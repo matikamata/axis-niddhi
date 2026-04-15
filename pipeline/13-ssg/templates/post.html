@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.titles.en }} | AXIS-NIDDHI{% endblock %}
+
+{% block content %}
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" {% if not post.has_pt %}disabled{% endif %}>
+
+<header>
+    <!-- Environment Toolbar (Theme Switcher) -->
+    <div class="env-toolbar" style="position: absolute; top: 0; right: 0;">
+        <div id="theme-controls" class="theme-controls" aria-label="Reading Mode"></div>
+    </div>
+
+    <!-- SPRINT 6: Context Header (You Are Here) -->
+    <div class="context-header">
+        <span class="context-label">Section:</span>
+        <a href="{{ relative_root }}archive.html#section-{{ current_section_code }}" class="context-link">
+            {{ current_section_title }}
+        </a>
+        <span class="context-divider">|</span>
+        <span class="context-position">Post {{ position_index }} / {{ section_total }}</span>
+    </div>
+
+    <div class="meta">
+        <span class="pdpn">{{ post.pdpn }}</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label {% if not post.has_pt %}disabled{% endif %}">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">{{ post.titles.en }}</h1>
+    {% if post.has_pt %}
+    <h1 class="title-pt">{{ post.titles.pt }}</h1>
+    {% endif %}
+
+    <!-- SPRINT 6: Transmission Map (Prerequisites / Leads To) -->
+    <div class="transmission-map">
+        {% if prev_post %}
+        <div class="map-item">
+            <span class="map-label">From:</span>
+            <a href="{{ relative_root }}pages/{{ prev_post.pdpn }}/index.html">{{ prev_post.titles.en }}</a>
+        </div>
+        {% endif %}
+        
+        {% if next_post %}
+        <div class="map-item">
+            <span class="map-label">To:</span>
+            <a href="{{ relative_root }}pages/{{ next_post.pdpn }}/index.html">{{ next_post.titles.en }}</a>
+        </div>
+        {% endif %}
+    </div>
+
+</header>
+
+<div class="post-container">
+    
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="{{ relative_root }}archive.html">Library</a></li>
+            <li><a href="{{ relative_root }}archive.html#section-{{ current_section_code }}">{{ current_section_title }}</a></li>
+            <li aria-current="page" class="current-crumb-en">{{ post.titles.en }}</li>
+            {% if post.has_pt %}
+            <li aria-current="page" class="current-crumb-pt">{{ post.titles.pt }}</li>
+            {% endif %}
+        </ol>
+    </nav>
+
+    <div class="mini-toc toc-en" id="toc-en"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    {% if post.has_pt %}
+    <div class="mini-toc toc-pt" id="toc-pt"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    {% endif %}
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="{{ post.pdpn }}"
+             data-section="{{ current_section_title }}"
+             data-section-code="{{ current_section_code }}"
+             data-findex="{{ post.findex }}"
+             data-level="{{ meta_level }}"
+             data-reading-time="{{ meta_reading_time }}"
+             data-language-availability="en{% if post.has_pt %},pt{% endif %}"
+             itemscope itemtype="https://schema.org/Article">
+        {{ content_en | safe }}
+    </article>
+
+    {% if post.has_pt %}
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="{{ post.pdpn }}"
+             data-section="{{ current_section_title }}"
+             data-section-code="{{ current_section_code }}"
+             data-findex="{{ post.findex }}"
+             data-level="{{ meta_level }}"
+             data-reading-time="{{ meta_reading_time }}"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        {{ content_pt | safe }}
+    </article>
+    {% endif %}
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    {% if suggestion_block %}
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="{{ suggestion_block.url }}">{{ suggestion_block.title }}</a> section first.
+        </p>
+    </div>
+    {% endif %}
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    {% if meta_level == 'advanced' %}
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    {% endif %}
+
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    {% if prev_post %}
+    <a class="pathway-link prev" href="{{ relative_root }}pages/{{ prev_post.pdpn }}/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">{{ prev_post.titles.en }}</span>
+        {% if prev_post.has_pt %}
+        <span class="pathway-title title-pt">{{ prev_post.titles.pt }}</span>
+        {% else %}
+        <span class="pathway-title title-pt">{{ prev_post.titles.en }}</span>
+        {% endif %}
+    </a>
+    {% else %}<span class="pathway-placeholder"></span>{% endif %}
+
+    {% if next_post %}
+    <a class="pathway-link next" href="{{ relative_root }}pages/{{ next_post.pdpn }}/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">{{ next_post.titles.en }}</span>
+        {% if next_post.has_pt %}
+        <span class="pathway-title title-pt">{{ next_post.titles.pt }}</span>
+        {% else %}
+        <span class="pathway-title title-pt">{{ next_post.titles.en }}</span>
+        {% endif %}
+    </a>
+    {% else %}<span class="pathway-placeholder"></span>{% endif %}
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="{{ relative_root }}archive.html#section-{{ current_section_code }}">
+        ↑ Back to {{ current_section_title }}
+    </a>
+</nav>
+
+{% endblock %}
+ 

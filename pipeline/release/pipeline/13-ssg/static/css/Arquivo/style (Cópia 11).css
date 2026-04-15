@@ -1,0 +1,231 @@
+/* =========================================================
+   BRASILEIRINHO — MUSEUM POLISH V1.2.7
+   Ajustes perceptuais e acessibilidade contextual
+   ========================================================= */
+
+/* ---------- RESET ---------- */
+* {
+  box-sizing: border-box;
+}
+
+header,
+.threshold-header {
+  text-align: center;
+}
+
+/* ---------- AXIOMS ---------- */
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+
+  --bg-paper: #fdfbf7;
+  --green-axiom: #00ff00;
+
+  --paper-shadow: 0 14px 44px rgba(0,0,0,0.16);
+}
+
+/* ---------- BODY ---------- */
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.85; /* + micro-respiração */
+  background: #e9e9e9;
+  color: var(--fg);
+}
+
+/* ---------- THEMES ---------- */
+body[data-theme="dark"] {
+  --green-axiom: #66ff66; /* menos vibração, mesma identidade */
+  --bg-paper: #121418;
+  --fg: #e6e6e6;
+  background: #0c0e12;
+}
+
+body[data-theme="colirio"] {
+  --bg-paper: #f4fff7;
+  --fg: #123d2a;
+}
+
+body[data-theme="sunset"] {
+  --bg-paper: #fff4ee;
+  --fg: #4a1c0f;
+}
+
+body[data-theme="sunrise"] {
+  --bg-paper: #fdfcf7;
+  --fg: #2b2b2b;
+}
+
+/* ---------- ENV TOOLBAR ---------- */
+.env-toolbar {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 9999;
+
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px);
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.22);
+}
+
+.theme-controls {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.theme-btn {
+  border: none;
+  background: #dcdcdc;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.32rem 0.5rem;
+  border-radius: 50%;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.theme-btn:hover {
+  background: var(--green-axiom);
+  color: black;
+  transform: scale(1.05);
+}
+
+/* ---------- MAIN (KINDLE PAPER) ---------- */
+main {
+  max-width: 840px;
+  margin: 5.2rem auto 6.5rem;
+  padding: 4rem 3.6rem;
+
+  background: var(--bg-paper);
+  border-radius: 16px;
+  box-shadow: var(--paper-shadow);
+}
+
+/* ---------- THRESHOLD ---------- */
+.threshold-header {
+  padding-bottom: 6.5rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(0,0,0,0.045);
+}
+
+.visual-anchor {
+  opacity: 0.8; /* ainda mais silêncio */
+  margin-bottom: 2.2rem;
+  color: var(--green-axiom);
+}
+
+/* ---------- HEADERS ---------- */
+h1, h2, h3, h4, h5 {
+  font-family: Georgia, serif;
+  color: var(--green-axiom);
+  font-weight: normal;
+}
+
+h5 {
+  font-size: 1.35rem;
+  margin-top: 2.8rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(0,255,0,0.22);
+}
+
+/* ---------- LINKS ---------- */
+a {
+  color: var(--green-axiom);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- INDEX INTRO ---------- */
+.library-intro {
+  font-style: italic;
+  opacity: 0.82;
+  margin-bottom: 3.4rem;
+  border-left: 3px solid var(--green-axiom);
+  padding-left: 1.6rem;
+}
+
+/* ---------- ACCORDION ---------- */
+.library-section h2 {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  user-select: none;
+}
+
+.library-section h2::before {
+  content: '▶';
+  font-size: 0.7rem;
+  transition: transform 0.25s ease;
+  color: var(--green-axiom);
+}
+
+.library-section h2.active::before {
+  transform: rotate(90deg);
+}
+
+.post-list {
+  margin-left: 1.6rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+/* ---------- LANGUAGE SYSTEM ---------- */
+.lang-radio {
+  position: absolute;
+  left: -9999px;
+}
+
+.content-en, .content-pt,
+.title-en, .title-pt,
+.current-crumb-en, .current-crumb-pt,
+.toc-en, .toc-pt {
+  display: none;
+}
+
+#lang-en:checked ~ header .title-en,
+#lang-en:checked ~ .post-container .content-en,
+#lang-en:checked ~ .post-container .current-crumb-en,
+#lang-en:checked ~ .post-container .toc-en {
+  display: block;
+}
+
+#lang-pt:checked ~ header .title-pt,
+#lang-pt:checked ~ .post-container .content-pt,
+#lang-pt:checked ~ .post-container .current-crumb-pt,
+#lang-pt:checked ~ .post-container .toc-pt {
+  display: block;
+}
+
+/* ---------- LANGUAGE BUTTON FEEDBACK ---------- */
+#lang-en:checked ~ header .lang-controls label[for="lang-en"],
+#lang-pt:checked ~ header .lang-controls label[for="lang-pt"] {
+  background: var(--green-axiom);
+  color: black;
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+:focus-visible {
+  outline: 2px dashed var(--green-axiom);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: 4.5rem;
+  font-size: 0.72rem;
+  opacity: 0.55;
+  text-align: center;
+}
+

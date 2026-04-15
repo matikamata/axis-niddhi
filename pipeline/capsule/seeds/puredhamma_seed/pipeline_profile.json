@@ -1,0 +1,200 @@
+{
+  "corpus_id": "puredhamma",
+  "engine": "AXIS-NIDDHI",
+  "engine_version": "5.4",
+  "pipeline_script": "scripts/core/run_full_pipeline.sh",
+  "execution_order": [
+    "SG",
+    "SP",
+    "SA",
+    "SD"
+  ],
+  "stages": {
+    "SG": {
+      "name": "GENESIS",
+      "role": "Extract → Preprocess → Build CSL",
+      "scripts": [
+        {
+          "id": "SG00",
+          "name": "SG00_reset_workspace.sh",
+          "role": "Reset workspace, re-import SQL dump"
+        },
+        {
+          "id": "SG01",
+          "name": "SG01_extract_html.py",
+          "role": "Extract post HTML from MySQL"
+        },
+        {
+          "id": "SG02",
+          "name": "SG02_preprocess_html.py",
+          "role": "Normalize and clean HTML"
+        },
+        {
+          "id": "SG03",
+          "name": "SG03_build_csl.py",
+          "role": "Build Canon Source Ledger (CSL)"
+        },
+        {
+          "id": "SG04",
+          "name": "SG04_harvest_assets.py",
+          "role": "Harvest media assets"
+        }
+      ],
+      "output": "09-csl/ (748 PDPN entries)"
+    },
+    "SP": {
+      "name": "PRESERVATION",
+      "role": "Migrate → Identity → Translate → Freeze",
+      "scripts": [
+        {
+          "id": "SP00",
+          "name": "SP00_freeze_translations.py",
+          "role": "Freeze PT-BR translations to 03-translations/"
+        },
+        {
+          "id": "SP01",
+          "name": "SP01_migrate_ptbr.py",
+          "role": "Migrate legacy PT-BR content"
+        },
+        {
+          "id": "SP01b",
+          "name": "SP01b_restore_translations.py",
+          "role": "Restore frozen translations (SHA-256 validated)"
+        },
+        {
+          "id": "SP02",
+          "name": "SP02_upgrade_identity.py",
+          "role": "Upgrade identity schema, seal SHA-256 hashes"
+        },
+        {
+          "id": "SP03",
+          "name": "SP03_mass_migration.py",
+          "role": "Mass migration phase 3"
+        },
+        {
+          "id": "SP04",
+          "name": "SP04_phase5_migration.py",
+          "role": "Mass migration phase 5"
+        },
+        {
+          "id": "SP05",
+          "name": "SP05_fix_headers.py",
+          "role": "Fix post headers and structure"
+        },
+        {
+          "id": "SP06",
+          "name": "SP06_audio_converter.py",
+          "role": "Convert Pāli audio references"
+        },
+        {
+          "id": "SP07",
+          "name": "SP07_compile_glossary.py",
+          "role": "Compile Pāli-PT glossary (987 terms)"
+        },
+        {
+          "id": "SP08",
+          "name": "SP08_glossary_gate.py",
+          "role": "Glossary review gate (human approval)"
+        },
+        {
+          "id": "SP09",
+          "name": "SP09_translation_menu.py",
+          "role": "Generate translation control CSV"
+        },
+        {
+          "id": "SP10",
+          "name": "SP10_translate_deepl.py",
+          "role": "DeepL translation (manual, batched)"
+        },
+        {
+          "id": "SP11",
+          "name": "SP11_translate_titles.py",
+          "role": "Translate EN titles → PT-BR"
+        }
+      ],
+      "seals": [
+        {
+          "id": "SEAL_1",
+          "after": "SP06",
+          "script": "SP02 --force",
+          "role": "Lock SHA-256 hashes post-HTML mutation"
+        },
+        {
+          "id": "SEAL_2",
+          "after": "SP11",
+          "script": "SP02 --force",
+          "role": "Preserve titles.pt in identity.json"
+        }
+      ],
+      "manual_steps": [
+        "SP10 — requires operator CSV review and DeepL quota management"
+      ],
+      "output": "09-csl/ — identity sealed, translations frozen"
+    },
+    "SA": {
+      "name": "AUDIT",
+      "role": "SHA-256 Consistency + Structural Integrity + Canon Manifest",
+      "scripts": [
+        {
+          "id": "SA01",
+          "name": "SA01_final_audit.py",
+          "role": "Structural integrity audit"
+        },
+        {
+          "id": "SA02",
+          "name": "SA02_freeze_manifest.py",
+          "role": "Generate CSL immutability manifest"
+        },
+        {
+          "id": "SA03",
+          "name": "SA03_translation_progress.py",
+          "role": "Translation progress report (PT-BR %)"
+        },
+        {
+          "id": "SA04",
+          "name": "SA04_generate_canon_manifest.py",
+          "role": "Cryptographic canon manifest (all components)"
+        }
+      ],
+      "output": "metadata/canon_manifest.json"
+    },
+    "SD": {
+      "name": "DISTRIBUTION",
+      "role": "Asset Map → Static Site → WordPress inject",
+      "scripts": [
+        {
+          "id": "SD01",
+          "name": "SD01_generate_asset_map.py",
+          "role": "Generate asset map JSON"
+        },
+        {
+          "id": "SD02",
+          "name": "SD02_generate_slug_map.py",
+          "role": "Generate slug map (internal, called by SD03)"
+        },
+        {
+          "id": "SD03",
+          "name": "SD03_static_site_build.py",
+          "role": "Build static site via Jinja2 SSG engine"
+        },
+        {
+          "id": "SD04",
+          "name": "SD04_wordpress_inject.py",
+          "role": "Inject posts into WordPress (optional)"
+        }
+      ],
+      "output": "13-static-site/ (748 posts, EN + PT-BR)"
+    }
+  },
+  "translation_workflow": {
+    "engine": "DeepL API",
+    "freeze_script": "SP00_freeze_translations.py",
+    "restore_script": "SP01b_restore_translations.py",
+    "freeze_dir": "03-translations/",
+    "control_csv": "metadata/Translation_Control_Center.csv",
+    "quota_limit_chars": 450000,
+    "languages": [
+      "pt-BR"
+    ]
+  }
+}

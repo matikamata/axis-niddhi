@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.titles.en }} | Brasileirinho{% endblock %}
+
+{% block content %}
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" {% if not post.has_pt %}disabled{% endif %}>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+        <li><a href="{{ relative_root }}index.html">Library</a></li>
+        <li><a href="{{ relative_root }}index.html#section-{{ current_section_code }}">{{ current_section_title }}</a></li>
+        <li aria-current="page" class="current-crumb-en">{{ post.titles.en }}</li>
+        {% if post.has_pt %}<li aria-current="page" class="current-crumb-pt">{{ post.titles.pt }}</li>{% endif %}
+    </ol>
+</nav>
+
+<header>
+    <div class="meta"><span class="pdpn">{{ post.pdpn }}</span></div>
+    <div class="lang-controls">
+        <label for="lang-en" class="lang-btn">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-btn {% if not post.has_pt %}disabled{% endif %}">🇧🇷 Português</label>
+    </div>
+    <h1 class="title-en">{{ post.titles.en }}</h1>
+    {% if post.has_pt %}<h1 class="title-pt">{{ post.titles.pt }}</h1>{% endif %}
+</header>
+
+<div class="post-container">
+    <article class="content-block content-en" id="content-en" data-pdpn="{{ post.pdpn }}" itemscope itemtype="https://schema.org/Article">
+        {{ content_en | safe }}
+    </article>
+    {% if post.has_pt %}
+    <article class="content-block content-pt" id="content-pt" data-pdpn="{{ post.pdpn }}" itemscope itemtype="https://schema.org/Article">
+        {{ content_pt | safe }}
+    </article>
+    {% endif %}
+</div>
+
+<nav class="pathways">
+    {% if prev_post %}
+    <a class="pathway-link prev" href="{{ prev_post.url }}">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">{{ prev_post.title_en }}</span>
+        <span class="pathway-title title-pt">{{ prev_post.title_pt if prev_post.title_pt else prev_post.title_en }}</span>
+    </a>
+    {% else %}<span class="pathway-placeholder"></span>{% endif %}
+
+    {% if next_post %}
+    <a class="pathway-link next" href="{{ next_post.url }}">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">{{ next_post.title_en }}</span>
+        <span class="pathway-title title-pt">{{ next_post.title_pt if next_post.title_pt else next_post.title_en }}</span>
+    </a>
+    {% else %}<span class="pathway-placeholder"></span>{% endif %}
+</nav>
+
+<div style="text-align: center; margin-top: 2rem;"><a href="{{ relative_root }}index.html">Back to Index</a></div>
+{% endblock %}

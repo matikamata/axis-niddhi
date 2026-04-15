@@ -1,0 +1,276 @@
+/*
+ * typography-pro.css
+ * [FF-011] 2026-03-09 — Brasileirinho Engine / AXIS-NIDDHI Sprint V5.5
+ *
+ * Tipografia nivel Kindle / Apple Books para leitura longa de ensaios Dhamma.
+ * Importar APOS style.css para que estas regras tenham precedencia nos
+ * elementos de conteudo (main, .post-container), sem sobrescrever UI do engine.
+ *
+ * Em base.html:
+ *   <link rel="stylesheet" href="../../css/style.css">
+ *   <link rel="stylesheet" href="../../css/typography-pro.css">   ← adicionar
+ */
+
+/* ── VARIAVEIS ─────────────────────────────────────────────────────────────── */
+:root {
+  --font-reading: "Literata", "Georgia", "Times New Roman", serif;
+  --font-ui:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --reading-max-width: 760px;
+  --reading-padding:   32px;
+  --reading-size:      18px;
+  --reading-lh:        1.75;
+}
+
+/* ── CORPO DE LEITURA ───────────────────────────────────────────────────────── */
+main {
+  font-family:      var(--font-reading);
+  font-size:        var(--reading-size);
+  line-height:      var(--reading-lh);
+  letter-spacing:   0.01em;
+  text-rendering:   optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── PARAGRAFOS ─────────────────────────────────────────────────────────────── */
+main p {
+  margin:   1.4em 0;
+  orphans:  2;
+  widows:   2;
+}
+
+/* ── TITULOS ────────────────────────────────────────────────────────────────── */
+main h1,
+main h2,
+main h3,
+main h4,
+main h5 {
+  font-family: var(--font-ui);
+  line-height: 1.25;
+  margin-top:  2em;
+}
+
+main h1 { font-size: 2.2rem; }
+main h2 { font-size: 1.6rem; }
+main h3 { font-size: 1.3rem; }
+main h4 { font-size: 1.1rem; }
+main h5 { font-size: 1.0rem; }
+
+/* ── CITACOES ───────────────────────────────────────────────────────────────── */
+main blockquote {
+  border-left: 4px solid #ddd;
+  margin:      1.5em 0 1.5em 0;
+  padding:     0.6em 0 0.6em 1.2em;
+  color:       #555;
+  font-style:  italic;
+}
+
+/* ── CODIGO ─────────────────────────────────────────────────────────────────── */
+main code,
+main pre {
+  font-family: ui-monospace, Menlo, Consolas, "Courier New", monospace;
+  font-size:   0.88em;
+}
+
+/* ── LINKS ──────────────────────────────────────────────────────────────────── */
+main a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── SEARCH HIGHLIGHT ───────────────────────────────────────────────────────── */
+mark {
+  background: rgba(255, 220, 0, 0.35);
+  color:      inherit;
+  border-radius: 2px;
+  padding:    0 2px;
+}
+
+/* ── DARK MODE REAL (prefers-color-scheme) ──────────────────────────────────── */
+/*
+ * Complementa o dark mode manual (data-theme="dark") do style.css.
+ * Ativa automaticamente para usuarios com SO em dark mode.
+ * Nao conflita: data-theme="dark" usa variaveis CSS, este usa media query.
+ */
+@media (prefers-color-scheme: dark) {
+  /* Apenas aplicar se o usuario nao escolheu tema manualmente */
+  body:not([data-theme]) main,
+  body[data-theme=""] main {
+    background: #121418;
+    color:      #e6e6e6;
+  }
+
+  body:not([data-theme]) a,
+  body[data-theme=""] a {
+    color: #7aa2ff;
+  }
+
+  body:not([data-theme]) main blockquote,
+  body[data-theme=""] main blockquote {
+    border-left-color: #444;
+    color:             #b8b8b8;
+  }
+
+  body:not([data-theme]) mark,
+  body[data-theme=""] mark {
+    background: rgba(255, 200, 0, 0.25);
+  }
+}
+
+/* ── DARK MANUAL (data-theme="dark") — complemento ao style.css ─────────────── */
+body[data-theme="dark"] main blockquote {
+  border-left-color: #444;
+  color:             #b0b0b0;
+}
+
+body[data-theme="dark"] a {
+  color: #7aa2ff;
+}
+
+body[data-theme="dark"] mark {
+  background: rgba(255, 200, 0, 0.2);
+}
+
+/* ── MOBILE ─────────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  :root {
+    --reading-size:    16px;
+    --reading-padding: 20px;
+  }
+}
+
+/* =========================================================
+   [FF-012] COMPARATIVE INDEX MODE
+   Dual bilingual grid for translators and curators.
+   ========================================================= */
+
+/* Toggle buttons */
+.view-btn {
+  font-family:     var(--font-ui);
+  font-size:       0.8rem;
+  letter-spacing:  0.06em;
+  text-transform:  uppercase;
+  padding:         0.35rem 1rem;
+  border:          1px solid var(--border-color, #e0e0e0);
+  border-radius:   20px;
+  background:      transparent;
+  color:           var(--fg, #1a1a1a);
+  cursor:          pointer;
+  margin:          0 0.2rem;
+  transition:      all 0.15s ease;
+}
+.view-btn:hover  { background: rgba(0,255,0,0.08); }
+.view-btn.active {
+  background: var(--green-axiom, #00ff00);
+  color:      black;
+  border-color: var(--green-axiom, #00ff00);
+}
+
+/* Grid container — CSS Grid with display:contents rows
+   for performance: no JS virtualization needed up to ~2000 rows */
+.dual-index {
+  display:               grid;
+  grid-template-columns: 140px 1fr 1fr;
+  width:                 100%;
+  margin-top:            1.5rem;
+  font-size:             0.9rem;
+}
+
+/* display:contents = each row's cells participate directly in the parent grid */
+.index-row {
+  display: contents;
+}
+
+.index-cell {
+  padding:       0.65rem 1rem;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  line-height:   1.4;
+  overflow-wrap: break-word;
+}
+
+/* Hover: highlight entire logical row across all 3 columns */
+.index-row:hover .index-cell {
+  background: rgba(0, 255, 0, 0.04);
+}
+
+/* Header row */
+.index-header .index-cell {
+  font-family:    var(--font-ui);
+  font-size:      0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity:        0.5;
+  border-bottom:  2px solid var(--border-color, #e0e0e0);
+  padding-bottom: 0.5rem;
+}
+
+/* Section separator */
+.index-section-row .index-section-label {
+  font-family:    var(--font-ui);
+  font-size:      0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity:        0.4;
+  padding:        1rem 1rem 0.4rem;
+  border-bottom:  none;
+  border-top:     1px solid var(--border-color, #e0e0e0);
+  margin-top:     0.5rem;
+}
+
+/* PDPN column */
+.index-cell.pdpn {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size:   0.82rem;
+  opacity:     0.65;
+  white-space: nowrap;
+}
+.index-cell.pdpn a {
+  color:           inherit;
+  text-decoration: none;
+}
+.index-cell.pdpn a:hover { text-decoration: underline; }
+
+/* Translation status */
+.pt-missing {
+  color:      var(--meta-color, #666);
+  font-style: italic;
+  opacity:    0.6;
+}
+.pt-title-only { color: #c49b3a; }
+.pt-complete   { color: #4aa56a; }
+
+/* Status badges */
+.pt-badge {
+  display:       inline-block;
+  font-size:     0.65rem;
+  font-family:   var(--font-ui);
+  padding:       1px 4px;
+  border-radius: 3px;
+  margin-left:   4px;
+  vertical-align: middle;
+  background:    rgba(74, 165, 106, 0.2);
+  color:         #4aa56a;
+}
+.pt-badge-title {
+  background: rgba(196, 155, 58, 0.2);
+  color:      #c49b3a;
+}
+
+/* Dark mode adaptations */
+body[data-theme="dark"] .view-btn {
+  color: var(--fg, #e6e6e6);
+}
+body[data-theme="dark"] .index-row:hover .index-cell {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Mobile: stack columns */
+@media (max-width: 700px) {
+  .dual-index {
+    grid-template-columns: 100px 1fr;
+  }
+  /* Hide PT column on very small screens — show as tooltip instead */
+  .index-cell.pt { display: none; }
+  .index-header .index-cell:last-child { display: none; }
+}
+/* ── END FF-012 ── */

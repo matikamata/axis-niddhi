@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.titles.en }} | Brasileirinho{% endblock %}
+
+{% block content %}
+<div class="post-container">
+    
+    <!-- 
+      CSS-ONLY LANGUAGE SWITCHER 
+      We use radio buttons to toggle visibility.
+      This works 100% without JavaScript.
+    -->
+    <input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+    <input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" {% if not post.has_pt %}disabled{% endif %}>
+
+    <div class="lang-controls">
+        <label for="lang-en" class="lang-btn">English</label>
+        <label for="lang-pt" class="lang-btn {% if not post.has_pt %}disabled{% endif %}">
+            Português {% if not post.has_pt %}(N/A){% endif %}
+        </label>
+    </div>
+
+    <!-- Metadata Header -->
+    <header class="post-header">
+        <div class="meta">
+            <span class="pdpn">{{ post.pdpn }}</span>
+            <span class="section">{{ post.section_code }}</span>
+        </div>
+        
+        <!-- Titles change based on CSS selection -->
+        <h1 class="title-en">{{ post.titles.en }}</h1>
+        {% if post.has_pt %}
+        <h1 class="title-pt">{{ post.titles.pt }}</h1>
+        {% endif %}
+    </header>
+
+    <!-- Content Blocks -->
+    <article class="content-block content-en">
+        {{ content_en | safe }}
+    </article>
+
+    {% if post.has_pt %}
+    <article class="content-block content-pt">
+        {{ content_pt | safe }}
+    </article>
+    {% endif %}
+
+    <!-- Navigation Footer (Next/Prev) -->
+    <nav class="post-nav">
+        <!-- Logic to find next/prev in nav_tree would go here or be passed by renderer -->
+        <a href="{{ relative_root }}index.html">Back to Index</a>
+    </nav>
+
+</div>
+{% endblock %}

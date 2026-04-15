@@ -1,0 +1,59 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Brasileirinho{% endblock %}</title>
+    <link rel="stylesheet" href="{{ relative_root }}css/style.css">
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="{{ relative_root }}manifest.json"> -->
+</head>
+<body>
+
+    <main>
+        {% block content %}{% endblock %}
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible.</small></p>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="{{ relative_root }}js/main.js"></script>
+    <script src="{{ relative_root }}js/reading-flow.js"></script>
+
+    <!-- [20260222] Service Worker — Registro Progressivo
+         Estrategia: progressive enhancement.
+         - Site funciona 100% sem JS e sem SW.
+         - SW so e registrado se o browser suportar.
+         - SW controlara toda a origem (registrado da raiz, nao de /js/).
+         - FULL_PRECACHE = false em sw.js — so shell e pre-cacheado.
+         - Agency Layer (cache offline completo) requer acao explicita do usuario.
+
+         Para ativar Agency Layer no futuro, o UI pode chamar:
+           navigator.serviceWorker.controller.postMessage({
+             type: 'CACHE_POSTS',
+             urls: [ ...lista de URLs de posts... ]
+           });
+         Ver comentario em sw.js > cachePostsForOffline() para exemplo completo.
+    -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('{{ relative_root }}sw.js', { scope: '{{ relative_root }}' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+</body>
+</html>

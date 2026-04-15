@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Brasileirinho - Dhamma Archive{% endblock %}
+
+{% block content %}
+
+<header class="threshold-header">
+    
+    <div class="visual-anchor">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" 
+             aria-hidden="true" width="80" height="80">
+            <path d="M50 15 C 20 40, 10 70, 50 95 C 90 70, 80 40, 50 15 Z" 
+                  fill="none" stroke="currentColor" stroke-width="2" 
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M50 15 Q 50 55 50 85" fill="none" stroke="currentColor" 
+                  stroke-width="1.5" opacity="0.6"/>
+        </svg>
+    </div>
+
+    <h1>Brasileirinho</h1>
+
+    <p class="mission-statement">
+        A timeless, immutable archive of the Buddha Dhamma.
+    </p>
+
+</header>
+
+<div class="library-invitation">
+    Library Index ↓
+</div>
+
+<div class="library-index">
+    {% for section in nav_tree %}
+    <section class="library-section" id="section-{{ section.code }}">
+        <h2>
+            <span class="section-title">{{ section.title }}</span>
+            <span class="section-code">{{ section.code }}</span>
+        </h2>
+        <ul class="post-list">
+            {% for post in section.posts %}
+            <li>
+                <span class="findex">{{ post.findex }}</span>
+                <a href="{{ relative_root }}{{ post.pdpn }}/index.html">
+                    {{ post.titles.en }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endfor %}
+</div>
+
+{% endblock %}

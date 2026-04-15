@@ -1,0 +1,188 @@
+<!-- pipeline/13-ssg/templates/index.html -->
+
+{% extends "base.html" %}
+
+{% block title %}AXIS-NIDDHI Engine - Dhamma Archive{% endblock %}
+
+{% block content %}
+
+<header class="threshold-header">
+    <div class="env-toolbar">
+        <div id="theme-controls" class="theme-controls" aria-label="Reading Mode"></div>
+    </div>
+
+    <div class="visual-anchor" style="margin-bottom: 1.5rem;">
+        <a href="{{ relative_root }}leaf.html" target="_blank" rel="noopener noreferrer" title="Contemplar em Alta Resolução — Let it Flow" style="cursor: zoom-in; display: inline-block;">
+            <img src="{{ relative_root }}assets/BodhiCircuitLeaf.png" alt="Nature's Circuit - Dhamma Wheel Edition" style="
+                width: min(220px, 42vw);
+                filter: drop-shadow(0 0 18px var(--green-axiom));
+                animation: pulse-leaf 5s ease-in-out infinite;
+                opacity: 0.92;
+                transition: transform 0.3s ease;
+            " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+    </div>
+
+    <h1 class="main-title" style="margin-top: 0;">✧ AXIS-NIDDHI ENGINE ✧</h1>
+    <p class="mission-statement" style="opacity: 0.8; font-size: 1.1rem; max-width: 600px; margin: 0.5rem auto 2rem;">
+        A timeless, immutable archive of the nature of Nature's Laws.
+    </p>
+</header>
+
+<!-- BLOCK 3: LIBRARY INTRO (CANONICAL) -->
+<div class="library-intro" style="
+    border: 1px solid var(--green-axiom); 
+    padding: 3rem 2rem; 
+    border-radius: 16px; 
+    text-align: center; 
+    background: rgba(0, 255, 0, 0.01); 
+    margin: 3rem 0;
+    line-height: 1.6;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+">
+  <p style="font-size: 1.25rem; margin-bottom: 1.5rem; letter-spacing: -0.01em;">
+    🌿 DRAFT!
+  </p>
+
+  <!-- NOVO: Minimum Instructions -->
+  <div class="minimum-instructions" style="
+      max-width: 650px;
+      margin: 2rem auto;
+      text-align: left;
+      font-size: 0.95rem;
+      background: rgba(128, 128, 128, 0.05);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(128, 128, 128, 0.1);
+  ">
+      <p style="text-align: center; margin-top: 0; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; color: var(--meta-color);">
+          Minimum Instructions / Instruções Mínimas
+      </p>
+
+      <!-- Instruções em Inglês (en-US) -->
+      <div style="margin-bottom: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-weight: bold; font-size: 1rem;">
+              <span>🇺🇸</span> English
+          </div>
+          <ul style="margin: 0; padding-left: 1.5rem; opacity: 0.9;">
+              <li style="margin-bottom: 0.5rem;"><strong>Appearance Settings:</strong> Theme controls (☀️ 🌙 🌿 🌅 🏔️) are available for reading comfort.</li>
+              <li><strong>Audio Support:</strong> <span style="color: #d32f2f; font-weight: 500;">Selected terms</span> may include pronunciation recordings.</li>
+          </ul>
+      </div>
+
+      <!-- Instruções em Português (pt-BR) -->
+      <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-weight: bold; font-size: 1rem;">
+              <span>🇧🇷</span> Português
+          </div>
+          <ul style="margin: 0; padding-left: 1.5rem; opacity: 0.9;">
+              <li style="margin-bottom: 0.5rem;"><strong>Configurações de Aparência:</strong> Controles de tema (☀️ 🌙 🌿 🌅 🏔️) para conforto de leitura.</li>
+              <li><strong>Suporte de Áudio:</strong> <span style="color: #d32f2f; font-weight: 500;">Termos selecionados</span> podem conter gravações de pronúncia.</li>
+          </ul>
+      </div>
+  </div>
+  
+  <!-- Mantido do original: Entry Suggestions -->
+  <div class="guided-entry" style="
+      max-width: 600px;
+      margin: 2.5rem auto 0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--meta-color);
+  ">
+      <p style="margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">
+          Entry Suggestions
+      </p>
+      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+          <span>
+              🌱 Beginner? <a href="#section-TL">Start with the Three Levels</a>
+          </span>
+          <span>
+              🌳 Contemplation? <a href="#section-BD">Explore Buddha Dhamma</a>
+          </span>
+      </div>
+  </div>
+</div>
+
+<!-- [FF-012c] View Mode Toggle — Segmented Control (Apple style) -->
+<div class="view-mode-toggle" id="view-mode-toggle">
+  <div class="toggle-group">
+    <button class="view-btn active" id="btn-reader" data-mode="reader" onclick="setViewMode('reader')">Reader</button>
+    <button class="view-btn" id="btn-comparative" data-mode="comparative" onclick="setViewMode('comparative')">Comparative</button>
+  </div>
+</div>
+
+<!-- READER MODE (default) -->
+<div class="library-index" id="view-reader">
+    {% for section in nav_tree %}
+    <section class="library-section" id="section-{{ section.code }}">
+        <h2>
+            <span class="section-code">{{ section.code }}</span>
+            <span class="section-title">{{ section.title }}</span>
+        </h2>
+        <ul class="post-list">
+            {% for post in section.posts %}
+            <li>
+                <span class="findex">{{ post.findex }}</span>
+                <a href="{{ relative_root }}pages/{{ post.pdpn }}/index.html">
+                    {{ post.titles.en }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endfor %}
+</div>
+
+<!-- COMPARATIVE MODE [FF-012] — hidden by default, shown via JS toggle -->
+<div class="dual-index" id="view-comparative" hidden>
+
+  <!-- Header row -->
+  <div class="index-row index-header">
+    <div class="index-cell pdpn">PDPN</div>
+    <div class="index-cell">English Title</div>
+    <div class="index-cell">Portuguese Title</div>
+  </div>
+
+  {% for section in nav_tree %}
+  <!-- Section separator row -->
+  <div class="index-row index-section-row">
+    <div class="index-cell index-section-label" style="grid-column: 1 / -1;">
+      {{ section.code }} — {{ section.title }}
+    </div>
+  </div>
+
+  {% for post in section.posts %}
+  {%- if post.has_pt_content %}
+    {%- set pt_class = "pt-complete" %}
+  {%- elif post.has_pt_title %}
+    {%- set pt_class = "pt-title-only" %}
+  {%- else %}
+    {%- set pt_class = "pt-missing" %}
+  {%- endif %}
+  <div class="index-row" data-pdpn="{{ post.pdpn }}">
+    <div class="index-cell pdpn">
+      <a href="{{ relative_root }}pages/{{ post.pdpn }}/index.html">{{ post.pdpn }}</a>
+    </div>
+    <div class="index-cell en">
+      {{ post.titles.get('en', post.pdpn) }}
+    </div>
+    <div class="index-cell pt {{ pt_class }}">
+      {%- if post.titles.get('pt') %}
+        {{ post.titles.get('pt') }}
+        {%- if post.has_pt_content %}
+          <span class="pt-badge">✓</span>
+        {%- else %}
+          <span class="pt-badge pt-badge-title">T</span>
+        {%- endif %}
+      {%- else %}
+        <em>translation pending</em>
+      {%- endif %}
+    </div>
+  </div>
+  {% endfor %}
+  {% endfor %}
+
+</div>
+
+{% endblock %}
