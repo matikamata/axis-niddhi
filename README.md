@@ -1,23 +1,31 @@
-# AXIS-NIDDHI is a framework for purification, translation, and crystallization of Dhamma content.
+# AXIS-NIDDHI
+
+### A framework for careful translation and crystallization of Dhamma content
+
+This system does **not** attempt to reinterpret or redefine Dhamma.
+It supports faithful transmission across languages with minimal distortion.
+
+---
 
 ## 🧭 New here?
 
 Before exploring the code, please read:
 
-👉 /docs/VISION.md
+👉 `/docs/VISION.md`
 
-This document explains the intention, philosophy, and scope of this project.
+This document explains the intention, scope, and guiding principles behind this project.
 
 ---
 
 ## 📜 License
+
 > License: MIT (see `LICENSE.md`)
 
 ---
 
 ## Canonical Corpus Publishing Engine
 
-> Deterministic pipeline for preserving and publishing knowledge corpora as reproducible static artifacts.
+> Deterministic pipeline for publishing knowledge corpora as reproducible, static artifacts.
 
 ---
 
@@ -25,14 +33,14 @@ This document explains the intention, philosophy, and scope of this project.
 
 AXIS-NIDDHI takes a source corpus (e.g., a WordPress backup) and produces:
 
-- Static, database-free HTML output
-- Multi-language support via controlled translation pipeline
-- Bit-for-bit reproducible builds
-- Cryptographically verifiable integrity (SHA-256)
+* Static, database-free HTML output
+* Multi-language support via controlled translation pipeline
+* Bit-for-bit reproducible builds
+* Cryptographically verifiable integrity (SHA-256)
 
 This is not a backup system.
 
-It is a **deterministic preservation engine**.
+It is a **deterministic publishing and verification pipeline**.
 
 ---
 
@@ -40,42 +48,74 @@ It is a **deterministic preservation engine**.
 
 Given a source archive:
 
-- Extracts content into a canonical structure (CSL)
-- Applies controlled transformations (translation, normalization)
-- Verifies integrity at every stage
-- Produces a fully static, portable site
+* Extracts content into a canonical structure (CSL)
+* Applies controlled transformations (translation, normalization)
+* Verifies integrity at every stage
+* Produces a fully static, portable site
 
 Output characteristics:
 
-- No runtime dependencies
-- No database required
-- Fully offline-readable
-- Rebuildable on any compatible system
+* No runtime dependencies
+* No database required
+* Fully offline-readable
+* Rebuildable on any compatible system
+
+---
+
+## 🌍 Language Expansion
+
+AXIS-NIDDHI supports any DeepL-compatible language.
+
+Each new language requires a **human validation layer**, including:
+
+* glossary validation
+* translation review
+* consistency checks
+
+Technology assists — it does not replace discernment.
+
+See `CONTRIBUTING.md`.
+
+---
+
+## 📚 Context
+
+This engine was built in the context of a specific corpus:
+
+A body of work published at PureDhamma.net — a large collection of essays aimed at explaining Dhamma with technical precision.
+
+The current situation:
+
+* Deep material is primarily available in English
+* Many readers rely on translations
+* Literal translation can introduce distortion
+
+AXIS-NIDDHI exists to support:
+
+> **careful, traceable, and verifiable transmission across languages**
 
 ---
 
 ## 🧱 Architecture
 
 ```
-
 pipeline/
 ├── scripts/core/
 ├── scripts/tools/
 ├── metadata/
 ├── 09-csl/              ← Canonical Source Library (source of truth)
 ├── 13-ssg/              ← Static site generator
-└── release/             ← Sealed reproducible builds
-
-````
+└── release/             ← Reproducible builds
+```
 
 ### Pipeline Stages
 
-| Stage | Code | Description |
-|------|------|-------------|
-| Genesis | SG | Extract → structured corpus |
-| Preservation | SP | Translation + normalization |
-| Audit | SA | Integrity verification (SHA-256) |
-| Distribution | SD | Static site generation |
+| Stage        | Code | Description                      |
+| ------------ | ---- | -------------------------------- |
+| Genesis      | SG   | Extract → structured corpus      |
+| Processing   | SP   | Translation + normalization      |
+| Audit        | SA   | Integrity verification (SHA-256) |
+| Distribution | SD   | Static site generation           |
 
 ---
 
@@ -103,35 +143,7 @@ axis pipeline --full
 
 # Preview
 axis preview
-````
-
----
-
-## 🌍 Language Expansion
-
-AXIS-NIDDHI supports any DeepL-compatible language.
-
-Each new language requires a **human validation layer**:
-
-* glossary validation
-* translation review
-* doctrinal consistency check
-
-See `CONTRIBUTING.md`.
-
----
-
-## 📚 Background (Optional Context)
-
-This engine was built to preserve a specific corpus:
-
-A body of work published at PureDhamma.net — a large collection of essays aiming to reconstruct early teachings with technical precision.
-
-Regardless of philosophical alignment, the engineering problem remains:
-
-> How do you preserve a knowledge corpus so it can be rebuilt, verified, and read independently of its original platform?
-
-AXIS-NIDDHI is one answer.
+```
 
 ---
 
@@ -151,10 +163,5 @@ AXIS-NIDDHI is one answer.
 
 ---
 
-*AXIS-NIDDHI — Preserve structure. Enable continuity.*
-
-````
-
----
-
+*AXIS-NIDDHI — Enable continuity without altering meaning.*
 
