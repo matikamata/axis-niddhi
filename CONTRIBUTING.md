@@ -100,7 +100,7 @@ The flower opens. The pollen travels. The teaching finds those who are ready.
 
 If you are a programmer who wants to contribute to the pipeline itself (scripts, SSG engine, integrity model, CLI), open a GitHub Issue with the title: `[Steward] — [area of contribution]`.
 
-Read the [User Manual](https://github.com/YOUR_ORG/axis-niddhi/wiki) first — especially the Invariants section. Some rules are not negotiable.
+#ToDo: Read the [User Manual](https://github.com/YOUR_ORG/axis-niddhi/wiki) first — especially the Invariants section. Some rules are not negotiable.
 
 ---
 
