@@ -1,4 +1,14 @@
-# AXIS-NIDDHI
+# AXIS-NIDDHI is a framework for purification, translation, and crystallization of Dhamma content.
+
+## 🧭 New here?
+
+Before exploring the code, please read:
+
+👉 /docs/VISION.md
+
+This document explains the intention, philosophy, and scope of this project.
+
+---
 
 ## 📜 License
 > License: MIT (see `LICENSE.md`)
