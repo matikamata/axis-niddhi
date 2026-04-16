@@ -63,7 +63,7 @@ If not, that is perfectly fine.
 
 ## If You Choose to Participate
 
-You are invited to act as a **Kalyāṇamitta** — a “noble friend” who helps ensure that translations are not only correct, but meaningful.
+You are invited to act as a **Kalyāṇa mitta** — a “noble friend” who helps ensure that translations are not only correct, but meaningful.
 
 No force. No urgency.
 

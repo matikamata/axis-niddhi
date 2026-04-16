@@ -1,15 +1,15 @@
 # Contributing to AXIS-NIDDHI
-## The Kalyāṇamitta Protocol
+## The Kalyāṇa mittā Protocol
 
 *"Kalyāṇamittatā"* — noble friendship — is, as the Buddha said, not merely a part of the path. It is the whole of it.
 
-A **Kalyāṇamitta** in this project is a person who brings AXIS-NIDDHI to a new language community. Not a programmer. Not an administrator. A person who has understood the teaching, speaks the language of their community, and is willing to do the work of ensuring that the translation is not just grammatically correct — but *doctrinally faithful*.
+A **Kalyāṇa mitta** in this project is a person who brings AXIS-NIDDHI to a new language community. Not a programmer. Not an administrator. A person who has understood the teaching, speaks the language of their community, and is willing to do the work of ensuring that the translation is not just grammatically correct — but *doctrinally faithful*.
 
 ---
 
 ## Who This Is For
 
-You are a candidate to become a Kalyāṇamitta if:
+You are a candidate to become a Kalyāṇa mittā if:
 
 - You have read essays at [PureDhamma.net](https://puredhamma.net) and are familiar with them in English
 - You are a native speaker (or equivalent fluency) of a language that DeepL supports
