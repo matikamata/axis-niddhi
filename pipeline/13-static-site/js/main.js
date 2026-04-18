@@ -425,6 +425,16 @@ function toggleLabz() {
 
   // ── END FF-014 ────────────────────────────────────────────────────────────
 
+  // --- SPRINT 7: Print Markers ---
+  function initPrintVideoMarkers() {
+      document.querySelectorAll('iframe[src*="youtube"], iframe[src*="youtu.be"]').forEach(iframe => {
+          let marker = document.createElement('div');
+          marker.className = 'print-video-marker';
+          marker.innerHTML = '🎥 [Um vídeo foi incorporado nesta seção]';
+          iframe.parentNode.insertBefore(marker, iframe);
+      });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initViewMode();       // [FF-012]
@@ -434,6 +444,7 @@ function toggleLabz() {
     initAccordion();
     initPronunciation();
     initSearch(); // [Sprint 9]
+    initPrintVideoMarkers(); // [Sprint 7 Print Setup]
     generateTOC('content-en', 'toc-list-en');
     if (document.getElementById('content-pt')) {
       generateTOC('content-pt', 'toc-list-pt');
