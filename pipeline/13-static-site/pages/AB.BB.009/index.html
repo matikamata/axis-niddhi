@@ -46,9 +46,10 @@
 <input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
 
 <header>
-    <!-- Environment Toolbar (Theme Switcher) -->
-    <div class="env-toolbar" style="position: absolute; top: 0; right: 0;">
+    <!-- Environment Toolbar (Theme Switcher + Print Setup) -->
+    <div class="env-toolbar" style="position: absolute; top: 0; right: 0; display: flex; align-items: center; gap: 0.5rem; padding-right: 170px;">
         <div id="theme-controls" class="theme-controls" aria-label="Reading Mode"></div>
+        <button onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel" style="background:none; border:none; cursor:pointer; font-size:1.1rem; opacity:0.6; padding: 0.2rem; transition: opacity 0.2s; position: absolute; right: 1rem; top: 1.2rem; z-index: 999;">🖨️</button>
     </div>
 
     <!-- SPRINT 6: Context Header (You Are Here) -->
@@ -297,5 +298,35 @@ Next, "<a href="../../pages/AB.DD.008/index.html" rel="noopener noreferrer" targ
         });
       }
     </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
 </body>
 </html>

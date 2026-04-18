@@ -445,3 +445,35 @@ function toggleLabz() {
   window.addEventListener('scroll', saveScrollPosition,    { passive: true });
 
 })();
+
+// --- PRINT & PRESERVATION MODAL LOGIC ---
+function openPrintModal() {
+    document.getElementById('print-modal').classList.add('active');
+    document.getElementById('print-modal-overlay').classList.add('active');
+}
+
+function closePrintModal() {
+    document.getElementById('print-modal').classList.remove('active');
+    document.getElementById('print-modal-overlay').classList.remove('active');
+}
+
+function executePrint() {
+    const marginType = document.getElementById('p-margin').value;
+    const lineHeight = document.getElementById('p-line').value;
+    const root = document.documentElement;
+
+    root.style.setProperty('--print-line-height', lineHeight);
+
+    if (marginType === 'compact') {
+        root.style.setProperty('--print-pad', '0');
+    } else if (marginType === 'wide') {
+        root.style.setProperty('--print-pad', '0 5cm 0 0'); // Wide right margin for ink notes
+    } else {
+        root.style.setProperty('--print-pad', '0 1cm'); // Normal minimal breathing room
+    }
+
+    closePrintModal();
+    // Allow DOM to apply variables briefly before triggering the print spooler
+    setTimeout(() => { window.print(); }, 100);
+}
+

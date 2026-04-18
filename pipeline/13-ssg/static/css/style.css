@@ -513,9 +513,43 @@ footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: cent
   .position-indicator { display: block; margin-left: 0; padding-left: 0; border-left: none; margin-top: 0.5rem; }
 }
 
+/* --- PRINT SETTINGS MODAL --- */
+#print-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-paper);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  box-shadow: var(--paper-shadow);
+  z-index: 10000;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+}
+#print-modal.active { display: block; }
+#print-modal h3 { margin-top: 0; }
+#print-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+}
+#print-modal-overlay.active { display: block; }
+.print-group { margin-bottom: 1.2rem; }
+.print-group label { display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.9rem; }
+.print-group select { width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); background: var(--bg); color: var(--fg); font-family: inherit; }
+.print-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; }
+.print-btn { padding: 0.5rem 1rem; cursor: pointer; border: 1px solid var(--border-color); border-radius: 4px; background: transparent; color: var(--fg); }
+.print-btn.primary { background: var(--fg); color: var(--bg); border: none; font-weight: bold; }
+
 /* ---------- PRINT & PRESERVATION (SPRINT 7) ---------- */
 @page {
-  margin: 2cm;
+  /* Minimal physical page margin to allow our custom CSS padding to control the space */
+  margin: 1cm;
 }
 
 @media print {
@@ -524,25 +558,30 @@ footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: cent
   .mini-toc, .pathways, .post-nav, footer, 
   #reading-progress-hook, #ai-assistant-hook,
   .digestibility-suggestion, .silent-pause-block,
-  #search-form, #search-results {
+  #search-form, #search-results, #print-modal, #print-modal-overlay, #labz-banner {
     display: none !important;
   }
 
-  /* Reset Colors for Ink Saving */
+  /* Force PT-BR ONLY on printing to save paper */
+  .title-en, .content-en, .toc-en { display: none !important; }
+  .title-pt, .content-pt { display: block !important; }
+
+  /* Reset Colors for Ink Saving and apply dynamic Padding */
   body, main {
     background: white !important;
     color: black !important;
     box-shadow: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: var(--print-pad, 0) !important;
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  /* Typography for Print */
-  body {
-    font-size: 12pt;
-    line-height: 1.5;
+  /* Typography for Print with Dynamic Line Height */
+  body, article.content-block {
+    font-size: 11pt !important;
+    line-height: var(--print-line-height, 1.3) !important;
+    font-family: inherit;
   }
 
   h1, h2, h3, h4, h5 {
