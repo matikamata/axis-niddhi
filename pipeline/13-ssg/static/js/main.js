@@ -488,7 +488,7 @@ function executePrint() {
     if (colorMode === 'color') {
         root.style.setProperty('--print-text-color', 'inherit');
         root.style.setProperty('--print-heading-color', 'var(--green-axiom, #008800)');
-        root.style.setProperty('--print-link-color', 'var(--green-axiom, #008800)');
+        root.style.setProperty('--print-link-color', 'var(--link-color, #2b5fac)');
         root.style.setProperty('--print-color-adjust', 'exact');
         root.classList.add('print-colors');
     } else {
