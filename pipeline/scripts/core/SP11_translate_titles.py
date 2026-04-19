@@ -44,6 +44,9 @@ try:
 except ImportError:
     _CLS_AVAILABLE = False
 
+# Post-DeepL sanitization — canonical Pālī spellings (V5.4)
+from sanitize_pt import sanitize_pt_output
+
 _PDPN_RE = re.compile(r"^[A-Z]{2}\.[A-Z]{2}\.\d{3}$")
 
 GREEN  = "\033[92m"
@@ -116,7 +119,7 @@ def translate_batch(titles: list[str], auth_key: str, glossary_id: str | None = 
         print(f"{RED}❌ Erro DeepL HTTP {resp.status_code}: {resp.text[:200]}{RESET}")
         return []
 
-    return [t["text"] for t in resp.json()["translations"]]
+    return [sanitize_pt_output(t["text"]) for t in resp.json()["translations"]]
 
 
 # ==============================================================================

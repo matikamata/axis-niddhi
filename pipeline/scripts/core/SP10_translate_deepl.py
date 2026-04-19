@@ -77,6 +77,9 @@ try:
 except ImportError:
     _CLS_AVAILABLE = False
 
+# Post-DeepL sanitization — canonical Pālī spellings (V5.4)
+from sanitize_pt import sanitize_pt_output
+
 CSL_DIR   = DIR_09_CSL
 MENU_FILE = METADATA_DIR / "Translation_Control_Center.csv"
 
@@ -318,13 +321,13 @@ def process_post(
         # ── Traduzir Título ──────────────────────────────────────────────
         title_en = data.get("titles", {}).get("en", "Untitled")
         if not dry_run:
-            title_pt = translate_text(title_en, auth_key, glossary_id)
+            title_pt = sanitize_pt_output(translate_text(title_en, auth_key, glossary_id))
         else:
             title_pt = f"[DRY-RUN] {title_en}"
 
         # ── Traduzir Corpo ───────────────────────────────────────────────
         if not dry_run:
-            body_pt = translate_text(body_en, auth_key, glossary_id)
+            body_pt = sanitize_pt_output(translate_text(body_en, auth_key, glossary_id))
         else:
             body_pt = body_en
 

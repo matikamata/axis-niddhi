@@ -471,6 +471,8 @@ function closePrintModal() {
 function executePrint() {
     const marginType = document.getElementById('p-margin').value;
     const lineHeight = document.getElementById('p-line').value;
+    const colorSelect = document.getElementById('p-color');
+    const colorMode = colorSelect ? colorSelect.value : 'bw';
     const root = document.documentElement;
 
     root.style.setProperty('--print-line-height', lineHeight);
@@ -481,6 +483,20 @@ function executePrint() {
         root.style.setProperty('--print-pad', '0 5cm 0 0'); // Wide right margin for ink notes
     } else {
         root.style.setProperty('--print-pad', '0 1cm'); // Normal minimal breathing room
+    }
+
+    if (colorMode === 'color') {
+        root.style.setProperty('--print-text-color', 'inherit');
+        root.style.setProperty('--print-heading-color', 'var(--green-axiom, #008800)');
+        root.style.setProperty('--print-link-color', 'var(--green-axiom, #008800)');
+        root.style.setProperty('--print-color-adjust', 'exact');
+        root.classList.add('print-colors');
+    } else {
+        root.style.setProperty('--print-text-color', 'black');
+        root.style.setProperty('--print-heading-color', 'black');
+        root.style.setProperty('--print-link-color', 'black');
+        root.style.setProperty('--print-color-adjust', 'economy');
+        root.classList.remove('print-colors');
     }
 
     closePrintModal();

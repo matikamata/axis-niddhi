@@ -95,6 +95,34 @@ def audit_csl(apply_fix=False):
             print(f"❌ [JSON] {pdpn}: Erro ao ler identity: {e}")
             issues_found += 1
 
+        # 4. Verificação de grafia canônica Pālī (V5.4 — "Buda" proibido)
+        pt_html = folder / "source" / "pt-BR" / "content.html"
+        if pt_html.exists():
+            try:
+                pt_text = pt_html.read_text(encoding="utf-8")
+                from sanitize_pt import audit_pt_text
+                violations = audit_pt_text(pt_text)
+                if violations:
+                    terms = ", ".join(set(v["term"] for v in violations))
+                    print(f"🚫 [PĀLĪ] {pdpn}: {len(violations)}x grafia proibida ({terms})")
+                    issues_found += len(violations)
+            except Exception:
+                pass  # sanitize_pt não disponível — skip silencioso
+
+        # 4b. Verificar título PT
+        if identity_path.exists():
+            try:
+                data = json.loads(identity_path.read_text(encoding="utf-8"))
+                pt_title = data.get("titles", {}).get("pt", "")
+                if pt_title:
+                    from sanitize_pt import audit_pt_text
+                    title_violations = audit_pt_text(pt_title)
+                    if title_violations:
+                        print(f"🚫 [PĀLĪ] {pdpn}: título PT contém grafia proibida: '{pt_title}'")
+                        issues_found += 1
+            except Exception:
+                pass
+
     print("="*50)
     print("🏁 RELATÓRIO FINAL")
     if apply_fix:

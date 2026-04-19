@@ -604,12 +604,14 @@ footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: cent
   /* Reset Colors for Ink Saving and apply dynamic Padding */
   body, main {
     background: white !important;
-    color: black !important;
+    color: var(--print-text-color, black) !important;
     box-shadow: none !important;
     margin: 0 !important;
     padding: var(--print-pad, 0) !important;
     width: 100% !important;
     max-width: 100% !important;
+    -webkit-print-color-adjust: var(--print-color-adjust, economy) !important;
+    print-color-adjust: var(--print-color-adjust, economy) !important;
   }
 
   /* Typography for Print with Dynamic Line Height */
@@ -620,7 +622,7 @@ footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: cent
   }
 
   h1, h2, h3, h4, h5 {
-    color: black !important;
+    color: var(--print-heading-color, black) !important;
     page-break-after: avoid;
     text-align: left !important; /* Force left alignment for readability */
   }
@@ -630,7 +632,7 @@ footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: cent
   }
 
   a {
-    color: black !important;
+    color: var(--print-link-color, black) !important;
     text-decoration: underline;
     border: none !important;
   }
@@ -640,6 +642,12 @@ footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: cent
     content: " (" attr(href) ")";
     font-size: 0.8em;
     font-family: monospace;
+  }
+
+  html.print-colors * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 
   /* Layout */
