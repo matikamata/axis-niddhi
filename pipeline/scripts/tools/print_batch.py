@@ -116,13 +116,68 @@ def filter_printable(rows, lote):
     return printable
 
 
+class PrintColorHandler(http.server.SimpleHTTPRequestHandler):
+    """Intercepta HTML para injetar CSS de impressão (Remove animações + Ativa Cores)"""
+    def log_message(self, *args, **kwargs):
+        pass
+
+    def do_GET(self):
+        if self.path.endswith('.html') or self.path.endswith('/'):
+            # Encontrar o local correspondente
+            file_path = os.path.join(str(STATIC_SITE), self.path.lstrip('/').split('?')[0])
+            if os.path.isdir(file_path):
+                file_path = os.path.join(file_path, 'index.html')
+            
+            if os.path.exists(file_path):
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Injetar o CSS/JS de print nativo antes do fechamento do head
+                injection = """
+                <style>
+                @media print {
+                    :root {
+                        --print-text-color: inherit !important;
+                        --print-heading-color: #008800 !important;
+                        --print-link-color: #2b5fac !important;
+                        --print-color-adjust: exact !important;
+                    }
+                    html { 
+                        -webkit-print-color-adjust: exact !important; 
+                        print-color-adjust: exact !important; 
+                    }
+                    main {
+                        animation: none !important;
+                        opacity: 1 !important;
+                        transform: none !important;
+                        visibility: visible !important;
+                    }
+                    * {
+                        transition: none !important;
+                    }
+                }
+                </style>
+                <script>document.documentElement.classList.add('print-colors');</script>
+                """
+                
+                content = content.replace('</head>', injection + '</head>')
+                
+                encoded = content.encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(encoded)))
+                self.end_headers()
+                self.wfile.write(encoded)
+                return
+        
+        # Para outros arquivos, usar comportamento padrão
+        super().do_GET()
+
+
 def _start_local_server(directory):
-    """Levanta um servidor HTTP temporário em thread daemon. Retorna (httpd, port)."""
+    """Levanta um servidor HTTP temporário em thread daemon."""
     os.chdir(str(directory))
-    handler = http.server.SimpleHTTPRequestHandler
-    # Silenciar logs do servidor
-    handler.log_message = lambda *args, **kwargs: None
-    httpd = socketserver.TCPServer(("127.0.0.1", 0), handler)
+    httpd = socketserver.TCPServer(("127.0.0.1", 0), PrintColorHandler)
     port = httpd.server_address[1]
     thread = threading.Thread(target=httpd.serve_forever, daemon=True)
     thread.start()
