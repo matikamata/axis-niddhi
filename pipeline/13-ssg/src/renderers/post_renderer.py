@@ -107,9 +107,13 @@ def extract_csl_tattoo(html_content: str) -> tuple:
     lines = [l.strip() for l in match.group(1).strip().splitlines() if l.strip()]
     rows = ''.join(f'<tr><td>{l}</td></tr>' for l in lines)
     tattoo_div = (
-        f'<div class="csl-tattoo" aria-hidden="true">'
+        f'<div class="meta-toggle-wrap csl-tattoo" aria-hidden="true">'
+        f'<button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\\\'open\\\')" aria-expanded="false">'
+        f'ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span>'
+        f'</button>'
+        f'<div class="meta-table-wrap">'
         f'<table>{rows}</table>'
-        f'</div>'
+        f'</div></div>'
     )
     # Remove the original comment from html to prevent BS4 corruption
     clean_html = html_content[:match.start()] + html_content[match.end():]
@@ -221,9 +225,13 @@ def render_post(
             ]
         )
         _tattoo = (
-            f'<div class="csl-tattoo" aria-hidden="true">'
+            f'<div class="meta-toggle-wrap csl-tattoo" aria-hidden="true">'
+            f'<button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\\\'open\\\')" aria-expanded="false">'
+            f'ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span>'
+            f'</button>'
+            f'<div class="meta-table-wrap">'
             f'<table>{rows}</table>'
-            f'</div>'
+            f'</div></div>'
         )
 
     content_en = link_resolver.resolve_links(raw_en_clean, post.pdpn)

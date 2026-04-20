@@ -67,11 +67,11 @@ function toggleLabz() {
   const THEME_KEY = 'br_theme';
 
   const THEMES = [
-    { id: 'light', icon: '☀️' },
+    { id: 'light', icon: '🏔️' },
     { id: 'dark', icon: '🌙' },
+    { id: 'sunrise', icon: '☀️' },
     { id: 'colirio', icon: '🌿' },
-    { id: 'sunset', icon: '🌅' },
-    { id: 'sunrise', icon: '🏔️' }
+    { id: 'sunset', icon: '🌅' }
     // stardust é gerido pelo toggleLabz() — não aparece no theme switcher normal
   ];
 
@@ -153,6 +153,18 @@ function toggleLabz() {
 
       h2.addEventListener('click', () => {
         h2.classList.toggle('active');
+        const list = section.querySelector('.accordion-content');
+        if (list) {
+          if (h2.classList.contains('active')) {
+            list.style.maxHeight = list.scrollHeight + 'px';
+            const icon = h2.querySelector('.toggle-icon');
+            if(icon) icon.textContent = '▼';
+          } else {
+            list.style.maxHeight = '0px';
+            const icon = h2.querySelector('.toggle-icon');
+            if(icon) icon.textContent = '▶';
+          }
+        }
       });
     });
 
@@ -163,7 +175,16 @@ function toggleLabz() {
       const target = document.querySelector(hash);
       if (target && target.classList.contains('library-section')) {
         const h2 = target.querySelector('h2');
-        if (h2) h2.classList.add('active');
+        if (h2) {
+          h2.classList.add('active');
+          const list = target.querySelector('.accordion-content');
+          if (list) {
+            // Give time for layout calc
+            setTimeout(() => { list.style.maxHeight = list.scrollHeight + 'px'; }, 50);
+            const icon = h2.querySelector('.toggle-icon');
+            if(icon) icon.textContent = '▼';
+          }
+        }
         // Smooth scroll to ensure visibility
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -425,6 +446,72 @@ function toggleLabz() {
 
   // ── END FF-014 ────────────────────────────────────────────────────────────
 
+  // --- SPRINT G: Section Boxes Colasáveis (h5 → wrapper) ---
+  function initSectionBoxes() {
+    // Extrair PDPN do URL: /pages/BD.AA.000/index.html → "BD.AA.000"
+    const pdpnMatch = window.location.pathname.match(/\/pages\/([^/]+)/);
+    const pdpn = pdpnMatch ? pdpnMatch[1] : 'index';
+    const storageKey = 'sections-' + pdpn;
+
+    // Recuperar estados salvos
+    let savedState = {};
+    try { savedState = JSON.parse(sessionStorage.getItem(storageKey) || '{}'); } catch(e) {}
+
+    // Slug simples a partir do texto do h5
+    function toSlug(text) {
+      return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+    }
+
+    // Salvar estado atual
+    function saveState(slug, isCollapsed) {
+      savedState[slug] = isCollapsed;
+      try { sessionStorage.setItem(storageKey, JSON.stringify(savedState)); } catch(e) {}
+    }
+
+    // Processar cada container de conteúdo
+    ['content-en', 'content-pt'].forEach(function(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const h5s = Array.from(container.querySelectorAll('h5'));
+      if (!h5s.length) return;
+
+      h5s.forEach(function(h5) {
+        const slug = toSlug(h5.textContent || '');
+
+        // Coletar siblings até o próximo h5 ou fim do container
+        const siblings = [];
+        let next = h5.nextSibling;
+        while (next && !(next.nodeName === 'H5')) {
+          siblings.push(next);
+          next = next.nextSibling;
+        }
+
+        // Criar wrapper .section-content
+        const wrapper = document.createElement('div');
+        wrapper.className = 'section-content';
+        wrapper.setAttribute('data-h5-slug', slug);
+
+        // Inserir wrapper após o h5 e mover siblings para dentro
+        h5.parentNode.insertBefore(wrapper, h5.nextSibling);
+        siblings.forEach(function(el) { wrapper.appendChild(el); });
+
+        // Restaurar estado salvo (padrão: expandido)
+        if (savedState[slug] === true) {
+          h5.classList.add('collapsed');
+          wrapper.classList.add('collapsed');
+        }
+
+        // Evento de click
+        h5.addEventListener('click', function() {
+          const isCollapsed = h5.classList.toggle('collapsed');
+          wrapper.classList.toggle('collapsed', isCollapsed);
+          saveState(slug, isCollapsed);
+        });
+      });
+    });
+  }
+
   // --- SPRINT 7: Print Markers ---
   function initPrintVideoMarkers() {
       document.querySelectorAll('iframe[src*="youtube"], iframe[src*="youtu.be"]').forEach(iframe => {
@@ -442,6 +529,7 @@ function toggleLabz() {
     initSectionHighlight();  // [FF-014]
     initLang();
     initAccordion();
+    initSectionBoxes();   // [SPRINT G] h5 colasáveis
     initPronunciation();
     initSearch(); // [Sprint 9]
     initPrintVideoMarkers(); // [Sprint 7 Print Setup]
@@ -503,4 +591,16 @@ function executePrint() {
     // Allow DOM to apply variables briefly before triggering the print spooler
     setTimeout(() => { window.print(); }, 100);
 }
+
+// --- TOC TOGGLE (SPRINT C) ---
+window.toggleTOC = function(targetId) {
+    const el = document.getElementById(targetId);
+    if(el) {
+        if (el.style.display === 'none' || el.style.display === '') {
+            el.style.display = 'block';
+        } else {
+            el.style.display = 'none';
+        }
+    }
+};
 

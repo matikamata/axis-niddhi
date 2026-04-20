@@ -84,7 +84,12 @@
           </div>
           <ul style="margin: 0; padding-left: 1.5rem; opacity: 0.9;">
               <li style="margin-bottom: 0.5rem;"><strong>Appearance Settings:</strong> Theme controls (☀️ 🌙 🌿 🌅 🏔️) are available for reading comfort.</li>
-              <li><strong>Audio Support:</strong> <span style="color: #d32f2f; font-weight: 500;">Selected terms</span> may include pronunciation recordings.</li>
+              <li><strong>Reading Signals:</strong>
+                  <span class="manual-feature-desc">
+                      Terms in <span style="color:var(--term-audio); font-weight:bold;">red</span> have pronunciation recordings — click to hear.
+                      Terms in <span style="color:var(--term-glossary); font-weight:bold;">amber</span> are glossary entries (audio coming soon).
+                  </span>
+              </li>
           </ul>
       </div>
 
@@ -95,7 +100,12 @@
           </div>
           <ul style="margin: 0; padding-left: 1.5rem; opacity: 0.9;">
               <li style="margin-bottom: 0.5rem;"><strong>Configurações de Aparência:</strong> Controles de tema (☀️ 🌙 🌿 🌅 🏔️) para conforto de leitura.</li>
-              <li><strong>Suporte de Áudio:</strong> <span style="color: #d32f2f; font-weight: 500;">Termos selecionados</span> podem conter gravações de pronúncia.</li>
+              <li><strong>Sinais de Leitura:</strong>
+                  <span class="manual-feature-desc">
+                      Termos em <span style="color:var(--term-audio); font-weight:bold;">vermelho</span> têm gravação de pronúncia — clique para ouvir.
+                      Termos em <span style="color:var(--term-glossary); font-weight:bold;">âmbar</span> são entradas do glossário (áudio em breve).
+                  </span>
+              </li>
           </ul>
       </div>
   </div>
@@ -132,13 +142,79 @@
 
 <!-- READER MODE (default) -->
 <div class="library-index" id="view-reader">
+
+    <!-- SPRINT D: Section Grid (Overview) -->
+    {%- set EMOJIS = {
+        'AB': '🧠',
+        'BA': '👁️',
+        'BC': '📿',
+        'BD': '🌳',
+        'BM': '🧘',
+        'BS': '📜',
+        'CH': '📊',
+        'CC': '✨',
+        'DD': '📖',
+        'DH': '🏥',
+        'DP': '🔵',
+        'DS': '🔬',
+        'DT': '⏳',
+        'EL': '⚙️',
+        'ER': '🐘',
+        'FT': '📝',
+        'FW': '🧬',
+        'GY': '📚',
+        'HB': '🏛️',
+        'HS': '🏺',
+        'IS': '🪞',
+        'KD': '🔑',
+        'KF': '🗝️',
+        'KS': '⚡',
+        'LD': '🌱',
+        'LP': '🕯️',
+        'MB': '🪷',
+        'MQ': '🌸',
+        'MR': '🌀',
+        'MS': '📌',
+        'NK': '🌟',
+        'NP': '🆕',
+        'OD': '🌌',
+        'PD': 'ℹ️',
+        'PN': '🌠',
+        'PS': '🔗',
+        'PV': '🔮',
+        'QD': '⚛️',
+        'QM': '🌊',
+        'SI': '📖',
+        'SN': '🕊️',
+        'TL': '🌿',
+        'TS': '📋',
+        'VM': '🗺️',
+        'WP': '🌐'
+    } -%}
+    <div class="section-grid">
+        {% for section in nav_tree %}
+        <a href="#section-{{ section.code }}" class="section-card" title="{{ section.title }}" onclick="
+            setTimeout(() => {
+                const h2 = document.querySelector('#section-{{ section.code }} h2');
+                if (h2 && !h2.classList.contains('active')) h2.click();
+            }, 50);
+        ">
+            <span class="section-card-icon">{{ EMOJIS.get(section.code, '🔖') }}</span>
+            <span class="section-card-code">{{ "%02d"|format(loop.index) }} &bull; {{ section.code }}</span>
+            <span class="section-card-title">{{ section.title }}</span>
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- Lista Colapsável (Accordion) -->
     {% for section in nav_tree %}
     <section class="library-section" id="section-{{ section.code }}">
-        <h2>
+        <h2 class="accordion-header" style="cursor: pointer; display: flex; align-items: center; gap: 0.8rem;">
+            <span class="toggle-icon" style="color: var(--green-axiom); font-size: 0.8rem; transition: transform 0.3s;">▶</span>
             <span class="section-code">{{ section.code }}</span>
             <span class="section-title">{{ section.title }}</span>
         </h2>
-        <ul class="post-list">
+        <ul class="post-list accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; margin-left: 1.6rem; padding-left: 0; list-style: none;">
             {% for post in section.posts %}
             <li>
                 <span class="findex">{{ post.findex }}</span>

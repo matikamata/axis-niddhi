@@ -13,18 +13,13 @@
 <header>
 
 
-    <!-- SPRINT 6: Context Header (You Are Here) -->
-    <div class="context-header">
-        <span class="context-label">Section:</span>
-        <a href="{{ relative_root }}archive.html#section-{{ current_section_code }}" class="context-link">
-            {{ current_section_title }}
-        </a>
-        <span class="context-divider">|</span>
-        <span class="context-position">Post {{ position_index }} / {{ section_total }}</span>
-    </div>
-
-    <div class="meta">
-        <span class="pdpn">{{ post.pdpn }}</span>
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">{{ current_section_title }}</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post {{ position_index }} / {{ section_total }}</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">{{ post.pdpn }}</span>
     </div>
 
     <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
@@ -40,41 +35,29 @@
     <h1 class="title-pt">{{ post.titles.pt }}</h1>
     {% endif %}
 
-    <!-- SPRINT 6: Transmission Map (Prerequisites / Leads To) -->
-    <div class="transmission-map">
-        {% if prev_post %}
-        <div class="map-item">
-            <span class="map-label">From:</span>
-            <a href="{{ relative_root }}pages/{{ prev_post.pdpn }}/index.html">{{ prev_post.titles.en }}</a>
-        </div>
-        {% endif %}
-        
-        {% if next_post %}
-        <div class="map-item">
-            <span class="map-label">To:</span>
-            <a href="{{ relative_root }}pages/{{ next_post.pdpn }}/index.html">{{ next_post.titles.en }}</a>
-        </div>
-        {% endif %}
-    </div>
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
 
 </header>
 
 <div class="post-container">
     
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <ol>
-            <li><a href="{{ relative_root }}archive.html">Library</a></li>
-            <li><a href="{{ relative_root }}archive.html#section-{{ current_section_code }}">{{ current_section_title }}</a></li>
-            <li aria-current="page" class="current-crumb-en">{{ post.titles.en }}</li>
-            {% if post.has_pt %}
-            <li aria-current="page" class="current-crumb-pt">{{ post.titles.pt }}</li>
-            {% endif %}
-        </ol>
-    </nav>
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
 
-    <div class="mini-toc toc-en" id="toc-en"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    <!-- TOC Toggles -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button onclick="toggleTOC('toc-content-en')" style="background:none; border:none; color:var(--meta-color); text-decoration:underline; cursor:pointer; padding:0; text-align:left;">
+            To see the sections of this text click here
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+    
     {% if post.has_pt %}
-    <div class="mini-toc toc-pt" id="toc-pt"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button onclick="toggleTOC('toc-content-pt')" style="background:none; border:none; color:var(--meta-color); text-decoration:underline; cursor:pointer; padding:0; text-align:left;">
+            Para ver as seções deste ensaio clique aqui
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
     {% endif %}
 
     <article class="content-block content-en" id="content-en"
@@ -124,6 +107,24 @@
     </div>
     {% endif %}
 
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    {% if prev_post %}
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="{{ relative_root }}pages/{{ prev_post.pdpn }}/index.html">{{ prev_post.titles.en }}</a>
+    </div>
+    {% endif %}
+    
+    {% if next_post %}
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="{{ relative_root }}pages/{{ next_post.pdpn }}/index.html">{{ next_post.titles.en }}</a>
+    </div>
+    {% endif %}
 </div>
 
 <nav class="pathways" aria-label="Next and Previous">
