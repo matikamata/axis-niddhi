@@ -537,6 +537,16 @@ function toggleLabz() {
     if (document.getElementById('content-pt')) {
       generateTOC('content-pt', 'toc-list-pt');
     }
+
+    // [SPRINT L] BUG 1: meta-toggle via event listener (onclick inline estava quebrado)
+    const metaBtn = document.getElementById('meta-toggle-btn');
+    if (metaBtn) {
+      metaBtn.addEventListener('click', () => {
+        const wrap = metaBtn.closest('.meta-toggle-wrap');
+        const isOpen = wrap.classList.toggle('open');
+        metaBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
   });
 
   // FF-014: scroll listeners (passive for performance)
