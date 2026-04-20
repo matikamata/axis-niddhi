@@ -1,0 +1,406 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Ditthi Wrong Views Samma Ditthi Correct Views | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 4 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.EE.009</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Ditthi Wrong Views Samma Ditthi Correct Views</h1>
+    
+    <h1 class="title-pt">Diṭṭhi Visões erradas Samma Ditthi Visões corretas</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.EE.009</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.EE.009"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0152"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.EE.009</td></tr><tr><td>Fin-dex</td><td>0152</td></tr><tr><td>Slug</td><td>ditthi-wrong-views-samma-ditthi-correct-views</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Ditthi Wrong Views Samma Ditthi Correct Views</td></tr></table></div></div><p style="text-align: justify;"><strong>Revised April 2, 2016; February 6, 2020; <span style="color: #3366ff;">August 4, 2023</span></strong></p>
+<h5>Wrong Views About the World</h5>
+<p style="text-align: justify;">1. <em>Diṭṭhi</em> means dogmatic belief in something(s) in the sense that "this alone is true, and everything else is false regardless of the facts." <strong>Even though <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> </strong>(pronounced michchā diṭṭhi)<strong> is the correct term </strong>("<em>diṭṭhi</em><span>" means "views" and "<span class="pali-term term-highlight" data-term="micchā">micchā</span>" is "wrong"), in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> literature, "</span><em>diṭṭhi</em>" is used frequently instead of "<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>";<strong> the immoral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> is <em>diṭṭhi</em>.</strong></p>
+<ul>
+<li style="text-align: justify;"><span>In the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s time, 62 such dogmatic views were the topics of frequent discussions. They are in the </span><em><span>Brahmajala <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>.</li>
+<li style="text-align: justify;">The <em>diṭṭhāsava</em> (<em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> for the 62 wrong views) is eliminated by <em>diṭṭhi vissuddhi</em>, i.e., cleansing of the wrong views at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong><span>2. Some of these dogmatic views that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> had to deal with frequently were the following.</span></strong><span> There is a self, there is no self, <span class="pali-term term-highlight" data-term="reincarnation">reincarnation</span>, no <span class="pali-term term-highlight" data-term="reincarnation">reincarnation</span>, things exist, things do not exist, there are no laws of </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, there are laws of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>,</span></em> AND they are deterministic.</span></p>
+<ul>
+<li style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> refuted those all. Unfortunately, some of those wrong views are back in most versions of "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" today, most notably the "no-self" (</span><em>anātma</em>) concept.</li>
+<li style="text-align: justify;"><span>We have discussed some (the first four items were presented in several <span class="pali-term term-highlight" data-term="posts">posts</span>, for example, "</span><a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="What Reincarnates? – Concept of a Lifestream">What Reincarnates? - Concept of a Lifestream</a>" and "<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anatta</a>"), and we will discuss others in detail in the future.</li>
+</ul>
+<h5>Having Wrong Views Is an <em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em></h5>
+<p style="text-align: justify;">3. <em>Diṭṭhi</em> (or <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em><span>) is also one of the ten immoral actions or <span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span>. </span><em><span><span class="pali-term term-highlight" data-term="micchā">Micchā</span> </span></em><em>diṭṭhi</em><span> arises in the mind, i.e., it is an <span class="pali-term term-highlight" data-term="akusala">akusala</span> done by the mind. It also leads to corrupt speech and deeds. See, "</span><a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Ten Immoral Actions (Dasa Akusala)</a>."</p>
+<ul>
+<li style="text-align: justify;"><span>You can see that such thoughts arise due to dogmatic beliefs, i.e., when one is not willing even to consider the possibility that one could be wrong and to examine the evidence critically. For example, some people refuse even to examine the existing evidence for <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> with an open mind, which is </span><em>diṭṭhi</em>.</li>
+<li style="text-align: justify;">And one needs to know the "big picture of the 31 realms", concepts of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>, <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>, etc., to make a decision on <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>; it is not enough to look at the accounts or evidence for <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> as presented in, "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank" title="Evidence for Rebirth">Evidence for Rebirth</a>."</li>
+</ul>
+<h5>Three Levels of<em><span> <span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em></h5>
+<p style="text-align: justify;">4. <strong>There are three layers in which <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> is established and accumulates bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>:</strong></p>
+<ul style="text-align: justify;">
+<li>Suppose one kills one's parents with the <em>diṭṭhi</em> that a parent is not a unique person and that such <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> does not have consequences. That is the coarse level. It can be compared to a fire that burns down a house.</li>
+<li>The second level is when one vehemently defends such a wrong view in a debate and does not even consider the facts presented by the other side. One may genuinely believe in that position, BUT that is because one is not aware of the "bigger picture" on existence. The problem is that "not knowing the facts" is not an excuse. One could jump off of a building, not knowing how gravity operates but will suffer injury/death. This middle level is analogous to a fire that ignites when a match stick strikes a hard surface.</li>
+<li>The third level is the <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> level, where these views lay dormant as <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> (<em><span>diṭṭhi <span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em>). This subtler level is analogous to a box of matches that has the potential to start a fire.</li>
+</ul>
+<h5>Two Levels of<em><span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></h5>
+<p style="text-align: justify;">5. Someone is said to have <em><strong><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></strong></em> when one has wrong views at any of the three levels in #4 above. <span style="color: #0000ff;">On the other hand, <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> can be two kinds</span>:</p>
+<ul style="text-align: justify;">
+<li>One knows that bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> (actions) have adverse consequences and can lead to bad rebirths. One wants to live a moral life and strive for a "good <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>." That is "</span><strong>mundane or conventional <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>."</span></em></strong> Thus these are still defiled views (have "<em><span><span class="pali-term term-highlight" data-term="kilesa">kilesa</span></span></em>" in them) since they lead to extending <em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em><span>, and one has not yet eliminated the possibility of future <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em>apāyā</em> (four lower realms).</li>
+<li>But when one comprehends to "true nature of this world," one realizes that there can be no lasting happiness anywhere in the 31 realms of existence. This <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> is realized when one truly comprehends <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>; see, "<a href="../../pages/TL.HH.008/index.html" rel="noopener noreferrer" target="_blank" title="Why is Correct Interpretation of Anicca, Dukkha, Anatta so Important?">Why is Correct Interpretation of Anicca, Dukkha, Anatta" is so Important?</a>".</li>
+<li>That is the "<strong>transcendental or <em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></strong>" that leads to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; it is free of defilements or "<em><span><span class="pali-term term-highlight" data-term="kilesa">kilesa</span></span></em>" or ("<em>keles</em><span>" in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>). This view becomes complete at the </span><em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. <em><span><span class="pali-term term-highlight" data-term="kilesa">Kilesa</span></span></em> are discussed in "<a href="../../pages/LD.AA.006/index.html" rel="noopener noreferrer" target="_blank">What Are Kilesa (Mental Impurities)? – Connection to Cetasika</a>".</li>
+</ul>
+<h5>Mundane or Conventional <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></h5>
+<p style="text-align: justify;">6. Thus, <strong>conventional <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></strong> means the view to "do good things." One understands <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and knows the consequences of evil deeds; see "<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma - In a Chart</a>."</p>
+<ul>
+<li style="text-align: justify;">As we discussed in  "<a href="../../pages/BD.AA.003/index.html" rel="noopener noreferrer" target="_blank" title="Foundation of Dhamma">Foundation of Dhamma</a><span>," "doing good things" is better. Still, most of those things are done with the wrong intention of achieving something in return (good <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, winning a lottery, passing an examination, etc. ). This kind of </span><em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> will perpetuate the<em> samsāric</em> journey <strong>but is a required first stage to comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>.</strong></li>
+<li>The danger in stopping at the conventional <em>samma diṭṭhi</em><span> is that we do not know what one will do in a future life (say, another human birth.) One could be born under circumstances where one is not exposed to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, may associate with wrong people, and may commit </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> that will lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em>apāyā</em><span> (lowest four realms. The other danger is that we do not know what kind of <span class="pali-term term-highlight" data-term="kamma">kamma</span> we have done in previous lives, and we may already have some bad </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds that could lead to a birth in the<em> apāyā</em>.</li>
+</ul>
+<h5>Transcendental or <em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></h5>
+<p style="text-align: justify;">7. By <strong><em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></strong> is meant the understanding of the true nature of "this world" of 31 realms and the round of rebirths.</p>
+<ul>
+<li style="text-align: justify;">For example, "there is a self" and "there is no self" are both incorrect, and things (both animate and inanimate) exist if the conditions for their existence are present (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>).</li>
+<li style="text-align: justify;">Even though one partially comprehends <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, the understanding becomes complete only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</li>
+</ul>
+<p style="text-align: justify;">8. If one cultivates the "<em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span>" <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> and becomes a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>, then one will be free from rebirths in the <em>apāyā</em>.</p>
+<ul>
+<li style="text-align: justify;">The four greed-based immoral thoughts that arise due to wrong views ("<em><span style="color: #0000ff;"><span>diṭṭhi <span class="pali-term term-highlight" data-term="sahagata">sahagata</span> lōbha <span class="pali-term term-highlight" data-term="citta">citta</span></span></span></em>") do not arise In a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>, do not occur. See, "<a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank" title="Akusala Citta – How a Sotāpanna Avoids Apayagami Citta">Akusala Citta - How a Sōtapanna Avoids Apayagami Citta</a>."</li>
+</ul>
+<p style="text-align: justify;">Next, "<a href="../../pages/TL.GG.008/index.html" rel="noopener" target="_blank">How do we Decide which View is Diṭṭhi (Wrong View)?</a>"</p>
+<p style="text-align: justify;"> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.EE.009"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0152"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.EE.009
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p style="text-align: justify;"><strong>Revisado em 2 de abril de 2016; 6 de fevereiro de 2020; <span style="color: #3366ff;">4 de agosto de 2023</span></strong></p>
+<h5>Visões erradas sobre o mundo</h5>
+<p style="text-align: justify;">1. <em>Diṭṭhi</em> significa crença dogmática em algo(s) no sentido de que “somente isso é verdade, e tudo o mais é falso, independentemente dos fatos”. <strong>Embora <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> </strong><span>(pronuncia-se <span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span>)</span><strong> seja o termo correto</strong> (“<em>diṭṭhi</em><span>” significa “visões” e “<span class="pali-term term-highlight" data-term="micchā">micchā</span>” significa “errado”), na literatura <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, “</span><em>diṭṭhi</em>” é usado com frequência em vez de “<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em>”;<strong> o <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> imoral é <em>diṭṭhi</em>.</strong></p>
+<ul>
+<li style="text-align: justify;"><span>Na época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, 62 dessas visões dogmáticas eram temas de discussões frequentes. Elas estão no </span><em><span>Brahmajala <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>.</li>
+<li style="text-align: justify;">O <em>diṭṭhāsava</em> (<em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em> para as 62 visões erradas) é eliminado pelo <em>diṭṭhi vissuddhi</em>, ou seja, a purificação das visões erradas no estágio <em>Sótapanna</em>.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong><span>2. Algumas dessas visões dogmáticas com as quais o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> teve que lidar frequentemente eram as seguintes.</span></strong> Existe um eu, não existe um eu, Renascimento, não há Renascimento, as coisas existem, as coisas não existem, não há leis do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, há leis do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>,</span></em> E elas são determinísticas.</span></p>
+<ul>
+<li style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> refutou todas elas. Infelizmente, algumas dessas visões erradas estão de volta na maioria das versões do “Buddhismo” atual, principalmente o conceito de “não-eu” (</span><em>anātma</em>).</li>
+<li style="text-align: justify;">Discutimos algumas delas (os quatro primeiros itens foram apresentados em vários ensaios, por exemplo, “<a href="../../pages/PS.FF.003/index.html" title="What Reincarnates? – Concept of a Lifestream">O que ocorre no processo de Renascimento? - Conceito de um fluxo de vida</a>” e “<a href="../../pages/KD.FF.001/index.html" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anattā</a>”), e discutiremos outras em detalhes no futuro.</li>
+</ul>
+<h5>Ter visões erradas é um <em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em></h5>
+<p style="text-align: justify;">3. <em>Diṭṭhi</em> (ou <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em><span>) também é uma das dez ações imorais ou <span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span>. </span><em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em><span> surge na mente, ou seja, é um <span class="pali-term term-highlight" data-term="akusala">Akusala</span> feito pela mente. Também leva a palavras e ações corruptas. Veja “</span><a href="../../pages/TL.EE.003/index.html" title="Ten Immoral Actions (Dasa Akusala)">Dez ações imorais (Dasa Akusala)</a>”.</p>
+<ul>
+<li style="text-align: justify;">Você pode ver que tais pensamentos surgem devido a crenças dogmáticas, ou seja, quando alguém não está disposto nem mesmo a considerar a possibilidade de estar errado e a examinar as evidências criticamente. Por exemplo, algumas pessoas se recusam até mesmo a examinar as evidências existentes para o Renascimento com uma mente aberta, o que é <em>diṭṭhi</em>.</li>
+<li style="text-align: justify;">E é preciso conhecer o “quadro geral dos 31 reinos”, os conceitos de <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>, <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>, etc., para tomar uma decisão sobre o Renascimento; não é suficiente examinar os relatos ou evidências do Renascimento, conforme apresentados em “<a href="../../pages/BD.AA.007/index.html" title="Evidence for Rebirth">Evidências do Renascimento</a>”.</li>
+</ul>
+<h5>Três níveis de<em><span> <span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em></h5>
+<p style="text-align: justify;">4. <strong>Existem três camadas nas quais <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> se estabelece e acumula mau <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>:</strong></p>
+<ul style="text-align: justify;">
+<li>Suponha que alguém mate seus pais com o <em>diṭṭhi</em> de que um pai não é uma pessoa única e que tal <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> não tem consequências. Esse é o nível grosseiro. Pode ser comparado a um incêndio que destrói uma casa.</li>
+<li>O segundo nível é quando alguém defende veementemente tal visão errada em um debate e nem mesmo considera os fatos apresentados pelo outro lado. Pode-se acreditar genuinamente nessa posição, MAS isso é porque não se está ciente do “quadro geral” da existência. O problema é que “não conhecer os fatos” não é uma desculpa. Alguém poderia pular de um prédio, sem saber como a gravidade funciona, mas sofreria ferimentos/morte. Esse nível intermediário é análogo a um incêndio que se inicia quando um fósforo atinge uma superfície dura.</li>
+<li>O terceiro nível é o nível <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>, onde essas visões permanecem adormecidas como <em><span><span class="pali-term term-highlight" data-term="āsavā">Āsavā</span></span></em> (<em><span>diṭṭhi <span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em>). Esse nível mais sutil é análogo a uma caixa de fósforos que tem o potencial de iniciar um incêndio.</li>
+</ul>
+<h5>Dois níveis de<em><span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></h5>
+<p style="text-align: justify;">5. Diz-se que alguém tem <em><strong><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></strong></em> quando tem visões erradas em qualquer um dos três níveis acima mencionados no nº 4. <span style="color: #0000ff;">Por outro lado, <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> pode ser de dois tipos</span>:</p>
+<ul style="text-align: justify;">
+<li>A pessoa sabe que <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (ações) ruins têm consequências adversas e podem levar a renascimentos ruins. A pessoa quer viver uma vida moral e se esforçar para um “bom renascimento”. Isso é <strong><em><span>“<span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> mundano ou convencional<em>”.</em></strong> Portanto, essas ainda são visões impuras (contêm “<em><span><span class="pali-term term-highlight" data-term="kilesā">Kilesā</span></span></em>”), pois levam à prolongação <em><span>do <span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em>, e a pessoa ainda não eliminou a possibilidade de renascimento futuro no <em>apāyā</em> (quatro reinos inferiores).</li>
+<li>Mas quando se compreende a “verdadeira natureza deste mundo”, percebe-se que não pode haver felicidade duradoura em nenhum dos 31 reinos da existência. Esse <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> é realizado quando se compreende verdadeiramente <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>; veja “<a href="../../pages/TL.HH.008/index.html" title="Why is Correct Interpretation of Anicca, Dukkha, Anatta so Important?">Por que a interpretação correta de Anicca, Dukkha, Anattā é tão importante?</a>”.</li>
+<li>Essa é a <strong><em><span>“<span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> transcendental ou <em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span></span></em></strong>” que leva ao <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; ela é livre de impurezas ou “<em><span><span class="pali-term term-highlight" data-term="kilesa">Kilesa</span></span></em>” ou (“<em>keles</em>” em cingalês). Essa visão se completa no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. <em><span><span class="pali-term term-highlight" data-term="kilesa">Kilesa</span></span></em> são discutidos em “<a href="../../pages/LD.AA.006/index.html">O que são Kilesa (impurezas mentais)? – Conexão com Cetasika</a>”.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> mundano ou convencional</h5>
+<p style="text-align: justify;">6. Assim, <strong><em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> convencional</strong> significa a visão de “fazer coisas boas”. A pessoa compreende <em><span>o <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e conhece as consequências das más ações; veja “<a href="../../pages/MS.BB.001/index.html">Buddha Dhamma - Em um gráfico</a>”.</p>
+<ul>
+<li style="text-align: justify;">Como discutimos em “<a href="../../pages/BD.AA.003/index.html" title="Foundation of Dhamma">Fundamentos do Dhamma</a>”, “fazer coisas boas” é melhor. Ainda assim, a maioria dessas coisas é feita com a intenção errada de obter algo em troca (bom Renascimento, ganhar na loteria, passar em um exame, etc.). Esse tipo de <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> perpetuará a jornada <em>samsárica</em><strong>, mas é um primeiro estágio necessário para compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</strong></li>
+<li>O perigo de parar no <em>samma diṭṭhi</em><span> convencional é que não sabemos o que faremos em uma vida futura (digamos, outro nascimento humano). Podemos nascer em circunstâncias em que não seremos expostos ao <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, podemos nos associar com pessoas erradas e podemos cometer </span><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que nos levará ao Renascimento no <em>apāyā</em><span> (os quatro reinos mais baixos). O outro perigo é que não sabemos que tipo de <span class="pali-term term-highlight" data-term="kamma">Kamma</span> fizemos em vidas anteriores e podemos já ter algumas sementes </span><em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruins que poderiam levar a um nascimento no <em>apāyā</em>.</li>
+</ul>
+<h5>Transcendental ou <em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></h5>
+<p style="text-align: justify;">7. Por <strong><em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em></strong> entende-se a compreensão da verdadeira natureza deste “mundo” de 31 reinos e do ciclo de renascimentos.</p>
+<ul>
+<li style="text-align: justify;">Por exemplo, “existe um eu” e “não existe um eu” são ambos incorretos, e as coisas (tanto animadas quanto inanimadas) existem se as condições para sua existência estiverem presentes (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>).</li>
+<li style="text-align: justify;">Embora se compreenda parcialmente <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, a compreensão só se torna completa no estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">8. Se alguém cultivar o “<em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span>” <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> e se tornar um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, então estará livre dos renascimentos no <em>apāyā</em>.</p>
+<ul>
+<li style="text-align: justify;">Os quatro pensamentos imorais baseados na ganância que surgem devido a visões erradas (“<em><span style="color: #0000ff;"><span>diṭṭhi <span class="pali-term term-highlight" data-term="sahagata">Sahagata</span> lōbha <span class="pali-term term-highlight" data-term="citta">Citta</span></span></span></em>”) não surgem em um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, não ocorrem. Veja “<a href="../../pages/TL.HH.010/index.html" title="Akusala Citta – How a Sotāpanna Avoids Apayagami Citta">Akusala Citta - Como um Sotāpanna evita Apayagami Citta</a>”.</li>
+</ul>
+<p style="text-align: justify;">A seguir, “<a href="../../pages/TL.GG.008/index.html">Como decidimos qual visão é Diṭṭhi (visão errada)?</a>”</p>
+<p style="text-align: justify;"> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.EE.013/index.html">Hetu Phala Paccuppanna And Paticca Samuppada</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.AA.000/index.html">Three Levels Of Practice</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.EE.013/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Hetu Phala Paccuppanna And Paticca Samuppada</span>
+        
+        <span class="pathway-title title-pt">Hetu Phala Paccuppanna e Paticca Samuppada</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.AA.000/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Three Levels Of Practice</span>
+        
+        <span class="pathway-title title-pt">Três níveis de prática</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

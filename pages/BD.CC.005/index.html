@@ -1,0 +1,532 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Patient H M Brain And Memory | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 13 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.CC.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Patient H M Brain And Memory</h1>
+    
+    <h1 class="title-pt">Paciente H M: Cérebro e Memória</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.CC.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.CC.005"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0016"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.CC.005</td></tr><tr><td>Fin-dex</td><td>0016</td></tr><tr><td>Slug</td><td>patient-h-m-brain-and-memory</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Patient H M Brain And Memory</td></tr></table></div></div><p><strong> September 25, 2020; revised April 11, 2022</strong></p>
+<p style="text-align: justify;"><span> Patient H.M. provided a critical clue to the role of the hippocampus in memory preservation. Studies on him and a few other patients point to direct and indirect roles played by the brain in preserving memories.  The <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> and scientific descriptions are the same for habitual (procedural) memory but different for autobiographical (declarative) memory.</span></p>
+<h5 style="text-align: justify;">Major Components of the Brain</h5>
+<p style="text-align: justify;">1. The following diagram shows the brain divided into three regions. The following bullet points provide the KEY FUNCTIONS of each area. It is a crude description but provides a simple picture.</p>
+<p style="text-align: justify;"><img alt="" class="alignleft wp-image-32100" height="315" src="http://localhost/beng_feb2026/wp-content/uploads/Brain-Major-Components-300x171.jpg" width="553"/></p>
+<ul style="text-align: justify;">
+<li>The <span style="color: #993366;"><strong>cerebellum</strong> <strong>(indicated in red)</strong></span> controls <span style="color: #993366;"><strong>body movements</strong></span>. The cerebellum also helps with body balance and remembering repetitive tasks. If there is significant damage to the <span style="color: #993366;"><strong>brain stem</strong></span>, one is likely to die. The brain stem controls vital functions like breathing.</li>
+<li>The <strong>limbic system</strong> plays a vital role in <strong>memory.</strong> It also deals with emotions. <strong>Components of the limbic system are indicated in black.</strong></li>
+<li>The <span style="color: #0000ff;"><strong>neocortex</strong></span> <strong><span style="color: #0000ff;">(indicated in blue)</span></strong> is the largest area of the brain and manages <span style="color: #0000ff;"><strong>sensory inputs</strong> <strong>such as vision and hearing</strong></span>. It is also the "<span style="color: #0000ff;"><strong>thinking brain</strong></span>." It wraps around the limbic system, starting from the edge of the cerebellum.</li>
+</ul>
+<p style="text-align: justify;">Click on the link to download the figure: "<a href="http://localhost/beng_feb2026/wp-content/uploads/Brain-Major-Components.jpg" rel="noopener noreferrer" target="_blank">Major Components of the Brain</a>."</p>
+<h5 style="text-align: justify;">Structural Information on the Three Regions of the Brain</h5>
+<p style="text-align: justify;">2. The above figure shows a brain cut in the middle. <strong>Some components of the limbic system have two parts on either side.</strong> For example, the hippocampus and amygdala have two identical structures on the brain's left and right sides.</p>
+<ul style="text-align: justify;">
+<li>On the other hand, the brain stem and cerebellum are single structures.</li>
+<li>In contrast to both, the neocortex has different areas specialized for various tasks. Analysis of sensory inputs happens in the back (visual and auditory cortex.) Parts of the frontal cortex manage planning, speech, and related motor control aspects. The neocortex accounts for 76% of the brain.</li>
+</ul>
+<h5 style="text-align: justify;">Overview of Our Discussion So Far</h5>
+<p style="text-align: justify;"><span>3. Now, we can better visualize our discussion so far in the previous few <span class="pali-term term-highlight" data-term="posts">posts</span>, especially the <span class="pali-term term-highlight" data-term="post">post</span> on "</span><a href="../../pages/BD.CC.004/index.html" rel="noopener noreferrer" target="_blank">Persistent Vegetative State – Buddhist View</a><span>." Let us first go over that <span class="pali-term term-highlight" data-term="post">post</span>.</span></p>
+<ul style="text-align: justify;">
+<li>The brain stem regulates breathing, heart rate, and blood pressure. Therefore, it is likely that people in vegetative states do not have significant damage to their brain stems.</li>
+</ul>
+<p style="text-align: justify;"><img alt="" class="alignleft wp-image-32105" height="234" src="http://localhost/beng_feb2026/wp-content/uploads/Neocortex-Areas.png" width="468"/></p>
+<ul style="text-align: justify;">
+<li>The loss of motor control (body movements) is likely due to damage to the cerebellum.</li>
+<li>The visual and auditory cortexes are close to the cerebellum (left figure). Click to download the figure: "<a href="http://localhost/beng_feb2026/wp-content/uploads/Neocortex-Areas.png" rel="noopener noreferrer" target="_blank">Neocortex Areas and Cerebellum</a>." The limbic system is hidden in this view.</li>
+<li><span>That roughly matches what we discussed in the previous <span class="pali-term term-highlight" data-term="post">post</span> about different situations of people in vegetative states. For example, suppose there is damage to the cerebellum area but minimal damage to the visual/auditory cortexes. Such patients may be able to see/hear but not be able to respond.</span></li>
+<li>On the other hand, if the visual/auditory cortexes and the cerebellum are damaged, the patients will not be able to see or hear as well.</li>
+<li><span>We discussed those two situations in the previous <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;">The Opposite of a “Vegetative State” - Living Without Memory</h5>
+<p style="text-align: justify;">4. Now, let us discuss a few people who were unfortunate to face different problems due to a third region of the brain located close to the middle of the brain. As we can see from the first figure above, the limbic system lies underneath the neocortex and sits above the brain stem/cerebellum area.</p>
+<ul style="text-align: justify;">
+<li>The limbic system is the "emotional center" of the brain because it controls emotions. It has several components, including the hippocampus, amygdala, and thalamus.</li>
+<li>Our focus here is on the hippocampus. As we will see, it plays a significant role in memory.</li>
+<li>There are two symmetrically-placed hippocampi on either side of the brain. Surgeons removed both of them in a patient who went by the name "patient H.M."</li>
+</ul>
+<h5 style="text-align: justify;">The account of "Patient H.M." - Critical Role of Hippocampus</h5>
+<p style="text-align: justify;">5. Patient H.M. (or Henry Molaison) suffered from frequent bouts of seizures. In 1953, a surgeon removed both his hippocampi in an attempt to solve that problem. Even though the episodes went away, HM suffered a devastating memory loss.</p>
+<ul style="text-align: justify;">
+<li>HM lost the ability to retain NEW memories. But he could remember events up to the operation but could not remember anything for more than a few minutes AFTER the operation. The following video explains it in more detail.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/KkaXNvzE4pk?si=RzXxER6t1QniMrTY" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>After extensive studies on patient HM (he died in 2008) and on several other patients with memory loss,  neuroscientists have concluded that the hippocampus is the component In the brain that strengthens short-term memories to long-term memories and "passes them over to the neocortex."</li>
+<li><span>However, they do not know how those memories can be "passed over to another brain region" or how the brain can keep such "long-term memories" for a long time. In the next <span class="pali-term term-highlight" data-term="post">post</span>, we will discuss some people's ability to remember past events extensively. </span><strong>For example, some people can remember what they ate for lunch several years ago on a specific arbitrary date!</strong><span> We will discuss that in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li>The extensive study of patient HM is vital since it allows us to pinpoint one brain component responsible for long-term memories.</li>
+</ul>
+<h5 style="text-align: justify;">Nomenclature of Memory</h5>
+<p style="text-align: justify;">6. We need to be aware of some standard terms neuroscientists use. That will help us understand the content in the following videos.</p>
+<ul style="text-align: justify;">
+<li><strong>Autobiographical (or episodic, declarative, or explicit) memory</strong> is about remembering events, facts, etc. These memories are about dates, events, names, etc. They are the same as <em>nāmagotta</em><span> in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, </span><em>nāmagotta</em> are not in the brain but reside in the "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> plane." There is a "transmitter" in the brain that transmits memories to the "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> plane." Then, there is a "receiver" in the brain that makes it possible to recall memories from the "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em><span> plane." More on that in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li>The other is <strong>habitual (or procedural or implicit) memory</strong> or being able to do repetitive tasks like playing the piano, riding a bicycle, brushing teeth, etc. They are related to one's habits. These memories are "hard-wired" in the brain. It appears that the cerebellum in the brain is where such "memory connections" occur.</li>
+<li><strong>Anterograde amnesia</strong> is the failure to store memories after trauma. <strong>Retrograde amnesia</strong> is the failure to recall memories before the trauma. The loss of the hippocampus leads to anterograde amnesia.</li>
+</ul>
+<h5 style="text-align: justify;">Further Details on Patient H.M.</h5>
+<p style="text-align: justify;">7. The following video is a bit long. But it provides a lot of information.</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/UqVUVREIXKg?si=d9yydXw4x6OQDQ3N" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>@ 4 minutes: Hippocampi on both sides of the brain surgically removed. After that, he couldn't remember anything that had happened minutes ago. Of course, he could remember events before the operation.</li>
+<li>Imagine the hippocampi to be the "transmitter." Suppose it transmits new memories to the "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> plane," where they remain intact forever. Then, suppose another component (yet unidentified) in the brain can help recall memories. That "receiver" worked for patient H.M. since he could recall memories formed BEFORE removing the hippocampi.</li>
+<li><span>We will discuss this "theory" in the next <span class="pali-term term-highlight" data-term="post">post</span>. But keep this in mind as we continue the discussion here.</span></li>
+<li>@4:40 minutes: "Declarative memory" is the same as the autobiographical memory. "Procedural memory" is the same as "habitual memory."</li>
+<li>@5:40 minutes: The narrator says there is only one book on patient H.M., But there are two more. See Ref. 1.</li>
+</ul>
+<p style="text-align: justify;"><span>8. The Nova clip @7 minutes says that chemical processes create and erase memories. But that is not consistent with either <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> or recent scientific findings.</span></p>
+<ul style="text-align: justify;">
+<li>@8:40 minutes: The account of H.M.'s medical problems led to surgery.</li>
+<li>@10 minutes: Patient H.M. could remember everything that happened before his operation.</li>
+<li>@10:30 minutes: Dr. Milner concluded that the hippocampus MAKES long-term memories. But we will see that there is a better explanation.</li>
+<li>@11:00 minutes: The drawing experiment showed that he could learn repetitive processes. As we will see below, that comes under "habitual memory" (learning a motor skill) controlled by the cerebellum. But, of course, he had no memory of going through those trial runs of drawing the star.</li>
+<li><span>@12 minutes: Current scientific explanation of memory formation. This explanation is also consistent with <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Construction of "habitual memories" or motor skills appears to occur in the cerebellum.</span></li>
+</ul>
+<h5 style="text-align: justify;">The Account of Patient E.P.</h5>
+<p style="text-align: justify;">9. The account of a different person, <strong>patient E.P., </strong>starts at 4:30 minutes. In 1992, E.P. suffered a viral infection that seemed to have damaged parts of the limbic system. That is very similar to the case of Clive Wearing, which we will discuss below.</p>
+<ul style="text-align: justify;">
+<li>@ 17 minutes: Patient E.P. could not retain memories of events AFTER coming down with the infection. But he remembered events before that. Thus, he does not have autobiographical memories of events AFTER the infection.</li>
+<li>@19:30: The virus destroyed areas around the hippocampus. After that damage, patient E.P. could not retain any NEW autobiographical information. But he remembers everything that happened BEFORE that virus-induced damage. That is similar to the case of patient H.M.</li>
+<li>@22 minutes: The narrator says the hippocampus helps "record the memories." But as we will see, the hippocampus transmits those memories to the <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> plane.</li>
+<li>@ 24 minutes: Brief discussion of Clive Wearing.</li>
+<li>@25:40 minutes: The account of Dr. Jacopo Annese, who compiles records of the brains of people with different backgrounds, including those with memory problems.</li>
+<li>@30:10 to 32 minutes: The brain of patient H.M. <strong>The discussion relevant to our topic stops at 32 minutes.</strong></li>
+<li>@32 minutes to end: Work of Dr. Annese. He plans to make a repository of complete brain scans of 1000 people.</li>
+<li>Next, we discuss a third patient who lost ALL his memories AND cannot make ANY memories.</li>
+</ul>
+<h5 style="text-align: justify;">Clive Wearing – Musician With Seven-Second Memory</h5>
+<p style="text-align: justify;">10. Clive Wearing was a reputable musician. A herpes virus damaged his brain (around the limbic system) just over a few days in 1985. Unlike patient H.M. and patient E.P., he cannot recall ANY memories. <span style="color: #ff0000;"><strong><span style="color: #993366;">He can remember only those events within the last seven seconds.</span> </strong><span style="color: #000000;">His situation is even worse than that of the previous two patients.</span></span></p>
+<ul style="text-align: justify;">
+<li>Therefore, he cannot recognize anyone. Even though he cannot remember his wife's name, he knows that she is a special person in his life.</li>
+<li>So, he virtually lives "just at that moment"!</li>
+<li>The following video is a bit long. But it provides a lot of information.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/k_P7Y0-wgos?si=62-n8VTve-bmf5Da" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5 style="text-align: justify;">Significant Deductions from Clive Wearing's Case</h5>
+<p style="text-align: justify;">11. Note in the beginning that he can play the piano but cannot remember anything that happened even several seconds ago!</p>
+<ul style="text-align: justify;">
+<li>Therefore, his habitual memory is intact (consistent with undamaged cerebellum.) But he has anterograde AND retrograde amnesia, i.e., total loss of autobiographical memory.  Therefore, he seems to have lost both the transmitter (hippocampus) and "receiver" (cannot be identified yet.)</li>
+<li>@ 6:40 minutes: He says it is like being dead. No thoughts of any kind except the one that passes by. In that sense, his state is a kind of "vegetative state" even though he can maintain his physical activities.</li>
+<li>@ 9:30 minutes: The account of how he lost memory in several days in 1985.</li>
+</ul>
+<p style="text-align: justify;">12. Here are more notable things from the above video:</p>
+<ul style="text-align: justify;">
+<li>@ 10 minutes: How he lost memory within several days. The herpes virus crossed the blood-brain barrier and got into the brain. There is only a one-in-a-million chance of that happening!</li>
+<li>@14 minutes: He says he cannot think about anything. That is why he initially cried all day long. He says it is like being dead.</li>
+<li>@19 minutes: Every moment is the beginning of consciousness! He repeats that at @43 minutes. No thoughts mean like being dead! He was fortunate to be able to play the piano. <strong>As we mentioned, such "learned memories" remain hard-wired in the cerebellum.</strong> <span style="color: #0000ff;"><strong>That is a notable difference from "episodic memories," which are not (and cannot be) "stored" in the brain.</strong></span><span> We will discuss that in the next <span class="pali-term term-highlight" data-term="post">post</span>. That is also why he can dress by himself, eat and do other "regular activities" by himself.</span></li>
+</ul>
+<p style="text-align: justify;">13. We can learn a lot about the workings of the brain and the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> by carefully analyzing the accounts of patient H.M., patient E.P., and Clive Wearing.</p>
+<ul style="text-align: justify;">
+<li><span>We will continue the discussion in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;">References</h5>
+<p style="text-align: justify;">1. <strong>Books on patient H.M.:</strong> Philip J. Hilts,  <i>Memory's Ghost</i> (1996). Suzanne Corkin  <span class="cs1-lock-registration" title="Free registration required"><i>Permanent Present Tense: The Unforgettable Life of the Amnesic Patient, H. M. </i>(2013). Luke Dittrich <i>Patient H.M.: A Story of Memory, Madness, and Family Secrets </i>(2017). </span></p>
+<p style="text-align: justify;">2. <strong>Book on Clive Wearing:</strong> Deborah Wearing, <em>Forever Today</em> (2005).</p>
+<p style="text-align: justify;">3. One could Google and find much more information on any of these topics. I have provided just enough material to get the basic idea.</p>
+<p><span>All <span class="pali-term term-highlight" data-term="posts">posts</span> in this section at "</span><a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – A Scientific Approach</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.CC.005"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0016"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.CC.005
+Language:     pt-BR
+Generated-At: 2026-04-17T21:31:41Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong> 25 de setembro de 2020; revisado em 11 de abril de 2022</strong></p>
+<p style="text-align: justify;"> O paciente H.M. forneceu uma pista crucial sobre o papel do hipocampo na preservação da memória. Estudos sobre ele e alguns outros pacientes apontam para papéis diretos e indiretos desempenhados pelo cérebro na preservação das memórias. As descrições Buddhistas e científicas são as mesmas para a memória habitual (procedimental), mas diferentes para a memória autobiográfica (declarativa).</p>
+<h5 style="text-align: justify;">Principais componentes do cérebro</h5>
+<p style="text-align: justify;">1. O diagrama a seguir mostra o cérebro dividido em três regiões. Os pontos a seguir apresentam as PRINCIPAIS FUNÇÕES de cada área. É uma descrição simplificada, mas fornece uma visão geral.</p>
+<p style="text-align: justify;"><img alt="" class="alignleft wp-image-32100" height="315" src="http://localhost/beng_feb2026/wp-content/uploads/Brain-Major-Components-300x171.jpg" width="553"/></p>
+<ul style="text-align: justify;">
+<li>O <span style="color: #993366;"><strong>cerebelo</strong> <strong>(indicado em vermelho)</strong></span> controla <span style="color: #993366;"><strong>os movimentos do corpo</strong></span>. O cerebelo também ajuda no equilíbrio corporal e na lembrança de tarefas repetitivas. Se houver dano significativo ao <span style="color: #993366;"><strong>tronco</strong></span> <span style="color: #993366;"><strong>cerebral</strong></span>, é provável que a pessoa morra. O tronco cerebral controla funções vitais como a respiração.</li>
+<li>O <strong>sistema límbico</strong> desempenha um papel vital na <strong>memória.</strong> Ele também lida com as emoções. <strong>Os componentes do sistema límbico estão indicados em preto.</strong></li>
+<li>O <span style="color: #0000ff;"><strong>neocórtex</strong></span> <strong><span style="color: #0000ff;">(indicado em azul)</span></strong> é a maior área do cérebro e gerencia <span style="color: #0000ff;"><strong>os estímulos sensoriais, como a visão e a audição</strong></span>. É também o “<span style="color: #0000ff;"><strong>cérebro pensante</strong></span>”. Ele envolve o sistema límbico, começando na borda do cerebelo.</li>
+</ul>
+<p style="text-align: justify;">Clique no link para baixar a figura: “<a href="http://localhost/beng_feb2026/wp-content/uploads/Brain-Major-Components.jpg" rel="noopener noreferrer" target="_blank">Principais componentes do cérebro</a>”.</p>
+<h5 style="text-align: justify;">Informações estruturais sobre as três regiões do cérebro</h5>
+<p style="text-align: justify;">2. A figura acima mostra um corte do cérebro no meio. <strong>Alguns componentes do sistema límbico têm duas partes em cada lado.</strong> Por exemplo, o hipocampo e a amígdala têm duas estruturas idênticas nos lados esquerdo e direito do cérebro.</p>
+<ul style="text-align: justify;">
+<li>Por outro lado, o tronco cerebral e o cerebelo são estruturas únicas.</li>
+<li>Em contraste com ambos, o neocórtex possui diferentes áreas especializadas para várias tarefas. A análise dos estímulos sensoriais ocorre na parte posterior (córtex visual e auditivo). Partes do córtex frontal controlam o planejamento, a fala e aspectos relacionados ao controle motor. O neocórtex representa 76% do cérebro.</li>
+</ul>
+<h5 style="text-align: justify;">Visão geral de nossa discussão até agora</h5>
+<p style="text-align: justify;">3. Agora, podemos visualizar melhor nossa discussão até o momento nos ensaios anteriores, especialmente o ensaio sobre <a href="../../pages/BD.CC.004/index.html" rel="noopener noreferrer" target="_blank">“Estado Vegetativo Persistente – Visão Buddhista</a>”. Vamos primeiro revisar esse ensaio.</p>
+<ul style="text-align: justify;">
+<li>O tronco cerebral regula a respiração, a frequência cardíaca e a pressão arterial. Portanto, é provável que pessoas em estado vegetativo não apresentem danos significativos no tronco cerebral.</li>
+</ul>
+<p style="text-align: justify;"><img alt="" class="alignleft wp-image-32105" height="234" src="http://localhost/beng_feb2026/wp-content/uploads/Neocortex-Areas.png" width="468"/></p>
+<ul style="text-align: justify;">
+<li>A perda do controle motor (movimentos corporais) provavelmente se deve a danos no cerebelo.</li>
+<li>Os córtex visual e auditivo estão próximos ao cerebelo (figura à esquerda). Clique para baixar a figura: “<a href="http://localhost/beng_feb2026/wp-content/uploads/Neocortex-Areas.png" rel="noopener noreferrer" target="_blank">Áreas do neocórtex e cerebelo</a>”. O sistema límbico está oculto nesta imagem.</li>
+<li>Isso corresponde, em linhas gerais, ao que discutimos no ensaio anterior sobre diferentes situações de pessoas em estado vegetativo. Por exemplo, suponha que haja danos na área do cerebelo, mas danos mínimos nos córtexes visual e auditivo. Esses pacientes podem ser capazes de ver/ouvir, mas não de responder.</li>
+<li>Por outro lado, se os córtexes visual e auditivo e o cerebelo estiverem danificados, os pacientes não serão capazes de ver nem ouvir.</li>
+<li>Discutimos essas duas situações no ensaio anterior.</li>
+</ul>
+<h5 style="text-align: justify;">O oposto de um “estado vegetativo” — viver sem memória</h5>
+<p style="text-align: justify;">4. Agora, vamos discutir algumas pessoas que tiveram a infelicidade de enfrentar problemas diferentes devido a uma terceira região do cérebro localizada próxima ao centro do cérebro. Como podemos ver na primeira figura acima, o sistema límbico fica abaixo do neocórtex e acima da área do tronco cerebral/cerebelo.</p>
+<ul style="text-align: justify;">
+<li>O sistema límbico é o “centro emocional” do cérebro, pois controla as emoções. Ele possui vários componentes, incluindo o hipocampo, a amígdala e o tálamo.</li>
+<li>Nosso foco aqui é o hipocampo. Como veremos, ele desempenha um papel significativo na memória.</li>
+<li>Existem dois hipocampos posicionados simetricamente em cada lado do cérebro. Cirurgiões removeram ambos em um paciente conhecido como “paciente H.M.”</li>
+</ul>
+<h5 style="text-align: justify;">O relato do “Paciente H.M.” – Papel Crítico do Hipocampo</h5>
+<p style="text-align: justify;">5. O paciente H.M. (ou Henry Molaison) sofria de crises convulsivas frequentes. Em 1953, um cirurgião removeu ambos os seus hipocampos na tentativa de resolver esse problema. Embora as crises tenham desaparecido, H.M. sofreu uma perda de memória devastadora.</p>
+<ul style="text-align: justify;">
+<li>HM perdeu a capacidade de reter NOVAS memórias. Mas ele conseguia se lembrar de eventos até a operação, mas não conseguia se lembrar de nada por mais do que alguns minutos APÓS a operação. O vídeo a seguir explica isso com mais detalhes.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/KkaXNvzE4pk?si=RzXxER6t1QniMrTY" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Após estudos extensivos sobre o paciente HM (que faleceu em 2008) e sobre vários outros pacientes com perda de memória, os neurocientistas concluíram que o hipocampo é o componente do cérebro que transforma memórias de curto prazo em memórias de longo prazo e “as transfere para o neocórtex”.</li>
+<li>No entanto, eles não sabem como essas memórias podem ser “transferidas para outra região do cérebro” ou como o cérebro consegue manter tais “memórias de longo prazo” por um longo tempo. No próximo ensaio, discutiremos a capacidade de algumas pessoas de se lembrarem extensivamente de eventos passados. <strong>Por exemplo, algumas pessoas conseguem lembrar o que comeram no almoço há vários anos, em uma data específica e arbitrária!</strong> Discutiremos isso nos próximos ensaios.</li>
+<li>O estudo aprofundado do paciente HM é vital, pois nos permite identificar um componente cerebral responsável pelas memórias de longo prazo.</li>
+</ul>
+<h5 style="text-align: justify;">Nomenclatura da Memória</h5>
+<p style="text-align: justify;">6. Precisamos estar cientes de alguns termos padrão usados pelos neurocientistas. Isso nos ajudará a compreender o conteúdo dos vídeos a seguir.</p>
+<ul style="text-align: justify;">
+<li><strong>A memória autobiográfica (ou episódica, declarativa ou explícita)</strong> diz respeito à lembrança de eventos, fatos, etc. Essas memórias dizem respeito a datas, eventos, nomes, etc. Elas são o mesmo que <em>nāmagotta</em><span> no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. No <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, </span><em>os nāmagotta</em> não estão no cérebro, mas residem no “plano <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>”. Existe um “transmissor” no cérebro que transmite memórias para o “plano <em><span>de <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>”. Além disso, há um “receptor” no cérebro que possibilita recuperar memórias do “plano <em><span>de <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>”. Mais sobre isso em ensaios futuros.</li>
+<li>A outra é <strong>a memória habitual (ou procedural ou implícita)</strong>, ou seja, a capacidade de realizar tarefas repetitivas como tocar piano, andar de bicicleta, escovar os dentes, etc. Elas estão relacionadas aos hábitos de cada um. Essas memórias estão “programadas” no cérebro. Parece que o cerebelo no cérebro é onde essas “conexões de memória” ocorrem.</li>
+<li><strong>A amnésia anterógrada</strong> é a incapacidade de armazenar memórias após um trauma. <strong>A amnésia retrógrada</strong> é a incapacidade de recordar memórias anteriores ao trauma. A perda do hipocampo leva à amnésia anterógrada.</li>
+</ul>
+<h5 style="text-align: justify;">Mais detalhes sobre o paciente H.M.</h5>
+<p style="text-align: justify;">7. O vídeo a seguir é um pouco longo. Mas fornece muitas informações.</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/UqVUVREIXKg?si=d9yydXw4x6OQDQ3N" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>@ 4 minutos: Hipocampos em ambos os lados do cérebro removidos cirurgicamente. Depois disso, ele não conseguia se lembrar de nada que tivesse acontecido minutos antes. É claro que ele conseguia se lembrar de eventos anteriores à operação.</li>
+<li>Imagine que os hipocampos sejam o “transmissor”. Suponha que ele transmita novas memórias para o “plano <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>”, onde elas permanecem intactas para sempre. Então, suponha que outro componente (ainda não identificado) no cérebro possa ajudar a recuperar memórias. Esse “receptor” funcionou para o paciente H.M., já que ele conseguia se lembrar de memórias formadas ANTES da remoção dos hipocampos.</li>
+<li>Discutiremos essa “teoria” no próximo ensaio. Mas tenha isso em mente enquanto continuamos a discussão aqui.</li>
+<li>@4:40 minutos: “Memória declarativa” é o mesmo que memória autobiográfica. “Memória procedural” é o mesmo que “memória habitual”.</li>
+<li>@5:40 minutos: O narrador diz que há apenas um livro sobre o paciente H.M., mas há mais dois. Veja a Ref. 1.</li>
+</ul>
+<p style="text-align: justify;"><span>8. O clipe da Nova aos 7 minutos diz que processos químicos criam e apagam memórias. Mas isso não é consistente nem com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> nem com descobertas científicas recentes.</span></p>
+<ul style="text-align: justify;">
+<li>@8:40 minutos: O relato dos problemas médicos de H.M. levou à cirurgia.</li>
+<li>@10 minutos: O paciente H.M. conseguia se lembrar de tudo o que aconteceu antes de sua operação.</li>
+<li>@10:30 minutos: O Dr. Milner concluiu que o hipocampo CRIA memórias de longo prazo. Mas veremos que há uma explicação melhor.</li>
+<li>@11:00 minutos: O experimento de desenho mostrou que ele era capaz de aprender processos repetitivos. Como veremos a seguir, isso se enquadra na “memória habitual” (aprendizagem de uma habilidade motora) controlada pelo cerebelo. Mas, é claro, ele não tinha nenhuma lembrança de ter passado por aqueles ensaios de desenhar a estrela.</li>
+<li><span>@12 minutos: Explicação científica atual sobre a formação da memória. Essa explicação também é consistente com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. A construção de “memórias habituais” ou habilidades motoras parece ocorrer no cerebelo.</span></li>
+</ul>
+<h5 style="text-align: justify;">O relato do paciente E.P.</h5>
+<p style="text-align: justify;">9. O relato de outra pessoa, <strong>o paciente E.P., </strong>começa aos 4:30 minutos. Em 1992, E.P. sofreu uma infecção viral que parece ter danificado partes do sistema límbico. Isso é muito semelhante ao caso de Clive Wearing, que discutiremos abaixo.</p>
+<ul style="text-align: justify;">
+<li>@ 17 minutos: O paciente E.P. não conseguia reter memórias de eventos APÓS ter contraído a infecção. Mas ele se lembrava de eventos anteriores a isso. Assim, ele não possui memórias autobiográficas de eventos APÓS a infecção.</li>
+<li>@19:30: O vírus destruiu áreas ao redor do hipocampo. Após esse dano, o paciente E.P. não conseguia reter nenhuma informação autobiográfica NOVA. Mas ele se lembra de tudo o que aconteceu ANTES desse dano induzido pelo vírus. Isso é semelhante ao caso do paciente H.M.</li>
+<li>@22 minutos: O narrador diz que o hipocampo ajuda a “registrar as memórias”. Mas, como veremos, o hipocampo transmite essas memórias para o plano <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>.</li>
+<li>@ 24 minutos: Breve discussão sobre Clive Wearing.</li>
+<li>@25:40 minutos: O relato do Dr. Jacopo Annese, que compila registros dos cérebros de pessoas com diferentes origens, incluindo aquelas com problemas de memória.</li>
+<li>@30:10 a 32 minutos: O cérebro do paciente H.M. <strong>A discussão relevante para o nosso tema termina aos 32 minutos.</strong></li>
+<li>@32 minutos até o final: Trabalho do Dr. Annese. Ele planeja criar um repositório com exames cerebrais completos de 1.000 pessoas.</li>
+<li>A seguir, discutimos um terceiro paciente que perdeu TODAS as suas memórias E não consegue formar NENHUMA memória.</li>
+</ul>
+<h5 style="text-align: justify;">Clive Wearing – Músico com memória de sete segundos</h5>
+<p style="text-align: justify;">10. Clive Wearing era um músico de renome. Um vírus do herpes danificou seu cérebro (na região do sistema límbico) em apenas alguns dias, em 1985. Ao contrário do paciente H.M. e do paciente E.P., ele não consegue se lembrar de NENHUMA memória. <span style="color: #ff0000;"><strong><span style="color: #993366;">Ele consegue se lembrar apenas dos eventos ocorridos nos últimos sete segundos.</span> </strong><span style="color: #000000;">Sua situação é ainda pior do que a dos dois pacientes anteriores.</span></span></p>
+<ul style="text-align: justify;">
+<li>Portanto, ele não consegue reconhecer ninguém. Mesmo que não consiga lembrar-se do nome da esposa, ele sabe que ela é uma pessoa especial em sua vida.</li>
+<li>Assim, ele vive praticamente “apenas naquele momento”!</li>
+<li>O vídeo a seguir é um pouco longo. Mas fornece muitas informações.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/k_P7Y0-wgos?si=62-n8VTve-bmf5Da" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5 style="text-align: justify;">Deduções significativas do caso de Clive Wearing</h5>
+<p style="text-align: justify;">11. Observe, no início, que ele consegue tocar piano, mas não consegue se lembrar de nada do que aconteceu há apenas alguns segundos!</p>
+<ul style="text-align: justify;">
+<li>Portanto, sua memória habitual está intacta (consistente com um cerebelo intacto). Mas ele tem amnésia anterógrada E retrógrada, ou seja, perda total da memória autobiográfica.  Portanto, ele parece ter perdido tanto o transmissor (hipocampo) quanto o “receptor” (ainda não identificado).</li>
+<li>@ 6:40 minutos: Ele diz que é como estar morto. Nenhum pensamento de qualquer tipo, exceto aquele que passa. Nesse sentido, seu estado é uma espécie de “estado vegetativo”, embora ele consiga manter suas atividades físicas.</li>
+<li>@ 9:30 minutos: O relato de como ele perdeu a memória em poucos dias em 1985.</li>
+</ul>
+<p style="text-align: justify;">12. Aqui estão mais pontos notáveis do vídeo acima:</p>
+<ul style="text-align: justify;">
+<li>@ 10 minutos: Como ele perdeu a memória em poucos dias. O vírus do herpes atravessou a barreira hematoencefálica e chegou ao cérebro. Há apenas uma chance em um milhão de isso acontecer!</li>
+<li>@14 minutos: Ele diz que não consegue pensar em nada. É por isso que, no início, chorava o dia inteiro. Ele diz que é como estar morto.</li>
+<li>@ 19 minutos: Cada momento é o início da consciência! Ele repete isso aos 43 minutos. Não ter pensamentos é como estar morto! Ele teve a sorte de poder tocar piano. <strong>Como mencionamos, essas “memórias aprendidas” permanecem gravadas no cerebelo.</strong> <span style="color: #0000ff;"><strong>Essa é uma diferença notável em relação às “memórias episódicas”, que não são (e não podem ser) “armazenadas” no cérebro.</strong></span> Discutiremos isso no próximo ensaio. É também por isso que ele consegue se vestir sozinho, comer e realizar outras “atividades regulares” por conta própria.</li>
+</ul>
+<p style="text-align: justify;">13. Podemos aprender muito sobre o funcionamento do cérebro e do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> analisando cuidadosamente os relatos do paciente H.M., do paciente E.P. e de Clive Wearing.</p>
+<ul style="text-align: justify;">
+<li>Continuaremos a discussão no próximo ensaio.</li>
+</ul>
+<h5 style="text-align: justify;">Referências</h5>
+<p style="text-align: justify;">1. <strong>Livros sobre o paciente H.M.:</strong> Philip J. Hilts,  <i>Memory's Ghost</i> (1996). Suzanne Corkin  <span class="cs1-lock-registration" title="Free registration required"><i>Permanent Present Tense: The Unforgettable Life of the Amnesic Patient, H. M. </i>(2013). Luke Dittrich <i>Patient H.M.: A Story of Memory, Madness, and Family Secrets </i>(2017). </span></p>
+<p style="text-align: justify;">2. <strong>Livro sobre Clive Wearing:</strong> Deborah Wearing, <em>Forever Today</em> (2005).</p>
+<p style="text-align: justify;">3. É possível pesquisar no Google e encontrar muito mais informações sobre qualquer um desses tópicos. Forneço apenas material suficiente para se ter uma ideia básica.</p>
+<p>Todas as postagens desta seção em “<a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Uma Abordagem Científica</a>”.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.CC.004/index.html">Persistent Vegetative State Buddhist View</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.CC.006/index.html">Memory Recall For Gandhabba In A Human Body</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.CC.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Persistent Vegetative State Buddhist View</span>
+        
+        <span class="pathway-title title-pt">Perspectiva Buddhista sobre o estado vegetativo persistente</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.CC.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Memory Recall For Gandhabba In A Human Body</span>
+        
+        <span class="pathway-title title-pt">Recuperação de memórias de Gandhabba em um corpo humano</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

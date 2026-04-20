@@ -1,0 +1,450 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sensual Pleasures The Hidden Suffering | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 7 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.BB.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sensual Pleasures The Hidden Suffering</h1>
+    
+    <h1 class="title-pt">Prazeres sensuais: o sofrimento oculto</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.BB.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.BB.005"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0010"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.BB.005</td></tr><tr><td>Fin-dex</td><td>0010</td></tr><tr><td>Slug</td><td>sensual-pleasures-the-hidden-suffering</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Sensual Pleasures The Hidden Suffering</td></tr></table></div></div><p><strong>August 22, 2020; revised June 15, 2022; <span style="color: #3366ff;">December 11, 2023</span></strong></p>
+<h5>Sensual Pleasures (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>)</h5>
+<p style="text-align: justify;"><span>1. The word sensual means the gratification of physical senses. It may have a sexual connotation, but not necessarily. We will use that word in that sense to represent the meaning of the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word “</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>.” <span style="color: #993366;"><strong>People like sensual pleasures because they have "<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>."</strong></span></p>
+<ul style="text-align: justify;">
+<li>Such sensory contacts occur in close proximity. The three main “close sensory contacts” involve eating, smelling, and body touches (including sex.) However, visuals and sounds are also used to enhance these three sensory experiences.</li>
+<li>Therefore, “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>” means craving for sensual pleasures (tasty foods, nice fragrances, bodily comforts, etc.), not just for sex. See, “<a href="../../pages/PS.BB.004/index.html" rel="noopener noreferrer" target="_blank">What is “Kāma”? It is not Just Sex</a>.”</li>
+<li>All five sensory contacts are available in most of the lowest 11 realms (four <em class="text-italics">apāyā</em>, the human realm, and six <em class="text-italics"><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> realms.) Thus, <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> includes those 11 realms.</li>
+<li>Most "sensory pleasures" are "mind-made"; see "<a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">Sotapanna Stage via Understanding Perception (Saññā)</a>."</li>
+<li>Furthermore, those sensual pleasures (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>) come at a price. There is much suffering in <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, as we will see below.</li>
+</ul>
+<h5 style="text-align: justify;">What Is a Body (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>)?</h5>
+<p style="text-align: justify;"><span>2. In the previous <span class="pali-term term-highlight" data-term="post">post</span>, we saw that out of 31 realms in this world, living beings in 20 realms </span><strong class="text-strong">do not have physical bodies like ours.</strong> <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> in those 20 realms have only a trace of matter. They cannot be seen even with the best scientific instruments available today. See “<a href="../../pages/BD.BB.004/index.html" rel="noopener" target="_blank">Mind and Matter – Buddhist Analysis</a>.” <strong class="text-strong">Therefore, we need to abandon our perception of “solid, dense” bodies like ours to be universal. </strong>Even our bodies, in reality, are mostly "empty space," as illustrated in the following video:<strong class="text-strong"><br/>
+</strong></p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/S_ZaiAbI8xs?si=ycqawoCzxIvaRPOO" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"> </p>
+<ul style="text-align: justify;">
+<li><span>There is also the following related issue. We conventionally translate the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word “</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>” as “body.” Now, we are only used to “physical, dense bodies” like ours or animals. The idea of a living being with very little matter (and thus invisible to us) is strange to most of us.</li>
+<li><span>However, the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word “</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>” means a “collection.” As we know, a living being is a collection of five aggregates (<em class="text-italics">pancakkhandha</em><span>) in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. An entity that can support those five aggregates has a “</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>.”</li>
+<li>In English, we sometimes use “body” as a collection or aggregate. Some examples are “body of water” and “body of evidence.”</li>
+<li><em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> has a set of “bare minimum” (a trace of) <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> to support the five aggregates, as discussed below.<strong class="text-strong"> <span style="color: #993366;">A “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>” of a living being is a collection of aggregates of mind and matter.</span></strong></li>
+<li><span>The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word for a physical body is “</span><em class="text-italics">sarīra</em>” even though “<strong><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em></strong>” is sometimes used, especially regarding sesnory experiences (touch, injuries, etc.)  felt by the physical body, i.e., in "<em><strong>kāyañca</strong><span> <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> phoṭṭhabbe ca uppajjati kāyaviññāṇaṁ</span></em>" in the "<a href="https://suttacentral.net/mn148/en/sujato" rel="noopener" target="_blank"><em><span>Chachakka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 148)</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Why Do Humans Need Dense Physical Bodies?</h5>
+<p style="text-align: justify;">3. Then, a question comes up. Why do humans need physical bodies? We discussed that human (and animal) life also starts with an “invisible body” (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>), just like for a <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>. A dense physical body arises later on when that <em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span> gets into a womb. See the previous <span class="pali-term term-highlight" data-term="post">post</span>, “Mind and Matter – <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Analysis.” Why doesn’t the </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> stays with that invisible body?</p>
+<ul style="text-align: justify;">
+<li>We need physical bodies to taste the food, smell nice odors, have sex, etc. Those sensory experiences REQUIRE dense bodies. We highly value those “bodily contacts” and constantly think, speak, and work to get more.</li>
+<li>But there is a “hidden price to pay” for close-contact sensory pleasures. <strong class="text-strong">Such dense bodies are prone to diseases, injuries, and body pains.</strong><span> - Unfortunately, such problems are not very evident at a young age, and for most people, by the time they realize these problems, it is too late. Their brains are getting weak too, and they may not be able to learn the deeper teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>Most living-beings in the 11 realms of<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> have dense bodies. The bodies of <em class="text-italics"><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> are a bit less dense but dense enough to experience those three sensory inputs. The word “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>” implies such close contact.</li>
+<li><span style="color: #993366;"><strong class="text-strong">Let us consider a different approach to see the “drawbacks” and “dangers” in sensual pleasures.</strong> </span>Let us look into how <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> in 20 realms (out of 31 realms in the world) overcome the desire for sensual pleasures and live for billions of years in “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> bliss” in those realms.</li>
+</ul>
+<h5 style="text-align: justify;">Sufferings Due to “Dense Bodies” Is Absent in <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> Realms</h5>
+<p style="text-align: justify;">4. Out of the 31 realms of our world, the higher-lying 20 realms of <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> are absent from any suffering (diseases like cancer, injuries, brain defects, or even body aches). As we discussed in #2, those <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> do not have dense bodies like ours. <strong>To be born in <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> realms</span></em>, one must overcome </strong><span style="color: #000000;"><strong><em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em></strong><strong>at least temporarily</strong>; see "</span><a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Rebirths Take Place According to Abhisaṅkhāra</a>."</p>
+<ul style="text-align: justify;">
+<li><span>Their “physical bodies” have just an unimaginably small amount of “matter” that is a billion times smaller than an atom in modern science. It is better to call it an invisible “magnetic body” or an “energy field.” Some people think these <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> have ONLY the mind, but that is not correct. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that the mind could not exist without a material base. These <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> have “bodies” with the least amount of matter in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, a </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>.</li>
+<li>Furthermore, there is no need to eat since there is no dense physical body to maintain. The subtle “body” of a <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> is sustained by <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</li>
+<li><span>Of course, “bodies” that are invisible is a strange notion to many people. That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said his <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> has never been known to the world.</span></li>
+<li>How do those<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> get such “invisible bodies” that are not subject to any suffering (illnesses, injuries, hunger, etc.)?</li>
+</ul>
+<h5 style="text-align: justify;">Births in <em class="text-italics"><span>Arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> Realms</h5>
+<p style="text-align: justify;"><span>5. As briefly mentioned in the previous <span class="pali-term term-highlight" data-term="post">post</span>, one can be born in those four realms by cultivating the four highest </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. <span style="color: #3366ff;"><strong class="text-strong">Those who cultivate such <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> enjoy the same life experiences as <em class="text-italics"><span>arupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (with just the ability to think.)</strong></span></p>
+<ul style="text-align: justify;">
+<li><em class="text-italics"><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> yogis</span></em> get to such <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> using various techniques, <strong class="text-strong">but abstaining from sensual pleasures is a requirement.</strong> Such <em class="text-italics"><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> yogis</span></em> normally stay away from sensual attractions by living in forests, especially away from women. But Noble Persons (<em class="text-italics">Ariyas</em>) get to such <em class="text-italics">jhānā</em> by cultivating wisdom and comprehending the dangers of sensual pleasures. Once getting to <em class="text-italics"><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, one could associate with even the most beautiful women without being tempted. For example, an <em class="text-italics">Anāgāmi</em> has no <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>.</li>
+<li>The four <em class="text-italics"><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms correspond to optimum levels of <em class="text-italics"><span><span class="pali-term term-highlight" data-term="mettā">mettā</span>, <span class="pali-term term-highlight" data-term="karuṇā">karuṇā</span>, <span class="pali-term term-highlight" data-term="muditā">muditā</span>, </span></em>and<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span></span></em>.</li>
+<li>For details, see “<a href="https://www.accesstoinsight.org/lib/authors/nyanaponika/wheel006.html" rel="noopener noreferrer" target="_blank">The Four Sublime States</a>” by Nyanaponika Thera. To quote from that article, “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> is free from hate; <strong class="text-strong">and one who assiduously develops these four sublime states, by conduct and meditation, is said to become an equal of <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> </span></em>(<em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>-samo</span></em>).</strong> If they become the dominant influence in his mind,<strong class="text-strong"> he will be reborn in congenial worlds, the realms of <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>.</strong> Therefore, these states of mind are called God-like, <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>-like.“</li>
+<li>These <em class="text-italics"><span>arupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (in the four highest realms) have the “smallest bodies” of all living beings. In the <em class="text-italics"><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> language, they only have the “seat of the mind” (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>) for thinking. They do not have any of the five “physical senses” of seeing, hearing, smelling, tasting, or body touches.</li>
+</ul>
+<h5 style="text-align: justify;">Births in <em class="text-italics"><span>Rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> Realms</h5>
+<p style="text-align: justify;">6. <em class="text-italics"><span>Rupāvacara <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> have only a “bit more complex bodies” with the addition of two <em class="text-italics"><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> of <em class="text-italics"><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span></span></em> and <em class="text-italics">sota</em>. They can see and hear, in addition to being able to think. As we know, the 16 <em class="text-italics"><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms lie below the 4 <em class="text-italics"><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. See, "<a href="../../pages/TS.AA.013/index.html" rel="noopener noreferrer" target="_blank">31 Realms of Existence</a>" and “<a href="https://www.accesstoinsight.org/ptf/dhamma/sagga/loka.html" rel="noopener noreferrer" target="_blank">The Thirty-one Planes of Existence.</a>”</p>
+<ul style="text-align: justify;">
+<li>Note that <em class="text-italics"><span>rupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> <strong class="text-strong">can “see” and “hear’ without having physical eyes and ears like humans.</strong><span> I explained in the previous <span class="pali-term term-highlight" data-term="post">post</span> (“Mind and Matter – <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Analysis.”) that we do not see or hear with our physical eyes and ears. Our physical eyes are like cameras that only “take pictures” of the external world for the </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> trapped inside the dense physical body. Also see “<a href="../../pages/IS.CC.005/index.html" rel="noopener noreferrer" target="_blank">Vision Is a Series of “Snapshots” – Movie Analogy</a>.”</li>
+<li>A human can be assured of birth in a <em class="text-italics"><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm by cultivating <em class="text-italics"><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. The 16 realms in <em class="text-italics"><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em><span> <span class="pali-term term-highlight" data-term="loka">loka</span> correspond to the four lower </span><em class="text-italics">jhānā</em> at various “strengths.”</li>
+<li>Even to get to the four lower <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> corresponding to the 16 realms in <em class="text-italics"><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>, <span style="color: #3366ff;"><strong class="text-strong">one needs to suppress at least the desire for sensual pleasures (or “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>“) in addition to abstaining from immoral deeds (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>.)</strong></span> That is why all <em class="text-italics"><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> on <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> have a verse with “<em class="text-italics">vivicceva kāmehi, vivicca akusalehi dhammehi</em>.” or “withdrawn from sensuality, withdrawn from <em class="text-italics"><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em> thoughts.” See “<a href="../../pages/LD.FF.004/index.html" rel="noopener noreferrer" target="_blank">Jhānic Experience in Detail – Sāmañ­ña­phala Sutta (DN 2)</a>.”</li>
+</ul>
+<h5 style="text-align: justify;">Why Do People Cultivate <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>?</h5>
+<p style="text-align: justify;">7. Sensory pleasures due to “close contacts” (eating, smelling, sex, and other “bodily comforts”) come at a price, as we discussed in #3. Such “close contacts” are possible ONLY with a complex, dense body. However, such a dense body is subjected to various types of ailments.</p>
+<ul style="text-align: justify;">
+<li><strong class="text-strong">In addition</strong>, the ability of the physical body to provide such sensory experiences GO DOWN with age. At old age, the taste buds don’t work well. One may be unable to smell odors the same way as one used to. And one’s sexual capabilities go down as well. One can easily see such drawbacks.</li>
+<li><strong class="text-strong">Furthermore, there is also a hidden danger in such cravings for sense pleasures.</strong><span> The pursuit of sense pleasures INEVITABLY leads to immoral deeds sooner or later. People kill, rape, steal, and lie to get possession of “material things” that provide those sensory contacts. Such actions are papa <span class="pali-term term-highlight" data-term="kamma">kamma</span> (or strong immoral deeds) that can lead to bad results (</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em><span>). In particular, they can lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the “bad realms’ or </span><em class="text-italics">apāyā</em>.</li>
+<li><span style="color: #993366;"><strong class="text-strong">Ancient <em class="text-italics">yogis</em><span> (even before the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>,) realized that sense pleasures (</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>) have such bad consequences.</strong></span> They saw that by staying away from such sense pleasures, one could GET INTO <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em><span> states. So, they went deep into forests, stayed away from society in general and women in particular. They focus on “neutral objects” such as one’s breath or a <span class="pali-term term-highlight" data-term="kasina">kasina</span> object. With such techniques, they could get to both </span><em class="text-italics">rupāvacara</em> and <em class="text-italics"><span>arupāvacara <span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states.</li>
+</ul>
+<h5 style="text-align: justify;"><span>Why Are Such “Non-<span class="pali-term term-highlight" data-term="buddhist">Buddhist</span>” </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> Techniques Are Useless in the Long Run?</h5>
+<p style="text-align: justify;">8. We remember that ascetic Siddhattha (before attaining the <em class="text-italics">Buddhahood</em>) learned such mundane <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> techniques from two <em class="text-italics">yogis</em>, Āḷāra Kālāma and Uddaka Ramaputta. The <em class="text-italics">Bodhisatta</em> realized that such techniques do not remove <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> from one’s mind, but can only SUPPRESS them.</p>
+<ul style="text-align: justify;">
+<li>While cultivating such a <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> will lead to rebirths in a<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm, the existence in that realm WILL END once that <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em><span> energy runs out. Then, one can be reborn in an <span class="pali-term term-highlight" data-term="apāya">apāya</span> in the future. </span><span style="color: #3366ff;"><strong class="text-strong"><span>The only PERMANENT solution is to end the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span></strong></span><span>That DOES NOT mean extinction because there is no “soul-type entity” going through the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. See, “</span><a href="../../pages/PS.FF.003/index.html" rel="noopener" target="_blank">What Reincarnates? – Concept of a Lifestream</a>.” For a deeper analysis, “<a href="../../pages/SI.AA.012/index.html" rel="noopener" target="_blank">Yamaka Sutta (SN 22.85) – Arahanthood Is Not Annihilation but End of Suffering</a>.” </li>
+<li>The <em class="text-italics">Bodhisatta</em> spent six more years pursuing the way to permanently REMOVE <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> (and other defilements) from the mind.</li>
+</ul>
+<h5 style="text-align: justify;">The Permanent Solution Is <em class="text-italics"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></h5>
+<p style="text-align: justify;">9. Upon attaining the <em class="text-italics">Buddhahood</em><span>, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> realized that </span><span style="color: #993366;"><strong class="text-strong">one must first understand the unfruitfulness and dangers in pursuing such sensory pleasures.</strong></span> That is the ONLY way to remove cravings for sensual pleasures PERMANENTLY and to avoid rebirths in the <em class="text-italics">apāyā</em> due to INEVITABLE temptations in <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">With that<span style="color: #993366;"> <strong class="text-strong">understanding of the <em class="text-italics"><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature, one becomes a <em class="text-italics"><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> free of rebirths in the <em class="text-italics">apāyās</em>.</strong></span> That is when one ENTERS the Noble Path.</li>
+<li style="text-align: justify;">Then, by following that Noble Path, one can become free of <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> first and stop rebirths anywhere in <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> at the <em class="text-italics">Anāgāmi </em>stage.</li>
+<li style="text-align: justify;">The main point is that birth in ANY of the 31 realms of this world WILL end up in death. Even the “relatively peaceful” life in a<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em><span> realm will end in death. There is no refuge anywhere in the 31 realms. Therefore, the ONLY permanent solution is to stop any and all rebirths. Of course, that process starts with understanding the overall <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process among the 31 realms. That understanding is embedded in the Four Noble Truths (and </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.)</li>
+<li style="text-align: justify;">We are going through this process to get a better understanding of that grand scheme of things.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.BB.005"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0010"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.BB.005
+Language:     pt-BR
+Generated-At: 2026-04-17T21:31:12Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>22 de agosto de 2020; revisado em 15 de junho de 2022; <span style="color: #3366ff;">11 de dezembro de 2023</span></strong></p>
+<h5>Prazeres sensuais (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>)</h5>
+<p style="text-align: justify;"><span>1. A palavra sensual significa a satisfação dos sentidos físicos. Ela pode ter uma conotação sexual, mas não necessariamente. Usaremos essa palavra nesse sentido para representar o significado da palavra em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> “</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span></span></em>”. <span style="color: #993366;"><strong>As pessoas gostam de prazeres sensuais porque têm “<em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>”.</strong></span></p>
+<ul style="text-align: justify;">
+<li>Esses contatos sensoriais ocorrem em estreita proximidade. Os três principais “contatos sensoriais próximos” envolvem comer, cheirar e toques corporais (incluindo sexo). No entanto, imagens e sons também são usados para intensificar essas três experiências sensoriais.</li>
+<li>Portanto, “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>” significa desejo por prazeres sensoriais (comidas saborosas, fragrâncias agradáveis, confortos corporais etc.), não apenas por sexo. Veja “O que<a href="../../pages/PS.BB.004/index.html" rel="noopener noreferrer" target="_blank"> é ‘Kāma’? Não é apenas sexo</a>”.</li>
+<li>Todos os cinco contatos sensoriais estão presentes na maioria dos 11 reinos inferiores (quatro <em class="text-italics">apāyā</em>, o reino humano e seis reinos <em class="text-italics"><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>). Assim, <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> inclui esses 11 reinos.</li>
+<li>A maioria dos “prazeres sensoriais” é “criada pela mente”; veja “<a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">Estágio de Sotāpanna por meio da Percepção Compreensiva (Saññā)</a>”.</li>
+<li>Além disso, esses prazeres sensuais (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>) têm um preço. Há muito sofrimento no <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>, como veremos a seguir.</li>
+</ul>
+<h5 style="text-align: justify;">O que é um corpo (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>)?</h5>
+<p style="text-align: justify;">2. No ensaio anterior, vimos que, dos 31 reinos deste mundo, os seres vivos em 20 reinos <strong class="text-strong">não possuem corpos físicos como os nossos.</strong> <em class="text-italics"><span>Os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> nesses 20 reinos têm apenas um traço de matéria. Eles não podem ser vistos nem mesmo com os melhores instrumentos científicos disponíveis hoje. Veja “Mente<a href="../../pages/BD.BB.004/index.html" rel="noopener" target="_blank"> e Matéria – Análise Buddhista</a>”. <strong class="text-strong">Portanto, precisamos abandonar nossa percepção de que corpos “sólidos e densos” como os nossos são universais. </strong>Mesmo nossos corpos, na realidade, são em sua maior parte “espaço vazio”, conforme ilustrado no vídeo a seguir:<strong class="text-strong"><br/>
+</strong></p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/S_ZaiAbI8xs?si=ycqawoCzxIvaRPOO" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"> </p>
+<ul style="text-align: justify;">
+<li><span>Há também a seguinte questão relacionada. Traduzimos convencionalmente a palavra <span class="pali-term term-highlight" data-term="pālī">Pālī</span> “Kā</span><em class="text-italics">ya</em>” como “corpo”. Ora, estamos acostumados apenas a “corpos físicos e densos” como os nossos ou os dos animais. A ideia de um ser vivo com muito pouca matéria (e, portanto, invisível para nós) é estranha para a maioria de nós.</li>
+<li><span>No entanto, a palavra em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> “</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>” significa uma “coleção”. Como sabemos, um ser vivo é uma coleção de cinco agregados (<em class="text-italics">pancakkhandha</em><span>) no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Uma entidade que pode sustentar esses cinco agregados possui um “Kā</span><em class="text-italics">ya</em>”.</li>
+<li>Em português, às vezes usamos “corpo” como uma coleção ou agregado. Alguns exemplos são “massa de água” e “conjunto de provas”.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> possui um conjunto de “mínimo necessário” (um traço de) <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> para sustentar os cinco agregados, conforme discutido abaixo.<strong class="text-strong"> <span style="color: #993366;">Um “Kā<em class="text-italics">ya</em>” de um ser vivo é uma coleção de agregados de mente e matéria.</span></strong></li>
+<li><span>A palavra em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> para corpo físico é “</span><em class="text-italics">sarīra</em>”, embora “<strong><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em></strong>” seja às vezes usada, especialmente em relação a experiências sensoriais (toque, ferimentos, etc.)  sentidas pelo corpo físico, ou seja, em “<em><strong>kāyañca</strong><span> <span class="pali-term term-highlight" data-term="paṭicca">Paṭicca</span> phoṭṭhabbe ca uppajjati kāyaviññāṇaṁ</span></em>” no “<a href="https://suttacentral.net/mn148/en/sujato" rel="noopener" target="_blank"><em><span>Chachakka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 148)</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Por que os seres humanos precisam de corpos físicos densos?</h5>
+<p style="text-align: justify;">3. Então, surge uma pergunta. Por que os seres humanos precisam de corpos físicos? Discutimos que a vida humana (e animal) também começa com um “corpo invisível” (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>), assim como para um <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. Um corpo físico denso surge mais tarde, quando esse <em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> entra no útero. Veja o ensaio anterior, “Mente e Matéria – Análise Buddhista”. Por que o <em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não permanece com esse corpo invisível?</p>
+<ul style="text-align: justify;">
+<li>Precisamos de corpos físicos para saborear a comida, sentir odores agradáveis, fazer sexo, etc. Essas experiências sensoriais EXIGEM corpos densos. Valorizamos muito esses “contatos corporais” e constantemente pensamos, falamos e trabalhamos para obter mais.</li>
+<li>Mas há um “preço oculto a pagar” pelos prazeres sensoriais de contato próximo. <strong class="text-strong">Esses corpos densos são propensos a doenças, lesões e dores físicas.</strong><span> – Infelizmente, tais problemas não são muito evidentes na juventude e, para a maioria das pessoas, quando percebem esses problemas, já é tarde demais. Seus cérebros também estão enfraquecendo, e elas podem não ser capazes de aprender os ensinamentos mais profundos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>A maioria dos seres vivos nos 11 reinos de<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> possui corpos densos. Os corpos dos <em class="text-italics"><span><span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> são um pouco menos densos, mas densos o suficiente para experimentar esses três estímulos sensoriais. A palavra “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span></span></em>” implica esse contato íntimo.</li>
+<li><span style="color: #993366;"><strong class="text-strong">Vamos considerar uma abordagem diferente para ver as “desvantagens” e os “perigos” dos prazeres sensoriais.</strong> </span>Vamos examinar como <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>,</span></em> nos 20 reinos (dos 31 reinos do mundo), supera o desejo por prazeres sensoriais e vive por bilhões de anos em “<em class="text-italics">Êxtase</em> <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>” nesses reinos.</li>
+</ul>
+<h5 style="text-align: justify;">Os sofrimentos decorrentes de “corpos densos” estão ausentes nos reinos <em class="text-italics"><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em></h5>
+<p style="text-align: justify;">4. Dos 31 reinos do nosso mundo, os 20 reinos superiores de <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> estão isentos de qualquer sofrimento (doenças como câncer, lesões, defeitos cerebrais ou mesmo dores no corpo). Como discutimos no ponto 2, esses <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> não possuem corpos densos como os nossos. <strong>Para nascer nos <em><span>reinos de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>, é preciso superar </strong><span style="color: #000000;"><strong><em><span>o <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span>,</span></em></strong> <strong>pelo menos temporariamente</strong>; veja “</span><a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Os renascimentos ocorrem de acordo com o Abhisaṅkhāra</a>”.</p>
+<ul style="text-align: justify;">
+<li><span>Seus “corpos físicos” possuem apenas uma quantidade inimaginavelmente pequena de “matéria”, que é um bilhão de vezes menor do que um átomo na ciência moderna. É melhor chamá-lo de um “corpo magnético” invisível ou de um “campo de energia”. Algumas pessoas pensam que esses <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> têm APENAS a mente, mas isso não está correto. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou que a mente não poderia existir sem uma base material. Esses <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> têm “corpos” com a menor quantidade de matéria no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, um </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>.</li>
+<li>Além disso, não há necessidade de comer, já que não há um corpo físico denso para sustentar. O “corpo” sutil de um <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> é sustentado pela energia <em class="text-italics"><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</li>
+<li><span>É claro que “corpos” invisíveis são uma noção estranha para muitas pessoas. É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que seu <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> nunca foi conhecido pelo mundo.</span></li>
+<li>Como esses<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> obtêm tais “corpos invisíveis” que não estão sujeitos a nenhum sofrimento (doenças, ferimentos, fome, etc.)?</li>
+</ul>
+<h5 style="text-align: justify;">Nascimentos nos Reinos <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> Arupāvacara</span></em></h5>
+<p style="text-align: justify;">5. Conforme brevemente mencionado no ensaio anterior, é possível nascer nesses quatro reinos cultivando os quatro <em class="text-italics">Jhānas</em> mais elevados. <span style="color: #3366ff;"><strong class="text-strong">Aqueles que cultivam tais <em class="text-italics">Jhānas</em> desfrutam das mesmas experiências de vida que <em class="text-italics"><span>os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> arupāvacara</span></em> (apenas com a capacidade de pensar).</strong></span></p>
+<ul style="text-align: justify;">
+<li><em class="text-italics"><span>Os iogues <span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> alcançam tais <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> usando várias técnicas, <strong class="text-strong">mas a abstinência de prazeres sensuais é um requisito.</strong> Esses <em class="text-italics"><span>iogues <span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> normalmente se mantêm afastados das atrações sensuais vivendo em florestas, especialmente longe das mulheres. Mas as Pessoas Nobres (<em class="text-italics">Ariyas</em>) alcançam tais <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> cultivando sabedoria e compreendendo os perigos dos prazeres sensuais. Uma vez alcançado o <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>, pode-se conviver até mesmo com as mulheres mais belas sem ser tentado. Por exemplo, um <em class="text-italics">Anāgāmi</em> não possui <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>.</li>
+<li>Os quatro reinos <em class="text-italics"><span>arupāvacara de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> correspondem aos níveis ótimos de <em class="text-italics"><span><span class="pali-term term-highlight" data-term="mettā">Mettā</span>, <span class="pali-term term-highlight" data-term="karuṇā">Karuṇā</span>, <span class="pali-term term-highlight" data-term="muditā">Muditā</span></span></em> e<em class="text-italics"><span> <span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em>.</li>
+<li>Para mais detalhes, consulte “<a href="https://www.accesstoinsight.org/lib/authors/nyanaponika/wheel006.html" rel="noopener noreferrer" target="_blank">Os Quatro Estados Sub</a>limes”, de Nyanaponika Thera. Citando esse artigo: “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> está livre do ódio; <strong class="text-strong">e aquele que desenvolve assiduamente esses quatro estados sublimes, por meio da conduta e da meditação, é considerado igual a <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> </span></em>(<em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>-samo</span></em>).</strong> Se eles se tornarem a influência dominante em sua mente,<strong class="text-strong"> ele renascerá em mundos agradáveis, os reinos de <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.</strong> Portanto, esses estados mentais são chamados de divinos, <em class="text-italics"><span>semelhantes a <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.”</li>
+<li>Esses <em class="text-italics"><span>arupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (nos quatro reinos mais elevados) possuem os “corpos mais pequenos” de todos os seres vivos. Na linguagem do <em class="text-italics"><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, eles possuem apenas o “assento da mente” (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span></span></em>) para pensar. Eles não possuem nenhum dos cinco “sentidos físicos” de visão, audição, olfato, paladar ou tato.</li>
+</ul>
+<h5 style="text-align: justify;">Nascimentos nos Reinos <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> Rupāvacara</span></em></h5>
+<p style="text-align: justify;">6. <em class="text-italics"><span>Os <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span> rupāvacara</span></em> têm apenas “corpos um pouco mais complexos”, com a adição de dois <em class="text-italics"><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda Rūpa</span></span></em>: <em class="text-italics"><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span></span></em> e <em class="text-italics">sota</em>. Eles podem ver e ouvir, além de serem capazes de pensar. Como sabemos, os 16 reinos <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara</span></em> situam-se abaixo dos 4 reinos <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> arupāvacara</span></em>. Veja “<a href="../../pages/TS.AA.013/index.html" rel="noopener noreferrer" target="_blank">31 Reinos da Existência</a>” e “<a href="https://www.accesstoinsight.org/ptf/dhamma/sagga/loka.html" rel="noopener noreferrer" target="_blank">Os Trinta e Um Planos da Existência”.</a></p>
+<ul style="text-align: justify;">
+<li>Observe que <em class="text-italics"><span>os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara</span></em> <strong class="text-strong">podem “ver” e “ouvir” sem ter olhos e ouvidos físicos como os humanos.</strong> Expliquei no ensaio anterior (“Mente e Matéria – Análise Buddhista”) que não vemos nem ouvimos com nossos olhos e ouvidos físicos. Nossos olhos físicos são como câmeras que apenas “tiram fotos” do mundo externo para o <em class="text-italics"><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> preso dentro do corpo físico denso. Veja também “A <a href="../../pages/IS.CC.005/index.html" rel="noopener noreferrer" target="_blank">Visão é uma Série de ‘Instantâneos’ – Analogia com o Cinema</a>”.</li>
+<li>Um ser humano pode garantir seu nascimento no reino <em class="text-italics"><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara</span></em> cultivando <em class="text-italics"><span>o <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> rupāvacara</span></em>. Os 16 reinos no <em class="text-italics"><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em><span> <span class="pali-term term-highlight" data-term="loka">Loka</span> </span><em class="text-italics">rupāvacara</em> correspondem aos quatro <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> inferiores em vários “níveis de intensidade”.</li>
+<li>Mesmo para alcançar os quatro <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> inferiores correspondentes aos 16 reinos do <em class="text-italics"><span><span class="pali-term term-highlight" data-term="loka">loka</span> de <span class="pali-term term-highlight" data-term="brahma">Brahma</span> rupāvacara</span></em>, <span style="color: #3366ff;"><strong class="text-strong">é necessário suprimir pelo menos o desejo por prazeres sensuais (ou “<em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>”), além de abster-se de atos imorais (<em class="text-italics"><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>).</strong></span> É por isso que todos <em class="text-italics"><span>os <span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> sobre <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> contêm um versículo com “<em class="text-italics">vivicceva kāmehi, vivicca akusalehi dhammehi</em>” ou “afastado da sensualidade, afastado dos pensamentos <em class="text-italics"><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span></span></em>”. Veja <a href="../../pages/LD.FF.004/index.html" rel="noopener noreferrer" target="_blank">“Experiência Jhānica em Detalhe – Sāmaññaphala Sutta (DN 2)</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Por que as pessoas cultivam <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>?</h5>
+<p style="text-align: justify;">7. Os prazeres sensoriais decorrentes de “contatos íntimos” (comer, cheirar, sexo e outros “confortos corporais”) têm um preço, como discutimos no ponto 3. Tais “contatos íntimos” são possíveis SOMENTE com um corpo complexo e denso. No entanto, um corpo tão denso está sujeito a vários tipos de doenças.</p>
+<ul style="text-align: justify;">
+<li><strong class="text-strong">Além disso</strong>, a capacidade do corpo físico de proporcionar tais experiências sensoriais DIMINUI com a idade. Na velhice, as papilas gustativas não funcionam bem. Pode-se ficar incapaz de sentir odores da mesma forma que antes. E as capacidades sexuais também diminuem. É fácil perceber tais desvantagens.</li>
+<li><strong class="text-strong">Além disso, há também um perigo oculto nesses desejos por prazeres sensoriais.</strong><span> A busca por prazeres sensoriais leva inevitavelmente a atos imorais, mais cedo ou mais tarde. As pessoas matam, estupram, roubam e mentem para obter “bens materiais” que proporcionam esses contatos sensoriais. Tais ações são <span class="pali-term term-highlight" data-term="kamma">Kamma</span> (ou atos imorais graves) que podem levar a maus resultados (</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>). Em particular, elas podem levar ao renascimento nos “reinos ruins” ou <em class="text-italics">apāyā</em>.</li>
+<li><span style="color: #993366;"><strong class="text-strong"><em class="text-italics">Os</em> antigos <em class="text-italics">iogues</em><span> (mesmo antes do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>) perceberam que os prazeres sensoriais (</span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>) têm consequências tão ruins.</strong></span> Eles viram que, ao se afastar desses prazeres sensoriais, era possível ALCANÇAR estados <em class="text-italics">de</em> <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Assim, eles se adentraram nas florestas, afastaram-se da sociedade em geral e das mulheres em particular. Eles se concentravam em “objetos neutros”, como a própria respiração ou um objeto Kasiṇa. Com tais técnicas, eles conseguiam alcançar tanto os estados <em class="text-italics"><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> rupāvacara</span></em> quanto os <em class="text-italics">arupāvacara</em>.</li>
+</ul>
+<h5 style="text-align: justify;">Por que essas técnicas <em class="text-italics"><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> “não Buddhistas” são inúteis a longo prazo?</h5>
+<p style="text-align: justify;">8. Lembramos que o asceta Siddhattha (antes de atingir a <em class="text-italics">iluminação</em>) aprendeu tais técnicas mundanas <em class="text-italics"><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> com dois <em class="text-italics">iogues</em>, Āḷāra Kālāma e Uddaka Ramaputta. O <em class="text-italics">Bodhisatta</em> percebeu que tais técnicas não removem <em class="text-italics"><span>o <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em> da mente, mas apenas o SUPRIMEM.</p>
+<ul style="text-align: justify;">
+<li>Embora cultivar tal <em class="text-italics"><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> leve aos renascimentos no reino<em class="text-italics"><span> de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>, a existência nesse reino TERÁ FIM assim que a energia <em class="text-italics"><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em><span> se esgotar. Então, pode-se renascer em um <span class="pali-term term-highlight" data-term="apāya">Apāya</span> no futuro. </span><span style="color: #3366ff;"><strong class="text-strong">A única solução PERMANENTE é pôr fim ao processo de renascimento. </strong></span>Isso NÃO SIGNIFICA extinção, pois não há nenhuma “entidade do tipo alma” passando pelo processo de renascimento. Veja “<a href="../../pages/PS.FF.003/index.html" rel="noopener" target="_blank">O que ocorre no processo de renascimento? – Conceito de um fluxo de vida</a>”. Para uma análise mais profunda, “<a href="../../pages/SI.AA.012/index.html" rel="noopener" target="_blank">Yamaka Sutta (SN 22.85) – Arahantidade não é aniquilação, mas o fim do sofrimento</a>”. </li>
+<li>O <em class="text-italics">Bodhisatta</em> passou mais seis anos buscando o caminho para REMOVER permanentemente <em class="text-italics"><span>o <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em> (e outras impurezas) da mente.</li>
+</ul>
+<h5 style="text-align: justify;">A Solução Permanente é <em class="text-italics"><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></h5>
+<p style="text-align: justify;">9. Ao atingir a <em class="text-italics">iluminação</em><span>, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> percebeu que </span><span style="color: #993366;"><strong class="text-strong">é preciso primeiro compreender a futilidade e os perigos de buscar tais prazeres sensoriais.</strong></span> Essa é a ÚNICA maneira de remover PERMANENTEMENTE os desejos por prazeres sensoriais e evitar renascimentos nos <em class="text-italics">apāyā</em> devido às tentações INEVITÁVEIS no <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">Com essa<span style="color: #993366;"> <strong class="text-strong">compreensão da natureza <em class="text-italics"><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, torna-se um <em class="text-italics"><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> livre de renascimentos nos <em class="text-italics">apāyās</em>.</strong></span> É nesse momento que se ENTRA no Nobre Caminho.</li>
+<li style="text-align: justify;">Então, seguindo esse Nobre Caminho, pode-se primeiro libertar-se do <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em> e interromper os renascimentos em qualquer lugar do <em class="text-italics"><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> no estágio de <em class="text-italics">Anāgāmi</em>.</li>
+<li style="text-align: justify;">O ponto principal é que o nascimento em QUALQUER um dos 31 reinos deste mundo TERÁ como fim a morte. Mesmo a vida “relativamente pacífica” num reino<em class="text-italics"><span> de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> terminará em morte. Não há refúgio em nenhum dos 31 reinos. Portanto, a ÚNICA solução permanente é interromper todos e quaisquer renascimentos. É claro que esse processo começa com a compreensão do processo geral de renascimento entre os 31 reinos. Essa compreensão está incorporada nas Quatro Nobres Verdades (e <em class="text-italics">no Tilakkhaṇa</em>).</li>
+<li style="text-align: justify;">Estamos passando por esse processo para obter uma melhor compreensão desse grande esquema das coisas.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.BB.004/index.html">Mind Matter Buddhist Analysis</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.BB.006/index.html">Kammic Energy Leads To Consciousness</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.BB.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Mind Matter Buddhist Analysis</span>
+        
+        <span class="pathway-title title-pt">Análise Buddhista sobre Mente e Matéria</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.BB.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Kammic Energy Leads To Consciousness</span>
+        
+        <span class="pathway-title title-pt">A energia Kamma conduz à consciência</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Evidence For Rebirth | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 47 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.AA.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Evidence For Rebirth</h1>
+    
+    <h1 class="title-pt">Evidências do Renascimento</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.AA.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.AA.007"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0056"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.AA.007</td></tr><tr><td>Fin-dex</td><td>0056</td></tr><tr><td>Slug</td><td>evidence-for-rebirth</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Evidence For Rebirth</td></tr></table></div></div><p><span><span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> is a foundational axiom of <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> (<span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.) There is much evidence from <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts, Near Death Experiences, child prodigies, and other areas.</span></p>
+<p><strong>Revised January 18, 2020; September 3, 2020; <span style="color: #3366ff;">rewritten February 25, 2023</span></strong></p>
+<p><img alt="" class="alignnone wp-image-43673 size-full" height="720" src="http://localhost/beng_feb2026/wp-content/uploads/3.-Rebirth-Axiom-of-Buddha-Dhamma.jpg" width="960"/></p>
+<p><strong>Download/Print:</strong> "<a href="http://localhost/beng_feb2026/wp-content/uploads/3.-Rebirth-Axiom-of-Buddha-Dhamma.jpg" rel="noopener" target="_blank">3. Rebirth - Axiom of Buddha Dhamma</a>"</p>
+<h5>Introduction</h5>
+<p style="text-align: justify;"><span>1. Most people in Western societies are not familiar with the concept of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. However, that is changing because there is a lot of evidence emerging, and scientists and philosophers are beginning to take it seriously.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">One needs to look at the mounting evidence without any preconceived ideas. <span style="color: #3366ff;"><span style="color: #3366ff;"><strong>There is no plausible way to explain these accounts from a purely "materialistic" point of view, i.e., that consciousness arises from inert matter. </strong></span></span>T<span style="color: #3366ff;"><span style="color: #3366ff;"><span style="color: #000000;">he brain <strong>does not produce</strong> consciousness <strong>but plays a critical role</strong> in human consciousness: "</span></span></span><a href="../../pages/AB.DD.006/index.html" rel="noopener" target="_blank">Brain – Interface between Mind and Body</a>."</li>
+<li style="text-align: justify;">Here is a video of a recent discussion on Western research on children's past lives, Near Death Experiences, etc.:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0AtTM9hgCDw" width="560"></iframe></div></p>
+<h5 style="text-align: justify;">OBE and NDE Studies</h5>
+<p style="text-align: justify;">2. "Near-Death Experiences," or NDEs, are unique and fascinating phenomena that occur when an individual comes close to death, either through a life-threatening event or a medical emergency. Even with being declared dead with no brain function, individuals report seeing their "dead bodies" from above and what happened even in other rooms. They could move with their "mental bodies." In recent years, modern science has become interested in NDEs because some accounts of those who go through such experiences can be tested. <span style="color: #3366ff;"><strong>Ongoing studies may significantly impact scientific thinking about consciousness in the coming years.</strong></span></p>
+<ul>
+<li>Here is a popular YouTube video on the presentation of a physician on Near-Death Experiences:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/J5n2dzN1joU" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li><span>There is an ever-growing number of reports of Out-of-Body Experiences (OBE) and Near-Death Experiences (NDE) that not only support <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> but also are consistent with the concept of a 'mental body" or "</span><em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>"; see, "<a href="../../pages/AB.DD.007/index.html" rel="noopener noreferrer" target="_blank">Out-of-Body Experience (OBE) and Manōmaya Kāya</a><span>" and other related <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify;">3. There are many YouTube videos, but here are three recent books on these subjects:</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">"Consciousness Beyond Life" by Pim van Lommel (2010) gives detailed accounts of case studies on NDE by a renowned cardiologist.</li>
+<li>"After: A Doctor  Explores  What Near-Death  Experiences  Reveal about Life and  Beyond"  by Bruce Greyson (2021).</li>
+<li style="text-align: justify;">"Brain Wars" by Mario Beauregard (2012) is a book by a scientist on NDE, OBE, and the mind-body problem in general.</li>
+<li style="text-align: justify;">"Dying to be Me: My Journey from Cancer, to Near Death, to True Healing," by Anita Moorjani (2012), is a personal story of a cancer survivor who had been diagnosed to die within a few weeks but had an "unexplainable recovery" within days during which time she had an out-of-body experience.</li>
+</ul>
+<h3 style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Accounts</span></h3>
+<p style="text-align: justify;"><span>4. The late Professor Ian Stevenson at the University of Virginia conducted over 20 years of research on the authenticity of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts, which Professor Jim Tucker is continuing.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>These two professors have written several books about <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. A good book is "Twenty Cases Suggestive of <span class="pali-term term-highlight" data-term="reincarnation">Reincarnation</span>" by Ian Stevenson. By the way, Professor Stevenson became a <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> later on in his life, presumably because of his studies (see “<span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> as Doctrine and Experience” by Francis Story (2003); first edition 1975). He mentions this in the introduction he wrote to this book by Francis Story; I have scanned that introduction: "</span><a href="http://localhost/beng_feb2026/dhamma/what-is-buddha-dhamma/introduction-to-rebirth-by-francis-story-ian-stevenson/" rel="noopener noreferrer" target="_blank" title="Introduction to “Rebirth by Francis Story” – Ian Stevenson">Introduction to "Rebirth by Francis Story - Ian Stevenson</a>."</li>
+<li style="text-align: justify;">Here is a video that discusses the work of the late Dr. Ian Stevenson, Dr. Jim Tucker, and colleagues at the University of Virginia:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/9w2MCpzE8u0" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"><span>5. In their book, "Soul Survivor: The <span class="pali-term term-highlight" data-term="reincarnation">Reincarnation</span> of a World War II Fighter Pilot," Bruce and Andrea Leininger detail the amazing story of their son's recount of a past life.</span></p>
+<ul style="text-align: justify;">
+<li><span>Here is a recent YouTube video on James Leininger's <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> account:</span></li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6B27WRX0Auw" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li><span>Here is another story of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> of a Civil War General:</span></li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aQHp9bGVDB8" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li><span>Here is a three-year-old chanting <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> (and doing a very good job). Can a three-year-old memorize such complex lines of <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>?</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/jGHDpgBc9Dk" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li><span>Also, see the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/MR.AA.008/index.html" rel="noopener noreferrer" target="_blank">Boy Who Remembered Pāli Suttas for 1500 Years</a><span>." This is a true story about a boy (Dhammaruwan) who recited complex and lengthy <span class="pali-term term-highlight" data-term="pāli">Pāli</span> </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> at five years of age, which sounded very different from current chantings. Furthermore, he remembers accounts of his previous life 1500 years ago, when he accompanied the famous Buddhaghosa on his trip to Sri Lanka.</li>
+</ul>
+<h5 style="text-align: justify;">Child Prodigies</h5>
+<p style="text-align: justify;">Another piece of evidence comes from child prodigies.  Here is a report on "10 Mind-Blowing Child Prodigies":</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/xvDuqW9SFT8" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Here is a list of child prodigies from Wikipedia. You will recognize many of the names:</li>
+</ul>
+<p style="text-align: justify;"><a href="https://en.wikipedia.org/wiki/List_of_child_prodigies" rel="noopener noreferrer" target="_blank" title="List of Child Prodigies">List of Child Prodigies</a></p>
+<ul style="text-align: justify;">
+<li>Here is the link to the Wikipedia article on child prodigies:</li>
+</ul>
+<p style="text-align: justify;"><a href="https://en.wikipedia.org/wiki/Child_prodigy" rel="noopener noreferrer" target="_blank" title="Child Prodigy">Child Prodigy</a></p>
+<h5 style="text-align: justify;"><span>Evidence for <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Much Stronger Than Perceived</span></h5>
+<p style="text-align: justify;"><span>6. Many people say that direct “proof” for <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> cannot be given; it is the other way around. If one's memories are in the brain (as science believes), all those memories will be lost when one dies. There is no "physical connection" between the brains of those involved in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> stories.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><strong><span>Therefore, even if just one of those <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts can be proven true, there is no way to explain that other than <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. </span></strong><span style="color: #3366ff;"><strong>How can the brain in this life recall memories from the brain in a previous life?</strong></span></li>
+<li style="text-align: justify;">If there is a connection between two lives that lived in two geographical locations (also separated by time), there is no explanation for that in current science, i.e., no way to make a connection between the DNA of those two "persons." A purely materialistic view cannot explain it.</li>
+<li style="text-align: justify;">Recent scientific findings show that matter in different locations is entangled at a fundamental level; see "<a href="../../pages/DS.KK.003/index.html" rel="noopener noreferrer" target="_blank">Quantum Entanglement - We Are All Connected</a>." Also, "a living just going from one physical body to another"; see, "<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">Who Reincarnates? - Concept of a Lifestream</a>".</li>
+</ul>
+<p style="text-align: justify;"><span>7. Also, it is by having this presumption of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> that all of the seeming anomalies and inequalities of life can be explained; see "</span><a href="../../pages/TL.GG.003/index.html" rel="noopener noreferrer" target="_blank" title="Vagaries of Life and the Way to Seek “Good Rebirths”">Vagaries of Life and the Way to Seek Good Rebirths</a>."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">And how could we ever explain the birth of such prodigies as Jeremy Bentham, who, already in his fourth year, could read and write Latin and Greek? John Stuart Mill read Greek at the age of three and wrote a history of Rome at six years of age.  Babington Macaulay wrote a compendium of world history at age six. Beethoven gave public concerts when he was seven; Mozart had written musical compositions before his sixth year.  Voltaire read the fables of Lafontaine when he was three years old.</li>
+<li style="text-align: justify;">Does it not seem infinitely more probable that all these prodigies and geniuses, who in many cases came from illiterate parents, had already, in previous births, laid the foundations for their extraordinary faculties?</li>
+</ul>
+<h5 style="text-align: justify;">Healing with Hypnosis</h5>
+<p style="text-align: justify;">8. The late Dr. Richard Feynman was skeptical about the claims in hypnosis studies until he subjected himself to hypnosis on two occasions. In both instances, he verified that hypnosis works if done correctly. He describes these two cases in his book, "Surely You're Joking, Mr. Feynman!" (1985), pp. 66-68.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Therefore, hypnosis provides yet another set of "supporting material." There are many cases of people remembering past lives when hypnotized. It is hard to evaluate the validity of most such cases.</li>
+<li style="text-align: justify;">However, there is a branch of hypnosis that uses it as therapy. Some people seem to have "phobias" based on a horrific event from a past life. They cannot determine why they have these phobias, but they become cured when a hypnotist brings out that experience. Here is a 20/20 documentary of three such cases, where they vouch for the authenticity of the therapy sessions:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/hMfsjXiZGis" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"><span>9. There are hundreds of youtube videos on <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> stories and many on child prodigies and hypnosis-based curing of specific ailments.</span></p>
+<p style="text-align: justify;"><strong>The following books are also good reads:</strong></p>
+<ul style="text-align: justify;">
+<li>"Many Lives, Many Masters," by Brian Weiss (1988).</li>
+<li><span>"Many Mansions: The Edgar Cayce Story on <span class="pali-term term-highlight" data-term="reincarnation">Reincarnation</span>," by Gina Cerminara (1988).</span></li>
+<li>"Children's Past Lives: How Past Life Memories Affect Your Child" by Carol Bowman (1998)</li>
+<li>"Return to Life: Extraordinary Cases of Children Who Remember Past Lives," Jim B. Tucker (2013).</li>
+</ul>
+<h5 style="text-align: justify;">One White Crow Is Enough to Disprove the Hypothesis, “All Crows Are Black”</h5>
+<p style="text-align: justify;">10. <span style="color: #993366;"><strong><span>If even a SINGLE <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> account or an NDE is valid, then the hypothesis “consciousness arises in the brain” is false.</span></strong></span> American philosopher William James stated the following that is widely quoted today (“<a href="https://journals.sfu.ca/seemj/index.php/seemj/article/viewFile/210/173" rel="noopener" target="_blank">After the White Crow: Integrating Science and Anomalous Experience</a>,” Jerry E. Wesch (click on the link to download pdf)):</p>
+<blockquote>
+<p><span><strong>In order to disprove the assertion that all crows are black, one white crow is sufficient.</strong></span></p>
+</blockquote>
+<ul style="text-align: justify;">
+<li>That is a logical statement. <strong><span>It is unnecessary to prove that all or even many <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts/NDE accounts are true.</span></strong> Even if just one account is valid, that is enough to conclude that the brain is not the “seat of the mind.”</li>
+<li><span>We have thousands of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>/NDE accounts scrutinized by scientists/physicians.</span></li>
+<li>Also, see "<a href="../../pages/PS.GG.016/index.html" rel="noopener" target="_blank">Near-Death Experiences (NDE): Brain Is Not the Mind</a>."</li>
+</ul>
+<h5 class="newaps" style="text-align: justify;">Discussion</h5>
+<p style="text-align: justify;"><span>11. Some of you may wonder whether there is an inconsistency here. I have repeatedly mentioned that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> clearly stated that it is extremely rare to be born a human. Yet, from the above <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> case studies, it appears that people have been born in the human realm in successive lives. If it is so hard to attain a human birth, how can this be?</span></p>
+<p style="text-align: justify;">12. There is nothing inconsistent. The critical problem here is another misinterpretation. "<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>" or existence is not the same as a "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" or a birth; see "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava and Jāti – States of Existence and Births Therein</a>."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>Upon exhausting the <span class="pali-term term-highlight" data-term="kammic">kammic</span> energy for one existence, a living being grabs hold of another strong </span><em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> potential for the next existence. A human existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) can last thousands of years. Yet, each human birth (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) lasts only about 100 years. Therefore, there can be many births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) within human existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.)</li>
+<li>Between successive births, that human lives in <em><span>para <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> with just the "mental body" or <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. Another word for that entity is <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>. The concept of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is explained in simple terms in "<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Ghost 1990 Movie – Good Depiction of Gandhabba Concept</a>."</li>
+<li>The same is true for the animal realm. The life of a dog is less than 20 years, but a "dog <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" can last thousands or more years.</li>
+</ul>
+<p style="text-align: justify;">13. Thus, if one has done a highly meritorious deed and at some point in <em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em><span> (<span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process) latches on to that "</span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed" (see, "<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>"), that energy may be able to sustain that existence for many rebirths.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">In these cases, when physical death occurs BEFORE exhausting the energy of the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed, the <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (also called <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) leaves the dead body and waits until a suitable womb is ready; see, "<a href="../../pages/AB.DD.005/index.html" rel="noopener noreferrer" target="_blank">Manomaya Kaya (Gandhabba) and the Physical Body</a>." In this case, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> may carry a physical resemblance to the next life, including scars of any significant wounds, birthmarks, etc.</li>
+<li style="text-align: justify;"><span>When <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> occurs, the new physical body could resemble parts of the old body. In many <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> cases, such physical resemblances have been confirmed (as in the case of the civil war general in one of the above videos).</span></li>
+</ul>
+<p style="text-align: justify;">14. In summary, it is essential to remember that in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, it is "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span></span></em>," i.e., grasping or craving (<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>) that leads to existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>): for example, existence as a dog.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">That existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) may have enough<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy to support many repeated births as a dog. Therefore, once a given <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or existence is grasped, the next step of "<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span></span></em>" will lead to repeated births as a dog until that <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy is exhausted; see "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava and Jāti – States of Existence and Births Therein</a>."</li>
+</ul>
+<p style="text-align: justify;">15. Conversely, if the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for that "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" has run out when death occurs, a new "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" will be grasped at the death moment.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">For example, a human may exhaust the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for that human existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) and grasp a <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> seed for <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (existence) of an elephant. In that case, an "elephant <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>" </span></em>will come out of the dead body of the human. Then it will stay in that "mental body" until a matching "elephant womb" appears. That means the mother elephant must have a <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> similar to this new elephant.</li>
+</ul>
+<p style="text-align: justify;"><span>16. It may be difficult to grasp these concepts initially.  One must carefully examine the evidence provided in the links and go back to several layers to grasp these ideas. It is not possible to explain everything in one <span class="pali-term term-highlight" data-term="post">post</span>. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> can be very deep if one wants to comprehend how nature works.</span></p>
+<ul>
+<li>The deep connection between mind and matter is discussed in detail in “<a href="../../pages/BD.CC.001/index.html" rel="noopener" target="_blank">Brain and the Gandhabba</a>.”</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.AA.007"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0056"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.AA.007
+Language:     pt-BR
+Generated-At: 2026-04-18T04:01:44Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><span>O renascimento é um axioma fundamental do Buddhismo (<span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>). Há muitas evidências provenientes de relatos de renascimento, experiências de quase morte, crianças prodígios e outras áreas.</span></p>
+<p><strong>Revisado em 18 de janeiro de 2020; 3 de setembro de 2020; <span style="color: #3366ff;">reescrito em 25 de fevereiro de 2023</span></strong></p>
+<p><img alt="" class="alignnone wp-image-43673 size-full" height="720" src="http://localhost/beng_feb2026/wp-content/uploads/3.-Rebirth-Axiom-of-Buddha-Dhamma.jpg" width="960"/></p>
+<p><strong>Baixar/Imprimir:</strong> “<a href="http://localhost/beng_feb2026/wp-content/uploads/3.-Rebirth-Axiom-of-Buddha-Dhamma.jpg" rel="noopener" target="_blank">3. Renascimento – Axioma do Buddha Dhamma</a>”</p>
+<h5>Introdução</h5>
+<p style="text-align: justify;">1. A maioria das pessoas nas sociedades ocidentais não está familiarizada com o conceito de Renascimento. No entanto, isso está mudando porque há muitas evidências surgindo, e cientistas e filósofos estão começando a levá-lo a sério.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">É preciso analisar as evidências crescentes sem quaisquer ideias preconcebidas. <span style="color: #3366ff;"><span style="color: #3366ff;"><strong>Não há maneira plausível de explicar esses relatos a partir de um ponto de vista puramente “materialista”, ou seja, de que a consciência surge da matéria inerte. </strong></span></span><span style="color: #3366ff;"><span style="color: #3366ff;"><span style="color: #000000;">O cérebro <strong>não produz</strong> consciência</span></span></span><span style="color: #3366ff;"><span style="color: #3366ff;"><strong>, </strong></span></span><span style="color: #3366ff;"><span style="color: #3366ff;"><span style="color: #000000;"><strong>mas desempenha um papel fundamental</strong> na consciência humana: “</span></span></span><a href="../../pages/AB.DD.006/index.html" rel="noopener" target="_blank">Cérebro – Interface entre Mente e Corpo</a>”.</li>
+<li style="text-align: justify;">Aqui está um vídeo de uma discussão recente sobre pesquisas ocidentais sobre vidas passadas de crianças, experiências de quase morte (EQM), etc.:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0AtTM9hgCDw" width="560"></iframe></div></p>
+<h5 style="text-align: justify;">Estudos sobre EFC e EQM</h5>
+<p style="text-align: justify;">2. “Experiências de Quase Morte”, ou EQMs, são fenômenos únicos e fascinantes que ocorrem quando um indivíduo se aproxima da morte, seja por meio de um evento com risco de vida ou de uma emergência médica. Mesmo após serem declarados mortos, sem função cerebral, os indivíduos relatam ver seus “corpos mortos” de cima e o que aconteceu até mesmo em outras salas. Eles podiam se mover com seus “corpos mentais”. Nos últimos anos, a ciência moderna passou a se interessar pelas NDEs porque alguns relatos daqueles que passam por tais experiências podem ser testados. <span style="color: #3366ff;"><strong>Estudos em andamento podem impactar significativamente o pensamento científico sobre a consciência nos próximos anos.</strong></span></p>
+<ul>
+<li>Aqui está um vídeo popular do YouTube sobre a apresentação de um médico sobre Experiências de Quase-Morte:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/J5n2dzN1joU" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li>Há um número cada vez maior de relatos de Experiências Fora do Corpo (EFC) e Experiências de Quase Morte (EQM) que não apenas apoiam o Renascimento, mas também são consistentes com o conceito de um “corpo mental” ou “<em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>”; veja “<a href="../../pages/AB.DD.007/index.html" rel="noopener noreferrer" target="_blank">Experiência Fora do Corpo (EFC) e Manōmaya Kāya</a>” e outros ensaios relacionados.</li>
+</ul>
+<p style="text-align: justify;">3. Existem muitos vídeos no YouTube, mas aqui estão três livros recentes sobre esses assuntos:</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">“Consciousness Beyond Life”, de Pim van Lommel (2010), apresenta relatos detalhados de estudos de caso sobre ECM por um renomado cardiologista.</li>
+<li>“After: A Doctor Explores What Near-Death Experiences Reveal about Life and Beyond”, de Bruce Greyson (2021).</li>
+<li style="text-align: justify;">"Brain Wars", de Mario Beauregard (2012), é um livro escrito por um cientista sobre EQM, EFC e o problema mente-corpo em geral.</li>
+<li style="text-align: justify;">"Dying to be Me: My Journey from Cancer, to Near Death, to True Healing", de Anita Moorjani (2012), é a história pessoal de uma sobrevivente de câncer que havia sido diagnosticada com poucas semanas de vida, mas teve uma "recuperação inexplicável" em poucos dias, período durante o qual teve uma experiência extracorpórea.</li>
+</ul>
+<h3 style="text-align: justify;">Relatos de Renascimento</h3>
+<p style="text-align: justify;">4. O falecido professor Ian Stevenson, da Universidade da Virgínia, conduziu mais de 20 anos de pesquisa sobre a autenticidade de relatos de Renascimento, pesquisa que o professor Jim Tucker continua.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Esses dois professores escreveram vários livros sobre Renascimento. Um bom livro é “Vinte Casos Sugestivos de Renascimento”, de Ian Stevenson. A propósito, o professor Stevenson tornou-se Buddhista mais tarde na vida, provavelmente devido aos seus estudos (ver “Renascimento como Doutrina e Experiência”, de Francis Story (2003); primeira edição de 1975). Ele menciona isso na introdução que escreveu para este livro de Francis Story; digitalizei essa introdução: “<a href="http://localhost/beng_feb2026/dhamma/what-is-buddha-dhamma/introduction-to-rebirth-by-francis-story-ian-stevenson/" rel="noopener noreferrer" target="_blank" title="Introduction to “Rebirth by Francis Story” – Ian Stevenson">Introdução a ‘Renascimento’, de Francis Story – Ian Stevenson</a>”.</li>
+<li style="text-align: justify;">Aqui está um vídeo que discute o trabalho do falecido Dr. Ian Stevenson, do Dr. Jim Tucker e de colegas da Universidade da Virgínia:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/9w2MCpzE8u0" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;">5. Em seu livro, “Soul Survivor: O Renascimento de um Piloto de Caça da Segunda Guerra Mundial”, Bruce e Andrea Leininger detalham a incrível história do relato de vida passada de seu filho.</p>
+<ul style="text-align: justify;">
+<li>Aqui está um vídeo recente do YouTube sobre o relato de Renascimento de James Leininger:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6B27WRX0Auw" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Aqui está outra história sobre o renascimento de um general da Guerra Civil:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aQHp9bGVDB8" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Aqui está uma criança de três anos recitando <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> Buddhistas (e fazendo um ótimo trabalho). Será que uma criança de três anos consegue memorizar versos tão complexos de <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>?</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/jGHDpgBc9Dk" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Veja também o ensaio “<a href="http://localhost/beng_feb2026/myths-or-realities/boy-who-remembered-Pālī-suttas-for-1500-years/" rel="noopener noreferrer" target="_blank">Menino que se lembrava de Suttās em Pālī há 1.500 anos</a>”. Esta é uma história real sobre um menino (Dhammaruwan) que recitava <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> complexas e extensas aos cinco anos de idade, que soavam muito diferentes dos cantos atuais. Além disso, ele se lembra de relatos de sua vida passada, há 1.500 anos, quando acompanhou o famoso Buddhaghosa em sua viagem ao Sri Lanka.</li>
+</ul>
+<h5 style="text-align: justify;">Crianças prodígios</h5>
+<p style="text-align: justify;">Outra evidência vem das crianças prodígios. Aqui está uma reportagem sobre “10 crianças prodígios impressionantes”:</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/xvDuqW9SFT8" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Aqui está uma lista de crianças prodígios da Wikipedia. Você reconhecerá muitos dos nomes:</li>
+</ul>
+<p style="text-align: justify;"><a href="https://en.wikipedia.org/wiki/List_of_child_prodigies" rel="noopener noreferrer" target="_blank" title="List of Child Prodigies">Lista de crianças prodígios</a></p>
+<ul style="text-align: justify;">
+<li>Aqui está o link para o artigo da Wikipédia sobre crianças prodígios:</li>
+</ul>
+<p style="text-align: justify;"><a href="https://en.wikipedia.org/wiki/Child_prodigy" rel="noopener noreferrer" target="_blank" title="Child Prodigy">Criança prodígio</a></p>
+<h5 style="text-align: justify;">Evidências de Renascimento muito mais fortes do que se imagina</h5>
+<p style="text-align: justify;">6. Muitas pessoas dizem que não é possível apresentar uma “prova” direta do Renascimento; na verdade, é o contrário. Se as memórias de uma pessoa estão no cérebro (como acredita a ciência), todas essas memórias serão perdidas quando ela morrer. Não há nenhuma “conexão física” entre os cérebros das pessoas envolvidas nas histórias de Renascimento.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><strong>Portanto, mesmo que apenas um desses relatos de renascimento possa ser comprovado como verdadeiro, não há como explicar isso a não ser pelo renascimento. </strong><span style="color: #3366ff;"><strong>Como o cérebro nesta vida pode recordar memórias do cérebro de uma vida anterior?</strong></span></li>
+<li style="text-align: justify;">Se existe uma conexão entre duas vidas que viveram em dois locais geográficos (também separados pelo tempo), não há explicação para isso na ciência atual, ou seja, não há como estabelecer uma conexão entre o DNA dessas duas “pessoas”. Uma visão puramente materialista não consegue explicar isso.</li>
+<li style="text-align: justify;">Descobertas científicas recentes mostram que a matéria em diferentes locais está entrelaçada em um nível fundamental; veja “<a href="../../pages/DS.KK.003/index.html" rel="noopener noreferrer" target="_blank">Entrelaçamento Quântico – Estamos Todos Conectados</a>”. Além disso, “um ser vivo simplesmente passando de um corpo físico para outro”; veja “<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">Quem Faz o Renascimento? – Conceito de um Fluxo de Vida</a>”.</li>
+</ul>
+<p style="text-align: justify;">7. Além disso, é por meio dessa presunção de Renascimento que todas as aparentes anomalias e desigualdades da vida podem ser explicadas; veja “<a href="../../pages/TL.GG.003/index.html" rel="noopener noreferrer" target="_blank" title="Vagaries of Life and the Way to Seek “Good Rebirths”">Caprichos da Vida e o Caminho para Buscar Bons Renascimentos</a>”.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">E como poderíamos explicar o nascimento de prodigios como Jeremy Bentham, que, já aos quatro anos, sabia ler e escrever latim e grego? John Stuart Mill lia grego aos três anos e escreveu uma história de Roma aos seis anos. Babington Macaulay escreveu um compêndio de história mundial aos seis anos. Beethoven deu concertos públicos aos sete anos; Mozart já havia escrito composições musicais antes dos seis anos.  Voltaire leu as fábulas de Lafontaine quando tinha três anos de idade.</li>
+<li style="text-align: justify;">Não parece infinitamente mais provável que todos esses prodígios e gênios, que em muitos casos eram filhos de pais analfabetos, já tivessem, em vidas anteriores, lançado as bases para suas faculdades extraordinárias?</li>
+</ul>
+<h5 style="text-align: justify;">Cura com Hipnose</h5>
+<p style="text-align: justify;">8. O falecido Dr. Richard Feynman era cético em relação às alegações dos estudos sobre hipnose até que se submeteu à hipnose em duas ocasiões. Em ambos os casos, ele verificou que a hipnose funciona se for feita corretamente. Ele descreve esses dois casos em seu livro, “Surely You’re Joking, Mr. Feynman!” (1985), pp. 66-68.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Portanto, a hipnose fornece mais um conjunto de “material de apoio”. Há muitos casos de pessoas que se lembram de vidas passadas quando hipnotizadas. É difícil avaliar a validade da maioria desses casos.</li>
+<li style="text-align: justify;">No entanto, existe um ramo da hipnose que a utiliza como terapia. Algumas pessoas parecem ter “fobias” baseadas em um evento horrível de uma vida passada. Elas não conseguem determinar por que têm essas fobias, mas ficam curadas quando um hipnotizador traz à tona essa experiência. Aqui está um documentário do 20/20 sobre três desses casos, nos quais as pessoas atestam a autenticidade das sessões de terapia:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/hMfsjXiZGis" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;">9. Existem centenas de vídeos no YouTube sobre histórias de Renascimento e muitos sobre crianças prodígios e a cura de doenças específicas por meio da hipnose.</p>
+<p style="text-align: justify;"><strong>Os seguintes livros também são boas leituras:</strong></p>
+<ul style="text-align: justify;">
+<li>"Muitas Vidas, Muitos Mestres", de Brian Weiss (1988).</li>
+<li>"Many Mansions: The Edgar Cayce Story on Renascimento", de Gina Cerminara (1988).</li>
+<li>"Vidas Passadas das Crianças: Como as Memórias de Vidas Passadas Afetam Seu Filho", de Carol Bowman (1998)</li>
+<li>"Retorno à Vida: Casos Extraordinários de Crianças que se Lembram de Vidas Passadas", de Jim B. Tucker (2013).</li>
+</ul>
+<h5 style="text-align: justify;">Um corvo branco é suficiente para refutar a hipótese de que “todos os corvos são pretos”</h5>
+<p style="text-align: justify;">10. <span style="color: #993366;"><strong>Se mesmo um ÚNICO relato de Renascimento ou uma experiência de quase morte (NDE) for válido, então a hipótese de que “a consciência surge no cérebro” é falsa.</strong></span> O filósofo americano William James afirmou o seguinte, que é amplamente citado hoje (“<a href="https://journals.sfu.ca/seemj/index.php/seemj/article/viewFile/210/173" rel="noopener" target="_blank">After the White Crow: Integrating Science and Anomalous Experience</a>”, Jerry E. Wesch (clique no link para baixar o PDF)):</p>
+<blockquote>
+<p><span><strong>Para refutar a afirmação de que todos os corvos são pretos, basta um corvo branco.</strong></span></p>
+</blockquote>
+<ul style="text-align: justify;">
+<li>Essa é uma afirmação lógica. <strong>Não é necessário provar que todos ou mesmo muitos relatos de Renascimento/experiências de quase morte (EQM) sejam verdadeiros.</strong> Mesmo que apenas um relato seja válido, isso é suficiente para concluir que o cérebro não é a “sede da mente”.</li>
+<li>Temos milhares de relatos de Renascimento/EMD analisados por cientistas/médicos.</li>
+<li>Veja também “<a href="../../pages/PS.GG.016/index.html" rel="noopener" target="_blank">Experiências de Quase-Morte (EQM): O Cérebro Não É a Mente</a>”.</li>
+</ul>
+<h5 class="newaps" style="text-align: justify;">Discussão</h5>
+<p style="text-align: justify;"><span>11. Alguns de vocês podem se perguntar se há uma inconsistência aqui. Mencionei repetidamente que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou claramente que é extremamente raro nascer como humano. No entanto, a partir dos estudos de caso de Renascimento acima, parece que as pessoas têm nascido no reino humano em vidas sucessivas. Se é tão difícil alcançar um nascimento humano, como isso pode ser?</span></p>
+<p style="text-align: justify;">12. Não há nada de inconsistente. O problema crítico aqui é outra interpretação errônea. “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” ou existência não é o mesmo que “<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>” ou nascimento; veja “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>”.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>Ao esgotar a energia de <span class="pali-term term-highlight" data-term="kamma">Kamma</span> de uma existência, um ser vivo se apega a outro forte potencial </span><em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para a próxima existência. Uma existência humana (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) pode durar milhares de anos. No entanto, cada nascimento humano (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) dura apenas cerca de 100 anos. Portanto, pode haver muitos nascimentos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) dentro da existência humana (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>).</li>
+<li>Entre nascimentos sucessivos, esse ser humano vive em <em><span>para <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> apenas com o “corpo mental” ou <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. Outra palavra para essa entidade é <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>. O conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é explicado em termos simples em “<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Filme Ghost de 1990 – Boa representação do conceito de Gandhabba</a>”.</li>
+<li>O mesmo se aplica ao reino animal. A vida de um cão é inferior a 20 anos, mas um “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> de cão” pode durar milhares de anos ou mais.</li>
+</ul>
+<p style="text-align: justify;">13. Assim, se alguém realizou uma ação altamente meritória e, em algum momento do <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em> (processo de renascimento), se apega a essa “semente <em>de</em> Kam<em>ma</em>” (ver “<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>”), essa energia pode ser capaz de sustentar essa existência por muitos renascimentos.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Nesses casos, quando a morte física ocorre ANTES de esgotar a energia da semente <em>de</em> <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, o <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> (também chamado de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>) deixa o corpo morto e espera até que um útero adequado esteja pronto; veja “<a href="../../pages/AB.DD.005/index.html" rel="noopener noreferrer" target="_blank">Manomaya Kāya (Gandhabba) e o Corpo Físico</a>”. Nesse caso, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode apresentar uma semelhança física com a próxima vida, incluindo cicatrizes de ferimentos significativos, marcas de nascença, etc.</li>
+<li style="text-align: justify;">Quando ocorre o renascimento, o novo corpo físico pode se assemelhar a partes do corpo antigo. Em muitos casos de renascimento, tais semelhanças físicas foram confirmadas (como no caso do general da guerra civil em um dos vídeos acima).</li>
+</ul>
+<p style="text-align: justify;">14. Em resumo, é essencial lembrar que, em <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, é “<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">Upādāna Paccayā Bhava</span></span></em>”, ou seja, o apego ou desejo (<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>) que leva à existência (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>): por exemplo, a existência como um cão.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Essa existência (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) pode ter energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> suficiente para sustentar muitos renascimentos repetidos como um cão. Portanto, uma vez que um determinado <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> ou existência é agarrado, o próximo passo de “<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">Bhava Paccayā Jāti</span></span></em>” levará a renascimentos repetidos como um cão até que essa energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> se esgote; veja “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava e Jāti – Estados de Existência e Renascimentos Neles</a>”.</li>
+</ul>
+<p style="text-align: justify;">15. Por outro lado, se a energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para esse “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” se esgotar quando a morte ocorrer, um novo “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” será agarrado no momento da morte.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Por exemplo, um ser humano pode esgotar a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para essa existência humana (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) e agarrar-se a uma semente <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> (existência) de um elefante. Nesse caso, um “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> de elefante<em>” </em>sairá do corpo morto do humano. Em seguida, ele permanecerá nesse “corpo mental” até que um “útero de elefante” compatível apareça. Isso significa que a mãe elefante deve ter uma <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> semelhante à dessa nova elefante.</li>
+</ul>
+<p style="text-align: justify;"><span>16. Pode ser difícil compreender esses conceitos inicialmente. É preciso examinar cuidadosamente as evidências fornecidas nos links e voltar a várias camadas para compreender essas ideias. Não é possível explicar tudo em um único ensaio. O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> pode ser muito profundo se quisermos compreender como a natureza funciona.</span></p>
+<ul>
+<li>A profunda conexão entre mente e matéria é discutida em detalhes em “O <a href="../../pages/BD.CC.001/index.html" rel="noopener" target="_blank">Cérebro e o Gandhabba</a>”.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.AA.006/index.html">Samsaric Time Scale Buddhist Cosmology</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.II.001/index.html">Power Of The Human Mind</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.AA.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Samsaric Time Scale Buddhist Cosmology</span>
+        
+        <span class="pathway-title title-pt">Escala de tempo de Saṃsāra na cosmologia Buddhista</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.II.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Power Of The Human Mind</span>
+        
+        <span class="pathway-title title-pt">O Poder da Mente Humana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

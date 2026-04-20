@@ -1,0 +1,318 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Vipassana Vidassana Bhavana Insight Meditation | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Bhāvanā (Meditation)</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 6 / 34</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BM.AA.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Vipassana Vidassana Bhavana Insight Meditation</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BM.AA.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Bhāvanā (Meditation)</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BM.AA.004"
+             data-section="Bhāvanā (Meditation)"
+             data-section-code="BM"
+             data-findex="0719"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BM.AA.004</td></tr><tr><td>Fin-dex</td><td>0719</td></tr><tr><td>Slug</td><td>vipassana-vidassana-bhavana-insight-meditation</td></tr><tr><td>Section</td><td>BM</td></tr><tr><td>Title EN</td><td>Vipassana Vidassana Bhavana Insight Meditation</td></tr></table></div></div><strong>Revised April 11, 2020; <span style="color: #0000ff">September 4,2022</span></strong>
+<p style="text-align: justify"><strong><span>The top 10 <span class="pali-term term-highlight" data-term="posts">posts</span> in this section describe the fundamentals of <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> meditation. The rest of the <span class="pali-term term-highlight" data-term="posts">posts</span> in this section discuss meditation subjects. They clarify unresolved questions and help gain </span><em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em><span>. The first 11 <span class="pali-term term-highlight" data-term="posts">posts</span> should be followed in that order, at least initially.</span></strong></p>
+<p style="text-align: justify"><span>1. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is focused on purifying the mind of greed, hatred, and ignorance.  As the mind is purified, it gains </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span>,</span></em> which can be experienced at various levels from the beginning. If one can "stick to" this program for a couple of months, one can look back and see the change in oneself. One should have a more peaceful, calm mind that has "cooled down."</p>
+<ul style="text-align: justify">
+<li>A mind is impure because it attaches to “things in this world” with the misconception that things in this world (31 realms) can be maintained to one’s satisfaction, i.e., with the perception of <span style="color: #ff0000"><em><strong>nicca</strong></em></span>. Thus the prevailing mindset is that happiness (<span style="color: #ff0000"><em><strong><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></strong></em></span>) should be attained by employing any means. And once attained it can be maintained, and thus one is in total control of one’s affairs (<span style="color: #ff0000"><em><strong>atta</strong></em></span>).</li>
+<li>These three misconceptions of <span style="color: #ff0000"><em><span>nicca, <span class="pali-term term-highlight" data-term="sukha">sukha</span>, and atta</span></em></span><span> are the three culprits that keep us bound to “this world” of 31 realms, i.e., the endless <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process or </span><em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span></span></em><span>. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> showed that the actual reality of "this world” is described by the three characteristics of </span><span style="color: #0000ff"><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></em></span> No matter how hard we try, we cannot maintain things to our satisfaction in the long term (<span style="color: #0000ff"><strong><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em></strong></span>). Thus we get distraught (<span style="color: #0000ff"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em></strong></span>), and thus we are not in control and become helpless when born in bad realms like the animal realm (<span style="color: #0000ff"><strong><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em></strong></span>).</li>
+<li>More details in the first discourse at "<a href="../../pages/KD.FF.021/index.html" rel="noopener noreferrer" target="_blank">Tilakkhana – English Discourses</a>."</li>
+</ul>
+<p style="text-align: justify">2. I am NOT saying that one should not work hard to get a good education and job. That MUST be done. It is impossible to have peace of mind if one is hungry and homeless. But we also need to be aware of the FACT that all mundane achievements are temporary. Even if we get to live this life without a major catastrophe, we have to leave all behind when we die.</p>
+<ul style="text-align: justify">
+<li>One acts with greed, hate, and ignorance and makes the mind impure because of the wrong perceptions of <em><span>nicca, <span class="pali-term term-highlight" data-term="sukha">sukha</span>, and atta</span></em>. Then one is capable of immoral acts to get some temporary satisfaction because the bad consequences of such actions may not be clear. However, when one truly understands the reality (i.e., <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>), such immoral actions become unlikely.</li>
+<li>For that stage to be reached, one has to train one’s mind to “take in the good" and "reject the bad.” For that, a change in one’s habits (with <em>Ānapānasati</em> meditation) is necessary.</li>
+</ul>
+<p style="text-align: justify">The following is a logical  sequence for meditation:</p>
+<p style="text-align: justify">3. First, one must sort out what is good and bad and the consequences of good and bad actions. This is why the vision, <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>, comes first in the Noble Eightfold Path.  To get to <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>, </span></em>one needs to “sort out the good from the bad.”</p>
+<ul style="text-align: justify">
+<li><em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> (<em>vi</em>+<em>passa</em> means "to see clearly" and discard. Here, where “<em>vi</em>” means "special" and “<em>passa</em>” is to "see." <em>Vidassanā</em> (<em>vi</em>+<em><span><span class="pali-term term-highlight" data-term="dassana">dassana</span></span></em> means sort out by clear vision, whereas “<em><span><span class="pali-term term-highlight" data-term="dassana">dassana</span></span></em><span>” means the vision) means the same thing. Understanding <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> and acquiring the vision are needed to sort out the “good” from the “bad.”</span></li>
+<li>I cannot emphasize enough the importance of <em><span><span class="pali-term term-highlight" data-term="vipassanā">vipassanā</span></span></em> (<em>vidassanā</em>) or insight meditation. <span style="color: #0000ff">Without the “correct” vision, one could strive for the whole life and not get anywhere</span>: one has to understand the true nature of this world (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>), the Four Noble Truths, and the Noble Eightfold Path. It is not memorization but understanding that counts.</li>
+</ul>
+<p style="text-align: justify"><strong>4. A huge amount of defilements are removed from one’s mind with this insight meditation. The key is to understand the "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature of this world." It is the first type of meditation that is needed.</strong> One can attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> stage without doing any other types of meditation discussed below. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> once took a bit of soil to a fingertip and told the </span><em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> that “if the amount of defilements a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> needs to get rid of is comparable to this amount of soil, then a normal human being has to get rid of an equivalent to the soil in the whole Earth.”</p>
+<ul style="text-align: justify">
+<li>That is not a misprint or an exaggeration. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> is bound to attain<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> within a maximum of seven "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>.</span></em><span>” A normal human being could be trapped in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process for trillions of years to come. We have been through the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process for countless trillions; see “</span><a href="../../pages/DS.KK.004/index.html" rel="noopener noreferrer" target="_blank" title="Infinity – How Big Is It?">Infinity -How Big is It?</a>”.</li>
+<li>Many say, "I do like my life. Why would I not want to be reborn?". <strong>The problem is that future rebirths may not be in the human realm.</strong><span> We have no idea what we have done in our past lives. Thus even if we live a perfectly moral life, there are no guarantees that we will get a good <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. This is why understanding </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span>, <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, etc., via insight meditation, is important.</span></li>
+</ul>
+<p style="text-align: justify"><strong>5. How does one do insight meditation?</strong><span> Listening to discourses and reading <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> concepts are the two main forms of getting the correct information. Then one could contemplate those concepts in sitting meditation. </span><span style="color: #0000ff"><span>But reading up on <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> concepts during a quiet time is meditation; also see "</span></span><a href="../../pages/KD.FF.010/index.html" rel="noopener noreferrer" target="_blank">How to Cultivate the Anicca Sanna</a><span>" and the follow-up <span class="pali-term term-highlight" data-term="post">post</span>.</span></p>
+<ul style="text-align: justify">
+<li>Once some understanding is reached via <em><span><span class="pali-term term-highlight" data-term="vipassanā">vipassanā</span></span></em> (<em>vidassanā</em>) <em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> or insight meditation, one can start the next two key steps. <em><span><span class="pali-term term-highlight" data-term="mettā">Mettā</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> and various forms of <em><span><span class="pali-term term-highlight" data-term="anupassanā">anupassanā</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span>.</span></em></li>
+<li>Once one understands the true status of affairs in the wider world of 31 realms, one can comprehend the amount of suffering that has been hidden. With that understanding, one can engage in the <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="mettā">mettā</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>, an excellent way to pay back our old debts to other beings. <strong>This is the second way to purify our minds too.</strong></li>
+<li style="text-align: justify">I hope I have conveyed the idea that the bulk of work can be done with just insight meditation, contemplating "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>." However, doing the other two types of<em><span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>, i.e.,  <em><span><span class="pali-term term-highlight" data-term="mettā">mettā</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> and <em>Ānapānasati</em>, can be helpful for insight meditation too.</li>
+</ul>
+<p style="text-align: justify">6. <strong>The last and third way to purify the mind is via <em><span><span class="pali-term term-highlight" data-term="anupassanā">anupassanā</span></span></em>.</strong> <em><span><span class="pali-term term-highlight" data-term="anupassanā">anupassanā</span></span></em> means “discard according to the principles learned” ("<em>anu</em>” means according to, and “<em>passana</em>” means to "see." <strong>Another meaning of "<em>anu</em>" is defilements</strong>, which is "to be able to see one's defilements"). <em><span><span class="pali-term term-highlight" data-term="anupassanā">Anupassanā</span></span></em> can take various forms.</p>
+<ul>
+<li style="text-align: justify"><em><span>Ānapānasati <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> is the foundation. Once "<em>ā</em><em>na</em>” and "<em>ā</em><em>pāna</em>” are sorted out by <em><span><span class="pali-term term-highlight" data-term="vipassanā">vipassanā</span></span></em> (<em>vidassanā</em>), one needs to engage in<em> Ānapānasati</em> all the time. This means one needs to be mindful of what one is about to do and ensure it is the “right thing to do.”</li>
+<li>When one starts understanding <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, one can start doing the <em><span><span class="pali-term term-highlight" data-term="aniccānupassanā">aniccānupassanā</span>, <span class="pali-term term-highlight" data-term="dukkhānupassanā">dukkhānupassanā</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="anattānupassanā">anattānupassanā</span></span></em>, and four more related “<em><span><span class="pali-term term-highlight" data-term="anupassanā">anupassanā</span></span></em>.” I will elaborate on this later.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> (with <em><span>kayānupassanā, <span class="pali-term term-highlight" data-term="vedanānupassanā">vedanānupassanā</span>, <span class="pali-term term-highlight" data-term="cittānupassanā">cittānupassanā</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="dhammānupassanā">dhammānupassanā</span></span></em>) includes all the <em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> techniques that we have discussed so far. It is THE ultimate encompassing everything needed to attain stress relief. It can take one to <em>Arahanthood</em>. <em>Ānapānasati</em> (not breath mediation) is essentially the same as <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>, and that is the first step to attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> stage</span></em>. See <strong>“</strong><a href="../../pages/ER.FF.001/index.html" rel="noopener" target="_blank">Elephant in the Room 3 – Ānāpānasati</a>.“</li>
+</ul>
+<p style="text-align: justify">7. Thus, one could make things simpler by just doing insight meditation, <em>Ānapānasati</em>, and the <em><span><span class="pali-term term-highlight" data-term="mettā">mettā</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>. That is all one needs to do to have a "better state of mind" or even to become a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>.</p>
+<p style="text-align: justify">8. The problem with meditation techniques taught even in <em>Theravada</em> schools these days is the following. They are either breath meditation or chantings. How can one remove defilements by watching the breath? Even though it can calm the mind, there are no long-term benefits. Watching the breath, CANNOT reduce defilements from the mind.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>Another popular technique is just to contemplate impermanence. They keep repeating, "my body is impermanent; it is subjected to decay and death." Has anyone achieved any progress doing that for even twenty or thirty years? A <span class="pali-term term-highlight" data-term="buddha">Buddha</span> does not need to tell us that. </span><strong>All people belonging to any religion know impermanence is a fact of life!</strong></li>
+<li style="text-align: justify"><span>Yet another popular "chanting" is to contemplate the "foulness of the body." That is not what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> meant by the "</span><em><span>patikūla <span class="pali-term term-highlight" data-term="manasikāra">manasikāra</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>."  Again, everyone knows that our bodies are subject to decay and death; see "<a href="../../pages/SI.BB.001/index.html" rel="noopener noreferrer" target="_blank">Maha Satipaṭṭhāna Sutta</a>."</li>
+</ul>
+Next, "<a href="../../pages/BM.AA.005/index.html" rel="noopener noreferrer" target="_blank" title="Ariya Metta Bhavana (Loving Kindness Meditation)">Ariya mettā bhāvanā (Loving Kindness Meditation)</a>", .............
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BM.AA.003/index.html">The Second Level</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BM.AA.005/index.html">Ariya Metta Bhavana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BM.AA.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">The Second Level</span>
+        
+        <span class="pathway-title title-pt">The Second Level</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BM.AA.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Ariya Metta Bhavana</span>
+        
+        <span class="pathway-title title-pt">Ariya Metta Bhavana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BM">
+        ↑ Back to Bhāvanā (Meditation)
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

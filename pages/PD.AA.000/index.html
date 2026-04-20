@@ -1,0 +1,401 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Buddha Dhamma Teachings Of Buddha | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">About</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 1 / 3</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PD.AA.000</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Buddha Dhamma Teachings Of Buddha</h1>
+    
+    <h1 class="title-pt">Buddha Dhamma: Os Ensinamentos do Buddha</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PD.AA.000</td></tr>
+          <tr><td><strong>Section</strong></td><td>About</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PD.AA.000"
+             data-section="About"
+             data-section-code="PD"
+             data-findex="0001"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PD.AA.000</td></tr><tr><td>Fin-dex</td><td>0001</td></tr><tr><td>Slug</td><td>buddha-dhamma-teachings-of-buddha</td></tr><tr><td>Section</td><td>PD</td></tr><tr><td>Title EN</td><td>Buddha Dhamma Teachings Of Buddha</td></tr></table></div></div><p><span>Welcome to the <span class="pali-term term-highlight" data-term="pure dhamma">pure dhamma</span> website! This website explains critical concepts in <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> (<span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>) per the <span class="pali-term term-highlight" data-term="pali canon">Pali Canon</span>, </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>.</span></em></p>
+<p><strong>Revised August 12, 2019; July 4, 2022;<span style="color: #0000ff;"> February 21, 2023</span></strong></p>
+<p style="text-align: justify;"><span style="color: #008000;"><strong>Note:</strong></span> Now, you can select the "dark mode" (suitable for nighttime reading) or the "regular mode" by clicking the "crescent Moon icon" at the bottom right.</p>
+<p style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> (<span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>) describes the “laws of nature” as discovered by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> 2500 years ago. This website presents those teaching per the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Canon, </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span>. Even though I was a <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> by birth, I never bothered to consider why I was a <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span>. When I retired several years ago, I started reading widely on many subjects, including science, philosophy, and religion.</span></p>
+<ul style="text-align: justify;">
+<li><span>When I started to glean the profound message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, I realized that I had not known much about my own “religion.” Furthermore, it had been “contaminated” over its long history. Since 2009, I have been trying to find the essence of the message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. I wanted to share the results with the rest of the world; see "</span><a href="../../pages/PD.CC.000/index.html" rel="noopener noreferrer" target="_blank">About</a>."</li>
+</ul>
+<p style="text-align: justify;"><span>There seem to be three types of people who become interested in "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>":</span></p>
+<ol style="text-align: justify;">
+<li>Those who have endured hardships see "suffering in this world" and seek solutions.</li>
+<li>Those getting to old age are beginning to see signs of possible problems looming in the future. That includes aging, various ailments, not being able to get satisfaction from those things that provided comfort before, etc.</li>
+<li>Those who are intellectually motivated and exposed to <em>Dhammapada</em><span> verses or some other types of sayings by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> see a glimpse of a broader worldview of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ol>
+<p style="text-align: justify;">Some who have been to meditation retreats realize there is a second option than seeking material wealth and indulging in sensory pleasures. Especially for those people in categories 1 and 2, it becomes clear that indulging in sense pleasures does not have staying power. On the other hand, the sense of well-being achieved via insight meditation (not breath meditation) has staying power and does not go down as one gets old.</p>
+<ul style="text-align: justify;">
+<li><span>It is a good idea for people in any category first to understand <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s message. Those who are intellectually motivated will be able to get a complete picture and thus better intellectual satisfaction. For those in categories 1 and 2, a much better idea of focusing their efforts will become apparent with an insight into why focusing on purifying the mind will be beneficial.</span></li>
+<li><strong><span style="color: #0000ff;">January 30, 2019:</span></strong><span> For those new to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (or want to look at the essential fundamentals, see "</span><a href="../../pages/LD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Essential Buddhism</a>."</li>
+<li><span>Today, there are many incorrect interpretations of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings. See the new section on "</span><a href="../../pages/ER.AA.000/index.html" rel="noopener" target="_blank">Elephants in the Room.</a>"</li>
+</ul>
+<p style="text-align: justify;"><span>I believe anyone could benefit in some way by first getting a complete worldview of the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, which is much more expansive and complex than the one we perceive with our senses. The mind is the precursor to everything in this world: "</span><a href="../../pages/DD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Manōpubbangamā Dhammā..</a>".</p>
+<p style="text-align: justify;"><span>This website was launched in early January 2014. As of August 2020, it has around 600 <span class="pali-term term-highlight" data-term="posts">posts</span>. You may want to look at some new sections listed at the end of this <span class="pali-term term-highlight" data-term="post">post</span>. Some early <span class="pali-term term-highlight" data-term="posts">posts</span> may need revisions.</span></p>
+<ul style="text-align: justify;">
+<li><span>I discuss many "scientific aspects" to illustrate that <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is a complete worldview that withstood all scrutiny for 2500 years. However, my main goal is to convey the benefits of actual practice.</span></li>
+</ul>
+<p style="text-align: justify;">I have experienced much of what I discuss here. The reason that I started this website is to share that experience with anyone interested. The "practice" part will emerge as I lay down the basic ideas. To practice something, one needs to know what to practice. See "<a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" target="_blank" title="Bhavana (Meditation)">Bhāvanā (Meditation)</a>."</p>
+<ul style="text-align: justify;">
+<li><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is NOT a religion to be followed by following rituals or blindly following a few precepts. It describes laws of nature that need to be "grasped" and "lived." <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> here means "teachings." First, the correct teachings must be understood. Then it becomes clear WHY one must live life in a certain way.</span></li>
+<li><span>This website is not a blog but a Content Management System (CMS). The material does not belong to me but to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. What I try to do is to keep the information accurate to the best of my ability. I will change the format and contents to revise as needed or present better. So, please go back and read "old topics" occasionally.</span></li>
+<li>Also, one needs to contemplate the ideas presented; just quickly going through them may not yield many benefits.</li>
+</ul>
+<p style="text-align: justify;"><span>Another aspect that I try to highlight is the CONSISTENCY of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. You will see links from any given area to other sections. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is called "Bhaghavath" because he analyzed the same in many ways. They are all self-consistent with the primary axioms, such as 31 realms of existence, </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>/<span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em><span>, and <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>As science has progressed mainly over the past hundred years, consistency with science is also becoming apparent. But science has not yet grasped the mind's importance (over matter). In some of the <span class="pali-term term-highlight" data-term="posts">posts</span>, I am making predictions about what science will discover in the future. To have a timestamp, I started putting the publication date of new <span class="pali-term term-highlight" data-term="posts">posts</span> beginning in late October 2015.</span></li>
+<li style="text-align: justify;">Please send your suggestions/comments/questions and let me know of any technical issues with the site using the "Comments" tab. I do not plan to have a discussion forum, so your comments will not be published.</li>
+<li style="text-align: justify;"><span>I usually write four to five essays a month. They are listed in the "New/Revised <span class="pali-term term-highlight" data-term="posts">Posts</span>" menu at the bottom of each page. Engaging/relevant news articles are also on that menu.</span></li>
+<li style="text-align: justify;"><span>I started posting the publication date in new <span class="pali-term term-highlight" data-term="posts">posts</span> starting on October 23, 2015. Thus, if a web <span class="pali-term term-highlight" data-term="post">post</span> is not dated, it must have been published before October 23, 2015.</span></li>
+</ul>
+<p style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em><span>Sabba dānan <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> dānan jināti,"</span></em><span> or "Gift of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> excels all other gifts." Please inform others about this site if you benefit from it.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>However, we should only inform others. Humanity has suffered enough from those who have tried to force their views on others. As the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "Come and see for yourself!".</span></li>
+</ul>
+<p style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> also said, "</span><em><span>Sabba ratin <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> ratin jināti,"</span></em><span> or "Taste of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> excels all other tastes (pleasures)." I hope you will be patient to look around the site to learn enough <span class="pali-term term-highlight" data-term="pure dhamma">pure Dhamma</span> to enjoy its taste.</span></p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>Note added/revised December 7, 2016</strong><strong>:</strong> </span> I have added a "Font Size Selector" on the top right so that any reader can control the font size.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>There are two other possible tools: 1. Each <span class="pali-term term-highlight" data-term="post">post</span> can be printed using the PRINT button below that <span class="pali-term term-highlight" data-term="post">post</span>. 2. All the <span class="pali-term term-highlight" data-term="posts">posts</span> on the site can be downloaded using three eBook formats. One can read them on electronic devices like Amazon Kindle: </span><a href="../../pages/FT.CC.001/index.html" rel="noopener noreferrer" target="_blank" title="Pure Dhamma Essays in Book Format">Pure Dhamma Essays in Book Format</a>.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>Note added June 8, 2017: </strong></span><span>As of today, there are over 450 <span class="pali-term term-highlight" data-term="posts">posts</span> on the website. Recently, I have been getting inquiries on “where to start?”. I just added the following <span class="pali-term term-highlight" data-term="post">post</span> to summarize various sections and how to locate <span class="pali-term term-highlight" data-term="posts">posts</span> of interest: "</span><a href="../../pages/BD.AA.001/index.html" rel="noopener noreferrer" target="_blank">User’s Guide to Pure Dhamma Website</a>."</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>April 14, 2018:</strong></span> Discussion forum initiated in December of 2017: “<a href="../../pages/PD.BB.000/index.html" rel="noopener noreferrer" target="_blank">Forum</a><span>.“ Updates and new <span class="pali-term term-highlight" data-term="posts">posts</span> at “</span><a href="../../pages/FT.GG.001/index.html" rel="noopener noreferrer" target="_blank">New / Revised Posts</a>. “</p>
+<p style="text-align: justify;"><span style="font-size: 1.125rem; letter-spacing: 0px;"><span style="color: #0000ff;"><strong>March 2018:</strong></span> N</span>ew section on “<a href="../../pages/QD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Quantum Mechanics and Dhamma</a>.”</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>November 20, 2018:</strong></span><span> I have disabled comments on individual <span class="pali-term term-highlight" data-term="posts">posts</span>. You can comment at the “Forum“ or email me at lal@<span class="pali-term term-highlight" data-term="puredhamma">puredhamma</span>.net.</span></p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>July 10, 2019: </strong><span style="color: #000000;">New section on "</span></span><a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origin of Life</a>."</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>July 31, 2020:</strong></span> New section on "<a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – A Scientific Approach</a>."</p>
+<p style="text-align: justify;"><strong><span style="color: #0000ff;">February 19, 2021:</span> </strong>New subsection on "<a href="http://localhost/beng_feb2026/paticca-samuppada/paticca-samuppada-essential-concepts/" rel="noopener" target="_blank">Paṭicca Samuppāda – Essential Concepts</a>."</p>
+<p style="text-align: justify;"><strong><span style="color: #0000ff;">July 2, 2021:</span> </strong>New subsection on<strong> "</strong><a href="../../pages/KD.BB.001/index.html" rel="noopener" target="_blank">Basic Framework of Buddha Dhamma</a>"</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>February 28, 2022: </strong></span>New section on "<a href="../../pages/ER.AA.000/index.html" rel="noopener" target="_blank">Elephants in the Room</a>"</p>
+<p style="text-align: justify;"><span>It is important to know that there is a special convention for writing <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words: </span><a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">"Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1</a>." There is also a "<a href="../../pages/TS.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (A-K)</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="PD.AA.000"
+             data-section="About"
+             data-section-code="PD"
+             data-findex="0001"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        PD.AA.000
+Language:     pt-BR
+Generated-At: 2026-04-17T21:30:30Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><span>Bem-vindo ao site <span class="pali-term term-highlight" data-term="pure dhamma">Pure Dhamma</span>! Este site explica conceitos fundamentais do Buddhismo (<span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>) de acordo com o Cânone <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, </span><em><span>o <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>.</span></em></p>
+<p><strong>Revisado em 12 de agosto de 2019; 4 de julho de 2022; <span style="color: #0000ff;">21 de fevereiro de 2023</span></strong></p>
+<p style="text-align: justify;"><span style="color: #008000;"><strong>Observação:</strong></span> Agora, você pode selecionar o “modo escuro” (adequado para leitura noturna) ou o “modo normal” clicando no “ícone da lua crescente” no canto inferior direito.</p>
+<p style="text-align: justify;"><span>O Buddhismo (<span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>) descreve as “leis da natureza” conforme descobertas pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span> há 2.500 anos. Este site apresenta esses ensinamentos de acordo com o Cânone <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. Embora eu fosse Buddhista de nascimento, nunca me preocupei em refletir sobre o motivo de ser Buddhista. Quando me aposentei, há vários anos, comecei a ler amplamente sobre diversos assuntos, incluindo ciência, filosofia e religião.</p>
+<ul style="text-align: justify;">
+<li><span>Quando comecei a compreender a profunda mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, percebi que não sabia muito sobre minha própria “religião”. Além disso, ela havia sido “contaminada” ao longo de sua longa história. Desde 2009, venho tentando encontrar a essência da mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Queria compartilhar os resultados com o resto do mundo; veja “</span><a href="../../pages/PD.CC.000/index.html" rel="noopener noreferrer" target="_blank">Sobre</a>”.</li>
+</ul>
+<p style="text-align: justify;">Parece haver três tipos de pessoas que se interessam pelo “Buddhismo”:</p>
+<ol style="text-align: justify;">
+<li>Aqueles que passaram por dificuldades veem o “sofrimento neste mundo” e buscam soluções.</li>
+<li>Aqueles que estão chegando à velhice começam a ver sinais de possíveis problemas que se aproximam no futuro. Isso inclui o envelhecimento, várias doenças, não conseguir obter satisfação das coisas que antes proporcionavam conforto, etc.</li>
+<li>Aqueles que são motivados intelectualmente e expostos aos versos <em>do Dhammapada</em><span> ou a outros tipos de ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> vislumbram uma visão de mundo mais ampla do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ol>
+<p style="text-align: justify;">Alguns que já participaram de retiros de meditação percebem que existe uma segunda opção além de buscar riqueza material e entregar-se aos prazeres sensoriais. Especialmente para as pessoas das categorias 1 e 2, fica claro que entregar-se aos prazeres sensoriais não tem durabilidade. Por outro lado, a sensação de bem-estar alcançada por meio da meditação de insight (não da meditação da respiração) tem durabilidade e não diminui à medida que se envelhece.</p>
+<ul style="text-align: justify;">
+<li><span>É uma boa ideia que as pessoas de qualquer categoria compreendam primeiro a mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Aqueles que são motivados intelectualmente serão capazes de obter uma visão completa e, assim, uma melhor satisfação intelectual. Para aqueles nas categorias 1 e 2, uma ideia muito melhor de como concentrar seus esforços se tornará evidente com uma compreensão de por que focar na purificação da mente será benéfico.</span></li>
+<li><strong><span style="color: #0000ff;">30 de janeiro de 2019:</span></strong><span> Para aqueles que são novos no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (ou desejam examinar os fundamentos essenciais), consulte “</span><a href="../../pages/LD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddhismo Essencial</a>”.</li>
+<li><span>Hoje, há muitas interpretações incorretas dos ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Veja a nova seção sobre “</span><a href="../../pages/ER.AA.000/index.html" rel="noopener" target="_blank">Elefantes na Sala”.</a></li>
+</ul>
+<p style="text-align: justify;"><span>Acredito que qualquer pessoa poderia se beneficiar de alguma forma ao primeiro obter uma visão de mundo completa do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, que é muito mais ampla e complexa do que aquela que percebemos com nossos sentidos. A mente é o precursor de tudo neste mundo: “</span><a href="../../pages/DD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Manōpubbangamā Dhammā..</a>”.</p>
+<p style="text-align: justify;">Este site foi lançado no início de janeiro de 2014. Em agosto de 2020, ele contava com cerca de 600 ensaios. Você pode querer dar uma olhada em algumas novas seções listadas no final desta publicação. Algumas publicações antigas podem precisar de revisões.</p>
+<ul style="text-align: justify;">
+<li><span>Abordo muitos “aspectos científicos” para ilustrar que o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é uma visão de mundo completa que resistiu a todo o escrutínio por 2.500 anos. No entanto, meu objetivo principal é transmitir os benefícios da prática real.</span></li>
+</ul>
+<p style="text-align: justify;">Eu experimentei muito do que discuto aqui. A razão pela qual criei este site é compartilhar essa experiência com qualquer pessoa interessada. A parte da “prática” surgirá à medida que eu apresentar as ideias básicas. Para praticar algo, é preciso saber o que praticar. Veja “<a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" target="_blank" title="Bhavana (Meditation)">Bhāvanā (Meditação)</a>”.</p>
+<ul style="text-align: justify;">
+<li><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> NÃO é uma religião a ser seguida por meio de rituais ou do cumprimento cego de alguns preceitos. Ele descreve leis da natureza que precisam ser “compreendidas” e “vividas”. <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> aqui significa “ensinamentos”. Primeiro, os ensinamentos corretos devem ser compreendidos. Então fica claro POR QUE se deve viver a vida de uma determinada maneira.</span></li>
+<li><span>Este site não é um blog, mas um Sistema de Gerenciamento de Conteúdo (CMS). O material não pertence a mim, mas ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. O que procuro fazer é manter as informações precisas da melhor maneira possível. Mudarei o formato e o conteúdo para revisá-los conforme necessário ou para apresentá-los melhor. Portanto, por favor, volte e leia os “tópicos antigos” ocasionalmente.</span></li>
+<li>Além disso, é preciso contemplar as ideias apresentadas; apenas dar uma olhada rápida nelas pode não trazer muitos benefícios.</li>
+</ul>
+<p style="text-align: justify;"><span>Outro aspecto que procuro destacar é a CONSISTÊNCIA do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Você verá links de qualquer área para outras seções. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> é chamado de “Bhaghavath” porque analisou o mesmo tema de muitas maneiras. Todas elas são auto-consistentes com os axiomas primários, tais como os 31 reinos da existência, </span><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>/<span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> e Renascimento.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">À medida que a ciência progrediu principalmente nos últimos cem anos, a consistência com a ciência também está se tornando evidente. Mas a ciência ainda não compreendeu a importância da mente (sobre a matéria). Em alguns dos ensaios, estou fazendo previsões sobre o que a ciência descobrirá no futuro. Para ter uma data de referência, comecei a colocar a data de publicação dos novos ensaios a partir do final de outubro de 2015.</li>
+<li style="text-align: justify;">Por favor, envie suas sugestões/comentários/perguntas e me informe sobre quaisquer problemas técnicos com o site usando a guia “Comentários”. Não pretendo ter um fórum de discussão, portanto, seus comentários não serão publicados.</li>
+<li style="text-align: justify;">Normalmente escrevo de quatro a cinco ensaios por mês. Eles estão listados no menu “Postagens novas/revisadas” na parte inferior de cada página. Artigos de notícias interessantes/relevantes também estão nesse menu.</li>
+<li style="text-align: justify;">Comecei a publicar a data de publicação nos novos ensaios a partir de 23 de outubro de 2015. Portanto, se um ensaio na web não tiver data, ele deve ter sido publicado antes de 23 de outubro de 2015.</li>
+</ul>
+<p style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span>Sabba dānan <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> dānan jināti”,</span></em><span> ou “A doação do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> supera todas as outras doações”. Por favor, informe outras pessoas sobre este site se você se beneficiar dele.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>No entanto, devemos apenas informar outras pessoas. A humanidade já sofreu o suficiente com aqueles que tentaram impor suas opiniões aos outros. Como disse o <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: “Venha e veja por si mesmo!”.</span></li>
+</ul>
+<p style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> também disse: “</span><em><span>Sabba ratin <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> ratin jināti”,</span></em><span> ou “O sabor do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> supera todos os outros sabores (prazeres)”. Espero que você tenha paciência para explorar o site e aprender o <span class="pali-term term-highlight" data-term="pure dhamma">Pure Dhamma</span> o suficiente para apreciar seu sabor.</span></p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>Nota adicionada/revisada em 7 de dezembro de 2016:</strong></span>Adicionei um “Seletor de Tamanho da Fonte” no canto superior direito para que qualquer leitor possa controlar o tamanho da fonte.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Existem duas outras ferramentas disponíveis: 1. Cada postagem pode ser impressa usando o botão IMPRIMIR abaixo dela. 2. Todas as postagens do site podem ser baixadas em três formatos de e-book. É possível lê-las em dispositivos eletrônicos como o Amazon Kindle: <a href="../../pages/FT.CC.001/index.html" rel="noopener noreferrer" target="_blank" title="Pure Dhamma Essays in Book Format">Ensaios sobre o Pure Dhamma em formato de livro</a>.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>Nota adicionada em 8 de junho de 2017: </strong></span>Até hoje, há mais de 450 ensaios no site. Recentemente, tenho recebido perguntas sobre “por onde começar?”. Acabei de adicionar o seguinte ensaio para resumir as várias seções e explicar como localizar ensaios de interesse: “<a href="../../pages/BD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Guia do Usuário do Site Pure Dhamma</a>”.</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>14 de abril de 2018:</strong></span> Fórum de discussão iniciado em dezembro de 2017: “<a href="../../pages/PD.BB.000/index.html" rel="noopener noreferrer" target="_blank">Fórum</a>.” Atualizações e novos ensaios em <a href="../../pages/FT.GG.001/index.html" rel="noopener noreferrer" target="_blank">“Ensaios Novos / Revisados</a>.”</p>
+<p style="text-align: justify;"><span style="font-size: 1.125rem; letter-spacing: 0px;"><span style="color: #0000ff;"><strong>Março de 2018:</strong></span> N</span>ova seção sobre <a href="../../pages/QD.AA.000/index.html" rel="noopener noreferrer" target="_blank">“Mecânica Quântica e Dhamma</a>”.</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>20 de novembro de 2018:</strong></span><span> Desativei os comentários em ensaios individuais. Você pode comentar no “Fórum” ou me enviar um e-mail para lal@<span class="pali-term term-highlight" data-term="puredhamma">PureDhamma</span>.net.</span></p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>10 de julho de 2019: </strong><span style="color: #000000;">Nova seção sobre “</span></span><a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origem da Vida</a>”.</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>31 de julho de 2020:</strong></span> Nova seção sobre “<a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Uma Abordagem Científica</a>”.</p>
+<p style="text-align: justify;"><strong><span style="color: #0000ff;">19 de fevereiro de 2021:</span> </strong>Nova subseção sobre “<a href="http://localhost/beng_feb2026/paticca-samuppada/paticca-samuppada-essential-concepts/" rel="noopener" target="_blank">Paṭicca Samuppāda – Conceitos Essenciais</a>”.</p>
+<p style="text-align: justify;"><strong><span style="color: #0000ff;">2 de julho de 2021:</span> </strong>Nova subseção sobre<strong> “</strong><a href="../../pages/KD.BB.001/index.html" rel="noopener" target="_blank">Estrutura Básica do Buddha Dhamma</a>”</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>28 de fevereiro de 2022: </strong></span>Nova seção sobre <a href="../../pages/ER.AA.000/index.html" rel="noopener" target="_blank">“Elefantes na </a>sala”</p>
+<p style="text-align: justify;"><span>É importante saber que existe uma convenção especial para escrever palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>: </span><a href="http://localhost/beng_feb2026/historical-background/Tipiṭaka-english-convention-part-1/" rel="noopener noreferrer" target="_blank">“Convenção ‘Tipiṭaka English’ adotada pelos primeiros estudiosos europeus – Parte 1</a>.” Há também um “<a href="http://localhost/beng_feb2026/tables-and-summaries/Pālī-glossary-a-k/" rel="noopener noreferrer" target="_blank">Glossário de Pālī – (A-K)</a>.”</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PD.BB.000/index.html">Forums</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    <span class="pathway-placeholder"></span>
+
+    
+    <a class="pathway-link next" href="../../pages/PD.BB.000/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Forums</span>
+        
+        <span class="pathway-title title-pt">Forums</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PD">
+        ↑ Back to About
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

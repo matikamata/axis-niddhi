@@ -1,0 +1,358 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>The Pale Blue Dot…….. | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 8 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.BB.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">The Pale Blue Dot……..</h1>
+    
+    <h1 class="title-pt">O Pálido Ponto Azul……..</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.BB.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>2</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.BB.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0395"
+             data-level="intermediate"
+             data-reading-time="2"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.BB.002</td></tr><tr><td>Fin-dex</td><td>0395</td></tr><tr><td>Slug</td><td>let-us-make-a-better-world</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>The Pale Blue Dot……..</td></tr></table></div></div><p><strong>Revised March 2, 2020; <span style="color: #0000ff;">August 28, 2022</span></strong></p>
+<p>1. Even if some of us are not thinking about a "wider worldview" or "what happens after death," we all want a better world.</p>
+<p>I thought of sharing this awesome video from the late Dr. Carl Sagan:</p>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wupToqz1e2g" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"><span>2. When I read the writings of all those past scientists like Sagan, Feynman, Einstein, Bohm, Heisenberg, etc., I wonder how much more they could have accomplished spiritually if they had been exposed to pure <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul>
+<li style="text-align: justify;">Yet, I am still impressed by their pure reasoning and compassion for humanity; they were not just scientists with a narrow focus. They thought deeply about the "purpose of existence."</li>
+</ul>
+<p style="text-align: justify;">3. Even though science has revealed the unimaginable vastness of space, scientists think our universe is only 15 billion years old. However, each of us has had an uncountable number of lives in the past. See "<a href="../../pages/DS.BB.002/index.html" rel="noopener noreferrer" target="_blank">Origin of Life – There is No Traceable Origin</a>." Not only is our place in the vast cosmos insignificantly small, but our existence of about 100 years (in this life) is also insignificantly small.</p>
+<ul>
+<li style="text-align: justify;">Yet, out of countless beings that live on this Earth,  we are the only species capable of forging our destiny.</li>
+<li style="text-align: justify;">We must be mindful not only of the welfare of our family and friends but of all other people and beings (seen and unseen).</li>
+</ul>
+<p style="text-align: justify;">4. Do you know why some actions are good and others bad? We may quote some ethical maxims or juggle with philosophical abstractions, but there is a simple explanation called nature. “Good is good because it leads to happiness and freedom of the heart. Bad is bad because it leads to suffering, and it feels bad”.</p>
+<ul>
+<li style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said a moral deed (</span><em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) makes one's heart "pulsating with joy"; an immoral deed leads to a burdened heart.</li>
+</ul>
+<p style="text-align: justify;">5. Nature encourages morality and punishes immorality via its built-in reward-punishment system, which is none other than the laws of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. But the punishment is not immediate, so it is hard for people to make the connection.</p>
+<ul>
+<li style="text-align: justify;">Even if the punishment in question comes a few lives later, this “time lag” is not that long since <em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span></span></em> is “beginning-less” and “endless.”</li>
+</ul>
+<p style="text-align: justify;">6. Humans innately know what is right and what is wrong. Most bad actions are committed with a mind that is not calm but is agitated. Therefore, we must learn how to calm our minds: "<a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank" title="Key to Calming the Mind – The Five Hindrances">Key to Calming the Mind - The Five Hindrances</a>."</p>
+<ul>
+<li>By the way, Dr. Sagan's books like "Pale Blue Dot: A Vision of the Human Future in Space," "The Varieties of Scientific Experience," and "Billions &amp; Billions: Thoughts on Life and Death at the Brink of the Millennium" are very informative. These are likely to be available in local public libraries.</li>
+</ul>
+<p>Next, "<a href="../../pages/TL.BB.003/index.html" rel="noopener noreferrer" target="_blank">The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)</a>", ...........</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.BB.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0395"
+             data-level="intermediate"
+             data-reading-time="2"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.BB.002
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p><strong>Revisado em 2 de março de 2020; <span style="color: #0000ff;">28 de agosto de 2022</span></strong></p>
+<p>1. Mesmo que alguns de nós não estejam pensando em uma “visão de mundo mais ampla” ou “o que acontece após a morte”, todos nós queremos um mundo melhor.</p>
+<p>Pensei em compartilhar este vídeo incrível do falecido Dr. Carl Sagan:</p>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/wupToqz1e2g" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"><span>2. Quando leio os escritos de todos aqueles cientistas do passado, como Sagan, Feynman, Einstein, Bohm, Heisenberg, etc., me pergunto o quanto mais eles poderiam ter conquistado espiritualmente se tivessem sido expostos ao <span class="pali-term term-highlight" data-term="pure dhamma">Pure Dhamma</span> de <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<ul>
+<li style="text-align: justify;">No entanto, ainda estou impressionado com seu raciocínio puro e compaixão pela humanidade; eles não eram apenas cientistas com um foco limitado. Eles pensavam profundamente sobre o “propósito da existência”.</li>
+</ul>
+<p style="text-align: justify;">3. Embora a ciência tenha revelado a vastidão inimaginável do espaço, os cientistas acreditam que nosso universo tem apenas 15 bilhões de anos. No entanto, cada um de nós teve um número incontável de vidas no passado. Veja “<a href="../../pages/DS.BB.002/index.html" target="_blank">Origem da Vida – Não há origem rastreável</a>”. Não apenas nosso lugar no vasto cosmos é insignificante, mas nossa existência de cerca de 100 anos (nesta vida) também é insignificante.</p>
+<ul>
+<li style="text-align: justify;">No entanto, entre os inúmeros seres que vivem nesta Terra, somos a única espécie capaz de forjar o nosso destino.</li>
+<li style="text-align: justify;">Devemos estar atentos não apenas ao bem-estar de nossa família e amigos, mas também de todas as outras pessoas e seres (visíveis e invisíveis).</li>
+</ul>
+<p style="text-align: justify;">4. Você sabe por que algumas ações são boas e outras ruins? Podemos citar algumas máximas éticas ou brincar com abstrações filosóficas, mas há uma explicação simples chamada natureza. “O bem é bom porque leva à felicidade e à liberdade do coração. O mal é ruim porque leva ao sofrimento e faz mal”.</p>
+<ul>
+<li style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que uma ação moral (</span><em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) faz o coração “pulsar de alegria”; uma ação imoral leva a um coração sobrecarregado.</li>
+</ul>
+<p style="text-align: justify;">5. A natureza incentiva a moralidade e pune a imoralidade por meio de seu sistema interno de recompensa e punição, que nada mais é do que as leis do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>. Mas a punição não é imediata, por isso é difícil para as pessoas fazerem a conexão.</p>
+<ul>
+<li style="text-align: justify;">Mesmo que a punição em questão venha algumas vidas depois, esse “intervalo de tempo” não é tão longo, já que <em><span>o <span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em> é “sem começo” e “sem fim”.</li>
+</ul>
+<p style="text-align: justify;">6. Os seres humanos sabem instintivamente o que é certo e o que é errado. A maioria das más ações é cometida com uma mente que não está calma, mas agitada. Portanto, devemos aprender a acalmar nossas mentes: “<a href="../../pages/TL.CC.002/index.html" target="_blank" title="Key to Calming the Mind – The Five Hindrances">A chave para acalmar a mente — os Cinco Estorvos</a>”.</p>
+<ul>
+<li>A propósito, os livros do Dr. Sagan, como “Pale Blue Dot: A Vision of the Human Future in Space” (Pálido ponto azul: uma visão do futuro humano no espaço), “The Varieties of Scientific Experience” (As variedades da experiência científica) e “Billions &amp; Billions: Thoughts on Life and Death at the Brink of the Millennium” (Bilhões e bilhões: pensamentos sobre a vida e a morte à beira do milênio) são muito informativos. É provável que estejam disponíveis nas bibliotecas públicas locais.</li>
+</ul>
+<p>A seguir, “<a href="../../pages/TL.BB.003/index.html" target="_blank">A Lei da Atração, Hábitos, Caráter (Gati) e Desejos (Āsavas)</a>”, ...........</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.BB.001/index.html">The Basics</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.BB.003/index.html">Law Of Attraction Habits Gathi And Cravings Asavas</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.BB.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">The Basics</span>
+        
+        <span class="pathway-title title-pt">O básico</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.BB.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Law Of Attraction Habits Gathi And Cravings Asavas</span>
+        
+        <span class="pathway-title title-pt">Lei da Atração Hábitos Gathi e Desejos Āsavā</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

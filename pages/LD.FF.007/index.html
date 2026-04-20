@@ -1,0 +1,387 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Mundane Supramundane Jhana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Living Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 41 / 52</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">LD.FF.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Mundane Supramundane Jhana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>LD.FF.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Living Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>15</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="LD.FF.007"
+             data-section="Living Dhamma"
+             data-section-code="LD"
+             data-findex="0242"
+             data-level="intermediate"
+             data-reading-time="15"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>LD.FF.007</td></tr><tr><td>Fin-dex</td><td>0242</td></tr><tr><td>Slug</td><td>mundane-supramundane-jhana</td></tr><tr><td>Section</td><td>LD</td></tr><tr><td>Title EN</td><td>Mundane Supramundane Jhana</td></tr></table></div></div><p><strong>October 12, 2017; revised February 9, 2018; June 17, 2022;<span style="color: #000000"> rewritten November 16, 2022; <span style="color: #3366ff">revised January 31, 2023</span></span></strong></p>
+<p style="text-align: justify">Here we will discuss three critical <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> from the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> to resolve controversial arguments about mundane (<em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em>) and supramundane (<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>) <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.  </p>
+<ul style="text-align: justify">
+<li><span>The <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/SI.AA.011/index.html" rel="noopener noreferrer" target="_blank">Tapussa Sutta (AN 9.41)– Akuppā Cētōvimutti</a>" clearly explains the difference between<em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>.</span></em></li>
+<li>It is interesting to note that some <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> do not specifically label <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> as <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em>. <span style="color: #0000ff"><span style="color: #0000ff"><span style="color: #000000">One has to read a given <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> carefully to figure out which <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are discussed, but the conclusion always is that <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are worthless by themselves unless used as a platform to attain <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>;</span> see, "</span></span><a href="../../pages/LD.FF.002/index.html" rel="noopener noreferrer" target="_blank">Samādhi, Jhāna, Magga Phala – Introduction</a>."</li>
+<li>The "<a href="../../pages/SI.AA.007/index.html" rel="noopener noreferrer" target="_blank">Pathama Metta Sutta</a>" also discusses<span style="color: #0000ff"> the <strong>critical differences </strong>between </span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>. </span></em>It shows that a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> can cultivate <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> (i.e., without removing <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>) and be born in lower <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. However, unlike those with <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> without <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>, that person will not return to <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>.</li>
+<li>Only four <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> (five according to <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> analysis) are discussed in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. Today, many English texts incorrectly label the “higher <strong><em>arupāvacara samāpatti</em></strong>” as the fifth through the eighth <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. In the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, they are labeled as <em><span><span class="pali-term term-highlight" data-term="ākāsānañcāyatana">ākāsānañcāyatana</span>, <span class="pali-term term-highlight" data-term="viññāṇañcāyatana">viññāṇañcāyatana</span>,  <span class="pali-term term-highlight" data-term="ākiñcaññāyatana">ākiñcaññāyatana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="nevasaññānāsaññāyatana">nevasaññānāsaññāyatana</span> </span><strong>samāpatti </strong></em>and NOT <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> </span></em>states.</li>
+</ul>
+<p style="text-align: justify">1. The main characteristics and purposes of <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> (supermundane)<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are described in detail in the "<a href="https://suttacentral.net/an9.36/pli/ms" rel="noopener noreferrer" target="_blank">jhāna Sutta (Anguttara Nikāya 9.36)</a>". The English translation (<a href="https://suttacentral.net/an9.36/en/sujato" rel="noopener noreferrer" target="_blank">Mental Absorption</a>) at that site is not good, so I will translate most of the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em><span> here. However, the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> Translation (</span><span class="var"> </span><a href="https://suttacentral.net/an9.36/si/zoysa" rel="noopener noreferrer" target="_blank">ඣානනිස්සයන සූත්‍රය)</a> is much better; of course, <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> are mistranslated there too.</p>
+<ul style="text-align: justify">
+<li><span>I will use critical <span class="pali-term term-highlight" data-term="pāli">Pāli</span> terms without translating since anyone reading the <span class="pali-term term-highlight" data-term="post">post</span> will likely understand them. I think that would make it easier to read.</span></li>
+</ul>
+<p style="text-align: justify">2. Now, I will translate the<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, and the <span style="color: #0000ff">numbers below</span><span> correspond to the paragraphs in the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> version: "</span><a href="https://suttacentral.net/an9.36/pli/ms" rel="noopener noreferrer" target="_blank">jhāna Sutta (Anguttara Nikāya 9.36)</a>".</p>
+<p style="text-align: justify"><span style="color: #0000ff">#1</span>. <em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, <strong>I will state the removal of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em></strong> <strong>(mental fermentations)</strong> via the first<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, second<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, third<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, fourth <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span>, ākāsānañ­cāyata­na, viñ­ñā­ṇañ­cāyata­na, ākiñ­cañ­ñā­yatana, neva­<span class="pali-term term-highlight" data-term="saññā">saññā</span>­nā­sañ­ñāyata­na, <span class="pali-term term-highlight" data-term="saññā">saññā</span>­ve­dayi­ta­<span class="pali-term term-highlight" data-term="nirodha">nirodha</span></span></em> (the last four are the <em>arūpavacara samāpatti</em> states). Also, I have minimized wording to keep the paragraph short, just giving the meaning.</p>
+<ul style="text-align: justify">
+<li>Thus the primary purpose of <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states is to do insight meditation and remove <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em>, not to enjoy that <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> "pleasure" or relief. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is attained via the removal of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span>:</span></em><strong><strong><em> "</em></strong></strong><a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Removal of Āsavā</a>."</li>
+<li>There is a lot of important information in the next paragraph.</li>
+</ul>
+<p style="text-align: justify"><span style="color: #0000ff">#2</span>. <em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, I declare the removal of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (mental fermentations) via the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. On account of what do I say that?  A <em><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></em> abstaining from sense pleasures (<em>vivicceva kāmehi</em>), abstaining from <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em>, arrives in the vicinity of the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> (<em>upasampajja</em> <em>viharati</em>). <span style="color: #0000ff">He thus contemplates the <strong><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature</strong> (<em>aniccatō</em>), <strong><em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> nature (<em>dukkhato</em>)</strong>, disease-ridden nature (<em>rogatō</em>), cancer-like nature (<em>gandatō</em>), arrow-like nature (<em>sallatō</em>), painful (<em>aghatō</em>), danger-ridden (<em>ābādhatō</em>), alien (<em>paratō</em>), subject to destruction (<em>palokatō</em>), an empty (<em>suññatō</em>), <strong>not-fruitful and leading to helplessness (<em>anattō</em>) </strong></span>OF <span style="color: #0000ff"><em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, vedana, sanna, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (<em>rūpagataṃ vedanāgataṃ saññāgataṃ saṅkhārāgataṃ viññāṇagataṃ</em>)</span>. He turns his mind away from those phenomena and, having done so, inclines his mind to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: ‘<em><span><span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> santaṃ <span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> paṇītaṃ yadidaṃ sabba­saṅ­khā­ra­sama­tho sabbū­padhipa­ṭi­nissaggo taṇhākkhayo virāgo <span class="pali-term term-highlight" data-term="nirodho">nirodho</span> nibbānan’ti. </span></em>Thus he gets rid of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em>.<span style="color: #0000ff"><span> Suppose he does not complete the removal of <span class="pali-term term-highlight" data-term="āsava">āsava</span>. In that case, he will remove the first five </span><em>samyōjana</em> and thus be born<em> opapatika</em> (in <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>) and attain <em><span><span class="pali-term term-highlight" data-term="parinibbāna">parinibbāna</span></span></em> there. He will not return to this world</span> ("<em><span style="color: #0000ff">No ce āsavānaṃ khayaṃ pāpuṇāti</span>, <span style="color: #0000ff">teneva dhammarāgena tāya dhammanandiyā pañcannaṃ</span> <span style="color: #0000ff">orambhāgiyānaṃ saṃyojanānaṃ parikkhayā opapātiko hoti tattha parinibbāyī</span> <span style="color: #0000ff"><span>anāvattidhammo <span class="pali-term term-highlight" data-term="tasmā">tasmā</span> lokā"</span></span></em>)<em>.</em></p>
+<ul>
+<li style="text-align: justify">Thus one cannot attain<em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> without comprehending the <strong><span style="color: #0000ff"><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em></span></strong> nature of the <em>pancakkhandha</em>.</li>
+<li style="text-align: justify">The standard verse, "..(<em>pathamam</em>) <em>jhānam upasampajja viharati</em>.." is commonly translated as, "..enters and remains in the (first) <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>..". However, "<em>upasampajja viharati</em>" ("<em>upa</em>" + "<em>san</em>" + "<em>pajja</em>") means "abiding in the vicinity of clarifying and removing '<em>san</em>'"; of course, '<em>san</em>' are <em>lōbha, dōsa, mōha,</em> or<em><span> <span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em>. The prefix "<em>upa</em>" means "near or close." For example, "<em>upasampadā</em>" ("<em>upa</em>" + "<em>san</em>" + "<em>padā</em>")means a<em><span> <span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></em> has advanced and is getting close to "sorting out '<em>san</em>' and thus to <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</li>
+<li style="text-align: justify"><strong>Now, let us recapture the three critical steps in the above paragraph</strong>: First, one gets to the <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> by contemplating a long list of faults (<em>ādinava</em>) of the five aggregates <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, vedana, sanna, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> </span></em>that make up one's world; see, "<a href="../../pages/KD.II.001/index.html" rel="noopener noreferrer" target="_blank">The Five Aggregates (Pancakkhandha)</a>."</li>
+<li style="text-align: justify"><span style="color: #0000ff">Once one gets to the vicinity of the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, one can intensify it and be fully absorbed in it by contemplating the relief that is already seen</span>: ‘<em><span><span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> santaṃ <span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> paṇītaṃ yadidaṃ sabba­saṅ­khā­ra­sama­tho sabbū­padhipa­ṭi­nissaggo taṇhākkhayo virāgo <span class="pali-term term-highlight" data-term="nirodho">nirodho</span> nibbānan’ti. </span></em><strong>This is the extra effort involved in cultivating the <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> versus <em>pannāvimutti</em> path.</strong></li>
+<li style="text-align: justify">Thirdly, one can get to the higher <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em>by again contemplating the faults (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>) of the five aggregates.</li>
+</ul>
+<p style="text-align: justify"><span style="color: #0000ff">#3</span>. "<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, suppose an archer or archer’s apprentice practice on a straw man or mound of clay. After a while, he could shoot long distances, fire accurate shots in rapid succession, and pierce great masses; in the same way, a <em><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></em> abstaining from sensuality, abstaining from <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em>, arrives in the vicinity (<em>upasampajja</em>) of the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span>."</span></em></p>
+<ul style="text-align: justify">
+<li>The rest is essentially the same as in #2 above from that point onward about how <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> are removed by contemplating those faults (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>) of the five aggregates, to the following confirmation statement at the end of the paragraph to emphasize the following: "<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, I surely declare removal of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (mental fermentations) via the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span>."</span></em></li>
+</ul>
+<p style="text-align: justify"><span style="color: #0000ff">#4</span>. This paragraph repeats the same paragraph of #2 above for the second, third, and fourth<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. It is interesting that even at the fourth <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, one could only be guaranteed to become an<em> Anāgami</em>. However, as mentioned in #2, one could attain <em>Arahanthood</em> even from the first<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> if all <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> are removed. That holds for any <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> through the fourth.</p>
+<p style="text-align: justify"><span style="color: #0000ff">#5</span>. The same verse as #3 is repeated for the second, third, and fourth<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, with the paragraph ending, "..<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, I surely declare the removal of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (mental fermentations) via the fourth <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>".</p>
+<p style="text-align: justify"><span style="color: #0000ff">#6 , #7</span>. The paragraphs in #2 and #3 for the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are now repeated for the first <em>arūpavacara samāpatti:</em> <em>ākāsānañ­cāyata­na</em>.</p>
+<p style="text-align: justify"><span style="color: #0000ff">#8 , #9</span>. The paragraphs in #2 and #3 for the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are now repeated for the second and third <em>arūpavacara samāpatti: </em><em>viñ­ñā­ṇañ­cāyata­na </em>and<em>  ākiñ­cañ­ñā­yatana.</em>  Again, it is interesting that even at such higher<em> arūpavacra jhānā, </em>one could only be guaranteed to become an <em>Anāgami.</em></p>
+<p style="text-align: justify"><span style="color: #0000ff">#10</span>.  "As for the two <em><span>saññāsamāpatti <span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em> - <em><span>neva­<span class="pali-term term-highlight" data-term="saññā">saññā</span>­ nā ­sañ­ñāyata­na ­samā­patti</span></em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>­ve­dayi­ta­<span class="pali-term term-highlight" data-term="nirodho">nirodho</span></span></em> - they remove <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> and will lead to the faultless state of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>."</p>
+<ul style="text-align: justify">
+<li>Thus if one gets to the highest <em><span>arūpavacra (<span class="pali-term term-highlight" data-term="ariya">Ariya</span>) samāpatti, </span></em>one will attain the <em>Arahantship</em> and also will be able to get to <em><span><span class="pali-term term-highlight" data-term="nirodha samāpatti">nirodha samāpatti</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>­ve­dayi­ta­<span class="pali-term term-highlight" data-term="nirodho">nirodho</span></span></em>)<em>.</em></li>
+</ul>
+<p style="text-align: justify">3. That is, in essence, the complete <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span>, </span></em>which provides many key insights that have been hidden surprisingly. I almost fell off my chair when I first read it. I am unsure how and why modern translators failed to understand the importance of this <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>Then I started reading more <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> and realized that these critical pieces are in many other <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>. see, for example, "<a href="https://suttacentral.net/mn44/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Cūḷa Ve­dalla­ <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 44)</a>" AND "<a href="https://suttacentral.net/mn119/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Kāyaga­tā­<span class="pali-term term-highlight" data-term="sati">sati</span>­ <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 119)</a>".</li>
+</ul>
+<p style="text-align: justify">4. We can learn a lot of critical aspects of <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> from this critical <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span>. </span></em>Let us begin with the fact that one gets to the vicinity (<em>upasampajja</em>) of the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> <strong>by contemplating the faults (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>) of <em>pancakkhandha</em> (<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, vedana, sanna, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>); once getting there, one</strong> <strong>further removes <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> by the same process. </strong></p>
+<ul style="text-align: justify">
+<li>Thus, one gets to <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> with insight meditation (<em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em>) on the unsuitability (faults of) <em>kāmavacara</em> states, and then once getting to <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, starts doing <em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> on the unsuitability of any <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> state to transcend that state.</li>
+<li>There is a long list of such faults (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>) (<strong><span style="color: #0000ff">from #1</span></strong>): <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature (<em>aniccatō</em>), <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> nature (<em>dukkhato</em>), disease-ridden nature (<em>rogatō</em>), cancer-like nature (<em>gandatō</em>), arrow-like nature (<em>sallatō</em>), painful (<em>aghatō</em>), danger-ridden (<em>ābādhatō</em>), alien (<em>paratō</em>), subject to destruction (<em>palokatō</em>), an empty (<em>suññatō</em>), not-fruitful and leading to helplessness (<em>anattō</em>)<span style="color: #0000ff">. </span></li>
+</ul>
+<p style="text-align: justify">5. Therefore, the main goal at any given <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is to contemplate all those faults (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>) of that state -- and move to the next higher state. If a Noble Person goes through the four <em>rupāvacara </em><em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states, all <em>arupāvacara samāpatti </em>up to the <em><span>nēva <span class="pali-term term-highlight" data-term="saññā">saññā</span> nā <span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>and attains <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, they are said to have attained <em><span>akuppā <span class="pali-term term-highlight" data-term="cetovimutti">cetovimutti</span></span></em>. See "<a href="../../pages/LD.FF.008/index.html" rel="noopener" target="_blank">Nirōdha Samāpatti, Phala Samāpatti, Jhāna, and Jhāna Samāpatti</a>."</p>
+<ul>
+<li style="text-align: justify">Of course, one could remove all <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> and attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> from any lower<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li>If one attains <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> from a lower<em><span> <span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> state (below the highest <em>arūpavacara samāpatti</em>), one is said to attain <em>pannāvimutti.</em></li>
+<li><span style="color: #0000ff">While the word "<em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>" has come to everyday use, a better word is "<em>dhyāna</em><span>" (ඣාන in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> and දැවීම in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, meaning "burning").</span></span></li>
+<li>We will stick with the word "<em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>" instead of "<em>dhyana</em>" since it is commonly used. It is just helpful to know where the meaning comes from.</li>
+</ul>
+<p style="text-align: justify">6. One can think clearly in any<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. Even intermittent <em><span><span class="pali-term term-highlight" data-term="vitakka">vitakka</span>/<span class="pali-term term-highlight" data-term="vicāra">vicāra</span></span></em> ("wheeling around" with stray thoughts) will be absent after the second <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, i.e., one is in the <em>avitakka/avicāra</em> (free of <em><span><span class="pali-term term-highlight" data-term="vitakka">vitakka</span>/<span class="pali-term term-highlight" data-term="vicāra">vicāra</span></span></em>)<em> </em>mode after the second <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>; I will discuss <em>jhānanga</em> or <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em><span> factors in a future <span class="pali-term term-highlight" data-term="post">post</span>.</span></p>
+<ul style="text-align: justify">
+<li>This is why <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is helpful in insight (<em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em>) meditation. The mind becomes calm when more and more <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> are removed as one proceeds to higher<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> (and <em>samāpatti</em>) states.</li>
+</ul>
+<p style="text-align: justify">7. Even though the relief experienced in <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em><span> is the only "enjoyment" recommended by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, that is not the primary purpose of </span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. That is because if one gets attached to a<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, one cannot move up to the higher one. In any case, it is mainly those who get to <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> who get attached to them <strong>(however, it is possible to attain any stage of <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> even with <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em> <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> or even without any <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>)</strong>. If one has seen the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature, one will not get attached to a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li><span>In that context, in a previous <span class="pali-term term-highlight" data-term="post">post</span>, it was discussed that any </span><em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> state is a mental state corresponding to "this world"; see “<a href="../../pages/LD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Ascendance to Nibbāna via Jhāna (dhyāna)</a>. “</li>
+</ul>
+<p style="text-align: justify">8. <em>Pancanīvarana</em> are also <span style="color: #0000ff">completely removed</span> at the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. From the <a href="https://suttacentral.net/mn43/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Mahāve­dalla <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 43)</a>: ".. <em>Idhāvuso,<strong><span> paṭhamaṃ <span class="pali-term term-highlight" data-term="jhānaṃ">jhānaṃ</span> samāpannāssa</span></strong> bhikkhuno kāmacchando <span style="color: #0000ff">pahīno hoti</span>, byāpādo <span style="color: #0000ff">pahīno hoti</span>, thinamiddhaṃ <span style="color: #0000ff">pahīnaṃ hot</span>i, uddhac­ca­kukkuc­caṃ <span style="color: #0000ff">pahīnaṃ hoti</span><span>, <span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span> </span><span style="color: #0000ff">pahīnā hoti</span>..".</em></p>
+<ul style="text-align: justify">
+<li><span>Many <span class="pali-term term-highlight" data-term="suttā">suttā</span> clearly state such conditions for the first </span><strong>supramundane</strong> <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li>In contrast, neither the five <em>samyōjana</em> nor the <em>pancanīvarana</em> is removed in any <strong>mundane</strong><em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. The reasons are apparent: none of the <em>kiles</em>a (<em>klēsha</em>/defilements) can be removed by taking a neutral object as the <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em>.</li>
+</ul>
+<p style="text-align: justify"><span>9. This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> told Ven. Saddha: "..“</span><em><strong><span>Ājānī­ya­jhāyi­<span class="pali-term term-highlight" data-term="taṃ">taṃ</span></span></strong> kho, saddha, jhāya; mā </em><span class="var"><em><span>kha­ḷuṅ­ka­jhāyi­<span class="pali-term term-highlight" data-term="taṃ">taṃ</span></span></em>..", OR "Saddha, cultivate the <strong><em>ajānīya </em>(thoroughbred horse)</strong><em><strong><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></strong>, </em>not the <strong><em>khalunka</em> (mule) <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em></strong>": <a href="https://suttacentral.net/an11.9/pli/ms" rel="noopener noreferrer" target="_blank">Saddha Sutta (Anguttara Nikāya 11.9)</a>.</span></p>
+<ul style="text-align: justify">
+<li>In the <a href="https://suttacentral.net/an11.9/en/sujato" rel="noopener noreferrer" target="_blank">Sutta Central translation,</a>  <span class="var"><em>khalunka </em>is a colt (a young horse). But the correct translation is a mule. As described in the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, a mule is lazy and useless compared to a thoroughbred horse.</span></li>
+<li>As described in the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, one who cultivates mundane <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> takes worldly objects (<em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em>, breath) as <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em>, and even though they can attain <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, they will not have the respect of the <em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em> who can see the <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em>.</li>
+<li>On the other hand, <em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em> cannot see the <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>) of those who have cultivated <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, and they pay to him from a distance.</li>
+</ul>
+<p style="text-align: justify">10. Therefore, there is a HUGE difference in HOW one arrives at a given<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>One using the<em><span> <span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em> path gets to <em>jhānā</em> by focusing one's mind on a mundane object, i.e., an object belonging to this world (for example, one's breath or a <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em><span> object) and/or by contemplating mundane moral thoughts (benevolent, kind, etc.); we will discuss this in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li>On the other hand, one on the Noble Path reaches a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> by contemplating <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, i.e., the<em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature of this world of 31 realms. </li>
+<li>However,<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> is the only<em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em><span> recommended by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> since sensory pleasures will bind one to the </span><em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>. It is said that some <em>pannāvimutta </em><em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> cultivate <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> after attaining <em>Arahanthood.</em></li>
+</ul>
+<p style="text-align: justify"><span>11. Also, see the previous <span class="pali-term term-highlight" data-term="post">post</span> where it is discussed how Ven. Moggallana cultivated the first </span><em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> <strong>after</strong> attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage: “<a href="../../pages/LD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Ascendance to Nibbāna via Jhāna (dhyāna)</a>. “</p>
+<ul style="text-align: justify">
+<li>One who can get fully absorbed in the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em><em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em>will be born in the <em>Suddhāvāsa</em> realms of the <b><i><span><span class="pali-term term-highlight" data-term="rūpa loka">rūpa loka</span>, </span></i></b><i></i>and will not come back to the<em><span> <span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, i.e., one is an <em>Anāgami</em>, as clearly stated in the <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> and several other <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>.</li>
+<li>On the other hand, one who cultivates <strong>mundane first<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em></strong> will be born in the <strong>first <em>rūpavacara</em> <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm in the next birth</strong>, but in later rebirths, could even be born in the <em>apāyā </em>(since<em><span> <span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> was only suppressed, not removed).</li>
+</ul>
+<p style="text-align: justify">12. One can get into mundane (<em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em>)<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em><span>via breath or <span class="pali-term term-highlight" data-term="kasina">kasina</span> meditation, and one could do </span><em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> from mundane<em><span> <span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states.</p>
+<ul style="text-align: justify">
+<li>But the problem is that people get addicted to those states and cannot see their <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</li>
+</ul>
+<p style="text-align: justify">13. In addition to the above <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> (and more that I found) on <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, I found other <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> that discussed <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. <span style="color: #0000ff">In none of these <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> was a specific label saying <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> or<em><span> <span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</span> However, one can see which is which when reading text.</p>
+<ul style="text-align: justify">
+<li>In the following reference, it is clearly stated that <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> is only suppressed (<strong><em>vikkhambhanato</em>)</strong> in all <em>rūpavācara</em> and <em><span>arūpavācara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. On the other hand, it states that <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> is removed (<strong><em>samucchedato</em>)</strong> in stages via <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</li>
+<li>The difference between <strong><em><span>vikkhambhana <span class="pali-term term-highlight" data-term="pahāna">pahāna</span> </span></em></strong>and <em><strong><span><span class="pali-term term-highlight" data-term="samuccheda">samuccheda</span> <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></strong></em> is discussed in "<a href="../../pages/LD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Suffering in This Life – Role of Mental Impurities</a>."</li>
+</ul>
+<p style="text-align: justify">The following are the two relevant passages from the <em>Khuddaka Nikāya</em>, <em>Mahāniddesa</em>, <em>Aṭṭhakavagga</em>: <a href="https://suttacentral.net/mnd1/pli/ms" rel="noopener noreferrer" target="_blank">1. Kāma­sutta­niddesa</a><span> . There is no English translation there, but the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> translation is given: </span><a href="https://suttacentral.net/mnd1/si/zoysa" rel="noopener noreferrer" target="_blank">කාම සූත්‍ර නිර්දෙශය</a>.</p>
+<p style="text-align: justify"><em><strong><span>Paṭhamaṃ <span class="pali-term term-highlight" data-term="jhānaṃ">jhānaṃ</span> bhāventopi </span><span style="color: #0000ff">vikkhambhanato</span><span> <span class="pali-term term-highlight" data-term="kāme">kāme</span> parivajjeti</span></strong><span> … pe … dutiyaṃ <span class="pali-term term-highlight" data-term="jhānaṃ">jhānaṃ</span> bhāventopi … tatiyaṃ <span class="pali-term term-highlight" data-term="jhānaṃ">jhānaṃ</span> bhāventopi … catutthaṃ <span class="pali-term term-highlight" data-term="jhānaṃ">jhānaṃ</span> bhāventopi … ākāsānañ­cāyata­na­samā­pattiṃ bhāventopi … viñ­ñā­ṇañ­cāyata­na­samā­pattiṃ bhāventopi … ākiñ­cañ­ñā­yatana­samā­pattiṃ bhāventopi … neva­<span class="pali-term term-highlight" data-term="saññā">saññā</span>­nā­saññāya­tana­samā­pattiṃ bhāventopi vikkhambhanato <span class="pali-term term-highlight" data-term="kāme">kāme</span> parivajjeti. <span class="pali-term term-highlight" data-term="evaṃ">Evaṃ</span> vikkhambhanato <span class="pali-term term-highlight" data-term="kāme">kāme</span> parivajjeti</span></em>.</p>
+<ul style="text-align: justify">
+<li>Translated: <span style="color: #0000ff">"<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>" is suppressed</span> (<strong><em>vikkhambhanato</em>) </strong>in the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, ...to <em><span>neva­<span class="pali-term term-highlight" data-term="saññā">saññā</span>­nā­saññāya­tana (</span></em>highest <em>arūpavācara samāpatti</em>). As we saw above, <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> </span></em>is removed even before getting to the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span>.</span></em> Thus, only<em><span> <span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em> (mundane) <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em>are<em> </em>meant here.</li>
+<li>See "<a href="../../pages/SI.AA.011/index.html" rel="noopener" target="_blank">Tapussa Sutta (AN 9.41)– Akuppā Cētōvimutti</a>" for another example.</li>
+</ul>
+<p style="text-align: justify"><a class="sc" href="https://suttacentral.net/mnd1/pli/ms#26" id="26" title="SuttaCentral paragraph number."></a><em><strong>Kathaṃ <span style="color: #0000ff">samucchedato</span><span> <span class="pali-term term-highlight" data-term="kāme">kāme</span> parivajjeti</span></strong><span>? Sotā­patti­maggaṃ bhāventopi apāyagamanīye <span class="pali-term term-highlight" data-term="kāme">kāme</span> samucchedato parivajjeti, sakadā­gāmi­maggaṃ bhāventopi oḷārike <span class="pali-term term-highlight" data-term="kāme">kāme</span> samucchedato parivajjeti, anāgāmimaggaṃ bhāventopi anusahagate <span class="pali-term term-highlight" data-term="kāme">kāme</span> samucchedato parivajjeti, arahattamaggaṃ bhāventopi sabbena sabbaṃ sabbathā sabbaṃ asesaṃ nissesaṃ samucchedato <span class="pali-term term-highlight" data-term="kāme">kāme</span> parivajjeti. <span class="pali-term term-highlight" data-term="evaṃ">Evaṃ</span> samucchedato <span class="pali-term term-highlight" data-term="kāme">kāme</span> parivajjetīti—yo <span class="pali-term term-highlight" data-term="kāme">kāme</span> parivajjeti.</span></em></p>
+<ul style="text-align: justify">
+<li>Translated:<span style="color: #0000ff"> "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>" is removed</span> (<em><strong>samucchedato</strong></em><strong>) </strong>in stages via the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, <em>Sakadā­gāmi</em> stages and is removed at the <em>Anāgami</em> stage; it is removed without a trace at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</li>
+</ul>
+<p style="text-align: justify">14. The following <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> clearly states the difference between <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānā</span></em>.</p>
+<p style="text-align: justify"><a href="https://suttacentral.net/an4.123/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Paṭhamanānākaraṇa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 4. 123)</a>: “ <em><span>Idha, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ekacco puggalo vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṃ savicāraṃ vivekajaṃ pītisukhaṃ paṭhamaṃ <span class="pali-term term-highlight" data-term="jhānaṃ">jhānaṃ</span> upasampajja viharati. So tadassādeti, <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> nikāmeti, tena ca vittiṃ āpajjāti. Tattha ṭhito tadadhimutto tabbahula-vihārī aparihīno kālaṃ kurumāno brahmakāyikānaṃ devānaṃ sahabyataṃ upapajjāti. Brahmakāyikānaṃ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, devānaṃ kappo āyuppamāṇaṃ. Tattha puthujjano yāvatāyukaṃ ṭhatvā yāvatakaṃ <span class="pali-term term-highlight" data-term="tesaṃ">tesaṃ</span> devānaṃ āyuppamāṇaṃ <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> sabbaṃ khepetvā nirayampi gacchati tiracchānayonimpi gacchati pettivisayampi gacchati. <span class="pali-term term-highlight" data-term="bhagavato">Bhagavato</span> pana sāvako tattha yāvatāyukaṃ ṭhatvā yāvatakaṃ <span class="pali-term term-highlight" data-term="tesaṃ">tesaṃ</span> devānaṃ āyuppamāṇaṃ <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> sabbaṃ khepetvā tasmiṃyeva bhave parinibbāyati. <span class="pali-term term-highlight" data-term="ayaṃ">Ayaṃ</span> kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, viseso <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> adhippayāso <span class="pali-term term-highlight" data-term="idaṃ">idaṃ</span> nānākaraṇaṃ sutavato ariyasāvakassa assutavatā puthujjanena, yadidaṃ gatiyā upapattiyā <span class="pali-term term-highlight" data-term="sati">sati</span></span></em>.”</p>
+<p style="text-align: justify"><strong>Translated</strong>: “There is the case where an individual, withdrawn from sensuality (<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em><span>), withdrawn from <span class="pali-term term-highlight" data-term="akusala">akusala</span>, enters &amp; remains in the first </span><em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em><span>: rapture &amp; pleasure born from withdrawal, accompanied by directed thought &amp; evaluation. He savors that, longs for that, and finds satisfaction through that. Staying there—fixed on that, dwelling there often, not losing the <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>—then when he dies, he is born with the <span class="pali-term term-highlight" data-term="devas">devas</span> of <span class="pali-term term-highlight" data-term="brahma">Brahma</span>’s retinue. The <span class="pali-term term-highlight" data-term="devas">devas</span> of <span class="pali-term term-highlight" data-term="brahma">Brahma</span>’s retinue, monks, have a life span of an eon.</span><strong><span> A run-of-the-mill person, having stayed there, having used up all the life-span of those <span class="pali-term term-highlight" data-term="devas">devas</span>, goes to hell, to the animal realm, or the state of the hungry ghosts. But a disciple of the Blessed One, having stayed there, having used up all the life-span of those <span class="pali-term term-highlight" data-term="devas">devas</span>, attains <span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span>.</span></strong> This, monks, is the difference, this the distinction, this the distinguishing factor, between a Noble disciple and a normal person who had not heard the Noble Truths (<em>assutavatā puthujjanena</em>), in regards to the <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> and birth.”</p>
+<ul>
+<li style="text-align: justify">When one attains the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, one has become an <em>Anāgāmi</em>. He/she will be born in that <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> </span></em>realm and attain <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em> there, as stated in the above <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>.</li>
+<li style="text-align: justify">In other words, <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> must be REMOVED entirely to get to the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. It is only temporarily suppressed (<em><span>vikkhambana <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em>) for the <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li>A <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> who gets to the first<strong> <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em></strong> has not removed <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>. But he/she will not come back to the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em><em><span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> (will get the <em><span>Anāgāmi <span class="pali-term term-highlight" data-term="phala">phala</span></span></em> moment in the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> and attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> there). So, he/she is still an <em>Anāgāmi</em> (“<em>na</em>” + “<em>ā</em><em>gami</em>” or not coming back).</li>
+<li style="text-align: justify">Even some followers of Waharaka <em>Thēro</em> in Sri Lanka do not seem to understand this point. However, Waharaka <em>Thēro</em> has explained this in the following short <em>dēsana</em><span> (in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>):  “</span><a href="http://localhost/beng_feb2026/wp-content/uploads/CD45-13-Ariya-and-Anariya-Jhana.mp3" rel="noopener noreferrer" target="_blank">Ariya and Anariya Jhana</a>. “</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/LD.FF.006/index.html">Pannavimutti Arahanthood Without Jhana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/LD.FF.008/index.html">Nirodha Samapatti Phala Samapatti Jhana And Jhana Samapatti</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/LD.FF.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Pannavimutti Arahanthood Without Jhana</span>
+        
+        <span class="pathway-title title-pt">Pannavimutti Arahanthood Without Jhana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/LD.FF.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Nirodha Samapatti Phala Samapatti Jhana And Jhana Samapatti</span>
+        
+        <span class="pathway-title title-pt">Nirodha Samapatti Phala Samapatti Jhana And Jhana Samapatti</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-LD">
+        ↑ Back to Living Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

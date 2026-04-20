@@ -1,0 +1,406 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anicca Repeated Arisingdestruction | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 31 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anicca Repeated Arisingdestruction</h1>
+    
+    <h1 class="title-pt">Anicca: Surgimento e destruição repetidos</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>5</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.007"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0104"
+             data-level="intermediate"
+             data-reading-time="5"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.007</td></tr><tr><td>Fin-dex</td><td>0104</td></tr><tr><td>Slug</td><td>anicca-repeated-arisingdestruction</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Anicca Repeated Arisingdestruction</td></tr></table></div></div><p style="text-align: justify">1.<i><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></i> has been analyzed in several different ways in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. In the <i><span>Patisambidha <span class="pali-term term-highlight" data-term="magga">Magga</span> Prakarana </span></i>in the <i><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></i>, it is explained as,</p>
+<p style="text-align: justify">“<strong><i><span><span class="pali-term term-highlight" data-term="uppāda">uppāda</span> vayattena <span class="pali-term term-highlight" data-term="anicca">anicca</span></span></i></strong>”,</p>
+<p style="text-align: justify">which means “(this world is) <b><i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></i></b> because we just keep going through the birth (arising)/ death (destruction) process”.</p>
+<ul style="text-align: justify">
+<li>Of course, in between birth and death there is mostly suffering (in the realms at and below the human realm, where most beings spend time). This is the <b><i><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></i></b> characteristic.</li>
+</ul>
+<p style="text-align: justify">2. This is what we have been doing for an unimaginably long time (beginning-less), there is no break from it until one attains <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>We see some people committing suicide hoping to end it all; but ending this life does not solve the “problem”. In fact, it may lead to a birth in a lower realm, which will only increase the suffering.</li>
+<li>Thus continuing this ceaseless birth/death process is <b><i><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i></b>, i.e., it is fruitless, burdened with suffering, and thus one is truly helpless.</li>
+</ul>
+<p style="text-align: justify">3. We can see the Three Characteristics (<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>) of this world by carefully examining the fate of anything that arises in this world, which goes by the name <i>sankata</i>.</p>
+<ul style="text-align: justify">
+<li>Whether it is a living being or an inert thing any<em> sankata</em> arises, lasts for a certain time, and then perishes.</li>
+<li>For an inert object, the process stops at the destruction step, and it does not feel anything as it goes through the process.</li>
+<li>But for a living being, there is (mostly) suffering during arising/living/death, even though there may be spurts of “happiness” if one is fortunate enough to be born in human realms or the realms above it.</li>
+<li>And the process does not stop at death unlike for an inert object. It just keep repeating.</li>
+</ul>
+<p style="text-align: justify">The arising/destruction of a <em>sankata</em> is described in, "<a href="http://localhost/beng_feb2026/key-dhamma-concepts/nirodha-and-vaya-two-different-concepts/" rel="noopener noreferrer" target="_blank">Nirödha and Vaya – Two Different Concepts</a>".</p>
+<p style="text-align: justify">4. A living being’s suffering is also enhanced by the “<em>sankata</em> characteristics of inert objects” too. We work hard to acquire “things” but either they get run down/destroyed (houses, cars, furniture,.... ) or we die leaving them behind. Then if we are lucky to be born human in the next birth we just start this “accumulation process” and get distraught at death again….</p>
+<ul style="text-align: justify">
+<li>If we think through logically (and this is real meditation), we should be able to grasp this main concept of<em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.</li>
+<li>Through the ages, philosophers (as well as most people) have wondered, “What is the meaning of life?”. And they normally think about just this present life; see, "<a href="../../pages/DP.BB.002/index.html" rel="noopener noreferrer" target="_blank" title="“Why Does the World Exist?” by Jim Holt">"Why Does the World Exist?” by Jim Holt</a>"</li>
+</ul>
+<p style="text-align: justify">5. Someone who has accomplished something significant may think otherwise at the moment of that accomplishment. But it lasts only a short time; at death, it is all gone. If he/she wanted to accomplish something significant in the next life (provided one is lucky to be reborn human), then one has to start all over.</p>
+<ul style="text-align: justify">
+<li>This point becomes poignantly clear, if one takes a little time and think about the life of any famous personality (emperors, kings, politicians, movie stars,...from times past to the present). Most of them are bound to be born in lower realms because of the heinous acts they did to get some of those positions.</li>
+<li>If one knows the “big picture” about the wider world and the beginning-less journey we have made, it becomes clear that all through uncountable number of lives we have struggled in vain “seeking an elusive happiness”. There is no meaning to life in the long run, AND it makes one suffer, and this is the nature of this world:<i><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>.</li>
+</ul>
+<p style="text-align: justify">6. If there is a birth, there MUST be a death. There is no exception, other than <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<p style="text-align: justify">This is the “<i>ak<em>ā</em>lika</i>” or "timeless" quality of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>All <em>sankata</em> operate on the basis of <i><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></i>, which normally take time to bring their fruits. This is why people are unable to “see” the working of<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. There may be drug dealers who live like kings, but they will be paying with interest in the future.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> brings fruits instantaneously, there is no time gap involved (it is “<i>akalika</i>”), unlike a <i>sankata</i>. Furthermore, once attained there is no time duration after which it is destroyed; it is forever.</li>
+<li>The <i><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span> </span></i>(<i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>, Skadagami, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i>) are attained in one<i><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></i> (lasting less than a billionth of a second). And since they were attained via ELIMINATION OF CAUSES, there is no destruction associated with them. i.e., they are forever.</li>
+<li>In comparison, a living being arises DUE TO CAUSES, and when the underlying cause or the fuel is spent, the living being dies. But the process does not stop, because the being had acquired NEW CAUSES (new <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) during that life or in the previous lives.</li>
+</ul>
+<p style="text-align: justify">7. In the <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Vandana</span></em><b>:</b></p>
+<p style="text-align: justify">“<em>Sv<i>ā</i>kkhatō Bhagavatä Dhammö <b>Sandiṭṭhikō Akālikō</b> Ehi-passikō Opanīyikō Paccattam</em></p>
+<p style="text-align: justify"><em>veditabbō vinnuhiti</em>”,</p>
+<p style="text-align: justify">the quality of<em><span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> that is described by “<i>ak<em>ā</em>lika</i>” is that it leads to effects that do not depend on time.</p>
+<ul>
+<li style="text-align: justify">And that is achieved via the quality listed before that: “<i>sandiṭṭhik<em>ō</em></i>” ("<em>san</em>" + "<em>diṭṭhikō</em>"). <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> explains and clarifies “<i>san</i>” that are the causes (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>) for arising of <em>sankata</em> (whether they are living or inert); see, "<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank" title="What is “San”? Meaning of Sansara (or Samsara)">What is “San”? Meaning of Sansara (or Samsara)</a>".</li>
+<li style="text-align: justify">"<em>Bhagavatā Dhammō</em>" can be taken as "<em><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em>", but it has a deeper meaning too (This <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> was only DISCOVERED by the <em><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama</span></em>, as had countless other Buddhas before him). "B<em>hagavatā</em>" ("<em>bhaga</em>" + "<em>vata</em>" where "<em>bhaga</em>" means divide and "<em>vata</em>" means <span style="color: #0000ff">"the process"</span> that looks like a <span style="color: #0000ff">"living being"</span><span>") means this <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, by analyzing a "person" in terms of "actions", illustrates that there in no enduring entity in a "living being".</span></li>
+<li style="text-align: justify">And this process leads to "<em>svakkhata</em>" ("<em><span><span class="pali-term term-highlight" data-term="sva">sva</span></span></em>" for "self" and "<em>akkata</em>" or "<em>akrutha</em>" or "<em>akriya</em>" or means putting out of action) meaning  it leads to getting rid of the concept of a "me" (<em><span>asmai <span class="pali-term term-highlight" data-term="māna">māna</span></span></em>) -- which happens at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.<span style="color: #0000ff"> It is not about whether a "self" exists or not; it is rather to realize that nothing in this world is worth to be considered "mine".</span></li>
+</ul>
+<p style="text-align: justify">8. Some people erroneously interpret “<strong><i>upp<em>ā</em><span>da vayattena <span class="pali-term term-highlight" data-term="anicca">anicca</span></span></i></strong>” as "things are IMPERMANENT because EVERYTHING is formed and destroyed within 17 thought moments".</p>
+<ul>
+<li class="entry-title"><span>This serious misconception is discussed in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/PS.GG.019/index.html" rel="noopener noreferrer" target="_blank">Does any Object (Rupa) Last only 17 Thought Moments?</a>".</li>
+<li>Each <em>sankata</em> that arises has its own lifetime: a fly lives only for a few days, a human lives for about 100 years.</li>
+</ul>
+Next, "<a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – Worthlessness of Worldly Things</a>", .........
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.FF.007"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0104"
+             data-level="intermediate"
+             data-reading-time="5"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.FF.007
+Language:     pt-BR
+Generated-At: 2026-04-18T04:05:15Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify">1.<i><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></i> foi analisado de várias maneiras diferentes no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. No <i><span>Patisambidha <span class="pali-term term-highlight" data-term="magga">Magga</span> Prakarana </span></i>do <i><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></i>, é explicado como:</p>
+<p style="text-align: justify">“<strong><i><span><span class="pali-term term-highlight" data-term="uppāda">Uppāda</span> vayattena <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></i></strong>”,</p>
+<p style="text-align: justify">o que significa “(este mundo é) <b><i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></i></b> porque simplesmente continuamos passando pelo processo de nascimento (surgimento)/morte (destruição)”.</p>
+<ul style="text-align: justify">
+<li>É claro que, entre o nascimento e a morte, há principalmente sofrimento (nos reinos no nível humano e abaixo dele, onde a maioria dos seres passa o tempo). Essa é a característica <b><i><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></i></b>.</li>
+</ul>
+<p style="text-align: justify">2. É isso que temos feito por um tempo inimaginavelmente longo (sem começo), não há pausa nisso até que se alcance <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>Vemos algumas pessoas cometendo suicídio na esperança de acabar com tudo; mas acabar com esta vida não resolve o “problema”. Na verdade, isso pode levar a um nascimento em um reino inferior, o que apenas aumentará o sofrimento.</li>
+<li>Assim, continuar esse processo incessante de nascimento e morte é <b><i>Anattā</i></b>, ou seja, é infrutífero, sobrecarregado de sofrimento e, portanto, a pessoa está verdadeiramente desamparada.</li>
+</ul>
+<p style="text-align: justify">3. Podemos ver as Três Características (<em>Tilakkhaṇa</em>) deste mundo examinando cuidadosamente o destino de qualquer coisa que surja neste mundo, o que é conhecido como <i>sankata</i>.</p>
+<ul style="text-align: justify">
+<li>Seja um ser vivo ou uma coisa inerte, qualquer<em> sankata</em> surge, dura por um certo tempo e depois perece.</li>
+<li>Para um objeto inerte, o processo termina na etapa da destruição, e ele não sente nada enquanto passa por esse processo.</li>
+<li>Mas, para um ser vivo, há (principalmente) sofrimento durante o surgimento/vida/morte, embora possa haver momentos de “felicidade” se alguém tiver a sorte de nascer nos reinos humanos ou nos reinos acima deles.</li>
+<li>E o processo não se detém na morte, ao contrário do que ocorre com um objeto inerte. Ele simplesmente continua se repetindo.</li>
+</ul>
+<p style="text-align: justify">O surgimento/destruição de um <em>sankata</em> é descrito em “<a href="http://localhost/beng_feb2026/key-dhamma-concepts/nirodha-and-vaya-two-different-concepts/" rel="noopener noreferrer" target="_blank">Nirödha e Vaya – Dois Conceitos Diferentes</a>”.</p>
+<p style="text-align: justify">4. O sofrimento de um ser vivo também é intensificado pelas “características <em>sankata</em> dos objetos inertes”. Trabalhamos duro para adquirir “coisas”, mas elas se desgastam/são destruídas (casas, carros, móveis,...) ou morremos deixando-as para trás. Então, se tivermos a sorte de nascer humanos na próxima vida, simplesmente recomeçamos esse “processo de acumulação” e ficamos angustiados com a morte novamente...</p>
+<ul style="text-align: justify">
+<li>Se refletirmos logicamente (e isso é meditação de verdade), devemos ser capazes de compreender esse conceito principal de<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>.</li>
+<li>Ao longo dos tempos, os filósofos (assim como a maioria das pessoas) têm se perguntado: “Qual é o sentido da vida?”. E normalmente pensam apenas nesta vida presente; veja “<a href="../../pages/DP.BB.002/index.html" rel="noopener noreferrer" target="_blank" title="“Why Does the World Exist?” by Jim Holt">Por que o mundo existe?”</a>, <a href="../../pages/DP.BB.002/index.html" rel="noopener noreferrer" target="_blank" title="“Why Does the World Exist?” by Jim Holt">de Jim Holt</a>.</li>
+</ul>
+<p style="text-align: justify">5. Alguém que tenha realizado algo significativo pode pensar de outra forma no momento dessa realização. Mas isso dura apenas um curto período; na morte, tudo se vai. Se ele/ela quisesse realizar algo significativo na próxima vida (supondo que se tenha a sorte de renascer como humano), então teria de começar tudo de novo.</p>
+<ul style="text-align: justify">
+<li>Esse ponto fica dolorosamente claro se a gente dedicar um tempinho para pensar na vida de qualquer personalidade famosa (imperadores, reis, políticos, estrelas de cinema... do passado até o presente). A maioria deles está fadada a renascer em reinos inferiores por causa dos atos hediondos que cometeram para alcançar algumas dessas posições.</li>
+<li>Se alguém conhece o “quadro geral” do mundo mais amplo e da jornada sem início que temos percorrido, fica claro que, ao longo de um número incontável de vidas, temos lutado em vão “buscando uma felicidade indescritível”. Não há sentido na vida a longo prazo, E ela nos faz sofrer, e essa é a natureza deste mundo:<i><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></i>.</li>
+</ul>
+<p style="text-align: justify">6. Se há um nascimento, DEVE haver uma morte. Não há exceção, a não ser <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<p style="text-align: justify">Essa é a qualidade “<i>ak<em>ā</em>lika</i>” ou “atemporal” do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>Todos <em>os sankata</em> operam com base no <i><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></i>, que normalmente leva tempo para produzir seus frutos. É por isso que as pessoas são incapazes de “ver” o funcionamento do<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. Pode haver traficantes de drogas que vivem como reis, mas eles pagarão com juros no futuro.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> traz frutos instantaneamente, não há intervalo de tempo envolvido (é “<i>akalika</i>”), ao contrário de um <i>sankata</i>. Além disso, uma vez alcançado, não há duração de tempo após a qual ele seja destruído; é para sempre.</li>
+<li>Os <i><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span> </span></i>(<i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>, Skadagami, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i>) são alcançados em um único<i><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></i> (com duração inferior a um bilionésimo de segundo). E, como foram alcançados por meio da ELIMINAÇÃO DAS CAUSAS, não há destruição associada a eles. Ou seja, eles são eternos.</li>
+<li>Em comparação, um ser vivo surge POR CAUSAS, e quando a causa subjacente ou o combustível se esgota, o ser vivo morre. Mas o processo não para, porque o ser adquiriu NOVAS CAUSAS (novo <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) durante essa vida ou nas vidas anteriores.</li>
+</ul>
+<p style="text-align: justify">7. No <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Vandana</span></em><b>:</b></p>
+<p style="text-align: justify">“<em>Sv<i>ā</i>kkhatō Bhagavatä Dhammö <b>Sandiṭṭhikō Akālikō</b> Ehi-passikō Opanīyikō Paccattam</em></p>
+<p style="text-align: justify"><em>veditabbō vinnuhiti</em>”,</p>
+<p style="text-align: justify">a qualidade do<em><span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> descrita por “<i>ak<em>ā</em>lika</i>” é que ela conduz a efeitos que não dependem do tempo.</p>
+<ul>
+<li style="text-align: justify">E isso é alcançado por meio da qualidade listada anteriormente: “<i>sandiṭṭhik<em>ō</em></i>” (“<em>san</em>” + “<em>diṭṭhikō</em>”). <em><span>O <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> explica e esclarece “<i>san</i>”, que são as causas (<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>) para o surgimento de <em>sankata</em> (sejam eles vivos ou inertes); veja, “<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank" title="What is “San”? Meaning of Sansara (or Samsara)">O que é “San”? Significado de Sansara (ou Samsara)</a>”.</li>
+<li style="text-align: justify">“<em>Bhagavatā Dhammō</em>” pode ser interpretado como “<em><span>o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span></span></em>”, mas também tem um significado mais profundo (este <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> foi apenas DESCOBERTO pelo <em><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama</span></em>, assim como por inúmeros outros Buddhas antes dele). "B<em>hagavatā</em>" ("<em>bhaga</em>" + "<em>vata</em>", onde "<em>bhaga</em>" significa dividir e "<em>vata</em>" significa <span style="color: #0000ff">"o processo"</span> que se assemelha a um <span style="color: #0000ff">"ser vivo"</span><span>) significa que este <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, ao analisar uma "pessoa" em termos de "ações", ilustra que não há nenhuma entidade duradoura em um "ser vivo".</span></li>
+<li style="text-align: justify">E esse processo leva a “<em>svakkhata</em>” (“<em><span><span class="pali-term term-highlight" data-term="sva">sva</span></span></em>” para “eu” e “<em>akkata</em>” ou “<em>akrutha</em>” ou “<em>akriya</em>”, que significa “colocar fora de ação”), o que significa que leva a livrar-se do conceito de um “eu” (<em><span>asmai <span class="pali-term term-highlight" data-term="māna">Māna</span></span></em>) — o que ocorre no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.<span style="color: #0000ff"> Não se trata de saber se um “eu” existe ou não; trata-se, antes, de perceber que nada neste mundo vale a pena ser considerado “meu”.</span></li>
+</ul>
+<p style="text-align: justify">8. Algumas pessoas interpretam erroneamente “Upp<strong><i><em>ā</em>da vayattena </i></strong>An<strong><i>icca</i></strong>” como “as coisas são IMPERMANENTES porque TUDO é formado e destruído em 17 momentos de pensamento”.</p>
+<ul>
+<li class="entry-title">Esse grave equívoco é discutido no ensaio “<a href="../../pages/PS.GG.019/index.html" rel="noopener noreferrer" target="_blank">Algum objeto (Rūpa) dura apenas 17 momentos de pensamento?</a>”.</li>
+<li>Cada <em>sankata</em> que surge tem sua própria duração: uma mosca vive apenas alguns dias, um ser humano vive cerca de 100 anos.</li>
+</ul>A seguir, “<a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – A futilidade das coisas mundanas</a>
+”, .........
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.FF.006/index.html">Anicca Inability To Keep What We Like</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.008/index.html">Anicca Worthlessness Of Worldly Things</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.FF.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anicca Inability To Keep What We Like</span>
+        
+        <span class="pathway-title title-pt">Anicca: a incapacidade de manter aquilo de que gostamos</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Anicca Worthlessness Of Worldly Things</span>
+        
+        <span class="pathway-title title-pt">Anicca: A futilidade das coisas mundanas</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

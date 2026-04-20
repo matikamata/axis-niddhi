@@ -1,0 +1,524 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Grand Unified Theory Of Dhamma | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 39 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.HH.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Grand Unified Theory Of Dhamma</h1>
+    
+    <h1 class="title-pt">Grande Teoria Unificada do Dhamma</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.HH.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>14</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.HH.002"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0047"
+             data-level="intermediate"
+             data-reading-time="14"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.HH.002</td></tr><tr><td>Fin-dex</td><td>0047</td></tr><tr><td>Slug</td><td>grand-unified-theory-of-dhamma</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Grand Unified Theory Of Dhamma</td></tr></table></div></div><p><strong>Revised May 20, 2016; December 22, 2018; July 6, 2019; August 21, 2019</strong></p>
+<p style="text-align: justify;"><span>1. According to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, EVERYTHING in existence can be put into four ultimate realities (</span><em><span><span class="pali-term term-highlight" data-term="paramattha">paramattha</span></span></em>):</p>
+<ul style="text-align: justify;">
+<li>Thoughts (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>)</li>
+<li>Thought qualities or mental factors (<em>cētasika</em>)</li>
+<li>Matter (<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>)</li>
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></li>
+</ul>
+<p style="text-align: justify;">These entities are described in detail in the <a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank" title="Tables and Summaries">Tables and Summaries</a> and  <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> sections; see "<a href="../../pages/AB.BB.001/index.html" rel="noopener noreferrer" target="_blank" title="Abhidhamma – Introduction">Abhidhamma - Introduction</a>."</p>
+<ul style="text-align: justify;">
+<li>All existence “in this world” is described in terms of the first three. And they are all conditional; each is born due to the presence of a cause. If there is no cause, none of these three will arise. That is the fundamental cause and effect (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>) in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+<li>Causes are numerous, but the root causes are six: greed, hate, ignorance, non-greed, non-hate, and non-ignorance.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> and those other three entities are mutually exclusive (things in this world are absent in <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>); see, "<a href="https://suttacentral.net/ud8.1/pli/ms" rel="noopener noreferrer" target="_blank">Paṭha­ma­nib­bā­na­paṭi­saṃ­yutta­ Sutta (Ud 8.1)</a>" (English translation: "<a href="https://suttacentral.net/ud8.1/en/anandajoti" rel="noopener noreferrer" target="_blank">The First Discourse about Nibbāna</a>").</li>
+</ul>
+<p style="text-align: justify;">2. <span style="font-size: 12pt;"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> results with the removal of <span style="letter-spacing: 0px;">the three roots of greed, hate, and ignorance </span><span style="letter-spacing: 0px;">(</span><em style="letter-spacing: 0px;">rāgakkhyō, dōsakkhayō, mōhakkhayō Nibbānam</em><span style="letter-spacing: 0px;">).</span></span></p>
+<ul>
+<li style="text-align: justify;">It is necessary to first cultivate the three moral roots, non-greed, non-hate, and non-ignorance, while in the mundane eightfold path. That allows one to comprehend <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) and start on the Noble Eightfold Path; see "<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – In a Chart</a>."</li>
+<li style="text-align: justify;">Therefore, one strives to remove greed, hate, and ignorance, which are "<em>san</em>"; see, "<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is “San”? Meaning of Sansāra (or Saṃsāra)</a>".  That is the key to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, </span></em>as laid out in the Noble Eightfold Path.</li>
+<li style="text-align: justify;">Since it does not arise due to causes, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is permanent.</li>
+</ul>
+<p style="text-align: justify;">3. The <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> arise and decay at a fast rate: billions of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> can arise and pass away each second. But as we will see in the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> section, "active thoughts" occur relatively infrequently in "fast bursts" or <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>.<strong> </strong><em>Cētasika</em> is “embedded” in each <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. There are 89 types of <em>cittā</em> in all and 52 types of <em>cētasikas</em>; see "<a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank" title="Tables and Summaries">Tables and Summaries</a>." Thus the mental realm is very complicated.</p>
+<ul style="text-align: justify;">
+<li>For an introduction to the mind, see "<a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">Amazingly Fast Time Evolution of a Thought (Citta)</a>," "<a href="../../pages/AB.BB.004/index.html" rel="noopener noreferrer" target="_blank">The Amazing Mind – Critical Role of Nāmagotta (Memories)</a>," and "<a href="../../pages/IS.CC.006/index.html" rel="noopener noreferrer" target="_blank">Do I Have “A Mind” That Is Fixed and “Mine”?</a>" in that order.</li>
+</ul>
+<p style="text-align: justify;">4. Matter (<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>) constitutes 28 basic units, of which only four are fundamental. However, the smallest indivisible unit of matter<span style="font-size: 1.125rem; letter-spacing: 0px;"> is called a "</span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;">"; see "</span><a href="../../pages/TS.AA.007/index.html" rel="noopener noreferrer" style="font-size: 1.125rem; letter-spacing: 0px;" target="_blank" title="Rupa – Generation Mechanisms">Rupa - Generation Mechanisms</a><span style="font-size: 1.125rem; letter-spacing: 0px;">" and "</span><a href="../../pages/AB.GG.004/index.html" rel="noopener noreferrer" style="font-size: 1.125rem; letter-spacing: 0px;" target="_blank">The Origin of Matter – Suddhashtaka</a>." <em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;"> has very long lifetimes of a </span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="mahā">mahā</span> kappa </span></em><span style="font-size: 1.125rem; letter-spacing: 0px;">(basically the age of the universe).  A <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> </span></em></span>is the building block of a<span style="font-size: 1.125rem; letter-spacing: 0px;">ny "tangible thing" in this world. </span></p>
+<ul style="text-align: justify;">
+<li>Any <em>saṅkata</em> in “this world” is subject to change. Each <em>saṅkata</em> (basically any material thing) has a lifetime that could be shorter than a second or as long as billions of years (for a star, for example).</li>
+</ul>
+<p style="text-align: justify;">5. Many people confuse "<em>udayavaya</em>" or "formation and the breakup of a <em>saṅkata"</em> means anything, including <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span>,</span></em> is perpetually in flux<i>.</i> They try to tie this with "impermanence,"  which they incorrectly translate <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> to be.  In the contrary, a <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> </span></em>has a very long lifetime.</p>
+<ul style="text-align: justify;">
+<li>It is only those "composites" such as humans, animals, trees, etc. that undergo decay and death at time scales that are discernible to us; a gold bar does not decay for a very long time; see, "<a href="../../pages/PS.GG.019/index.html" rel="bookmark noopener noreferrer" target="_blank">Does any Object (Rupa) Last only 17 Thought Moments?</a>".</li>
+<li>For a discussion on <em>udayavaya ñāna, </em>see "<a href="../../pages/TL.LL.001/index.html" rel="noopener noreferrer" target="_blank">Udayavaya Ñāna</a>."</li>
+</ul>
+<p style="text-align: justify;">6. The "result" of this <em>udayavaya</em> nature of all <em>saṅkata</em> embedded in the Three Characteristics of "this world": <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>. But <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> is NOT impermanence, and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is NOT "no-self"; see, "<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anatta - Wrong Interpretations</a>."</p>
+<ul style="text-align: justify;">
+<li><span>Briefly, (i) it is not possible to find AND maintain happiness in anything in "this world." (ii) Because of that, we become distraught and suffer, and (iii). Thus, one becomes helpless (not in control). It is essential to realize that these are characteristics of not just this life, but our beginning-less <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process in "this wider world" of 31 realms described below.</span></li>
+<li>Even though gold bars are virtually permanent relative to our lifetimes, we still cannot "maintain it to our satisfaction." That is because we have to leave it (and anything else) behind when we die.</li>
+<li>And all this is due to "<em>udayavaya</em>" of<em> saṅkata</em>, all that we experience.</li>
+</ul>
+<p style="text-align: justify;"><strong>7. Therefore, there is NOTHING "in this world” that is permanent (except "<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> gotta</span></em>"; see below)</strong>. Everything is constantly changing. That is why nothing in “this world” will meet one’s expectations; see, "<a href="../../pages/DS.KK.002/index.html" rel="bookmark noopener noreferrer" target="_blank">Second Law of Thermodynamics is Part of Anicca!</a>".</p>
+<ul style="text-align: justify;">
+<li>Some things can last longer than others, but nothing is permanent. Anything is CONDITIONAL, i.e., arises due to causes. It would not come to existence in the absence of root causes. Thus it is said that everything “in this world” is CONDITIONED.</li>
+<li>The only exception is "<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> gotta,</span></em>" which are the permanent records of a given "lifestream"; see "<a href="../../pages/TL.DD.005/index.html" rel="bookmark noopener noreferrer" target="_blank">Recent Evidence for Unbroken Memory Records (HSAM)</a>." That is how one with <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers can go back and look at one's past lives; some children can recall their past lives too. That record is permanent.</li>
+</ul>
+<p style="text-align: justify;">8. This world of<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span>, cētasika</span></em> and <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> is very complicated. Living beings can be born in 31 realms, out of which we can "see" only two realms: human and animal.</p>
+<ul style="text-align: justify;">
+<li><strong>Think about the fact that all biological matter arises from just four bases of DNA, and all computer codes are based on two units, 0 and 1.</strong> Thus, one can see how complex the mind is when 89 types of <em>cittā </em>and 52 types of <em>cētasikas</em> involved!</li>
+</ul>
+<p style="text-align: justify;">9.<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, in contrast to <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>, cētasika</span></em>, and <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>, is UNCONDITIONED. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> attained by removing all root causes. Thus, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> itself is permanent and does not arise due to root causes<span style="font-size: 1.125rem; letter-spacing: 0px;">.</span></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is attained at four steps or stages: Stream Entry (<em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>), Once-Returner (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>), Non-Returner (<em>Anāgāmi</em>),<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+<li>At each stage, bad "character/habits" or "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" (pronounced "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>") that could result in births in some realms are “removed”; see, "<a href="../../pages/KD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Gati, Bhava, and Jāti</a>." For example, at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, <em><span>hateful <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> suitable for beings in<em><span> <span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em>, <em><span>greedy <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> suitable for <em>petas</em> (hungry ghosts), etc., are removed.</li>
+<li>All causes (and all "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>") were removed at the<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. However, <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em><span> lives as a normal human being until death and is not reborn anywhere in “this world.” Let us first examine what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> meant by “this world” in the next section.</span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 18pt;">Thirty-one Planes of Existence</span></h5>
+<p style="text-align: justify;">Here is a video from Carl Sagan to get an idea of how vast our "detectable universe" is:</p>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5Ex__M-OwSA" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"><span>The “worldview” of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is not merely about the living beings on this planet. Our Solar system is one of infinite “world systems” (planetary systems). In EACH planetary system with life (scientists have not found even one yet, but they are out there!), there are 31 “planes of existence.” As we find out below, we can “see” only two realms: our human and animal realms. Thus our “world” is much more complicated than even present-day science believes.</span></p>
+<p style="text-align: justify;">As some of you may already know, <strong>science cannot account for 95% of the mass of the universe</strong><span>, which they label “dark energy” and “dark matter”; see "The 4 Percent Universe" by Richard Panek (2011), or do a Google search on "dark energy and dark matter". That is why I say that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> transcended “this world”; see "</span><a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Introduction">Power of the Human Mind – introduction</a>." He was able to “see” the whole of existence: see “<a href="../../pages/DS.KK.005/index.html" rel="noopener noreferrer" target="_blank" title="Godel’s Incompleteness Theorem">Godel’s Incompleteness Theorem</a>” under “<a href="../../pages/DS.AA.002/index.html" rel="noopener noreferrer" target="_blank" title="Dhamma and Science">Dhamma and Science</a>.”</p>
+<ul style="text-align: justify;">
+<li>A being in a given plane of existence is reborn in any of the 31 realms at death. That happens instantaneously, and evidence for such a mechanism slowly emerges from quantum mechanics; see "<a href="../../pages/DS.KK.003/index.html" rel="noopener noreferrer" target="_blank" title="Quantum Entanglement – We Are All Connected">Quantum Entanglement -  We are all Connected</a>."</li>
+</ul>
+<p style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has described these different realms of existence in many </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, and a convenient summary is at: "<a href="../../pages/TS.AA.013/index.html" rel="noopener noreferrer" target="_blank">31 Realms of Existence</a>". For a detailed discussion, see "<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Realms Associated with the Earth</a>". In the following, I will use a visual to simplify things and provide a simple description of<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> with respect to this "wider world of existence."</p>
+<ul style="text-align: justify;">
+<li>Imagine a sphere with 31 shells, with a small sphere in the middle. Thus the total volume of the big sphere is filled by the center sphere and surrounding shells. The 31 sections represent the 31 planes of existence. I emphasize that this is just a visual. The reality is different. For example, animal and human realms co-exist. Also, both time and space are infinite.</li>
+</ul>
+<p style="text-align: justify;">1. The inner 11 shells represent the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>, where all five physical sense faculties are present.</p>
+<ul style="text-align: justify;">
+<li>The innermost sphere represents the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell), where there is non-stop suffering; next is the animal realm. There are two more realms where suffering is higher than in the human plane.</li>
+<li>The human plane is the fifth shell. That is the last realm where greed, hate, and ignorance prevail. However, this is unique in the sense that humans can also get rid of all those three and attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li>The sixth through eleventh shells represent the realms of the <em><span><span class="pali-term term-highlight" data-term="devā">devā</span></span></em> (wrongly translated as gods by many). <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> do not have dense bodies with flesh and blood; thus, they do not have physical ailments. They do not generate greedy thoughts.</li>
+</ul>
+<p style="text-align: justify;">2.  The next 16 shells represent realms where only two physical sense faculties (eye and ear) are active, in addition to the mind. These beings have very fine bodies, even less dense than <em>dēvā</em>. These are called <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōkā</span></em>.</p>
+<p style="text-align: justify;">3. The last four shells represent the <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōkā</span></em>, where beings have ultra-fine bodies and only the mind faculty; they do not have physical senses.</p>
+<p style="text-align: justify;">4. In <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōkā</span></em>, living beings are in <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states, and those beings do not have either greed or hate, but they still have ignorance.</p>
+<ul style="text-align: justify;">
+<li>Humans can attain these <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states, and thus humans can “temporarily live” in those <em>lōkās</em>; see "<a href="../../pages/BD.II.004/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Anariya or Mundane Jhanas">Power of the Human Mind - Anariya or Mundane Jhanas</a>."</li>
+<li>The 16 realms in the<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōka</span></em> correspond to the four lower <em>jhānā</em>, and the four realms in the <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōka</span></em> correspond to the four higher <em>jhānā</em>.</li>
+</ul>
+<p style="text-align: justify;">5. Now, many of you may be thinking, "How do I know all this is true? Is there any evidence?". There are a lot of things we do not know about "this world." We cannot rely on our senses or even science to verify/confirm these; see "<a href="../../pages/TL.BB.005/index.html" rel="noopener noreferrer" target="_blank">Wrong Views (Micca Diṭṭhi) – A Simpler Analysis</a>" and "<a href="../../pages/DS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Dhamma and Science</a>."</p>
+<ul style="text-align: justify;">
+<li>Only within the last 50 years or so that science has accepted that our universe has more than a few galaxies (now science has confirmed that there are billions of galaxies!).</li>
+<li>Furthermore, the newest findings (yet unconfirmed) in string theory indicate that we live in a 10-dimensional world (of course, we cannot see the other spatial dimensions), not a 3-dimensional world. For a fun look at different spatial dimensions, see "<a href="../../pages/DS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="What Happens in Other Dimensions?">What Happens in Other Dimensions</a>."</li>
+</ul>
+<p style="text-align: justify;">6. Any living being (including each of us) has been in all realms in this beginning-less <em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span> </span></em>(or <em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em>). We have been in the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell), and we have been at the highest (except the five pure abodes in <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōka,</span></em> which can be accessed only by<em> Anāgāmi</em> or Non-Returners).</p>
+<p style="text-align: justify;">7. Above the human realm is relatively less suffering (except at death, which is inevitable). However, without achieving at least the Stream Entry (<em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>) stage, even a living being in the highest plane can fall to any lower level. Therefore, a normal human is bound to end up in the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell) at some point; once there, one will spend a long agonizing time there and eventually come out. Each of us has done this many times over. The cause of births in different realms is explained in terms of “<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds”; see "<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>").</p>
+<p style="text-align: justify;">8. So, each living being moves from one realm to another <strong>but spends the most time in the four lower worlds</strong>, mainly because it is hard to come out once fallen there. This “<em>saṃsāric</em> wandering” is a critical point to think about and comprehend.</p>
+<p style="text-align: justify;">9. As one moves away from the center, the level of suffering decreases, and mundane pleasure increases up to the 11th realm. After that, in the<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōkā</span></em> it is mainly the <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures, not the sense pleasures; see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a>".</p>
+<p style="text-align: justify;">10. The human and animal realms are the only ones where a being is born to parents. In all other realms, living beings are born instantaneously, formed fully, within an instant (<em>cittakkhana</em>) of dying in the previous life. <em><span>That is an <span class="pali-term term-highlight" data-term="opapātika">opapātika</span> birth.</span></em><span> That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em><span>manō pubbaṅgamā <span class="pali-term term-highlight" data-term="dhammā">dhammā</span>...........</span></em>." The mind is the root cause, not matter.</p>
+<ul style="text-align: justify;">
+<li>As discussed in the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> section, even humans and animals start their "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" <em>opapatically</em> as <em>gandhabbā; </em>see "<a href="../../pages/AB.DD.001/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)</a>." They begin building a "dense physical body" after entering a womb.</li>
+</ul>
+<p style="text-align: justify;">11.  A person who becomes an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> or attains <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> will not be reborn in any of these 31 realms. Thus, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is not difficult to understand: see "<a href="../../pages/KD.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Nibbāna – Is it Difficult to Understand?">Nibbāna - Is it Difficult to Understand?</a>" and "<a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank" title="What Are Rupa? (Relation to Nibbāna)">What are Rupa? Relation to Nibbāna</a><span>" and other <span class="pali-term term-highlight" data-term="posts">posts</span> (by the way, you can type a keyword in the "Search box" at the top right to get a list of relevant <span class="pali-term term-highlight" data-term="posts">posts</span>).</span></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>, in the present model, corresponds to getting out of all 31 shells, out of the giant sphere, and no more <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in any of the 31 realms.  </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is where the permanent <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> or <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>, is.</li>
+<li>When one attains <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> or <em>Arahanthood</em>, he/she looks just like any other human but has no attachments to worldly things. Until death, an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is subjected to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>.</span></em> When that <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> power is used up, he dies and is not reborn because he/she will not "willingly grasp" (or "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>") any of the possible births.</li>
+</ul>
+<p style="text-align: justify;"><span>12. Why are we trapped in the 31 realms? Because we perceive that there is happiness to be had in "this world." We are unaware that there is much suffering in the lower four realms. Many people look at their lives and say, "where is this suffering the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was talking about?": It is the hidden suffering that is there not only in this world but mainly in the lowest four realms. The problem is that it is hard to come back up once fallen there. In those realms - animal realm included - beings are more like robots. They do not have developed minds like humans.</span></p>
+<ul style="text-align: justify;">
+<li>No one or no external force is keeping us in "this world" of 31 realms. Content with sense pleasures, do not see the suffering "in the long term" or even in this life as we get old. Thus <strong>we are clinging to everything in this world like an octopus grabbing its prey with all eight legs.</strong> And we are not aware that there is a better kind of pleasure in <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, in detaching from "this world"; see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a><span>". (Also, unless a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comes along, we do not know about the 31 realms and are not aware of the suffering in the lower four realms).</span></li>
+</ul>
+<p style="text-align: justify;">13. Can we taste <em><span><span class="pali-term term-highlight" data-term="nibbānic">Nibbānic</span></span></em> “pleasure”? Yes. We can feel it in increments, even below the Stream Entry (<em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>) stage; see "<a href="../../pages/TL.CC.006/index.html" rel="noopener noreferrer" target="_blank" title="How to Taste Nibbāna">How to Taste Nibbāna</a>." That is <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>, the “pleasure of giving up worldly things.”</p>
+<ul style="text-align: justify;">
+<li>This <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> has “quantum jumps” (substantial instantaneous changes) at the four stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: Stream Entry, Once-Returner, Non-Returner, and <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Thus when one is on the Path, one can experience <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> at varying degrees, all the way to <em><span><span class="pali-term term-highlight" data-term="nibbānic">Nibbānic</span></span></em> bliss, during this very lifetime; see, at the end of "<a href="../../pages/BD.JJ.001/index.html" rel="noopener noreferrer" target="_blank" title="The Four Stages in Attaining Nibbāna">The Four Stages in Attaining Nibbāna</a>."</li>
+</ul>
+<p style="text-align: justify;">14. All these 31 realms are in our solar system (<em>cakkavāla </em>or<em> Chakrawāta </em><span>in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>). They are associated with the Earth. There are billions of such </span><em>cakkavāla</em> (planetary systems) in existence at all times with living beings.</p>
+<ul style="text-align: justify;">
+<li>These are in clusters of the small, medium, and large “world systems” (galaxies, galaxy clusters, and superclusters?). But none is permanent. They come into being and eventually perish. Within the past 100 years or so, scientists have confirmed the existence of billions of planetary systems within each galaxy. And there are billions of such galaxies in our universe!</li>
+</ul>
+<p style="text-align: justify;">We have been born in almost all of these realms in our <em>saṃsāric</em> journey that has no traceable beginning.</p>
+<p>Continues the discussion in, "<a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Our Two Worlds: Material and Mental</a>", ........</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.HH.002"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0047"
+             data-level="intermediate"
+             data-reading-time="14"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.HH.002
+Language:     pt-BR
+Generated-At: 2026-04-17T21:34:17Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>Revisado em 20 de maio de 2016; 22 de dezembro de 2018; 6 de julho de 2019; 21 de agosto de 2019</strong></p>
+<p style="text-align: justify;"><span>1. De acordo com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, TUDO o que existe pode ser classificado em quatro realidades últimas (</span><em><span><span class="pali-term term-highlight" data-term="paramattha">Paramattha</span></span></em>):</p>
+<ul style="text-align: justify;">
+<li>Pensamentos (<em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>)</li>
+<li>Qualidades do pensamento ou fatores mentais (<em>cētasika</em>)</li>
+<li>Matéria (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>)</li>
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></li>
+</ul>
+<p style="text-align: justify;">Essas entidades são descritas em detalhes nas seções <a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank" title="Tables and Summaries">Tabelas e Resumos</a> e <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>; consulte “<a href="../../pages/AB.BB.001/index.html" rel="noopener noreferrer" target="_blank" title="Abhidhamma – Introduction">Abhidhamma – Introdução</a>”.</p>
+<ul style="text-align: justify;">
+<li>Toda a existência “neste mundo” é descrita em termos das três primeiras. E todas elas são condicionadas; cada uma surge devido à presença de uma causa. Se não houver causa, nenhuma dessas três surgirá. Essa é a causa e efeito fundamentais (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>) no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+<li>As causas são numerosas, mas as causas fundamentais são seis: ganância, ódio, ignorância, não-ganância, não-ódio e não-ignorância.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> e essas outras três entidades são mutuamente exclusivas (as coisas deste mundo estão ausentes em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>); veja “<a href="https://suttacentral.net/ud8.1/pli/ms" rel="noopener noreferrer" target="_blank">Paṭha­ma­nib­bā­na­paṭi­saṃ­yutta­ Sutta (Ud 8.1)</a>” (tradução para o inglês: “<a href="https://suttacentral.net/ud8.1/en/anandajoti" rel="noopener noreferrer" target="_blank">O Primeiro Discurso sobre Nibbāna</a>”).</li>
+</ul>
+<p style="text-align: justify;">2. <span style="font-size: 12pt;"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> resulta da remoção das<span style="letter-spacing: 0px;"> três raízes da ganância, do ódio e da ignorância (</span><em style="letter-spacing: 0px;"><span>rāgakkhyō, dōsakkhayō, mōhakkhayō <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span style="letter-spacing: 0px;">).</span></span></p>
+<ul>
+<li style="text-align: justify;">É necessário primeiro cultivar as três raízes morais — não-ganância, não-ódio e não-ignorância — enquanto se está no caminho óctuplo mundano. Isso permite compreender <em>Tilakkhaṇa</em> (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>) e iniciar-se no Nobre Caminho Óctuplo; veja “<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Em um Gráfico</a>”.</li>
+<li style="text-align: justify;">Portanto, a pessoa se esforça para remover a ganância, o ódio e a ignorância, que são “<em>san</em>”; veja “<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">O que é ‘San’? Significado de Sansāra (ou Saṃsāra)</a>”. Essa é a chave para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, </span></em>conforme estabelecido no Nobre Caminho Óctuplo.</li>
+<li style="text-align: justify;">Como não surge devido a causas, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é permanente.</li>
+</ul>
+<p style="text-align: justify;">3. O <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> surge e decai em um ritmo acelerado: bilhões de <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> podem surgir e desaparecer a cada segundo. Mas, como veremos na seção <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, “pensamentos ativos” ocorrem com relativa pouca frequência em “explosões rápidas” ou <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> vithi</span></em>.<strong> </strong><em>Cētasika</em> está “incorporada” em cada <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>. Existem 89 tipos de <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> no total e 52 tipos de <em>cētasikas</em>; consulte “<a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank" title="Tables and Summaries">Tabelas e Resumos</a>”. Assim, o reino mental é muito complicado.</p>
+<ul style="text-align: justify;">
+<li>Para uma introdução à mente, consulte “<a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">A Evolução Incrivelmente Rápida de um Pensamento (Citta)</a>”, “<a href="../../pages/AB.BB.004/index.html" rel="noopener noreferrer" target="_blank">A Mente Incrível – O Papel Crítico de Nāmagotta (Memórias)</a>” e <a href="../../pages/IS.CC.006/index.html" rel="noopener noreferrer" target="_blank">“Tenho uma ‘Mente’ que é Fixa e ‘Minha’?</a>”, nessa ordem.</li>
+</ul>
+<p style="text-align: justify;">4. A matéria (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>) constitui 28 unidades básicas, das quais apenas quatro são fundamentais. No entanto, a menor unidade indivisível da matéria<span style="font-size: 1.125rem; letter-spacing: 0px;"> é chamada de “</span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;">”; consulte “</span><a href="../../pages/TS.AA.007/index.html" rel="noopener noreferrer" style="font-size: 1.125rem; letter-spacing: 0px;" target="_blank" title="Rupa – Generation Mechanisms">Rūpa – Mecanismos de Geração</a><span style="font-size: 1.125rem; letter-spacing: 0px;">” e “</span><a href="../../pages/AB.GG.004/index.html" rel="noopener noreferrer" style="font-size: 1.125rem; letter-spacing: 0px;" target="_blank">A Origem da Matéria – Suddhāṭṭhaka</a>”. <em style="font-size: 1.125rem; letter-spacing: 0px;"><span>O <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;"> tem uma vida útil muito longa, de um </span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> kappa </span></em><span style="font-size: 1.125rem; letter-spacing: 0px;">(basicamente a idade do universo). Um <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span> </span></em></span>é o bloco de construção de <span style="font-size: 1.125rem; letter-spacing: 0px;">qualquer “coisa tangível” neste mundo. </span></p>
+<ul style="text-align: justify;">
+<li>Qualquer <em>saṅkata</em> neste “mundo” está sujeito a mudanças. Cada <em>saṅkata</em> (basicamente qualquer coisa material) tem uma duração que pode ser menor que um segundo ou tão longa quanto bilhões de anos (para uma estrela, por exemplo).</li>
+</ul>
+<p style="text-align: justify;">5. Muitas pessoas confundem “<em>udayavaya</em>” ou “formação e dissolução de um <em>saṅkata”</em> com a ideia de que tudo, incluindo <em><span>o <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span>,</span></em> está em constante mudança<i>.</i> Elas tentam associar isso à “impermanência”,  que traduzem incorretamente como <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.  Pelo contrário, um <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span> </span></em>tem uma vida útil muito longa.</p>
+<ul style="text-align: justify;">
+<li>São apenas esses “compostos”, como seres humanos, animais, árvores etc., que sofrem decomposição e morte em escalas de tempo discerníveis para nós; uma barra de ouro não se decompõe por um período muito longo; veja “<a href="../../pages/PS.GG.019/index.html" rel="bookmark noopener noreferrer" target="_blank">Algum objeto (Rūpa) dura apenas 17 momentos de pensamento?</a>”.</li>
+<li>Para uma discussão sobre <em>udayavaya ñāna, </em>veja “<a href="../../pages/TL.LL.001/index.html" rel="noopener noreferrer" target="_blank">Udayavaya Ñāna</a>”.</li>
+</ul>
+<p style="text-align: justify;">6. O “resultado” dessa natureza <em>udayavaya</em> de todo <em>saṅkata</em> está incorporado nas Três Características “deste mundo”: <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>. Mas <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> NÃO é impermanência, e <em>Anattā</em> NÃO é “não-eu”; veja “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anattā – Interpretações Erradas</a>”.</p>
+<ul style="text-align: justify;">
+<li>Resumidamente, (i) não é possível encontrar E manter a felicidade em nada neste “mundo”. (ii) Por causa disso, ficamos angustiados e sofremos, e (iii). Assim, ficamos desamparados (sem controle). É essencial perceber que essas são características não apenas desta vida, mas do nosso processo de Renascimento sem início neste “mundo mais amplo” de 31 reinos descrito abaixo.</li>
+<li>Embora as barras de ouro sejam praticamente permanentes em relação às nossas vidas, ainda assim não podemos “mantê-las a nosso contento”. Isso porque temos que deixá-las (e qualquer outra coisa) para trás quando morremos.</li>
+<li>E tudo isso se deve ao “<em>udayavaya</em>” do<em> saṅkata</em>, tudo o que experimentamos.</li>
+</ul>
+<p style="text-align: justify;"><strong>7. Portanto, não há NADA “neste mundo” que seja permanente (exceto “<em><span><span class="pali-term term-highlight" data-term="nāma">Nāma</span> gotta</span></em>”; veja abaixo)</strong>. Tudo está em constante mudança. É por isso que nada “neste mundo” atenderá às expectativas de alguém; veja, “A <a href="../../pages/DS.KK.002/index.html" rel="bookmark noopener noreferrer" target="_blank">Segunda Lei da Termodinâmica faz parte de Anicca!</a>”.</p>
+<ul style="text-align: justify;">
+<li>Algumas coisas podem durar mais do que outras, mas nada é permanente. Tudo é CONDICIONAL, ou seja, surge devido a causas. Não viria a existir na ausência de causas fundamentais. Assim, diz-se que tudo “neste mundo” é CONDICIONADO.</li>
+<li>A única exceção é “<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> gotta</span></em>”<em>,</em> que são os registros permanentes de um determinado “fluxo de vida”; veja “<a href="../../pages/TL.DD.005/index.html" rel="bookmark noopener noreferrer" target="_blank">Evidências recentes de registros de memória ininterruptos (HSAM)</a>”. É assim que alguém com poderes <em><span>de <span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em> pode voltar e observar suas vidas passadas; algumas crianças também conseguem se lembrar de suas vidas passadas. Esse registro é permanente.</li>
+</ul>
+<p style="text-align: justify;">8. Este mundo de<em><span> <span class="pali-term term-highlight" data-term="citta">Citta</span>, cētasika</span></em> e <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> é muito complicado. Os seres vivos podem nascer em 31 reinos, dos quais podemos “ver” apenas dois: o humano e o animal.</p>
+<ul style="text-align: justify;">
+<li><strong>Pense no fato de que toda a matéria biológica surge a partir de apenas quatro bases de DNA, e todos os códigos de computador se baseiam em duas unidades, 0 e 1.</strong> Assim, pode-se ver o quão complexa é a mente quando 89 tipos de <em>cittā </em>e 52 tipos de <em>cētasikas</em> estão envolvidos!</li>
+</ul>
+<p style="text-align: justify;">9.<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, em contraste com <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span>, cētasika</span></em> e <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>, é INCONDICIONADO. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é alcançado pela remoção de todas as causas fundamentais. Assim, o próprio <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é permanente e não surge devido a causas fundamentais<span style="font-size: 1.125rem; letter-spacing: 0px;">.</span></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é alcançado em quatro etapas ou estágios: Entrada na Corrente (<em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>), Aquele que Retorna Uma Vez (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>), Aquele que Não Retorna (<em>Anāgāmi</em>),<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+<li>Em cada estágio, os maus “caráteres/hábitos” ou “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” (pronuncia-se “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>”) que poderiam resultar em renascimentos em alguns reinos são “removidos”; veja “<a href="../../pages/KD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Gati, Bhava e Jāti</a>”. Por exemplo, no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, <em><span>as <span class="pali-term term-highlight" data-term="gati">Gati</span> de ódio</span></em> adequadas para seres em<em><span> <span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em>, <em><span>as <span class="pali-term term-highlight" data-term="gati">Gati</span> de ganância</span></em> adequadas para <em>petas</em> (fantasmas famintos), etc., são removidas.</li>
+<li>Todas as causas (e todas <em>as</em> “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>”) foram removidos no estágio<em> </em>de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. No entanto, <em><span>o <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em><span> vive como um ser humano normal até a morte e não renasce em nenhum lugar “deste mundo”. Vamos primeiro examinar o que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> quis dizer com “este mundo” na próxima seção.</span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 18pt;">Trinta e um Planos de Existência</span></h5>
+<p style="text-align: justify;">Aqui está um vídeo de Carl Sagan para se ter uma ideia de quão vasto é o nosso “universo detectável”:</p>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5Ex__M-OwSA" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;"><span>A “visão de mundo” do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> não se refere apenas aos seres vivos deste planeta. Nosso Sistema Solar é um dos infinitos “sistemas mundiais” (sistemas planetários). Em CADA sistema planetário com vida (os cientistas ainda não encontraram nem um, mas eles estão lá fora!), existem 31 “planos de existência”. Como veremos a seguir, podemos “ver” apenas dois reinos: o reino humano e o reino animal. Assim, nosso “mundo” é muito mais complexo do que até mesmo a ciência atual acredita.</span></p>
+<p style="text-align: justify;">Como alguns de vocês já devem saber, <strong>a ciência não consegue explicar 95% da massa do universo</strong><span>, que eles chamam de “energia escura” e “matéria escura”; veja “The 4 Percent Universe”, de Richard Panek (2011), ou faça uma pesquisa no Google por “energia escura e matéria escura”. É por isso que digo que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> transcendeu “este mundo”; veja “</span><a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Introduction">O Poder da Mente Humana – introdução</a>”. Ele foi capaz de “ver” a totalidade da existência: veja <a href="../../pages/DS.KK.005/index.html" rel="noopener noreferrer" target="_blank" title="Godel’s Incompleteness Theorem">“Teorema da Incompletude de Gödel</a>” em “<a href="../../pages/DS.AA.002/index.html" rel="noopener noreferrer" target="_blank" title="Dhamma and Science">Dhamma e Ciência</a>”.</p>
+<ul style="text-align: justify;">
+<li>Um ser em um determinado plano de existência renasce em qualquer um dos 31 reinos após a morte. Isso acontece instantaneamente, e evidências desse mecanismo surgem lentamente da mecânica quântica; consulte “<a href="../../pages/DS.KK.003/index.html" rel="noopener noreferrer" target="_blank" title="Quantum Entanglement – We Are All Connected">Entrelacamento Quântico – Estamos todos conectados</a>”.</li>
+</ul>
+<p style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descreveu esses diferentes reinos da existência em muitos </span><em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>, e um resumo conveniente encontra-se em: “<a href="../../pages/TS.AA.013/index.html" rel="noopener noreferrer" target="_blank">31 Reinos da Existência</a>”. Para uma discussão detalhada, consulte “<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Reinos Associados à Terra</a>”. A seguir, usarei um recurso visual para simplificar as coisas e fornecer uma descrição simples de<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> em relação a este “mundo mais amplo da existência”.</p>
+<ul style="text-align: justify;">
+<li>Imagine uma esfera com 31 camadas, com uma pequena esfera no meio. Assim, o volume total da grande esfera é preenchido pela esfera central e pelas camadas circundantes. As 31 seções representam os 31 planos de existência. Enfatizo que isso é apenas um recurso visual. A realidade é diferente. Por exemplo, os reinos animal e humano coexistem. Além disso, tanto o tempo quanto o espaço são infinitos.</li>
+</ul>
+<p style="text-align: justify;">1. As 11 camadas internas representam o <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>, onde todas as cinco faculdades sensoriais físicas estão presentes.</p>
+<ul style="text-align: justify;">
+<li>A esfera mais interna representa o <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno), onde há sofrimento ininterrupto; em seguida vem o reino animal. Existem mais dois reinos onde o sofrimento é maior do que no plano humano.</li>
+<li>O plano humano é a quinta camada. Esse é o último reino onde prevalecem a ganância, o ódio e a ignorância. No entanto, isso é único no sentido de que os humanos também podem se livrar de todos esses três e alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li>A sexta até a décima primeira camadas representam os reinos dos <em><span><span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> (traduzidos erroneamente como deuses por muitos). <em><span>Os <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> não possuem corpos densos de carne e osso; portanto, não sofrem de doenças físicas. Eles não geram pensamentos de ganância.</li>
+</ul>
+<p style="text-align: justify;">2. As próximas 16 camadas representam reinos onde apenas duas faculdades sensoriais físicas (vista e audição) estão ativas, além da mente. Esses seres têm corpos muito sutis, ainda menos densos que <em><span>os dos <span class="pali-term term-highlight" data-term="devas">devas</span></span></em>. Esses reinos são chamados de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōkā</span></em>.</p>
+<p style="text-align: justify;">3. As últimas quatro camadas representam o <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span> lōkā</span></em>, onde os seres possuem corpos ultrafinos e apenas a faculdade da mente; eles não possuem sentidos físicos.</p>
+<p style="text-align: justify;">4. Nos <em>lōkā</em> de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span></span></em>, os seres vivos encontram-se em estados <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, e esses seres não têm nem ganância nem ódio, mas ainda possuem ignorância.</p>
+<ul style="text-align: justify;">
+<li>Os seres humanos podem atingir esses estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> e, assim, podem “viver temporariamente” nesses <em>lōkās</em>; veja “<a href="../../pages/BD.II.004/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Anariya or Mundane Jhanas">O Poder da Mente Humana – Anariya ou Jhānas Mundanas</a>”.</li>
+<li>Os 16 reinos no<em><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka</span></em> correspondem aos quatro <em>jhānā</em> inferiores, e os quatro reinos no <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span> lōka</span></em> correspondem aos quatro <em>jhānā</em> superiores.</li>
+</ul>
+<p style="text-align: justify;">5. Agora, muitos de vocês podem estar pensando: “Como posso saber se tudo isso é verdade? Existe alguma evidência?”. Há muitas coisas que não sabemos sobre “este mundo”. Não podemos confiar em nossos sentidos ou mesmo na ciência para verificar/confirmar isso; veja “<a href="../../pages/TL.BB.005/index.html" rel="noopener noreferrer" target="_blank">Visões Erradas (Micca Diṭṭhi) – Uma Análise Mais Simples</a>” e “<a href="../../pages/DS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Dhamma e Ciência</a>”.</p>
+<ul style="text-align: justify;">
+<li>Foi somente nos últimos 50 anos, mais ou menos, que a ciência aceitou que nosso universo tem mais do que algumas galáxias (agora a ciência confirmou que existem bilhões de galáxias!).</li>
+<li>Além disso, as descobertas mais recentes (ainda não confirmadas) na teoria das cordas indicam que vivemos em um mundo de 10 dimensões (é claro que não podemos ver as outras dimensões espaciais), e não em um mundo tridimensional. Para uma visão divertida sobre as diferentes dimensões espaciais, consulte “<a href="../../pages/DS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="What Happens in Other Dimensions?">O que acontece em outras dimensões</a>”.</li>
+</ul>
+<p style="text-align: justify;">6. Qualquer ser vivo (incluindo cada um de nós) já esteve em todos os reinos neste <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span> </span></em>(ou <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em>) sem início. Já estivemos no <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno) e já estivemos no mais alto (exceto nas cinco moradas puras em <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka,</span></em> que só podem ser acessadas por<em> Anāgāmi</em> ou Não-Retornantes).</p>
+<p style="text-align: justify;">7. Acima do reino humano há relativamente menos sofrimento (exceto na morte, que é inevitável). No entanto, sem alcançar pelo menos o estágio de Entrada na Corrente (<em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>), mesmo um ser vivo no plano mais elevado pode cair para qualquer nível inferior. Portanto, um ser humano normal está fadado a acabar no <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno) em algum momento; uma vez lá, passará um longo tempo agonizante e, eventualmente, sairá. Cada um de nós já passou por isso muitas vezes. A causa dos nascimentos em diferentes reinos é explicada em termos de “<em>sementes</em><span> de <span class="pali-term term-highlight" data-term="kamma">Kamma</span>”; veja “</span><a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>”).</p>
+<p style="text-align: justify;">8. Assim, cada ser vivo passa de um reino para outro, <strong>mas passa a maior parte do tempo nos quatro mundos inferiores</strong>, principalmente porque é difícil sair de lá uma vez que se caiu. Essa “vagação <em>samsárica</em>” é um ponto crítico a ser pensado e compreendido.</p>
+<p style="text-align: justify;">9. À medida que se afasta do centro, o nível de sofrimento diminui, e o prazer mundano aumenta até o 11º reino. Depois disso, nos <em><span>lōkā <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span></span></em>, são principalmente os prazeres <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, não os prazeres sensoriais; veja “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade – O que é Niramisa Sukha?</a>”.</p>
+<p style="text-align: justify;">10. Os reinos humano e animal são os únicos onde um ser nasce de pais. Em todos os outros reinos, os seres vivos nascem instantaneamente, já totalmente formados, no instante (<em>cittakkhana</em>) da morte na vida anterior. <em><span>Esse é um nascimento <span class="pali-term term-highlight" data-term="opapātika">Opapātika</span>.</span></em><span> É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span>manō pubbaṅgamā <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span>...........</span></em>.” A mente é a causa fundamental, não a matéria.</p>
+<ul style="text-align: justify;">
+<li>Conforme discutido na seção <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, mesmo humanos e animais iniciam seu “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” <em>opapaticamente</em> como <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>; </span></em>veja “<a href="../../pages/AB.DD.001/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)</a>”. Eles começam a construir um “corpo físico denso” após entrarem no útero.</li>
+</ul>
+<p style="text-align: justify;">11. Uma pessoa que se torna um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> ou alcança <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> não renascerá em nenhum desses 31 reinos. Assim, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> não é difícil de entender: veja “<a href="../../pages/KD.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Nibbāna – Is it Difficult to Understand?">Nibbāna – É difícil de entender?</a>” e “<a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank" title="What Are Rupa? (Relation to Nibbāna)">O que são Rūpa? Relação com Nibbāna</a>” e outros ensaios (a propósito, você pode digitar uma palavra-chave na “caixa de pesquisa” no canto superior direito para obter uma lista de ensaios relevantes).</p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, no modelo atual, corresponde a sair de todas as 31 conchas, sair da esfera gigante, e não realizar mais nenhum renascimento em nenhum dos 31 reinos. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é onde se encontra o <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> permanente, ou <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>.</li>
+<li>Quando alguém alcança <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> ou <em><span>a condição de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>, parece-se com qualquer outro ser humano, mas não tem apegos às coisas mundanas. Até a morte, um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> está sujeito ao <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span>.</span></em> Quando esse poder <em>kármico</em> se esgota, ele morre e não renasce, pois não “agarrará voluntariamente” (ou “<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>”) nenhum dos possíveis renascimentos.</li>
+</ul>
+<p style="text-align: justify;"><span>12. Por que estamos presos nos 31 reinos? Porque percebemos que há felicidade a ser encontrada “neste mundo”. Não temos consciência de que há muito sofrimento nos quatro reinos inferiores. Muitas pessoas olham para suas vidas e dizem: “onde está esse sofrimento de que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> falava?”: É o sofrimento oculto que está presente não apenas neste mundo, mas principalmente nos quatro reinos inferiores. O problema é que é difícil voltar para cima uma vez que se caiu lá. Nesses reinos — incluindo o reino animal — os seres são mais como robôs. Eles não têm mentes desenvolvidas como os humanos.</span></p>
+<ul style="text-align: justify;">
+<li>Ninguém, nem nenhuma força externa, está nos mantendo neste “mundo” de 31 reinos. Satisfeitos com os prazeres sensoriais, não vemos o sofrimento “a longo prazo” ou mesmo nesta vida, à medida que envelhecemos. Assim<strong>, estamos nos agarrando a tudo neste mundo como um polvo que agarra sua presa com todas as oito patas.</strong> E não estamos cientes de que existe um tipo melhor de prazer em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, no desapego deste “mundo”; veja “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três Tipos de Felicidade — O que é Niramisa Sukha?</a><span>”. (Além disso, a menos que um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> apareça, não sabemos sobre os 31 reinos e não estamos cientes do sofrimento nos quatro reinos inferiores).</span></li>
+</ul>
+<p style="text-align: justify;">13. Podemos experimentar o “prazer” <em><span>de <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>? Sim. Podemos senti-lo gradualmente, mesmo abaixo do estágio de Entrada na Corrente (<em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>); veja “<a href="../../pages/TL.CC.006/index.html" rel="noopener noreferrer" target="_blank" title="How to Taste Nibbāna">Como Experimentar Nibbāna</a>”. Isso é <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>, o “prazer de abandonar as coisas mundanas”.</p>
+<ul style="text-align: justify;">
+<li>Esse <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> apresenta “saltos quânticos” (mudanças instantâneas substanciais) nos quatro estágios de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: Entrada na Corrente, Aquele que Retorna Uma Vez, Aquele que Não Retorna e <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Assim, quando alguém está no Caminho, pode experimentar <em><span>o nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> em graus variados, até a bem-aventurança <em>de</em> <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, durante esta mesma vida; veja, no final de “<a href="../../pages/BD.JJ.001/index.html" rel="noopener noreferrer" target="_blank" title="The Four Stages in Attaining Nibbāna">Os Quatro Estágios para Alcançar Nibbāna</a>”.</li>
+</ul>
+<p style="text-align: justify;">14. Todos esses 31 reinos estão em nosso sistema solar (<em>cakkavāla </em>ou<em> Chakrawāta </em>em Cingalês). Eles estão associados à Terra. Existem bilhões desses <em>cakkavāla</em> (sistemas planetários) em existência a todo momento, com seres vivos.</p>
+<ul style="text-align: justify;">
+<li>Estes estão agrupados em “sistemas mundiais” pequenos, médios e grandes (galáxias, aglomerados de galáxias e superaglomerados?). Mas nenhum é permanente. Eles surgem e, eventualmente, perecem. Nos últimos 100 anos, mais ou menos, os cientistas confirmaram a existência de bilhões de sistemas planetários dentro de cada galáxia. E há bilhões dessas galáxias em nosso universo!</li>
+</ul>
+<p style="text-align: justify;">Nascemos em quase todos esses reinos em nossa jornada <em>samsárica,</em> que não tem um início rastreável.</p>
+<p>Continua a discussão em “<a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Nossos Dois Mundos: Material e Mental</a>”, ........</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.HH.001/index.html">The Grand Unified Theory Of Dhamma</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.HH.003/index.html">Our Two Worlds Material Immaterial</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.HH.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">The Grand Unified Theory Of Dhamma</span>
+        
+        <span class="pathway-title title-pt">A Grande Teoria Unificada do Dhamma</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.HH.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Our Two Worlds Material Immaterial</span>
+        
+        <span class="pathway-title title-pt">Nossos dois mundos: o material e o imaterial</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

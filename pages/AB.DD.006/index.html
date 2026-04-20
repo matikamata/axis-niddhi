@@ -1,0 +1,393 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Brain Interface Between Mind And Body | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Abhidhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 30 / 37</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">AB.DD.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Brain Interface Between Mind And Body</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>AB.DD.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Abhidhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="AB.DD.006"
+             data-section="Abhidhamma"
+             data-section-code="AB"
+             data-findex="0785"
+             data-level="advanced"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>AB.DD.006</td></tr><tr><td>Fin-dex</td><td>0785</td></tr><tr><td>Slug</td><td>brain-interface-between-mind-and-body</td></tr><tr><td>Section</td><td>AB</td></tr><tr><td>Title EN</td><td>Brain Interface Between Mind And Body</td></tr></table></div></div><p><strong>April 22, 2016; revised September 22, 2019; <span style="color: #3366ff;"><span style="color: #000000;">March 6, 2023;</span> July 8, 2024 </span></strong></p>
+<h5>The brain is Not the Mind</h5>
+<p style="text-align: justify;">1. Contrary to what scientists believe, our minds are not in the brain (<span style="color: #3366ff;"><span>this is another prediction from <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> that will be proven correct in the future</span></span>).</p>
+<ul style="text-align: justify;">
+<li>The "mind door" where <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (or thoughts) arise is at the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>, which is not in our physical bodies. It is in the <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>;</span></em> see "<a href="../../pages/AB.DD.002/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)- Introduction</a>."</li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has a subtle body; it is not a "body" in the sense we usually think about a "body." It is more like an energy field) that overlaps the physical body; see "<a href="../../pages/AB.DD.004/index.html" rel="noopener noreferrer" target="_blank">Ghost in the Machine – Synonym for the Manomaya Kaya?</a>".</li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> overlaps the heart in the physical body. When we hear traumatic news, we feel a burning sensation close to the heart, not in the head. We don't say, "Oh, my head felt burning when I heard the news." It is the heart area that feels it. (The head may start hurting later if one keeps thinking about the loss).</li>
+<li>On the other hand, when we overuse our five physical senses or think hard about a complex problem, our heads hurt. That's because the brain has to do a lot of processing in those situations. While watching a movie, our brains work overtime to convert sensory inputs from the eyes (<em><span><span class="pali-term term-highlight" data-term="cakkhu indriya">cakkhu indriya</span></span></em>) and the ears (<em><span><span class="pali-term term-highlight" data-term="sota indriya">sota indriya</span></span></em>). When we think about a complex problem, the <i><span>brain's <span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span> </span></i>must work hard; see below.</li>
+</ul>
+<h5>Two Overlapping "Bodies" - Physical Body and<em><span> <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (Mental Body)</h5>
+<p style="text-align: justify;">2. A physical body is a temporary shelter or a "shell" for the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>'s subtle body. The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>receives sense inputs from the outside world via the physical body. See "<a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Body Types in Different Realms - Importance of Manomaya Kaya</a>,"</p>
+<ul style="text-align: justify;">
+<li>Since a given physical body has a lifetime of around 100 years, we have to "build a new physical body" when the current one decays and finally dies. (That is if we have extra <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>); see "<a href="../../pages/KD.GG.006/index.html" rel="bookmark noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>."</li>
+</ul>
+<p style="text-align: justify;">3. Before entering the mother's womb, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has an invisible "body," more like an "energy packet." Thus, it cannot experience taste or touch, even though some can "digest odors" and become denser.</p>
+<ul style="text-align: justify;">
+<li>A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> waiting for a womb is usually about the size of a fully grown human, but it has very little "matter" that is not visible to us. At the moment of "<em>okkanti</em>" (or entering the mother's womb), he/she will enter <strong>through the mother's body</strong> and collapse to the size of the zygote when taking possession of it; see, "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">What does Buddha Dhamma (Buddhism) say about Birth Control?</a>".</li>
+<li>Thus a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>, when outside waiting for a suitable womb, is just like a ghost shown in the movies. Of course, humans cannot see it even with technological advances. It is much smaller in mass than the first cell formed by the union of the mother and father, the zygote.</li>
+<li>The physical body grows to start with a single cell (zygote) using the nutrition from the mother. After the baby is born, it consumes food to grow to the size of an adult.</li>
+<li><span style="color: #3366ff;">Thus it is helpful to have this visual, where a very fine <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> trapped inside a physical body of over a hundred pounds controls it.</span></li>
+</ul>
+<h5>Brain - Interface Between the Physical Body and <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">4. Once inside a physical body, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> <strong>has to</strong> use the physical body to interact with the outside world. It is like being trapped in a solid shell. Initially, its mind will be in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state (see "<a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vithi – Processing of Sense Inputs</a>") and not conscious of the outside world, except for body sensations.</p>
+<ul style="text-align: justify;">
+<li>In a human, the brain first processes the signals coming through the "physical senses" (eyes, ears, etc.) The brain transmits that information to the five <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> in the<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em> Those <em>pasāda rupā</em> then pass that information to the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of the mind) in the<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>;</span></em> see "<a href="../../pages/AB.DD.002/index.html" rel="bookmark noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)- Introduction</a>."</li>
+<li>That is how our minds receive information from the external world.</li>
+<li>Now the question arises: "How do the sense inputs coming through the eyes, ears, tongue, nose, and body are transmitted to the <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (situated close to the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>)?". <em> </em>Note that the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> overlaps the physical heart.</li>
+</ul>
+<p style="text-align: justify;">5. The brain acts as the intermediary between those physical sense inputs and the five <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>. It processes incoming information and converts it to a form that can be understood by the mind (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>First, the sensory inputs coming into the physical body through the eyes, ears, tongue, nose, and body go to specific brain regions. That has been well-researched by scientists over the past hundred years. The following figure shows the specific areas of the brain that analyze the data from the five senses.</li>
+</ul>
+<p style="text-align: justify;"><img alt="Brain and five Senses" class="wp-image-8240 size-full aligncenter" height="254" src="http://localhost/beng_feb2026/wp-content/uploads/Brain-and-five-Senses.jpg" width="353"/></p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;">Science cannot explain how the brain comprehends the corresponding signals after processing those signals. </span><span style="color: #0000ff;"><span style="color: #3366ff;">For example, in vision, there is no "picture" formed in the back of the head;</span> <span style="color: #000000;">see "On Intelligence" by Jeff Hawkins (2005) for a helpful discussion.</span></span></li>
+</ul>
+<p style="text-align: justify;">6. The signals for vision, sounds, smells, and taste come into the body through specific body parts. In contrast, the touch sensations can come from anywhere in the body and transmitted to the brain via an intricate system of nerves:</p>
+<p style="text-align: justify;"><img alt="Nervous_System" class="size-medium wp-image-8241 aligncenter" height="271" src="http://localhost/beng_feb2026/wp-content/uploads/Nervous_System-300x271.jpg" width="300"/></p>
+<ul>
+<li style="text-align: justify;">These nerve signals go to the brain for processing (see the "touch and pressure" processing area figure in #5 above).</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (Mental Body) Overlaps the Physical Body</h5>
+<p style="text-align: justify;">7. It is essential to note that the misty <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has a similar "nervous system" that overlaps the physical nervous system shown above. Yes. <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> is more like an "energy field." (This is irrelevant to the present discussion, but the physical body imparts <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> via body aches, diseases, and injuries.)</p>
+<ul style="text-align: justify;">
+<li>The physical nervous system has to align with the nervous system of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em> That alignment could change (due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>), which makes our body's nervous system go out-of-alignment for proper body function, leading to aches and pains. See #6 of "<a href="../../pages/BM.AA.013/index.html" rel="bookmark noopener noreferrer" target="_blank">11. Magga Phala and Ariya Jhanas via Cultivation of Saptha Bojjhaṅga</a>".</li>
+</ul>
+<p style="text-align: justify;">8. The signals from the other four senses go to specific brain areas (indicated in the figure of #5 above) via specialized neural pathways. For example, the optical nerve carries the visual signal to <span style="font-size: 1.125rem; letter-spacing: 0px;">the brain</span><span style="font-size: 1.125rem; letter-spacing: 0px;">:</span></p>
+<p style="text-align: justify;"><img alt="Eye Indriya" class="size-full wp-image-8242 aligncenter" height="146" src="http://localhost/beng_feb2026/wp-content/uploads/Eye-Indriya.jpeg" width="229"/></p>
+<ul style="text-align: justify;">
+<li>Once the brain processes those sensory inputs from the five physical senses, they are "transmitted" to the corresponding five <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (<em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em>) See below.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="mana indriya">Mana Indriya</span></span></em> in the Brain</h5>
+<p style="text-align: justify;">9. So far, we have identified five of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>'s "windows to the outside world" from his/her "shell" or the physical body: eyes, ears, nose, tongue, and the body.</p>
+<ul style="text-align: justify;">
+<li>What about the "<em>dhammās</em>" that are the finest<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="mano">mano</span> rupās</span></em>) that interact with the physical body? That is how we think about "random things" out of the blue. For example, we may be washing dishes in the kitchen, and thoughts about a friend or a relative may come to mind.</li>
+<li><span>Thoughts about a friend -- who may be a thousand <span class="pali-term term-highlight" data-term="miles">miles</span> away -- come through the </span><em><span><span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span></span></em> in the head (inside the brain). Of course, science is not aware of that.</li>
+<li><span>We discussed this in a previous <span class="pali-term term-highlight" data-term="post">post</span>: "</span><a href="../../pages/AB.GG.005/index.html" rel="noopener" target="_blank">What are Dhammā? – A Deeper Analysis</a>."</li>
+</ul>
+<p style="text-align: justify;"><span style="font-size: 12pt;"><span>10. How are the signals processed in the brain due to incoming vision, sound, smell, taste, touch, and <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> passed to the five </span><em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> and the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span>?</span></em> </span></p>
+<ul>
+<li><span style="color: #3366ff;"><strong>The <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> has a blueprint of the physical body.</strong></span> The physical body grows according to that blueprint. <span style="color: #3366ff;"><strong>As the physical body grows, <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (also called a “<em><span>kirana <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>” because it is a subtle body, essentially the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) also “expands.”</strong> </span>The brain in the physical body overlaps “the brain” in the <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>and transfers the processed information on sensory inputs to “the brain” in the <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. The <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> thus receives that information via the <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em></li>
+<li><strong>It would be the reverse process when the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> sends commands to the brain, for example, to move body parts.</strong></li>
+<li style="text-align: justify;"><span style="font-size: 12pt;"><span style="letter-spacing: 0px;">Further details in "</span><a href="../../pages/AB.DD.002/index.html" rel="noopener noreferrer" style="letter-spacing: 0px;" target="_blank">Gandhabba (Manomaya Kaya)- Introduction</a>."</span></li>
+</ul>
+<h5>The Origin of <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> Vithi</span></em></h5>
+<p style="text-align: justify;">11. When information comes to one of the five <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span>,</span></em> it passes on that signal to the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> by impinging (hitting) the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>. That results in the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> vibrating 17 times, just like a clamped blade, when hit by an object, vibrates a certain number of times; see "<a href="../../pages/AB.DD.002/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)- Introduction</a>" and "<a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vithi – Processing of Sense Inputs</a>."</p>
+<ul style="text-align: justify;">
+<li>That is the origin of a<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> of 17 <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>.</span></em> Each <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> corresponds to a single vibration of <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>. This 17 thought-moment time is the lifetime of a<em><span> hadaya <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> ( vibrational energy) of the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>.</li>
+<li>It is a common mistake to take this to mean that <strong>any <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em></strong> has a lifetime of 17 thought moments. <span style="color: #3366ff;">That is a terrible mistake</span>; see, "<a href="../../pages/PS.GG.019/index.html" rel="noopener noreferrer" target="_blank">Does any Object (Rupa) Last only 17 Thought Moments?</a>".</li>
+<li><span>Describing these details in one or even several <span class="pali-term term-highlight" data-term="posts">posts</span> is impossible. One may need to look through other <span class="pali-term term-highlight" data-term="posts">posts</span> to clarify some concepts. The "Search" button on the top right is an excellent resource for this task.</span></li>
+</ul>
+<p style="text-align: justify;">12. Any of the five<em> pasāda rupās</em> has to strike the<em><span> <span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> to pass on its signal. However, signals from the <em><span><span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span></span></em> can exchange information with the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> directly.</p>
+<ul style="text-align: justify;">
+<li>When the<em><span> <span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span></span></em> interacts with the <em><span>hadaya <span class="pali-term term-highlight" data-term="vatthu">vatthu</span>, </span></em>that also results in a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi; s</span></em>uch<em> manodvara</em> <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi </span></em>do not have a fixed length.</li>
+<li>Still, only one of the six sensory signals can contact the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> at a given time. But since the process is swift, billions of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> can run through the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> "in the blink of an eye."</li>
+</ul>
+<h5>Two Inter-Dependent "Bodies"</h5>
+<p style="text-align: justify;">13. Therefore, this process involves interaction between two overlapping systems: the physical body and the corresponding subtle "energy body" of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>When the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>escapes from the body under stressful situations, it can float above the physical body. Then the physical body becomes inert until the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>returns to it; see, "<a href="../../pages/AB.DD.007/index.html" rel="noopener noreferrer" target="_blank">Manomaya Kaya and Out-of-Body Experience (OBE)</a>."</li>
+</ul>
+<p style="text-align: justify;">14. Thus, the brain plays a significant role in shaping our future. Similarly, the five physical senses play vital roles too.</p>
+<ul style="text-align: justify;">
+<li>If one of the five physical senses is damaged, we lose the corresponding "window to the external world." We will not be able to see If both eyes are damaged. If the sensors inside the ears are damaged, we cannot hear, etc.</li>
+<li>But the most critical is, of course, the brain. If the brain is damaged, sensory signals can not be processed, and we cannot interact with the external world. Thus, being brain-dead is virtually equivalent to being dead.</li>
+<li>However, if one's brain becomes damaged due to an accident, it will not affect the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>inside. It is just that the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>will not be able to communicate with the external world. And if damage to the brain results in the death of the physical body, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>will just come out of the dead body and wait for a suitable womb.</li>
+</ul>
+<h5>Next Existence Determined by <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span> Vipaka</span></em></h5>
+<p style="text-align: justify;">15. It does not matter whether one gets killed due to an accident or dies due to an illness or old age. The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>'s future is determined by his/her <em><span><span class="pali-term term-highlight" data-term="gati">gati</span> </span></em>(or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), past <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em>bija</em>), etc.</p>
+<ul style="text-align: justify;">
+<li>If the physical body dies in an accident, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>will immediately come out of the dead body. Then it will wait for a suitable womb if there is still more<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy left for the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (in an accident, that is likely).</li>
+<li>But if one gets to old age and dies or dies due to illness -- and if one has exhausted<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> --</span></em> then the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> will occur. If one is to become a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em>, a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> will appear instantaneously in the corresponding <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> world. If one is to become an animal, an animal <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> will emerge from the dead body and will have to wait for a suitable womb to become available.</li>
+</ul>
+<p style="text-align: justify;">16. It is also clear why we must take good care of the body, our sense faculties, and our brains. <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>'s (our) ability to make decisions depends on all those faculties working in optimum conditions.</p>
+<ul>
+<li style="text-align: justify;">We have a short lifetime of around 100 years to get rid of our defiled (immoral) <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>. </span></em> We also need to cultivate good (moral) <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>, comprehend the true nature of this world (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>), and be free from future suffering.</li>
+<li style="text-align: justify;">We need to try to get to the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> and be free from the four lowest realms (<em>apāyā</em>). At least, we must make progress towards that goal so that in a future life, we will have a <em>tihetuka</em> birth that makes it easier to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li style="text-align: justify;">We need to eat, exercise, and care for our bodies to perform optimally to accomplish those things. We also need to avoid drugs and alcohol and associate with those who have similar goals (and avoid those with bad habits).</li>
+</ul>
+<p>17. Some scientists and philosophers are beginning to understand that memories are not stored in the brain. See "<a href="https://getpocket.com/explore/item/the-empty-brain" rel="noopener" target="_blank">The Empty Brain</a>."</p>
+<ul>
+<li>Thanks to reader Diogo Roberto R. Freitas for alerting me to the above article.</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/AB.DD.005/index.html">Manomaya Kaya Gandhabba And The Physical Body</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/AB.DD.007/index.html">Manomaya Kaya And Out Of Body Experience Obe</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/AB.DD.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Manomaya Kaya Gandhabba And The Physical Body</span>
+        
+        <span class="pathway-title title-pt">Manomaya Kaya Gandhabba And The Physical Body</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/AB.DD.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Manomaya Kaya And Out Of Body Experience Obe</span>
+        
+        <span class="pathway-title title-pt">Manomaya Kaya And Out Of Body Experience Obe</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-AB">
+        ↑ Back to Abhidhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

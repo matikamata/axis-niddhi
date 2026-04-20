@@ -1,0 +1,340 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>What Is Anapana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Bhāvanā (Meditation)</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 9 / 34</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BM.AA.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">What Is Anapana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BM.AA.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Bhāvanā (Meditation)</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BM.AA.007"
+             data-section="Bhāvanā (Meditation)"
+             data-section-code="BM"
+             data-findex="0722"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BM.AA.007</td></tr><tr><td>Fin-dex</td><td>0722</td></tr><tr><td>Slug</td><td>what-is-anapana</td></tr><tr><td>Section</td><td>BM</td></tr><tr><td>Title EN</td><td>What Is Anapana</td></tr></table></div></div><p><strong>Revised April 2, 2017;  July 23, 2020; June 6, 2022; <span style="color: #3366ff;">October 11, 2002</span></strong></p>
+<p style="text-align: justify;"><strong><span>The top 10 <span class="pali-term term-highlight" data-term="posts">posts</span> in this section describe the fundamentals of <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> meditation. The rest of the <span class="pali-term term-highlight" data-term="posts">posts</span> in this section discuss meditation subjects. They clarify unresolved questions and help gain </span><em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em><span>. The first 11 <span class="pali-term term-highlight" data-term="posts">posts</span> should be followed in that order, at least initially.</span></strong></p>
+<p style="text-align: justify;">1. The "<a href="https://suttacentral.net/mn118/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span>, </span></em>MN 118)</a>" has the following verse:</p>
+<p style="text-align: justify;">"<em><span style="color: #3366ff;"><strong>Ānāpānassati</strong></span><span>, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, bhāvitā bahulīkatā mahapphalā hoti mahānisaṃsā. Ānāpānassati, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, bhāvitā bahulīkatā </span><span style="color: #3366ff;"><strong>cattāro satipaṭṭhāne</strong></span> paripūreti. Cattāro satipaṭṭhānā bhāvitā bahulīkatā <span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="satta">satta</span> bojjhaṅge</span></strong></span><span> paripūrenti. <span class="pali-term term-highlight" data-term="satta">Satta</span> bojjhaṅgā bhāvitā bahulīkatā </span><span style="color: #3366ff;"><strong>vijjāvimuttiṃ paripūrenti</strong></span></em>."</p>
+<p style="text-align: justify;"><strong>That means:</strong> "<span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em></strong></span>, <em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, when practiced frequently bears many fruits and leads to many benefits.<span style="color: #0000ff;"> <strong><span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, when cultivated and pursued, brings the four <em>Satipaṭṭhānas</em> to their completion</span>.</strong></span> The four <em>Satipaṭṭhānas</em>, when cultivated and pursued, bring the <span style="color: #3366ff;"><strong>seven <em><span><span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span></span></em></strong></span> to their completion. The seven <em><span><span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span></span></em>, when cultivated and pursued, bring <strong><span style="color: #3366ff;"><em>vijjā</em> (opposite of <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) and <em><span><span class="pali-term term-highlight" data-term="vimutti">vimutti</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>) to their completion</span>.</strong>"</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span style="color: #3366ff;">Now, if <em>ānapāna</em> means "breathing in and breathing out," how can that lead to the completion of the four <em>Satipaṭṭhānas, the seven <em><span><span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span>, </span></em></em>removal of<em><em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span>, </span></em></em>and the attainment of<em><em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>? </span></em></em>Can anyone seriously think that is possible?</span></li>
+<li style="text-align: justify;">Instead, <em>ānapāna </em>MEANS cultivating <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span></span></em>, etc., by "taking in morals" and "expelling immoral," as we discuss below.</li>
+</ul>
+<p style="text-align: justify;">2. <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> is a more detailed version of the <em><span><span class="pali-term term-highlight" data-term="ānāpānasati bhāvanā">Ānāpānasati Bhāvanā</span></span></em>. Thus it is essential to learn the correct version of the <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>. If one does <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span> </span></em>correctly, it can be easily turned into <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span>Section 4 on "<span class="pali-term term-highlight" data-term="dhammānupassanā">Dhammānupassanā</span>" describes how the cultivation of the four types of </span><em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em><span>leads to the removal of the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> and fulfillment of the seven </span><em><span><span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span></span></em> to their completion. See, "<a href="https://suttacentral.net/mn10/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 10)</a>." That confirms the statements in the <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>mentioned above.</li>
+</ul>
+<p style="text-align: justify;"><span>3. First, let us figure out exactly what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> meant by "</span><em>ā</em><em>na"</em> and "<em>ā</em><em>pāna"</em> in "<em>ā</em><em><span>na+āpāna+<span class="pali-term term-highlight" data-term="sati">sati</span>"</span></em> which rhymes as <em>ā</em><em>nāpānasati</em>; of course, "<em><span><span class="pali-term term-highlight" data-term="sati">sati</span>"</span></em> is mindfulness.</p>
+<ul style="text-align: justify;">
+<li>"<em>Ā</em><span>na" is taking in; In <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, "</span><em>ā</em><em>nayānaya"</em> is "import." "<em>ā</em><em>pāna"</em><span> is discarding;  In <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, "</span><em>apānayānaya"</em> is "export." Thus "<em>ā</em>na" + "<em>ā</em>p<em>ā</em>na" or <em>ānapāna</em> is "taking in/discarding" or import/export.</li>
+<li>"Assa" is the same as "<em>ā</em>na", and "passa" is the same as "<em>ā</em>p<em>ā</em>na". In Sri Lanka, parents tell their child to clean his/her room by saying, "<em>kāmaraya</em> (room) <em>assa passa</em> (or <em>aspas</em>) <em>karāganna" </em>(කාමරය අස්පස් කරගන්න.)</li>
+<li>When cleaning the room, the child needs to get rid of the clutter (<em>passa</em>) but also can take in (<em>assa</em>) something like a flower vase to make the room look more pleasant or to take in a chair that can be useful.</li>
+</ul>
+<p style="text-align: justify;">4. <strong><span>During the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> itself, auxiliary </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span>,</span></em> as well as commentaries ("<em>Atthakatha"</em><span>), were written to explain the keywords/phrases in the main <span class="pali-term term-highlight" data-term="suttā">suttā</span> that were abbreviated for easy transmission; see "</span><a href="../../pages/HB.AA.007/index.html" rel="noopener noreferrer" target="_blank" title="Preservation of the Dhamma">Preservation of Dhamma</a>." </strong></p>
+<p style="text-align: justify;">There are two crucial <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em>, "<a href="https://suttacentral.net/sn38.5/en/sujato" rel="noopener" target="_blank"><em><span>Assāsappatta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 38.5)</a>" and the "<a href="https://suttacentral.net/sn38.6/en/sujato" rel="noopener" target="_blank"><em><span>Paramassāsappatta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 38.6)</a>" that describe how one should "take in" <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em> thoughts and "discard" <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em> thoughts; that is "<em>ā</em>na" +" <em>ā</em>pāna" (ā<em>napāna</em>) or "<em>assa/passa,"</em><span> for cleaning up (the mind). The English translation there is hopeless, but one can get the idea by looking at the <span class="pali-term term-highlight" data-term="pali">Pali</span> version. You don't need to be an expert on <span class="pali-term term-highlight" data-term="pāli">Pāli</span> to see that.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">In the <em><span>Mahasaccaka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>, "<em>assa/passa"</em><span> was also used to indicate "in and out breathing" when the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was describing to Saccaka how he engaged in the "breath meditation" per instructions by Alāra Kālama and Uddakarāmaputta while he was searching for the truth as </span><em>Bodhisatta</em>.</li>
+<li style="text-align: justify;">But the following verses of that <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> describe how he gave up on that technique and moved onto the correct path.</li>
+<li style="text-align: justify;">So, we must ensure a given phrase is used in the proper context, depending on the situation.</li>
+<li style="text-align: justify;">For example, there are several conventional and deeper meanings to the keywords "<em>atta"</em> and "a<em>natta,"</em> and one needs to be able to figure out which meaning to use for a given case; see, "<a href="../../pages/DD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Atta Hi Attano Natho</a>," "<a href="../../pages/KD.FF.017/index.html" rel="noopener noreferrer" target="_blank">Anatta – the Opposite of Which Atta?</a><span>", and links in those <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify;">5. When one knows what <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>/<span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em> are, the first thing to do is to prevent from doing <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em> and to make an effort to do <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em> by engaging in meritorious actions (<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> kriya</span></em>); see, "<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Ten Immoral Actions (Dasa Akusala)</a>", and "<a href="../../pages/TL.EE.004/index.html" rel="noopener noreferrer" target="_blank" title="Ten Moral Actions (Dasa Kusala) and Ten Meritorious Actions (Punna Kriya)">Punna Kamma – Dāna, Sīla, Bhāvanā</a>".</p>
+<ul style="text-align: justify;">
+<li>Thus, when one leads a moral life, one automatically engages in the primary form of <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>.</li>
+<li>And, one cannot do a proper formal <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span> </span></em>meditation and get to even <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>, let alone a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span>,</span></em><span> unless one leads a moral life. The <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> are too strong to be suppressed; see "</span><a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank" title="Key to Calming the Mind – The Five Hindrances">Key to Calming the Mind - Five Hindrances</a>."</li>
+</ul>
+<p style="text-align: justify;">6. <strong>Formal <em><span><span class="pali-term term-highlight" data-term="ānāpānasati bhāvanā">Ānāpānasati Bhāvanā</span></span></em></strong> can be done in a formal sitting or walking meditation session while engaging in the basic version (taking in what is good/discarding what is evil) all the time.</p>
+<ul style="text-align: justify;">
+<li>There is no need to do <em><span><span class="pali-term term-highlight" data-term="samatha bhāvanā">Samatha Bhāvanā</span></span></em> separately. If one does a formal <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span> </span></em>session with the eyes closed in a quiet place, one will automatically get into <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>. <strong>Let good thoughts grow, and discard evil thoughts. Very simple.</strong></li>
+<li>Another thing to do in a formal meditation session is contemplate a<strong><span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> concept like </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, or <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>. That means focusing on "<em>ā</em>na."</strong></li>
+<li>When one gets to <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>, the mind goes on "auto-pilot"; you will feel that your mind is taking charge and you need to exert less effort to keep the focus.</li>
+</ul>
+<ol style="text-align: justify;">
+<li>When one does the basic version while engaged in other activities, one is only mindful of what one is engaged in, i.e., the task at hand. That task presumably does not involve the BIG EIGHT we discussed previously; see "<a href="../../pages/TL.BB.001/index.html" rel="noopener noreferrer" target="_blank" title="The Basics in Meditation">The Basics in Meditation</a>." It could be a technical task or a daily chore like washing dishes or driving. <b> Be mindful of just the task (washing, driving, etc.).</b> Here, one will NOT get into <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>, so there is no danger of injuring oneself. Many people get into accidents while driving because they are not mindful of driving.</li>
+</ol>
+<ul style="text-align: justify;">
+<li>However, if one does not have a specific task (say, when riding a bus or waiting at the doctor's office), one could be engaged in <em><span><span class="pali-term term-highlight" data-term="ānāpānasati bhāvanā">Ānāpānasati Bhāvanā</span></span></em>. When our minds are not focused on something (like in the cases mentioned above), all sorts of ideas bubble up. As we discussed in "<a href="../../pages/TL.BB.001/index.html" rel="noopener noreferrer" target="_blank" title="The Basics in Meditation">The Basics in Meditation</a>." These are due to deeply ingrained habits or <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> that we have acquired not only in this life but also from previous lives.</li>
+</ul>
+<p style="text-align: justify;">8. The more we keep reviving or re-living this habit (i.e., doing <em>āna/apāna</em> or <em>assa/passa</em>), the more we strengthen that good habit (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>We have come all this way in the cycle of rebirths that are mostly filled with suffering because of our bad habits (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) that have been percolated into a very dense state of deep-seated cravings (<em>ā</em><em>savas</em>). It may take some time to develop this "<em>āna/pāna,"</em> but you will see results in a few weeks to a few months.</li>
+</ul>
+<p style="text-align: justify;">9. In the <em>ānapānapabba</em> of the <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, it says, "<em><span>..sō satō vā assa <span class="pali-term term-highlight" data-term="sati">sati</span>, satō vā passa <span class="pali-term term-highlight" data-term="sati">sati</span>. Digham vā assasantō digham assasāmi ti pajānāti, digham vā passasantō digham passasāmi ti pajānāti, ......"</span></em> Here it DOES NOT mean "take long breaths in, expel long breaths out"; instead, it means "get rid of long-established (deeply-rooted) bad habits, and cultivate long-established good habits."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Similarly, the next sentence ("<em>..rassam vā assasantō..."</em>) is not about short breaths but about those good habits that you started to work on recently and those bad habits that started to creep into your mind recently (if there are any).</li>
+<li style="text-align: justify;">One cannot purify one's mind by breathing in/out, even though it can get one's mind to calm down (<em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em>). The correct way of doing it is doing both <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> together.</li>
+</ul>
+<p style="text-align: justify;">10. When we think a bit more about this, we realize that what needs to be discarded are <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> (wrong views), <em><span><span class="pali-term term-highlight" data-term="micchā saṅkappa">micchā saṅkappa</span></span></em> (wrong thoughts or ideas), <em><span><span class="pali-term term-highlight" data-term="micchā">micchā</span> vācā</span></em> (incorrect, harmful speech), <em><span><span class="pali-term term-highlight" data-term="micchā">micchā</span> kammaṃta</span></em> (incorrect/harmful actions), <em><span><span class="pali-term term-highlight" data-term="micchā">micchā</span> ājiva</span></em> (incorrect/harmful way of living),<em><span> <span class="pali-term term-highlight" data-term="micchā vāyāma">micchā vāyāma</span></span></em> (tendency to strive on immoral activities), <em><span><span class="pali-term term-highlight" data-term="micchā sati">micchā sati</span></span></em> (tendency to focus on immoral activities); when one does all that <em><span><span class="pali-term term-highlight" data-term="micchā samādhi">micchā samādhi</span></span></em> (tendency to get absorbed in immoral ideas/actions) is the result.</p>
+<ul style="text-align: justify;">
+<li>In the same way, what we need to "take in" are <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span>,  <span class="pali-term term-highlight" data-term="sammā saṅkappa">sammā saṅkappa</span>, <span class="pali-term term-highlight" data-term="sammā">sammā</span> vācā, <span class="pali-term term-highlight" data-term="sammā">sammā</span> kammaṃta, <span class="pali-term term-highlight" data-term="sammā">sammā</span> ājiva, <span class="pali-term term-highlight" data-term="sammā vāyāma">sammā vāyāma</span>, <span class="pali-term term-highlight" data-term="sammā sati">sammā sati</span></span></em>, and when one keeps doing that one automatically gets to <em><span><span class="pali-term term-highlight" data-term="sammā samādhi">sammā samādhi</span></span></em>.</li>
+<li>Put in another way, <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span> </span></em>is nothing but "taking in" the Noble Eightfold Path and "discarding" the opposite.</li>
+</ul>
+<p style="text-align: justify;"><span>11. The longer one "takes in" or "lives" the Noble Eightfold Path and "rejects" the opposite, the easier it becomes to get to <span class="pali-term term-highlight" data-term="samādhi">samādhi</span> in a formal meditation session. As </span><em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> grows gradually, one day, one will automatically get into the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. However, one more thing is needed before getting to the <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> jhānā: </span></em>an understanding of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and ānatta</span></em>. See "<a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">Is Ānāpānasati Breath Meditation?</a>"</p>
+<ul>
+<li style="text-align: justify;">Keep practicing "<em>ānapāna"</em> as much as possible throughout the day. With time, you will feel the "cooling down" or '<em>nivana"</em> or "a taste of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>."</span></em></li>
+<li style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is NOT about following rituals. It is all about cleansing one's mind, which takes effort and concentration. Initially, it could be challenging, but as one gains </span><em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> bit by bit, one gets motivated. In a few months, one can look back at one's life and see that it has changed for the better.</li>
+<li style="text-align: justify;"><span style="color: #3366ff;">Even though one can start with discarding immoral deeds and cultivating or taking in morals, one needs to know the real meanings of "<em>san,"</em> <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>,</span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> to do the <em>ā</em><em><span>nāpānasati <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span> </span></em>in a deeper sense:</span> (i) One needs to comprehend which "<em>san"</em> or defilements to be discarded; see, "<a href="../../pages/KD.DD.001/index.html" rel="noopener noreferrer" target="_blank">San</a>." (ii) One needs to know the deeper meanings of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>; see, "<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta</a>."</li>
+</ul>
+<p>12. More details with many <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> references at “<a href="../../pages/ER.FF.001/index.html" rel="noopener" target="_blank">Elephant in the Room 3 – Ānāpānasati</a>.”</p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BM.AA.006/index.html">Anapanasati Bhavana Introduction</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BM.AA.008/index.html">Anapanasati Not Breath Meditation</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BM.AA.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anapanasati Bhavana Introduction</span>
+        
+        <span class="pathway-title title-pt">Anapanasati Bhavana Introduction</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BM.AA.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Anapanasati Not Breath Meditation</span>
+        
+        <span class="pathway-title title-pt">Anapanasati Not Breath Meditation</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BM">
+        ↑ Back to Bhāvanā (Meditation)
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

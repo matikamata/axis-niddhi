@@ -1,0 +1,373 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Citta Basis Of Experience Actions | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Is There a “Self”?</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 2 / 20</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">IS.CC.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Citta Basis Of Experience Actions</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>IS.CC.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Is There a “Self”?</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="IS.CC.002"
+             data-section="Is There a “Self”?"
+             data-section-code="IS"
+             data-findex="0304"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>IS.CC.002</td></tr><tr><td>Fin-dex</td><td>0304</td></tr><tr><td>Slug</td><td>citta-basis-of-experience-actions</td></tr><tr><td>Section</td><td>IS</td></tr><tr><td>Title EN</td><td>Citta Basis Of Experience Actions</td></tr></table></div></div><p>What we conventionally call a "thought" is the cumulative effect of billions of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. A <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em><span> is the fundamental unit of cognition in <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>.</span></p>
+<p><strong>September 22, 2019; revised November 30, 2022;<span style="color: #3366ff;"> July 7, 2024</span></strong></p>
+<h5>Introduction</h5>
+<p style="text-align: justify;">1. We have been discussing the first few verses of the <em><span>Chachakka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 148) in the series on "<a href="../../pages/DS.DD.002/index.html" rel="noopener" target="_blank">Buddhist Worldview – Introduction</a>." It is a good idea to take a break and look at what we have learned from a different point of view.</p>
+<ul style="text-align: justify;">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> called himself a "</span><em>vibhajjavādi</em>." That means he explained things in great detail by diving into and subdividing a given entity or concept to examine it at more fundamental levels.</li>
+<li>That is very much like what the scientists are doing today. They first explained the matter in terms of molecules and then atoms. Later, they found that an atom has a nucleus and electrons in orbitals around it. Then they probed the nucleus and discovered that more fundamental particles (with names like gluons and quarks) make up the nucleus.</li>
+<li>By probing deeper, physicists also came up with Quantum Mechanics. Matter and energy are "quantized" on a small scale. That means they come in "packets" or "quantā" (the singular is "quantum.")</li>
+<li><span>More than 2500 years ago, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught that matter and energy are quantized. The smallest "quantum" in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is a </span><em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>. But that is not relevant to the present discussion.</li>
+</ul>
+<h5 style="text-align: justify;">Sensory Experience is Quantized - It comes in "Packets"</h5>
+<p style="text-align: justify;">2. I am not going to discuss Quantum mechanics here. But I want to look at the “<a href="https://suttacentral.net/mn148/en/sujato" rel="noopener" target="_blank"><em><span>Chachakka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 148)</a>" from a different point of view. That will break the tradition of providing boring translations of <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, and I hope will also provide better insights into the material in the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>. This discussion would be beneficial before we move to the next section of the<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span>As you will see below, scientists are just beginning to take mental phenomena seriously. They have made a bit of progress. But they are not even close to having a detailed analysis of mental phenomena that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> did over 2500 years ago.</span></li>
+<li><span>Mental energy is also quantized, even though we may feel like thoughts are continuous. The smallest unit in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is a "</span><em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>". A <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> lasts less than a billionth of a second. <strong>We cannot experience a single <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</strong> Even though it is conventionally translated as "a thought," that is incorrect.</li>
+<li>What we usually think of as a "thought" consists of billions of <em>cittā</em> (The plural of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is <em>cittā,</em> but sometimes I tend to write that as <em>cittā </em>just because that is easier for most people.) By the way, <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is pronounced: "chiththa."</li>
+</ul>
+<h5 style="text-align: justify;">What is a Thought?</h5>
+<p style="text-align: justify;"><span>3. Let us first see the progress that science has made over the past 50 years. Science is still at a very early stage regarding the mind. But they have made some progress recently, and we will show them to be entirely consistent with <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Those findings help explain more profound concepts in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul style="text-align: justify;">
+<li>Only fifty years ago, scientists thought computers could "become conscious" by increasing processing speeds. Now some computers are much faster, but they do not have consciousness. We will discuss later why computers will never become conscious.</li>
+<li>The following is a presentation entitled "What is a Thought?" by Henning Beck, a scientist studying brain phenomena.</li>
+</ul>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/oJfFMoAgbv8" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5 style="text-align: justify;">A Computer Does Not Have Perception (<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>)</h5>
+<p style="text-align: justify;">4. At 4:00 minutes, we see a "face" made up of fruits and vegetables. Even though it is not a natural human face, it takes us just a second to realize that it represents a face.</p>
+<ul style="text-align: justify;">
+<li>But as Mr. Beck points out, a computer will never be able to recognize the representation of the human face depicted there.</li>
+<li>At 9:20 minutes, he starts discussing the identification of a chair. Again, a computer has difficulty identifying "less obvious" structures that can serve as chairs.</li>
+<li>In both these instances, what the computer is missing is <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> (loosely translated to English as "perception"). Even animals can recognize objects relevant to their survival. A dog, for example, can instantly recognize its owners and any other pets living in the house. It can recognize foods that it likes, etc. See "<a href="../../pages/KD.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Saññā – What It Really Means</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Vēdanā, <span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>, Joy, Sadness, etc. Cannot Arise in a Brain</h5>
+<p style="text-align: justify;">5. Around 6:00 minutes, Mr. Beck starts talking about human thought. All he (and other scientists) know right now is that our thoughts rise very fast. But they do not explain how thoughts with feelings (<em>vedana</em>), perception (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>), joy, etc., can arise from a brain made of inert atoms and molecules.</p>
+<ul style="text-align: justify;">
+<li>A brain is not that different from a computer because atoms and molecules are the building blocks of both. Both can process information. But a brain processes information in a very different way compared to a computer. It involves billions of neurons working as a team. Scientists are not even close to figuring out how the brain processes information.</li>
+<li>In the future, scientists may be able able to figure out how those neurons can process information much faster than a computer with a thousand times higher processing speeds.</li>
+<li>However, they will still NOT be able to figure out how a human or animal can recognize their surroundings AND generate emotions (happy, sad, etc.)</li>
+<li>Around 11:00 minutes, he discusses the difference between learning and understanding. That is an excellent point.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Vēdanā, <span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>, Joy, Sadness, etc. Arise in the "Mental Body"</h5>
+<p><span>In a previous <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/DS.EE.001/index.html" rel="noopener noreferrer" target="_blank">Contact Between Āyatana Leads to Vipāka Viññāna</a>," I mentioned that plants and trees have a basic form of <em>vēdanā</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em><span>(see #3,#4 there.) However, plants and trees CANNOT generate emotions like joy and sadness. A tree does not have a mind or a "mental body" created by <span class="pali-term term-highlight" data-term="kammic">kammic</span> energy.</span></p>
+<p style="text-align: justify;">6. Similarly, a brain cannot generate a thought. How can feelings and emotions come from an entity made of inert atoms and molecules? The "mental body" of a living being is created by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</p>
+<ul style="text-align: justify;">
+<li>There has to be a LIVING BEING to generate a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, the basic unit of consciousness. For a human being, the essence of that LIVING ENTITY is not the physical body but the mental body.</li>
+<li><span style="color: #3366ff;"><strong>That "mental body" is alternatively called a <em>manōmaya</em> <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</strong></span> It consists of a <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of mind) and five <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em> located around it (for seeing, listening, smelling, tasting, and touching.) The mental body is not like the "physical body." It is more like an "energy body" that gives life to the inert and dense physical body.</li>
+<li>A <em>manōmaya</em> <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>may be visualized as an "energy field" within the physical body, with the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> and five <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em> overlapping the region of the physical heart.</li>
+</ul>
+<p style="text-align: justify;">7. Our brains cannot identify objects. It cannot generate emotions like joy and sadness. As discussed in #4 above, animals without brains can identify things and generate feelings and emotions.</p>
+<ul style="text-align: justify;">
+<li>It is the <strong>mental body (<em>manōmaya</em> <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>or <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>)</strong> that generates emotions like joy and sadness as well as <em>vedana</em>, <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em></li>
+<li><span style="color: #0000ff;"><span style="color: #3366ff;">More precisely, those mental phenomena arise in the <strong><em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of mind)</strong> of the </span><em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></span>.</em></span></li>
+</ul>
+<p style="text-align: justify;">8. The details are not critical, but the primary mechanism is essential to understand. A brain does not see, hear, smell, taste, or touch. The seat of the mind (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>) experiences all those. <span style="color: #993366;"><strong>A<em><span> <span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> can be created ONLY by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</strong></span></p>
+<ul style="text-align: justify;">
+<li>That is why the human body is just a shell that supports the mental body (<em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> or the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>). At the death of the physical body, that <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> leaves the body instantly. When we touch a dead body, it is evident that there is no "life."</li>
+<li><strong>A living body is like a "live wire" with an electric current flowing through.</strong> One will get an "electrical shock" by touching it. But if there is no electric current, it is just a metal wire.</li>
+<li><strong>In the same way, a <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> gives "life" to an inert physical body.</strong></li>
+</ul>
+<h5 style="text-align: justify;">The<em><span> Manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> Changes from Existence to Existence</h5>
+<p style="text-align: justify;">9. What happens to the <strong><em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em></strong>at the end of existence? To clarify, let us take the case of a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> dying and getting a human existence. That transition from a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em><span> to a human happens at the moment of death of that <span class="pali-term term-highlight" data-term="brahma">Brahma</span>. It is called the </span><strong>"<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em>" moment</strong> ("<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em>" means dying, and "<em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em>" means getting a new existence.)</p>
+<ul style="text-align: justify;">
+<li>A <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> has a seat of the mind (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>) and two <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em> (for seeing and hearing). <span style="box-sizing: border-box; margin: 0; padding: 0; text-align: left;">On the other hand, the new human existence would have five <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em> (for seeing, listening, smelling, tasting, and touching).</span> Furthermore, the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> of the human would be different from that of a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>.</li>
+<li>Therefore, the <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>of the new human existence differs from that of the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>. </span></em></li>
+<li>Suppose that at the end of that human existence, that human gets an animal existence. Then, at that "<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em>" moment, that new animal existence would have its own set of <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> and five <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">10. Those three existences are very different, even though it is the same "lifestream." So, what can be taken as a "soul" or a "self"?</p>
+<ul style="text-align: justify;">
+<li><span>That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said there is no "soul " or a "self" or a "</span><em>ātma</em>" going from one birth to another. In the above example, the same "lifestream" that started as a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> became a human and then an animal. <span style="color: #3366ff;"><strong>What is the ESSENCE that defines a "soul" or a "self" or a "<em>ātma</em>"?</strong></span></li>
+<li>The details are in the section "<a href="../../pages/IS.CC.001/index.html" rel="noopener" target="_blank">Sensory Experience – Basis of Buddhā’s Worldview</a>." First, let us look into the mechanism of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> generation.</li>
+</ul>
+<h5 style="text-align: justify;">A <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> Has <em><span>Vēdanā, <span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>, and Many Other "Built-In" Mental Factors</h5>
+<p style="text-align: justify;">11. A <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is the fundamental unit of cognition, which we do not feel by itself. It comes in bunches of 12 or more <em>cittā</em>. Those "bunches" or series of <em>cittā</em> are <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>. <strong>What we "feel" or "experience" is the cumulative effect of numerous such <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>.</strong></p>
+<ul style="text-align: justify;">
+<li>Any <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> that arises due to sensory input from one of the five physical senses has 17 <em>cittā</em>. It is a <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>.</li>
+<li>On the other hand, a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> arising directly in mind (due to <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>) may have varying numbers of <em>cittā</em>, with a minimum of 12 <em>cittā</em>. That is a <em><span>manōdvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi.</span></em></li>
+</ul>
+<p style="text-align: justify;">12. What we usually call a "thought" is the cumulative effect of billions of such <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> that arise PER SECOND.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Each of those <em>cittā</em> has at least seven mental factors (<em>cētasikā</em>). Those universal <em>cētasikā</em> include <em>vēdanā</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>. <em>Vēdanā</em> <em>cētasika</em> makes one FEEL a sensory input. The <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> <em>cētasika</em> is the one that recognizes that sensory input.</li>
+<li><span style="color: #3366ff;"><strong>Only a living being can generate that fundamental unit of cognition (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) within a billionth of a second, with built-in seven or more <em>cētasikā.</em></strong></span></li>
+<li>That is why a computer or a robot will NEVER become conscious. <span style="color: #993366;"><strong>Only <em><span><span class="pali-term term-highlight" data-term="kammic">Kammic</span></span></em> energy can create a <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> with the seat of the mind (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>). </strong></span></li>
+<li><span style="color: #993366;"><span style="color: #000000;">That is why there will NEVER be true Artificial Intelligence (AI)! There can only be sophisticated robots capable of, for example, autonomous driving.</span></span></li>
+</ul>
+<h5 style="text-align: justify;">Important Role of the Brain</h5>
+<p style="text-align: justify;">13. Even though the brain cannot generate <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, it plays a critical role in getting the information about the sense object to the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>. More details at "<a href="../../pages/AB.DD.006/index.html" rel="noopener noreferrer" target="_blank">Brain – Interface between Mind and Body</a>." Let us briefly discuss the series of events following the capture of an image by our eyes.</p>
+<ul style="text-align: justify;">
+<li>The retinas at the back of the eyes send the captured image to the visual cortex in the brain through the optical nerve. That part of the brain then analyzes the signal to a form the mind can understand. That information is sent to the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> pasada <span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>in the <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em> Then the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> <span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em> makes contact with <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>, which vibrates 17 times due to that "impact."</li>
+<li>Those 17 vibrations of the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> correspond to the generation of a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> with 17 <em>cittā</em>. That is the origin of a <em><span>cakkhudvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>. It is not necessary to learn those details. But those interested can find details at "<a href="../../pages/PS.GG.019/index.html" rel="noopener noreferrer" target="_blank">Does any Object (Rupa) Last only 17 Thought Moments?</a>."</li>
+<li>Sensory inputs coming through the other four physical senses (ears, nose, tongue, and the body) work the same way.</li>
+</ul>
+<p style="text-align: justify;">14. Remember that the sensory input comes to a <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em> in the mental body AFTER the brain processes the sensory signal. For example, when we see a tree, the image of the tree received by the eyes is processed by the brain first.</p>
+<ul>
+<li style="text-align: justify;">Then the brain transmits that processed signal to the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> <span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em>, which, in turn, transfers it to the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span>.</span></em></li>
+<li style="text-align: justify;">It is the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> that "feels" or "experiences" that image and "sees" the tree.</li>
+<li style="text-align: justify;">But even a sensory experience that we "feel" arises from a series of "sensory packets." For example, when we see a tree, that image does not come in continuously. It comes in "packets" or "snapshots."</li>
+<li style="text-align: justify;"><span>That is similar to how a video camera or a movie film works. We will discuss that in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/IS.CC.005/index.html" rel="noopener noreferrer" target="_blank">Vision Is a Series of “Snapshots” – Movie Analogy</a>."</li>
+</ul>
+<p><span>The complete set of <span class="pali-term term-highlight" data-term="posts">posts</span> at "</span><a href="../../pages/DS.BB.001/index.html" rel="noopener" target="_blank">Origin of Life</a>."</p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/IS.CC.006/index.html">Do I Have A Mind That Is Fixed And Mine</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/IS.CC.003/index.html">Vipaka Vedana Samphassa Ja Vedana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/IS.CC.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Do I Have A Mind That Is Fixed And Mine</span>
+        
+        <span class="pathway-title title-pt">Do I Have A Mind That Is Fixed And Mine</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/IS.CC.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Vipaka Vedana Samphassa Ja Vedana</span>
+        
+        <span class="pathway-title title-pt">Vipaka Vedana Samphassa Ja Vedana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-IS">
+        ↑ Back to Is There a “Self”?
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

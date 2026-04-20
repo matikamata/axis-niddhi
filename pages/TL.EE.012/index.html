@@ -1,0 +1,520 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Why Is It Necessary To Learn Key Pali Words | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 39 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.EE.012</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Why Is It Necessary To Learn Key Pali Words</h1>
+    
+    <h1 class="title-pt">Por que é necessário aprender as principais palavras em Pālī?</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.EE.012</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.EE.012"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0431"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.EE.012</td></tr><tr><td>Fin-dex</td><td>0431</td></tr><tr><td>Slug</td><td>why-is-it-necessary-to-learn-key-pali-words</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Why Is It Necessary To Learn Key Pali Words</td></tr></table></div></div><p style="text-align: justify"><strong>Original written before October 23, 2015; Revised March 4, 2017; October 8, 2018</strong></p>
+<p style="text-align: justify"><span>I had not given this issue much thought until someone at an online forum pointed out in 2014 that I was using too many <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words and it was difficult to understand the meaning of those terms. This is an important point that has two aspects:</span></p>
+<ul>
+<li style="text-align: justify">In the<em><span> Arana Vibhanga <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> (MN 139), the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> advised </span><em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em><span> to explain the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> by providing the MEANINGS and not to emphasize a given language. As long as one comprehends the concept, it does not matter what language is used.</span></li>
+<li style="text-align: justify">On the other hand, we need to have a way to transmit the key foundational words for future generations without distorting the meaning of such words. And it is difficult to find suitable words in other languages for keywords like <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</li>
+</ul>
+<ul style="text-align: justify">
+<li><span>I have explained the meaning of any <span class="pali-term term-highlight" data-term="pāli">Pāli</span> term I use. But for a first-time reader, this could be a legitimate issue. Please use the "Search" button on the top right to locate relevant <span class="pali-term term-highlight" data-term="posts">posts</span> for any keyword. There is a "</span><a href="../../pages/TS.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (A-K)</a>" and "<a href="../../pages/TS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (L-Z)</a>".</li>
+</ul>
+<p style="text-align: justify"><span>1. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is the most complex theory in the world; it encompasses all of nature’s laws. Even though its basic premises are not hard to grasp, if one needs to dig deeper, one needs to spend some time “learning the basics”, or the “fundamental ideas involved”.</span></p>
+<ul style="text-align: justify">
+<li>Think about it this way: Can one learn algebra without knowing arithmetic?</li>
+<li>The key is to learn the basic ideas well, words like <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>, <span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em><span> etc. It is said that one could understand the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s message about existence just by comprehending </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> (which will lead to an understanding of<em><span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>), and that is true.</li>
+<li>But that is not possible if <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em><span> is translated into English as just one word: impermanence. The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> means much more than just impermanence. So, it is better for the word <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and to learn what is meant by that word.</li>
+<li><em>Viññāna</em> is another word like that. It should not be translated just as "consciousness"; it is much more complex; see, "<a href="../../pages/KD.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Viññāna – What It Really Means</a>".</li>
+</ul>
+<p style="text-align: justify">2. There is another aspect too. If one learns the basic concepts in addition/subtraction or even quantum mechanics, it does not matter what language one uses to learn it. The key is to get the IDEA, not just learn the words. One can learn addition/subtraction or quantum mechanics in ANY language, not by memorizing words but by understanding the key concepts.</p>
+<ul>
+<li style="text-align: justify">When a child learns how to add/subtract, he/she has to learn the basic multiplication table and the procedures on how to use that knowledge in handling big numbers. After that he/she can solve any arbitrary problem involving big numbers.</li>
+<li style="text-align: justify"><span>In the same way, one needs to get the IDEAS embodied in some key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words because many of those <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words CANNOT be directly translated into other languages: They are highly condensed, each word packed with deep meanings.</span></li>
+<li style="text-align: justify">In quantum mechanics, the word “quantum” embodies the subject; regardless of the language one uses, one knows what a quantum is. In the same way, one needs to know what “<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>” is. There is no other word for it in English.</li>
+<li style="text-align: justify"><strong><span>Once one UNDERSTANDS the meaning of a certain key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word, then one may even be able to find a suitable word in any language to keep it in mind. There is no need to memorize <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words for the sake of memorizing. It is similar to learning any concept.</span></strong></li>
+<li style="text-align: justify"><span>We just should not change the original <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words in the </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span>. That is the "blueprint" that needs to be transmitted intact so that <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s original message will be kept intact.</span></li>
+</ul>
+<p style="text-align: justify"><span>3. Let us first examine the reasons why <span class="pali-term term-highlight" data-term="pāli">Pāli</span> is a special language.</span></p>
+<ul style="text-align: justify">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> delivered his discourses in </span><em>Māghadhi</em><span> language; a version of that language suitable for memorization (<span class="pali-term term-highlight" data-term="pāli">Pāli</span>) was used to SUMMARIZE those </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>. For example, <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Cakka Pavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> was delivered to the five ascetics overnight. How many pages would it take to write all that down? Yet, it was condensed into a few pages.</li>
+<li>In the old days, <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em><span> were orally transmitted generation-to-generation, and that was the other reason to condense it into a special form like a poem that is easy to remember and recite. The origin of the word “<span class="pali-term term-highlight" data-term="pāli">Pāli</span>” comes from that particular way of organization of the words.</span></li>
+</ul>
+<p style="text-align: justify"><span>4. Therefore, it may take several words in a different language to express the meaning of some <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words like </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>, <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, etc. <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> is another whole phrase that is best kept intact and just learn what is meant by that phrase; see, “<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda”</a>“.</p>
+<ul style="text-align: justify">
+<li><span>Thus most <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words are impossible to be translated word-by-word to other languages. </span><strong>There is a system to glean the true meanings of the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> as well as the deep subject of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em></strong>; see, "<a href="../../pages/SI.AA.001/index.html" rel="noopener noreferrer" target="_blank">Sutta – Introduction</a>".</li>
+<li>This is the reason that many commentaries were written in the old days to explain the meaning of keywords and phrases; see, “<a href="../../pages/HB.AA.007/index.html" rel="noopener noreferrer" target="_blank">Preservation of Dhamma</a>“ for details.</li>
+<li>Unfortunately, most of those original commentaries (<em><span><span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> Attakathā</span></em><span>) cannot be found today, except for three; see the above <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<p style="text-align: justify">5. Most of the problems we have today are due to such “word by word” translation of <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> into other languages.</p>
+<ul>
+<li style="text-align: justify">The most visible and disastrous translations are the translation of the words <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> into <em><span><span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span></span></em> as <em>anitya</em> and <em>anātma</em><span>; these words were then ADOPTED in the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language to express the meaning of </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>. Then within the last two hundred or so years, those <em><span><span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span></span></em> words were directly translated to English and now have become established to mean “impermanence” and “no-self”; see, "<a href="../../pages/HB.AA.018/index.html" rel="noopener noreferrer" target="_blank">Misinterpretation of Anicca and Anatta by Early European Scholars</a>".</li>
+<li style="text-align: justify"><span>Incorrect translation of just those words have kept the message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> hidden for over fifteen hundred years. It is not an accident that there have not been that many </span><em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> during that time.</li>
+<li style="text-align: justify">For the correct meanings of these words, see,  “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta – Wrong Interpretations</a><span>“ and the follow-up <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<p style="text-align: justify">6. In fact, it is said that one can reach the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage by just comprehending the true meanings of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, the three characteristics of the world. These three words have embodied in them a very broad message. Whole <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> were delivered to describe what was meant by those words! <span style="color: #0000ff"><strong>It is WRONG and DISASTROUS to just translate them as impermanence, suffering, and "no-self".</strong></span></p>
+<ul style="text-align: justify">
+<li><b>But if one wishes</b>, and knows the correct interpretations, one can dig much deeper to unimaginable depths. For example, there is a process involving 9 steps where a given <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> starts off as a pure (<em>pabhasvara</em>)<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> and gets “contaminated” before getting to the <em>viññānakkhandha</em> stage within a billionth of a second!</li>
+<li>Those are discussed in detail, for example, "<a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">Amazingly Fast Time Evolution of a Thought (Citta)</a>" and "<a href="../../pages/AB.GG.006/index.html" rel="noopener noreferrer" target="_blank">Pabhassara Citta, Radiant Mind, and Bhavaṅga</a>".</li>
+<li>However, there is no need to go to that depth for most people (and many will not have enough time to do that anyway, but there could be a few who would really enjoy it).</li>
+<li><span>I just want everyone to appreciate <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> for what it is, and to help remove many misconceptions that are out there today.</span></li>
+</ul>
+<p style="text-align: justify"><strong><span>7. To summarize, I cannot emphasize enough the importance of UNDERSTANDING the meanings of key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words. It may take some time to truly grasp those meanings. I keep revising those key <span class="pali-term term-highlight" data-term="posts">posts</span>, whenever a better way to express an idea comes to mind or when someone else points out a better way to express it. </span></strong></p>
+<ul>
+<li style="text-align: justify"><span style="color: #0000ff">Experience is a key factor in understanding.</span> The word "elephant" may not mean anything to someone who does not understand English. But if it is shown to him what an elephant looks like, then he can associate the word "elephant" with the big animal.</li>
+<li style="text-align: justify">In the same way, it is important to UNDERSTAND what <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> means, by using one's experience: for example, we cannot maintain even our body the way we would like for the LONG TERM, etc. Then you look at others, especially those who are even older than us, or those who died of old age, and realize that it is true. Then you think about anything in this world, and realize that it is true, i.e., we cannot maintain ANYTHING in this world to our satisfaction, and that is <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>.</li>
+<li style="text-align: justify">Also see, "<a href="../../pages/KD.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Sanna – What It Really Means</a>".</li>
+</ul>
+<p style="text-align: justify"><span>8. The following is a table with some key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words and links to a few <span class="pali-term term-highlight" data-term="posts">posts</span> that describe what those words mean. More <span class="pali-term term-highlight" data-term="posts">posts</span> probably can be found by using the "Search" button on the top right.</span></p>
+<p style="text-align: justify">Next, "<a href="../../pages/TL.FF.002/index.html" rel="noopener noreferrer" target="_blank">Origin of Morality (and Immorality) in Buddhism</a>", ..</p>
+<table class="aligncenter" style="height: 596px" width="605">
+<thead>
+<tr style="height: 26px">
+<td style="text-align: center;width: 71.8182px;height: 26px"><span style="color: #0000ff"><strong>Word </strong></span></td>
+<td style="text-align: center;width: 509.091px;height: 26px"><span style="color: #0000ff"><strong>Links</strong></span></td>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 81px">
+<td style="text-align: center;width: 71.8182px;height: 81px"><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">Anatta</span></span></td>
+<td style="width: 509.091px;height: 81px">
+<p class="entry-title"><a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta</a></p>
+</td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span><span class="pali-term term-highlight" data-term="gati">Gati</span>, <span class="pali-term term-highlight" data-term="bhava">Bhava</span>, <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></td>
+<td style="width: 509.091px;height: 53px">
+<p class="entry-title"><a href="../../pages/KD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Gati to Bhava to Jāti – Ours to Control</a></p>
+</td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></td>
+<td style="width: 509.091px;height: 53px"><a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" style="color: #ea9629" target="_blank" title="Habits, Goals, and Character (Gati)">Habits, Goals, and Character (Gati)</a>, <a href="../../pages/TL.BB.003/index.html" rel="noopener noreferrer" target="_blank" title="The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)">The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)</a>,<a href="../../pages/TL.GG.002/index.html" rel="noopener noreferrer" target="_blank" title="Saṃsāric Habits, Character (Gati), and Cravings (Āsava)"> Saṃsāric Habits, Character (Gati), and Cravings (Āsava)</a></td>
+</tr>
+<tr style="height: 50px">
+<td style="text-align: center;width: 71.8182px;height: 50px"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></td>
+<td style="width: 509.091px;height: 50px">
+<p class="entry-title"><a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a></p>
+</td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span>Niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></td>
+<td style="width: 509.091px;height: 53px"><strong style="font-weight: bold;color: #141412"><a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" style="color: #bc360a" target="_blank">Three Kinds of Happiness – What is Niramisa Sukha?</a>, <a href="../../pages/TL.CC.006/index.html" rel="noopener noreferrer" style="font-weight: normal;color: #bc360a" target="_blank" title="How to Taste Nibbāna">How to Taste Nibbāna</a>, <a href="../../pages/BD.JJ.003/index.html" rel="noopener noreferrer" style="font-weight: normal;color: #ea9629" target="_blank" title="Niramisa Sukha (Happiness Arising from Dissociating from the 31 realms)">Niramisa Sukha (Happiness Arising from Dissociating from the 31 realms)</a></strong></td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></td>
+<td style="width: 509.091px;height: 53px"><a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" style="color: #ea9629" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda</a>, <a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" style="color: #ac0404" target="_blank">Paṭicca Samuppāda - Introduction</a></td>
+</tr>
+<tr style="height: 50px">
+<td style="text-align: center;width: 71.8182px;height: 50px">San</td>
+<td style="width: 509.091px;height: 50px">
+<p class="entry-title"><a href="../../pages/KD.DD.001/index.html" rel="noopener noreferrer" target="_blank">San</a></p>
+</td>
+</tr>
+<tr style="height: 9.36914px">
+<td style="text-align: center;width: 71.8182px;height: 9.36914px"><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></td>
+<td style="width: 509.091px;height: 9.36914px"><a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a></td>
+</tr>
+</tbody>
+</table>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.EE.012"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0431"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+Derived Translation
+PD#PN: TL.EE.012
+Lang: pt-BR
+Date: 2026-02-24T02:06:20Z
+-->
+<!--
+Canonical CSL Artifact
+Derived from PureDhamma.net SRO
+PD#PN: TL.EE.012
+Extraction: 2026-02-23T21:10:02Z
+Integrity: PENDING_CALCULATION
+-->
+<p style="text-align: justify"><strong>Original escrito antes de 23 de outubro de 2015; revisado em 4 de março de 2017; 8 de outubro de 2018</strong></p>
+<p style="text-align: justify"><span>Eu não tinha pensado muito sobre essa questão até que alguém em um fórum online apontou, em 2014, que eu estava usando muitas palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e que era difícil entender o significado desses termos. Esse é um ponto importante que tem dois aspectos:</span></p>
+<ul>
+<li style="text-align: justify">No <em><span>Arana Vibhanga <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> (MN 139), o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> aconselhou </span><em><span>os <span class="pali-term term-highlight" data-term="bhikkhū">Bhikkhū</span></span></em><span> a explicarem o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> fornecendo os SIGNIFICADOS e não enfatizando uma determinada língua. Desde que se compreenda o conceito, não importa a língua utilizada.</span></li>
+<li style="text-align: justify">Por outro lado, precisamos ter uma maneira de transmitir as palavras fundamentais para as gerações futuras sem distorcer o significado dessas palavras. E é difícil encontrar palavras adequadas em outras línguas para palavras-chave como <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, Anattā</span></em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</li>
+</ul>
+<ul style="text-align: justify">
+<li><span>Expliquei o significado de todos os termos <span class="pali-term term-highlight" data-term="pālī">Pālī</span> que uso. Mas para um leitor iniciante, isso pode ser um problema legítimo. Use o botão “Pesquisar” no canto superior direito para localizar ensaios relevantes para qualquer palavra-chave. Há um “</span><a href="http://localhost/brasileirinho/tables-and-summaries/Pālī-glossary-a-k/" target="_blank">Glossário Pālī – (A-K)</a>” e <a href="http://localhost/brasileirinho/tables-and-summaries/Pālī-glossary-l-z/" target="_blank">um “Glossário Pālī – (L-Z)</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>1. O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é a teoria mais complexa do mundo; ela abrange todas as leis da natureza. Embora suas premissas básicas não sejam difíceis de compreender, se alguém precisar se aprofundar, será necessário dedicar algum tempo para “aprender o básico” ou as “ideias fundamentais envolvidas”.</span></p>
+<ul style="text-align: justify">
+<li>Pense da seguinte maneira: é possível aprender álgebra sem saber aritmética?</li>
+<li>O segredo é aprender bem as ideias básicas, palavras como <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, Anattā, <span class="pali-term term-highlight" data-term="bhava">Bhava</span>,</span></em><span> etc. Diz-se que é possível compreender a mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> sobre a existência apenas compreendendo </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> (o que levará à compreensão de<em><span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e<em> Anattā</em>), e isso é verdade.</li>
+<li>Mas isso não é possível se <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em><span> for traduzido para o português como apenas uma palavra: impermanência. A palavra <span class="pali-term term-highlight" data-term="pālī">Pālī</span> </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> significa muito mais do que apenas impermanência. Portanto, é melhor aprender o que significa a palavra <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</li>
+<li><em>Viññāna</em> é outra palavra assim. Ela não deve ser traduzida apenas como “consciência”; é muito mais complexa; veja “<a href="../../pages/KD.JJ.007/index.html" target="_blank">Viññāna – O que realmente significa</a>”.</li>
+</ul>
+<p style="text-align: justify">2. Há também outro aspecto. Se alguém aprende os conceitos básicos de adição/subtração ou mesmo de mecânica quântica, não importa o idioma usado para aprender. O importante é compreender a IDÉIA, não apenas aprender as palavras. É possível aprender adição/subtração ou mecânica quântica em QUALQUER idioma, não memorizando palavras, mas compreendendo os conceitos-chave.</p>
+<ul>
+<li style="text-align: justify">Quando uma criança aprende a somar/subtrair, ela precisa aprender a tabuada básica e os procedimentos sobre como usar esse conhecimento ao lidar com números grandes. Depois disso, ela pode resolver qualquer problema arbitrário envolvendo números grandes.</li>
+<li style="text-align: justify"><span>Da mesma forma, é preciso compreender as IDEIAS incorporadas em algumas palavras-chave em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, porque muitas dessas palavras NÃO PODEM ser traduzidas diretamente para outros idiomas: elas são altamente condensadas, cada palavra repleta de significados profundos.</span></li>
+<li style="text-align: justify">Na mecânica quântica, a palavra “quântico” incorpora o assunto; independentemente do idioma que se usa, sabe-se o que é um quântico. Da mesma forma, é preciso saber o que é “Anic<em>ca</em>”. Não há outra palavra para isso em português.</li>
+<li style="text-align: justify"><strong><span>Uma vez que se COMPREENDA o significado de uma determinada palavra-chave em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, então pode-se até mesmo encontrar uma palavra adequada em qualquer idioma para ter a palavra em mente. Não há necessidade de memorizar palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> apenas para memorizar. É semelhante a aprender qualquer conceito.</span></strong></li>
+<li style="text-align: justify"><span>Apenas não devemos alterar as palavras originais em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> no </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span>. Esse é o “projeto” que precisa ser transmitido intacto para que a mensagem original do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> seja mantida intacta.</span></li>
+</ul>
+<p style="text-align: justify"><span>3. Vamos primeiro examinar as razões pelas quais o <span class="pali-term term-highlight" data-term="pālī">Pālī</span> é uma língua especial.</span></p>
+<ul style="text-align: justify">
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> proferiu seus discursos na língua </span><em>Māghadhi</em><span>; uma versão dessa língua adequada para memorização (<span class="pali-term term-highlight" data-term="pālī">Pālī</span>) foi usada para RESUMIR essas </span><em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>. Por exemplo, <em><span>o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Cakka Pavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> foi proferido aos cinco ascetas durante a noite. Quantas páginas seriam necessárias para escrever tudo isso? No entanto, foi condensado em poucas páginas.</li>
+<li>Antigamente, <em><span>os <span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em><span> eram transmitidos oralmente de geração em geração, e essa foi a outra razão para condensá-los em uma forma especial, como um poema, que é fácil de lembrar e recitar. A origem da palavra “<span class="pali-term term-highlight" data-term="pālī">Pālī</span>” vem dessa maneira particular de organizar as palavras.</span></li>
+</ul>
+<p style="text-align: justify"><span>4. Portanto, podem ser necessárias várias palavras em uma língua diferente para expressar o significado de algumas palavras <span class="pali-term term-highlight" data-term="pālī">Pālī</span></span><em>,</em> como <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, Anattā, <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>, etc. <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> é outra frase completa que é melhor manter intacta e apenas aprender o que ela significa; veja “<a href="../../pages/PS.EE.002/index.html" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda”</a>”.</p>
+<ul style="text-align: justify">
+<li><span>Assim, a maioria das palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> é impossível de ser traduzida palavra por palavra para outros idiomas. </span><strong>Existe um sistema para compreender os verdadeiros significados do <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em></strong>,<strong> bem como o profundo assunto de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></strong>; veja “<a href="../../pages/SI.AA.001/index.html" target="_blank">Suttā – Introdução</a>”.</li>
+<li>Essa é a razão pela qual muitos comentários foram escritos antigamente para explicar o significado de palavras-chave e frases; veja “<a href="../../pages/HB.AA.007/index.html" target="_blank">Preservação do Dhamma</a>” para mais detalhes.</li>
+<li>Infelizmente, a maioria desses comentários originais (<em>Cingalês Attakathā</em>) não pode ser encontrada hoje, exceto três; veja o ensaio acima.</li>
+</ul>
+<p style="text-align: justify">5. A maioria dos problemas que temos hoje se deve a essa tradução “palavra por palavra” dos <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> para outras línguas.</p>
+<ul>
+<li style="text-align: justify">As traduções mais visíveis e desastrosas são a tradução das palavras <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em> para <em>o sânscrito</em> como <em>anitya</em> e <em>anātma</em>; essas palavras foram então ADOTADAS na língua cingalês para expressar o significado de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>. Então, nos últimos duzentos anos, essas palavras <em>sânscritas</em> foram traduzidas diretamente para o inglês e agora se estabeleceram com o significado de “impermanência” e “não-eu”; veja “<a href="../../pages/HB.AA.018/index.html" target="_blank">Interpretação errônea de Anicca e Anattā pelos primeiros estudiosos europeus</a>”.</li>
+<li style="text-align: justify"><span>A tradução incorreta dessas palavras manteve a mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> oculta por mais de mil e quinhentos anos. Não é por acaso que não houve muitos </span><em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> durante esse tempo.</li>
+<li style="text-align: justify">Para os significados corretos dessas palavras, veja “<a href="../../pages/KD.FF.003/index.html" target="_blank">Anicca, Dukkha, Anattā – Interpretações erradas</a>” e o ensaio seguinte.</li>
+</ul>
+<p style="text-align: justify">6. Na verdade, diz-se que é possível alcançar o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> apenas compreendendo os verdadeiros significados de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>, as três características do mundo. Essas três palavras incorporam uma mensagem muito ampla. <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> inteiras foram proferidas para descrever o que essas palavras significavam! <span style="color: #0000ff"><strong>É ERRADO e DESASTRE traduzi-las apenas como impermanência, sofrimento e “não-eu”.</strong></span></p>
+<ul style="text-align: justify">
+<li><b>Mas se alguém desejar</b> e conhecer as interpretações corretas, poderá aprofundar-se muito mais, a profundidades inimagináveis. Por exemplo, há um processo envolvendo nove etapas em que um determinado <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> começa como um <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> puro (<em>pabhasvara</em>) e é “contaminado” antes de chegar ao estágio <em>viññānakkhandha</em> em um bilionésimo de segundo!</li>
+<li>Isso é discutido em detalhes, por exemplo, em “<a href="../../pages/AB.BB.003/index.html" target="_blank">Evolução incrivelmente rápida do tempo de um pensamento (Citta)</a>” e “<a href="../../pages/AB.GG.006/index.html" target="_blank">Pabhassara Citta, mente radiante e Bhavaṅga</a>”.</li>
+<li>No entanto, não há necessidade de se aprofundar tanto para a maioria das pessoas (e muitas não terão tempo suficiente para fazer isso de qualquer maneira, mas pode haver algumas que realmente gostariam).</li>
+<li><span>Eu só quero que todos apreciem o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> pelo que ele é e ajudem a remover muitos equívocos que existem hoje em dia.</span></li>
+</ul>
+<p style="text-align: justify"><strong><span>7. Para resumir, não posso enfatizar o suficiente a importância de COMPREENDER os significados das palavras-chave em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>. Pode levar algum tempo para realmente compreender esses significados. Eu continuo revisando esses ensaios importantes sempre que me ocorre uma maneira melhor de expressar uma ideia ou quando alguém aponta uma maneira melhor de expressá-la. </span></strong></p>
+<ul>
+<li style="text-align: justify"><span style="color: #0000ff">A experiência é um fator fundamental para a compreensão.</span> A palavra “elefante” pode não significar nada para alguém que não entende inglês. Mas se lhe for mostrado como é um elefante, então ele poderá associar a palavra “elefante” ao grande animal.</li>
+<li style="text-align: justify">Da mesma forma, é importante COMPREENDER o que significa <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, usando a própria experiência: por exemplo, não podemos manter nem mesmo nosso corpo da maneira que gostaríamos a LONGO PRAZO, etc. Então você olha para os outros, especialmente aqueles que são ainda mais velhos do que nós, ou aqueles que morreram de velhice, e percebe que isso é verdade. Então você pensa sobre qualquer coisa neste mundo e percebe que isso é verdade, ou seja, não podemos manter NADA neste mundo de forma satisfatória, e isso é <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</li>
+<li style="text-align: justify">Veja também “<a href="../../pages/KD.JJ.004/index.html" target="_blank">Sanna – O que realmente significa</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>8. A seguir, apresentamos uma tabela com algumas palavras-chave em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e links para alguns ensaios que descrevem o significado dessas palavras. Provavelmente, você encontrará mais ensaios usando o botão “Pesquisar” no canto superior direito.</span></p>
+<p style="text-align: justify">Próximo, “<a href="../../pages/TL.FF.002/index.html" target="_blank">Origem da moralidade (e imoralidade) no Buddhismo</a>”, ...</p>
+<table class="aligncenter" style="height: 596px" width="605">
+<thead>
+<tr style="height: 26px">
+<td style="text-align: center;width: 71.8182px;height: 26px"><span style="color: #0000ff"><strong>Palavra </strong></span></td>
+<td style="text-align: center;width: 509.091px;height: 26px"><span style="color: #0000ff"><strong>Links</strong></span></td>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 81px">
+<td style="text-align: center;width: 71.8182px;height: 81px"><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></td>
+<td style="width: 509.091px;height: 81px">
+<p class="entry-title"><a href="../../pages/KD.FF.001/index.html" target="_blank">Anicca, Dukkha, Anattā</a></p>
+</td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span><span class="pali-term term-highlight" data-term="gati">Gati</span>, <span class="pali-term term-highlight" data-term="bhava">Bhava</span>, <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></td>
+<td style="width: 509.091px;height: 53px">
+<p class="entry-title"><a href="../../pages/KD.GG.004/index.html" target="_blank">Gati para Bhava para Jāti – Nosso para controlar</a></p>
+</td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></td>
+<td style="width: 509.091px;height: 53px"><a href="../../pages/TL.BB.004/index.html" style="color: #ea9629" target="_blank" title="Habits, Goals, and Character (Gati)">Hábitos, objetivos e caráter (Gati)</a>, <a href="../../pages/TL.BB.003/index.html" target="_blank" title="The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)">a lei da atração, hábitos, caráter (Gati) e desejos (Āsava)</a>, <a href="../../pages/TL.GG.002/index.html" target="_blank" title="Saṃsāric Habits, Character (Gati), and Cravings (Āsava)">hábitos samsáricos, caráter (Gati) e desejos (Āsava)</a></td>
+</tr>
+<tr style="height: 50px">
+<td style="text-align: center;width: 71.8182px;height: 50px"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></td>
+<td style="width: 509.091px;height: 50px">
+<p class="entry-title"><a href="../../pages/KD.EE.001/index.html" target="_blank">Nibbāna</a></p>
+</td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span>Niramisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></td>
+<td style="width: 509.091px;height: 53px"><strong style="font-weight: bold;color: #141412"><a href="../../pages/TL.CC.005/index.html" style="color: #bc360a" target="_blank">Três tipos de felicidade – O que é Niramisa Sukha?</a>, <a href="../../pages/TL.CC.006/index.html" style="font-weight: normal;color: #bc360a" target="_blank" title="How to Taste Nibbāna">Como saborear Nibbāna</a>, <a href="../../pages/BD.JJ.003/index.html" style="font-weight: normal;color: #ea9629" target="_blank" title="Niramisa Sukha (Happiness Arising from Dissociating from the 31 realms)">Niramisa Sukha (Felicidade que surge da dissociação dos 31 reinos)</a></strong></td>
+</tr>
+<tr style="height: 53px">
+<td style="text-align: center;width: 71.8182px;height: 53px"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></td>
+<td style="width: 509.091px;height: 53px"><a href="../../pages/PS.EE.002/index.html" style="color: #ea9629" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda</a>, <a href="../../pages/PS.EE.002/index.html" style="color: #ac0404" target="_blank">Paṭicca Samuppāda - Introdução</a></td>
+</tr>
+<tr style="height: 50px">
+<td style="text-align: center;width: 71.8182px;height: 50px">San</td>
+<td style="width: 509.091px;height: 50px">
+<p class="entry-title"><a href="../../pages/KD.DD.001/index.html" target="_blank">San</a></p>
+</td>
+</tr>
+<tr style="height: 9.36914px">
+<td style="text-align: center;width: 71.8182px;height: 9.36914px"><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></td>
+<td style="width: 509.091px;height: 9.36914px"><a href="../../pages/KD.DD.003/index.html" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a></td>
+</tr>
+</tbody>
+</table>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.EE.011/index.html">The Four Factors Of Accomplishment</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.FF.001/index.html">Buddha Dhamma And Morality</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.EE.011/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">The Four Factors Of Accomplishment</span>
+        
+        <span class="pathway-title title-pt">Os quatro fatores de realização</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.FF.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Buddha Dhamma And Morality</span>
+        
+        <span class="pathway-title title-pt">Buddha Dhamma e moralidade</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

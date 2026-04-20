@@ -1,0 +1,476 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anicca Worthlessness Of Worldly Things | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 32 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.008</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anicca Worthlessness Of Worldly Things</h1>
+    
+    <h1 class="title-pt">Anicca: A futilidade das coisas mundanas</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.008</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.008"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0105"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.008</td></tr><tr><td>Fin-dex</td><td>0105</td></tr><tr><td>Slug</td><td>anicca-worthlessness-of-worldly-things</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Anicca Worthlessness Of Worldly Things</td></tr></table></div></div><strong>August 20, 2017; revised June 8, 2020</strong>
+<h5>Different Meanings of <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em></h5>
+<p style="text-align: justify">1. <em><span style="color: #ff0000"><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></span></em><span style="color: #ff0000"><span> (pronounced "<span class="pali-term term-highlight" data-term="anichcha">anichcha</span>")</span></span> is a profound concept that has several meanings (impermanence is only a small part of it). We discussed one interpretation as "it is not possible to maintain anything in this world to one's satisfaction"; see, "<a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Inability to Keep What We Like</a>."</p>
+<ul style="text-align: justify">
+<li>Another interpretation is the following. Whatever that seems to provide lasting happiness arises and destroyed. Anything is subjected to unpredictable changes (<em>viparināma</em>) while it lasts. See, "<a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Repeated Arising/Destruction</a>."</li>
+<li>Here we discuss another: There is nothing in this world that is valuable and can provide lasting happiness. Not only that, but more craving can only lead to more suffering!</li>
+</ul>
+<h5>We Like to Get Hold of Things That We Like (Crave)</h5>
+<p style="text-align: justify">2. <span style="color: #ff0000">The desire (<em>iccā </em>or<em> icchā</em>; pronounced "ichchā")</span> for any object depends on the value that one places for that object. If one realizes that the object does not have any significant value, then one would not have any desire for that object.</p>
+<ul style="text-align: justify">
+<li><span style="color: #ff0000">One has<em> iccā</em> for a given object which one perceives it to be of "<em>nicca"</em> (pronounced "nichch<i>a"</i>) nature</span>, i.e., that one thinks has value and can provide happiness.</li>
+<li>If one realizes that a given object does not have a real value, one loses craving for that. The <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature means NOTHING in this world has real value. Of course, full comprehension comes only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. The starting point is to see that immoral actions MUST BE avoided regarding even "seemingly high-value things."</li>
+</ul>
+<h5>The Perception of "Value" Depends on One's Level of Understanding</h5>
+<p style="text-align: justify">3. Suppose you give the following choices for a five-year-old. A giant chocolate bar or the title to a brand new house (written to his/her name so that the child will be the owner of the house).</p>
+<ul style="text-align: justify">
+<li>What will the child choose? Of course, the child will want chocolate, and he/she will have no idea how a piece of paper can be more valuable than tasty chocolate! Thus the child has the perception of <em>nicca</em> for the chocolate, i.e., that it can bring happiness whereas the happiness from the house is hard to be grasped by the child.</li>
+<li>However, when that same child grows up and becomes an adult, he/she will choose the title to the house without hesitation. By that time, he/she would have realized that a house is much more valuable than a bar of chocolate. The adult will recognize the "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature" of the chocolate: it can only bring happiness only for a few minutes!</li>
+<li>Did anyone have to explicitly tell that adult that the title to the house is much more worth than chocolate? No. One would realize that when one learns more about the world.</li>
+<li><span>Just the same way, when one learns <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, one will AUTOMATICALLY realize that nothing in this world has real value. But that realization comes gradually.</span></li>
+</ul>
+<h5>The Tendency to Do Immoral Deeds Based on Cravings</h5>
+<p style="text-align: justify">4. All immoral deeds (<em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>) are done because of the "value" that one places on worldly things. A child may hit another over that chocolate. An adult may be willing to lie, steal, or even kill to get possession of a house.</p>
+<ul>
+<li style="text-align: justify"><span>When that adult grasps the critical message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, he/she will realize the "</span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature" of the house too. That even craving for a house is not worth compared to the "cooling down" one can gain by getting rid of the <strong>cravings</strong> associated with the house. Of course, one does not need to get rid of the house.</li>
+<li>He/she would realize that collecting "valuables" like houses, cars, etc. or making a lot of money <strong>(much more than one needs)</strong><span> can bring only suffering at the end (and lose precious time one could have spent on learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and making progress towards </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>).</li>
+</ul>
+<h5>Adverse Consequences of Cravings</h5>
+<p style="text-align: justify">5. Craving for sense objects can have adverse consequences in a wide range. At a lower level, just enjoying sense pleasures without harming others will make one bound to the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka </span></em>(via "<em>pati icca sama uppada"</em> or "what one likes is what one gets"); see, "<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – "Pati+ichcha" + "Sama+uppāda."</a></p>
+<ul style="text-align: justify">
+<li>However, if one does immoral deeds (<em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>) to get such "valuables," then one will be subjected to <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> </span></em>(direct suffering) in the<em> apāyā</em> in future lives; see, "<a href="../../pages/PS.II.003/index.html" rel="noopener" target="_blank">Introduction -2 – The Three Categories of Suffering</a><span>". That is the worst kind of future suffering, and one would not be able to comprehend that if one does not believe in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> or that </span><em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>, i.e., if one has <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>.</li>
+<li>Once one gets rid of <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>, it will be easier to see one aspect of the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature. That is "<span style="color: #ff0000"><em><strong class="highlight"><span><span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span></span></strong></em><em><span> <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>,"</span></em> which means "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature leads to one to the downside,"</span> i.e., to do immoral acts and to end up experiencing unimaginable suffering (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>) in the <em>apāyā</em>.</li>
+<li><span style="color: #ff0000">Thus <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature not only means that one cannot maintain things to one's satisfaction in the long run but ALSO, it can lead to much suffering in the future.</span></li>
+</ul>
+<h5>The Understanding Leads to the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> Stage</h5>
+<p style="text-align: justify">6. One can get to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage by comprehending the above harsh consequences of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</p>
+<ul style="text-align: justify">
+<li><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span> also said, "</span><em><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> bhayaṭṭhena"</span></em> or "one should be fearful of the <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> nature" when describing the characteristic of <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>. At the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, one can see that not comprehending the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature can lead to suffering in the <em>apāyā.</em> But he/she may still not realize that <span style="color: #ff0000">much suffering (even though less than in the <em>apāyā</em>) can also arise due to just being attached to sense pleasures, i.e., <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>.</span></li>
+<li>The full impact of "<em><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> bhayaṭṭhena"</span></em> is realized only at the <em>Anāgami</em> stage (having seen a glimpse of it at the <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> stage). <strong>That is when one realizes the <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> associated with just the craving for sensual pleasures.</strong></li>
+<li>Craving for sense-pleasures lead to <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em><span>, as explained in detail in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/PS.II.002/index.html" rel="noopener noreferrer" target="_blank">Introduction – What is Suffering?</a>".</li>
+</ul>
+<p style="text-align: justify">7. At the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, one comprehends the "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature" at a preliminary level and grasps the <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>.</span></em> Even though one can see the truth of the other two types of <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>), one does not "truly grasp their effects." Those two aspects of <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> are present in the higher realms of <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em> (human and <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realms).</p>
+<ul style="text-align: justify">
+<li>One truly starts comprehending <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span> </span></em>at the <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>stage, and it will be completed only at the <em>Anāgami</em> stage. That leads to further strengthening of "<em><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> bhayaṭṭhena."</span></em> One can see the danger in the types of <span style="color: #ff0000"><em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> arising from attachment to sense pleasures (even without engaging in immoral acts).</span></li>
+<li>Comprehending the bad consequences of sensual pleasures is much harder than seeing the dangers associated with immoral deeds. That is why a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> is still "not free" from rebirths in <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>.</li>
+</ul>
+<h5>Cravings for Sense Desires Lost Only at the <em>Anāgami</em> Stage</h5>
+<p style="text-align: justify">8. By the time one gets to <em>Anāgami</em> stage, one would have removed the lower five types of bonds (<em>ō</em><em>rambhagiya samyōjana</em>) that bind one to the realms in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>; see, "<a href="../../pages/TL.HH.006/index.html" rel="noopener noreferrer" target="_blank">Dasa Samyōjana – Bonds in Rebirth Process</a>."</p>
+<ul style="text-align: justify">
+<li>There are five higher <em>samyōjana </em>associated with higher <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> and <em>arupa</em> realms. First one removes <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> (attachment to <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>) and then <em>arupa</em><em><span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> (attachment to <em><span>arupa <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>).</li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> and <em>arupa</em> realms (highest 20 realms) mostly have <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> and <em><span>arupa <span class="pali-term term-highlight" data-term="jhānic">jhānic</span> </span></em>pleasures. In those realms, <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> are mostly absent, and only the <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> (death at the end) is present. <span style="color: #ff0000">One lives with <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasure until the end when one becomes helpless and could end up even in the <em>apāyā</em>.</span></li>
+</ul>
+<p style="text-align: justify">9. In comprehending the Three Characteristics of nature, the critical step is in realizing that collecting "valuables" (houses, money, etc.) as an adult is as foolish as collecting candy wrappers as a child.</p>
+<ul style="text-align: justify">
+<li><span>To make that step of "higher wisdom" per <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, one needs first to understand the "world view of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>," that the world is of</span><em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature, i.e., <span style="color: #ff0000">CRAVING for those "valuables" only lead to suffering in the long run.</span> "Long-run" involves not only this life but future lives.</li>
+<li><span>That is why belief in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> is an important requirement to even start on the mundane Path.</span></li>
+</ul>
+<h5>The World is of <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> Nature, Not <em>Nicca</em> Nature</h5>
+<p style="text-align: justify">10. It is an illusion to believe that ANY object in this world will have the "<strong><em>nicca"</em> nature. That there are things in this world that have real, lasting value.</strong> <span style="color: #0000ff">The reality is the opposite expressed by the word "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>."</span></em></span> One meaning of "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>"</span></em> is that there is nothing in this world of value that can bring lasting happiness.</p>
+<ul style="text-align: justify">
+<li><span style="color: #ff0000">However, it is challenging for one to comprehend this "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature" unless one believes in the laws of <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span>.</span></em> That one's actions will have consequences. A natural extension of the laws of <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em><span> is the validity of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></span></li>
+<li>Many actions committed in this life do not bring their results in this life. But they will appear in future lives. Therefore, the laws of <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em><span> necessarily REQUIRE the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+<li>One has more "<em>iccā"</em> (or more attachment) for an object that one perceives to be of high value. Then one would have the perception of "<em>nicca"</em> nature for that object.  He/she thinks that it can provide happiness.</li>
+<li><span style="color: #0000ff">But the reality is that either that object loses its value OR one dies, making any perceived value zero at the end. One of those two outcomes is inevitable.</span></li>
+</ul>
+<h5>It is Impossible to Comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em><span> Nature Without Belief in <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Process</span></h5>
+<p style="text-align: justify"><span>11. If one does not believe in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process, then one could be compelled to do immoral deeds to get possession of valuable objects. That is a hidden defilement (</span><em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>) that may not manifest unless the temptation is high.</p>
+<ul style="text-align: justify">
+<li>For example, one may not steal anything for a lifetime but could be tempted to take a bribe of a million dollars.</li>
+<li>Or, a drug addict could say, "I am just going to enjoy inhaling drugs until I die from it," thinking that there will not be any consequences after the physical body dies.</li>
+<li><span>However, one's outlook on such things will dramatically change if one can see the reality of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Most people just believe what "science says" and do not even bother to look at the ever-increasing evidence for the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. See "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a>."</li>
+<li>Science agrees that causes lead to corresponding effects. Any action has a reaction. However, since science does not know much about how the mind works, it is unable to provide answers to issues that involve the mind. <strong><em><span><span class="pali-term term-highlight" data-term="kammā">Kammā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> are causes and corresponding effects.</strong></li>
+</ul>
+<h5>Greed Comes from the Perception of <em>Nicca</em> Nature</h5>
+<p style="text-align: justify">12. <em>Lōbha</em> (<em><span><span class="pali-term term-highlight" data-term="abhijjhā">abhijjhā</span></span></em>) is the greed generated in a mind that puts a "very high value" for an object. One is willing to do immoral acts to get possession.</p>
+<ul style="text-align: justify">
+<li>One with just <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> (desire for sensual pleasures) has the desire to enjoy sensual objects but would not hurt others to get them. Most "moral people" belong to this category UNLESS the temptation becomes high. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> has <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> but will not succumb to ANY temptation to do <em>apāyagāmi</em> deeds.</li>
+<li>A <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>has lost the desire to "own" such sensual objects but still likes to enjoy them.</li>
+<li>Any desire for sensual pleasures goes away at the <em>Anāgami</em> stage.</li>
+</ul>
+<p style="text-align: justify">13. In other words, one starts losing the value that one places for "mind-pleasing" objects as one progresses to higher stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">But the critical point to understand is that one LOSES such desires AUTOMATICALLY. One does not need to, and one CANNOT, lose such desires by sheer will power. <span style="color: #0000ff"><span>One needs to "see" the dangers of such cravings by developing the "<span class="pali-term term-highlight" data-term="dhamma">dhamma</span> eye," or </span><em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em> (wisdom) by learning and contemplating on the <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.</span></li>
+<li style="text-align: justify">Even if one forcefully keeps such desires SUPPRESSED, such desires will just stay dormant (remain as <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span>.</span></em>) Those <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> WILL resurface later in this life or future lives. They can only be removed by comprehending <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>.</span></em> See, "<a href="../../pages/TL.HH.003/index.html" rel="noopener noreferrer" target="_blank">Āsava, Anusaya, and Gati (Gathi)</a>."</li>
+<li>With gradual cleansing of the mind, one will start seeing the worthlessness of worldly things.</li>
+</ul>
+Also, see, "<a href="../../pages/KD.FF.020/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta – According to Some Key Suttā</a>."
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.FF.008"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0105"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.FF.008
+Language:     pt-BR
+Generated-At: 2026-04-18T04:05:20Z
+Engine:       DeepL API (Glossary V5)
+-->
+<strong>20 de agosto de 2017; revisado em 8 de junho de 2020</strong>
+<h5>Diferentes significados de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em></h5>
+<p style="text-align: justify">1. <em><span style="color: #ff0000"><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></span></em><span style="color: #ff0000"><span> (pronuncia-se “<span class="pali-term term-highlight" data-term="anichcha">Anichcha</span>”)</span></span> é um conceito profundo que possui vários significados (a impermanência é apenas uma pequena parte dele). Discutimos uma interpretação como “não é possível manter nada neste mundo de forma satisfatória”; veja “<a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Incapacidade de Manter o que Gostamos</a>”.</p>
+<ul style="text-align: justify">
+<li>Outra interpretação é a seguinte. Tudo o que parece proporcionar felicidade duradoura surge e se destrói. Qualquer coisa está sujeita a mudanças imprevisíveis (<em>viparināma</em>) enquanto dura. Veja “<a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Surgimento/Destruição Repetidos</a>”.</li>
+<li>Aqui discutimos outra: não há nada neste mundo que seja valioso e possa proporcionar felicidade duradoura. Não só isso, mas mais desejo só pode levar a mais sofrimento!</li>
+</ul>
+<h5>Gostamos de nos apoderar das coisas de que gostamos (desejamos)</h5>
+<p style="text-align: justify">2. <span style="color: #ff0000">O desejo (<em>iccā </em>ou<em> icchā</em>; pronunciado “ichchā”)</span> por qualquer objeto depende do valor que se atribui a esse objeto. Se alguém perceber que o objeto não tem nenhum valor significativo, então não terá nenhum desejo por esse objeto.</p>
+<ul style="text-align: justify">
+<li><span style="color: #ff0000">A pessoa tem<em> iccā</em> por um determinado objeto que percebe como sendo de natureza “<em>nicca”</em> (pronuncia-se “nichch<i>a”</i>)</span>, ou seja, que acredita ter valor e poder proporcionar felicidade.</li>
+<li>Se alguém perceber que um determinado objeto não tem valor real, perde o desejo por ele. A natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> significa que NADA neste mundo tem valor real. É claro que a compreensão plena só se alcança no estágio <em><span>de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. O ponto de partida é perceber que as ações imorais DEVEM SER evitadas, mesmo em relação a “coisas aparentemente de alto valor”.</li>
+</ul>
+<h5>A percepção de “valor” depende do nível de compreensão de cada um</h5>
+<p style="text-align: justify">3. Suponha que você dê as seguintes opções a uma criança de cinco anos: uma barra de chocolate gigante ou a escritura de uma casa nova (em nome dela, para que a criança seja a proprietária da casa).</p>
+<ul style="text-align: justify">
+<li>O que a criança escolherá? É claro que a criança vai querer o chocolate e não terá ideia de como um pedaço de papel pode ser mais valioso do que um chocolate saboroso! Assim, a criança tem a percepção de <em>nicca</em> em relação ao chocolate, ou seja, que ele pode trazer felicidade, enquanto a felicidade proveniente da casa é difícil de ser compreendida pela criança.</li>
+<li>No entanto, quando essa mesma criança crescer e se tornar adulta, ela escolherá a escritura da casa sem hesitar. Nessa altura, ela já terá percebido que uma casa é muito mais valiosa do que uma barra de chocolate. O adulto reconhecerá a “natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” do chocolate: ele só pode trazer felicidade por alguns minutos!</li>
+<li>Alguém precisou dizer explicitamente a esse adulto que a escritura da casa vale muito mais do que o chocolate? Não. A pessoa perceberia isso ao aprender mais sobre o mundo.</li>
+<li><span>Da mesma forma, quando se aprende o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, percebe-se AUTOMATICAMENTE que nada neste mundo tem valor real. Mas essa compreensão vem gradualmente.</span></li>
+</ul>
+<h5>A tendência de cometer atos imorais baseados em desejos</h5>
+<p style="text-align: justify">4. Todas as ações imorais (<em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>) são cometidas devido ao “valor” que se atribui às coisas mundanas. Uma criança pode bater em outra por causa daquele chocolate. Um adulto pode estar disposto a mentir, roubar ou até mesmo matar para obter a posse de uma casa.</p>
+<ul>
+<li style="text-align: justify"><span>Quando esse adulto compreender a mensagem fundamental do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ele/ela perceberá também a “natureza </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” da casa. Que mesmo o desejo por uma casa não vale a pena em comparação com o “alívio” que se pode obter ao livrar-se dos <strong>desejos</strong> associados à casa. É claro que não é preciso livrar-se da casa.</li>
+<li>Ele/ela perceberia que acumular “bens valiosos” como casas, carros etc. ou ganhar muito dinheiro <strong>(muito mais do que o necessário)</strong><span> só pode trazer sofrimento no final (e fazer com que se perca um tempo precioso que poderia ter sido dedicado a aprender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e a progredir em direção </span><em><span>ao <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>).</li>
+</ul>
+<h5>Consequências adversas dos desejos</h5>
+<p style="text-align: justify">5. O desejo por objetos sensoriais pode ter consequências adversas em uma ampla gama. Em um nível mais baixo, apenas desfrutar dos prazeres sensoriais sem prejudicar os outros fará com que a pessoa fique presa ao <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka </span></em>(por meio de “<em>pati icca sama uppada”</em> ou “o que se gosta é o que se obtém”); veja “<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – “Pati+ichcha” + “Sama+uppāda”.</a></p>
+<ul style="text-align: justify">
+<li>No entanto, se alguém cometer atos imorais (<em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>) para obter tais “bens valiosos”, então estará sujeito a <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> </span></em>(sofrimento direto) nos<em> apāyā</em> em vidas futuras; veja “<a href="../../pages/PS.II.003/index.html" rel="noopener" target="_blank">Introdução -2 – As Três Categorias de Sofrimento</a>”. Esse é o pior tipo de sofrimento futuro, e não seria possível compreender isso se não se acreditasse no Renascimento ou no <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span> <span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>, ou seja, se se tivesse <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em>.</li>
+<li>Uma vez que se livre de <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em>, será mais fácil perceber um aspecto da natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>. Isso é “<span style="color: #ff0000"><em><strong class="highlight"><span><span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span></span></strong></em><em><span> <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>”,</span></em> o que significa “a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> leva a pessoa a um lado negativo”,</span> ou seja, a cometer atos imorais e acabar experimentando um sofrimento inimaginável (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>) nos <em>apāyā</em>.</li>
+<li><span style="color: #ff0000">Assim, a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> não significa apenas que não se pode manter as coisas de forma satisfatória a longo prazo, mas TAMBÉM que pode levar a muito sofrimento no futuro.</span></li>
+</ul>
+<h5>A compreensão leva ao estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em></h5>
+<p style="text-align: justify">6. Pode-se alcançar o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> ao compreender as severas consequências da natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> mencionadas acima.</p>
+<ul style="text-align: justify">
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> também disse: “</span><em><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> bhayaṭṭhena”</span></em> ou “deve-se temer a natureza <em>do</em> <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>” ao descrever a característica do <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>. No estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, pode-se ver que não compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> pode levar ao sofrimento no <em>apāyā.</em> Mas ele/ela ainda pode não perceber que <span style="color: #ff0000">muito sofrimento (embora menor do que no <em>apāyā</em>) também pode surgir simplesmente por estar apegado aos prazeres sensoriais, ou seja, <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>.</span></li>
+<li>O impacto total de “<em><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> bhayaṭṭhena”</span></em> é percebido apenas no estágio <em>Anāgami</em> (tendo-se vislumbrado um pouco disso no estágio <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>). <strong>É nesse momento que se percebe o <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> associado apenas ao desejo por prazeres sensoriais.</strong></li>
+<li>O desejo por prazeres sensoriais leva ao <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e ao <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>, conforme explicado em detalhes na postagem “<a href="../../pages/PS.II.002/index.html" rel="noopener noreferrer" target="_blank">Introdução – O que é sofrimento?</a>”.</li>
+</ul>
+<p style="text-align: justify">7. No estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, compreende-se a “natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” em um nível preliminar e capta-se o <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>.</span></em> Embora seja possível ver a verdade dos outros dois tipos de <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e <em><span>Viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>), não se “compreende verdadeiramente seus efeitos”. Esses dois aspectos do <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> estão presentes nos reinos superiores do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em> (reinos humano e <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>).</p>
+<ul style="text-align: justify">
+<li>Começa-se a compreender verdadeiramente <em><span>o <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> e <em><span>o viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span> </span></em>no estágio <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>, e isso só será completado no estágio <em>Anāgami</em>. Isso leva a um fortalecimento ainda maior do “<em><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> bhayaṭṭhena”.</span></em> É possível perceber o perigo nos tipos de <span style="color: #ff0000"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> que surgem do apego aos prazeres sensoriais (mesmo sem se envolver em atos imorais).</span></li>
+<li>Compreender as consequências negativas dos prazeres sensoriais é muito mais difícil do que perceber os perigos associados a atos imorais. É por isso que um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> ainda “não está livre” dos renascimentos no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>.</li>
+</ul>
+<h5>O desejo pelos prazeres sensoriais só é perdido no estágio <em>de Anāgami</em></h5>
+<p style="text-align: justify">8. Quando se chega ao estágio <em>de</em> <em>Anāgami</em>, já se terão removido os cinco tipos inferiores de laços (<em>ōrambhagiya samyōjana</em>) que prendem a pessoa aos reinos do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>; veja “<a href="../../pages/TL.HH.006/index.html" rel="noopener noreferrer" target="_blank">Dasa Samyōjana – Laços no Processo de Renascimento</a>”.</p>
+<ul style="text-align: justify">
+<li>Existem cinco <em>samyōjana</em> superiores associados aos reinos <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> e <em>arupa</em> superiores. Primeiro, remove-se <em><span>o <span class="pali-term term-highlight" data-term="rūpa rāga">Rūpa Rāga</span></span></em> (apego ao <em><span><span class="pali-term term-highlight" data-term="rūpa jhāna">Rūpa Jhāna</span></span></em>) e, em seguida<em><span>, o arupa <span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> (apego ao <em><span>arupa <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>).</li>
+<li>Os reinos <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> e <em>arupa</em> (os 20 reinos mais elevados) apresentam principalmente prazeres <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> e <em>arupa</em>. Nesses reinos, <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> estão praticamente ausentes, e apenas o <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> (morte no final) está presente. <span style="color: #ff0000">Vive-se com o prazer <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> até o fim, quando se torna-se indefeso e pode acabar até mesmo no <em>apāyā</em>.</span></li>
+</ul>
+<p style="text-align: justify">9. Ao compreender as Três Características da natureza, o passo crítico está em perceber que acumular “bens valiosos” (casas, dinheiro, etc.) na idade adulta é tão tolo quanto acumular papéis de balas na infância.</p>
+<ul style="text-align: justify">
+<li><span>Para dar esse passo de “sabedoria superior” segundo o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, é preciso primeiro compreender a “visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>”, de que o mundo é de natureza </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, ou seja, <span style="color: #ff0000">o DESEJO por esses “objetos de valor” só leva ao sofrimento a longo prazo.</span> “A longo prazo” envolve não apenas esta vida, mas vidas futuras.</li>
+<li>É por isso que a crença no Renascimento é um requisito importante para sequer iniciar o Caminho mundano.</li>
+</ul>
+<h5>O mundo é de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, não de natureza <em>nicca</em></h5>
+<p style="text-align: justify">10. É uma ilusão acreditar que QUALQUER objeto neste mundo tenha a <strong>natureza</strong> “<strong><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>”. Que existam coisas neste mundo que tenham valor real e duradouro.</strong> <span style="color: #0000ff">A realidade é o oposto, expresso pela palavra “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>”.</span></em></span> Um dos significados de “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>”</span></em> é que não há nada neste mundo de valor que possa trazer felicidade duradoura.</p>
+<ul style="text-align: justify">
+<li><span style="color: #ff0000">No entanto, é difícil compreender essa “natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” a menos que se acredite nas leis do <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span>.</span></em> Que as ações de alguém terão consequências. Uma extensão natural das leis do <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> é a validade do processo de Renascimento.</span></li>
+<li>Muitas ações cometidas nesta vida não trazem seus resultados nesta vida. Mas elas aparecerão em vidas futuras. Portanto, as leis do <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> necessariamente EXIGEM o processo de Renascimento.</li>
+<li>A pessoa tem mais “<em>iccā”</em> (ou mais apego) por um objeto que percebe como sendo de alto valor. Então, ela teria a percepção da natureza “<em>nicca”</em> para esse objeto. Ela pensa que ele pode proporcionar felicidade.</li>
+<li><span style="color: #0000ff">Mas a realidade é que ou esse objeto perde seu valor OU a pessoa morre, tornando qualquer valor percebido nulo no final. Um desses dois resultados é inevitável.</span></li>
+</ul>
+<h5>É impossível compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> sem acreditar no processo de Renascimento</h5>
+<p style="text-align: justify">11. Se alguém não acredita no processo de Renascimento, então pode ser compelido a cometer atos imorais para obter a posse de objetos valiosos. Essa é uma impureza oculta (<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>) que pode não se manifestar, a menos que a tentação seja grande.</p>
+<ul style="text-align: justify">
+<li>Por exemplo, alguém pode não roubar nada durante toda a vida, mas pode ser tentado a aceitar um suborno de um milhão de dólares.</li>
+<li>Ou, um viciado em drogas poderia dizer: “Vou apenas aproveitar para inalar drogas até morrer por causa disso”, pensando que não haverá consequências após a morte do corpo físico.</li>
+<li>No entanto, a perspectiva de alguém sobre tais coisas mudará drasticamente se for capaz de enxergar a realidade do processo de Renascimento. A maioria das pessoas simplesmente acredita no que “a ciência diz” e nem se dá ao trabalho de examinar as evidências cada vez maiores do processo de Renascimento. Veja “<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências do Renascimento</a>”.</li>
+<li>A ciência concorda que causas levam a efeitos correspondentes. Toda ação tem uma reação. No entanto, como a ciência não sabe muito sobre como a mente funciona, ela é incapaz de fornecer respostas para questões que envolvem a mente. <strong><em><span><span class="pali-term term-highlight" data-term="kammā">Kammā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> são causas e efeitos correspondentes.</strong></li>
+</ul>
+<h5>A ganância provém da percepção da natureza <em>nicca</em></h5>
+<p style="text-align: justify">12. <em>Lōbha</em> (<em><span><span class="pali-term term-highlight" data-term="abhijjhā">Abhijjhā</span></span></em>) é a ganância gerada em uma mente que atribui um “valor muito alto” a um objeto. A pessoa está disposta a cometer atos imorais para obter posse.</p>
+<ul style="text-align: justify">
+<li>Alguém com apenas <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em> (desejo por prazeres sensuais) tem o desejo de desfrutar de objetos sensuais, mas não prejudicaria os outros para obtê-los. A maioria das “pessoas morais” pertence a essa categoria, A MENOS QUE a tentação se torne forte. Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> tem <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span>,</span></em> mas não sucumbirá a NENHUMA tentação de praticar atos <em>apāyagāmi</em>.</li>
+<li>Um <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>perdeu o desejo de “possuir” tais objetos sensuais, mas ainda gosta de desfrutá-los.</li>
+<li>Qualquer desejo por prazeres sensuais desaparece no estágio de <em>Anāgami</em>.</li>
+</ul>
+<p style="text-align: justify">13. Em outras palavras, começa-se a perder o valor que se atribui aos objetos “agradáveis à mente” à medida que se avança para estágios mais elevados de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">Mas o ponto crítico a ser compreendido é que se PERDE tais desejos AUTOMATICAMENTE. Não é necessário, e NÃO É POSSÍVEL, perder tais desejos por mera força de vontade. <span style="color: #0000ff"><span>É preciso “ver” os perigos de tais ânsias desenvolvendo o “olho do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>”, ou </span><em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em> (sabedoria), por meio do aprendizado e da contemplação dos <em>Tilakkhaṇa</em>.</span></li>
+<li style="text-align: justify">Mesmo que se mantenha esses desejos SUPRIMIDOS à força, eles permanecerão apenas adormecidos (permanecerão como <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>)<em>.</em> Esses <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> IRÃO ressurgir mais tarde nesta vida ou em vidas futuras. Eles só podem ser removidos pela compreensão <em>do Tilakkhaṇa.</em> Veja “<a href="../../pages/TL.HH.003/index.html" rel="noopener noreferrer" target="_blank">Āsava, Anusaya e Gati (Gathi)</a>”.</li>
+<li>Com a purificação gradual da mente, a pessoa começará a perceber a futilidade das coisas mundanas.</li>
+</ul>Veja também “<a href="../../pages/KD.FF.020/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā – De acordo com alguns Suttā importantes</a>
+”.
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.FF.007/index.html">Anicca Repeated Arisingdestruction</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.009/index.html">Incesssant Distress Pilana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.FF.007/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anicca Repeated Arisingdestruction</span>
+        
+        <span class="pathway-title title-pt">Anicca: Surgimento e destruição repetidos</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.009/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Incesssant Distress Pilana</span>
+        
+        <span class="pathway-title title-pt">Angústia incessante, Pilana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

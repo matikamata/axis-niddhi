@@ -1,0 +1,524 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Verify Sotapanna Stage | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 91 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.JJ.011</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Verify Sotapanna Stage</h1>
+    
+    <h1 class="title-pt">Verificar o estágio Sotāpanna</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.JJ.011</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>15</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.JJ.011"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0501"
+             data-level="intermediate"
+             data-reading-time="15"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.JJ.011</td></tr><tr><td>Fin-dex</td><td>0501</td></tr><tr><td>Slug</td><td>verify-sotapanna-stage</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Verify Sotapanna Stage</td></tr></table></div></div><p style="text-align: justify;"><strong>Revised March 23, 2017; <span style="color: #3366ff;">last revised October 25, 2025</span></strong></p>
+<p style="text-align: justify;">One can determine for oneself whether one has attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. It becomes clear that one has removed the characteristics (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) suitable to be born in the four lowest realms (<em>apāyā</em>).</p>
+<h5><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> Is the First Goal</h5>
+<p style="text-align: justify;">1. The most precious thing sought by a <em>Bhauddhayā</em><span> (or a practicing <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span>) is the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>; </span></em>see, "<a href="../../pages/TL.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Why a Sōtapanna is better off than any King, Emperor, or a Billionaire</a>."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Arahanthood is the ultimate goal. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></em>will become an <em>Arahanthood</em> within seven<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>. </span></em></li>
+<li style="text-align: justify;">Seven <em>bhavas</em> are many more than seven births because, within a given <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, there can be many births. See "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>."</li>
+<li><span>Thus, it is essential to know how to figure out whether one has attained that stage. Other than that person himself/herself, only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can say whether a given person has achieved </span><em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>; see "<a href="../../pages/TL.JJ.005/index.html" rel="noopener noreferrer" target="_blank">Myths about the Sōtapanna Stage</a>."</li>
+<li><span>As we discussed in that <span class="pali-term term-highlight" data-term="post">post</span>, even Ven. Sariputta (who was only second to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> in <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> knowledge) could not do that. Some people claim they know whether another person has attained the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage (and make money doing that).</li>
+</ul>
+<p style="text-align: justify;">2. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> has seen the way to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>.</span></em> He/she still has more work to do, but has glimpsed <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> from afar. The way to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> has become apparent.</p>
+<ul style="text-align: justify;">
+<li><span>In another <span class="pali-term term-highlight" data-term="post">post</span>, I described a simile. A traveler looking for a particular mountain to reach the top can finally see its outline at a distance. He/she still has to travel to the mountain's base and climb up. Most of the hard work was finding the location of that mountain and getting close to it. See "</span><a href="../../pages/TL.JJ.006/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugami and a Sotāpanna</a>" and "<a href="../../pages/TL.JJ.003/index.html" rel="noopener noreferrer" target="_blank">The Sōtapanna Stage</a>."</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em><span>Is the Stopping of the <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Process</span></h5>
+<p style="text-align: justify;"><span>3. In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, the ultimate goal is to stop the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process anywhere in the 31 realms of this world. </span><span style="color: #3366ff;"><strong><span>That corresponds to realizing that there is only suffering to be found in this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></strong></span> In particular, one has to comprehend the danger of rebirths in the lowest four realms (<em>apāyā</em>).</p>
+<ul style="text-align: justify;">
+<li>The ONLY WAY to come to this realization is to comprehend the true nature of this world of 31 realms: <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>. And those do not mean impermanence, suffering, and "no-self"; see, "<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta – Wrong Interpretations</a>."</li>
+<li>Instead, it is to realize the unfruitfulness of striving to reach the mirage of happiness in this world of 31 realms and thus convince oneself that one is truly helpless in this cycle of rebirths.</li>
+<li>Therefore, one must work diligently to stop future suffering by "giving up cravings for things in this world" and strive to reach the only oasis in this desert of the cycle of rebirths or <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. That is to release the mind from the burdens of the material world.</li>
+</ul>
+<h5>Comprehension of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> will change one's outlook on life</h5>
+<p style="text-align: justify;">4. Once that idea sinks in, one's attitude, behavior, and outlook on life will change forever.</p>
+<ul style="text-align: justify;">
+<li>Let us take an example. Once a child learns to add two numbers, they will never forget it. There will be no second-guessing. If an adult, even a teacher, tells that child that "two plus three is six," there is no way that that child will ever agree.</li>
+<li>Attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> stage is like that. Deep down, one will KNOW the dangers of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Any happiness, whether due to health, wealth, or fame, is of NO VALUE in the long term. He /she has truly understood the value of the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> and that </span><strong>faith (based on understanding)</strong> will prevail through future rebirths.</li>
+<li>That is not a "magical effect." A living being is a continuous flow of <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span> energy</span></em>; see "<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">What Reincarnates? – Concept of a Lifestream</a>". Thus, what happens at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="phala">phala</span></span></em> moment is that the "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of that lifestream is irrevocably changed. <strong>One would have permanently shed any "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" suitable for a hell-being (with <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> of strong hate), a <em><span><span class="pali-term term-highlight" data-term="peta">peta</span></span></em> (intense greed), an<em><span> <span class="pali-term term-highlight" data-term="asura">asura</span></span></em> (freeloading mentality), or an animal (a mixture of all those; "<em>tirisan</em>" or all three "<em>san</em>").</strong></li>
+<li>One way to assess is to see how much of one's such "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" has improved. (Throughout working towards the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage). One should be able to see <strong>significant</strong> changes. For discussions on "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" (or "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>"), please use the "Search" box on the top right.</li>
+</ul>
+<h5>“Seeing” the True Nature of This World</h5>
+<p style="text-align: justify;">5. Let us take another example. When we look in a mirror and see our image, we KNOW that it is not another person or oneself but merely an image. We don't need to think twice about it.</p>
+<ul style="text-align: justify;">
+<li>But have you seen a dog barking at its reflection in a mirror or a still water surface? A dog thinks it is another dog and barks at it. A dog would not know it is just a reflection.</li>
+<li>In the same way, an average human thinks very highly of his/her material wealth. One is willing to "do whatever it takes" to possess worldly things, titles, recognition, etc.</li>
+<li>But a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> would instinctively know the unfruitfulness of such struggles. They may still enjoy sensory pleasures (and thus may still like to eat tasty food or engage in sexual activity, for example). However, they will not willingly go to extremes, such as engaging in sexual misconduct, having affairs outside the marriage, or being excessively greedy and exploiting others.</li>
+<li>A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> has reduced<em> lōbha</em> to <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> and <em>dōsa</em> (or<em> dvesha</em>) to <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em><span>. In other words, greed or hate that was due to the total covering of the mind by the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> would reduce to "attachments" and "dislikes"; see, "</span><a href="../../pages/KD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Lobha, Dosa, Moha versus Raga, Patigha, Avijja</a>."</li>
+<li><span>The most important thing is that he/she will NEVER do an immoral deed strong enough to lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the lowest four realms, i.e., an </span><em>apāyagāmi </em>deed. We all KNOW that our reflection in a mirror is not real, so we will not try to talk to it. Similarly, a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> INSTINCTIVELY avoids doing anything that is profoundly immoral. He/she does not need to think about the consequences of such acts, etc. The mind will automatically block such actions.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> </span></em>Can Be a Distraction</h5>
+<p style="text-align: justify;">6. One could be a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> (or even an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>) without being able to get to any <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em><span>beforehand. Many people in the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> attained </span><em>Arahanthood</em> upon listening to a<em> desana</em>. <em>Upacara </em>and<em><span> anuloma <span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> are sufficient for attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. Also, <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> are two different things; see, "<a href="../../pages/LD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Samādhi, Jhāna (Dhyāna), Magga Phala</a>."</p>
+<ul style="text-align: justify;">
+<li>That becomes clear when we look at the possible rebirths of a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> could be reborn at or above the human realm.</li>
+<li>But if one has attained the first<em><span> <span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>,</span></em> one WILL be born in the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm. Thus, a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> with even an<em><span> <span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānā</span></em> WILL NOT be reborn as a human.</li>
+<li>By the way, if one is not a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> but has attained<em><span> <span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānā</span></em>, he/she will also be born in a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm. But the difference is that he/she is not free from rebirths in even the lowest four realms.</li>
+<li>What I described above is consistent with the extension of 89 <em>cittā</em> to 121. The "additional 40 <em>cittā</em>" come about when attaining the four stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> for people at various (<em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em>) <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> levels; see "<a href="../../pages/TS.AA.004/index.html" rel="noopener noreferrer" target="_blank">The 89 (121) Types of Citta</a>". However, these are technical details that may not concern most people. I just wanted to show consistency.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> Experiences Are the Same</h5>
+<p style="text-align: justify;"><span style="color: #0000ff;"><span style="color: #000000;">7.</span> <span style="color: #3366ff;"><span>We also need to <span class="pali-term term-highlight" data-term="keep in mind">keep in mind</span> that the </span><em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span>/samāpatti </span></em>experience is the same for <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānā/samāpatti as</span></em> for <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> jhānā/samāpatti. </span></em>They are mental states of the <em>rupāvacara</em> and <em>arupāvacara</em> realms; they still belong to this world of 31 planes.</span> </span>However, subtle differences arise because <em>anusayas</em> (unbroken <em>saṁyojana</em>) are present in <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. See #8, #10, etc. in "<a href="../../pages/SI.AA.011/index.html" rel="noopener" target="_blank">Tapussa Sutta (AN 9.41)– Akuppā Cētōvimutti</a>."</p>
+<ul>
+<li style="text-align: justify;">There were <em>yogis</em><span> even before the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> who could attain the highest </span><em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānās, </span></em>proceed to higher <em>arupāvacara samāpatti,</em> and also cultivate <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers. <em><span>Ceto <span class="pali-term term-highlight" data-term="vimutti">vimutti</span></span></em> (or <em>ceto vimukthi</em>) with <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānā</span></em> is not the same as <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> with <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span> <span class="pali-term term-highlight" data-term="vimutti">vimutti</span>. </span></em>In the former, defilements are suppressed. In the latter, they have been removed. Even though the <em>arupāvacara samāpatti </em>are called "higher <em>jhānās</em>" these days, that is incorrect. There are only four (five in <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> analysis) <em>jhānās. </em>The higher <em>arupāvacara </em>mental states are <em>arupāvacara samāpatti</em>; see "<a href="../../pages/TS.AA.004/index.html" rel="noopener" target="_blank">The 89 (121) Types of Citta</a>."</li>
+<li style="text-align: justify;">Of course, having even <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānā</span></em> makes it easier to do <em><span><span class="pali-term term-highlight" data-term="vipassanā">vipassanā</span></span></em> (comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) and attain <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> Are Very Different in Essence</h5>
+<p style="text-align: justify;">8. Just SUPPRESSION of <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em> thoughts and craving for sensual pleasures (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>) can lead to <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em> <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span>.</span></em></p>
+<ul>
+<li style="text-align: justify;">On the other hand, attaining <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> requires removing craving (<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>) for sensual pleasures (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>). Thus, one needs to be an <em>Anāgāmi</em> to attain even the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>. </span></em>See "<a href="../../pages/LD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Possible Outcomes of Meditation – Samādhi, Jhāna, Magga Phala</a>."</li>
+<li style="text-align: justify;">Here is a<em> desana</em><span> from the Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span> describing the difference between </span><em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em><span> (it is in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, but I have extracted the essence in this <span class="pali-term term-highlight" data-term="post">post</span> for others):
+</span><p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Waharaka-Thero-Difference-between-Magga-Phala-and-Jhana.mp3" type="audio/mpeg"/></audio></p>
+</li>
+</ul>
+<h5>Changes One Can See For Oneself</h5>
+<p style="text-align: justify;">9. Even before reaching the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, one will notice changes in one's behavior and attitude towards other humans and all living beings. All of those will gradually change as one starts following the Path.</p>
+<ul style="text-align: justify;">
+<li>But there will be significant changes after attaining the<em><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. That change may not be noticeable in a day. It could take weeks or a few months to see significant changes in one's lifestyle when looking back.</li>
+<li><span>The tendency to get together with large groups (to party) will decrease. One will spend more time learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and contemplating concepts that are still not entirely clear. Finding more about the real nature of this world is immensely enjoyable.</span></li>
+<li>One will also start noticing things that one has not noticed before. One will see clear instances of people's "self-induced" suffering as they try to enjoy life by "partying harder," but only get exhausted.</li>
+<li><span style="color: #0000ff;">The only concrete way to be convinced of the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage is to make sure that the three <em>samyōjana</em> of<em><span> <span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span>, vicikiccā</span></em>, and <em><span>silabbata <span class="pali-term term-highlight" data-term="parāmāsa">parāmāsa</span></span></em> are absent.</span> See, “<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/sakkaya-ditthi-personality-me-view/" rel="noopener noreferrer" target="_blank">Sakkaya Diṭṭhi is Personality (Me) View?</a>“.</li>
+</ul>
+<h5>Should One Declare One's Attainments?</h5>
+<p style="text-align: justify;"><span>10. Then there is this question. Is it appropriate or even allowed by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> for someone to declare the </span><em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> one has attained?</p>
+<ul>
+<li style="text-align: justify;">As stated in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, the following is the case. If one falsely declares that one has a certain <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>, intending to gain respect, money, publicity, etc., that is a bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>. </span></em>A conventional <em><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></em> becomes "<em>pārājika,"</em> loses the priesthood automatically, and thus could be born in the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> for doing that.</li>
+<li style="text-align: justify;">Many people who attain <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> do not declare it; it is not a bragging point. It is the same with <em>jhānā</em>. Many people start off developing <em>jhānā</em> to attain supermundane (<em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em>) powers, but once they get there, they have already seen the fruitlessness of even those powers.</li>
+<li style="text-align: justify;">In particular, when one develops <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers to see previous lives, one becomes so disgusted with what one (and others) have gone through in past lives. One does not seek to look back much further.</li>
+</ul>
+<p>11. <span style="color: #3366ff;"><strong>The declaration of a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> is not banned.</strong></span> "A person attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage may declare it if he/she wishes to do so," in particular for the benefit of others. In the<em> "<a href="https://suttacentral.net/dn16/en/sujato" rel="noopener" target="_blank">Mahā Parinibbāna Sutta </a></em><a href="https://suttacentral.net/dn16/en/sujato" rel="noopener" target="_blank">(DN 16)</a>", "<em>Katamo ca so, ānanda, dhammādāso dhammapariyāyo, yena samannāgato ariyasāvako ākaṅkhamāno attanāva attānaṃ byākareyya: ‘khīṇanirayomhi khīṇa­ti­racchā­na­yoni khīṇa­petti­visayo khīṇā­pāya­dugga­ti­vini­pāto, <span style="color: #3366ff;"><strong>sotā­panno­hamasmi</strong></span> avini­pāta­dhammo niyato sam­bodhi­parā­yaṇo’ti."</em></p>
+<ul>
+<li><strong>Translation: </strong>"<span class="segment" id="sn55.8:6.6"><span class="translation"><span class="text">A noble disciple who has achieved this may declare of themselves: </span></span></span><span class="segment" id="sn55.8:6.7"><span class="translation"><span class="text"><span>I have finished with <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in hell, the animal realm, and the ghost realm. </span><span style="color: #3366ff;"><strong>I am a stream-enterer!</strong> </span>I’m not liable to be reborn in the lower realms and am bound for the final release-<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>”</span></span></span></li>
+<li style="text-align: justify;">The same verse appears in a series of four <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> (SN 55. 7 through SN 55.10); see, for example, "<a href="https://suttacentral.net/sn55.8/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamagiñjakāvasatha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.8)</a>." </li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> Examples/Accounts</h5>
+<p style="text-align: justify;">12. Now, let us discuss some episodes from the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> to clarify some of the above points.</p>
+<ul style="text-align: justify;">
+<li><span>Visāka (one of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s chief female lay disciples) had attained the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage at a young age. But she remained at that stage even without developing any<em> jhānā</em> or higher <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em><span> until death at age 120. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that she would be reborn as a </span><em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> many times (as I remember, 11 times).</li>
+<li>Similarly, the wealthy businessman  Anathapindika, who built the beautiful and expensive monastery <em>Jetavanaramaya,</em>  attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage upon hearing his first <em>desana</em><span> from the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. He died and was reborn in the Tusita realm (one of the six </span><em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> worlds). Since those<em><span> <span class="pali-term term-highlight" data-term="deva">deva</span></span></em> worlds also belong to the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>, it is clear that he never attained an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li><span>Mahānāma was a wealthy person who was related to Prince Siddhartha's family. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> told him that he had attained the</span><em><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. However, when engaged in his business activities, he often became frustrated and angry with his servants, yelling at them. After such an episode of outburst, he would think, "If I am still able to become angry like this, I must not have attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> stage yet." So, he would see the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, explain what happened, and ask whether the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was sure about the declaration. He still had doubts about his attainment of the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> stage until the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> confirmed it for the third time; see "</span><a href="https://suttacentral.net/sn55.21/en/sujato" rel="noopener" target="_blank"><em><span>Paṭha­ma ­<span class="pali-term term-highlight" data-term="mahā">Mahā</span>­<span class="pali-term term-highlight" data-term="nāma">nāma</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.21)</a>".</li>
+<li><strong>The key is that there is a difference between hate (<em>dōsa</em>) and getting angry (<em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em>); <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em> is removed only at the <em>Anāgāmi</em> stage.</strong></li>
+</ul>
+<h5>More Accounts From <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em></h5>
+<p>13. Then there was the Sarakāni <em>brāhmin</em>, who also belonged to a "high caste." He used to consume alcohol and get drunk regularly. His relatives, who were <em>vedic brāhmins</em>, disowned him from their lot, saying he was unworthy to be one of them. He also attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> stage, but could not give up the habit of drinking even after achieving that. When he died, Mahānāma (mentioned above) asked the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> where Sarakāni was reborn. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said Sarakāni had attained the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage and had been reborn as a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em>. Sarakāni's relatives laughed out loud contemptuously upon hearing this and declared, "If Sarakāni were a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>, then we all should be <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em><span>." When Mahānāma reported this back to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said those ignorant </span><em>brāhmins</em> would go by outward appearances. That description is in the <i>"<a href="https://suttacentral.net/sn55.24/en/sujato" rel="noopener" target="_blank">Paṭhamasaraṇānisakka Sutta </a></i><a href="https://suttacentral.net/sn55.24/en/sujato" rel="noopener" target="_blank">(SN 55. 24)</a>."</p>
+<ul style="text-align: justify;">
+<li>Of course, that episode does not imply that one can continue engaging in immoral activities and still attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. What we need to understand is that drinking alcohol by itself is not one of the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em><span> (ten immoral actions), but heavy consumption could lead to it. Sarakāni probably continued with his long-time habit to some extent but was unlikely to have "got drunk." A <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> removes only strong greed (lōbha)</span><strong><em>.</em> K<em><span>āma <span class="pali-term term-highlight" data-term="rāga">rāga</span>,</span></em> or attachment to sense pleasures, is removed only at the <em>Anāgāmi</em> stage.</strong></li>
+<li>In the <em>Mahānāma</em> <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em><span> (delivered to Mahānāma mentioned above), the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> described the </span><em>sila</em> (moral conduct) of a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>: "<em><span>pānātipātā pativiratō hōti, <span class="pali-term term-highlight" data-term="adinnādānā">adinnādānā</span> pativiratō hōti, kamēsu micchācārā pativiratō hōti, musāvādā pativiratō hōti, surāmēraya majjapamā dattānā pativiratō hōti."</span></em> It is essential to realize the deep meanings of the "five precepts"; see "<a href="../../pages/TL.EE.005/index.html" rel="noopener noreferrer" target="_blank">The Five Precepts - What the Buddha Meant by Them</a>."</li>
+<li>In the above, "<em>pativiratō hōti</em>" does not mean "will not" but rather "will not do with liking." After all, a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> (unless had attained<em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span> jhānā</span></em>) is not yet released from the higher realms of the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>, only from the lowest four realms.</li>
+</ul>
+<h5><em><span>Asmi <span class="pali-term term-highlight" data-term="māna">Māna</span></span></em> Removed Only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> Stage</h5>
+<p style="text-align: justify;">14.<strong> Some people try to remove the sense of "me" or the sense of "self" to get to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, but that is removed only at the<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</strong></p>
+<ul>
+<li style="text-align: justify;">As long as one is bound to the 31 realms, a sense of "self" will be there. <strong>These "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" are removed in stages, starting with "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span>" suitable for <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em>apāyā, as discussed in #4 above</em>.</strong> Even an <em>Anāgāmi</em> has a sense of "self" left, though most of his/her attachments for sense pleasures would not be there. One cannot pass a college exam without having graduated from high school.</li>
+<li style="text-align: justify;">One has to advance systematically through stages; see "<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Removal of Āsavā</a>" and "<a href="../../pages/TS.AA.011/index.html" rel="noopener noreferrer" target="_blank">Conditions for the Four Stages of Nibbāna</a>."</li>
+<li style="text-align: justify;">As long as one is bound to the 31 realms or "this material world," it is not correct to say that there is a "self" or there is "no-self"; both wrong and extreme views; see "<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta</a>."</li>
+<li style="text-align: justify;">Any meditation with the wrong concepts of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, or <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> "will not grow." One should be able to "feel" one's understanding "grow" if one is doing the correct types of meditation; see, "<a href="../../pages/BM.AA.015/index.html" rel="noopener noreferrer" target="_blank">13. Kammattana (Recitations) for the Sōtapanna Stage</a>".</li>
+</ul>
+<h5><span>Only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Can Know Another Person's Attainments</span></h5>
+<p style="text-align: justify;"><span>15. Finally, only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> could discern whether another person has attained </span><em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span>. </span></em>However, many instances of people declaring their attainments by themselves when that declaration helped a noble purpose.</p>
+<ul>
+<li style="text-align: justify;"><span>All those who participated in the first four <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Councils (<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> </span><em>Sangāyanā</em>) were <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span>,</span></em> according to the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>. </span></em>Thus all those many thousands of <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> who attended those four <em>Sangāyanā</em> must have declared the <em>Arahantship</em> by themselves.</li>
+<li style="text-align: justify;">Ven. Ananda attained the <em>Arahantship</em><span> just the night before the first <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council (</span><em>Sangāyanā</em>.) He came to the Council by air (with <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em><span> powers) and entered the hall through the keyhole. He did that to dispel doubts from the other <span class="pali-term term-highlight" data-term="arahants">Arahants</span>' minds about his attainment.</span></li>
+<li style="text-align: justify;">There are only a few instances of <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em><span> or even the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> performing such supernormal acts. It was essential to remove any doubts of others about the </span><em>Arahantship</em> of Ven. Ananda because of the critical role he played at the First <em>Sangāyanā</em>.</li>
+</ul>
+<p>Also see: "<a href="../../pages/TL.JJ.006/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugami and a Sotāpanna</a>," "<a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Four Conditions for Attaining Sōtapanna Magga/Phala</a>," and "<a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – The Four Qualities of a Sotāpanna</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.JJ.011"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0501"
+             data-level="intermediate"
+             data-reading-time="15"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.JJ.011
+Language:     pt-BR
+Generated-At: 2026-03-10T23:21:30Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;"><strong>Revisado em 23 de março de 2017; <span style="color: #3366ff;">última revisão em 25 de outubro de 2025</span></strong></p>
+<p style="text-align: justify;">É possível determinar por si mesmo se atingiu o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Fica claro que removeu as características (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>) adequadas para nascer nos quatro reinos mais baixos (<em>apāyā</em>).</p>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> é a primeira meta</h5>
+<p style="text-align: justify;">1. A coisa mais preciosa buscada por um <em>Bhauddhayā</em> (ou um Buddhista praticante) é o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>; </span></em>veja “<a href="../../pages/TL.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Por que um Sotāpanna é melhor do que qualquer rei, imperador ou bilionário</a>”.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Arahanthood é o objetivo final. Um <em>Sótapanna </em>se tornará um <em>Arahanthood</em> dentro de sete<em><span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>. </span></em></li>
+<li style="text-align: justify;">Sete <em>bhavas</em> são muito mais do que sete nascimentos, porque, dentro de um determinado <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>, pode haver muitos nascimentos. Veja “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>”.</li>
+<li><span>Portanto, é essencial saber como descobrir se alguém atingiu esse estágio. Além da própria pessoa, apenas um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pode dizer se uma determinada pessoa alcançou </span><em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>; veja “<a href="../../pages/TL.JJ.005/index.html" rel="noopener noreferrer" target="_blank">Mitos sobre o estágio Sótapanna</a>”.</li>
+<li><span>Como discutimos nesse ensaio, mesmo o Ven. Sariputta (que era apenas o segundo depois do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> em conhecimento do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>) não podia fazer isso. Algumas pessoas afirmam saber se outra pessoa atingiu o estágio </span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> (e ganham dinheiro fazendo isso).</li>
+</ul>
+<p style="text-align: justify;">2. Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> viu o caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>.</span></em> Ele/ela ainda tem mais trabalho a fazer, mas vislumbrou <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> de longe. O caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> tornou-se evidente.</p>
+<ul style="text-align: justify;">
+<li>Em outro ensaio, descrevi uma comparação. Um viajante que procura uma determinada montanha para chegar ao topo pode finalmente ver seu contorno à distância. Ele/ela ainda precisa viajar até a base da montanha e subir. A maior parte do trabalho árduo foi encontrar a localização daquela montanha e chegar perto dela. Veja “<a href="../../pages/TL.JJ.006/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugami e um Sotāpanna</a>” e “<a href="../../pages/TL.JJ.003/index.html" rel="noopener noreferrer" target="_blank">O estágio Sōtapanna</a>”.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>é a interrupção do processo de Renascimento</h5>
+<p style="text-align: justify;"><span>3. No <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, o objetivo final é interromper o processo de renascimento em qualquer um dos 31 reinos deste mundo. </span><span style="color: #3366ff;"><strong>Isso corresponde à compreensão de que só há sofrimento neste processo de renascimento.</strong></span> Em particular, é preciso compreender o perigo dos renascimentos nos quatro reinos mais baixos (<em>apāyā</em>).</p>
+<ul style="text-align: justify;">
+<li>A ÚNICA MANEIRA de chegar a essa compreensão é compreender a verdadeira natureza deste mundo de 31 reinos: <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>. E isso não significa impermanência, sofrimento e “não-eu”; veja “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā – Interpretações Erradas</a>”.</li>
+<li>Em vez disso, é perceber a infrutuosidade de se esforçar para alcançar a miragem da felicidade neste mundo de 31 reinos e, assim, convencer-se de que se está verdadeiramente impotente neste ciclo de Renascimentos.</li>
+<li>Portanto, deve-se trabalhar diligentemente para impedir o sofrimento futuro, “abrindo mão dos desejos pelas coisas deste mundo” e se esforçando para alcançar o único oásis neste deserto do ciclo de renascimentos, ou <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Isso significa libertar a mente dos fardos do mundo material.</li>
+</ul>
+<h5>A compreensão de <em>Tilakkhaṇa</em> mudará a visão de vida de uma pessoa</h5>
+<p style="text-align: justify;">4. Uma vez que essa ideia seja assimilada, a atitude, o comportamento e a visão de vida mudarão para sempre.</p>
+<ul style="text-align: justify;">
+<li>Vamos dar um exemplo. Uma vez que uma criança aprende a somar dois números, ela nunca mais se esquecerá disso. Não haverá dúvidas. Se um adulto, mesmo um professor, disser a essa criança que “dois mais três é seis”, não há como essa criança concordar.</li>
+<li>Alcançar o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span> é assim. No fundo, a pessoa SABERÁ os perigos do processo de Renascimento. Qualquer felicidade, seja devido à saúde, riqueza ou fama, NÃO TEM VALOR a longo prazo. Ela compreendeu verdadeiramente o valor do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> e que </span><strong>a fé (baseada na compreensão)</strong> prevalecerá nos Renascimentos futuros.</li>
+<li>Isso não é um “efeito mágico”. Um ser vivo é um fluxo contínuo de <em><span>energia de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>; veja “<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">O que reencarna? – Conceito de um fluxo de vida</a>”. Assim, o que acontece no momento do <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="phala">Phala</span></span></em> é que a <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> desse fluxo de vida é irrevogavelmente alterada. <strong>A pessoa teria se livrado permanentemente de qualquer “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” adequado para um ser infernal (com <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> de ódio intenso), um <em><span><span class="pali-term term-highlight" data-term="peta">Peta</span></span></em> (ganância intensa), um<em><span> <span class="pali-term term-highlight" data-term="asura">Asura</span></span></em> (mentalidade parasitária) ou um animal (uma mistura de todos esses; “<em>tirisan</em>” ou todos os três “<em>san</em>”).</strong></li>
+<li>Uma maneira de avaliar é ver o quanto a “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” de alguém melhorou. (Ao longo do trabalho em direção ao estágio <em>Sótapanna</em>). Deve-se ser capaz de ver mudanças <strong>significativas</strong>. Para discussões sobre “G<em>ati</em>” (ou “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>”), use a caixa “Pesquisar” no canto superior direito.</li>
+</ul>
+<h5>“Vendo” a verdadeira natureza deste mundo</h5>
+<p style="text-align: justify;">5. Vamos dar outro exemplo. Quando olhamos no espelho e vemos nossa imagem, SABEMOS que não é outra pessoa ou nós mesmos, mas apenas uma imagem. Não precisamos pensar duas vezes sobre isso.</p>
+<ul style="text-align: justify;">
+<li>Mas você já viu um cão latindo para seu reflexo no espelho ou na superfície de uma água parada? O cão pensa que é outro cão e late para ele. O cão não sabe que é apenas um reflexo.</li>
+<li>Da mesma forma, um ser humano comum tem uma opinião muito elevada de sua riqueza material. Ele está disposto a “fazer o que for preciso” para possuir bens materiais, títulos, reconhecimento, etc.</li>
+<li>Mas um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> saberia instintivamente da infrutuosidade de tais lutas. Eles ainda podem desfrutar de prazeres sensoriais (e, portanto, ainda podem gostar de comer comida saborosa ou se envolver em atividades sexuais, por exemplo). No entanto, eles não irão voluntariamente a extremos, como se envolver em conduta sexual imprópria, ter casos fora do casamento ou ser excessivamente gananciosos e explorar os outros.</li>
+<li>Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> reduziu<em> lōbha</em> a <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em> e <em>dōsa</em> (ou<em> dvesha</em>) a <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em>. Em outras palavras, a ganância ou o ódio que eram causados pelo total obscurecimento da mente pelos Cinco Estorvos se reduziriam a “apegos” e “aversões”; veja “<a href="../../pages/KD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Lobha, Dosa, Moha versus Raga, Paṭigha, Avijjā</a>”.</li>
+<li>O mais importante é que ele/ela NUNCA fará uma ação imoral forte o suficiente para levar ao Renascimento nos quatro reinos mais baixos, ou seja, uma ação <em>apāyagāmi</em>. Todos nós SABEMOS que nosso reflexo no espelho não é real, então não tentaremos falar com ele. Da mesma forma, um <em>Sótapanna</em> INSTINTIVAMENTE evita fazer qualquer coisa que seja profundamente imoral. Ele/ela não precisa pensar nas consequências de tais atos, etc. A mente bloqueará automaticamente tais ações.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> </span></em>pode ser uma distração</h5>
+<p style="text-align: justify;">6. É possível ser um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> (ou mesmo um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>) sem conseguir atingir nenhum <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> </span></em><span>antes. Muitas pessoas na época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> alcançaram </span><em>o Arahanthood</em> ao ouvir um<em> desana</em>. <em>Upacara </em>e<em><span> anuloma <span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em> são suficientes para atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Além disso, <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> são duas coisas diferentes; veja “<a href="../../pages/LD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Samādhi, Jhāna (Dhyāna), Magga Phala</a>”.</p>
+<ul style="text-align: justify;">
+<li>Isso fica claro quando olhamos para os possíveis renascimentos de um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> poderia renascer no reino humano ou acima dele.</li>
+<li>Mas se alguém atingiu o primeiro<em><span> <span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>,</span></em> ele NASCERÁ no reino de <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. Assim, um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> com até mesmo um<em><span> <span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> NÃO renascerá como humano.</li>
+<li>A propósito, se alguém não for um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>,</span></em> mas tiver alcançado<em><span> <span class="pali-term term-highlight" data-term="anariya">Anariya</span> jhānā</span></em>, ele/ela também renascerá no reino de <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. Mas a diferença é que ele/ela não está livre de renascimentos nem mesmo nos quatro reinos mais baixos.</li>
+<li>O que descrevi acima é consistente com a extensão de 89 <em>Cittā</em> para 121. Os “40 <em>Cittā</em> adicionais” surgem quando se alcançam os quatro estágios de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> para pessoas em vários níveis (<em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em>) <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>; veja “<a href="../../pages/TS.AA.004/index.html" rel="noopener noreferrer" target="_blank">Os 89 (121) tipos de Cittā</a>”. No entanto, esses são detalhes técnicos que podem não interessar à maioria das pessoas. Eu só queria mostrar a consistência.</li>
+</ul>
+<h5>As experiências <em><span>de <span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> são as mesmas</h5>
+<p style="text-align: justify;"><span style="color: #0000ff;"><span style="color: #000000;">7.</span> <span style="color: #3366ff;">Também deve ter em mente que a experiência <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>/samāpatti</span></em> é a mesma para <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>/samāpatti e</span></em> para <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>/samāpatti. </span></em>São estados mentais dos reinos <em>rupāvacara</em> e <em>arupāvacara</em>; eles ainda pertencem a este mundo de 31 planos.</span> </span>No entanto, surgem diferenças sutis porque <em>os Anusayas</em> (<em>saṁyojana</em> ininterrupto) estão presentes no <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Veja #8, #10, etc. em “<a href="../../pages/SI.AA.011/index.html" rel="noopener" target="_blank">Tapussa Sutta (AN 9.41) – Akuppā Cētōvimutti</a>”.</p>
+<ul>
+<li style="text-align: justify;">Havia <em>iogues</em><span> mesmo antes do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> que podiam atingir os mais altos </span><em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> jhānās, </span></em>prosseguir para o mais elevado <em>arupāvacara samāpatti</em> e também cultivar poderes <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em>. <em><span>Ceto <span class="pali-term term-highlight" data-term="vimutti">vimutti</span></span></em> (ou <em>ceto vimukthi</em>) com <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> jhānā</span></em> não é o mesmo que <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> com <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span> <span class="pali-term term-highlight" data-term="vimutti">vimutti</span>. </span></em>No primeiro, as impurezas são suprimidas. No segundo, elas foram removidas. Embora os <em>arupāvacara samāpatti </em>sejam chamados de “<em>jhānās</em> superiores” atualmente, isso é incorreto. Existem apenas quatro (cinco na análise <em><span>do <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>) <em>jhānās. </em>Os estados mentais <em>arupāvacara</em> superiores são <em>arupāvacara samāpatti</em>; veja “<a href="../../pages/TS.AA.004/index.html" rel="noopener" target="_blank">Os 89 (121) tipos de Citta</a>”.</li>
+<li style="text-align: justify;">É claro que ter até mesmo <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> jhānā</span></em> torna mais fácil fazer <em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> (compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>) e alcançar <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> são muito diferentes em essência</h5>
+<p style="text-align: justify;">8. A simples SUPRESSÃO de pensamentos <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span></span></em> e do desejo por prazeres sensuais (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>) pode levar ao <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>.</span></em></p>
+<ul>
+<li style="text-align: justify;">Por outro lado, alcançar <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> requer remover o desejo (<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>) por prazeres sensuais (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>). Assim, é preciso ser um <em>Anāgāmi</em> para alcançar até mesmo o primeiro <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>. </span></em>Veja “<a href="../../pages/LD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Possíveis resultados da meditação – Samādhi, Jhāna, Magga Phala</a>”.</li>
+<li style="text-align: justify;">Aqui está um<em> desana</em><span> do Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span> descrevendo a diferença entre </span><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> (está em Cingalês, mas extraí a essência neste ensaio para os outros):
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Waharaka-Thero-Difference-between-Magga-Phala-and-Jhana.mp3" type="audio/mpeg"/></audio></p>
+</li>
+</ul>
+<h5>Mudanças que se podem observar em si mesmo</h5>
+<p style="text-align: justify;">9. Mesmo antes de atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, a pessoa notará mudanças em seu comportamento e atitude em relação a outros seres humanos e todos os seres vivos. Tudo isso mudará gradualmente à medida que a pessoa começar a seguir o Caminho.</p>
+<ul style="text-align: justify;">
+<li>Mas haverá mudanças significativas após atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Essa mudança pode não ser perceptível em um dia. Pode levar semanas ou alguns meses para ver mudanças significativas no estilo de vida de alguém quando se olha para trás.</li>
+<li><span>A tendência de se reunir com grandes grupos (para festas) diminuirá. A pessoa passará mais tempo aprendendo o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e contemplando conceitos que ainda não estão totalmente claros. Descobrir mais sobre a verdadeira natureza deste mundo é imensamente agradável.</span></li>
+<li>A pessoa também começará a perceber coisas que não percebia antes. Verá exemplos claros do sofrimento “autoinduzido” das pessoas, que tentam aproveitar a vida “festejando mais”, mas só conseguem se esgotar.</li>
+<li><span style="color: #0000ff;">A única maneira concreta de se convencer do estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> é certificar-se de que os três <em>samyōjana</em> de<em><span> <span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span>, vicikiccā</span></em> e <em><span><span class="pali-term term-highlight" data-term="parāmāsa">Parāmāsa</span></span></em> estão ausentes.</span> Veja “<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/sakkaya-ditthi-personality-me-view/" rel="noopener noreferrer" target="_blank">Sakkāya Diṭṭhi é a visão da personalidade (eu)?</a>”.</li>
+</ul>
+<h5>Deve-se declarar suas conquistas?</h5>
+<p style="text-align: justify;"><span>10. Então surge esta questão. É apropriado ou mesmo permitido pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span> que alguém declare o </span><em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> que alcançou?</p>
+<ul>
+<li style="text-align: justify;">Conforme declarado no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, o seguinte é o caso. Se alguém declarar falsamente que possui um determinado <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>, com a intenção de ganhar respeito, dinheiro, publicidade, etc., isso é um mau <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>. </span></em>Um <em><span><span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span></em> convencional se torna “<em>pārājika”,</em> perde automaticamente o sacerdócio e, portanto, pode nascer no <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> por fazer isso.</li>
+<li style="text-align: justify;">Muitas pessoas que alcançam <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> não o declaram; não é algo para se gabar. O mesmo acontece com <em>jhānā</em>. Muitas pessoas começam a desenvolver <em>jhānā</em> para alcançar poderes supramundanos (<em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em>), mas, uma vez que chegam lá, já perceberam a futilidade mesmo desses poderes.</li>
+<li style="text-align: justify;">Em particular, quando alguém desenvolve poderes <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em> para ver vidas anteriores, fica tão enojado com o que ele (e outros) passaram em vidas passadas. Não se procura olhar muito mais para trás.</li>
+</ul>
+<p>11. <span style="color: #3366ff;"><strong>A declaração de um <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> não é proibida.</strong></span> “Uma pessoa que atinge o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> pode declará-lo se desejar”, especialmente para o benefício de outros. No<em> <a href="https://suttacentral.net/dn16/en/sujato" rel="noopener" target="_blank">“Mahā Parinibbāna Sutta </a></em><a href="https://suttacentral.net/dn16/en/sujato" rel="noopener" target="_blank">(DN 16)</a>”, <em>“Katamo ca so, ānanda, dhammādāso dhammapariyāyo, yena samannāgato ariyasāvako ākaṅkhamāno attanāva attānaṃ byākareyya: ‘khīṇanirayomhi khīṇa-ti-racchā-nayoni khīṇa-petti-visayo khīṇā-pāya-dugga-ti-vini-pāto, <span style="color: #3366ff;"><strong>sotā­panno­hamasmi</strong></span> avini­pāta­dhammo niyato sam­bodhi­parā­yaṇo’ti."</em></p>
+<ul>
+<li><strong>Tradução: </strong><span class="segment" id="sn55.8:6.6"><span class="translation"><span class="text">“Um nobre discípulo que alcançou isso pode declarar sobre si mesmo: </span></span></span><span class="segment" id="sn55.8:6.7"><span class="translation"><span class="text">Eu terminei com o renascimento no inferno, no reino animal e no reino dos fantasmas. <span style="color: #3366ff;"><strong>Eu sou um entrante na corrente!</strong></span> Não estou sujeito a renascer nos reinos inferiores e estou destinado à libertação final –<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>”.</span></span></span></li>
+<li style="text-align: justify;">O mesmo versículo aparece em uma série de quatro <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> (SN 55.7 a SN 55.10); veja, por exemplo, “<a href="https://suttacentral.net/sn55.8/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamagiñjakāvasatha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.8)</a>”. </li>
+</ul>
+<h5>Exemplos/Relatos <em><span>do <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em></h5>
+<p style="text-align: justify;">12. Agora, vamos discutir alguns episódios do <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> para esclarecer alguns dos pontos acima.</p>
+<ul style="text-align: justify;">
+<li><span>Visāka (uma das principais discípulas leigas do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>) alcançou o estágio </span><em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> ainda jovem. Mas ela permaneceu nesse estágio, mesmo sem desenvolver nenhum<em> jhānā</em> ou <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em><span> superior, até sua morte aos 120 anos. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou que ela renasceria como um </span><em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> muitas vezes (se bem me lembro, 11 vezes).</li>
+<li>Da mesma forma, o rico empresário Anathapindika, que construiu o belo e caro mosteiro <em>Jetavanaramaya,</em> alcançou o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> ao ouvir seu primeiro <em>desana</em><span> do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Ele morreu e renasceu no reino Tusita (um dos seis mundos </span><em><span>de <span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>). Como esses mundos <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> também pertencem ao <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>, fica claro que ele nunca alcançou um <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</li>
+<li><span>Mahānāma era uma pessoa rica que tinha parentesco com a família do príncipe Siddhartha. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse-lhe que ele tinha alcançado o estágio </span><em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. No entanto, quando se dedicava às suas atividades comerciais, muitas vezes ficava frustrado e zangado com os seus servos, gritando com eles. Após um episódio de explosão de raiva, ele pensava: “Se ainda sou capaz de ficar zangado assim, devo não ter alcançado o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span>”. Então, ele ia ver o <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, explicava o que havia acontecido e perguntava se o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> tinha certeza sobre a declaração. Ele ainda tinha dúvidas sobre ter alcançado o estágio de </span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span> até que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> confirmou pela terceira vez; veja “</span><a href="https://suttacentral.net/sn55.21/en/sujato" rel="noopener" target="_blank"><em><span>Paṭha­ma ­<span class="pali-term term-highlight" data-term="mahā">Mahā</span>­<span class="pali-term term-highlight" data-term="nāma">nāma</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.21)</a>”.</li>
+<li><strong>O ponto principal é que há uma diferença entre ódio (<em>dōsa</em>) e ficar com raiva (<em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em>); <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em> só é removido no estágio <em>Anāgāmi</em>.</strong></li>
+</ul>
+<h5>Mais relatos do <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em></h5>
+<p>13. Havia também o <em>brāhmin</em> Sarakāni, que também pertencia a uma “casta elevada”. Ele costumava consumir álcool e embriagar-se regularmente. Seus parentes, que eram <em>brāhmins védicos</em>, o renegaram, dizendo que ele era indigno de ser um deles. Ele também alcançou o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span>, mas não conseguiu abandonar o hábito de beber, mesmo depois de alcançá-lo. Quando ele morreu, Mahānāma (mencionado acima) perguntou ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span> onde Sarakāni havia renascido. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que Sarakāni havia alcançado o estágio </span><em>de Sótapanna</em> e renascido como um <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>. Os parentes de Sarakāni riram alto com desdém ao ouvir isso e declararam: “Se Sarakāni fosse um <em>Sótapanna</em>, então todos nós deveríamos ser <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em><span>”. Quando Mahānāma relatou isso ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que aqueles </span><em>brāhmins</em> ignorantes se baseavam nas aparências externas. Essa descrição está no <i>“<a href="https://suttacentral.net/sn55.24/en/sujato" rel="noopener" target="_blank">Paṭhamasaraṇānisakka Sutta </a></i><a href="https://suttacentral.net/sn55.24/en/sujato" rel="noopener" target="_blank">(SN 55. 24)</a>”.</p>
+<ul style="text-align: justify;">
+<li>É claro que esse episódio não implica que alguém possa continuar se envolvendo em atividades imorais e ainda assim atingir o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. O que precisamos entender é que beber álcool por si só não é uma das <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em><span> (dez ações imorais), mas o consumo excessivo pode levar a isso. Sarakāni provavelmente continuou com seu hábito de longa data até certo ponto, mas era improvável que tivesse “ficado bêbado”. Um <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> remove apenas a ganância forte (lōbha)</span><strong><em>.</em> K<em><span>āma <span class="pali-term term-highlight" data-term="rāga">Rāga</span>,</span></em> ou apego aos prazeres dos sentidos, é removido apenas no estágio <em>Anāgāmi</em>.</strong></li>
+<li>No <em>Mahānāma</em> <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> (entregue a Mahānāma, mencionado acima), o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descreveu o </span><em>sila</em> (conduta moral) de um <em>Sótapanna</em>: “<em><span>pānātipātā pativiratō hōti, <span class="pali-term term-highlight" data-term="adinnādānā">Adinnādānā</span> pativiratō hōti, kamēsu micchācārā pativiratō hōti, musāvādā pativiratō hōti, surāmēraya majjapamā dattānā pativiratō hōti.”</span></em> É essencial compreender os significados profundos dos “cinco preceitos”; consulte “<a href="../../pages/TL.EE.005/index.html" rel="noopener noreferrer" target="_blank">Os Cinco Preceitos - O que o Buddha quis dizer com eles</a>”.</li>
+<li>No texto acima, “<em>pativiratō hōti</em>” não significa “não fará”, mas sim “não fará com prazer”. Afinal, um <em>Sótapanna</em> (a menos que tenha alcançado<em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span> jhānā</span></em>) ainda não está liberado dos reinos superiores do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>, apenas dos quatro reinos inferiores.</li>
+</ul>
+<h5><em><span>Asmi <span class="pali-term term-highlight" data-term="māna">Māna</span></span></em> removido apenas no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em></h5>
+<p style="text-align: justify;">14.<strong> Algumas pessoas tentam remover o senso de “eu” ou o senso de “eu mesmo” para chegar ao estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, mas isso só é removido no estágio<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</strong></p>
+<ul>
+<li style="text-align: justify;">Enquanto alguém estiver preso aos 31 reinos, a sensação de “eu” estará presente. <strong>Essas <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> são removidas em estágios, começando com a <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> adequada para o Renascimento no <em>apāyā, conforme discutido no item 4 acima</em>.</strong> Mesmo um <em>Anāgāmi</em> ainda tem um senso de “eu”, embora a maioria de seus apegos aos prazeres dos sentidos não esteja mais presente. Não se pode passar em um exame universitário sem ter se formado no ensino médio.</li>
+<li style="text-align: justify;">É preciso avançar sistematicamente através das etapas; veja “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">O Caminho para Nibbāna – Remoção de Āsavā</a>” e “<a href="../../pages/TS.AA.011/index.html" rel="noopener noreferrer" target="_blank">Condições para as Quatro Etapas de Nibbāna</a>”.</li>
+<li style="text-align: justify;">Enquanto se estiver preso aos 31 reinos ou “este mundo material”, não é correto dizer que existe um “eu” ou que não existe um “eu”; ambas são visões erradas e extremas; veja “<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā</a>”.</li>
+<li style="text-align: justify;">Qualquer meditação com conceitos errados de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> ou Anattā</span></em> “não crescerá”. A pessoa deve ser capaz de “sentir” sua compreensão “crescer” se estiver praticando os tipos corretos de meditação; veja “<a href="../../pages/BM.AA.015/index.html" rel="noopener noreferrer" target="_blank">13. Kammattana (Recitações) para o Estágio Sótapanna</a>”.</li>
+</ul>
+<h5><span>Somente um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pode conhecer as realizações de outra pessoa</span></h5>
+<p style="text-align: justify;"><span>15. Finalmente, somente um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> poderia discernir se outra pessoa alcançou </span><em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span>. </span></em>No entanto, há muitos casos de pessoas que declararam suas realizações por conta própria quando essa declaração ajudou a um propósito nobre.</p>
+<ul>
+<li style="text-align: justify;"><span>Todos aqueles que participaram dos quatro primeiros Conselhos Buddhistas (<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> </span><em>Sangāyanā</em>) eram <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span>,</span></em> de acordo com o <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>. </span></em>Assim, todos aqueles milhares de <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> que participaram desses quatro <em>Sangāyanā</em> devem ter declarado o <em>Arahantismo</em> por conta própria.</li>
+<li style="text-align: justify;">O Venerável Ananda alcançou o <em>arahantato</em> na noite anterior ao primeiro Concílio Buddhista (<em>Sangāyanā</em>). Ele chegou ao Concílio pelo ar (com poderes <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em><span>) e entrou no salão pela fechadura. Ele fez isso para dissipar as dúvidas dos outros <span class="pali-term term-highlight" data-term="arahants">Arahants</span> sobre sua realização.</span></li>
+<li style="text-align: justify;">Existem apenas alguns casos de <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em><span> ou mesmo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> realizando tais atos sobrenaturais. Era essencial remover quaisquer dúvidas dos outros sobre o </span><em>Arahantismo</em> do Venerável Ananda devido ao papel crítico que ele desempenhou no Primeiro <em>Sangāyanā</em>.</li>
+</ul>
+<p>Veja também: “<a href="../../pages/TL.JJ.006/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugami e um Sotāpanna</a>”, “<a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Quatro Condições para Alcançar Sōtapanna Magga/Phala</a>” e “<a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – As Quatro Qualidades de um Sotāpanna</a>”.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.KK.004/index.html">Kama Asvada Phassa Paccaya Vedana Samphassa Ja Vedana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.JJ.012/index.html">Only Akusala Removed By Sotapanna</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.KK.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Kama Asvada Phassa Paccaya Vedana Samphassa Ja Vedana</span>
+        
+        <span class="pathway-title title-pt">Kama Asvada Phassa Paccaya Vedana Samphassa Ja Vedana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.JJ.012/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Only Akusala Removed By Sotapanna</span>
+        
+        <span class="pathway-title title-pt">Somente Akusala removido por Sotāpanna</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

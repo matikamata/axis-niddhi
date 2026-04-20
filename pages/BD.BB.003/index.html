@@ -1,0 +1,456 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Theories Of Our World Scientific Overview | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 5 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.BB.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Theories Of Our World Scientific Overview</h1>
+    
+    <h1 class="title-pt">Teorias sobre o nosso mundo: uma visão geral científica</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.BB.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.BB.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0008"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.BB.003</td></tr><tr><td>Fin-dex</td><td>0008</td></tr><tr><td>Slug</td><td>theories-of-our-world-scientific-overview</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Theories Of Our World Scientific Overview</td></tr></table></div></div><p><strong> August 9, 2020; <span style="color: #0000ff;">revised July 25, 2022</span></strong></p>
+<p style="text-align: justify;"><span> We will first briefly discuss three main theories of our world. Then, we will start a broader discussion of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s description of this world.</span></p>
+<h5 style="text-align: justify;">Theories of Our World - According to Modern Science</h5>
+<p style="text-align: justify;">1. Western science has been studying our world since the time of the ancient Greeks. But its focus has been on the material world. There have been investigations on TWO fronts—the<span style="color: #0000ff;"><strong> structure of matter and the origin of life.</strong></span></p>
+<ul style="text-align: justify;">
+<li><span>Investigations on the structure of matter started with Socrates and Aristotle. As discussed in the previous <span class="pali-term term-highlight" data-term="post">post</span>, Democritus proposed the first atomic theory, which has evolved into current studies on quantum physics. See "</span><a href="../../pages/BD.BB.002/index.html" rel="noopener noreferrer" target="_blank">Introduction – A Scientific Approach to Buddha Dhamma</a>" and Ref. 1 below.</li>
+<li>The second front is on the origin of life or the study of the living world. That includes plants and conscious life. See "<a href="https://en.wikipedia.org/wiki/History_of_biology" rel="noopener noreferrer" target="_blank">History of biology</a>." Modern science believes that living cells evolved FROM inert matter ("abiogenesis.") See Ref. 2 for more details.</li>
+<li>Both conscious and non-conscious (plant) life have <span style="color: #0000ff;"><strong>living cells as the basis.</strong></span>   See "<a href="../../pages/DS.BB.002/index.html" rel="noopener noreferrer" target="_blank">Origin of Life – There is No Traceable Origin</a>."</li>
+<li>A separate area of research looks into how consciousness (or mental phenomena) can arise from inert matter. See "<a href="https://en.wikipedia.org/wiki/Consciousness" rel="noopener noreferrer" target="_blank">Consciousness</a>." As discussed, modern science CAN NOT explain the origin of <span style="color: #0000ff;"><strong>conscious life</strong></span>.</li>
+</ul>
+<h5 style="text-align: justify;">Theories of Our World - Religious Explanation</h5>
+<p style="text-align: justify;">2. Of course, the other prevailing explanation of the origin of life is that a Creator created the whole world, including all the stars, planets, our Earth, and the first forms of life on Earth.</p>
+<ul style="text-align: justify;">
+<li>Even though it is easiest to state, this explanation has no factual basis. One HAS TO accept it based purely on the faith of a Creator.</li>
+<li>See, for example, "<a href="https://answersingenesis.org/evidence-for-creation/" rel="noopener noreferrer" target="_blank">Evidence for Creation</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><span>Theories of Our World - <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Explanation</span></h5>
+<p style="text-align: justify;"><span>3. Even though <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (commonly known as <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>) is usually considered a religion, it is NOT a religion, as described in #2. It can be treated as a scientific theory, as we will do in this series of <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></p>
+<ul style="text-align: justify;">
+<li><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> provides a complete description of our world.</span></li>
+<li><span>However, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> did not try to provide detailed descriptions of material phenomena. He taught that finding such details will only take precious time away from the urgent need to find the truth about the unimaginable suffering associated with the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+<li>Therefore, much of the <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span> Piṭaka</span></em> and the <em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span> Piṭaka</span></em><span> focus on the "problem of suffering" and how to stop future suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+<li><span>As we know, <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings are contained in three </span><em>Piṭaka</em> or <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. The third one, <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>, describes the building blocks of our world in great detail. <span style="color: #0000ff;"><strong>That includes material (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) and mental (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>) aspects.</strong></span> If one is interested in figuring out those details, not in the other two <em>Piṭaka</em>, one needs to understand the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> material.</li>
+<li>However, it is unnecessary to go to <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em><span>'s great depths to get an idea about the underlying principles. In the upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>, we will do such a simplified analysis. That discussion will augment the series of <span class="pali-term term-highlight" data-term="posts">posts</span> on "</span><a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origin of Life</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Overview of Modern Science</h5>
+<p style="text-align: justify;">4. <strong>The focus of modern science is on figuring out the origin and the behavior of matter.</strong> <span style="color: #0000ff;"><strong>Scientists consider mental phenomena to be secondary and to arise from inert matter!</strong></span> Most scientists believe that mental phenomena arise in the brain.</p>
+<ul style="text-align: justify;">
+<li>Several proposals exist on how the mind (or thoughts) can arise from matter. But there is no credible theory that comes even close to begin to explain it. See "<a href="https://en.wikipedia.org/wiki/Consciousness" rel="noopener noreferrer" target="_blank">Consciousness</a>."</li>
+<li>A critical outcome of this approach is that modern science falls under the "annihilation view" (<em><span><span class="pali-term term-highlight" data-term="uccheda diṭṭhi">uccheda diṭṭhi</span></span></em>.) <span style="color: #993366;"><strong>That wrong view says that life ENDS at the death of the physical body. </strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Evidence Against Proposed Scientific Theories of the Mind</h5>
+<p style="text-align: justify;">5. Since mental phenomena are supposed to arise in the brain, that conclusion (in red in #4) leads to two critical implications.</p>
+<ul style="text-align: justify;">
+<li>The death of the brain -- thus the death of a human -- is the ABSOLUTE end of that life. There is no way to "transfer" the memories of one life to another. <strong><span>Thus, the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process is COMPLETELY ruled out in modern science.</span></strong></li>
+<li>Furthermore, it also <strong>RULES OUT the possibility of Out-of-Body Experiences (OBE), including Near-Death Experiences (NDE.)</strong></li>
+<li>Let us briefly discuss evidence regarding those three areas.</li>
+</ul>
+<h5 style="text-align: justify;"><span>Evidence from <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Accounts</span></h5>
+<p style="text-align: justify;"><span>6. I will just provide one account here. In their book, “Soul Survivor: The <span class="pali-term term-highlight" data-term="reincarnation">Reincarnation</span> of a World War II Fighter Pilot,” Bruce and Andrea Leininger detail the amazing story of their son’s recount of a past life.</span></p>
+<p style="text-align: justify;">Here is a recent youtube video on it:</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/DjbRUDPyhW0?si=0IevJh8heK7K_3bn" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li><span>More <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts are discussed in "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Evidence from <strong>Out-of-Body Experiences (</strong>OBE)</h5>
+<p style="text-align: justify;">7. In his book “Travels,” the famous author of Jurassic Park, Michael Crichton (1988, p. 307), mentions his ability to “shift my awareness out of my body and move it around the bedroom.” He says, “..I didn’t think anything about it… I assumed that anybody could do it..”.</p>
+<ul style="text-align: justify;">
+<li>A similar account has been given by a woman recently who also thought that “everybody could do it”: <a href="https://abcnews.go.com/Health/woman-body-experiences/story" rel="noopener noreferrer" target="_blank">https://abcnews.go.com/Health/woman-body-experiences/story?id=22825927</a></li>
+<li>A series of books, including “Journeys of the Body,” has been written by Robert A. Monroe based on his experiences.</li>
+</ul>
+<h5 style="text-align: justify;">Evidence from Near-Death Experiences (NDE)</h5>
+<p style="text-align: justify;">8. Only a few people can experience OBE at will. Typically, OBE happens under stressful conditions, most commonly during heart operations. These have a special name: near-death experiences (NDE.) The following video provides a good summary of NDE accounts.</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IXqUynqI0Xo?si=ND4wJoK9F56yK-sQ" width="560"></iframe></div></p>
+<ul style="text-align: justify;">
+<li>There are many books on NDE.  “Consciousness Beyond Life” by Pim van Lommel (2010) gives detailed accounts of case studies of NDE experienced by people undergoing heart operations.</li>
+<li>A recent book, "Dying to be me: My Journey from Cancer, to Near Death, to True Healing," by Anita Moorjani (2012), describes her NDE experience.</li>
+</ul>
+<h5 style="text-align: justify;">Current Philosophical Ideas on Consciousness</h5>
+<p style="text-align: justify;">9. Philosophers put forth their ideas when science cannot make much progress. Physics evolved from philosophy.</p>
+<ul style="text-align: justify;">
+<li>There are many ideas in philosophy about consciousness, including one (for example, by Daniel Dennett) that says consciousness is not real!</li>
+<li>The following video is a presentation by David Chalmers, a leading philosopher on consciousness. He makes much more sense and gets to the heart of the issue.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed//uhRhtFFhNzQ?si=vGN5HvYt53wuBQ1Z" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5 style="text-align: justify;">Consciousness Is a Fundamental Aspect of Nature</h5>
+<p style="text-align: justify;">10. David Chalmers makes some important points in the following video presentation.</p>
+<ul style="text-align: justify;">
+<li>Around 8 minutes, he explains that current theories of our world cannot accommodate consciousness.</li>
+<li>Then, he proposes to investigate the possibility that consciousness is a fundamental aspect of nature that CAN NOT be derived from other entities (such as matter.)</li>
+<li>Another philosopher who believes that consciousness cannot be derived is Thomas Nagel. He discusses that in his book in Ref. 3.   <strong><strong><span>That is what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained; see "</span></strong></strong><a href="../../pages/BD.BB.001/index.html" rel="noopener" target="_blank">Buddha Dhamma – A Scientific Approach</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Further Information</h5>
+<p style="text-align: justify;">1. The scientific effort on a single theory to explain material phenomena, "<a href="https://en.wikipedia.org/wiki/Grand_Unified_Theory#:~:text=A%20Grand%20Unified%20Theory%20(GUT,merged%20into%20a%20single%20force." rel="noopener noreferrer" target="_blank">Grand Unified Theory</a>."</p>
+<p style="text-align: justify;">2. Scientific studies on the emergence of life from inert matter, "<a href="https://en.wikipedia.org/wiki/Abiogenesis#:~:text=In%20evolutionary%20biology%2C%20abiogenesis%2C%20or,such%20as%20simple%20organic%20compounds.&amp;text=Any%20successful%20theory%20of%20abiogenesis,of%20these%20classes%20of%20molecules." rel="noopener noreferrer" target="_blank">Abiogenesis</a>."</p>
+<p style="text-align: justify;">3. Thomas Nagel, “<span class="a-size-medium a-color-base a-text-normal">Mind &amp; Cosmos: Why the Materialist Neo-Darwinian Conception of Nature Is Almost Certainly False” (2012).</span></p>
+<p style="text-align: justify;">4. Evidence emerges<span style="color: #000000;"> from several investigations that a brain is unnecessary to have conscious experiences.</span><strong style="color: #000000;"> I encourage watching the following video.</strong></p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.BB.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0008"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.BB.003
+Language:     pt-BR
+Generated-At: 2026-04-17T21:31:02Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong> 9 de agosto de 2020; <span style="color: #0000ff;">revisado em 25 de julho de 2022</span></strong></p>
+<p style="text-align: justify;"><span> Primeiramente, discutiremos brevemente as três principais teorias sobre o nosso mundo. Em seguida, iniciaremos uma discussão mais ampla sobre a descrição que <span class="pali-term term-highlight" data-term="buddha">Buddha</span> faz deste mundo.</span></p>
+<h5 style="text-align: justify;">Teorias sobre o nosso mundo — segundo a ciência moderna</h5>
+<p style="text-align: justify;">1. A ciência ocidental vem estudando nosso mundo desde a época dos antigos gregos. Mas seu foco tem sido o mundo material. Houve investigações em DUAS frentes — a<span style="color: #0000ff;"><strong> estrutura da matéria e a origem da vida.</strong></span></p>
+<ul style="text-align: justify;">
+<li>As investigações sobre a estrutura da matéria começaram com Sócrates e Aristóteles. Conforme discutido no ensaio anterior, Demócrito propôs a primeira teoria atômica, que evoluiu para os estudos atuais sobre física quântica. Veja “<a href="../../pages/BD.BB.002/index.html" rel="noopener noreferrer" target="_blank">Introdução – Uma Abordagem Científica ao Buddha Dhamma</a>” e Ref. 1 abaixo.</li>
+<li>A segunda frente é a origem da vida ou o estudo do mundo vivo. Isso inclui plantas e vida consciente. Veja “<a href="https://en.wikipedia.org/wiki/History_of_biology" rel="noopener noreferrer" target="_blank">História da biologia</a>”. A ciência moderna acredita que as células vivas evoluíram A PARTIR da matéria inerte (“abiogênese”). Veja a Ref. 2 para mais detalhes.</li>
+<li>Tanto a vida consciente quanto a não consciente (vegetal) têm <span style="color: #0000ff;"><strong>células vivas como base.</strong></span> Veja “<a href="../../pages/DS.BB.002/index.html" rel="noopener noreferrer" target="_blank">Origem da Vida – Não há Origem Rastreável</a>”.</li>
+<li>Uma área separada de pesquisa investiga como a consciência (ou fenômenos mentais) pode surgir da matéria inerte. Veja “<a href="https://en.wikipedia.org/wiki/Consciousness" rel="noopener noreferrer" target="_blank">Consciência</a>”. Conforme discutido, a ciência moderna NÃO CONSEGUE explicar a origem da <span style="color: #0000ff;"><strong>vida consciente</strong></span>.</li>
+</ul>
+<h5 style="text-align: justify;">Teorias sobre o nosso mundo – Explicação religiosa</h5>
+<p style="text-align: justify;">2. É claro que a outra explicação predominante para a origem da vida é que um Criador criou o mundo inteiro, incluindo todas as estrelas, planetas, nossa Terra e as primeiras formas de vida na Terra.</p>
+<ul style="text-align: justify;">
+<li>Embora seja a mais fácil de afirmar, essa explicação não tem base factual. É PRECISO aceitá-la baseando-se puramente na fé em um Criador.</li>
+<li>Veja, por exemplo, “<a href="https://answersingenesis.org/evidence-for-creation/" rel="noopener noreferrer" target="_blank">Evidências da Criação</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Teorias do Nosso Mundo - Explicação Buddhista</h5>
+<p style="text-align: justify;"><span>3. Embora o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (comumente conhecido como Buddhismo) seja geralmente considerado uma religião, ele NÃO é uma religião, conforme descrito no item 2. Ele pode ser tratado como uma teoria científica, como faremos nesta série de ensaios.</span></p>
+<ul style="text-align: justify;">
+<li><span>O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> oferece uma descrição completa do nosso mundo.</span></li>
+<li><span>No entanto, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> não tentou fornecer descrições detalhadas dos fenômenos materiais. Ele ensinou que buscar tais detalhes apenas tiraria um tempo precioso da necessidade urgente de encontrar a verdade sobre o sofrimento inimaginável associado ao processo de Renascimento.</span></li>
+<li>Portanto, grande parte do <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span> Piṭaka</span></em> e do <em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span> Piṭaka</span></em> concentra-se no “problema do sofrimento” e em como interromper o sofrimento futuro no processo de Renascimento.</li>
+<li><span>Como sabemos, os ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> estão contidos em três </span><em>Piṭaka</em> ou <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. O terceiro, o <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>, descreve os alicerces do nosso mundo em grande detalhe. <span style="color: #0000ff;"><strong>Isso inclui aspectos materiais (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>) e mentais (<em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em>).</strong></span> Se alguém estiver interessado em compreender esses detalhes, e não nos outros dois <em>Piṭaka</em>, precisa entender o material <em><span>do <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>.</li>
+<li>No entanto, não é necessário mergulhar nas profundezas do <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> para ter uma ideia dos princípios subjacentes. Nas próximas postagens, faremos uma análise simplificada. Essa discussão complementará a série de ensaios sobre “<a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">A Origem da Vida</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Visão geral da ciência moderna</h5>
+<p style="text-align: justify;">4. <strong>O foco da ciência moderna está em descobrir a origem e o comportamento da matéria.</strong> <span style="color: #0000ff;"><strong>Os cientistas consideram os fenômenos mentais como secundários e decorrentes da matéria inerte!</strong></span> A maioria dos cientistas acredita que os fenômenos mentais surgem no cérebro.</p>
+<ul style="text-align: justify;">
+<li>Existem várias propostas sobre como a mente (ou os pensamentos) podem surgir da matéria. Mas não há nenhuma teoria credível que chegue nem perto de começar a explicar isso. Veja “<a href="https://en.wikipedia.org/wiki/Consciousness" rel="noopener noreferrer" target="_blank">Consciência</a>”.</li>
+<li>Uma consequência crítica dessa abordagem é que a ciência moderna se enquadra na “visão da aniquilação” (<em><span><span class="pali-term term-highlight" data-term="uccheda diṭṭhi">Uccheda Diṭṭhi</span></span></em>). <span style="color: #993366;"><strong>Essa visão errada afirma que a vida TERMINA com a morte do corpo físico. </strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Evidências contra as teorias científicas propostas sobre a mente</h5>
+<p style="text-align: justify;">5. Como se supõe que os fenômenos mentais surjam no cérebro, essa conclusão (em vermelho no nº 4) leva a duas implicações críticas.</p>
+<ul style="text-align: justify;">
+<li>A morte do cérebro — e, portanto, a morte de um ser humano — é o fim ABSOLUTO dessa vida. Não há como “transferir” as memórias de uma vida para outra. <strong>Assim, o processo de Renascimento é COMPLETAMENTE descartado pela ciência moderna.</strong></li>
+<li>Além disso, isso também <strong>DESCARTA a possibilidade de Experiências Fora do Corpo (EFC), incluindo Experiências de Quase Morte (EQM).</strong></li>
+<li>Vamos discutir brevemente as evidências relativas a essas três áreas.</li>
+</ul>
+<h5 style="text-align: justify;">Evidências de relatos de Renascimento</h5>
+<p style="text-align: justify;">6. Apresentarei apenas um relato aqui. Em seu livro, “Soul Survivor: O Renascimento de um Piloto de Caça da Segunda Guerra Mundial”, Bruce e Andrea Leininger detalham a incrível história do relato de seu filho sobre uma vida passada.</p>
+<p style="text-align: justify;">Aqui está um vídeo recente do YouTube sobre o assunto:</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/DjbRUDPyhW0?si=0IevJh8heK7K_3bn" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Mais relatos de Renascimento são discutidos em “<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências do Renascimento</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Evidências de <strong>experiências extracorpóreas (</strong>OBE)</h5>
+<p style="text-align: justify;">7. Em seu livro “Travels”, o famoso autor de Jurassic Park, Michael Crichton (1988, p. 307), menciona sua capacidade de “deslocar minha consciência para fora do corpo e movê-la pelo quarto”. Ele diz: “... eu não dei importância a isso... Presumi que qualquer pessoa pudesse fazer isso...”.</p>
+<ul style="text-align: justify;">
+<li>Um relato semelhante foi dado recentemente por uma mulher que também achava que “todo mundo poderia fazer isso”: <a href="https://abcnews.go.com/Health/woman-body-experiences/story" rel="noopener noreferrer" target="_blank">https://abcnews.go.com/Health/woman-body-experiences/story?id=22825927</a></li>
+<li>Uma série de livros, incluindo “Journeys of the Body”, foi escrita por Robert A. Monroe com base em suas experiências.</li>
+</ul>
+<h5 style="text-align: justify;">Evidências de Experiências de Quase-Morte (EQM)</h5>
+<p style="text-align: justify;">8. Apenas algumas pessoas conseguem vivenciar a EFC à vontade. Normalmente, a EFC ocorre em condições de estresse, mais comumente durante cirurgias cardíacas. Essas experiências têm um nome específico: experiências de quase morte (EQM). O vídeo a seguir oferece um bom resumo de relatos de EQM.</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IXqUynqI0Xo?si=ND4wJoK9F56yK-sQ" width="560"></iframe></div></p>
+<ul style="text-align: justify;">
+<li>Existem muitos livros sobre ECM. “Consciousness Beyond Life”, de Pim van Lommel (2010), apresenta relatos detalhados de estudos de caso de ECM vividas por pessoas submetidas a cirurgias cardíacas.</li>
+<li>Um livro recente, “Dying to be me: My Journey from Cancer, to Near Death, to True Healing”, de Anita Moorjani (2012), descreve sua experiência de EQM.</li>
+</ul>
+<h5 style="text-align: justify;">Ideias filosóficas atuais sobre a consciência</h5>
+<p style="text-align: justify;">9. Os filósofos apresentam suas ideias quando a ciência não consegue avançar muito. A física evoluiu a partir da filosofia.</p>
+<ul style="text-align: justify;">
+<li>Existem muitas ideias na filosofia sobre a consciência, incluindo uma (por exemplo, de Daniel Dennett) que afirma que a consciência não é real!</li>
+<li>O vídeo a seguir é uma apresentação de David Chalmers, um dos principais filósofos sobre a consciência. Ele faz muito mais sentido e vai direto ao cerne da questão.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed//uhRhtFFhNzQ?si=vGN5HvYt53wuBQ1Z" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5 style="text-align: justify;">A Consciência é um Aspecto Fundamental da Natureza</h5>
+<p style="text-align: justify;">10. David Chalmers apresenta alguns pontos importantes na apresentação em vídeo a seguir.</p>
+<ul style="text-align: justify;">
+<li>Por volta dos 8 minutos, ele explica que as teorias atuais sobre o nosso mundo não conseguem acomodar a consciência.</li>
+<li>Em seguida, ele propõe investigar a possibilidade de que a consciência seja um aspecto fundamental da natureza que NÃO PODE ser derivado de outras entidades (como a matéria).</li>
+<li>Outro filósofo que acredita que a consciência não pode ser derivada é Thomas Nagel. Ele discute isso em seu livro na Ref. 3.   <strong><strong><span>Isso é o que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explicou; veja “</span></strong></strong><a href="../../pages/BD.BB.001/index.html" rel="noopener" target="_blank">Buddha Dhamma – Uma Abordagem Científica</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Mais informações</h5>
+<p style="text-align: justify;">1. O esforço científico em torno de uma teoria única para explicar os fenômenos materiais, a “<a href="https://en.wikipedia.org/wiki/Grand_Unified_Theory#:~:text=A%20Grand%20Unified%20Theory%20(GUT,merged%20into%20a%20single%20force." rel="noopener noreferrer" target="_blank">Grande Teoria Unificada</a>”.</p>
+<p style="text-align: justify;">2. Estudos científicos sobre o surgimento da vida a partir da matéria inerte, “<a href="https://en.wikipedia.org/wiki/Abiogenesis#:~:text=In%20evolutionary%20biology%2C%20abiogenesis%2C%20or,such%20as%20simple%20organic%20compounds.&amp;text=Any%20successful%20theory%20of%20abiogenesis,of%20these%20classes%20of%20molecules." rel="noopener noreferrer" target="_blank">abiogênese</a>”.</p>
+<p style="text-align: justify;">3. Thomas Nagel, “<span class="a-size-medium a-color-base a-text-normal">Mind &amp; Cosmos: Why the Materialist Neo-Darwinian Conception of Nature Is Almost Certainly False” (2012).</span></p>
+<p style="text-align: justify;">4. <span style="color: #000000;">Várias investigações</span> revelam evidências <span style="color: #000000;">de que o cérebro não é necessário para se ter experiências conscientes.</span><strong style="color: #000000;"> Recomendo assistir ao vídeo a seguir.</strong></p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.BB.002/index.html">Introduction Scientific Approach Buddha Dhamma</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.BB.004/index.html">Mind Matter Buddhist Analysis</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.BB.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Introduction Scientific Approach Buddha Dhamma</span>
+        
+        <span class="pathway-title title-pt">Introdução Abordagem científica Buddha Dhamma</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.BB.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Mind Matter Buddhist Analysis</span>
+        
+        <span class="pathway-title title-pt">Análise Buddhista sobre Mente e Matéria</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

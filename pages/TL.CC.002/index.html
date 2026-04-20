@@ -1,0 +1,460 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Key To Calming The Mind Five Hindrances | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 15 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.CC.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Key To Calming The Mind Five Hindrances</h1>
+    
+    <h1 class="title-pt">Chave para acalmar a mente Cinco Estorvos</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.CC.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.CC.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0403"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.CC.002</td></tr><tr><td>Fin-dex</td><td>0403</td></tr><tr><td>Slug</td><td>key-to-calming-the-mind-five-hindrances</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Key To Calming The Mind Five Hindrances</td></tr></table></div></div><p style="text-align: justify;"><strong>First revised August 2, 2016; <span style="color: #3366ff;">last revised July 18, 2025</span></strong></p>
+<p style="text-align: justify;"><span>A wandering mind is an unhappy mind! The conclusion of an article in the prestigious journal "Science," which, using real-time input from 5000 people worldwide, confirmed what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said 2500 years ago; see, "</span><a href="http://localhost/beng_feb2026/wp-content/uploads/A-wandering-mind-is-an-unhappy-mind-Science-Killingsworth-2010.pdf" rel="noopener" target="_blank">A wandering mind is an unhappy mind-Science-Killingsworth-2010</a>."</p>
+<h5 style="text-align: justify;">Mundane Ways to Calm a Mind</h5>
+<p style="text-align: justify;">1. The easiest way to calm a mind is to focus it on a neutral object. <b>There is only one thought arising at a time.</b> So, if one can keep the mind focused on something neutral, those unwanted thoughts cannot arise. Several techniques are available. Let us discuss a few below.</p>
+<ul style="text-align: justify;">
+<li>Especially when one gets angry, just stopping and counting to ten at least slows down the <em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em> (or the impulse) from running wildly. Do not let unwanted thoughts take over. They multiply very quickly, and then things get out of control; for a more in-depth discussion, see "<a href="../../pages/AB.BB.009/index.html" rel="noopener noreferrer" target="_blank" title="Javana of a Citta – The Root of Mental Power">Javana of a Citta - Root of Mental Power</a>."</li>
+<li><span>Taking a few deep breaths helps, too. Alternatively, in an angry situation, visualizing a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> statue and contemplating its serenity can also be helpful.</span></li>
+</ul>
+<p style="text-align: justify;">2. A popular meditation technique to calm the mind is “breath meditation.” Go to a quiet place (a less bright and less noisy place), sit in a chair comfortably, and concentrate on the in-and-out breath. Most people can feel the breath at the tip of the nose or on the lips. If not, one can be aware of the chest or abdomen rising and falling. Just focus your mind on any of these and do not let it wander to another thought. Initially, it may be hard, but with practice, it becomes easy. That is a crude form of <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> meditation.</p>
+<ul style="text-align: justify;">
+<li>However, those are just “tricks” to get a temporary solution. Just like a restless child is bound to throw a tantrum again, any relief from “breath meditation” is only fleeting.</li>
+</ul>
+<h5 style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Way to Calm a Mind</span></h5>
+<p style="text-align: justify;">3. Even S<em>amatha</em> meditation becomes easier if one lives a simple and moral life. One must at least obey the conventional five precepts of not killing other beings, stealing, lying, engaging in sexual misconduct, or using excessive amounts of alcohol. If one can further abstain from harsh speech slandering, and vain talk, that makes it even better; see “<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank">Ten Immoral Actions – Dasa Akusala</a>,“ and “<a href="../../pages/TL.EE.004/index.html" rel="noopener noreferrer" target="_blank">Punna Kamma – Dāna, Sīla, Bhāvanā</a>.“</p>
+<ul style="text-align: justify;">
+<li><b>One must be aware of those precepts 24 hours a day. They are not rituals to be obeyed. One follows them to purify one’s mind. Don’t worry if a precept gets broken once in a while. Such occurrences will become less frequent over time.</b></li>
+</ul>
+<p style="text-align: justify;">4. The reason that the mind becomes agitated easily is because of the “gunk” that we have in our minds (<span style="color: #0000ff;">they go by various names like <em><span>kilēsa, <span class="pali-term term-highlight" data-term="anusaya">anusaya</span>, "</span></em>bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>",</span></em> or mental impurities</span>). All this “gunk” is there due to greed, hate, and ignorance.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">If a mind is free from greed, hate, and ignorance (which is easier said than done), then the mind will be very calm, and nothing in the outside world can perturb that mind; see "<a href="../../pages/TL.BB.001/index.html" rel="noopener noreferrer" target="_blank" title="The Basics in Meditation">The Basics in Meditation</a>" and "<a href="../../pages/BM.AA.003/index.html" rel="noopener noreferrer" target="_blank" title="The Second Level">The Second Level</a>" for details.</li>
+</ul>
+<p style="text-align: justify;"><span>5. In a simile, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> compared a calm mind to a clear, calm lake that made the surroundings serene. That lake could become an undesirable eyesore if one or more of the following happens. (i) A dark-colored dye is in the water, (ii) The lake has <span class="pali-term term-highlight" data-term="boiling water">boiling water</span>, (iii) Water is covered with moss, (iv) the Lake is perturbed by wind, and (v) Water is turbid and muddy.</span></p>
+<h5 style="text-align: justify;"><em><span>Pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span> -</span></em> Root Causes for an Agitated Mind</h5>
+<p style="text-align: justify;"><span>6. Similarly, a peaceful mind will become polluted due to the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> (</span><em><span>pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span></span></em>); obstacle could be another translation for <em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span> </span></em>(<em>pañca </em>means five). These five are called “<em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span></span></em>” because they cover the mind from seeing the "true nature of the world". They are <em><span>kāmaccandha, <span class="pali-term term-highlight" data-term="vyāpāda">vyāpāda</span>, thina <span class="pali-term term-highlight" data-term="middha">middha</span>, <span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span>, </span></em>and<em><span> <span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>In simple terms, those five words refer to craving sensual pleasures, an angry mindset, a lethargic mindset, a tendency to engage in lowly deeds with arrogance, and doubts about the need for morality.</li>
+<li style="text-align: justify;">One cannot see the bottom of a lake if any of the above five factors are present. Similarly, the mind loses its capacity to "see things clearly" if those hindrances are there.</li>
+</ul>
+<h5 style="text-align: justify;"><em>Kāmaccandha </em>- Main Culprit</h5>
+<p style="text-align: justify;">7. Craving sensory pleasures (<em>kāmaccandha</em>) is like a dark dye. <em>Kāmaccandha</em> (“<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>”+“<em>icca</em>”+ “<em>anda</em>” means blinded by sense desires).</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><span>Note that there is an established convention for writing <span class="pali-term term-highlight" data-term="pāli">Pāli</span> using the English alphabet.</span></strong></span><span> Thus, "c" represents the "ch" sound, and "icca" is pronounced as "<span class="pali-term term-highlight" data-term="ichcha">ichcha</span>." See, </span><a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1</a></li>
+<li>Here, “<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>” means indulging in conscious thoughts about the five sense faculties that belong to the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em><span>: eye, ear, nose, tongue, and the body; "<span class="pali-term term-highlight" data-term="ichcha">ichcha</span>" is desire, and "andha" is for the blind.</span></li>
+<li>The attraction for something becomes so strong that one’s complete attention is on that object. The mind can lose control over what is sensible and what is not rational (or immoral).</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vyāpāda">Vyāpāda</span> </span></em>- Worse Than <em>Kāmaccandha</em></h5>
+<p style="text-align: justify;">8. Extreme hate (<em>vayāpāda </em>or <em><span><span class="pali-term term-highlight" data-term="vyāpāda">vyāpāda</span></span></em><span>) is like <span class="pali-term term-highlight" data-term="boiling water">boiling water</span>. We all have seen people who are so enraged that they are out of control.</span></p>
+<ul style="text-align: justify;">
+<li>One could become “animal-like,” and one who develops such character (“<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>”) could end up in hell (<em>apāyā</em>).</li>
+<li><em>Vayāpāda</em> (“<em>vayā</em>”+”<em>pāda</em>”) means traveling downward (in the 31 realms): "<em>vaya</em>" is destruction, and "<em>pāda" </em>means "(walking) towards."</li>
+<li>But <em><span><span class="pali-term term-highlight" data-term="vyāpāda">vyāpāda</span> </span></em>arises because of <em>kāmaccandha.</em></li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Thina <span class="pali-term term-highlight" data-term="middha">Middha</span> </span></em><span>- Disinterest in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> Due to Incomprehension of Basic Concepts</span></h5>
+<p style="text-align: justify;">9.<em><span> Thina <span class="pali-term term-highlight" data-term="middha">middha</span></span></em><span> (“frozen mind”) is like moss covering the water. Sleepiness is just a symptom of it. It is a dull mind that has not been exposed to <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><span>When one learns <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, one’s mind gets energized. </span></strong></span><span>Those meditators who fall asleep during meditation can overcome this problem by learning the <span class="pali-term term-highlight" data-term="pure dhamma">pure Dhamma</span> of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>See "<a href="../../pages/KD.BB.001/index.html" rel="noopener" target="_blank">Basic Framework of Buddha Dhamma</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span> - </span></em>Worse Than Either <em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em></h5>
+<p style="text-align: justify;">10.<em><span> <span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span></span></em> (customarily translated as restlessness and brooding) arises because of high-mindedness (<em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span></span></em>) and the tendency to engage in lowly deeds (<em><span><span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span></span></em>); in most cases, because of the high-mindedness, one tends to DO lowly things.</p>
+<ul style="text-align: justify;">
+<li>“<em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em>” means “high-mindedness” (high regard for oneself), which can be at various levels and completely removed only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. “<em><span><span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em>” refers to the tendency to engage in lowly actions, such as mistreating others. Those are two separate <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>: “<a href="../../pages/TS.AA.005/index.html" rel="noopener" target="_blank">Cetasika (Mental Factors)</a>”</li>
+<li>When they arise together, “<em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span></span></em>” becomes one of the five <em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span></span></em> that “covers a mind” and prevents “seeing the true nature of the world.” Here, one tends to do “lowly things” based on high-mindedness, power, and so on. <strong> </strong></li>
+<li>After the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, only <em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> </span></em>remains as a <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>(at a lower strength). The “<em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span></span></em>” <em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span></span></em> also remains at a lower level. Both <em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>and “<em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span></span></em>” <em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span> </span></em>fade with higher <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> and are totally eliminated only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span> </span></em>- No Faith Because of Incomprehension of Noble Truths/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em></h5>
+<p style="text-align: justify;">11.<em><span> With <span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span>, </span></em>one tends to do stupid things because of ignorance of the true nature of this world. It comes from “<em>vi</em>” (meaning twisted or unwise), “<em>ca</em>” (pronounced "cha") is thoughts, and "<em>icchā</em>" or cravings.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">For example, the tendency to commit immoral actions to fulfill one's desires stems from <em><span><span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span>.</span></em> One does not know or does not care about the adverse consequences of such activities. Thus, <em><span><span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></em> is compared to muddy water.</li>
+<li style="text-align: justify;">One must eliminate both the ten types of <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> and comprehend <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> to some extent. That means having a good idea about the real nature (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) of this world. That helps REMOVE the <em><span><span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span> <span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span>.</span></em></li>
+</ul>
+<h5 style="text-align: justify;">A Simile (Analogy)</h5>
+<p style="text-align: justify;"><span>12. In another simile, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> compared the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> (</span><em><span>pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span>) </span></em>to the darkness that keeps one from seeing true nature. For example, a furious person cannot see the damage to the other person and themselves. At least at that moment, hate and anger blind that person.</p>
+<ul style="text-align: justify;">
+<li><span>A mind “blinded’ by the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> can keep on adding “more bad stuff” even without realizing it. If you take a glass of muddy water and add more mud to it, you cannot see much difference. On the other hand, if you take a glass of clean water, you can see the presence of even the tiniest amount of dirt.</span></li>
+<li><span>Thus, when the mind is free of the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span>, one can easily see if any evil thoughts come to the mind. Then it is easy to contemplate the possible adverse consequences of such ideas and remove them. That will keep the mind from becoming perturbed. A mind free of the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> is calm and peaceful.</span></li>
+<li><span style="color: #3366ff;"><strong><span>That is why one should listen to discourses or read <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> <span class="pali-term term-highlight" data-term="posts">posts</span>, preferably when the mind is calm and clear.</span></strong></span> Then one can absorb more.</li>
+<li>More on <em><span>pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span></span></em> in "<a href="../../pages/PS.BB.003/index.html" rel="noopener" target="_blank">Pañca Nīvaraṇa and Sensual Pleasures (Kāma Rāga)</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Mundane Meditations - Good Start</h5>
+<p style="text-align: justify;">13. <b>It is good to practice mundane <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> meditation for short times. That allows one to have a peaceful state of mind during that time. But it does not remove any defilements (i.e., the underlying root causes).</b> <em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;"> meditation leads to t</span><span style="font-size: 1.125rem; letter-spacing: 0px;">he gradual removal of evils</span><span style="font-size: 1.125rem; letter-spacing: 0px;">; see “</span><a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" style="font-size: 1.125rem; letter-spacing: 0px;" target="_blank">Bhavana (Meditation)</a><span style="font-size: 1.125rem; letter-spacing: 0px;">.“</span></p>
+<ul style="text-align: justify;">
+<li>These hindrances are the results of bad habits ("<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>") we have developed over many lives. They have become deep-seated cravings ("<em>āsāvās</em>"), which remain with us as mental impurities (<em><span><span class="pali-term term-highlight" data-term="kilesa">kilesa</span></span></em>). When one starts on<em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> meditation, such bad habits, desires, and mental impurities will decrease. In the simile we initially discussed, the water in that lake will become pure by removing the dye, moss, and mud, and also by preventing disturbances through boiling and wind. The lake becomes calm and serene again in the absence of those ROOT CAUSES.</li>
+<li>The hindrances of <em><span>thina <span class="pali-term term-highlight" data-term="middha">middha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></em> go away at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. Those of <em>kāmaccandha </em>and <em><span><span class="pali-term term-highlight" data-term="vyāpāda">vyāpāda</span></span></em> reduce to <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em>.  <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma rāga</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span> </span></em>lessen at the<em><span> <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>stage and disappear at the<em> Anāgāmi stage.</em> <em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em> goes away only at the<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span> stage.</span></em></li>
+<li><span>Progressive lessening of the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> can bring the mind to a stable, peaceful state over time. That happens even before the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. Then one could feel the increase of the <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> that it brings; see, “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a>".</li>
+</ul>
+<p style="text-align: justify;">Next, "<a href="../../pages/TL.CC.003/index.html" rel="noopener noreferrer" target="_blank">Solution to a Wandering Mind – Abandon Everything?</a>", ........</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.CC.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0403"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.CC.002
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p style="text-align: justify;"><strong>Primeira revisão em 2 de agosto de 2016; <span style="color: #3366ff;">última revisão em 18 de julho de 2025</span></strong></p>
+<p style="text-align: justify;"><span>Uma mente inquieta é uma mente infeliz! Conclusão de um artigo publicado na prestigiosa revista “Science”, que, utilizando dados em tempo real de 5.000 pessoas em todo o mundo, confirmou o que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse há 2.500 anos; consulte </span><a href="http://localhost/brasileirinho/wp-content/uploads/A-wandering-mind-is-an-unhappy-mind-Science-Killingsworth-2010.pdf">“A wandering mind is an unhappy mind-Science-Killingsworth-2010</a>” (Uma <a href="http://localhost/brasileirinho/wp-content/uploads/A-wandering-mind-is-an-unhappy-mind-Science-Killingsworth-2010.pdf">mente inquieta é uma mente infeliz</a> – <a href="http://localhost/brasileirinho/wp-content/uploads/A-wandering-mind-is-an-unhappy-mind-Science-Killingsworth-2010.pdf">Science – Killingsworth – 2010</a>).</p>
+<h5 style="text-align: justify;">Maneiras mundanas de acalmar a mente</h5>
+<p style="text-align: justify;">1. A maneira mais fácil de acalmar a mente é concentrá-la em um objeto neutro. <b>Há apenas um pensamento surgindo por vez.</b> Portanto, se conseguirmos manter a mente focada em algo neutro, esses pensamentos indesejados não poderão surgir. Existem várias técnicas disponíveis. Vamos discutir algumas delas a seguir.</p>
+<ul style="text-align: justify;">
+<li>Especialmente quando alguém fica com raiva, basta parar e contar até dez para, pelo menos, desacelerar o <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span></span></em> (ou o impulso) de correr descontroladamente. Não deixe que pensamentos indesejados tomem conta. Eles se multiplicam muito rapidamente e, então, as coisas ficam fora de controle; para uma discussão mais aprofundada, veja “<a href="../../pages/AB.BB.009/index.html" title="Javana of a Citta – The Root of Mental Power">Javana de um Citta - Raiz do Poder Mental</a>”.</li>
+<li><span>Respirar profundamente algumas vezes também ajuda. Alternativamente, em uma situação de raiva, visualizar uma estátua de <span class="pali-term term-highlight" data-term="buddha">Buddha</span> e contemplar sua serenidade também pode ser útil.</span></li>
+</ul>
+<p style="text-align: justify;">2. Uma técnica de meditação popular para acalmar a mente é a “meditação da respiração”. Vá para um lugar tranquilo (um lugar menos iluminado e menos barulhento), sente-se confortavelmente em uma cadeira e concentre-se na respiração que entra e sai. A maioria das pessoas consegue sentir a respiração na ponta do nariz ou nos lábios. Se não for o caso, pode-se prestar atenção ao movimento de subida e descida do peito ou do abdômen. Basta concentrar a mente em qualquer um desses pontos e não deixar que ela divague para outro pensamento. No início, pode ser difícil, mas com a prática, torna-se fácil. Essa é uma forma rudimentar de meditação <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>No entanto, esses são apenas “truques” para obter uma solução temporária. Assim como uma criança inquieta está fadada a fazer birra novamente, qualquer alívio da “meditação da respiração” é apenas passageiro.</li>
+</ul>
+<h5 style="text-align: justify;">Maneira Buddhista de acalmar a mente</h5>
+<p style="text-align: justify;">3. Até mesmo a meditação S<em>amatha</em> se torna mais fácil se a pessoa leva uma vida simples e moral. É preciso, no mínimo, obedecer aos cinco preceitos convencionais de não matar outros seres, não roubar, não mentir, não se envolver em conduta sexual imprópria e não usar álcool em excesso. Se a pessoa puder, além disso, abster-se de palavras duras, calúnias e conversas vãs, isso será ainda melhor; consulte “<a href="../../pages/TL.EE.003/index.html">Dez Ações Imorais – Dasa Akusala</a>” e “<a href="../../pages/TL.EE.004/index.html">Punna Kamma – Dāna, Sīla, Bhāvanā</a>”.</p>
+<ul style="text-align: justify;">
+<li><b>É preciso estar ciente desses preceitos 24 horas por dia. Eles não são rituais a serem obedecidos. A pessoa os segue para purificar sua mente. Não se preocupe se um preceito for quebrado de vez em quando. Essas ocorrências se tornarão menos frequentes com o tempo.</b></li>
+</ul>
+<p style="text-align: justify;">4. A razão pela qual a mente fica agitada facilmente é por causa da “sujeira” que temos em nossas mentes (<span style="color: #0000ff;">ela tem vários nomes<em>,</em> como <em><span>kilēsa, <span class="pali-term term-highlight" data-term="anusaya">Anusaya</span>, “<span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> ruins<em>”</em> ou impurezas mentais</span>). Toda essa “sujeira” existe devido à ganância, ao ódio e à ignorância.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Se a mente estiver livre da ganância, do ódio e da ignorância (o que é mais fácil dizer do que fazer), ela ficará muito calma, e nada no mundo exterior poderá perturbá-la; consulte “<a href="../../pages/TL.BB.001/index.html" title="The Basics in Meditation">Os fundamentos da meditação</a>” e <a href="../../pages/BM.AA.003/index.html" title="The Second Level">“O segundo nível</a>” para obter mais detalhes.</li>
+</ul>
+<p style="text-align: justify;"><span>5. Em uma comparação, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comparou uma mente calma a um lago límpido e calmo que tornava o ambiente sereno. Esse lago poderia se tornar uma visão desagradável se uma ou mais das seguintes situações ocorressem. (i) Um corante de cor escura está na água, (ii) O lago tem água fervente, (iii) A água está coberta de musgo, (iv) O lago está perturbado pelo vento e (v) A água está turva e lamacenta.</span></p>
+<h5 style="text-align: justify;"><em><span>Pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span> -</span></em> Causas fundamentais para uma mente agitada</h5>
+<p style="text-align: justify;">6. Da mesma forma, uma mente pacífica ficará poluída devido aos Cinco Estorvos (<em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span></span></em>); obstáculo poderia ser outra tradução para <em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span> </span></em>(<em>pañca </em>significa cinco). Esses cinco são chamados de “Nī<em>varaṇa</em>” porque impedem a mente de ver a “verdadeira natureza do mundo”. Eles são <em><span>kāmaccandha, <span class="pali-term term-highlight" data-term="vyāpāda">Vyāpāda</span>, <span class="pali-term term-highlight" data-term="middha">Middha</span>, <span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em> e<em><span> <span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Em termos simples, essas cinco palavras referem-se ao desejo por prazeres sensuais, uma mentalidade raivosa, uma mentalidade letárgica, uma tendência a se envolver em ações vis com arrogância e dúvidas sobre a necessidade da moralidade.</li>
+<li style="text-align: justify;">Não se pode ver o fundo de um lago se qualquer um dos cinco fatores acima estiver presente. Da mesma forma, a mente perde sua capacidade de “ver as coisas claramente” se esses obstáculos estiverem presentes.</li>
+</ul>
+<h5 style="text-align: justify;"><em>Kāmaccandha </em>- Principal culpado</h5>
+<p style="text-align: justify;">7. O desejo por prazeres sensoriais (<em>kāmaccandha</em>) é como uma tinta escura. <em>Kāmaccandha</em><span> (“<span class="pali-term term-highlight" data-term="kāma">Kāma</span>” + “</span><em>icca</em>” + “<em>anda</em>” significa cegado pelos desejos sensoriais).</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><span>Observe que existe uma convenção estabelecida para escrever <span class="pali-term term-highlight" data-term="pālī">Pālī</span> usando o alfabeto inglês.</span></strong></span><span> Assim, “c” representa o som “ch”, e “icca” é pronunciado como “<span class="pali-term term-highlight" data-term="ichcha">Ichcha</span>”. Veja </span><a href="http://localhost/brasileirinho/historical-background/Tipiṭaka-english-convention-part-1/">“Convenção Tipiṭaka English adotada pelos primeiros estudiosos europeus – Parte 1</a></li>
+<li>Aqui, “<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span></span></em>” significa entregar-se a pensamentos conscientes sobre as cinco faculdades sensoriais que pertencem ao <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em><span>: olhos, ouvidos, nariz, língua e corpo; “<span class="pali-term term-highlight" data-term="ichcha">Ichcha</span>” é desejo e “andha” é para os cegos.</span></li>
+<li>A atração por algo se torna tão forte que toda a atenção da pessoa se concentra nesse objeto. A mente pode perder o controle sobre o que é sensato e o que não é racional (ou imoral).</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vyāpāda">Vyāpāda</span> </span></em>– Pior do que <em>Kāmaccandha</em></h5>
+<p style="text-align: justify;">8. O ódio extremo (<em>Vayāpāda </em>ou <em><span><span class="pali-term term-highlight" data-term="vyāpāda">Vyāpāda</span></span></em>) é como água fervente. Todos nós já vimos pessoas tão enfurecidas que ficam fora de controle.</p>
+<ul style="text-align: justify;">
+<li>A pessoa pode se tornar “animal” e quem desenvolve tal caráter (“G<em>ati</em>”) pode acabar no inferno (<em>apāyā</em>).</li>
+<li><em>Vayāpāda</em> (“<em>vayā</em>”+”<em>pāda</em>”) significa viajar para baixo (nos 31 reinos): “<em>vaya</em>” é destruição e “<em>pāda” </em>significa “(caminhar) em direção a”.</li>
+<li>Mas <em><span><span class="pali-term term-highlight" data-term="vyāpāda">Vyāpāda</span> </span></em>surge por causa de <em>kāmaccandha.</em></li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Thina <span class="pali-term term-highlight" data-term="middha">Middha</span> </span></em><span>- Desinteresse pelo <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> devido à incompreensão dos conceitos básicos</span></h5>
+<p style="text-align: justify;">9.<em><span> Thina <span class="pali-term term-highlight" data-term="middha">middha</span></span></em><span> (“mente congelada”) é como musgo cobrindo a água. A sonolência é apenas um sintoma disso. É uma mente entorpecida que não foi exposta ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><span>Quando se aprende o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, a mente fica energizada. </span></strong></span><span>Os meditadores que adormecem durante a meditação podem superar esse problema aprendendo o <span class="pali-term term-highlight" data-term="pure dhamma">Pure Dhamma</span> do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>Veja “<a href="../../pages/KD.BB.001/index.html">Estrutura Básica do Buddha Dhamma</a>”.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span> - </span></em>Pior do que <em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em></h5>
+<p style="text-align: justify;">10.<em><span> <span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">kukkucca</span></span></em> (habitualmente traduzido como inquietação e melancolia) surge devido à altivez (<em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em>) e à tendência de se envolver em ações mesquinhas (<em><span><span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em>); na maioria dos casos, devido à altivez, a pessoa tende a FAZER coisas mesquinhas.</p>
+<ul style="text-align: justify;">
+<li>“<em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em>” significa “altivez” (alta consideração por si mesmo), que pode ter vários níveis e só ser completamente removida no estágio <em><span>de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. “<em><span><span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em>” refere-se à tendência de se envolver em ações vis, como maltratar os outros. Esses são dois <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> separados: “<a href="../../pages/TS.AA.005/index.html">Cetasika (Fatores Mentais)</a>”.</li>
+<li>Quando surgem juntos, “<em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em>” torna-se um dos cinco <em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span></span></em> que “cobre a mente” e impede “ver a verdadeira natureza do mundo”. Aqui, a pessoa tende a fazer “coisas inferiores” com base na altivez, no poder e assim por diante. <strong> </strong></li>
+<li>Após o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, apenas <em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> </span></em>permanece como um <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span> </span></em>(com uma força menor). O <em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span></span></em> “<em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em>” também permanece em um nível mais baixo. Tanto <em><span>o <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span> <span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span></span></em> quanto <em><span>o <span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span></span></em> “<em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span> <span class="pali-term term-highlight" data-term="kukkucca">Kukkucca</span></span></em>” desaparecem com <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> mais elevado e são totalmente eliminados apenas no estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span> </span></em>- Falta de fé devido à incompreensão das Nobres <em>Verdades</em>/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em>Tilakkhaṇa</em></h5>
+<p style="text-align: justify;">11.<em><span> Com <span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span>, </span></em>a pessoa tende a fazer coisas estúpidas devido à ignorância da verdadeira natureza deste mundo. Vem de “<em>vi</em>” (que significa distorcido ou imprudente), “<em>ca</em>” (pronuncia-se “cha”) são pensamentos e “<em>icchā</em>” ou desejos.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Por exemplo, a tendência de cometer ações imorais para satisfazer os próprios desejos deriva de <em><span><span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span>.</span></em> A pessoa não conhece ou não se importa com as consequências adversas de tais atividades. Assim, <em><span><span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span></span></em> é comparado a água turva.</li>
+<li style="text-align: justify;">É preciso eliminar os dez tipos de <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> e compreender <em>Tilakkhaṇa</em> até certo ponto. Isso significa ter uma boa noção da verdadeira natureza (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>) deste mundo. Isso ajuda a REMOVER o <em><span><span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span> <span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span>.</span></em></li>
+</ul>
+<h5 style="text-align: justify;">Uma comparação (analogia)</h5>
+<p style="text-align: justify;"><span>12. Em outra comparação, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comparou os Cinco Estorvos (</span><em><span><span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span>) </span></em>à escuridão que impede a pessoa de ver a verdadeira natureza. Por exemplo, uma pessoa furiosa não consegue ver os danos causados à outra pessoa e a si mesma. Pelo menos naquele momento, o ódio e a raiva cegam essa pessoa.</p>
+<ul style="text-align: justify;">
+<li>Uma mente “cegada” pelos Cinco Estorvos pode continuar adicionando “mais coisas ruins” mesmo sem perceber. Se você pegar um copo de água barrenta e adicionar mais lama a ele, não poderá ver muita diferença. Por outro lado, se você pegar um copo de água limpa, poderá ver a presença até mesmo da menor quantidade de sujeira.</li>
+<li>Assim, quando a mente está livre dos Cinco Estorvos, é fácil perceber se algum pensamento maligno surge na mente. Então, é fácil contemplar as possíveis consequências adversas de tais ideias e removê-las. Isso impedirá que a mente fique perturbada. Uma mente livre dos Cinco Estorvos é calma e pacífica.</li>
+<li><span style="color: #3366ff;"><strong><span>É por isso que se deve ouvir discursos ou ler ensaios sobre o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, de preferência quando a mente está calma e clara.</span></strong></span> Assim, pode-se absorver mais.</li>
+<li>Mais sobre <em><span>pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span></span></em> em “<a href="../../pages/PS.BB.003/index.html">Pañca Nīvaraṇa e prazeres sensuais (Kāma Rāga)</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Meditações mundanas - Um bom começo</h5>
+<p style="text-align: justify;">13. <b>É bom praticar a meditação <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> mundana por curtos períodos. Isso permite que se tenha um estado mental pacífico durante esse tempo. Mas não remove nenhuma impureza (ou seja, as causas fundamentais subjacentes).</b> <span style="font-size: 1.125rem; letter-spacing: 0px;">A meditação</span> <em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> <span style="font-size: 1.125rem; letter-spacing: 0px;">leva à remoção gradual dos males; veja “Bhā</span><a href="../../pages/BM.AA.000/index.html" style="font-size: 1.125rem; letter-spacing: 0px;">vanā (Meditação)</a><span style="font-size: 1.125rem; letter-spacing: 0px;">”.</span></p>
+<ul style="text-align: justify;">
+<li>Esses obstáculos são o resultado de maus hábitos (“<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>”) que desenvolvemos ao longo de muitas vidas. Eles se tornaram desejos profundamente arraigados (“<em>āsāvās</em>”), que permanecem conosco como impurezas mentais (<em><span><span class="pali-term term-highlight" data-term="kilesa">Kilesa</span></span></em>). Quando se começa a meditação <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>, esses maus hábitos, desejos e impurezas mentais diminuem. Na comparação que discutimos inicialmente, a água daquele lago se tornará pura com a remoção do corante, do musgo e da lama, e também com a prevenção de perturbações causadas pela ebulição e pelo vento. O lago se torna calmo e sereno novamente na ausência dessas CAUSAS FUNDAMENTAIS.</li>
+<li>Os obstáculos de <em><span>thina <span class="pali-term term-highlight" data-term="middha">middha</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span></span></em> desaparecem no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Os de <em>kāmaccandha </em>e <em><span><span class="pali-term term-highlight" data-term="vyāpāda">Vyāpāda</span></span></em> reduzem-se a <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span> </span></em>e <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em>.  <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em> e<em><span> <span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span> </span></em>diminuem no estágio<em><span> <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> e desaparecem no <em>estágio Anāgāmi.</em> <em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em> desaparece apenas no <em><span>estágio <span class="pali-term term-highlight" data-term="arahant">Arahant</span>.</span></em></li>
+<li>A diminuição progressiva dos Cinco Estorvos pode levar a mente a um estado estável e pacífico ao longo do tempo. Isso acontece mesmo antes do estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Então, pode-se sentir o aumento do <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> que isso traz; veja “<a href="../../pages/TL.CC.005/index.html" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade - O que é Niramisa Sukha?</a>”.</li>
+</ul>
+<p style="text-align: justify;">Próximo, “<a href="../../pages/TL.CC.003/index.html">Solução para uma mente vagante - Abandonar tudo?</a>”, ........</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.BB.008/index.html">Difference Between A Wish And A Determination Paramita</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.CC.003/index.html">Solution To A Wandering Mind Abandon Everything</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.BB.008/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Difference Between A Wish And A Determination Paramita</span>
+        
+        <span class="pathway-title title-pt">Diferença entre um desejo e uma determinação Pāramitā</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.CC.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Solution To A Wandering Mind Abandon Everything</span>
+        
+        <span class="pathway-title title-pt">Solução para uma mente errante Abandonar tudo</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

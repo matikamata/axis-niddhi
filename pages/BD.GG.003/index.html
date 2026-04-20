@@ -1,0 +1,510 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Patihariya Supernormal Abilities Of A Buddha | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 33 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.GG.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Patihariya Supernormal Abilities Of A Buddha</h1>
+    
+    <h1 class="title-pt">Patihariya: As Capacidades Sobrenaturais de um Buddha</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.GG.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>12</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.GG.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0041"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.GG.003</td></tr><tr><td>Fin-dex</td><td>0041</td></tr><tr><td>Slug</td><td>patihariya-supernormal-abilities-of-a-buddha</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Patihariya Supernormal Abilities Of A Buddha</td></tr></table></div></div><p style="text-align: justify;"><strong>July 17, 2020; <span style="color: #3366ff;">last revised December 9, 2024</span></strong></p>
+<p style="text-align: justify;"><em> Pāṭihāriya (prātihārya </em><span>in <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span> and ප්‍රාතිහාර්ය in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) is a supernormal ability or a miracle. Several </span><em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> in the <i><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></i> discuss them.</p>
+<h5 style="text-align: justify;"><em><span>Kevaṭṭa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 11)</h5>
+<p style="text-align: justify;">1. I will extract a few relevant portions of the text from the English translation, "<a href="https://suttacentral.net/dn11/en/rhysdavids-brasington" rel="noopener noreferrer" target="_blank">To Kevaṭṭa (DN 11)</a>." I did not choose the other English translation since it translated "<em>pāṭihāriya"</em> as "a demonstration" rather than a "miracle." Anyone can do a demonstration. A<em> pāṭihāriya </em>can be performed only by someone with "supernormal capabilities." As we will see below, these powers are mind-boggling!</p>
+<ul style="text-align: justify;">
+<li>At the beginning of the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em><span>, Kevaṭṭa, a young householder, comes to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> and says the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> should instruct his disciples to perform "miracles" to convince more people to embrace <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> refuses but explains three types of "miracles."</span></li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> replies: "Kevaṭṭa, there are three types of miracles I have taught, having myself understood and realized them. And what are the three? </span><span style="color: #3366ff;"><strong>The miracle of psychic power, the miracle of telepathy, and the miracle of instruction</strong>.</span>"</li>
+</ul>
+<h5 style="text-align: justify;">The Miracle of Psychic Power (<em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span> Pāṭihāriya</span></em>)</h5>
+<p style="text-align: justify;">2. "And what, Kevaṭṭa, is the <span style="color: #3366ff;"><strong>miracle of</strong> <strong>psychic power (<em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span> pāṭihāriya</span></em>)</strong></span>?</p>
+<ul style="text-align: justify;">
+<li>"<strong>Here, Kevaṭṭa, a monk wields various psychic powers:</strong> He becomes many and then becomes one again. He appears and vanishes, goes unimpeded through walls, ramparts, and mountains as if through space. He can dive in and out of the Earth as if it were water, and he walks on water without sinking as if it were Earth. Sitting cross-legged, he travels through space like a winged bird. <strong>He can touch and stroke the Sun</strong> and the moon, so mighty. He exercises mastery as far as the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>-world."</li>
+</ul>
+<p style="text-align: justify;">(This verse explaining supernormal abilities appears in many <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, including DN 2, DN 10, DN 28, MN 6, MN 73, MN 77, SN 12.70, SN 16.9, SN 51.11, SN 51.17, AN 3.60, AN 3.101, AN 5.23, AN 6.2, AN 10.97)</p>
+<ul style="text-align: justify;">
+<li><span>Then the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> points out to Kevaṭṭa that someone who has learned the "Gandhāra Charm" ("Gandhāra Trick" would be a better translation) can do some of that too. That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> prohibited the display of such abilities. (Apparently, Gandhāra Trick can be compared to the "magic tricks" performed by magicians like David Copperfield today. However, the Gandhāra Trick seems much more powerful than any magic tricks performed today.)</span></li>
+</ul>
+<h5 style="text-align: justify;">The Miracle of Telepathy (<em>Ādesanā Pāṭihāriya</em>)</h5>
+<p style="text-align: justify;">3. "And what, Kevaṭṭa, is the<span style="color: #3366ff;"> <strong>miracle of telepathy (<em>ādesanā pāṭihāriya</em>)</strong></span>?</p>
+<ul style="text-align: justify;">
+<li>"Here, a monk reads the minds of other beings, of other people, reads their mental states, their thoughts, and ponderings, and says: 'That is how your mind is, that is how it inclines, that is in your heart.'"</li>
+<li><span>Then the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> points out that those who have mastered the "Manika Charm" can also read other people's minds. Therefore, that also is not impressive.</span></li>
+</ul>
+<h5 style="text-align: justify;">The Miracle of Instruction (<em>Anusāsanī Pāṭihāriya</em>)</h5>
+<p style="text-align: justify;">4. "And what, Kevaṭṭa, is the <span style="color: #3366ff;"><strong>miracle of instruction (<em>anusāsanī pāṭihāriya</em>)</strong></span>?</p>
+<ul style="text-align: justify;">
+<li>"Here, Kevaṭṭa, a monk teaches in this way: 'Reason in this way, do not reason in that way. Consider this and not that. Get rid of this habit, train yourself, and live life like that.' This, Kevaṭṭa, is called 'The miracle of instruction.'</li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explains the fruits of such instructions in detail by a learned </span><em><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span> </span></em><span>who has learned <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> from the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, how he learns to live a moral life and to cultivate </span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em><span> by REMOVING defilements. Then, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explains that SOME OF THEM can cultivate all those supernormal powers mentioned above.</span></li>
+<li>First, let us look at the scope and implications of the "psychic powers" (<em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span> <span class="pali-term term-highlight" data-term="bala">bala</span></span></em>.)<span style="color: #3366ff;"> <strong>All these are performed by a purified mind. </strong></span></li>
+<li>Several <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> describe various <em>ñāṇa</em> and <em><span><span class="pali-term term-highlight" data-term="iddhividha">iddhividha</span> ñāṇa. </span></em>Another is "<a href="https://suttacentral.net/dn2/en/sujato" rel="noopener" target="_blank"><em><span>Sāmaññaphala <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 2)</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Psychic Powers (<em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span> Pāṭihāriya</span></em>) - Unimaginable</h5>
+<p style="text-align: justify;">5. Technological advances drive modern society. Scientists have studied the properties of MATTER in great detail and have used those new findings to create "innovative devices" that help us work more efficiently. For example, they can build robotic machines that can do much work that humans cannot do.</p>
+<ul style="text-align: justify;">
+<li>So, it is indeed a "miracle" that Ven. Cūḷapanthaka created a thousand "copies" of himself to do work around the temple. Once the work is complete, he can make them disappear. That is referred to as "He becomes many and then becomes one again" in #2 above—relevant information on Ven. Cūḷapanthaka at, "<a href="https://suttacentral.net/thag10.4/en/sujato" rel="noopener noreferrer" target="_blank">Cūḷapanthaka</a>" and "<a href="https://www.tipitaka.net/tipitaka/dhp/verseload.php" rel="noopener noreferrer" target="_blank">Dhammapada Verse 25</a> – <a href="https://www.tipitaka.net/tipitaka/dhp/verseload.php" rel="noopener noreferrer" target="_blank">Cūlapantaka Vatthu</a>."</li>
+<li>Let us discuss a few more of these "miracles" to see how amazing they are.</li>
+</ul>
+<h5 style="text-align: justify;">Traveling Through the Air With Physical Body</h5>
+<p style="text-align: justify;">6. Another modern technological advance is traveling long distances with cars, airplanes, and rockets. These became possible due to the collective efforts of thousands of scientists starting from Galileo and Newton, over 300 years ago.</p>
+<ul style="text-align: justify;">
+<li>However, as stated in the above accounts of Ven. Cūḷapanthaka, traveling through the air with one's physical body, is possible after cultivating <em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span> <span class="pali-term term-highlight" data-term="bala">bala</span>. </span></em>That is referred to as, "Sitting cross-legged, he travels through space like a winged bird" in #2 above.</li>
+</ul>
+<p style="text-align: justify;">7. All these "psychic powers" have their basis in highly concentrated energy produced in the <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> of the <em>yogi</em>. Yes. Even other <em>yogis</em><span> during the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s time had cultivated SOME of these powers via cultivating </span><em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. They could, for example, travel through the air carrying their physical bodies.</p>
+<ul style="text-align: justify;">
+<li>As we know, <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> generates <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies that lead to future births. See "<a href="../../pages/AB.BB.009/index.html" rel="noopener noreferrer" target="_blank">Javana of a Citta – The Root of Mental Power</a>."</li>
+<li>The intensity or the power of <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> can be vastly increased for those who have cultivated <em>pāṭihāriyā</em> powers. Such a <em>yogi</em> can set up an "energy field" around his physical body, which can be controlled to move the physical body as he wishes.</li>
+<li>The video below demonstrates the basic idea of "electromagnetic levitation." A <em>yogi</em> would create such an "energy field" around his body and control it to move the body.</li>
+</ul>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/AU0q4wVohF8" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p> </p>
+<ul style="text-align: justify;">
+<li>By the way, one can buy various "levitating things" like "levitating globes."</li>
+</ul>
+<h5 style="text-align: justify;">Traveling to a Star System "In an Instant" - With <em><span>Manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em></h5>
+<p style="text-align: justify;">8. The closest star (possibly with a set of planets) to us is four light-years away. That means if a rocket ship travels <strong>at the speed of light</strong>, it will take four years. For comparison, the distance from the Earth to our Moon would take only 1.25 SECONDS. Therefore, a rocket ship traveling at the speed of light will take <strong>only 1.25 SECONDS to arrive at the Moon!</strong> But our rocketships take about three days to get to the Moon. Therefore, with a modern rocketship, it would take <strong>about 800 thousand years</strong> (depending on the speed attained in interstellar space) to get to the NEAREST star.</p>
+<ul style="text-align: justify;">
+<li><span>The capabilities of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (and some of his disciples with </span><em>pāṭihāriyā</em><span> powers) can be truly astounding. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> could travel anywhere among the 10,000 "world systems" (</span><em>dasasahassi lokadhātu</em>). A "world system" is a set of planets associated with a star, where one planet has life. In our "Solar system," the Sun is the star, and life is based on Earth. See "<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Realms Associated with the Earth</a>."</li>
+<li><span>Therefore, it is mind-boggling even to imagine someone traveling to a star thousands of light-years away instantly. Of course, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> would travel such vast distances only with his "mental body" (</span><em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.)</li>
+<li>By the way, <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> from such 10,000 world systems can visit Earth too. They have "bodies" that are equivalent to our mental bodies. They do not have dense physical bodies. <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em><span> from the 10,000 world systems came to listen to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s first discourse, </span><em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>.</li>
+<li>Many <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em><span> state that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> would arrive in a </span><em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> world within the time taken for someone to straighten a bent arm, i.e., less than a second! That is how <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> </span></em>from other world systems came to listen to <em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>. "<em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> </span></em>bodies" are almost equivalent to <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> of a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>. </span></em>(In comparison, a modern rocketship takes three days to get to the Moon.)</li>
+<li>Nothing analogous to such fast travel has yet been discussed in modern physics. I suspect that this is related to the recently established "non-locality" (or "quantum entanglement") in quantum mechanics: "<a href="../../pages/QD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Quantum Mechanics and Dhamma – Introduction</a>.</li>
+</ul>
+<h5>Touching the Sun</h5>
+<p style="text-align: justify;">9. In the “<a href="https://suttacentral.net/mn77/en/sujato" rel="noopener nofollow" target="_blank"><em><span>Mahāsakuludāyi <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 77)</a><span>” the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> says:</span></p>
+<p style="text-align: justify;">“<span class="text">Furthermore, I have explained to my disciples a practice that they use to wield the many kinds of psychic power: multiplying themselves and becoming one again; appearing and disappearing; going unobstructed through a wall, a rampart, or a mountain as if through space; diving in and out of the earth as if it were water; walking on water as if it were earth; flying cross-legged through the sky like a bird; <strong>touching and stroking with the hand the sun and moon</strong>, so mighty and powerful. They control the body as far as the realm of divinity.”</span></p>
+<ul>
+<li style="text-align: justify;">In that verse, “<span class="text"><strong>touching and stroking with the hand the sun and moon</strong>” requires one to reach the Sun and touch it. Of course, one would do that with the <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>, made of only a few <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span>, </span></em>as explained above. That <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>can instantly travel to the Sun without being burned by the unimaginable heat there. As discussed in the “<a href="../../pages/SI.AA.010/index.html" rel="noopener noreferrer" target="_blank">Buddhism and Evolution – Aggañña Sutta (DN 27),</a>” the higher <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms (where <em>Brahmas’</em> “bodies” are made of only a few <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>) are not destroyed in a “<em><span><span class="pali-term term-highlight" data-term="loka">loka</span> vināsaya</span></em>” (destruction of the lower realms) caused by a supernova event, which causes the heat of “seven Suns.”  </span></li>
+<li style="text-align: justify;"><span class="text">Once the fundamentals are understood, such phenomena are no longer “miracles.” </span></li>
+</ul>
+<h5 style="text-align: justify;">Going Through Walls, Mountains, etc.</h5>
+<p style="text-align: justify;">10. Compared to "traveling through air with the physical body" discussed in #6, and #7 above, a much more complex technique comes into play when "going through walls or diving into the Earth." I have not seen such an action attributed to <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> yogis</span></em>. In this case, one breaks down the physical body to the elementary level of <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>"Matter" is mostly empty space. An atom is virtually empty. This basic idea is illustrated in the first 3 minutes of the following video.</li>
+</ul>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ooWfzpUIoNM" width="560"></iframe></div></p>
+<p style="text-align: justify;"> </p>
+<h5 style="text-align: justify;">"Solid Matter" Is Mostly Empty Space!</h5>
+<p style="text-align: justify;">11. Watching the first three minutes of the above video can give us an idea of "how empty" an atom is. As shown, an atom is more than 99.999% empty!</p>
+<ul style="text-align: justify;">
+<li>Then why can we not go through a wall? The answer is that two atoms cannot get too close to each other due to electromagnetic forces. That is not discussed in the above video. In a solid, two atoms cannot come too close because one atom's outer "electron cloud" will repel that of the second atom. Therefore, even a steel bar is mostly empty space.</li>
+<li><span>However, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught that matter could be reduced below that of electrons and protons. That is the </span><em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> </span></em>level, where no electromagnetic interactions exist (like the repulsion among electrons.) All the "material stuff" in a physical body can be reduced to<strong> an invisible</strong> <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> </span></em>level. Scientists now know that an atom is divisible into smaller parts.  The recently detected Higgs boson could be at the <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> </span></em>level.</li>
+<li><span>However, scientists cannot reduce bulk matter to the <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> level. Moreover, they cannot take an object like an apple, break it below the atomic level, and then put it all back together. But one with high-end </span><em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span></span></em> powers can do that!</li>
+<li><strong>Such a <em>yogi</em> can reduce one's body to the <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> level, move it to another location very quickly, and then put it back together!</strong><span> This was discussed slightly differently in #6 through #10 in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/DS.BB.009/index.html" rel="noopener noreferrer" target="_blank">Mystical Phenomena in Buddhism?</a>"</li>
+<li>That approach of reducing the "material stuff" in a body to a form that can be transported to far destinations at high speed and then "re-assembling" back to the original form is part of <strong>science fiction</strong> these days; see "<a href="https://en.wikipedia.org/wiki/Teleportation" rel="noopener noreferrer" target="_blank">teleportation</a>." I remember watching the famous movie "<a href="https://en.wikipedia.org/wiki/The_Fly_(1986_film)" rel="noopener noreferrer" target="_blank"><i>The Fly</i> (1986 film).</a>" In that movie, a fly gets into the "teleportation machine" with the human, and the "re-assembly" at the other end produces a "human fly"!</li>
+</ul>
+<h5 style="text-align: justify;">Comparison With Modern Technology</h5>
+<p style="text-align: justify;"><span>12. As we can see, modern science and <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> take very different approaches to dealing with even material phenomena. Science is exclusively based on the study of inert matter, while</span><span style="color: #3366ff;"><strong><span> <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> can explain material properties in terms of mental phenomena.</span></strong> </span><span>Of course, scientists are still way behind the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<ul style="text-align: justify;">
+<li><span>From what we discussed above, think about one comparison. While the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> could visit </span><em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> worlds within a split-second, scientists have only made it to the Moon, which takes three days.</li>
+<li>The scientists are not even aware of the existence of the <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms.</li>
+<li><i><span><span class="pali-term term-highlight" data-term="deva">Deva</span> and <span class="pali-term term-highlight" data-term="brahma">Brahma</span> </span></i>realms are above the Earth. They have very little "matter, " so scientists cannot see them or their habitats. However, our rocketships can pass through their habitats without them even noticing.</li>
+<li>The closest analogy we have is the depiction of a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> in the 1990 movie "Ghost." See "<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Ghost 1990 Movie – Good Depiction of Gandhabba Concept</a>." From watching that movie, we can understand why we cannot see <em><span><span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (or their habitats). <em><span><span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> have "bodies" even more subtle compared to a human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</li>
+<li><span>Without scientists figuring out how to implement teleportation, they could not travel to the nearest star with rocket ships. <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s "mind-based" technique is based on a different paradigm.</span></li>
+<li>In the <em><span>Sīsapāvana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> (SN 56.31), <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said he taught only a tiny fraction of his knowledge. See "</span><a href="https://suttacentral.net/sn56.31/en/sujato" rel="noopener noreferrer" target="_blank">In a Rosewood Forest</a>."</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #3366ff;"><strong>There is no need to study or learn about <em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span></span></em> <em>pāṭihāriya </em>in detail.</strong> </span>I am providing this account to establish the following point. <strong>By controlling the mind, even a single person can get ahead of hundreds of years of scientific effort.</strong> The other two "miracles" are discussed in "<a href="../../pages/BD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Pāṭihāriya (Supernormal Abilities) of a Buddha – Part II."</a></p>
+<ul>
+<li><span>All <span class="pali-term term-highlight" data-term="posts">posts</span> on this subsection in "</span><a href="../../pages/BD.GG.001/index.html" rel="noopener" target="_blank">Buddhahood Associated Controversies</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Additional Resources</h5>
+<p style="text-align: justify;">1. There is a Wikipedia article, "<a href="https://en.wikipedia.org/wiki/Miracles_of_Gautama_Buddha" rel="noopener noreferrer" target="_blank">Miracles of Gautama Buddha.</a>"</p>
+<p class="entry-title" style="text-align: justify;">2. The above video is the second of a series of videos. More information on atoms is in the following set of videos:</p>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/LhveTGblGHY" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.GG.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0041"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.GG.003
+Language:     pt-BR
+Generated-At: 2026-04-17T21:33:48Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;"><strong>17 de julho de 2020; <span style="color: #3366ff;">última revisão em 9 de dezembro de 2024</span></strong></p>
+<p style="text-align: justify;"><em> Pāṭihāriya (prātihārya </em>em sânscrito e ප්‍රාතිහාර්ය em Cingalês) é uma habilidade sobrenatural ou um milagre. Vários <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> no <i><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></i> tratam desse assunto.</p>
+<h5 style="text-align: justify;"><em><span>Kevaṭṭa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 11)</h5>
+<p style="text-align: justify;">1. Vou extrair algumas partes relevantes do texto da tradução em inglês, “<a href="https://suttacentral.net/dn11/en/rhysdavids-brasington" rel="noopener noreferrer" target="_blank">To Kevaṭṭa (DN 11)</a>”. Não escolhi a outra tradução em inglês, pois ela traduzia “<em>pāṭihāriya”</em> como “uma demonstração” em vez de um “milagre”. Qualquer pessoa pode fazer uma demonstração. Um<em> pāṭihāriya</em> só pode ser realizado por alguém com “capacidades sobrenaturais”. Como veremos a seguir, esses poderes são impressionantes!</p>
+<ul style="text-align: justify;">
+<li>No início do <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span>, Kevaṭṭa, um jovem chefe de família, aproxima-se do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> e diz que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> deveria instruir seus discípulos a realizar “milagres” para convencer mais pessoas a abraçar os ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> recusa, mas explica três tipos de “milagres”.</span></li>
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> responde: “Kevaṭṭa, há três tipos de milagres que eu ensinei, tendo eu mesmo compreendido e realizado. E quais são os três? </span><span style="color: #3366ff;"><strong>O milagre do poder psíquico, o milagre da telepatia e o milagre da instrução</strong></span>.”</li>
+</ul>
+<h5 style="text-align: justify;">O Milagre do Poder Psíquico (<em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span> Pāṭihāriya</span></em>)</h5>
+<p style="text-align: justify;">2. “E o que, Kevaṭṭa, é o <span style="color: #3366ff;"><strong>milagre do poder psíquico (</strong><strong><em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span> pāṭihāriya</span></em>)</strong></span>?</p>
+<ul style="text-align: justify;">
+<li>“<strong>Aqui, Kevaṭṭa, um monge exerce vários poderes psíquicos:</strong> ele se multiplica e depois volta a ser um só. Ele aparece e desaparece, atravessa sem impedimentos paredes, muralhas e montanhas como se fossem o vazio. Ele pode mergulhar na Terra e emergir dela como se fosse água, e caminha sobre a água sem afundar como se fosse terra. Sentado de pernas cruzadas, ele viaja pelo espaço como um pássaro alado. <strong>Ele pode tocar e acariciar o Sol</strong> e a Lua, tão poderosos. Ele exerce domínio até o mundo <em>de</em> <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.”</li>
+</ul>
+<p style="text-align: justify;">(Este versículo explicando habilidades sobrenaturais aparece em muitos <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>, incluindo DN 2, DN 10, DN 28, MN 6, MN 73, MN 77, SN 12.70, SN 16.9, SN 51.11, SN 51.17, AN 3.60, AN 3.101, AN 5.23, AN 6.2, AN 10.97)</p>
+<ul style="text-align: justify;">
+<li><span>Então, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> aponta para Kevaṭṭa que alguém que tenha aprendido o “Feitiço de Gandhāra” (“Truque de Gandhāra” seria uma tradução melhor) também pode fazer algumas dessas coisas. É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> proibiu a exibição de tais habilidades. (Aparentemente, o Truque de Gandhāra pode ser comparado aos “truques de mágica” realizados por mágicos como David Copperfield hoje em dia. No entanto, o Truque de Gandhāra parece muito mais poderoso do que qualquer truque de mágica realizado atualmente.)</span></li>
+</ul>
+<h5 style="text-align: justify;">O Milagre da Telepatia (<em>Ādesanā Pāṭihāriya</em>)</h5>
+<p style="text-align: justify;">3. “E o que é, Kevaṭṭa, o<span style="color: #3366ff;"> <strong>milagre da telepatia (<em>ādesanā pāṭihāriya</em>)</strong></span>?</p>
+<ul style="text-align: justify;">
+<li>“Aqui, um monge lê as mentes de outros seres, de outras pessoas, lê seus estados mentais, seus pensamentos e reflexões, e diz: ‘É assim que sua mente está, é para isso que ela se inclina, é isso que está em seu coração.’”</li>
+<li><span>Então, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ressalta que aqueles que dominaram o “Feitiço Manika” também podem ler a mente de outras pessoas. Portanto, isso também não é impressionante.</span></li>
+</ul>
+<h5 style="text-align: justify;">O Milagre da Instrução (<em>Anusāsanī Pāṭihāriya</em>)</h5>
+<p style="text-align: justify;">4. “E o que, Kevaṭṭa, é o <span style="color: #3366ff;"><strong>milagre da instrução (<em>anusāsanī pāṭihāriya</em>)</strong></span>?</p>
+<ul style="text-align: justify;">
+<li>“Aqui, Kevaṭṭa, um monge ensina desta forma: ‘Raciocine desta forma, não raciocine daquela forma. Considere isto e não aquilo. Livre-se deste hábito, treine-se e viva a vida assim.’ Isso, Kevaṭṭa, é chamado de ‘O milagre da instrução’.</li>
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explica detalhadamente os frutos de tais instruções por meio de um </span><em><span><span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span></em><span> erudito que aprendeu o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> com o <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, mostrando como ele aprende a viver uma vida moral e a cultivar </span><em><span>o <span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em><span> ao REMOVER as impurezas. Em seguida, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explica que ALGUNS DELES podem cultivar todos aqueles poderes sobrenaturais mencionados acima.</span></li>
+<li>Primeiro, vamos examinar o alcance e as implicações dos “poderes psíquicos” (<em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span> <span class="pali-term term-highlight" data-term="bala">Bala</span></span></em>). <span style="color: #3366ff;"><strong>Todos eles são realizados por uma mente purificada. </strong></span></li>
+<li>Vários <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> descrevem vários <em>ñāṇa</em> e <em><span><span class="pali-term term-highlight" data-term="iddhividha">Iddhividha</span> ñāṇa. </span></em>Outro é o “<a href="https://suttacentral.net/dn2/en/sujato" rel="noopener" target="_blank"><em><span>Sāmaññaphala <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 2)</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Poderes psíquicos (<em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span> Pāṭihāriya</span></em>) — Inimagináveis</h5>
+<p style="text-align: justify;">5. Os avanços tecnológicos impulsionam a sociedade moderna. Os cientistas estudaram as propriedades da MATÉRIA em grande detalhe e utilizaram essas novas descobertas para criar “dispositivos inovadores” que nos ajudam a trabalhar com mais eficiência. Por exemplo, eles podem construir máquinas robóticas capazes de realizar muitas tarefas que os humanos não conseguem realizar.</p>
+<ul style="text-align: justify;">
+<li>Portanto, é de fato um “milagre” que o Venerável Cūḷapanthaka tenha criado mil “cópias” de si mesmo para realizar trabalhos no templo. Assim que o trabalho estiver concluído, ele pode fazê-las desaparecer. Isso é referido como “Ele se torna muitos e depois se torna um novamente” no ponto 2 acima — informações relevantes sobre o Venerável Cūḷapanthaka em “<a href="https://suttacentral.net/thag10.4/en/sujato" rel="noopener noreferrer" target="_blank">Cūḷapanthaka</a>” e “<a href="https://www.tipitaka.net/tipitaka/dhp/verseload.php" rel="noopener noreferrer" target="_blank">Verso 25 do Dhammapada</a> – <a href="https://www.tipitaka.net/tipitaka/dhp/verseload.php" rel="noopener noreferrer" target="_blank">Cūlapantaka Vatthu</a>”.</li>
+<li>Vamos discutir mais alguns desses “milagres” para ver como eles são incríveis.</li>
+</ul>
+<h5 style="text-align: justify;">Viajar pelo ar com o corpo físico</h5>
+<p style="text-align: justify;">6. Outro avanço tecnológico moderno é viajar longas distâncias com carros, aviões e foguetes. Isso se tornou possível graças aos esforços coletivos de milhares de cientistas, começando por Galileu e Newton, há mais de 300 anos.</p>
+<ul style="text-align: justify;">
+<li>No entanto, conforme afirmado nos relatos acima do Ven. Cūḷapanthaka, viajar pelo ar com o próprio corpo físico é possível após cultivar <em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span> <span class="pali-term term-highlight" data-term="bala">Bala</span>. </span></em>Isso é referido como: “Sentado de pernas cruzadas, ele viaja pelo espaço como um pássaro alado” no nº 2 acima.</li>
+</ul>
+<p style="text-align: justify;">7. Todos esses “poderes psíquicos” têm sua base na energia altamente concentrada produzida no <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> do <em>iogue</em>. Sim. Até mesmo outros <em>iogues</em><span> durante a época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> haviam cultivado ALGUNS desses poderes por meio do cultivo </span><em><span>do <span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Eles podiam, por exemplo, viajar pelo ar carregando seus corpos físicos.</p>
+<ul style="text-align: justify;">
+<li>Como sabemos, <em><span>o <span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> gera energias <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que conduzem a nascimentos futuros. Veja “<a href="../../pages/AB.BB.009/index.html" rel="noopener noreferrer" target="_blank">Javana de um Citta – A Raiz do Poder Mental</a>”.</li>
+<li>A intensidade ou o poder do <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> pode ser amplamente aumentado para aqueles que cultivaram os poderes <em>pāṭihāriyā</em>. Tal <em>iogue</em> pode criar um “campo de energia” ao redor de seu corpo físico, que pode ser controlado para mover o corpo físico conforme ele desejar.</li>
+<li>O vídeo abaixo demonstra a ideia básica da “levitação eletromagnética”. Um <em>iogue</em> criaria tal “campo de energia” ao redor de seu corpo e o controlaria para mover o corpo.</li>
+</ul>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/AU0q4wVohF8" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p> </p>
+<ul style="text-align: justify;">
+<li>A propósito, é possível comprar vários “objetos levitantes”, como “globos levitantes”.</li>
+</ul>
+<h5 style="text-align: justify;">Viajando para um sistema estelar “em um instante” – com <em><span>Manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em></h5>
+<p style="text-align: justify;">8. A estrela mais próxima de nós (possivelmente com um sistema de planetas) fica a quatro anos-luz de distância. Isso significa que, se uma nave espacial viajar <strong>à velocidade da luz</strong>, levará quatro anos. Para comparação, a distância da Terra até a Lua levaria apenas 1,25 SEGUNDOS. Portanto, um foguete viajando à velocidade da luz levaria <strong>apenas 1,25 SEGUNDOS para chegar à Lua!</strong> Mas nossos foguetes levam cerca de três dias para chegar à Lua. Portanto, com um foguete moderno, levaria <strong>cerca de 800 mil anos</strong> (dependendo da velocidade atingida no espaço interestelar) para chegar à estrela MAIS PRÓXIMA.</p>
+<ul style="text-align: justify;">
+<li><span>As capacidades do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (e de alguns de seus discípulos com poderes </span><em>pāṭihāriyā</em><span>) podem ser verdadeiramente surpreendentes. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> poderia viajar para qualquer lugar entre os 10.000 “sistemas mundiais” (</span><em>dasasahassi lokadhātu</em>). Um “sistema mundial” é um conjunto de planetas associados a uma estrela, onde um planeta abriga vida. Em nosso “Sistema Solar”, o Sol é a estrela, e a vida está baseada na Terra. Veja “<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Reinos Associados à Terra</a>”.</li>
+<li><span>Portanto, é impressionante até mesmo imaginar alguém viajando instantaneamente para uma estrela a milhares de anos-luz de distância. É claro que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> viajaria por distâncias tão vastas apenas com seu “corpo mental” (</span><em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>).</li>
+<li>A propósito, <em><span>os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> desses 10.000 sistemas mundiais também podem visitar a Terra. Eles possuem “corpos” equivalentes aos nossos corpos mentais. Não possuem corpos físicos densos. <em><span>Os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em><span> dos 10.000 sistemas mundiais vieram para ouvir o primeiro discurso do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, </span><em><span>o Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>.</li>
+<li>Muitas <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em><span> afirmam que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> chegaria a um mundo </span><em><span>de <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> no tempo que alguém leva para esticar um braço dobrado, ou seja, menos de um segundo! Foi assim que <em><span>os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> </span></em>de outros sistemas mundiais vieram ouvir o <em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>. Os “corpos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>” são quase equivalentes ao <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> de um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>. </span></em>(Em comparação, um foguete moderno leva três dias para chegar à Lua.)</li>
+<li>Nada análogo a tal viagem rápida foi discutido até agora na física moderna. Suspeito que isso esteja relacionado à “não-localidade” (ou “entrelaçamento quântico”) recentemente estabelecida na mecânica quântica: “<a href="../../pages/QD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Mecânica Quântica e Dhamma – Introdução</a>.</li>
+</ul>
+<h5>Tocando o Sol</h5>
+<p style="text-align: justify;">9. No “<a href="https://suttacentral.net/mn77/en/sujato" rel="noopener nofollow" target="_blank"><em><span>Mahāsakuludāyi <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 77)</a><span>”, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> diz:</span></p>
+<p style="text-align: justify;">“<span class="text">Além</span> disso<span class="text">, expliquei aos meus discípulos uma prática que eles usam para exercer os diversos tipos de poder psíquico: multiplicar-se e voltar a ser um só; aparecer e desaparecer; atravessar sem obstáculos uma parede, uma muralha ou uma montanha como se fosse o espaço; mergulhar dentro e fora da terra como se fosse água; caminhar sobre a água como se fosse terra; voar de pernas cruzadas pelo céu como um pássaro; <strong>tocar e acariciar com a mão o sol e a lua</strong>, tão grandiosos e poderosos. Eles controlam o corpo até o reino da divindade.”</span></p>
+<ul>
+<li style="text-align: justify;">Nesse versículo, “<span class="text"><strong>tocar e acariciar com a mão o sol e a</strong> lua” requer que se alcance o Sol e o toque. É claro que isso seria feito com o <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>, composto apenas de alguns <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span>, </span></em>conforme explicado acima. Esse <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>pode viajar instantaneamente até o Sol sem ser queimado pelo calor inimaginável que lá existe. Conforme discutido em “<a href="../../pages/SI.AA.010/index.html" rel="noopener noreferrer" target="_blank">Buddhismo e Evolução – Aggañña Sutta (DN 27)</a>”<a href="../../pages/SI.AA.010/index.html" rel="noopener noreferrer" target="_blank">,</a> os reinos superiores <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (onde <em>os</em> “corpos” são compostos de apenas alguns <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>) não são destruídos em um “<em><span><span class="pali-term term-highlight" data-term="loka">loka</span> vināsaya</span></em>” (destruição dos reinos inferiores) causado por um evento de supernova, que gera o calor de “sete Sóis”.  </span></li>
+<li style="text-align: justify;"><span class="text">Uma vez compreendidos os fundamentos, tais fenômenos não são mais “milagres”. </span></li>
+</ul>
+<h5 style="text-align: justify;">Atravessar paredes, montanhas, etc.</h5>
+<p style="text-align: justify;">10. Em comparação com “viajar pelo ar com o corpo físico”, discutido nos itens 6 e 7 acima, uma técnica muito mais complexa entra em jogo ao “atravessar paredes ou mergulhar na Terra”. Não vi tal ação atribuída a <em><span>iogues <span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em>. Nesse caso, decompõe-se o corpo físico até o nível elementar de <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>A “matéria” é em sua maior parte espaço vazio. Um átomo é praticamente vazio. Essa ideia básica é ilustrada nos primeiros 3 minutos do vídeo a seguir.</li>
+</ul>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ooWfzpUIoNM" width="560"></iframe></div></p>
+<p style="text-align: justify;"> </p>
+<h5 style="text-align: justify;">“A matéria sólida” é, em sua maior parte, espaço vazio!</h5>
+<p style="text-align: justify;">11. Assistir aos primeiros três minutos do vídeo acima pode nos dar uma ideia de “quão vazio” é um átomo. Conforme mostrado, um átomo é mais de 99,999% vazio!</p>
+<ul style="text-align: justify;">
+<li>Então, por que não podemos atravessar uma parede? A resposta é que dois átomos não podem se aproximar demais um do outro devido às forças eletromagnéticas. Isso não é discutido no vídeo acima. Em um sólido, dois átomos não podem se aproximar demais porque a “nuvem de elétrons” externa de um átomo repelirá a do segundo átomo. Portanto, mesmo uma barra de aço é composta principalmente de espaço vazio.</li>
+<li><span>No entanto, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ensinou que a matéria poderia ser reduzida a um nível inferior ao dos elétrons e prótons. Esse é o nível </span><em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>, onde não existem interações eletromagnéticas (como a repulsão entre elétrons). Toda a “matéria” em um corpo físico pode ser reduzida a<strong> um</strong> nível <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> <strong>invisível</strong>. Os cientistas sabem agora que um átomo é divisível em partes menores.  O bóson de Higgs, recentemente detectado, poderia estar no nível <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>.</li>
+<li><span>No entanto, os cientistas não conseguem reduzir a matéria em massa ao nível <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span>. Além disso, não conseguem pegar um objeto como uma maçã, dividi-lo abaixo do nível atômico e depois remontá-lo. Mas alguém com poderes </span><em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span></span></em> avançados consegue fazer isso!</li>
+<li><strong>Tal <em>iogue</em> pode reduzir o próprio corpo ao nível <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>, movê-lo para outro local muito rapidamente e, em seguida, remontá-lo!</strong> Isso foi discutido de forma ligeiramente diferente nos itens 6 a 10 do ensaio “<a href="../../pages/DS.BB.009/index.html" rel="noopener noreferrer" target="_blank">Fenômenos místicos no Buddhismo?</a>”.</li>
+<li>Essa abordagem de reduzir a “matéria” do corpo a uma forma que possa ser transportada para destinos distantes em alta velocidade e, em seguida, “reunir” de volta à forma original faz parte da <strong>ficção científica</strong> hoje em dia; veja “<a href="https://en.wikipedia.org/wiki/Teleportation" rel="noopener noreferrer" target="_blank">teletransporte</a>”. Lembro-me de ter assistido ao famoso filme “<a href="https://en.wikipedia.org/wiki/The_Fly_(1986_film)" rel="noopener noreferrer" target="_blank"><i>A Mosca</i></a>”<a href="https://en.wikipedia.org/wiki/The_Fly_(1986_film)" rel="noopener noreferrer" target="_blank"> (filme de 1986).</a> Nesse filme, uma mosca entra na “máquina de teletransporte” junto com o humano, e a “remontagem” no outro extremo produz uma “mosca humana”!</li>
+</ul>
+<h5 style="text-align: justify;">Comparação com a tecnologia moderna</h5>
+<p style="text-align: justify;"><span>12. Como podemos ver, a ciência moderna e o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> adotam abordagens muito diferentes ao lidar até mesmo com fenômenos materiais. A ciência baseia-se exclusivamente no estudo da matéria inerte, enquanto</span><span style="color: #3366ff;"><strong><span> o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> pode explicar as propriedades materiais em termos de fenômenos mentais.</span></strong> </span><span>É claro que os cientistas ainda estão muito atrás do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<ul style="text-align: justify;">
+<li><span>A partir do que discutimos acima, pense em uma comparação. Enquanto o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> podia visitar os mundos </span><em><span>dos <span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> e <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> em uma fração de segundo, os cientistas só conseguiram chegar à Lua, o que leva três dias.</li>
+<li>Os cientistas nem mesmo têm consciência da existência dos reinos dos <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> e <em><span>dos <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.</li>
+<li>Os reinos <i><span>dos <span class="pali-term term-highlight" data-term="devas">Devas</span> e dos <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></i> estão acima da Terra. Eles têm muito pouca “matéria”, de modo que os cientistas não podem vê-los nem seus habitats. No entanto, nossos foguetes podem passar por seus habitats sem que eles sequer percebam.</li>
+<li>A analogia mais próxima que temos é a representação de um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> no filme de 1990 “Ghost”. Veja “<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Filme Ghost de 1990 – Boa Representação do Conceito de Gandhabba</a>”. Ao assistir a esse filme, podemos entender por que não podemos ver <em><span>os <span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> ou <em>Brahmás</em> (ou seus habitats). <em><span>Os <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> têm “corpos” ainda mais sutis em comparação com um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> humano.</li>
+<li><span>Sem que os cientistas descobrissem como implementar o teletransporte, eles não poderiam viajar para a estrela mais próxima com naves espaciais. A técnica “baseada na mente” do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> se fundamenta em um paradigma diferente.</span></li>
+<li>No <em><span>Sīsapāvana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> (SN 56.31), o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que ensinou apenas uma minúscula fração de seu conhecimento. Veja “</span><a href="https://suttacentral.net/sn56.31/en/sujato" rel="noopener noreferrer" target="_blank">Em uma Floresta de Pau-rosa</a>”.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #3366ff;"><strong>Não há necessidade de estudar ou aprender sobre <em><span><span class="pali-term term-highlight" data-term="iddhi">Iddhi</span></span></em> <em>pāṭihāriya </em>em detalhes.</strong> </span>Estou apresentando este relato para estabelecer o seguinte ponto. <strong>Ao controlar a mente, mesmo uma única pessoa pode superar centenas de anos de esforço científico.</strong> Os outros dois “milagres” são discutidos em “<a href="../../pages/BD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Pāṭihāriya (Habilidades Sobrenaturais) de um Buddha – Parte II”.</a></p>
+<ul>
+<li>Todos os ensaios desta subseção em “<a href="../../pages/BD.GG.001/index.html" rel="noopener" target="_blank">Controvérsias Associadas à Iluminação</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Recursos adicionais</h5>
+<p style="text-align: justify;">1. Há um artigo na Wikipedia, “<a href="https://en.wikipedia.org/wiki/Miracles_of_Gautama_Buddha" rel="noopener noreferrer" target="_blank">Milagres de Gautama Buddha”.</a></p>
+<p class="entry-title" style="text-align: justify;">2. O vídeo acima é o segundo de uma série de vídeos. Mais informações sobre átomos estão na seguinte série de vídeos:</p>
+<p><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/LhveTGblGHY" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.GG.002/index.html">Buddhahood Controversies Introduction</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.GG.004/index.html">Patihariya Iddhi Of Buddha</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.GG.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Buddhahood Controversies Introduction</span>
+        
+        <span class="pathway-title title-pt">Controvérsias sobre a iluminação: Introdução</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.GG.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Patihariya Iddhi Of Buddha</span>
+        
+        <span class="pathway-title title-pt">O Poder de Patihariya do Buddha</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

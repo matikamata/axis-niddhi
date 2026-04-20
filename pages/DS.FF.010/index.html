@@ -1,0 +1,354 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Paticca Samuppada Mind To Matter | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Dhamma and Science</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 37 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">DS.FF.010</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Paticca Samuppada Mind To Matter</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>DS.FF.010</td></tr>
+          <tr><td><strong>Section</strong></td><td>Dhamma and Science</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="DS.FF.010"
+             data-section="Dhamma and Science"
+             data-section-code="DS"
+             data-findex="0320"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>DS.FF.010</td></tr><tr><td>Fin-dex</td><td>0320</td></tr><tr><td>Slug</td><td>paticca-samuppada-mind-to-matter</td></tr><tr><td>Section</td><td>DS</td></tr><tr><td>Title EN</td><td>Paticca Samuppada Mind To Matter</td></tr></table></div></div><strong>January 11, 2020</strong>
+<h5 style="text-align: justify">Where is the "Mind-to-Matter" Step in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>?</h5>
+<p style="text-align: justify">1. <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-mula</span></em> <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> starts with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" and ends with "<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="marana">marana</span></span></em>,.."</p>
+<ul style="text-align: justify">
+<li>The first step involves generating defiled thoughts (<em>manō</em>, <em>vaci</em>, and<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> (not being aware of the Four Noble Truths.) In the end, that leads to births of physical bodies (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) that will then undergo old age and death.</li>
+<li><span style="color: #0000ff"><strong>How do thoughts lead to the births of human beings and other living beings?</strong></span></li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> Create Energy!</h5>
+<p style="text-align: justify"><span>2. I laid the foundation for this <span class="pali-term term-highlight" data-term="post">post</span> in a recent <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/DS.FF.009/index.html" rel="noopener noreferrer" target="_blank">Dhammā, Kamma, Saṅkhāra, Mind – Critical Connections</a>." Please review that as needed.</p>
+<ul style="text-align: justify">
+<li>The critical point is that our thoughts (specifically <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) CREATE energy! That may be hard to believe.</li>
+<li><span>Even a few hundred years ago, many people thought that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught some other things that were "hard to believe." For example, <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught that there are an uncountable number of planetary systems like our Solar system in the universe. However, before Galileo invented the telescope, people believed that Earth was at the center of the universe! See the "</span><a href="https://en.wikipedia.org/wiki/Geocentric_model" rel="noopener noreferrer" target="_blank">Geocentric model</a>."</li>
+<li><span>Even after reading the previous <span class="pali-term term-highlight" data-term="post">post</span> mentioned above, many of you may not have caught on to the fact that the mind creates energy. And that is what leads to the "arising of physical bodies" in future existences (rebirths.) You may want to read that <span class="pali-term term-highlight" data-term="post">post</span> after reading this one, and things will become more clear.</span></li>
+</ul>
+<h5 style="text-align: justify">Thoughts Create "Seeds" That Can Give Rise to Physical Bodies</h5>
+<p style="text-align: justify"><span>3. In that previous <span class="pali-term term-highlight" data-term="post">post</span>, we discussed that such minute amounts of energies created by our thoughts are PART OF </span><em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> (with a long "a" at the end.)</p>
+<ul style="text-align: justify">
+<li>Of course, such minute amounts of energy cannot DIRECTLY create massive/dense bodies like ours.</li>
+<li>When a living being grasps a new existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>), only a "mental body" or "<em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>" for the new life appears. It is a "mental body" since it is mostly mental with only a trace of matter. <span style="color: #0000ff"><strong>Very little <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy is enough to create that "mental body." </strong></span></li>
+<li>This "mental body" or "<em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>" is the same as a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> or a "<em>patisandhi</em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>." </span></em><span style="color: #0000ff"><strong>One creates one's future via one's <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>(i.e., the way one THINKS). <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> describes that </strong></span><span style="font-weight: bolder;color: #0000ff">process.</span></li>
+<li><span>That is why it is CRITICAL to understand the previous three <span class="pali-term term-highlight" data-term="posts">posts</span>: "</span><a href="../../pages/DS.FF.009/index.html" rel="noopener noreferrer" target="_blank">Dhammā, Kamma, Saṅkhāra, Mind – Critical Connections,</a>" "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>," and "<a href="../../pages/DS.BB.007/index.html" rel="noopener noreferrer" target="_blank">Cloning and Gandhabba</a>."</li>
+</ul>
+<p style="text-align: justify">4. The word "<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em><span>" in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> means a "collection." Thus, this "body" that is created by </span><em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy consists mostly of the four "mental aggregates." <span style="color: #0000ff"><strong>It  has only a trace of matter (much smaller than an atom in modern science.)</strong></span></p>
+<ul style="text-align: justify">
+<li>However, it has all five aggregates of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>. <strong>Of course, the "<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>" is unbelievable small, but the "four mental aggregates are the same as those experienced by a living person with a physical body.</strong></li>
+<li>That "mental body" or "<em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>" is the same as <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>! However, after the initial formation, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> can "solidify" somewhat by "taking in scents or aroma." Hence the name "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" ("<em>gandha</em>" + "<em>abba</em>" or "taking in scents.")</li>
+<li>For details on <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>, see, "<a href="../../pages/LD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Mental Body – Gandhabba</a>."</li>
+</ul>
+<h5 style="text-align: justify">It is <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> That Sets Up Energy for a New Existence (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>)</h5>
+<p style="text-align: justify">5. There are no "<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>" in PS steps up to "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>." As we have discussed, a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> that arises via "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" is a type of "<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>" because it has "energy." As Einstein showed with his famous equation, E = mc^2, energy is also a manifestation of matter. Again, see "<a href="../../pages/DS.FF.009/index.html" rel="noopener noreferrer" target="_blank">Dhammā, Kamma, Saṅkhāra, Mind – Critical Connections</a>."</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff"><strong>Then at the next step, there is "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>." That is where a conventional "<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>" becomes "live." </strong></span>That is precisely what happens when a "<em><span>patisandhi <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> descends to a womb" and makes an inert zygote become alive! That occurs at the "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>" step in <em>Uppatti</em> PS.</li>
+<li><span>The <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>" explains how a "<em><span>patisandhi <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" leads to the creation of a "new human body."</li>
+<li>Sexual intercourse only creates the "material basis" for a new life. An egg (from the mother) combines with sperm (from the father) to form a single cell, a zygote. <strong><span style="color: #ff0000">That zygote is inert (a <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>),</span></strong> just like the egg and the sperm. An existing <span style="color: #ff0000"><strong>"mental body" or a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> </span></em>with energy)</strong></span> needs to merge with that zygote to form the <span style="color: #ff0000"><strong><em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>or the fetus (with mind and body).</strong></span></li>
+<li>Sexual intercourse is not necessary to form the zygote or the "material base" for a new "physical body." A zygote can be created in a laboratory, but still requires eggs from the mother; see, "<a href="../../pages/DS.BB.007/index.html" rel="noopener noreferrer" target="_blank">Cloning and Gandhabba</a>."</li>
+</ul>
+<h5 style="text-align: justify">"<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="salāyatana">Salāyatana</span></span></em>" in <em><span>Uppatti <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify">6. That "live person" or the fetus will grow for nine months to complete the formation of all six sensory faculties. That is the "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span></span></em>" step in <em>uppatti</em> PS. As we know, "<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span></span></em>" represents the "six sensory faculties" of a living being with a "body and mind."</p>
+<ul style="text-align: justify">
+<li>Therefore, the transition starts with the step "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>," Then, it goes through the "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>" step, before finalizing the formation of a "human with six sensory faculties" at the "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span></span></em>" step.</li>
+<li>However, it is essential to understand that a "<em><span>patisandhi <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em><span>" leading to a <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> must have been cultivated previously. Such a </span><em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> "builds up" over MANY "<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Idappaccayātā Paṭicca Samuppāda</a>" cycles that take place DURING a life or even over many lives.</li>
+</ul>
+<h5 style="text-align: justify">Example of an Alcoholic Making an "Animal <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>"</h5>
+<p style="text-align: justify">7. Let us consider an example to illustrate how one cultivates a <em><span>patisandhi <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> suitable for an animal over time. Let us consider an alcoholic/drug addict. I am not talking about a person who takes an occasional drink. Instead, this person has an addiction to alcohol or drugs.</p>
+<ul style="text-align: justify">
+<li><span>As we have discussed in recent <span class="pali-term term-highlight" data-term="posts">posts</span> on the </span><em><span>Chachakka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 148), one starts thinking about a certain <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em> (in this case, drinking) when thought about that <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em> comes to mind as a <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>. In this particular case, it could be seeing an alcohol bottle, hearing about an upcoming party, or just habitually remembering that "it is time to have a drink."</li>
+<li><span>As explained in those <span class="pali-term term-highlight" data-term="posts">posts</span>, one's mind quickly gets to "</span><em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>" (or "getting stuck" in that <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em>.) Thus, a PS process would start at the "<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>" step. See, "<a href="../../pages/DS.FF.008/index.html" rel="noopener noreferrer" target="_blank">Icchā (Cravings) Lead to Upādāna and to Eventual Suffering</a>."</li>
+<li>That is when one starts THINKING about that<em><span> <span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em> that came to the mind. That is the "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" step of a new PS cycle.</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></em> in "<em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>" Are Just "Visuals"</h5>
+<p style="text-align: justify">8. Suppose the alcoholic/drug addict in our example is sitting at his desk at work. Due to his habit, an upcoming party may come to his mind via “<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃ.</span></em>“</p>
+<ul style="text-align: justify">
+<li>Of course, he will be instantly "stuck in that <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span>,</span></em>" and the "<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>" step in PS gets him started on "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>." Thus, he starts thinking about the experience that he is going to have in the upcoming party. Those are <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</li>
+<li>That leads to the arising of a <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (anticipation or the expectation of the possible enjoyments) via "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>." <span style="color: #0000ff"><strong>The<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in his thoughts start creating energy for that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>.</strong></span></li>
+<li>That involves visualizing "party scenes" at the upcoming party and also his past experiences in similar situations. He will imagine the friends who will be there, what kind of alcohol, food, and other types of entertainment will be there. <span style="color: #0000ff"><strong>These are all "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>" or visuals that arise in his mind. </strong></span>These <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>are very much like what we experience in a dream, just visuals.</li>
+</ul>
+<h5 style="text-align: justify">Some of those <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></em> Cultivated Could be Compatible with Animal Mindsets</h5>
+<p style="text-align: justify">9. Some of those v<em>iññāṇa</em> and <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> cultivated by the alcoholic/drug addict in our example could be compatible with those of animals. That is a critical point.</p>
+<ul style="text-align: justify">
+<li>During some of these parties, alcohol or drug usage could get to extreme levels. Some people may pass out and could be unable to walk. They will be dragging themselves on the floor like animals.</li>
+<li>Some may be engaging in sexual misconduct. Such bodily actions are more potent than such cultivating <em>vaci</em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. However, in most cases, it is the cultivation of <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (thinking about such activities with <em><span><span class="pali-term term-highlight" data-term="vitakka">vitakka</span>/<span class="pali-term term-highlight" data-term="vicāra">vicāra</span></span></em>) that lead to bodily actions.</li>
+<li>Both kinds of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>lead to the growth of <em><span>patisandhi <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> </span></em>suitable to bring about an animal birth in the future (in an <em>Uppatti</em> PS process.)</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></em> In "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> <span class="pali-term term-highlight" data-term="paccaya">Paccaya</span> <span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></em>" Are Two Kinds</h5>
+<p style="text-align: justify">10. It is critical to note that the "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>" discussed in #8 are different from those in #5.</p>
+<ul style="text-align: justify">
+<li>The <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> in #8 helps build that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> via the backward step, "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>." When the alcoholic is making those 'visualizations," he is cultivating that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>. Thus, each is helping grow the other. That often happens in "<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Idappaccayātā Paṭicca Samuppāda</a>" cycles.</li>
+<li>For example, Ven. Sariputta in the "<span class="var" id="note111"><a href="https://suttacentral.net/sn12.67/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Naḷa­kalāpī <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 12.67)</a>": </span>"<em><span>Seyyathāpi, āvuso, dve naḷakalāpiyo aññamaññaṃ nissāya tiṭṭheyyuṃ. Evameva kho, āvuso, nāmarū­pa <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇaṃ">viññāṇaṃ</span>; <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpaṃ">nāmarūpaṃ</span></span></em>;.." OR "Just as two sheaves of reeds might stand leaning against each other, so too, with <em>nāmarū­pa</em> as condition, <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> <span class="add" title="Text added by the editor or translator for clarification.">comes to be.</span> With <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> as condition, <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> <span class="add" title="Text added by the editor or translator for clarification.">comes to be.."</span></li>
+<li><span style="color: #0000ff"><strong>On the other hand, the "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>" step happens only once in <em>uppatti</em> PS cycles.</strong></span> That involves a special "<em><span>patisandhi <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.) When that <em><span>patisandhi <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) descends to the womb, it merges with the zygote and creates a new "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em><span>" or a "live fetus." See, #5 above and the <span class="pali-term term-highlight" data-term="posts">posts</span> referred to there, "</span><a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>" and "<a href="../../pages/DS.BB.007/index.html" rel="noopener noreferrer" target="_blank">Cloning and Gandhabba</a>."</li>
+</ul>
+<h5 style="text-align: justify"><span>It Is Important to Review Related/Past <span class="pali-term term-highlight" data-term="posts">Posts</span> Often</span></h5>
+<p style="text-align: justify">11. Another thing to remember is that even a given PS cycle does not proceed in just one direction. All those steps, as with many others in PS, go backward too.  For example, "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" steps may go back and forth strengthening each other in many cases (see #8, #9 above.)</p>
+<ul>
+<li style="text-align: justify"><span>I have explained this in several previous <span class="pali-term term-highlight" data-term="posts">posts</span> in this series: "</span><a href="../../pages/DS.FF.001/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – Not ‘Self’ or ‘No-Self’</a>" A vital case discussed in "<a href="../../pages/DS.FF.006/index.html" rel="noopener noreferrer" target="_blank">Tanhā Paccayā Upādāna – Critical Step in Paṭicca Samuppāda</a>."</li>
+<li style="text-align: justify"><span>There is a lot to grasp in this <span class="pali-term term-highlight" data-term="post">post</span>. Please make sure to read the related <span class="pali-term term-highlight" data-term="posts">posts</span> mentioned above, so that these concepts are well-understood.</span></li>
+<li style="text-align: justify"><span>It is critical to have a good idea about these concepts to see how one makes one's future rebirths. Furthermore, the type of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> CORRESPONDS to the kind of </span><em>abhi</em>(<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) cultivated with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em>"</li>
+<li style="text-align: justify">That is how "mind to matter" transitions take place. <span style="color: #0000ff"><strong><span>And this is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that the mind is at the forefront.</span></strong></span></li>
+<li><span>All relevant <span class="pali-term term-highlight" data-term="posts">posts</span> at, "</span><a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origin of Life</a>."</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/DS.FF.009/index.html">Dhamma Kamma Sankhara Mind Critical Connections</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/DS.HH.002/index.html">Ghost 1990 Movie Good Depiction Of Gandhabba Concept</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/DS.FF.009/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Dhamma Kamma Sankhara Mind Critical Connections</span>
+        
+        <span class="pathway-title title-pt">Dhamma Kamma Sankhara Mind Critical Connections</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/DS.HH.002/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Ghost 1990 Movie Good Depiction Of Gandhabba Concept</span>
+        
+        <span class="pathway-title title-pt">Ghost 1990 Movie Good Depiction Of Gandhabba Concept</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-DS">
+        ↑ Back to Dhamma and Science
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

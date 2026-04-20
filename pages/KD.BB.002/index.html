@@ -1,0 +1,450 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Buddha Dhamma Noble Truths Paticca Samuppada Tilakkhana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 3 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.BB.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Buddha Dhamma Noble Truths Paticca Samuppada Tilakkhana</h1>
+    
+    <h1 class="title-pt">Buddha Dhamma, Nobres Verdades, Paticca Samuppada, Tilakkhaṇa</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.BB.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.BB.002"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0068"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.BB.002</td></tr><tr><td>Fin-dex</td><td>0068</td></tr><tr><td>Slug</td><td>buddha-dhamma-noble-truths-paticca-samuppada-tilakkhana</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Buddha Dhamma Noble Truths Paticca Samuppada Tilakkhana</td></tr></table></div></div><p style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is </span><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em> The Four Noble Truths state that suffering is associated with all existences in the world, and <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (dissociating from the world) is the way to stop suffering.<em><span> <span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> describes the undesirable characteristics of the world.</span></p>
+<p style="text-align: justify;"><strong>July 2, 2021; <span style="color: #3366ff;"><span style="color: #000000;">revised March 24, 2022;</span> December 23, 2022</span></strong></p>
+<h5 style="text-align: justify;">Noble Truths, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> - Interrelated</h5>
+<p style="text-align: justify;"><span>1. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is about eliminating suffering associated with the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Before following the Noble Eightfold Path, one must understand the </span><span style="color: #3366ff;"><strong>First Noble Truth</strong></span>. The First Noble Truth says that EACH AND EVERY birth <em><span>(<span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em><span>) in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process only perpetuates </span><em>saṁsāric</em><span> suffering, i.e., unimaginable suffering associated with the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></p>
+<ul style="text-align: justify;">
+<li>That critical step of "seeing AND fully comprehending" the First Noble Truth REQUIRES the following steps:</li>
+</ul>
+<ol style="list-style-type: lower-alpha; text-align: justify;">
+<li>"worldly things" are unsatisfactory, meaning we will NEVER be able to keep worldly things to our satisfaction IN THE LONG RUN.</li>
+<li>All our efforts to pursue such 'lasting happiness" only lead to more suffering.</li>
+<li>Therefore, all such efforts are in vain; they are unfruitful.</li>
+</ol>
+<p style="text-align: justify;">Those three characteristics of our world of 31 realms are summarized as <span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em></strong></span>: <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></strong></span> describes how we create our future births among the 31 realms. Moral actions (<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) lead to "good births," and immoral actions (<em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) lead to "bad births" in the <em>apāyās</em>. See "<a href="../../pages/PS.BB.009/index.html" rel="noopener" target="_blank">Six Root Causes – Loka Samudaya (Arising of Suffering) and Loka Nirodhaya (Nibbāna)</a>"</li>
+<li><span>Just living a "moral life" is not enough to stop suffering. It is necessary to realize that we MUST see the dangers in remaining in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. That means we must see that our tendency to value and crave "mind-pleasing things" in this world keeps us trapped in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+</ul>
+<h5 style="text-align: justify;">Need to"See" <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> Before Following the Path to Attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></h5>
+<p style="text-align: justify;"><span>2. When one comprehends the dangers of remaining in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (i.e., the First Noble Truth) by grasping the concepts of </span><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> and <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em><span>one would also "see" how to stop the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process and be completely free of suffering, i.e., one would comprehend the other three Noble Truths as well. It is ONLY THEN one can follow the Noble Eightfold Path and attain </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, i.e., <em>Arahanthood</em>.</span></p>
+<ul style="text-align: justify;">
+<li>Therefore, there are two major steps. The first is to "see" this new worldview and become a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span>/ <span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em>. With this step, one will be free of future births in the <em>apāyās</em> (where suffering is worst). This step is "<span style="color: #993366;"><strong><em>dassanena pahātabbā</em></strong></span>" or "<strong>remove defilements with clear vision</strong>."</li>
+<li>Once one understands the broad picture, one will realize how to Follow the Noble Eightfold Path (the Fourth Noble Truth.) That path is covered in three more steps <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi</span></em>, and <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. <strong>That removes the remaining defilements via <em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> (loosely translated as meditation.)</strong> This second step is "<span style="color: #993366;"><strong><em>bhāvanāya pahātabbā</em></strong>.</span>"</li>
+<li>Those two categories are discussed in the "<a href="https://suttacentral.net/mn2/pli/ms" rel="noopener" target="_blank"><em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 2)</a>."</li>
+</ul>
+<h5 style="text-align: justify;">The First Noble Truth</h5>
+<p style="text-align: justify;"><span>3. The foundation of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> was laid out in the first discourse of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, “</span><a href="https://suttacentral.net/sn56.11/en/sujato" rel="noopener" target="_blank"><em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(SN 56.11)</a>“ The First Noble Truth stated there succinctly:</p>
+<p style="text-align: justify;"><em class="text-italics"><span>“Idam kho pana, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> <span class="pali-term term-highlight" data-term="ariya">ariya</span> saccam:</span></em></p>
+<p style="text-align: justify;"><em><strong class="text-strong"><span>jātipi <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, jarāpi <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, byādhipi dukkho, maraṇampi dukkhāṃ</span></strong>, appiyehi sampayogo dukkho, piyehi vippayogo dukkho, <strong class="text-strong">yampicchaṃ na labhati tampi dukkhāṃ</strong>—<span style="color: #3366ff;"><strong><span>saṃkhittena pañcu­pādā­nak­khan­dhā <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span></span></strong></span></em>.”</p>
+<p style="text-align: justify;"><strong class="text-strong">Translated:</strong> <em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, What is the Noble Truth of Suffering?</p>
+<p style="text-align: justify;">“<strong class="text-strong">Birth is suffering, getting old is suffering, getting sick is suffering, dying is suffering.</strong> Having to associate with things one does not like is suffering, and so is separation from those one likes.<strong class="text-strong"> If one does not get what one likes, that is suffering</strong> – <span style="color: #3366ff;"><strong>in brief, the origin of suffering is the craving (<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>) for the five aggregates of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, viññāna</span></em> (<em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em></strong></span>).</p>
+<ul style="text-align: justify;">
+<li>As discussed, <span style="color: #0000ff;"><strong><em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></span> </em></strong><span style="color: #000000;">means "the world of 31 realms." Thus the origin of <em>saṁsāric</em> suffering is craving (and attachment to) this world.</span></span></li>
+<li><span>This is the "deep <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said is difficult for most people to understand!</span></li>
+</ul>
+<h5 style="text-align: justify;">Connection to <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em></h5>
+<p style="text-align: justify;"><span>4. Why did the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> say that we should not crave any </span><em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> or any mental aggregate (<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em><span>)? This is what we will be discussing over several <span class="pali-term term-highlight" data-term="posts">posts</span> initially.</span></p>
+<ul style="text-align: justify;">
+<li>One of the remaining original Commentaries, <em>Paṭisambhidāmagga, </em>explains this. It starts with the following succinct verse in Section “<span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/ps3.1/pli/ms" rel="noopener" target="_blank">3.1. Mahāpaññākathā:</a>” </span></span></span></li>
+</ul>
+<p style="text-align: justify;">“<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>Rūpaṁ atītānāgatapaccuppannaṁ</strong> <span style="color: #993366;"><strong><span>aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span> dukkhaṁ bhayaṭṭhena anattā asārakaṭṭhenāti</span></strong></span><span> tulayitvā tīrayitvā vibhāvayitvā vibhūtaṁ katvā rūpanirodhe <span class="pali-term term-highlight" data-term="nibbāne">nibbāne</span> khippaṁ javatīti—javanapaññā. </span></span></span></span><span class="segment" id="ps3.1:36.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> …pe… </span></span></span></span><span class="segment" id="ps3.1:36.3"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> … </span></span></span></span><span class="segment" id="ps3.1:36.4"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> … </span></span></span></span><span class="segment" id="ps3.1:36.5"><span class="root"><span class="text">viññāṇaṁ … </span></span></span><span class="segment" id="ps3.1:36.6"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> …pe… </span></span></span></span></em><span class="segment" id="ps3.1:36.7"><span class="root"><span class="text"><em><span>jarāmaraṇaṁ atītānāgatapaccuppannaṁ aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span> dukkhaṁ bhayaṭṭhena anattā asārakaṭṭhenāti tulayitvā tīrayitvā vibhāvayitvā vibhūtaṁ katvā jarāmaraṇanirodhe <span class="pali-term term-highlight" data-term="nibbāne">nibbāne</span> khippaṁ javatīti—javanapaññā</span></em>.”</span></span></span></p>
+<p style="text-align: justify;"><strong>Translation:</strong> "Any <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> that ever existed, will exist in the future, or that is being experienced now has the following three characteristics: <strong>Any such <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> is of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature because one's hopes for enjoying <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> will only lead to one's demise</strong> ("<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span style="color: #993366;"><span>aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span></span></span>."</strong></span></span></span></em>) <strong>It will eventually lead to sufferings that one should be afraid of</strong> ("<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span style="color: #993366;">dukkhaṁ bhayaṭṭhena</span>."</strong></span></span></span></em>) <strong><span>Therefore, such cravings are unfruitful and will make one helpless in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process</span></strong> ("<span style="color: #993366;"><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>anattā asārakaṭṭhenāti."</strong></span></span></span></em></span>)</p>
+<ul style="text-align: justify;">
+<li>(Note that "<strong><em><span><span class="pali-term term-highlight" data-term="khaya">khaya</span></span></em></strong><span>" is commonly translated as "destruction." It is the "destruction of moral values" in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, especially in the</span><em> lokottara</em> sense.)</li>
+<li>Then the verse is repeated for <em><span class="segment" id="ps3.1:36.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></span></span></span><span class="segment" id="ps3.1:36.3"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span></span></span><span class="segment" id="ps3.1:36.4"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span></span></span><span class="segment" id="ps3.1:36.5"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> </span></span></span></span></em><span class="segment" id="ps3.1:36.5"><span class="root"><span class="text">(i.e., that statement holds for the five aggregates. As we have discussed, the five aggregates encompass "the whole world."</span></span></span></li>
+<li>Then it is repeated for <i><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span>, sota, ghāna, jivhā, <span class="pali-term term-highlight" data-term="kāya">kāya</span>, <span class="pali-term term-highlight" data-term="mano">mano</span>, </span></i>and the six types of<i><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></i>(<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span>, sadda, gandha, rasa, phoṭṭhabba, <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>) we experience using them. These are the 12 <em>ayatanā</em> that also encompass the "whole world."</li>
+<li>Finally, it is repeated for the 11 terms in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>, namarupa, salayatana, <span class="pali-term term-highlight" data-term="samphassa">samphassa</span>, <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>, <span class="pali-term term-highlight" data-term="upādāna">upādāna</span>, <span class="pali-term term-highlight" data-term="bhava">bhava</span>, <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>.) These 11 terms also define our world.</li>
+<li>Therefore, those three characteristics are associated with ANYTHING to do with this world of 31 realms.</li>
+</ul>
+<p style="text-align: justify;">5. The same summary is stated differently in another section of <em>Paṭisambhidāmagga</em>. Section “<span class="segment" id="ps1.1:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/ps1.1/pli/ms" rel="noopener" target="_blank">1.1. Ñāṇakathā</a>” <em> </em>has the following verse:</span></span></span></p>
+<p style="text-align: justify;"><em><span class="segment" id="ps1.1:178.1"><span class="root"><span class="text"><strong>Kathaṁ “<span style="color: #3366ff;"><span>sabbe <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> <span class="pali-term term-highlight" data-term="aniccā">aniccā</span>, sabbe <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā</span></span><span>”ti sotāvadhānaṁ, taṁpajānanā <span class="pali-term term-highlight" data-term="paññā">paññā</span> sutamaye ñāṇaṁ?</span></strong> </span></span></span><span class="segment" id="ps1.1:178.2"><span class="root"><span class="text">“<strong><span style="color: #3366ff;"><span>Rūpaṁ aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>, dukkhaṁ bhayaṭṭhena, anattā asārakaṭṭhenā</span></span>”</strong><span>ti sotāvadhānaṁ, taṁpajānanā <span class="pali-term term-highlight" data-term="paññā">paññā</span> sutamaye ñāṇaṁ. </span></span></span></span><span class="segment" id="ps1.1:178.3"><span class="root"><span class="text"><span>“<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> … </span></span></span></span><span class="segment" id="ps1.1:178.4"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> … </span></span></span></span><span class="segment" id="ps1.1:178.5"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> … </span></span></span></span><span class="segment" id="ps1.1:178.6"><span class="root"><span class="text">viññāṇaṁ … </span></span></span><span class="segment" id="ps1.1:178.7"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> …pe… </span></span></span></span><span class="segment" id="ps1.1:178.8"><span class="root"><span class="text"><span>jarāmaraṇaṁ aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>, dukkhaṁ bhayaṭṭhena, anattā asārakaṭṭhenā”ti sotāvadhānaṁ, taṁpajānanā <span class="pali-term term-highlight" data-term="paññā">paññā</span> sutamaye ñāṇaṁ. </span></span></span></span><span class="segment" id="ps1.1:178.9"><span class="root"><span class="text"><span>Taṁ ñātaṭṭhena ñāṇaṁ, pajānanaṭṭhena <span class="pali-term term-highlight" data-term="paññā">paññā</span>. </span></span></span></span><span class="segment" id="ps1.1:178.10"><span class="root"><span class="text">Tena vuccati—</span></span></span><span class="segment" id="ps1.1:178.11"><span class="root"><span class="text"><span>“sabbe <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> <span class="pali-term term-highlight" data-term="aniccā">aniccā</span>, sabbe <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā”ti sotāvadhānaṁ, taṁpajānanā <span class="pali-term term-highlight" data-term="paññā">paññā</span> sutamaye ñāṇaṁ.</span></span></span></span></em></p>
+<ul style="text-align: justify;">
+<li><span>It says the same little bit differently. We will also discuss this in future <span class="pali-term term-highlight" data-term="posts">posts</span>. All these are interrelated and self-consistent.</span></li>
+</ul>
+<h5 style="text-align: justify;">Connection to <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify;">6. It says that our tendency to value and thus <strong>have <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em> for the five aggregates</strong> (i.e., <span style="color: #0000ff;"><em>pancupādānakkhandha</em><span style="color: #000000;">) leads to various types of <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em><span>. All <span class="pali-term term-highlight" data-term="jāti">jāti</span>, WITHOUT EXCEPTION, end up in old age, decay, and death.</span></span></span></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> describes the mechanism by which that takes place, i.e., starting with “<em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></strong></span>" </em>that cycle ALWAYS ends up with "<em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span>, <span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="marana">marana</span>, soka-paridēva-<span class="pali-term term-highlight" data-term="dukkha">dukkha</span>-dōmanassupāyasā sambhavan’ti.</span></strong></span>”</em></li>
+<li>To expand that a bit more: Average humans (<em>pothujjana</em>) who have not comprehended the Noble Truths (and thus have <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) engage in deeds that lead to future <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em><span>, perpetuating/lengthening the suffering-filled <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="mano">Mano</span>, vaci</span></em>, and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (<em>abhi</em>)<span style="color: #000000;"><em><span class="segment" id="ps1.1:178.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></span></span></span></em></span> generated with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> lead to such <em>pāpa</em>/<em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em>. A strong attachment to a worldly entity induces most <em><span>apāyagāmi pāpa <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>. Many of them are done on impulse, without thinking about the consequences of such actions. <strong>The whole idea of engaging in <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> is to train the mind to be not impulsive. One gets there gradually by regularly contemplating the consequences of actions. </strong></li>
+<li>It is necessary to understand what is meant by <span style="color: #000000;"><em><span class="segment" id="ps1.1:178.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>. </span></span></span></span></em><span class="segment"><span class="root"><span class="text">See "</span></span></span></span><a href="../../pages/KD.BB.006/index.html" rel="noopener" target="_blank">Saṅkhāra – What It Really Means</a>" and "<a href="../../pages/KD.BB.007/index.html" rel="noopener" target="_blank">Correct Meaning of Vacī Sankhāra</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Summary</h5>
+<p style="text-align: justify;"><span>7. It is a good idea to understand the key message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> before start reading deep <span class="pali-term term-highlight" data-term="suttas">suttas</span> and getting confused. In most discussion forums on <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>), people keep discussing the same questions they asked many years ago. The reason is the lack of clarity in basic concepts.</span></p>
+<ul style="text-align: justify;">
+<li>Some people question the validity of some <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> because those <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> don't fit into their narrative. Some people question the validity of <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> for the same reason and also because <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> is not easy to understand. However, the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> is fully self-consistent. I discussed these issues in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/HB.AA.007/index.html" rel="noopener" target="_blank">Preservation of the Buddha Dhamma</a>."</li>
+<li>This is why it is good to see how the three major concepts—Four Noble Truths, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>—relate to each other. They clarify and strengthen each other. <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> is not necessary to grasp those concepts, but it can help clarify "knotty issues."</li>
+</ul>
+<p style="text-align: justify;">8. The Four Noble Truths are discussed in many <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>, but many critical <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> are in the "<a href="https://suttacentral.net/pitaka/sutta/linked/sn/sn-mahavaggasamyutta/sn56" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="sacca">Sacca</span> Saṁyutta</span></em> (SN 56)</a>", where there are 131 <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>. The latter part of that section is devoted to many analogies on the high rate of rebirths in <em>apāyās</em>. See "<a href="../../pages/PS.II.002/index.html" rel="noopener" target="_blank">Introduction – What is Suffering?</a>"</p>
+<ul>
+<li style="text-align: justify;">There are about 250 <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> concentrated in the "<a href="https://suttacentral.net/pitaka/sutta/linked/sn/sn-salayatanavaggasamyutta/sn35/sn35-pathamapannasaka" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> Saṁyutta</span></em> (SN 35)</a>" on <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.)</li>
+<li style="text-align: justify;">The "<a href="https://suttacentral.net/pitaka/sutta/linked/sn/sn-nidanavaggasamyutta/sn12" rel="noopener" target="_blank"><em>Nidāna Saṁyutta</em> (SN 12)</a>" has about 90 <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> related to <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em>However, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>is analyzed in great detail only in the "</span><span class="segment" id="vb6:0.2"><span class="root"><span class="text"><a href="https://suttacentral.net/vb6/pli/ms" rel="noopener" target="_blank"><em>Paṭiccasamuppāda Vibhaṅga</em></a>" in the <em>Vibhaṅgapakaraṇa </em>of the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Pi</span><span style="color: #000000;">ṭ</span>aka</em>.</span></span></span></li>
+<li style="text-align: justify;">Of course, many other vital <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> and sections spread over the whole <em>Tipi<span style="color: #000000;">ṭaka</span></em><span style="color: #000000;"><span> on all three topics because they are the essence of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. For example, "</span></span><span class="segment"><span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/dn15/pli/ms" rel="noopener" target="_blank"><em><span>Mahānidāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 15)</a>" is a key <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> on <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em><span>A new series of <span class="pali-term term-highlight" data-term="posts">posts</span> based on that at "</span></span></span></span></span></span><a href="../../pages/ER.CC.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda During a Lifetime</a>."</li>
+</ul>
+<div> </div>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.BB.002"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0068"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.BB.002
+Language:     pt-BR
+Generated-At: 2026-04-18T04:02:36Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é </span><span style="color: #000000;"><em><span>o <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em> As Quatro Nobres Verdades afirmam que o sofrimento está associado a todas as formas de existência no mundo, e que <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (a dissociação do mundo) é o caminho para pôr fim ao sofrimento.<em> O Tilakkhaṇa</em> descreve as características indesejáveis do mundo.</span></p>
+<p style="text-align: justify;"><strong>2 de julho de 2021; <span style="color: #3366ff;"><span style="color: #000000;">revisado em 24 de março de 2022;</span> 23 de dezembro de 2022</span></strong></p>
+<h5 style="text-align: justify;">Verdades Nobres, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, <em>Tilakkhaṇa</em> - Inter-relacionados</h5>
+<p style="text-align: justify;"><span>1. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> trata da eliminação do sofrimento associado ao processo de Renascimento. Antes de seguir o Nobre Caminho Óctuplo, é preciso compreender a </span><span style="color: #3366ff;"><strong>Primeira Nobre Verdade</strong></span>. A Primeira Nobre Verdade afirma que CADA UM E TODOS os nascimentos <em><span>(<span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) no processo de Renascimento apenas perpetuam o sofrimento <em>saṁsárico</em>, ou seja, o sofrimento inimaginável associado ao processo de Renascimento.</p>
+<ul style="text-align: justify;">
+<li>Esse passo crítico de “ver E compreender plenamente” a Primeira Nobre Verdade EXIGE os seguintes passos:</li>
+</ul>
+<ol style="list-style-type: lower-alpha; text-align: justify;">
+<li>“as coisas mundanas” são insatisfatórias, o que significa que NUNCA seremos capazes de manter as coisas mundanas a nosso contento A LONGO PRAZO.</li>
+<li>Todos os nossos esforços para buscar essa “felicidade duradoura” só levam a mais sofrimento.</li>
+<li>Portanto, todos esses esforços são em vão; são infrutíferos.</li>
+</ol>
+<p style="text-align: justify;">Essas três características do nosso mundo de 31 reinos são resumidas como <span style="color: #3366ff;"><strong><em>Tilakkhaṇa</em></strong></span>: <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></strong></span> descreve como criamos nossos renascimentos futuros entre os 31 reinos. Ações morais (<em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>) levam a “bons renascimentos”, e ações imorais (<em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>) levam a “maus renascimentos” nos <em>apāyās</em>. Veja “<a href="../../pages/PS.BB.009/index.html" rel="noopener" target="_blank">Seis Causas Fundamentais – Loka Samudaya (Surgimento do Sofrimento) e Loka Nirodhaya (Nibbāna)</a>”</li>
+<li>Apenas viver uma “vida moral” não é suficiente para acabar com o sofrimento. É necessário perceber que devemos ver os perigos de permanecer no processo de Renascimento. Isso significa que devemos perceber que nossa tendência de valorizar e desejar “coisas que agradam à mente” neste mundo nos mantém presos no processo de Renascimento.</li>
+</ul>
+<h5 style="text-align: justify;">A necessidade de “ver” <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> antes de seguir o Caminho para alcançar <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></h5>
+<p style="text-align: justify;">2. Quando alguém compreende os perigos de permanecer no processo de renascimento (ou seja, a Primeira Nobre Verdade) ao compreender os conceitos de <em>Tilakkhaṇa</em> e <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em>também “verá” como interromper o processo de renascimento e se libertar completamente do sofrimento, ou seja, compreenderá as outras três Nobres Verdades também. É SOMENTE ENTÃO que se pode seguir o Nobre Caminho Óctuplo e alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, ou seja, <em><span>a condição de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</span></p>
+<ul style="text-align: justify;">
+<li>Portanto, há duas etapas principais. A primeira é “ver” essa nova visão de mundo e tornar-se um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>/<span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em>. Com essa etapa, a pessoa estará livre de renascimentos futuros nos <em>apāyās</em> (onde o sofrimento é pior). Essa etapa é “<span style="color: #993366;"><strong><em>dassanena pahātabbā</em></strong></span>” ou “<strong>remover as impurezas com visão clara</strong>”.</li>
+<li>Uma vez que se compreenda o panorama geral, perceber-se-á como seguir o Nobre Caminho Óctuplo (a Quarta Nobre Verdade). Esse caminho é abordado em mais três etapas: <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi</span></em> e <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. <strong>Isso remove as impurezas remanescentes por meio de <em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> (traduzido livremente como meditação).</strong> Esta segunda etapa é “<span style="color: #993366;"><strong><em>bhāvanāya pahātabbā</em></strong>”.</span></li>
+<li>Essas duas categorias são discutidas no “<a href="https://suttacentral.net/mn2/pli/ms" rel="noopener" target="_blank"><em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 2)</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">A Primeira Nobre Verdade</h5>
+<p style="text-align: justify;"><span>3. Os fundamentos do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> foram estabelecidos no primeiro discurso do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, “</span><a href="https://suttacentral.net/sn56.11/en/sujato" rel="noopener" target="_blank"><em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(SN 56.11)</a>”. A Primeira Nobre Verdade é enunciada ali de forma sucinta:</p>
+<p style="text-align: justify;"><em class="text-italics"><span>“Idam kho pana, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span> saccam:</span></em></p>
+<p style="text-align: justify;"><em><strong class="text-strong"><span>o nascimento é <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, o envelhecimento é <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, a doença é <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, maraṇampi dukkhāṃ</span></strong>, appiyehi sampayogo dukkho, piyehi vippayogo dukkho, <strong class="text-strong">yampicchaṃ na labhati tampi </strong><span style="color: #3366ff;"><strong><span>dukkhāṃ—saṃkhittena pañcu­pādā­nak­khan­dhā <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span></span></strong></span></em>.”</p>
+<p style="text-align: justify;"><strong class="text-strong">Traduzido:</strong> <em>Bhikkhūs</em>, O que é a Nobre Verdade do Sofrimento?</p>
+<p style="text-align: justify;">“<strong class="text-strong">Nascer é sofrimento, envelhecer é sofrimento, adoecer é sofrimento, morrer é sofrimento.</strong> Ter de conviver com coisas de que não se gosta é sofrimento, assim como a separação daqueles de quem se gosta.<strong class="text-strong"> Se não se obtém o que se gosta, isso é sofrimento</strong> – <span style="color: #3366ff;"><strong>em resumo, a origem do sofrimento é o desejo (<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>) pelos cinco agregados de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, Viññāna</span></em> (<em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em></strong></span>).</p>
+<ul style="text-align: justify;">
+<li>Conforme discutido, <span style="color: #0000ff;"><strong><em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></span> </em></strong><span style="color: #000000;">significa “o mundo dos 31 reinos”. Assim, a origem do sofrimento <em>samsárico</em> é o desejo (e o apego a) este mundo.</span></span></li>
+<li><span>Este é o “<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> profundo” que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse ser difícil de compreender para a maioria das pessoas!</span></li>
+</ul>
+<h5 style="text-align: justify;">Conexão com <em>Tilakkhaṇa</em></h5>
+<p style="text-align: justify;"><span>4. Por que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que não devemos desejar nenhum </span><em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> ou nenhum agregado mental (<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>)? É isso que discutiremos inicialmente em vários ensaios.</p>
+<ul style="text-align: justify;">
+<li>Um dos comentários originais remanescentes, o <em>Paṭisambhidāmagga, </em>explica isso. Ele começa com o seguinte verso sucinto na Seção “<span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/ps3.1/pli/ms" rel="noopener" target="_blank">3.1. Mahāpaññākathā:</a>” </span></span></span></li>
+</ul>
+<p style="text-align: justify;">“<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>Rūpaṁ atītānāgatapaccuppannaṁ</strong> <span style="color: #993366;"><strong><span>aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span> dukkhaṁ bhayaṭṭhena anattā asārakaṭṭhenāti</span></strong></span><span> tulayitvā tīrayitvā vibhāvayitvā vibhūtaṁ katvā rūpanirodhe <span class="pali-term term-highlight" data-term="nibbāne">nibbāne</span> khippaṁ javatīti—javanapaññā. </span></span></span></span><span class="segment" id="ps3.1:36.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> …pe… </span></span></span></span><span class="segment" id="ps3.1:36.3"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> … </span></span></span></span><span class="segment" id="ps3.1:36.4"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> … </span></span></span></span><span class="segment" id="ps3.1:36.5"><span class="root"><span class="text">viññāṇaṁ … </span></span></span><span class="segment" id="ps3.1:36.6"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> …pe… </span></span></span></span></em><span class="segment" id="ps3.1:36.7"><span class="root"><span class="text"><em><span>jarāmaraṇaṁ atītānāgatapaccuppannaṁ aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span> dukkhaṁ bhayaṭṭhena anattā asārakaṭṭhenāti tulayitvā tīrayitvā vibhāvayitvā vibhūtaṁ katvā jarāmaraṇanirodhe <span class="pali-term term-highlight" data-term="nibbāne">nibbāne</span> khippaṁ javatīti—javanapaññā</span></em>.”</span></span></span></p>
+<p style="text-align: justify;"><strong>Tradução:</strong> “Qualquer <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> que já existiu, que existirá no futuro ou que está sendo experimentada agora possui as seguintes três características: <strong>Qualquer <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> desse tipo é de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em></strong>, <strong>pois as esperanças de desfrutar <em><span>da <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> levarão apenas à própria morte</strong> (“<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span style="color: #993366;"><span><span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span></span></span>.”</strong></span></span></span></em>) <strong>Isso acabará por levar a sofrimentos dos quais se deve temer</strong> (<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>“<span style="color: #993366;">dukkhaṁ bhayaṭṭhena</span>.”</strong></span></span></span></em>)<strong>. Portanto, tais desejos são infrutíferos e tornarão a pessoa impotente no processo de Renascimento</strong> (<span style="color: #993366;"><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>“anattā asārakaṭṭhenāti.”</strong></span></span></span></em></span>).</p>
+<ul style="text-align: justify;">
+<li>(Observe que “<strong><em><span><span class="pali-term term-highlight" data-term="khaya">Khaya</span></span></em></strong><span>” é comumente traduzido como “destruição”. Trata-se da “destruição dos valores morais” no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, especialmente no sentido </span><em>lokottara</em>.)</li>
+<li>Em seguida, o versículo é repetido para <em><span class="segment" id="ps3.1:36.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, </span></span></span></span><span class="segment" id="ps3.1:36.3"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span>, </span></span></span></span><span class="segment" id="ps3.1:36.4"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span></span></span><span class="segment" id="ps3.1:36.5"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></span></span></span></em><span class="segment" id="ps3.1:36.5"><span class="root"><span class="text">(ou seja, essa afirmação se aplica aos cinco agregados. Como discutimos, os cinco agregados abrangem “o mundo inteiro”.</span></span></span></li>
+<li>Em seguida, é repetido para <i><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span>, sota, ghāna, jivhā, <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, <span class="pali-term term-highlight" data-term="mano">Mano</span></span></i> e os seis tipos de<i><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> </span></i>(<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, sadda, gandha, rasa, phoṭṭhabba, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em>) que experimentamos ao usá-los. Estes são os 12 <em>ayatanā</em> que também abrangem o “mundo inteiro”.</li>
+<li>Por fim, repete-se para os 11 termos em <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span>, namarupa, salayatana, <span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>, <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span>, <span class="pali-term term-highlight" data-term="upādāna">Upādāna</span>, <span class="pali-term term-highlight" data-term="bhava">Bhava</span>, <span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>). Esses 11 termos também definem nosso mundo.</li>
+<li>Portanto, essas três características estão associadas a TUDO que tem a ver com este mundo de 31 reinos.</li>
+</ul>
+<p style="text-align: justify;">5. O mesmo resumo é apresentado de forma diferente em outra seção do <em>Paṭisambhidāmagga</em>. A seção <span class="segment" id="ps1.1:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/ps1.1/pli/ms" rel="noopener" target="_blank">“1.1. Ñāṇakathā</a>” <em></em>contém o seguinte verso:</span></span></span></p>
+<p style="text-align: justify;"><em><span class="segment" id="ps1.1:178.1"><span class="root"><span class="text"><strong>Kathaṁ “<span style="color: #3366ff;"><span>sabbe <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> <span class="pali-term term-highlight" data-term="aniccā">aniccā</span>, sabbe <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span>, sabbe <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> anattā</span></span><span>”ti sotāvadhānaṁ, taṁpajānanā <span class="pali-term term-highlight" data-term="paññā">Paññā</span> sutamaye ñāṇaṁ?</span></strong> </span></span></span><span class="segment" id="ps1.1:178.2"><span class="root"><span class="text">“<strong><span style="color: #3366ff;"><span>Rūpaṁ aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>, dukkhaṁ bhayaṭṭhena, anattā asārakaṭṭhenā</span></span>”</strong><span>ti sotāvadhānaṁ, taṁpajānanā <span class="pali-term term-highlight" data-term="paññā">Paññā</span> sutamaye ñāṇaṁ. </span></span></span></span><span class="segment" id="ps1.1:178.3"><span class="root"><span class="text"><span>“<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> … </span></span></span></span><span class="segment" id="ps1.1:178.4"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> … </span></span></span></span><span class="segment" id="ps1.1:178.5"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> … </span></span></span></span><span class="segment" id="ps1.1:178.6"><span class="root"><span class="text">viññāṇaṁ … </span></span></span><span class="segment" id="ps1.1:178.7"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> …pe… </span></span></span></span><span class="segment" id="ps1.1:178.8"><span class="root"><span class="text"><span>jarāmaraṇaṁ aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>, dukkhaṁ bhayaṭṭhena, anattā asārakaṭṭhenā”ti sotāvadhānaṁ, taṁpajānanā <span class="pali-term term-highlight" data-term="paññā">Paññā</span> sutamaye ñāṇaṁ. </span></span></span></span><span class="segment" id="ps1.1:178.9"><span class="root"><span class="text"><span>Com base nesse conhecimento, o entendimento; com base no entendimento, a <span class="pali-term term-highlight" data-term="paññā">Paññā</span>. </span></span></span></span><span class="segment" id="ps1.1:178.10"><span class="root"><span class="text">Assim se diz: </span></span></span><span class="segment" id="ps1.1:178.11"><span class="root"><span class="text"><span>“Todos os fenômenos são impermanentes, todos os fenômenos são sofrimento, todos os <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> são sem-eu”, e com esse conhecimento, a <span class="pali-term term-highlight" data-term="paññā">Paññā</span> é o conhecimento (ñāṇa) que se obtém.</span></span></span></span></em></p>
+<ul style="text-align: justify;">
+<li>Diz a mesma coisa de uma maneira um pouco diferente. Também discutiremos isso em ensaios futuros. Tudo isso está inter-relacionado e é auto-consistente.</li>
+</ul>
+<h5 style="text-align: justify;">Conexão com <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify;">6. Diz que nossa tendência de valorizar e, portanto, <strong>ter <em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em> pelos cinco agregados</strong> (ou seja, <span style="color: #0000ff;"><em>pancupādānakkhandha</em><span style="color: #000000;">) leva a vários tipos de <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em><span>. Todos os <span class="pali-term term-highlight" data-term="jāti">Jāti</span>, SEM EXCEÇÃO, terminam em velhice, decadência e morte.</span></span></span></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> descreve o mecanismo pelo qual isso ocorre, ou seja, começando com “Av<em><span style="color: #993366;"><strong><span>ijjā <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></strong></span>”</em>, esse ciclo SEMPRE termina com “<em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">Bhava Paccayā Jāti</span>, <span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="jarā">Jarā</span>, <span class="pali-term term-highlight" data-term="maraṇa">Maraṇa</span>, soka-paridēva-<span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>-dōmanassupāyasā sambhavan’ti.</span></strong></span>”</em></li>
+<li>Para expandir um pouco mais: os seres humanos comuns (<em>pothujjana</em>) que não compreenderam as Nobres Verdades (e, portanto, têm <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>) se envolvem em ações que levam a futuros <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>, perpetuando/prolongando o processo de renascimento repleto de sofrimento.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="mano">Mano</span>, vaci</span></em> e <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (<em>abhi</em>)<span style="color: #000000;"><em><span class="segment" id="ps1.1:178.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></span></span></span></em></span> gerados com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> levam a tal <em>pāpa</em>/<em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em>. Um forte apego a uma entidade mundana induz a maioria dos <em><span>apāyagāmi pāpa <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>. Muitos deles são realizados por impulso, sem pensar nas consequências de tais ações. <strong>A ideia central de se dedicar ao <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> é treinar a mente para não ser impulsiva. Chega-se a isso gradualmente, contemplando regularmente as consequências das ações. </strong></li>
+<li>É necessário compreender o que se entende por <span style="color: #000000;"><em><span class="segment" id="ps1.1:178.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>. </span></span></span></span></em><span class="segment"><span class="root"><span class="text">Veja “</span></span></span></span><a href="../../pages/KD.BB.006/index.html" rel="noopener" target="_blank">Saṅkhāra – O que realmente significa</a>” e “<a href="../../pages/KD.BB.007/index.html" rel="noopener" target="_blank">Significado correto de Vacī Sankhāra</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Resumo</h5>
+<p style="text-align: justify;"><span>7. É uma boa ideia compreender a mensagem central do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> antes de começar a ler <span class="pali-term term-highlight" data-term="suttā">Suttā</span> profundas e ficar confuso. Na maioria dos fóruns de discussão sobre o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (Buddhismo), as pessoas continuam discutindo as mesmas questões que levantaram há muitos anos. A razão é a falta de clareza nos conceitos básicos.</span></p>
+<ul style="text-align: justify;">
+<li>Algumas pessoas questionam a validade de alguns <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> porque esses <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> não se encaixam em sua narrativa. Outras questionam a validade do <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> pela mesma razão e também porque <em><span>o <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> não é fácil de entender. No entanto, o <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> é totalmente coerente consigo mesmo. Discuti essas questões no ensaio “<a href="../../pages/HB.AA.007/index.html" rel="noopener" target="_blank">Preservação do Buddha Dhamma</a>”.</li>
+<li>É por isso que é bom ver como os três conceitos principais — as Quatro Nobres Verdades, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> e <em>Tilakkhaṇa</em> — se relacionam entre si. Eles se esclarecem e se fortalecem mutuamente. <em><span>O <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> não é necessário para compreender esses conceitos, mas pode ajudar a esclarecer “questões complexas”.</li>
+</ul>
+<p style="text-align: justify;">8. As Quatro Nobres Verdades são discutidas em muitos <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, mas muitos <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> essenciais estão no “<a href="https://suttacentral.net/pitaka/sutta/linked/sn/sn-mahavaggasamyutta/sn56" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="sacca">Sacca</span> Saṁyutta</span></em> (SN 56)</a>”, onde há 131 <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>. A parte final dessa seção é dedicada a muitas analogias sobre a alta taxa de renascimentos nos <em>apāyās</em>. Veja “<a href="../../pages/PS.II.002/index.html" rel="noopener" target="_blank">Introdução – O que é sofrimento?</a>”.</p>
+<ul>
+<li style="text-align: justify;">Há cerca de 250 <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> concentrados no “<a href="https://suttacentral.net/pitaka/sutta/linked/sn/sn-salayatanavaggasamyutta/sn35/sn35-pathamapannasaka" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> Saṁyutta</span></em> (SN 35)</a>” sobre <em>Tilakkhaṇa</em> (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>).</li>
+<li style="text-align: justify;">O “<a href="https://suttacentral.net/pitaka/sutta/linked/sn/sn-nidanavaggasamyutta/sn12" rel="noopener" target="_blank"><em>Nidāna Saṁyutta</em> (SN 12)</a>” tem cerca de 90 <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> relacionados a <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em>No entanto, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>é analisado em grande detalhe apenas no </span><span class="segment" id="vb6:0.2"><span class="root"><span class="text"><a href="https://suttacentral.net/vb6/pli/ms" rel="noopener" target="_blank"><em>“Paṭiccasamuppāda Vibhaṅga</em></a>”, no <em>Vibhaṅgapakaraṇa </em>do <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Pi</span><span style="color: #000000;">ṭ</span>aka</em>.</span></span></span></li>
+<li style="text-align: justify;">É claro que muitos outros <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> e seções essenciais estão espalhados por todo o <em>Tipi<span style="color: #000000;">ṭaka</span></em><span style="color: #000000;"> sobre os três tópicos</span>, <span style="color: #000000;"><span>pois são a essência do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Por exemplo, o “</span></span><span class="segment"><span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/dn15/pli/ms" rel="noopener" target="_blank"><em><span>Mahānidāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 15)</a>” é um <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> fundamental sobre <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em>Uma nova série de ensaios baseada nisso em “</span></span></span></span></span><a href="../../pages/ER.CC.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda Durante uma Vida</a>”.</li>
+</ul>
+<div> </div>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.BB.001/index.html">Basic Framework Of Buddha Dhamma</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.BB.003/index.html">Noble Truths Paticca Samuppada Tilakkhana Key Relationships</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.BB.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Basic Framework Of Buddha Dhamma</span>
+        
+        <span class="pathway-title title-pt">Estrutura básica do Buddha Dhamma</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.BB.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Noble Truths Paticca Samuppada Tilakkhana Key Relationships</span>
+        
+        <span class="pathway-title title-pt">As Nobres Verdades: Paticca Samuppada e Tilakkhaṇa – Relações Fundamentais</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

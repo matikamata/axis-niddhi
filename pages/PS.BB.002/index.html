@@ -1,0 +1,384 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Nibbana Ragakkhaya Dosakkhaya Mohakkhaya Part 1 | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 16 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.BB.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Nibbana Ragakkhaya Dosakkhaya Mohakkhaya Part 1</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.BB.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.BB.002"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0550"
+             data-level="advanced"
+             data-reading-time="9"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.BB.002</td></tr><tr><td>Fin-dex</td><td>0550</td></tr><tr><td>Slug</td><td>nibbana-ragakkhaya-dosakkhaya-mohakkhaya-part-1</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>Nibbana Ragakkhaya Dosakkhaya Mohakkhaya Part 1</td></tr></table></div></div><p><strong>February 19, 2021; <span style="color: #3366ff;">revised August 5, 2023</span></strong></p>
+<p><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is defined as "<em><span>rāgakkhayo dosakkhayo mohakkhayo—<span class="pali-term term-highlight" data-term="idaṃ">idaṃ</span> vuccati nibbānan'ti</span></em>"  OR "<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>is the ending of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>."</p>
+<h5>What Is <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>?</h5>
+<p style="text-align: justify;">1. The above verse explaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> appears in many <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span>.</span></em> The above quote is from "<a href="https://suttacentral.net/sn38.1/en/sujato" rel="noopener" target="_blank"><em><span>Nibbānapañhā <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 38.1)</a>."</p>
+<ul style="text-align: justify;">
+<li>There is a stronger version of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, i.e., <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em> (extreme greed.) Someone with a <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em> mindset CAN NOT comprehend the Four Noble Truths. That is why <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is defined as above.</li>
+<li>All future suffering arises due to <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, and <span class="pali-term term-highlight" data-term="moha">moha</span></span></em>. But until <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em> is reduced to the <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> level, one cannot comprehend the Noble Truths. See, "<a href="../../pages/KD.HH.005/index.html" rel="noopener" target="_blank">Lōbha, Dōsa, Mōha versus Rāga, Patigha, Avijjā</a>."</li>
+<li>Someone with a "moral mindset" which has removed the ten types of wrong views NORMALLY has reduced versions of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="patigha">patigha</span>, and <span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>. However, their mindsets can also be elevated to stronger <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, and <span class="pali-term term-highlight" data-term="moha">moha</span></span></em> under some conditions (if the temptation is high enough.)</li>
+<li>Someone who has removed the ten types of wrong views can comprehend the Four Noble Truths and remove <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> (ignorance about this world's real nature.) It happens in four stages culminating in the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</li>
+<li><span>That is a summary. We will discuss the details below and in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> Defined as Above Is the Ultimate Version</h5>
+<p style="text-align: justify;">2. What is defined above is the ultimate version of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> or the "ultimate cooling down" via "eliminating ANY future suffering."</p>
+<ul style="text-align: justify;">
+<li><span>In the previous three <span class="pali-term term-highlight" data-term="posts">posts</span> in this series, I briefly laid out the key (and deeper) foundations of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. I did that so that one would see the outline. Of course, more explanations are needed to clarify them.</span></li>
+<li>We will gradually clarify those concepts.</li>
+<li>The way to do that is to realize that we CAN experience the early stage of "cooling down" by gradually reducing <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, and <span class="pali-term term-highlight" data-term="moha">moha</span> </span></em>to the <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="patigha">patigha</span>,</span></em> and<em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span>, </span></em>AND trying to maintain them there without re-elevating to the <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span> </span></em>levels.</li>
+<li><span style="color: #993366;"><strong><span>A single <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word</span></strong></span> captures <em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></strong></span> </em>(and the reduced versions of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="patigha">patigha</span>, and <span class="pali-term term-highlight" data-term="avijjā">avijjā</span>.</span></em>) That word is "<span style="color: #993366;"><strong><em>san</em></strong></span>." See details in the section on "<a href="../../pages/KD.DD.001/index.html" rel="noopener" target="_blank"><em>San</em></a>."</li>
+</ul>
+<h5 style="text-align: justify;"><em>Sandiṭṭhikaṃ Nibbānan </em><span>- One Needs to "See Defilements" to Get to <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></h5>
+<p style="text-align: justify;">3. One first needs to "<strong>see defilements</strong>" or "<strong>see 'san'</strong>" (<strong><em>san diṭṭhika</em></strong>) to be able to see the path to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span>That is why the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is "</span><strong><em>sandiṭṭhika."</em></strong><span> In the verse that points out the virtues of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, "..</span><em>bhagavatā dhammo <strong class="highlight">sandiṭṭhiko</strong><span> <span class="pali-term term-highlight" data-term="akāliko">akāliko</span> <span class="pali-term term-highlight" data-term="ehipassiko">ehipassiko</span> opaneyyiko paccattaṃ veditabbo viññūhīti</span></em><span>" it is one of the qualities that makes <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> unique.</span></li>
+<li><span style="color: #3366ff;"><strong>One can experience the first stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (cooling down of the mind) by "seeing the dangers of "<em>san"</em> and gradually getting rid of them.</strong></span></li>
+<li>That is the <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> that can be experienced in this life! It is easily reached, especially if one can see the drawbacks of "<em>san</em>" (greed, anger, delusion.)</li>
+</ul>
+<p style="text-align: justify;"><span>4. That is what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained to  Jāṇussoṇi in the "</span><a href="https://suttacentral.net/an3.55/pli/ms" rel="noopener" target="_blank"><em><span>Nibbuta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 3.55)</a>." A reasonable English translation is "<a href="https://suttacentral.net/an3.55/en/bodhi" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (AN 3.55)</a>."</p>
+<ul style="text-align: justify;">
+<li><span>Jāṇussoṇi asks the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, “Master Gotama, it is said: ‘Directly visible </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, directly visible <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.’ In what way is <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> directly visible, immediate, inviting one to come and see, applicable, to be personally experienced by the wise?”</li>
+<li>As explained there, a mind with <strong>greed, hate</strong>, and <strong>delusion</strong> (ignorance about the real nature) "..experiences mental suffering and dejection."</li>
+<li>Thus if one can see the bad consequences of <span style="color: #993366;"><strong>greed, hate, and delusion (or '<em>san</em>')</strong></span>, one can reduce those and reach a "better state of mind." It is a "cooled state of mind" with less agitation, and would not experience depression.</li>
+<li>In particular, it is easy to recognize when greed and anger arise in one's mind. One should make an effort to control them. <span style="color: #3366ff;"><strong>That is the basis of <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> and <em><strong class="highlight"><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></strong></em> meditations:</strong></span> "being mindful."</li>
+<li>That is why <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is directly visible AND can be experienced in this life itself!</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Ādittapariyāya <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (The Fire Sermon) Is About the "Fire in a Mind"</h5>
+<p style="text-align: justify;">5. An English translation is "<a href="https://accesstoinsight.org/tipitaka/sn/sn35/sn35.028.nymo.html" rel="noopener" target="_blank"><em><span>Ādittapariyāya <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (The Fire Sermon)</a><span>." As with all English translations, it is a 'word-by-word" translation without clarifying what is meant by that "fire." (see other translations at <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central: "</span><a href="https://suttacentral.net/sn35.28/pli/ms" rel="noopener" target="_blank"><em><span>Āditta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.28)</a>")</p>
+<ul style="text-align: justify;">
+<li>It says, "The <strong>eye</strong> is burning, <strong>forms</strong> are burning, <strong>eye-consciousness</strong> is burning, <strong>eye-contact</strong> is burning, also <strong>whatever is felt</strong> as pleasant or painful or neither-painful-nor-pleasant that arises with eye contact for its indispensable condition, that too is burning." <span style="color: #3366ff;"><strong>That may not make sense if one does not see that it is ATTACHMENT TO those five things that LEADS to "fires in the MIND." </strong></span>Those five are associated with "seeing."</li>
+<li>Even the direct translation says, "Burning with what? Burning with the <span style="color: #993366;"><strong>fire of lust</strong></span>, with the <span style="color: #993366;"><strong>fire of hate</strong></span>, with the <span style="color: #993366;"><strong>fire of delusion</strong></span>.</li>
+<li>Such 5 types of "sources of fire" arise with the other senses: hearing, tasting, smelling, body touches, and the mind itself.</li>
+<li>But all those 30 "sources of fire" ALWAYS lead to "fires in mind." We MUST note that all 30 types of sensory experiences register in the mind!</li>
+<li>It is the MIND that will burn (sooner or later) due to the actions one takes (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> via <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) with the desire to seek pleasures with "seeing.'</li>
+<li>Some of that "burning" will materialize later in this life or even in future lives. <span style="color: #3366ff;"><strong>That "potential to bring suffering" is deposited as "<em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy," and that is also the same as "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" (cause for future suffering)!</strong></span> That is a hard part of understanding. But we will get to that.</li>
+</ul>
+<h5 style="text-align: justify;">"Burning" (<em>Tāpa</em>) Has Root Cause in <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> (Greed) and <em><span><span class="pali-term term-highlight" data-term="dosa">Dosa</span></span></em> (Anger)</h5>
+<p style="text-align: justify;">6. We attach to things that we like. This <strong>"attachment"</strong><span> is described in several ways by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: </span><em><strong><span>icchā, <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>, nandi, piya, <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></strong>,</em> etc. When exposed to such 'likable things" in this world, we become joyful and try to get more of them, even using immoral deeds. Therein lies the problem.</p>
+<ul style="text-align: justify;">
+<li><strong>Those things in this world that lead to such attachment and joyful feelings are those to which our ignorant minds assign "<em>kāmaguṇa</em>"</strong> or "characteristics/sources of <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>." See "<a href="../../pages/IS.CC.004/index.html" rel="noopener" target="_blank">Kāma Guṇa - Origin of Attachment (Tanhā)</a>."</li>
+<li>Even though they may provide temporary joy, they always lead to <strong>"heat/burning" (<em>tāpa</em>)</strong> in mind.</li>
+<li>The word "<em><span style="color: #ff0000;"><strong><span style="color: #993366;">tappati"</span> </strong></span></em>in the <em>Dhammapada</em> verse in #10 refers to a mind that is "heated/burning."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dosa">Dosa</span> - </span></em>Two Faces of a Coin</h5>
+<p style="text-align: justify;">7. <strong><em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em> are like the two faces of a coin, and the coin itself is <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>.)</strong> As long as <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> is there, <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> OR <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em> can arise.</p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="dosa">Dosa</span></span></em> (anger/hate/dislike) is the opposite of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> (and <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em>.) There are things that we don't like in this world. Furthermore, we also dislike/hate people who get in our way in our efforts to seek more sensory pleasures.</li>
+<li>We tend to evaluate external objects (people or objects) based on their ability to provide us with enjoyment/happiness or whether they appear ugly/distasteful/tend to get in our way. <strong>Thus, we tend to put anything into one of those two categories:</strong> like/dislike. This is due to the root cause of <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>. This explicit "measuring" or 'evaluation" is "<em><span><span class="pali-term term-highlight" data-term="māna">māna</span></span></em>."</li>
+<li><strong>We do that by "measuring" with the perception of "me" and trying to decide what will enhance "my enjoyment" and minimize "my displeasure."</strong> That is because of our <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> or ignorance that such behavior will ONLY lead to future suffering.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="moha">Moha</span></span></em> Is the Root Cause of <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dosa">Dosa</span></span></em></h5>
+<p style="text-align: justify;">8. Sometimes, the mind becomes uncertain (<em><span><span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></em>) about what to do. At other times, it becomes perturbed/excited (<em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span></span></em>) due to uncertainty about something. In such cases, only <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) is present.</p>
+<ul style="text-align: justify;">
+<li>In other words, <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em> is the root cause of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span>,</span></em> and all other <em><span>asobhana <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>.</li>
+<li>Furthermore, the deepest level of <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em> is in <em><span><span class="pali-term term-highlight" data-term="māna">māna</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span>, and <span class="pali-term term-highlight" data-term="avijjā">avijjā</span>.</span></em> Those are removed only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. It is one of the last five <em><span><span class="pali-term term-highlight" data-term="saṃyojana">Saṃyojana</span></span></em> (bonds to the<em> saṃsāric</em> process) of <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span>, arupa <span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="māna">māna</span>, <span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span>, <span class="pali-term term-highlight" data-term="avijjā">avijjā</span>. </span></em></li>
+<li>By the way, <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> is removed at the <em>Anāgāmi</em> stage. When one becomes an "<em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> Anugāmi</span></em>" at the next level, one loses <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> and <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>. It is only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage that one removes the last three: <em><span><span class="pali-term term-highlight" data-term="māna">māna</span>, <span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>. Here, <em><span><span class="pali-term term-highlight" data-term="māna">māna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span></span></em> are the last traces of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em> left. <em>Avijja</em> is the last trace of <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em><span> removed that breaks ALL bonds to the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (</span><em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span></span></em>.)</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> Go Together!</h5>
+<p style="text-align: justify;">9. Because of our unwise perception of a "me," we tend to attach to some things (<em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>) and try to stay away from other things (<em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>.) Either way, we are 'mentally bound" to both types. We tend to think about ways to get likable things closer and to keep unlikable things away. Thus, <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> is involved in both cases. See "<a href="../../pages/KD.HH.003/index.html" rel="noopener" target="_blank">Tanhā – How We Attach Via Greed, Hate, and Ignorance</a>."</p>
+<ul style="text-align: justify;">
+<li>It is impossible to get rid of <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em><span> as long as we do not comprehend the real nature of this world explained by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> and thereby get rid of </span><em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>.</li>
+<li><span>The first step towards that understanding is to live a moral life and cleanse the mind. That will enable one to comprehend this 'previously unheard" <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>: </span><span style="color: #3366ff;"><strong>Why sensory pleasures (<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>) WILL invariably lead to future suffering.</strong></span></li>
+<li>Therefore, we need to get to the next step of understanding <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em> and <em><span>dasa <span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em>.</li>
+<li><span>Don't worry too much about all these <span class="pali-term term-highlight" data-term="pāli">Pāli</span> terms. They will become clear as we discuss them further. There is no need to memorize. If you understand the concepts, they will become familiar.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span> </span></em>and <em><span>Dasa <span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em></h5>
+<p style="text-align: justify;">10. The path to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is to avoid immoral deeds or <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em> ("<a href="../../pages/TL.EE.003/index.html" rel="noopener" target="_blank">Ten Immoral Actions (Dasa Akusala)</a>") and to engage in meritorious deeds or <em><span>dasa <span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em> ("<a href="../../pages/SI.DD.002/index.html" rel="noopener" target="_blank">Dasa Akusala/Dasa Kusala – Basis of Buddha Dhamma</a>.")</p>
+<ul style="text-align: justify;">
+<li>The <span style="color: #993366;"><strong>drawbacks of <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em></strong></span> are succinctly stated in the following <em>Dhammapada</em> verse:</li>
+</ul>
+<p style="text-align: justify;"><em><span style="color: #993366;"><strong>Idha tappati, pecca tappati</strong>, </span>           <span style="color: #993366;"><strong>Agony now, agony hereafter,</strong></span></em><br/>
+<em>pāpakārī ubhayattha tappati.           The wrong-doer suffers agony in both worlds.</em><br/>
+<em>"<span style="color: #993366;"><strong>Pāpaṃ</strong></span> me katan"ti tappati,          Agonized now by the knowledge that one has <span style="color: #993366;"><strong>done wrong</strong></span>,</em><br/>
+<em>bhiyyo tappati, duggatiṃ gato</em>.        One suffers more agony when gone to a state of woe.</p>
+<ul style="text-align: justify;">
+<li>In the same way, the <span style="color: #3366ff;"><strong>benefits of <em><span>dasa <span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em></strong></span> will be evident in this life and future lives:</li>
+</ul>
+<p style="text-align: justify;"><em><span style="color: #3366ff;"><strong>Idha nandati, pecca nandati,</strong></span>         <span style="color: #3366ff;"> <strong>Rejoicing now, rejoicing hereafter</strong>,</span></em><br/>
+<em>katapuñño ubhayattha nandati.      The doer of wholesome actions rejoices in both worlds.</em><br/>
+<em>"<span style="color: #3366ff;"><strong>Puññaṃ</strong></span> me katan"ti nandati,      Rejoicing now in the knowledge that one has <span style="color: #3366ff;"><strong>acted morally</strong>,</span></em><br/>
+<em>bhiyyo nandati, suggatiṃ gato</em>.       One rejoices more when gone to a state of bliss.</p>
+<ul>
+<li style="text-align: justify;">We will discuss the relationship of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></em> to <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em> and <em><span>dasa <span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em><span> in the next <span class="pali-term term-highlight" data-term="post">post</span> in this series.</span></li>
+<li><span>Before that, please make sure to read the two <span class="pali-term term-highlight" data-term="posts">posts</span>: "</span><a href="../../pages/KD.HH.004/index.html" rel="noopener" target="_blank">Lōbha, Rāga and Kāmacchanda, Kāmarāga</a>" and “<a href="../../pages/KD.HH.005/index.html" rel="noopener noreferrer" target="_blank" title="Lobha,Dosa, Moha Versus Raga, Patigha, Avijja">Lōbha, Dosa, Moha Versus Rāga, Patigha, Avijja.</a><span>“ It is necessary to grasp the meanings of those various <span class="pali-term term-highlight" data-term="pāli">Pāli</span> terms before reading the next <span class="pali-term term-highlight" data-term="post">post</span> in this series.</span></li>
+</ul>
+<p><span><span class="pali-term term-highlight" data-term="posts">Posts</span> in this subsection at: "</span><a href="http://localhost/beng_feb2026/paticca-samuppada/paticca-samuppada-essential-concepts/" rel="noopener" target="_blank">Paṭicca Samuppāda – Essential Concepts</a>"</p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.AA.002/index.html">Paticca Samuppada Causes And Effects Introduction</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.BB.003/index.html">Panca Nivarana And Sensual Pleasures Kama Raga</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.AA.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Paticca Samuppada Causes And Effects Introduction</span>
+        
+        <span class="pathway-title title-pt">Paticca Samuppada Causes And Effects Introduction</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.BB.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Panca Nivarana And Sensual Pleasures Kama Raga</span>
+        
+        <span class="pathway-title title-pt">Panca Nivarana And Sensual Pleasures Kama Raga</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

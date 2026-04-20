@@ -1,0 +1,469 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Udayavaya Nana Importance Of The Cittaja Kaya | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 97 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.LL.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Udayavaya Nana Importance Of The Cittaja Kaya</h1>
+    
+    <h1 class="title-pt">Udayavaya Nana Importância do Cittaja Kaya</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.LL.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>12</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.LL.005"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0508"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.LL.005</td></tr><tr><td>Fin-dex</td><td>0508</td></tr><tr><td>Slug</td><td>udayavaya-nana-importance-of-the-cittaja-kaya</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Udayavaya Nana Importance Of The Cittaja Kaya</td></tr></table></div></div><p><strong>July 22, 2016; revised December 1, 2017; December 14, 2019</strong></p>
+<h5>Three Components of the Mental Body (<em><span>Manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>)</h5>
+<p style="text-align: justify;"><span>1. In previous <span class="pali-term term-highlight" data-term="posts">posts</span> in this series, we discussed </span><em>kabalinkā āhāra</em> for the physical body and three types of<em> āhāra</em> for the "mental body" (or <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>or <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>)</span></em>: <em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span> āhāra, manō sancētanā āhāra, and viññāna āhāra.</span></em></p>
+<ul style="text-align: justify;">
+<li>The <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> or the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> consists of three components: <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>, and <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. The <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> gets its energy at the beginning of that <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and does not require any external <em>āhāra</em>. The <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> is sustained continuously via fine <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> produced by <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> and <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>.</li>
+<li><strong>Therefore, the three types of <em>āhāra</em> for the <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> are all consumed by the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>. </span></em></strong><span style="color: #3366ff;">This <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>is nothing but the stream of thoughts we generate.</span></li>
+<li>An aside: Sometimes, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> can inhale "<em>arōma</em>" or <em>gandha</em> (<em>kabalinkā āhāra</em>)<em> </em> and have a fine (misty) physical body too. T<strong>hus, the name <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em></strong>, where "<em>abba</em>" means "inhale" or, in this case, "absorb." Such "more solidified" are the ones that people can sometimes see and even be captured by a camera.</li>
+</ul>
+<h5>The Big Picture</h5>
+<p style="text-align: justify;">2. Now, we can take a step back and look at the big picture, which gives a very illuminating view. <span style="color: #0000ff;"><span style="color: #3366ff;">This "big picture" could be beneficial in comprehending the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</span> </span>Of course, this is not the only way to grasp <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</p>
+<ul style="text-align: justify;">
+<li>The physical body we value so much and think about as "me" is a temporary shell. Like anything material in this world, it grows and peaks and then starts the downhill march ending in decay and eventual death. At the death of the physical body, the<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> comes out and has to wait for a suitable womb to start building a new body if the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> still has more <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy left; see, for example, "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>" and "<a href="../../pages/BD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Gandhabba – Only in Human and Animal Realms</a>."</li>
+<li>This is a critical factor that contributed to the concept of a "self" ("<em>āthma</em>" in Hinduism.) Hindu<em> yogis</em> who cultivated <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers could look back at a finite number of previous lives and could see a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> giving rise to repeated rebirths in human form (they likely practiced <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> in those recent previous lives, which made it easier for them to attain<em><span> <span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers in this life).</li>
+<li><span style="color: #3366ff;">However, they could not see far back enough to see that one could be born an animal or even worse.</span></li>
+</ul>
+<h5>An Analogy</h5>
+<p style="text-align: justify;">3. For humans and animals, we can compare the physical body controlled by the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> to a car (or any other vehicle) being driven by a person. The vehicle's body is like our physical body; the driver is analogous to the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>. Without the<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span>, the physical body cannot do anything; it would be lifeless, i.e., a dead body. The <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> "operates" the human body; see "</span><a href="../../pages/AB.DD.004/index.html" rel="noopener noreferrer" target="_blank">Ghost in the Machine – Synonym for the Manomaya Kaya?</a>".</p>
+<ul style="text-align: justify;">
+<li>The birth of a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>, in turn, is due to the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy that was created in a previous life. The <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> represents that energy (which will slowly deplete with time.) The term <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>comes from "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" and "<em>ja</em>" and "<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>". Here "<em>ja</em>" means "birth" or "origin," and "<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>" is the body. Thus <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>means the "body that was created due to <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>."</li>
+<li>Similarly, <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> arises due to <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (loosely translated as thoughts).</li>
+<li>"<em>Utu</em>" means "change," and the <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> is that part of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> body that arises by the conversion of <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy and the energy from<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em>).</li>
+</ul>
+<h5>We Have Control Over <em><span>Cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em></h5>
+<p style="text-align: justify;">4. <span style="color: #3366ff;">Now, we can see the critical importance of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. </span><em><span>Kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> arises due to previous <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, i.e., by <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in a previous life. More specifically, <em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em> in such <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>provided the energy for a new <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>, </span></em>which led to the<em><span> kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>; </span></em>see "<a href="../../pages/AB.BB.009/index.html" rel="noopener noreferrer" target="_blank">Javana of a Citta – The Root of Mental Power</a>."</p>
+<ul style="text-align: justify;">
+<li><em><span>Kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> is just a result, and it will slowly lose its energy over human existence. We cannot do anything about it (but if one does an <em><span>ānantariya <span class="pali-term term-highlight" data-term="kamma">kamma</span>,</span></em> it will be shortened). <span style="color: #3366ff;">Thus it is only the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> that we have control over. This is critically important. <strong>We have finally converged to the essence of a human being.</strong></span></li>
+<li><span>This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em><span>manō pubbangamā <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></em>...". The origin of anything in this world can be traced back to the mind (thoughts).</li>
+<li>Here we see the truth of the above statement for living beings. In the future, it will become clear that ANYTHING in this world has origins in mind. That is the story in the <em><span>Agganna <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>. But we have to proceed step-by-step.  An introduction at "<a href="../../pages/SI.AA.010/index.html" rel="noopener noreferrer" target="_blank">Buddhism and Evolution – Aggañña Sutta (DN 27)</a>."</li>
+</ul>
+<p style="text-align: justify;">5. <strong>We control our destiny via our thoughts or <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>.  I cannot emphasize enough the critical importance of the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. </strong></p>
+<ul style="text-align: justify;">
+<li>Therefore, we must pay attention to what kind of<em> āhāra</em> (conventionally translated as food, but you can see that is not a good translation) we provide for our thought stream.  But we have control over only those thoughts that we initiate.</li>
+</ul>
+<h5>Two Types of <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> (<em>Viññāna</em>) and Associated Feelings (<em>Vedana</em>)</h5>
+<p style="text-align: justify;">6. <span style="color: #0000ff;">There are two types of thoughts.</span> <strong>Some <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> arise due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>.</strong> For example, we may get to taste a delicious meal due to a good <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>,</span></em> and while eating it we feel "<em>jivhā viññāna</em>," i.e., those come through our sense of taste. These do not have <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>. Also see, "<a href="../../pages/DS.FF.007/index.html" rel="noopener noreferrer" target="_blank">Mōha/Avijjā and Vipāka Viññāṇa/Kamma Viññāṇa</a>" and "<a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank">Vedana (Feelings) Arise in Two Ways</a>".</p>
+<ul style="text-align: justify;">
+<li><strong>There is another set of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> that we initiate.</strong> For example, based on that tasty meal, we start thinking about returning to the same restaurant in the future, how to make it at home, etc. These generate <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>. The worst kind is <em>apunnābhisaṅkhāra</em>, where we think about ways to get that meal immorally, say, by stealing.</li>
+<li>But if it is just some food that quenches the hunger, we do not generate that type of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> after the <em><span><span class="pali-term term-highlight" data-term="vipāka citta">vipāka citta</span></span></em>.</li>
+<li>In another example, we see millions of things in a day (via <em><span><span class="pali-term term-highlight" data-term="vipāka citta">vipāka citta</span></span></em>) but generate <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> only in a few.</li>
+</ul>
+<h5>The Unending Cycle of <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>/<span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em></h5>
+<p style="text-align: justify;"><span>7. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span> vipākā vaddanthi, vipākā <span class="pali-term term-highlight" data-term="kamma">kamma</span> sambhavō, <span class="pali-term term-highlight" data-term="tasmā">tasmā</span> punabbhavō hōti, ēvam lōkō pavattati</span></em>".</p>
+<ul style="text-align: justify;">
+<li>What that means is: "Because of <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>,</span></em> we experience sense inputs; based on those, we initiate new <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>), and those, in turn, will bring <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em><span> in the future; that is how the world evolves (<span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process continues)."</span></li>
+<li><span style="color: #0000ff;">Thus the critical part is where we generate <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>. This is done with<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</span>  <span style="color: #000000;"><span style="color: #000000;">We will discuss this using <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> in the future, but let us try to understand how<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em><span> can be controlled. There are many <span class="pali-term term-highlight" data-term="posts">posts</span> in the "</span><a href="../../pages/AB.CC.001/index.html" rel="noopener noreferrer" target="_blank">Mind and Consciousness</a></span></span>" and "<a href="http://localhost/beng_feb2026/abhidhamma/citta-and-cetasika/" rel="noopener noreferrer" target="_blank">Citta and Cetasika</a>" sections on <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>.</li>
+</ul>
+<h5>The Key Is to Change Our <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em></h5>
+<p style="text-align: justify;">8. In fact,<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> ran too fast for us to control. Billions of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> run in a second. How can we control them? <strong>We cannot control them <em>in situ </em>as they initially arise.</strong></p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> cittā</span></em> arise due to our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>!</span> This is the key.</li>
+<li>For example, an<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is not tempted by any attractive sense input. He has removed all <em>āsavas</em> (cravings), and there is no <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> to bubble up. He/she has "Noble <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>."</li>
+<li>On the other hand,  a<em><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> may be tempted by that attractive sense input. He has not removed all <em>āsavas</em> (cravings), but he/she has removed <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> suitable for the <em>apāyā</em>, so <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> corresponding to highly immoral acts will not arise.</li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span> </span></em>(related to <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) is analogous to the dirt in the bottom of a well. If the water in the well is perturbed, some dirt can come to the surface (<em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em>). (i.e., if a sensory input matching our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span> comes into play, evil thoughts automatically come into the mind). This is discussed in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/BM.AA.003/index.html" rel="noopener noreferrer" target="_blank">3. The Second Level – Key to Purify the Mind</a>," in the Meditation section. Also, see "<a href="http://localhost/beng_feb2026/buddhism-in-charts/anuseti-how-anusaya-grows-with-sa%e1%b9%85khara/" rel="noopener" target="_blank">Anuseti – How Anusaya Grows with Saṅkhāra</a>."</li>
+<li>When one attains the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, the worst types of "gunk" will be removed. The rest will be removed in three more stages (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>).</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em>- Only Way to Change <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em></h5>
+<p style="text-align: justify;">9. In an average human, whether or not immoral<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> will be triggered will depend on his/her set of <em>āsavas</em> (or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>). If that particular sense input is attractive (i.e., matches his/her <em>āsavas</em>), then he/she may automatically initiate a highly immoral act to pursue that sensory input.</p>
+<ul style="text-align: justify;">
+<li>But the key here is the following. Even if such immoral <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> arises, one can still suppress them <strong>before the actual act is done, </strong>if one has learned <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>.</span></em>) For extremely immoral acts, like killing another human, most people can control such thoughts even without knowing about <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>. <span style="color: #3366ff;"><span>But the more one learns <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and understands the consequences; the more one can have firm control even over minor offenses.</span></span></li>
+<li><span style="color: #3366ff;">Furthermore, the more one controls one's actions this way, the more one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> will change for the better.</span> <strong>This is another key!</strong> This has been discussed in detail in "<a href="../../pages/BM.BB.001/index.html" rel="noopener noreferrer" target="_blank">9. Key to Ānāpānasati – How to Change Habits and Character (Gati)</a><span>". There are several <span class="pali-term term-highlight" data-term="posts">posts</span> under that topic.</span></li>
+</ul>
+<h5>Irreversible Change of <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> with Understanding of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em></h5>
+<p style="text-align: justify;">10. A <strong>large chunk </strong>of immoral <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> disappears by comprehending <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span> </span></em>at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> that are suitable to be born in the <em>apāyā</em> will be removed. <span style="color: #0000ff;">This is called "<em>dassanèna pahäthabbä,</em>" i.e., "removal via correct vision."</span></p>
+<ul style="text-align: justify;">
+<li>Thus highly immoral <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> do not arise in a<em><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>. A well that has been cleaned of the visible dirt at the bottom can not be muddied by perturbing the water in that well. Just like that, highly immoral thoughts do not arise in the mind of a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></em>because it is free of "worst gunk."</li>
+<li>However, to grasp <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, one's mind needs to be somewhat cleansed. One needs to change one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> gradually<em>.</em> The way to get there is to practice the correct Ā<em><span>nāpāna <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>). See "<a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">Is Ānāpānasati Breath Meditation?</a>"</li>
+</ul>
+<h5>Udayavaya Ñāṇa - How Suffering Arises and How It Can Be Stopped</h5>
+<p style="text-align: justify;">11. Thus, the key to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is in the <em>udayavaya ñāṇa</em>: future rebirths arise (<em>udaya</em>) due to <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> (or <em>cētana</em>) in our<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. By controlling immoral thoughts via reducing our <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), <strong>we can eventually stop them from arising.</strong></p>
+<ul style="text-align: justify;">
+<li>This is done by constantly <span style="color: #0000ff;">being vigilant</span> about the moral or immoral thoughts that come to our minds;<span style="color: #0000ff;"> this is <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>; </span></em></span><span class="mceItemHidden"><span class="mceItemHidden"><span class="mceItemHidden">see, "<a href="../../pages/SI.BB.001/index.html" rel="noopener noreferrer" target="_blank">Maha Satipaṭṭhāna Sutta</a>." </span></span></span>Then if the <span style="color: #993366;">thought is moral, we cultivate it (<em>ā</em><em>na</em>); if it is immoral, we stop it (<em>pāna</em>) </span>before it leads to immoral speech or actions;<span style="color: #993366;"> this is <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span>; </span></em></span>see, "<a href="../../pages/BM.AA.007/index.html" rel="noopener noreferrer" target="_blank">7. What is Änapāna?</a>".</li>
+<li>The other key point is that the more one cleans one's mind, the more one will be able to comprehend. <span style="color: #3366ff;">In particular, comprehending <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> REQUIRES a mind cleansed to some extent.</span></li>
+<li><strong>I hope you can see that this is a feedback loop</strong>: each time one goes through the loop (<span style="color: #3366ff;">being vigilant or <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> to cleansing the mind or <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em></span> to a more <span style="color: #3366ff;">purified mind</span> for <span style="color: #3366ff;"><span>grasping deeper <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></span> and back to <span style="color: #3366ff;">being vigilant</span>), one makes progress.</li>
+</ul>
+<h5>Importance of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em></h5>
+<p style="text-align: justify;">12. <strong>This effect is greatly amplified w</strong><strong>hen one finally grasps <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>:</span></em><span> One comprehends the futility of staying in this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (</span><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></em>)</strong> Anything we acquire through much effort cannot be kept to our satisfaction in the long run (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>) and eventually lead to nothing but suffering (<em>dukha.</em>) When one "sees" that, one will realize the urgency to reduce and remove one's <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>). This leads to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;">A considerable chunk of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) disappears via this understanding of the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. Highly potent immoral <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> do not arise in the mind of a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span>. </span></em><span>Then no more <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the</span><em>apāyā </em>or the four lowest realms.</span></li>
+<li>Thus with <em>udayavaya ñāṇa</em>, one can clarify the path to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage.</li>
+<li>Then the remaining <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> disappear (<em>āsavakkhaya</em>) via three more stages (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>) <span style="color: #3366ff;">by continuing this process (<em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>)</span>, and one attains <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, permanent happiness or the removal of all future suffering.</li>
+<li><span style="color: #3366ff;">But one also needs to do <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em>before the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage</span> to cleanse the mind to a level that is capable of grasping <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></em></li>
+</ul>
+<h5>Closing the 'Gaps"</h5>
+<p style="text-align: justify;"><span>13. Finally, I would like to close the loop by pointing to the connection to the concepts discussed in the early <span class="pali-term term-highlight" data-term="posts">posts</span>. The </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> consumes three kinds of mental food: <em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span> āhāra</span></em>, <em>manō sancētanā āhāra</em>, and <em>viññāna āhāra</em>.</p>
+<ul style="text-align: justify;">
+<li><span>As we saw in the previous <span class="pali-term term-highlight" data-term="post">post</span> in this series, "</span><a href="../../pages/TL.LL.004/index.html" rel="noopener noreferrer" target="_blank">Āhāra (Food) in Udayavaya Ñāna</a>," the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> consumes all three types of mental foods. And this is confirmed by the above discussion: Our initial sense inputs that COULD trigger<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> come via <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em></span>, sense contacts. They are JUST contacts. But based on those, we COULD accumulate new <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) by making <span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em></span>; also see "<a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank">Vedana (Feelings) Arise in Two Ways</a>" and "<a href="../../pages/PS.II.007/index.html" rel="noopener" target="_blank">Difference between Phassa and Samphassa</a>."</li>
+<li><span style="color: #3366ff;"><em>manō sancētanā āhāra</em></span> (which are <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) come into play during those <em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>; </span></em>this means we start "making plans" and also keep going back to that sensory input. Repeated triggers for a given sensory input (<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>) provide <em>āhāra</em> for that <em><span style="color: #3366ff;">viññāna</span>; </em>for example, see "<a href="../../pages/AB.CC.006/index.html" rel="noopener noreferrer" target="_blank">2. Viññāṇa (Consciousness) can be of Many Different Types and Forms</a><span>" and other relevant <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify;">By reading the links given (and also using the "Search box" at the top right), one should be able to clarify key issues. Please don't hesitate to comment if you need help clarifying a given concept.</p>
+<p style="text-align: justify;"> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.LL.005"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0508"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.LL.005
+Language:     pt-BR
+Generated-At: 2026-03-10T23:22:01Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>22 de julho de 2016; revisado em 1º de dezembro de 2017; 14 de dezembro de 2019</strong></p>
+<h5>Três componentes do corpo mental (<em><span>Manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>)</h5>
+<p style="text-align: justify;">1. Em ensaios anteriores desta série, discutimos <em>kabalinkā āhāra</em> para o corpo físico e três tipos de<em> āhāra</em> para o “corpo mental” (ou <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>ou <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>)</span></em>: <em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span> āhāra, manō sancētanā āhāra e viññāna āhāra.</span></em></p>
+<ul style="text-align: justify;">
+<li>O <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> consiste em três componentes: <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> e <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. O <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> obtém sua energia no início desse <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> e não requer nenhum <em>āhāra</em> externo. O <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> é sustentado continuamente por meio de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> sutil produzido por <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>.</li>
+<li><strong>Portanto, os três tipos de <em>āhāra</em> para o <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> são todos consumidos pelo <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>. </span></em></strong><span style="color: #3366ff;">Este <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> nada mais é do que o fluxo de pensamentos que geramos.</span></li>
+<li>Um aparte: às vezes, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode inalar “<em>arōma</em>” ou <em>gandha</em> (<em>kabalinkā āhāra</em>)<em></em>e ter um corpo físico sutil (nebuloso) também. <strong>Assim, o nome <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></strong>, onde “<em>abba</em>” significa “inalar” ou, neste caso, “absorver”. Esses “mais solidificados” são os que as pessoas às vezes podem ver e até mesmo capturar com uma câmera.</li>
+</ul>
+<h5>O panorama geral</h5>
+<p style="text-align: justify;">2. Agora, podemos dar um passo atrás e olhar para o panorama geral, o que nos dá uma visão muito esclarecedora. <span style="color: #0000ff;"><span style="color: #3366ff;">Esse “panorama geral” pode ser benéfico para compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</span> </span>É claro que essa não é a única maneira de compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>O corpo físico que tanto valorizamos e consideramos como “eu” é uma concha temporária. Como qualquer coisa material neste mundo, ele cresce, atinge o auge e então começa a descida que termina em decadência e eventual morte. Com a morte do corpo físico, o<em><span> <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> sai e tem que esperar por um útero adequado para começar a construir um novo corpo, se o <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano ainda tiver energia <em>de</em> <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> restante; veja, por exemplo, “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>” e “<a href="../../pages/BD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Gandhabba – Apenas nos Reinos Humano e Animal</a>”.</li>
+<li>Este é um fator crítico que contribuiu para o conceito de “eu” (“<em>āthma</em>” no hinduísmo). <em>Os iogues</em> hindus que cultivavam poderes <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em> podiam olhar para trás e ver um número finito de vidas anteriores e podiam ver um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dando origem a renascimentos repetidos na forma humana (eles provavelmente praticavam <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> nessas vidas anteriores recentes, o que tornava mais fácil para eles alcançarem poderes <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em> nesta vida).</li>
+<li><span style="color: #3366ff;">No entanto, eles não podiam ver longe o suficiente para ver que alguém poderia nascer como um animal ou algo ainda pior.</span></li>
+</ul>
+<h5>Uma analogia</h5>
+<p style="text-align: justify;">3. Para humanos e animais, podemos comparar o corpo físico controlado pelo <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> a um carro (ou qualquer outro veículo) sendo dirigido por uma pessoa. O corpo do veículo é como nosso corpo físico; o motorista é análogo ao <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>. Sem o<em><span> <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em><span>, o corpo físico não pode fazer nada; ele estaria sem vida, ou seja, seria um cadáver. O <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> “opera” o corpo humano; veja “</span><a href="../../pages/AB.DD.004/index.html" rel="noopener noreferrer" target="_blank">Fantasma na máquina – sinônimo de Manomaya Kaya?</a>”.</p>
+<ul style="text-align: justify;">
+<li>O nascimento de um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>, por sua vez, deve-se à energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que foi criada em uma vida anterior. O <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> representa essa energia (que se esgotará lentamente com o tempo). O termo <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>vem de “<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>”, “<em>ja</em>” e “<em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>”. Aqui, “<em>ja</em>” significa “nascimento” ou “origem”, e “<em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>” é o corpo. Assim<em><span>, kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>significa o “corpo que foi criado devido ao <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>”.</li>
+<li>Da mesma forma, <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> surge devido ao <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (traduzido livremente como pensamentos).</li>
+<li>“<em>Utu</em>” significa “mudança”, e o <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> é a parte do corpo <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> que surge pela conversão da energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e da energia de<em><span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="javana">Javana</span></span></em>).</li>
+</ul>
+<h5>Temos controle sobre <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em></h5>
+<p style="text-align: justify;">4. <span style="color: #3366ff;">Agora, podemos ver a importância crítica de <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>. </span><em><span>Kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> surge devido ao <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> anterior, ou seja, por <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> em uma vida anterior. Mais especificamente, <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span></span></em> em tal <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> </span></em>forneceu a energia para um novo <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span>, </span></em>o que levou ao<em><span> Kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>; </span></em>veja “<a href="../../pages/AB.BB.009/index.html" rel="noopener noreferrer" target="_blank">Javana de um Citta – A Raiz do Poder Mental</a>”.</p>
+<ul style="text-align: justify;">
+<li><em><span>Kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> é apenas um resultado e perderá lentamente sua energia ao longo da existência humana. Não podemos fazer nada a respeito (mas se alguém fizer um <em><span>ānantariya <span class="pali-term term-highlight" data-term="kamma">Kamma</span>,</span></em> ele será encurtado). <span style="color: #3366ff;">Portanto, é apenas sobre o <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> que temos controle. Isso é extremamente importante. <strong>Finalmente chegamos à essência do ser humano.</strong></span></li>
+<li><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span>manō pubbangamā <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></em>..”. A origem de qualquer coisa neste mundo pode ser rastreada até a mente (pensamentos).</li>
+<li>Aqui vemos a verdade da afirmação acima para os seres vivos. No futuro, ficará claro que TUDO neste mundo tem origem na mente. Essa é a história do <em><span>Agganna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>. Mas temos que prosseguir passo a passo. Uma introdução em “<a href="../../pages/SI.AA.010/index.html" rel="noopener noreferrer" target="_blank">Buddhismo e Evolução – Agganna Sutta (DN 27)</a>”.</li>
+</ul>
+<p style="text-align: justify;">5. <strong>Controlamos nosso destino por meio de nossos pensamentos ou <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. Não consigo enfatizar o suficiente a importância crítica do <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. </strong></p>
+<ul style="text-align: justify;">
+<li>Portanto, devemos prestar atenção ao tipo de<em> āhāra</em> (convencionalmente traduzido como alimento, mas você pode ver que essa não é uma boa tradução) que fornecemos ao nosso fluxo de pensamentos. Mas temos controle apenas sobre os pensamentos que iniciamos.</li>
+</ul>
+<h5>Dois tipos de <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> (<em>Viññāna</em>) e sentimentos associados (<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>)</h5>
+<p style="text-align: justify;">6. <span style="color: #0000ff;">Existem dois tipos de pensamentos.</span> <strong>Alguns <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> surgem devido ao <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>.</strong> Por exemplo, podemos saborear uma refeição deliciosa devido a um bom <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> e<em>,</em> enquanto a comemos, sentimos “<em>jivhā viññāna</em>”, ou seja, aqueles que vêm através do nosso sentido do paladar. Estes não têm <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>. Veja também “<a href="../../pages/DS.FF.007/index.html" rel="noopener noreferrer" target="_blank">Mōha/Avijjā e Vipāka Viññāṇa/Kamma Viññāṇa</a>” e “<a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank">Uma Vedanā (sentimentos) surgem de duas maneiras</a>”.</p>
+<ul style="text-align: justify;">
+<li><strong>Há outro conjunto de <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> que iniciamos.</strong> Por exemplo, com base naquela refeição saborosa, começamos a pensar em voltar ao mesmo restaurante no futuro, em como prepará-la em casa, etc. Isso gera <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>. O pior tipo é <em>apunnābhisaṅkhāra</em>, em que pensamos em maneiras de obter essa refeição de forma imoral, por exemplo, roubando.</li>
+<li>Mas se for apenas alguma comida que sacia a fome, não geramos esse tipo de <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> após o <em><span><span class="pali-term term-highlight" data-term="vipāka citta">Vipāka Citta</span></span></em>.</li>
+<li>Em outro exemplo, vemos milhões de coisas em um dia (via <em><span><span class="pali-term term-highlight" data-term="vipāka citta">Vipāka Citta</span></span></em>), mas geramos <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> apenas em algumas delas.</li>
+</ul>
+<h5>O ciclo interminável de <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>/<span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em></h5>
+<p style="text-align: justify;"><span>7. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span> vipākā vaddanthi, vipākā <span class="pali-term term-highlight" data-term="kamma">kamma</span> sambhavō, <span class="pali-term term-highlight" data-term="tasmā">tasmā</span> punabbhavō hōti, ēvam lōkō pavattati</span></em>”.</p>
+<ul style="text-align: justify;">
+<li>O que isso significa é: “Por causa do <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span>,</span></em> experimentamos estímulos sensoriais; com base neles, iniciamos <em>um</em> novo <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>), e esses, por sua vez, trarão <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> no futuro; é assim que o mundo evolui (o processo de Renascimento continua)”.</li>
+<li><span style="color: #0000ff;">Portanto, a parte crítica é onde geramos <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>. Isso é feito com<em><span> <span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</span> <span style="color: #000000;"><span style="color: #000000;">Discutiremos isso usando <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> no futuro, mas vamos tentar entender como<em><span> <span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> pode ser controlado. Há muitos ensaios nas </span></span>seções<span style="color: #000000;"><span style="color: #000000;"> “<a href="../../pages/AB.CC.001/index.html" rel="noopener noreferrer" target="_blank">Mente e Consciência</a></span></span>” e “<a href="http://localhost/beng_feb2026/abhidhamma/citta-and-cetasika/" rel="noopener noreferrer" target="_blank">Citta e Cetasika</a>” sobre <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>.</li>
+</ul>
+<h5>A chave é mudar nossa <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em></h5>
+<p style="text-align: justify;">8. Na verdade,<em><span> <span class="pali-term term-highlight" data-term="javana">Javana</span> Cittā</span></em> correu rápido demais para que pudéssemos controlá-la. Bilhões de <em>Cittas</em> correm em um segundo. Como podemos controlá-los? <strong>Não podemos controlá-los <em>in situ,</em> pois eles surgem inicialmente.</strong></p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> cittā</span></em> surge devido à nossa <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>!</span> Essa é a chave.</li>
+<li>Por exemplo, um<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não é tentado por nenhum estímulo sensorial atraente. Ele removeu todos <em>os āsavas</em> (desejos) e não há <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> para borbulhar. Ele/ela tem <em>a</em> “Nobre <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>”.</li>
+<li>Por outro lado, um<em><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> pode ser tentado por esse estímulo sensorial atraente. Ele não removeu todos <em>os āsavas</em> (desejos), mas removeu <em><span><span class="pali-term term-highlight" data-term="a gati">a Gati</span></span></em> adequada para o <em>apāyā</em>, de modo que <em><span>o <span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> correspondente a atos altamente imorais não surgirá.</li>
+<li>O <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span> </span></em>(relacionado à <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>) é análogo à sujeira no fundo de um poço. Se a água do poço for perturbada, alguma sujeira pode vir à superfície (<em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em>). (ou seja, se um estímulo sensorial correspondente à nossa <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> entrar em ação, pensamentos malignos automaticamente vêm à mente). Isso é discutido na postagem “<a href="../../pages/BM.AA.003/index.html" rel="noopener noreferrer" target="_blank">3. O Segundo Nível – Chave para Purificar a Mente</a>”, na seção Meditação. Veja também “<a href="http://localhost/beng_feb2026/buddhism-in-charts/anuseti-how-anusaya-grows-with-sa%e1%b9%85khara/" rel="noopener" target="_blank">Anuseti – Como Anusaya Cresce com Saṅkhāra</a>”.</li>
+<li>Quando alguém atinge o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, os piores tipos de “sujeira” serão removidos. O restante será removido em mais três estágios (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>).</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em>– A única maneira de mudar <em><span><span class="pali-term term-highlight" data-term="a gati">a Gati</span></span></em></h5>
+<p style="text-align: justify;">9. Em um ser humano comum, o fato de <em><span>um <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> imoral ser acionado ou não dependerá de seu conjunto de <em>āsavas</em> (ou <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>). Se aquela entrada sensorial específica for atraente (ou seja, corresponder aos seus <em>āsavas</em>), então ele poderá iniciar automaticamente um ato altamente imoral para perseguir essa entrada sensorial.</p>
+<ul style="text-align: justify;">
+<li>Mas o ponto-chave aqui é o seguinte. Mesmo que tal <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> imoral surja, ainda é possível suprimi-la <strong>antes que o ato seja realmente cometido, </strong>se a pessoa tiver aprendido <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> (ou <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em>)<em>.</em> Para atos extremamente imorais, como matar outro ser humano, a maioria das pessoas consegue controlar tais pensamentos mesmo sem conhecer <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>. <span style="color: #3366ff;"><span>Mas quanto mais se aprende <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e se compreende as consequências, mais se consegue ter um controle firme, mesmo sobre ofensas menores.</span></span></li>
+<li><span style="color: #3366ff;">Além disso, quanto mais se controla as próprias ações dessa maneira, mais a <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> muda para melhor.</span> <strong>Essa é outra chave!</strong> Isso foi discutido em detalhes em “<a href="../../pages/BM.BB.001/index.html" rel="noopener noreferrer" target="_blank">9. Chave para Ānāpānasati – Como mudar hábitos e caráter (Gati)</a>”. Há vários ensaios sobre esse tópico.</li>
+</ul>
+<h5>Irreversível mudança de <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> com a compreensão de <em>Tilakkhaṇa</em></h5>
+<p style="text-align: justify;">10. Uma <strong>grande parte </strong>das <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> imorais desaparece com a compreensão de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā </span></em>no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. <em><span>As <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> que são adequadas para nascer no <em>apāyā</em> serão removidas. <span style="color: #0000ff;">Isso é chamado de “<em>dassanèna pahäthabbä</em>”<em>,</em> ou seja, “remoção por meio da visão correta”.</span></p>
+<ul style="text-align: justify;">
+<li>Assim, <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> cittā</span></em> altamente imorais não surgem em um<em> Sótapanna</em>. Um poço que foi limpo da sujeira visível no fundo não pode ser turvo pela perturbação da água nesse poço. Da mesma forma, pensamentos altamente imorais não surgem na mente de um <em>Sótapanna </em>porque ela está livre da “pior sujeira”.</li>
+<li>No entanto, para compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>, a mente precisa estar um pouco limpa. É preciso mudar gradualmente a <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span>.</span></em> A maneira de chegar lá é praticar a <em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span> de</span></em> Ā<em>nāpāna</em> (ou <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>) correta. Veja <a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Ānāpānasati é meditação da respiração?</a>”</li>
+</ul>
+<h5>Udayavaya Ñāṇa - Como o sofrimento surge e como ele pode ser interrompido</h5>
+<p style="text-align: justify;">11. Assim, a chave para <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> está no <em>udayavaya ñāṇa</em>: renascimentos futuros surgem (<em>udaya</em>) devido ao <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> (ou <em>cētana</em>) em nosso<em><span> <span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>. Ao controlar pensamentos imorais através da redução de nosso <em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> Ruins), <strong>podemos eventualmente impedir que eles surjam.</strong></p>
+<ul style="text-align: justify;">
+<li>Isso é feito estando constantemente <span style="color: #0000ff;">vigilantes</span> sobre os pensamentos morais ou imorais que vêm à nossa mente;<span style="color: #0000ff;"> isso é <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>; </span></em></span><span class="mceItemHidden"><span class="mceItemHidden"><span class="mceItemHidden">veja “<a href="../../pages/SI.BB.001/index.html" rel="noopener noreferrer" target="_blank">Mahā Satipaṭṭhāna Sutta</a>”. </span></span></span>Então<span style="color: #993366;">,</span> se o <span style="color: #993366;">pensamento for moral, nós o cultivamos (<em>āna</em>); se for imoral, nós o impedimos (<em>pāna</em>) </span>antes que ele leve a palavras ou ações imorais;<span style="color: #993366;"> isso é <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span>; </span></em></span>veja “<a href="../../pages/BM.AA.007/index.html" rel="noopener noreferrer" target="_blank">7. O que é Änapāna?</a>”.</li>
+<li>O outro ponto-chave é que quanto mais limpamos nossa mente, mais seremos capazes de compreender. <span style="color: #3366ff;">Em particular, compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em> REQUER uma mente limpa até certo ponto.</span></li>
+<li><strong>Espero que você possa ver que isso é um ciclo de feedback</strong>: cada vez que se passa pelo ciclo (<span style="color: #3366ff;">estar vigilante ou <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> para limpar a mente ou <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em></span> para uma <span style="color: #3366ff;">mente</span> mais <span style="color: #3366ff;">purificada</span> para <span style="color: #3366ff;"><span>compreender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> mais profundamente</span></span> e voltar a <span style="color: #3366ff;">estar vigilante</span>), se faz progresso.</li>
+</ul>
+<h5>Importância de <em>Tilakkhaṇa</em></h5>
+<p style="text-align: justify;">12. <strong>Esse efeito é amplificado quando se compreende finalmente </strong><strong><em>Tilakkhaṇa:</em> compreende-se a futilidade de permanecer nesse processo de renascimento (<em>Anattā</em>)<em>.</em></strong> Tudo o que adquirimos com muito esforço não pode ser mantido a nosso gosto a longo prazo (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>) e acaba levando a nada além de sofrimento (<em>dukha</em>)<em>.</em> Quando se “vê” isso, percebe-se a urgência de reduzir e remover o <em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> ruins). Isso leva ao estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;">Uma parte considerável do <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> ruim) desaparece por meio dessa compreensão da natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> cittā</span></em> imorais altamente potentes não surgem na mente de um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>. </span></em>Então, não há mais renascimento no the<em>apāyā </em>ou nos quatro reinos mais baixos.</span></li>
+<li>Assim, com <em>udayavaya ñāṇa</em>, pode-se esclarecer o caminho para o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</li>
+<li>Então, os <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> restantes desaparecem (<em>āsavakkhaya</em>) através de mais três estágios (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>),<span style="color: #3366ff;"> continuando esse processo (<em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>)</span>, e alcança-se <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, a felicidade permanente ou a remoção de todo o sofrimento futuro.</li>
+<li><span style="color: #3366ff;">Mas também é necessário fazer <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em>antes do estágio <em>Sótapanna</em></span> para purificar a mente a um nível capaz de compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā.</span></em></li>
+</ul>
+<h5>Fechando as “lacunas”</h5>
+<p style="text-align: justify;">13. Finalmente, gostaria de fechar o ciclo apontando a conexão com os conceitos discutidos nos ensaios anteriores. O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> consome três tipos de alimento mental: <em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span> āhāra</span></em>, <em>manō sancētanā āhāra</em> e <em>viññāna āhāra</em>.</p>
+<ul style="text-align: justify;">
+<li>Como vimos no ensaio anterior desta série, “<a href="../../pages/TL.LL.004/index.html" rel="noopener noreferrer" target="_blank">Āhāra (Alimento) em Udayavaya Ñāna</a>”, o <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> consome todos os três tipos de alimentos mentais. E isso é confirmado pela discussão acima: Nossas entradas sensoriais iniciais que PODEM desencadear<em><span> <span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> vêm através de <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span></span></em></span>, contatos sensoriais. Eles são APENAS contatos. Mas, com base neles, PODEMOS acumular novo <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>) fazendo <span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span></span></em></span>; veja também “<a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank">Uma Vedanā Surgem de Duas Maneiras</a>” e “<a href="../../pages/PS.II.007/index.html" rel="noopener" target="_blank">Diferença entre Phassa e Samphassa</a>”.</li>
+<li><span style="color: #3366ff;"><em>manō sancētanā āhāra</em></span> (que são <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>) entram em ação durante esses <em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>; </span></em>isso significa que começamos a “fazer planos” e também continuamos voltando a essa informação sensorial. Gatilhos repetidos para uma determinada informação sensorial (<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span></span></em>) fornecem <em>āhāra</em> para esse <em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></span>; </em>por exemplo, veja “<a href="../../pages/AB.CC.006/index.html" rel="noopener noreferrer" target="_blank">2. Viññāṇa (Consciência) pode ser de muitos tipos e formas</a> diferentes” e outros ensaios relevantes.</li>
+</ul>
+<p style="text-align: justify;">Ao ler os links fornecidos (e também usar a “Caixa de pesquisa” no canto superior direito), você poderá esclarecer questões importantes. Não hesite em comentar se precisar de ajuda para esclarecer um determinado conceito.</p>
+<p style="text-align: justify;"> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.LL.004/index.html">Ahara Food In Udayavaya Nana</a>
+    </div>
+    
+    
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.LL.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Ahara Food In Udayavaya Nana</span>
+        
+        <span class="pathway-title title-pt">Ahara Food em Udayavaya Nana</span>
+        
+    </a>
+    
+
+    <span class="pathway-placeholder"></span>
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

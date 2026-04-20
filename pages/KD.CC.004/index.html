@@ -1,0 +1,472 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Dukkha In Tilakkhana Is A Characteristic Not Dukkha Vedana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 10 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.CC.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Dukkha In Tilakkhana Is A Characteristic Not Dukkha Vedana</h1>
+    
+    <h1 class="title-pt">O Dukkha em Tilakkhaṇa é uma característica, não a Vedanā de Dukkha</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.CC.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.CC.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0076"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.CC.004</td></tr><tr><td>Fin-dex</td><td>0076</td></tr><tr><td>Slug</td><td>dukkha-in-tilakkhana-is-a-characteristic-not-dukkha-vedana</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Dukkha In Tilakkhana Is A Characteristic Not Dukkha Vedana</td></tr></table></div></div><p><strong>August 16, 2021; <span style="color: #3366ff">revised December 13, 2022</span></strong></p>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> - An Inherent Characteristic of This World and Not the <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Vedana</span></em></h5>
+<p style="text-align: justify">1. The most misunderstood aspect of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) is to think that <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> means the "suffering that we experience." Most meditation programs focus on the physical discomforts during a session. That is a complete misunderstanding. <strong>We need to focus on the</strong><span style="color: #993366"><strong> "<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> nature" of this world.</strong></span></p>
+<ul style="text-align: justify">
+<li>A "<em><span><span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em>" means an intrinsic "characteristic" or a "quality." For example, the "<span class="segment" id="dn30:0.2"><span class="root"><span class="text"><a href="https://suttacentral.net/dn30/en/sujato" rel="noopener" target="_blank"><em><span>Lakkhaṇa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 30)</a><span>" describes a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s 31 unique qualities/characteristics.</span></span></span></span></li>
+<li>Someone may live a happy life for many years. Yet, old age and eventual death are intrinsic <em><span><span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> of any life. <strong>Even though that person may not be suffering right now, they WILL face suffering without any doubt. </strong></li>
+<li>Therefore, the "<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em>" refers to one of the three intrinsic characteristics (<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>) of Nature, i.e., of this world.</li>
+<li><span>Before you get all pessimistic about <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> also explained how to escape that cycle of suffering. But we must first understand this world's "<span class="pali-term term-highlight" data-term="dukkha">dukkha</span> nature." </span><span style="color: #0000ff"><strong>To solve a problem, one first needs to realize that there is a problem</strong></span> and then find its root causes. Only then will one be able to remove those root causes and eliminate the problem!</li>
+</ul>
+<h5 style="text-align: justify">Anything In This World Has Those Three Characteristics!</h5>
+<p style="text-align: justify"><span>2. In previous <span class="pali-term term-highlight" data-term="posts">posts</span> in this series, we discussed that EVERYTHING in this world (i.e., not only living beings) has those three characteristics. However, we will suffer only if we attach to those things. In other words, </span><strong><em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em></strong> has the <i><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span>,</span></i> but we will be subjected to suffering ONLY DUE TO <strong><em>pañc<span style="color: #993366">u­pādā­na</span>k­han­dhā, </em></strong>a tiny fraction of <strong><em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span> </span></em></strong>that we attach to. See "<a href="../../pages/KD.CC.002/index.html" rel="noopener" target="_blank">Anicca and Anatta – Two Characteristics of the World"</a> for discussion and <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> references.</p>
+<ul style="text-align: justify">
+<li>Many more <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> state the same in different ways; see References 1 and 2 below.</li>
+</ul>
+<p style="text-align: justify"><strong>3. Think about that carefully.</strong> Anything in this world has the <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> (and <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) characteristics "built-in."</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff"><strong>There is no way to avoid future suffering as long as one uses those six internal sensory faculties to "enjoy" the six types of external entities<span style="color: #993366"> with greed, hate, and ignorance of the Noble Truths!</span> </strong></span></li>
+<li><strong>However, giving up cravings for worldly things is hard to do.</strong> It would be impossible without knowing HOW and WHY suffering would be the result.</li>
+<li>That is why it is essential to understand the<strong> Four Noble Truths, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em></strong>They are interrelated and explain HOW and WHY such attachments lead to future suffering.</li>
+<li>Here is an analogy. An alcoholic will not be able to give up drinking without fully comprehending HOW and WHY alcohol consumption leads to suffering.</li>
+</ul>
+<h5 style="text-align: justify">This World Is "Anchored on Suffering"</h5>
+<p style="text-align: justify"><span>4. The primary message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is that there is unimaginable suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process among the 31 realms. Most births are in the four lowest realms (</span><em>apāyās</em>), where suffering dominates any temporary relief.</p>
+<ul style="text-align: justify">
+<li>As long as there is existence in this world of 31 realms, that existence WILL encounter both <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>.</li>
+<li>However, since living beings are tempted to engage in <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>/pāpa <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, most rebirths are in the <em>apāyās</em><span>. We have discussed this "vast imbalance" as pointed out by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> in many </span><em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em><span>. We discussed a few in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/PS.II.002/index.html" rel="noopener" target="_blank">Introduction – What is Suffering?</a>"</li>
+</ul>
+<p style="text-align: justify"><span>5. That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, </span><span class="verse-line"><span class="segment" id="sn1.68:2.1"><span class="root"><span class="text">“<em><span>Maccunā pihito <span class="pali-term term-highlight" data-term="loko">loko</span>,</span></em></span></span></span></span><em><span class="verse-line"><span class="segment" id="sn1.68:2.2"><span class="root"><span class="text"><span style="color: #0000ff"><strong><span>dukkhe <span class="pali-term term-highlight" data-term="loko">loko</span> patiṭṭhito</span></strong></span>; </span></span></span></span><span class="verse-line"><span class="segment" id="sn1.68:2.3"><span class="root"><span class="text"><span style="color: #993366"><strong>Taṇhāya</strong></span><span> uḍḍito <span class="pali-term term-highlight" data-term="loko">loko</span>,</span></span></span></span></span><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text">jarāya parivārito”ti. </span></span></span></span></em><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text">See,</span></span></span></span><em><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"> "<span class="segment" id="sn1.68:0.3"><a href="https://suttacentral.net/sn1.68/pli/ms" rel="noopener" target="_blank">Pihita Sutta </a></span></span></span></span></span></em><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"><span class="segment" id="sn1.68:0.3"><a href="https://suttacentral.net/sn1.68/pli/ms" rel="noopener" target="_blank">(SN 1.68)</a></span></span></span></span></span><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"><span class="segment" id="sn1.68:0.3">."</span></span></span></span></span></p>
+<p style="text-align: justify"><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"><strong>Translated:</strong> <span style="color: #000000">"The world is inhabited by death, <span style="color: #0000ff"><strong>the world is anchored on suffering</strong></span>; <span style="color: #993366"><strong>Craving/attachment</strong></span> has trapped the world; it is enveloped by decay and old age.”</span> </span></span></span></span><span class="segment" id="sn1.68:0.3"><span class="root"><span class="text"> </span></span></span></p>
+<ul style="text-align: justify">
+<li>A series of short <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> (SN 1.61 through SN 1.81) provides the basis for deeper <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> in <em>Saṁyutta Nikāya</em>. Read through those starting with the "<a href="https://suttacentral.net/sn1.61/pli/ms" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="nāma">Nāma</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 1. 61)</a>."</li>
+<li><strong>We can end that "long-term suffering" by understanding the root causes for births among the 31 realms.</strong> In particular, births in the <em>apāyās</em> are caused by <strong>immoral deeds (<em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em>)</strong> done while seeking sensory pleasures.</li>
+</ul>
+<h5 style="text-align: justify">Not Possible to Reach a State with "No Suffering" in This World</h5>
+<p style="text-align: justify">6. Understanding the Three Characteristics (<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>) helps to understand the Four Noble Truths.</p>
+<ul style="text-align: justify">
+<li><span style="color: #993366"><strong>The Nature of this world is such that no matter how hard we try, it is not possible to get to a place free of suffering.</strong></span></li>
+<li><span>Let us start with the assumption that there is no <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Some people have made enough money not only to sustain their families but even to fund the economy of a small country for a year! But would they not be subjected to suffering? We all get old and die one day!</span></li>
+<li>No matter how successful one becomes, that cannot be said to have led to a "state free of suffering."</li>
+<li><span>Those people who commit suicide hope that their suffering will end at death! Unfortunately, that is not the case either. <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> is inevitable for anyone below the </span><em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage, and births in the <em>apāyās</em> are possible for anyone who has not at least started to understand the Four Nobel Truths, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. That is why one should not waste any time!</li>
+</ul>
+<h5 style="text-align: justify"><span>Understanding “True Suffering” – It Is in the <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Process</span></h5>
+<p style="text-align: justify"><span>7. in the <span class="pali-term term-highlight" data-term="post">post</span> “</span><a href="../../pages/TL.GG.004/index.html" rel="noopener" target="_blank">Rebirth – Connection to Suffering in the First Noble Truth,</a>” we discussed references in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span> </span></em>that MOST rebirths are in the four lowest realms (<em>apāyās</em>.) We can only see the suffering in one of them, the animal realm.</p>
+<ul style="text-align: justify">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has discussed, in detail, the types of suffering in the other three </span><em>apāyās</em>. For example, in the “<span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/mn129/en/sujato" rel="noopener" target="_blank"><em><span>Bālapaṇḍita <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 129)</a>” and “</span></span></span><span class="segment" id="mn130:0.2"><span class="root"><span class="text"><a href="https://suttacentral.net/mn130/en/sujato" rel="noopener" target="_blank"><em><span>Devadūta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 130)</a>” </span></span></span><span class="segment" id="mn129:0.2"><span class="root"><span class="text"><span>the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explains, in detail, the types of suffering encountered in various lower realms.</span></span></span></span></li>
+<li>English translation of the first one: “<span class="segment" id="mn129:0.2"><span class="translation"><span class="text"><a href="https://suttacentral.net/mn129/en/sujato" rel="noopener" target="_blank">The Foolish and the Astute (MN 129</a>.).” That <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> explains that a person who engages in immoral activities (“<em>bālo</em>” or a “fool”) can expect the consequences (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>) both in this life and in future existences in the <em>apāyās</em>. </span></span></span><strong><span class="segment" id="mn129:0.2"><span class="translation"><span class="text"><span class="root">The account of the experiences in the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (lowest realm) is terrifying. </span></span></span></span></strong></li>
+</ul>
+<p style="text-align: justify">8. A related <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> is the “<a href="https://suttacentral.net/dn23/en/sujato" rel="noopener" target="_blank"><em><span>Pāyāsi <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 23)</a><span>.” It is about the wrong views that there is no <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process, etc. See the English translation: “</span><a href="https://suttacentral.net/dn23/en/sujato" rel="noopener" target="_blank">With <em>Pāyāsi</em> (DN 23)</a><span>.” For those who have doubts about the validity of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process or the existence of </span><em>apāyās</em>, it is a good idea to read the above <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em>.</p>
+<ul style="text-align: justify">
+<li><span>As mentioned in the first <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Noble Truths, Paṭicca Samuppāda, Tilakkhana,</a><span>" in this series of <span class="pali-term term-highlight" data-term="posts">posts</span>, we discuss </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> with the focus on the summary statement, "<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span style="color: #0000ff"><span>aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span></span></span> <span style="color: #993366">dukkhaṁ bhayaṭṭhena anattā asārakaṭṭhenāti.</span>" </strong></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">It can be stated as follows: </span></span></span></li>
+<li><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">"<strong>Anything in this world (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span>, </span></em><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>)<span style="color: #0000ff"> is of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature because one’s hopes for enjoying them will only lead to one’s demise</span></strong> (“<em><span style="color: #0000ff"><strong><span>aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span></span></strong></span>.”</em>)<span style="color: #993366"> <strong>It will eventually lead to sufferings that one should be afraid of</strong> (“</span><em><span style="color: #993366"><strong>dukkhaṁ bhayaṭṭhena</strong></span>.”</em>) Therefore, such cravings/efforts are <span style="color: #993366"><strong><span>unfruitful and will make one helpless in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process </span></strong>(“</span><em><span style="color: #993366"><strong>anattā asārakaṭṭhenāti</strong>.</span>”</em>)</span></span></span></li>
+<li><span>One would not become serious about learning <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> until realizing the unimaginable suffering associated with the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process!</span></li>
+</ul>
+<h5 style="text-align: justify">What Is <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>?</h5>
+<p style="text-align: justify">9. A key point here is that there are many instances where one can experience "periods of happiness" even for long times. Life is mostly of "sensual pleasures" in the 6 <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span> </span></em>realms.  In the 20 <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms, it is mostly "<em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures" that they experience. Even some humans experience high levels of "sensual pleasures" for most of their lives.</p>
+<ul style="text-align: justify">
+<li><span>However, all those "periods of happiness" or "pleasures" are VERY SHORT in the time scale of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process, which is effectively infinite. See "</span><a href="../../pages/DS.KK.004/index.html" rel="noopener" target="_blank">Infinity – How Big Is It?</a>"</li>
+<li>Furthermore, all humans, <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em>, and <em>Brahmas</em> will end up in the four lowest realms unless they get to the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage!</li>
+<li><span>Without a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, we would be unaware of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process and that births in the </span><em>apāyās</em> are much more frequent than births in the "good realms."</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em><span>Is About the <span class="pali-term term-highlight" data-term="cessation">Cessation</span> of Suffering</span></h5>
+<p style="text-align: justify"><span>10. This is why the First Noble Truth is about the <span class="pali-term term-highlight" data-term="cessation">CESSATION</span> of suffering and NOT about happiness or even</span><em><span> <span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> experiences. <span style="color: #993366"><strong>Since NOTHING in this world exists in <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, all <em>vedanās</em> (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span>,</span></em> AS WE KNOW) are absent in <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong></span></p>
+<ul style="text-align: justify">
+<li>Even though<em><span> <span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> discuss <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> as "<em><span><span class="pali-term term-highlight" data-term="nibbānic">Nibbānic</span></span></em> bliss," the term "bliss" indicates the bliss associated with the TOTAL absence of suffering. It is indeed bliss to be free of suffering forever!</li>
+<li>The closest analogy is the following. Suppose someone has had a migraine headache for years. If it goes away one day, they will be free of that horrible suffering. That would be a great relief to get rid of all that suffering.</li>
+<li>We should think of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> the same way, not as a paradise with sensual or <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures. We can only say for sure that there is not even a trace of suffering in <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. See, "<a href="../../pages/KD.EE.004/index.html" rel="noopener" target="_blank">Nibbāna “Exists,” but Not in This World</a>."</li>
+</ul>
+<h5 style="text-align: justify">References</h5>
+<p style="text-align: justify">1. Twelve <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> begin with the "<span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/sn35.1/en/sujato" rel="noopener" target="_blank"><em><span>Ajjhattānicca <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.1)</a>" and end with the "</span></span></span><span class="segment" id="sn35.12:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/sn35.12/en/sujato" rel="noopener" target="_blank"><em><span>Bāhirānattātītānāgata <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.12)</a>" state that our six internal sensory faculties (eyes, ears, nose, tongue, body, mind) AND the six types of <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> experienced by those faculties all have the Three Characteristics (<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.)</span></span></span></p>
+<ul style="text-align: justify">
+<li>For example, they say, "<em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span>, sota, ghāna, jivhā, <span class="pali-term term-highlight" data-term="kāya">kāya</span>, <span class="pali-term term-highlight" data-term="mano">mano</span></span></em>" all have the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> qualities or characteristics. <span style="color: #0000ff"><strong>That means all six sensory faculties have "built-in" <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span> </span></em>nature. </strong></span></li>
+<li>The same is true for the six types of external <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> that we experience: <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, sadda, gandha, rasa, </span><span class="segment" id="sn35.4:1.8"><span class="root"><span class="text">phoṭṭhabba, </span></span></span></em><span class="segment" id="sn35.4:1.8"><span class="root"><span class="text">and </span></span></span><em><span class="segment" id="sn35.4:1.9"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span>.</span></span></span></span></em><span class="segment" id="sn35.4:1.9"><span class="root"><span class="text"> </span></span></span></li>
+<li>But we will be subjected to suffering only if we attach to them!</li>
+</ul>
+<p style="text-align: justify">2. There are nine <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span>,</span></em> "<a href="https://suttacentral.net/sn35.43-51/en/sujato" rel="noopener" target="_blank"><span class="segment"><span class="root"><span class="text"><em>Aniccādisuttanavaka</em> (SN </span></span></span></a><span class="segment" id="sn35.43:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/sn35.43-51/en/sujato" rel="noopener" target="_blank">43–51)</a>," that state "<span style="color: #993366"><strong>everything (all) in this world is of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature</strong></span>."</span></span></span></p>
+<ul style="text-align: justify">
+<li><span>MANY other <span class="pali-term term-highlight" data-term="suttas">suttas</span> state the same in different ways: 138 <span class="pali-term term-highlight" data-term="suttas">suttas</span> say the five aggregates all have </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature: "<a href="https://suttacentral.net/search" rel="noopener" target="_blank"><span class="search-result-number">138 </span><span class="search-result-description">results for</span> </a><span class="search-result-term"><a href="https://suttacentral.net/search" rel="noopener" target="_blank">vedanā AND viññāṇaṁ AND aniccā</a>." Of course, the five aggregates encompass everything in this world.</span></li>
+<li>To state the same differently, five aggregates (<em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em>) are "subject to suffering." Even an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is subject to suffering until the death of the physical body (<em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em><span>.) The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> himself had bodily ailments.</span></li>
+<li>However, all that suffering ends at <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">3. Each person creates their own future suffering from their own actions based on (<em>abhi</em>)<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that arise due to the ignorance of this "big picture."</p>
+<ul>
+<li style="text-align: justify">When a mind grasps this "big picture," one attains the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. No matter how strong the temptation is, it will NEVER trigger the mind to commit "<em>apāyagāmi</em><span> actions" (those lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em>apāyās</em>). That is the meaning of “<span style="color: #993366"><strong><em>dassanena pahātabbā</em></strong></span>” or “<span style="color: #993366"><strong>remove defilements with clear vision</strong></span><span>” that we briefly mentioned in the first <span class="pali-term term-highlight" data-term="post">post</span> in this series: "</span><a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Noble Truths, Paṭicca Samuppāda, Tilakkhana</a>."</li>
+<li style="text-align: justify">That is the same as getting to the first step in the Noble Eightfold Path, <em>Samma Diṭṭhi.</em></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.CC.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0076"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.CC.004
+Language:     pt-BR
+Generated-At: 2026-04-18T04:03:13Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>16 de agosto de 2021; <span style="color: #3366ff">revisado em 13 de dezembro de 2022</span></strong></p>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> — Uma Característica Inerente a Este Mundo e Não a <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em></h5>
+<p style="text-align: justify">1. O aspecto mais mal interpretado do <em>Tilakkhaṇa</em> (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>) é pensar que <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> significa o “sofrimento que experimentamos”. A maioria dos programas de meditação concentra-se nos desconfortos físicos durante uma sessão. Isso é um completo equívoco. <strong>Precisamos nos concentrar na</strong><span style="color: #993366"><strong> “natureza <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>” deste mundo.</strong></span></p>
+<ul style="text-align: justify">
+<li>Um “<em>Lakkhaṇa</em>” significa uma “característica” intrínseca ou uma “qualidade”. Por exemplo, o <span class="segment" id="dn30:0.2"><span class="root"><span class="text"><a href="https://suttacentral.net/dn30/en/sujato" rel="noopener" target="_blank"><em><span>“Lakkhaṇa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 30)</a><span>” descreve as 31 qualidades/características únicas de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></span></span></span></li>
+<li>Alguém pode viver uma vida feliz por muitos anos. No entanto, a velhice e a morte inevitável são <em>Lakkhaṇas</em> intrínsecas de qualquer vida. <strong>Mesmo que essa pessoa não esteja sofrendo neste momento, ela IRÁ enfrentar o sofrimento, sem dúvida alguma. </strong></li>
+<li>Portanto, o <em><span>“<span class="pali-term term-highlight" data-term="dukkha">dukkha</span> </span></em>Lakkhaṇa” refere-se a uma das três características intrínsecas (<em>Tilakkhaṇa</em>) da Natureza, ou seja, deste mundo.</li>
+<li><span>Antes que você fique pessimista em relação ao <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> também explicou como escapar desse ciclo de sofrimento. Mas precisamos primeiro compreender a “natureza <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>” deste mundo. </span><span style="color: #0000ff"><strong>Para resolver um problema, é preciso primeiro perceber que existe um problema</strong></span> e, então, encontrar suas causas profundas. Só assim será possível remover essas causas profundas e eliminar o problema!</li>
+</ul>
+<h5 style="text-align: justify">Tudo neste mundo possui essas três características!</h5>
+<p style="text-align: justify">2. Em ensaios anteriores desta série, discutimos que TUDO neste mundo (ou seja, não apenas os seres vivos) possui essas três características. No entanto, sofreremos apenas se nos apegarmos a essas coisas. Em outras palavras, <strong><em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em></strong> possui o <i><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Lakkhaṇa,</span></i> mas estaremos sujeitos ao sofrimento SOMENTE POR CAUSA DE <strong><em>pañc<span style="color: #993366">u­pādā­na</span>k<span style="color: #993366">­</span>han<span style="color: #993366">­</span>dhā, </em></strong>uma minúscula fração de <strong><em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span> </span></em></strong>à qual nos apegamos. Consulte “<a href="../../pages/KD.CC.002/index.html" rel="noopener" target="_blank">Anicca e Anattā – Duas Características do Mundo”</a> para discussão e referências <em><span>aos <span class="pali-term term-highlight" data-term="suttas">Suttas</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>Muitos outros <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> afirmam o mesmo de maneiras diferentes; veja as Referências 1 e 2 abaixo.</li>
+</ul>
+<p style="text-align: justify"><strong>3. Pense nisso cuidadosamente.</strong> Qualquer coisa neste mundo tem as características <strong>de</strong> <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> (e <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em>) “embutidas”.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff"><strong>Não há como evitar o sofrimento futuro enquanto se usar essas seis faculdades sensoriais internas para “desfrutar” dos seis tipos de entidades externas <span style="color: #993366">com ganância, ódio e ignorância das Nobres Verdades!</span> </strong></span></li>
+<li><strong>No entanto, abandonar os desejos por coisas mundanas é difícil.</strong> Seria impossível sem saber COMO e POR QUE o sofrimento seria o resultado.</li>
+<li>É por isso que é essencial compreender as<strong> Quatro Nobres Verdades, <em>Tilakkhaṇa</em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em></strong>Elas estão inter-relacionadas e explicam COMO e POR QUE tais apegos levam ao sofrimento futuro.</li>
+<li>Aqui está uma analogia. Um alcoólatra não será capaz de abandonar a bebida sem compreender plenamente COMO e POR QUE o consumo de álcool leva ao sofrimento.</li>
+</ul>
+<h5 style="text-align: justify">Este Mundo Está “Ancorado no Sofrimento”</h5>
+<p style="text-align: justify"><span>4. A mensagem principal do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> é que há um sofrimento inimaginável no processo de renascimento entre os 31 reinos. A maioria dos nascimentos ocorre nos quatro reinos mais baixos (</span><em>apāyās</em>), onde o sofrimento domina qualquer alívio temporário.</p>
+<ul style="text-align: justify">
+<li>Enquanto houver existência neste mundo de 31 reinos, essa existência ENCONTRARÁ tanto <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> quanto <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>.</li>
+<li>No entanto, como os seres vivos são tentados a se envolver em <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>/pāpa <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, a maioria dos renascimentos ocorre nos <em>apāyās</em><span>. Já discutimos esse “vasto desequilíbrio”, conforme apontado pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span> em muitos </span><em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>. Abordamos alguns deles no ensaio “<a href="../../pages/PS.II.002/index.html" rel="noopener" target="_blank">Introdução – O que é sofrimento?</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>5. É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: </span><span class="verse-line"><span class="segment" id="sn1.68:2.1"><span class="root"><span class="text">“<em><span>Maccunā pihito <span class="pali-term term-highlight" data-term="loko">loko</span>,</span></em></span></span></span></span> <em><span class="verse-line"><span class="segment" id="sn1.68:2.2"><span class="root"><span class="text"><span style="color: #0000ff"><strong><span>dukkhe <span class="pali-term term-highlight" data-term="loko">loko</span> patiṭṭhito</span></strong></span>; </span></span></span></span><span class="verse-line"><span class="segment" id="sn1.68:2.3"><span class="root"><span class="text"><span style="color: #993366"><strong>Taṇhāya</strong></span><span> uḍḍito <span class="pali-term term-highlight" data-term="loko">loko</span>, </span></span></span></span></span><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text">jarāya parivārito”ti</span></span></span></span></em><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text">. Veja</span></span></span></span> <em><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"><span class="segment" id="sn1.68:0.3"><a href="https://suttacentral.net/sn1.68/pli/ms" rel="noopener" target="_blank">“Pihita Sutta </a></span></span></span></span></span></em><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"><span class="segment" id="sn1.68:0.3"><a href="https://suttacentral.net/sn1.68/pli/ms" rel="noopener" target="_blank">(SN 1.68)</a></span></span></span></span></span><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"><span class="segment" id="sn1.68:0.3">”.</span></span></span></span></span></p>
+<p style="text-align: justify"><span class="verse-line"><span class="segment" id="sn1.68:2.4"><span class="root"><span class="text"><strong>Traduzido:</strong> <span style="color: #000000">“O mundo é habitado pela morte, <span style="color: #0000ff"><strong>o mundo está ancorado no sofrimento</strong></span>; <span style="color: #993366"><strong>o desejo/apego</strong></span> aprisionou o mundo; ele está envolto pela decadência e pela velhice.”</span> </span></span></span></span><span class="segment" id="sn1.68:0.3"><span class="root"><span class="text"> </span></span></span></p>
+<ul style="text-align: justify">
+<li>Uma série de <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> curtos (SN 1.61 a SN 1.81) fornece a base para <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> mais profundos no <em>Saṁyutta Nikāya</em>. Leia-os começando pelo “<a href="https://suttacentral.net/sn1.61/pli/ms" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="nāma">Nāma</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 1.61)</a>”.</li>
+<li><strong>Podemos pôr fim a esse “sofrimento de longo prazo” compreendendo as causas fundamentais dos nascimentos nos 31 reinos.</strong> Em particular, os nascimentos nos <em>apāyās</em> são causados por <strong>ações imorais (<em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em>)</strong> praticadas na busca de prazeres sensoriais.</li>
+</ul>
+<h5 style="text-align: justify">Não é possível alcançar um estado “sem sofrimento” neste mundo</h5>
+<p style="text-align: justify">6. Compreender as Três Características (<em>Tilakkhaṇa</em>) ajuda a compreender as Quatro Nobres Verdades.</p>
+<ul style="text-align: justify">
+<li><span style="color: #993366"><strong>A natureza deste mundo é tal que, por mais que nos esforcemos, não é possível chegar a um lugar livre de sofrimento.</strong></span></li>
+<li>Vamos partir do pressuposto de que não existe o processo de Renascimento. Algumas pessoas ganharam dinheiro suficiente não apenas para sustentar suas famílias, mas até mesmo para financiar a economia de um pequeno país por um ano! Mas será que elas não estariam sujeitas ao sofrimento? Todos nós envelhecemos e morremos um dia!</li>
+<li>Por mais sucesso que alguém tenha, não se pode dizer que isso tenha levado a um “estado livre de sofrimento”.</li>
+<li>Aquelas pessoas que cometem suicídio esperam que seu sofrimento termine com a morte! Infelizmente, esse também não é o caso. O renascimento é inevitável para qualquer pessoa abaixo do estágio <em><span>de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>, e renascimentos nos <em>apāyās</em> são possíveis para qualquer um que não tenha pelo menos começado a compreender as Quatro Nobres Verdades, <em>Tilakkhaṇa</em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. É por isso que não se deve perder tempo!</li>
+</ul>
+<h5 style="text-align: justify">Compreendendo o “Verdadeiro Sofrimento” – Ele está no Processo de Renascimento</h5>
+<p style="text-align: justify">7. Na postagem “<a href="../../pages/TL.GG.004/index.html" rel="noopener" target="_blank">Renascimento – Conexão com o Sofrimento na Primeira Nobre Verdade</a>”<a href="../../pages/TL.GG.004/index.html" rel="noopener" target="_blank">,</a> discutimos referências no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span> </span></em>de que a MAIORIA dos renascimentos ocorre nos quatro reinos mais baixos (<em>apāyās</em>). Só podemos ver o sofrimento em um deles, o reino animal.</p>
+<ul style="text-align: justify">
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> discutiu, em detalhes, os tipos de sofrimento nos outros três </span><em>apāyās</em>. Por exemplo, no “<span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/mn129/en/sujato" rel="noopener" target="_blank"><em><span>Bālapaṇḍita <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 129)</a>” e</span></span></span> no <span class="segment" id="mn130:0.2"><span class="root"><span class="text"><a href="https://suttacentral.net/mn130/en/sujato" rel="noopener" target="_blank"><em><span>“Devadūta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 130)</a>”</span></span></span><span class="segment" id="mn129:0.2"><span class="root"><span class="text"><span>, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explica, em detalhes, os tipos de sofrimento encontrados em vários reinos inferiores.</span></span></span></span></li>
+<li>Tradução para o português do primeiro: <span class="segment" id="mn129:0.2"><span class="translation"><span class="text"><a href="https://suttacentral.net/mn129/en/sujato" rel="noopener" target="_blank">“O Tolo e o Astuto (MN 129</a>).” Esse <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> explica que uma pessoa que se envolve em atividades imorais (“<em>bālo</em>” ou um “tolo”) pode esperar as consequências (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>) tanto nesta vida quanto em existências futuras nos <em>apāyās</em>. </span></span></span><strong><span class="segment" id="mn129:0.2"><span class="translation"><span class="text"><span class="root">O relato das experiências no <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (reino mais baixo) é aterrorizante. </span></span></span></span></strong></li>
+</ul>
+<p style="text-align: justify">8. Um <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> relacionado é o “<a href="https://suttacentral.net/dn23/en/sujato" rel="noopener" target="_blank"><em><span>Pāyāsi <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 23)</a>”. Trata-se das visões errôneas de que não existe o processo de Renascimento, etc. Veja a tradução para o inglês: “<a href="https://suttacentral.net/dn23/en/sujato" rel="noopener" target="_blank">Com <em>Pāyāsi</em> (DN 23)</a>”. Para aqueles que têm dúvidas sobre a validade do processo de renascimento ou a existência dos <em>apāyās</em>, é uma boa ideia ler as <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> acima.</p>
+<ul style="text-align: justify">
+<li>Conforme mencionado na primeira postagem, “<a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Nobres Verdades, Paṭicca Samuppāda, Tilakkhaṇa</a>”<a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">,</a> nesta série de ensaios, discutimos <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> com foco na declaração resumida: <em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span style="color: #0000ff"><span>“Aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span></span></span> <span style="color: #993366">Dukkhaṁ bhayaṭṭhena Anattā asārakaṭṭhenāti”.</span> </strong></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">Isso pode ser expressado da seguinte forma: </span></span></span></li>
+<li><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">“<strong>Tudo neste mundo (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>)<span style="color: #0000ff"> é de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, pois as esperanças de desfrutá-los levarão apenas à nossa perdição</span></strong> (“<em><span style="color: #0000ff"><strong><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span> <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span></span></strong></span>.”</em>)<span style="color: #993366"> <strong>Isso acabará por levar a sofrimentos dos quais se deve temer</strong> (“</span><em><span style="color: #993366"><strong>dukkhaṁ bhayaṭṭhena</strong></span>.”</em>) Portanto, tais desejos/esforços são <span style="color: #993366"><strong>infrutíferos e tornarão a pessoa impotente no processo de Renascimento</strong> (“</span><em><span style="color: #993366"><strong>anattā asārakaṭṭhenāti</strong>.</span>”</em>)</span></span></span></li>
+<li><span>A pessoa não levaria a sério o aprendizado do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> até perceber o sofrimento inimaginável associado ao processo de Renascimento!</span></li>
+</ul>
+<h5 style="text-align: justify">O que é <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>?</h5>
+<p style="text-align: justify">9. Um ponto-chave aqui é que há muitos casos em que se pode experimentar “períodos de felicidade”, mesmo por longos períodos. A vida consiste principalmente em “prazeres sensuais” nos 6 reinos <em><span>dos <span class="pali-term term-highlight" data-term="devas">Devas</span></span></em>. Nos 20 reinos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>, são principalmente “prazeres <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>” que eles experimentam. Até mesmo alguns humanos experimentam altos níveis de “prazeres sensuais” durante a maior parte de suas vidas.</p>
+<ul style="text-align: justify">
+<li>No entanto, todos esses “períodos de felicidade” ou “prazeres” são MUITO CURTOS na escala de tempo do processo de Renascimento, que é efetivamente infinito. Veja “<a href="../../pages/DS.KK.004/index.html" rel="noopener" target="_blank">Infinito – Quão grande é?</a>”</li>
+<li>Além disso, todos os humanos, <em>Devās</em> e <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> acabarão nos quatro reinos mais baixos, a menos que alcancem o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>!</li>
+<li><span>Sem um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, não teríamos consciência do processo de renascimento e de que os nascimentos nos </span><em>apāyās</em> são muito mais frequentes do que os nascimentos nos “reinos bons”.</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>trata da cessação do sofrimento</h5>
+<p style="text-align: justify">10. É por isso que a Primeira Nobre Verdade trata da CESSÃO do sofrimento e NÃO da felicidade ou mesmo de experiências <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. <span style="color: #993366"><strong>Como NADA neste mundo existe em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, todas <em>as Vedanās</em> (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span>,</span></em> COMO SABEMOS) estão ausentes em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong></span></p>
+<ul style="text-align: justify">
+<li>Embora<em><span> os <span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> discutam <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> como “felicidade <em>nibbânica</em>”, o termo “felicidade” indica a felicidade associada à ausência TOTAL de sofrimento. É de fato uma felicidade estar livre do sofrimento para sempre!</li>
+<li>A analogia mais próxima é a seguinte. Suponha que alguém tenha tido enxaqueca por anos. Se ela desaparecer um dia, essa pessoa estará livre desse sofrimento horrível. Seria um grande alívio livrar-se de todo esse sofrimento.</li>
+<li>Devemos pensar em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> da mesma maneira, não como um paraíso com prazeres sensuais ou <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Só podemos afirmar com certeza que não há nem mesmo um traço de sofrimento em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Veja “<a href="../../pages/KD.EE.004/index.html" rel="noopener" target="_blank">Nibbāna ‘existe’, mas não neste mundo</a>”.</li>
+</ul>
+<h5 style="text-align: justify">Referências</h5>
+<p style="text-align: justify">1. Doze <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span>,</span></em> começando com o <span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/sn35.1/en/sujato" rel="noopener" target="_blank"><em><span>“Ajjhattānicca <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.1)</a>” e terminando com o </span></span></span><span class="segment" id="sn35.12:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/sn35.12/en/sujato" rel="noopener" target="_blank"><em><span>“Bāhirānattātītānāgata <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.12)</a>”, afirmam que nossas seis faculdades sensoriais internas (olhos, ouvidos, nariz, língua, corpo, mente) E os seis tipos de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> experimentados por essas faculdades possuem todas as Três Características (<em>Tilakkhaṇa</em>.)</span></span></span></p>
+<ul style="text-align: justify">
+<li>Por exemplo, dizem que “<em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span>, sota, ghāna, jivhā, <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, <span class="pali-term term-highlight" data-term="mano">Mano</span></span></em>” possuem as qualidades ou características de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>. <span style="color: #0000ff"><strong>Isso significa que todas as seis faculdades sensoriais têm a natureza <em>de</em> <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em> “incorporada”. </strong></span></li>
+<li>O mesmo se aplica aos seis tipos de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> externos que experimentamos: <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, sadda, gandha, rasa, </span><span class="segment" id="sn35.4:1.8"><span class="root"><span class="text">phoṭṭhabba </span></span></span></em><span class="segment" id="sn35.4:1.8"><span class="root"><span class="text">e </span></span></span><em><span class="segment" id="sn35.4:1.9"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span>.</span></span></span></span></em><span class="segment" id="sn35.4:1.9"><span class="root"><span class="text"> </span></span></span></li>
+<li>Mas só estaremos sujeitos ao sofrimento se nos apegarmos a elas!</li>
+</ul>
+<p style="text-align: justify">2. Existem nove <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span>,</span></em> “<a href="https://suttacentral.net/sn35.43-51/en/sujato" rel="noopener" target="_blank"><span class="segment"><span class="root"><span class="text"><em>Aniccādisuttanavaka</em> (SN </span></span></span></a><span class="segment" id="sn35.43:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/sn35.43-51/en/sujato" rel="noopener" target="_blank">43–51)</a>”, que afirmam que “<span style="color: #993366"><strong>tudo (todos) neste mundo é de natureza<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em></strong></span>”.</span></span></span></p>
+<ul style="text-align: justify">
+<li><span>MUITOS outros <span class="pali-term term-highlight" data-term="suttas">suttas</span> afirmam o mesmo de maneiras diferentes: 138 <span class="pali-term term-highlight" data-term="suttas">suttas</span> dizem que os cinco agregados têm natureza </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>: “<a href="https://suttacentral.net/search" rel="noopener" target="_blank"><span class="search-result-number">138 </span><span class="search-result-description">resultados para</span> </a><span class="search-result-term"><a href="https://suttacentral.net/search" rel="noopener" target="_blank">Vedanā E viññāṇaṁ E Anicca</a>”. É claro que os cinco agregados abrangem tudo neste mundo.</span></li>
+<li>Para afirmar o mesmo de outra forma, os cinco agregados (<em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em>) estão “sujeitos ao sofrimento”. Mesmo um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> está sujeito ao sofrimento até a morte do corpo físico (<em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em><span>). O próprio <span class="pali-term term-highlight" data-term="buddha">Buddha</span> tinha doenças físicas.</span></li>
+<li>No entanto, todo esse sofrimento termina no <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">3. Cada pessoa cria seu próprio sofrimento futuro a partir de suas próprias ações, baseadas em (<em>abhi</em>)<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> que surgem devido à ignorância desse “quadro geral”.</p>
+<ul>
+<li style="text-align: justify">Quando a mente compreende esse “quadro geral”, alcança-se o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Não importa quão forte seja a tentação, ela NUNCA levará a mente a cometer “ações <em>apāyagāmi</em>” (aquelas que conduzem ao Renascimento nos <em>apāyās</em>). Esse é o significado de “<span style="color: #993366"><strong><em>dassanena pahātabbā</em></strong></span>” ou “<span style="color: #993366"><strong>remover as impurezas com visão clara</strong></span>”, que mencionamos brevemente no primeiro ensaio desta série: “<a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Nobres Verdades, Paṭicca Samuppāda, Tilakkhaṇa</a>”.</li>
+<li style="text-align: justify">Isso é o mesmo que chegar ao primeiro passo do Nobre Caminho Óctuplo, <em>Samma Diṭṭhi.</em></li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.CC.003/index.html">Anuloma Khanti Sammattaniyama Pre Requisites For A Sotapanna</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.CC.005/index.html">Attachment To Things With Dukkha Lakkhana Leads To Dukkha</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.CC.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anuloma Khanti Sammattaniyama Pre Requisites For A Sotapanna</span>
+        
+        <span class="pathway-title title-pt">Anuloma Khanti Sammattaniyama: Pré-requisitos para um Sotāpanna</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.CC.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Attachment To Things With Dukkha Lakkhana Leads To Dukkha</span>
+        
+        <span class="pathway-title title-pt">O apego às coisas que apresentam o Lakkhaṇa de Dukkha leva ao Dukkha</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

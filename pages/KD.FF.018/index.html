@@ -1,0 +1,351 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anatta No Unchanging Self | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 42 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.018</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anatta No Unchanging Self</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.018</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.018"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0115"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.018</td></tr><tr><td>Fin-dex</td><td>0115</td></tr><tr><td>Slug</td><td>anatta-no-unchanging-self</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Anatta No Unchanging Self</td></tr></table></div></div><p><strong>December 5, 2018; revised March 6, 2021; <span style="color: #0000ff;">August 29, 2022</span></strong></p>
+<h5><em><span><span class="pali-term term-highlight" data-term="anatta">Anatta</span></span></em> is Not About a "Self"</h5>
+<p style="text-align: justify;"><span>1. These days, most people translate the key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word "</span><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" simply as "no-self." However, just by looking at a few occurrences of "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, we can see that it needs to be interpreted differently, depending on the context.</p>
+<ul style="text-align: justify;">
+<li>The words "<em>attha,"</em> "<em>atta,"</em> and "<em><span><span class="pali-term term-highlight" data-term="attā">attā</span>"</span></em> can have many different meanings depending on the context.</li>
+<li>Even in English, there are cases like this: The word "<strong>right</strong>" can mean two different things: "you are <strong>right</strong>" and "turn <strong>right</strong>." Even though it is pronounced the same way, "write" means something entirely different from the possible meanings of "right."</li>
+<li>An easy way to remember the true meaning of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is to understand what is meant by "<em><span>sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā</span></em>" in the "<a href="https://suttacentral.net/an3.136/en/sujato" rel="noopener" target="_blank"><em><span>Uppādā <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 3.136)</a>." Here, "<em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span>" refers not to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> but to "</span><em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>" (plural) that bears everything in this world. This is the <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span> </span></em>in “<em><span>Ye <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> hetuppabhavā, <span class="pali-term term-highlight" data-term="tesaṃ">Tesaṃ</span> hetuṃ tathāgato āha</span></em>"  or "any <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> giving rise to this world arises due to "three "<em>san</em>" of <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></em><span> as explained by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>."  See #6 below. </span><span style="color: #0000ff;"><strong>Thus, all such <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span> </span></em>are without essence (<em>anattā</em>.)</strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Ānanda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 44.10)</h5>
+<p style="text-align: justify;">2. Even though this is a bit deep <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, "<a href="https://suttacentral.net/sn44.10/en/sujato" rel="noopener" target="_blank"><em><span>Ānanda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 44.10)</a>" provides an excellent basis to start a discussion on <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>. Just as now, many people in the days of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> wondered whether a "self" or a "soul" (</span><em><span><span class="pali-term term-highlight" data-term="attā">attā</span></span></em>) exists. That is, of course, the ordinary meaning of <em><span><span class="pali-term term-highlight" data-term="attā">attā</span>. </span></em></p>
+<ul style="text-align: justify;">
+<li><span>Vacchagotta comes to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> asked "</span><em><span><span class="pali-term term-highlight" data-term="kiṃ">kiṃ</span> nu kho, bho gotama, atthattā” ti?</span></em>" OR "Master Gotama, is it correct to say that there is a "self"?".</li>
+<li><strong>Note that "<em>atthattā</em>" is "<em><span>atthi <span class="pali-term term-highlight" data-term="attā">attā</span>,</span></em>" where "<em>atthi</em>" means "exists" and (as Vacchagotta meant in this case) "<em><span><span class="pali-term term-highlight" data-term="attā">attā</span>" </span></em>to be "self." </strong>Thus, by saying "<em>atthattā," </em>Vacchagotta meant: "correct to say an <em><span><span class="pali-term term-highlight" data-term="attā">attā</span> </span></em>exists."</li>
+</ul>
+<p style="text-align: justify;"><span>3. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> remained silent, and Vacchagotta asked the question in the negative form. The second time, he asked: "</span><em><span><span class="pali-term term-highlight" data-term="kiṃ">Kiṃ</span> pana, bho gotama, </span><strong>natthattā</strong>” ti?</em>" or, "Master Gotama, is it <strong>not</strong><span> correct to say that there is a "self"?". Seeing that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> refused to answer his question, Vacchagotta got up and left.</span></p>
+<ul style="text-align: justify;">
+<li><strong>Note that "<em>natthattā</em>" is made up of three words: "<em>na</em> <em><span>atthi <span class="pali-term term-highlight" data-term="attā">attā</span>,</span></em>" which negates  "<em>atthattā."</em> </strong></li>
+<li><span>I have discussed some of these word combinations in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>: "</span><a href="../../pages/KD.HH.009/index.html" rel="noopener noreferrer" target="_blank">Kāmaccandha and Icca – Being Blinded by Cravings</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span> Rejected Both "Self" and "No-Self"</span></h5>
+<p style="text-align: justify;"><span>4. When Vacchagotta left, Ven. Ānanda asked why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> did not answer the question.</span></p>
+<ul style="text-align: justify;">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained that if he answered positively (i.e., there is a "self"), then he would agree with those who had the wrong view that such a "self" exists. This view is called </span><em>sassatavāda,</em> or the belief that there is an "everlasting entity" (these days also called "a soul").</li>
+<li>If answered in the negative (i.e., there is "no-self"), then he would agree with those who had the wrong view that such a "self" does not exist. That is called <em>ucchedavāda, </em>or the belief that the body's death is the "end of a person," i.e., no re-birth.</li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejected both views of "self" (</span><em>sassatavāda</em>) and "no-self"(<em>ucchedavāda</em>).</li>
+</ul>
+<h5 style="text-align: justify;">A Rare Correct Translation of <em><span><span class="pali-term term-highlight" data-term="anatta">Anatta</span></span></em><span> at <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central</span></h5>
+<p style="text-align: justify;">5. <strong>Just from that verse, it is clear that if one takes "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" as "no-self," one has the wrong view taken by one faction of <em>brahmins</em><span> in the days of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: that of </span><em>ucchedavāda.</em></strong></p>
+<ul style="text-align: justify;">
+<li><span>I was surprised that the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central English translation says precisely what I explained in #4 above; see, "</span><a href="https://suttacentral.net/sn44.10/en/sujato" rel="noopener" target="_blank"><em><span>Ānanda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 44.10)</a><span class="add" title="Text added by the editor or translator for clarification.">". <strong>Directly quoting from that translation:</strong></span></li>
+<li>"If, Ānanda, when I was asked by the wanderer Vacchagotta, ‘Is there a self?’ I had answered, ‘There is a self,’ this would have been siding with those ascetics and brahmins who are eternalists. And if, when he asked, ‘Is there no self?’, I had answered, ‘There is no self.’ <a class="pts_pn" href="https://legacy.suttacentral.net/en/sn44.10#sn.iv.401" id="sn.iv.401" title="Pāli Text Society vol/page number."></a>That would have been siding with those ascetics and <em>brahmins</em> who are annihilationists."</li>
+<li><span>So, the translation of this verse is the same as mine. But the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central translation of the next verse uses the same meaning of "no-self" in </span><em><span>‘sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā’ </span></em>and gets into a contradiction, as we discuss now.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Sabbe <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> Anattā</span></em></h5>
+<p style="text-align: justify;"><span>6. Then the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> told Ven. Ānanda that any discussion on this topic would confuse Vacchagotta because he would then get mixed up with the deeper meaning of "</span><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" in ‘<em><span>sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā.</span></em>’ That refers to "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature": "<em><span>Ahañcānanda, vacchagottassa paribbājakassa ‘atthattā’ti puṭṭho samāno ‘atthattā’ti byākareyyaṃ, api nu me <span class="pali-term term-highlight" data-term="taṃ">taṃ</span>, ānanda, anulomaṃ abhavissa ñāṇassa uppādāya: ‘</span><strong><span>sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā</span></strong>’”ti</em>?". “<em>No hetaṃ, Bhante.”</em></p>
+<ul style="text-align: justify;">
+<li>That is the confusion most people have today. They equate "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature" in "<em><span>sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā"</span></em> with the "no-self" meaning of "<em>anattā."</em></li>
+<li>"<em><span>Sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā" </span></em>needs to be translated as<em> "</em> all<em><span> <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> </span></em>are of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span> </span></em>nature," i.e., of "without essence," and that one would become "<em>anattā" </em>or "without refuge" if one does not comprehend the "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature."</li>
+</ul>
+<p style="text-align: justify;"><span>7. In the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central translation, the same mundane meaning ("no-self")  is used for </span><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> in "<em><span>sabbe <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> anattā."</span><strong> </strong></em></p>
+<ul style="text-align: justify;">
+<li><span>The verse in #6 in the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central translation  is: "If, Ānanda, when I was asked by the wanderer Vacchagotta, ‘Is there a self?’ I had answered, ‘There is a self,’ would this have been consistent on my part with the arising of the knowledge that ‘all phenomena are nonself’?”.</span></li>
+<li><strong>First, "all phenomena are non-self" does not make sense. <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em> cannot have a "self" anyway.</span></strong> Here, the correct translation is, "all phenomena are of no essence." We will discuss this in detail later.</li>
+<li><strong><span style="color: #0000ff;"><span>Furthermore, that translation, "all phenomena are non-self," is self-contradictory to the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central translation of previous verses in #5 above</span></span>, </strong><span>where both "self" and "no-self" were shown to be rejected by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;">The Danger in Translating <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> Word-by-Word</h5>
+<p style="text-align: justify;">8. That is the danger in translating <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em><span> word-by-word without grasping the real meanings of <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words and understanding that meanings depend on the context.</span></p>
+<ul style="text-align: justify;">
+<li>Therefore, it should be quite clear that Vacchagotta's confusion is not different from the misunderstanding that many people have today.</li>
+<li>However, Vacchagotta could grasp that distinction later on and became a <em><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></em>. Ven. Vacchagotta became an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+<li>I sincerely hope those with the wrong understanding will also be able to see the truth at some point.</li>
+</ul>
+<p style="text-align: justify;">9. The deeper meaning of "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" will become clear as we discuss this in detail; See "<a href="http://localhost/beng_feb2026/paticca-samuppada/paticca-samuppada-essential-concepts/" rel="noopener" target="_blank">Paṭicca Samuppāda – Essential Concepts</a><span>." Without understanding those more basic concepts, it is dangerous to translate a given key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word like </span><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> using a generic English word(s).</p>
+<ul style="text-align: justify;">
+<li>For now, we will postpone the discussion on the deeper meaning of "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" and focus on "<em><span><span class="pali-term term-highlight" data-term="attā">attā</span>" and "anattā" </span></em>in the sense of "self" and "no-self."</li>
+</ul>
+<h5 style="text-align: justify;">Which Realm Correspond to an Unchanging "True Self"?</h5>
+<p style="text-align: justify;">10. A given living being can be born in any of the 31 realms (a few realms are reserved for <em>Anāgāmis</em>); see "<a href="../../pages/TS.AA.013/index.html" rel="noopener noreferrer" target="_blank">31 Realms of Existence</a>" and "<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Realms Associated with the Earth</a>".</p>
+<ul style="text-align: justify;">
+<li><strong>But the point is that a human could be born a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> or an animal in the next life. Would a dog have the same "self" as a human?</strong></li>
+<li>So, it is quite clear that there in no "<strong>unchanging self."</strong></li>
+</ul>
+<p style="text-align: justify;">11.  On the other hand, a human <strong>does not just become</strong> a<em><span> <span class="pali-term term-highlight" data-term="deva">deva</span></span></em> or an animal or a <em>preta</em> in the next life <strong>without underlying causes</strong>. <strong>It is not a random process.</strong></p>
+<ul style="text-align: justify;">
+<li>There is a continuation of the "lifestream" from this life to the next. One's <strong><em><span><span class="pali-term term-highlight" data-term="gati">gati</span> </span></em></strong>and one's <strong><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span> play key roles</span></em></strong>. I have discussed the critical and forgotten keyword <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span>) in many <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li><strong>That is why it is incorrect to say there is "no-self." There are "personality attributes" that flow from this life to the next. </strong></li>
+<li>That is explained in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (PS) or Dependent Origination. As we know, PS cycles start with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" and go through "<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span>."</span></em> That explains how <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> leads to future births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>).</li>
+<li>Roughly speaking, high levels of<em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> (or<em> mōha</em>) leads to births in the<em> apāyās</em>.</li>
+</ul>
+<h5 style="text-align: justify;">Summary</h5>
+<p style="text-align: justify;"><span>12. Therefore, from #10 and #11, we can see why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejected both views of "an unchanging self" and "no-self."</span></p>
+<ul>
+<li style="text-align: justify;">Instead, there is a next life (birth) according to the principle of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, which is cause and effect, just like in modern science. We will discuss PS later. However, it is easy to see this with an understanding of<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>.</li>
+<li style="text-align: justify;">Dasa<em><span> <span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em> (and <em><span>pāpa <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> or immoral deeds) lead to bad births, and <em><span>dasa <span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em> (and <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> or moral deeds) lead to good births.</li>
+<li style="text-align: justify;">This was discussed in: "<a href="http://localhost/beng_feb2026/three-levels-of-practice/moral-living-and-fundamentals/dhamma-concepts/kusala-kamma-punna-kamma/" rel="noopener noreferrer" target="_blank">Kusala and Akusala Kamma, Punna and Pāpa Kamma</a>".</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.FF.017/index.html">Anatta Opposite Of Which Atta</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.028/index.html">31 Realms Connection To Jhana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.FF.017/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anatta Opposite Of Which Atta</span>
+        
+        <span class="pathway-title title-pt">Anatta Opposite Of Which Atta</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.028/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">31 Realms Connection To Jhana</span>
+        
+        <span class="pathway-title title-pt">31 Realms Connection To Jhana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

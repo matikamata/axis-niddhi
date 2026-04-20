@@ -1,0 +1,402 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Foundation Of Dhamma | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 36 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.AA.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Foundation Of Dhamma</h1>
+    
+    <h1 class="title-pt">Fundamentos do Dhamma</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.AA.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.AA.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0044"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.AA.003</td></tr><tr><td>Fin-dex</td><td>0044</td></tr><tr><td>Slug</td><td>foundation-of-dhamma</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Foundation Of Dhamma</td></tr></table></div></div><p><span>The site's basic layout is discussed, and the uniqueness of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>) as a comprehensive and self-consistent worldview is emphasized.</span></p>
+<p><strong>Revised October 25, 2019</strong></p>
+<h5><span>A Worldview Not Known Without a <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></h5>
+<p style="text-align: justify;"><span>1. If you have not read the introductory <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/BD.AA.002/index.html" rel="noopener noreferrer" target="_blank" title="What is Buddha Dhamma?">What is Buddha Dhamma?</a><span>", please read and understand that first. It describes the unique aspects of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, in the sense that it is not a religion by some definitions, and the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was not a savior. There are two co-existing facets of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>:</span></p>
+<ul style="text-align: justify;">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, “This <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> is unlike anything the world has ever seen.” </span><strong><span style="color: #3366ff;"><span>It needs a paradigm change to get into the “new perspective about this worldview of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.”</span></span></strong> One needs to put aside all preconceived notions to understand the core message.</li>
+<li><span>However, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> also said, "My <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> is good in the beginning, good in the middle, and good at the end." </span><strong><span style="color: #3366ff;"><span>There is something to be gained from <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> for people who have just learned about it to those who have grasped the core concepts.</span></span></strong><span> That is why I have separated <span class="pali-term term-highlight" data-term="posts">posts</span> into three categories on the site.</span></li>
+<li>Many essential terms and verses, even whole <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, can be interpreted at several levels, ranging from superficial to profound meanings. As I build the site, I will try to give some examples. For example, the five precepts have much deeper meanings than the apparent ones. It is gratifying and exhilarating to see deeper meanings as one progresses. Thus, there is something to be gained at any level.</li>
+</ul>
+<h5>Three Levels of Practice</h5>
+<p style="text-align: justify;"><span>2. There are three basic ways to practice <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>:</span></p>
+<ul style="text-align: justify;">
+<li>At the fundamental level (see "<a href="../../pages/TL.BB.000/index.html" rel="noopener noreferrer" target="_blank">Moral Living and Fundamentals</a>"), one can find happiness or suffering according to how one lives one’s life. One whose actions harm oneself or others will be living in misery. Someone may seem to be living in luxury but could be living with a stressed mind.  We know about many wealthy/famous people who even committed suicide.</li>
+<li>At the next level, one leads a moral life and accumulates good<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> that could lead to a good <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. However, we must remember that even if one does not commit a single immoral <span class="pali-term term-highlight" data-term="kamma">kamma</span>, the next birth could be a bad one. We may have done enough immoral deeds in our previous lives; see "</span><a href="../../pages/TL.GG.001/index.html" rel="noopener noreferrer" target="_blank" title="Working Towards Good Rebirths">Working Towards Good Rebirths</a>."</li>
+<li>At the highest level, one will act to remove all evils from one's mind so that the mind becomes liberated from the body, which causes all suffering. Thus, one will be working to achieve <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, the unconditioned, permanent happiness; see "<a href="../../pages/TL.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="Seeking Nibbāna">Seeking Nibbāna</a>" and "<a href="../../pages/TL.II.001/index.html" rel="noopener noreferrer" target="_blank">Sōtapanna Stage of Nibbāna</a>."</li>
+</ul>
+<p style="text-align: justify;">3. The organization of this site at three levels:</p>
+<ul style="text-align: justify;">
+<li><span>Most people intuitively know the benefit of moral life. <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> will help understand why and even point to some possible improvements.</span></li>
+<li>When one lives a moral life and EXPERIENCES the benefit of that, one will be automatically drawn to think about whether there is a life after death. One reads about the evidence for/against this possibility. If the answer is “yes,” one can find possible ways to work towards a better life in the next birth. That is not much different from the moral behavior above. It is just that one will learn a lot about “the world” that we live in.</li>
+<li><span>Once achieving the second stage, some may want to explore the third stage. That third stage encompasses THE message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, that no matter where one is born in the next life, there are NO guarantees that the lives after that will be suffering-free. That is the path to <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, to cease suffering permanently.</span></li>
+</ul>
+<h5>A Systematic Approach Is Required</h5>
+<p style="text-align: justify;">4. Going straight to the third level will be like trying to get into high school without finishing primary and secondary schooling.</p>
+<ul>
+<li style="text-align: justify;"><span>However, even if one has not heard anything about <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> before, some may already be at the second stage, and few may be ready for the third stage. This life did not start at this birth. Each of us has come a long way and has molded our character through countless lives in the past. Thus, even if unaware, one may already be mentally prepared to tackle the third stage. So, please look around and find a starting point that is comfortable for you. See "</span><a href="../../pages/TL.DD.004/index.html" rel="noopener noreferrer" target="_blank" title="Where to Start on the Path?">Where to Start on the Path?</a>".  Only you know about yourself!</li>
+<li>Also, see "<a href="../../pages/LD.AA.004/index.html" rel="noopener noreferrer" target="_blank">Starting on the Path Even without Belief in Rebirth</a>" and "<a href="../../pages/LD.EE.002/index.html" rel="noopener noreferrer" target="_blank">Is It Necessary for a Buddhist to Eliminate Sensual Desires?</a>."</li>
+</ul>
+<h5>Critical Thinking Is Essential</h5>
+<p style="text-align: justify;">5. It is critical to realize that "knowledge" is not perfect at any level as long as one remains "in this world." Even though he was not talking about that, the famous physicist Richard Feynman illustrates this point well in this video:</p>
+<ul>
+<li style="text-align: justify;"><span>Let us take his example of someone slipping on ice. A drunk person stepping onto the ice-covered surface does not even realize it is icy and slippery. At the next level, an alert person knows that the surface is freezing and thus will be careful. But if one needs to understand why the icy surface is slippery, then a bit of fundamental physics is required to understand "why ice is slippery." See the next <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/BD.AA.004/index.html" rel="noopener noreferrer" target="_blank" title="The Importance of Purifying the Mind">The Importance of Purifying the Mind.</a>"</li>
+<li style="text-align: justify;"><span>It is unnecessary to understand "why ice is slippery" if one has an uncontaminated mind; a sober person with a calm mind will take precautions when stepping on an icy surface. More complex situations require the cleansing of an “average mind” further. That is where <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> makes a difference.</span></li>
+</ul>
+<h5><span>A Defiled Mind Is Unable to Grasp Deep <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></h5>
+<p style="text-align: justify;"><span>6. Even though humans have an innate sense of right and wrong, the mind becomes cloudy due to the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> (see </span><a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank" title="Key to Calming the Mind – The Five Hindrances">"Key to Calming the Mind - The Five Hindrances"</a>).</p>
+<ul>
+<li style="text-align: justify;"><span>Once <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Theory is understood, just that understanding leads to clearing up some of these hindrances; furthermore, the logic of a moral life comes naturally out of the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Theory. At least some idea of the foundations of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is CRITICAL before the “practice stage.”</span></li>
+<li style="text-align: justify;"><span>If one living a moral life reads about the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Theory, he/she may be motivated to explore the second stage, i.e., to think about the validity of the process of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, which is a fundamental axiom of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+<li style="text-align: justify;"><span>When one LIVES a life with the belief that what one does in this life will affect how one will fare after this life, then one may realize the danger in traversing this endless cycle of rebirths. That will lead to exploring the third stage, which is THE real message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<h5>Each Person Needs to Take the Initiative</h5>
+<p style="text-align: justify;"><strong><span style="color: #3366ff;">7. No one else can steer anyone else to any meaningful mundane happiness with <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> (in this life or next) or to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </span></strong></p>
+<ul>
+<li style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><i><span><span class="pali-term term-highlight" data-term="attā">Attā</span></span></i><i><span> hi <span class="pali-term term-highlight" data-term="attano">attano</span> nātho, </span></i><i>kō hi nāthō parō siyā", or, "One indeed is one's refuge; how can others be a refuge to one?".</i></li>
+<li style="text-align: justify;"><span>Purification of the mind is the key. That means removing greed and anger and dispelling wrong views by learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>. That is the key to attaining a peaceful life now, a better <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, or even attaining </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li style="text-align: justify;">Each one is in charge of one's mind. Others can only help.</li>
+<li>It is entirely up to the individual. This site will help one find the right path.</li>
+</ul>
+<p>Next, "<a href="../../pages/BD.AA.004/index.html" rel="noopener noreferrer" target="_blank" title="The Importance of Purifying the Mind">The Importance of Purifying the Mind</a>", .........</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.AA.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0044"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.AA.003
+Language:     pt-BR
+Generated-At: 2026-04-17T21:34:03Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><span>Discute-se a estrutura básica do site e destaca-se a singularidade do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (Buddhismo) como uma visão de mundo abrangente e coerente.</span></p>
+<p><strong>Revisado em 25 de outubro de 2019</strong></p>
+<h5><span>Uma visão de mundo desconhecida sem um <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></h5>
+<p style="text-align: justify;">1. Se você ainda não leu o ensaio introdutório, “<a href="../../pages/BD.AA.002/index.html" rel="noopener noreferrer" target="_blank" title="What is Buddha Dhamma?">O que é o Buddha Dhamma?</a><span>”, por favor, leia e compreenda isso primeiro. Ela descreve os aspectos únicos do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, no sentido de que não se trata de uma religião segundo algumas definições, e que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> não era um salvador. Existem duas facetas coexistentes do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>:</span></p>
+<ul style="text-align: justify;">
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “Este <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> é diferente de tudo o que o mundo já viu.” </span><strong><span style="color: #3366ff;"><span>É necessária uma mudança de paradigma para entrar na “nova perspectiva sobre essa visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>”.</span></span></strong> É preciso deixar de lado todas as noções preconcebidas para compreender a mensagem central.</li>
+<li><span>No entanto, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> também disse: “Meu <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> é bom no início, bom no meio e bom no fim.” </span><strong><span style="color: #3366ff;"><span>Há algo a ser ganho com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span></span></span></strong>, <strong><span style="color: #3366ff;">tanto para quem acabou de conhecê-lo quanto para aqueles que já compreenderam os conceitos centrais.</span></strong> É por isso que separei os ensaios em três categorias no site.</li>
+<li>Muitos termos e versos essenciais, e até mesmo <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> inteiras, podem ser interpretados em vários níveis, variando de significados superficiais a profundos. À medida que for construindo o site, tentarei dar alguns exemplos. Por exemplo, os cinco preceitos têm significados muito mais profundos do que os aparentes. É gratificante e estimulante perceber significados mais profundos à medida que se avança. Assim, há algo a ser ganho em qualquer nível.</li>
+</ul>
+<h5>Três Níveis de Prática</h5>
+<p style="text-align: justify;"><span>2. Existem três maneiras básicas de praticar o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>:</span></p>
+<ul style="text-align: justify;">
+<li>No nível fundamental (veja “<a href="../../pages/TL.BB.000/index.html" rel="noopener noreferrer" target="_blank">Vida Moral e Fundamentos</a>”), pode-se encontrar felicidade ou sofrimento de acordo com a forma como se vive a vida. Aquele cujas ações prejudicam a si mesmo ou aos outros viverá na miséria. Alguém pode parecer viver no luxo, mas pode estar vivendo com a mente estressada. Sabemos de muitas pessoas ricas/famosas que chegaram a cometer suicídio.</li>
+<li>No nível seguinte, leva-se uma vida moral e acumula-se bom<em><span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em><span> que pode levar a um bom renascimento. No entanto, devemos lembrar que, mesmo que não se cometa um único <span class="pali-term term-highlight" data-term="kamma">kamma</span> imoral, o próximo renascimento pode ser ruim. Podemos ter cometido atos imorais suficientes em nossas vidas anteriores; veja “</span><a href="../../pages/TL.GG.001/index.html" rel="noopener noreferrer" target="_blank" title="Working Towards Good Rebirths">Trabalhando para bons renascimentos</a>”.</li>
+<li>No nível mais elevado, a pessoa agirá para remover todos os males de sua mente, de modo que a mente se liberte do corpo, que causa todo o sofrimento. Assim, a pessoa estará trabalhando para alcançar <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, a felicidade incondicional e permanente; veja “<a href="../../pages/TL.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="Seeking Nibbāna">Buscando Nibbāna</a>” e “<a href="../../pages/TL.II.001/index.html" rel="noopener noreferrer" target="_blank">Estágio Sotāpanna de Nibbāna</a>”.</li>
+</ul>
+<p style="text-align: justify;">3. A organização deste site em três níveis:</p>
+<ul style="text-align: justify;">
+<li><span>A maioria das pessoas conhece intuitivamente os benefícios de uma vida moral. O <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> ajudará a compreender o porquê e até apontará algumas possíveis melhorias.</span></li>
+<li>Quando se vive uma vida moral e SE EXPERIMENTA o benefício disso, será automaticamente levado a pensar se existe vida após a morte. Lê-se sobre as evidências a favor e contra essa possibilidade. Se a resposta for “sim”, pode-se encontrar maneiras possíveis de trabalhar em direção a uma vida melhor no próximo nascimento. Isso não é muito diferente do comportamento moral mencionado acima. A diferença é que aprenderá muito sobre “o mundo” em que vivemos.</li>
+<li><span>Uma vez alcançado o segundo estágio, alguns podem querer explorar o terceiro estágio. Esse terceiro estágio abrange A mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, de que, não importa onde se nasça na próxima vida, não há garantias de que as vidas seguintes serão livres de sofrimento. Esse é o caminho para o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, para cessar o sofrimento permanentemente.</span></li>
+</ul>
+<h5>É necessária uma abordagem sistemática</h5>
+<p style="text-align: justify;">4. Ir direto para o terceiro nível será como tentar entrar no ensino médio sem concluir o ensino fundamental e médio.</p>
+<ul>
+<li style="text-align: justify;"><span>No entanto, mesmo que alguém nunca tenha ouvido falar do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> antes, alguns podem já estar no segundo estágio, e poucos podem estar prontos para o terceiro estágio. Esta vida não começou neste nascimento. Cada um de nós percorreu um longo caminho e moldou seu caráter ao longo de inúmeras vidas no passado. Assim, mesmo sem saber, alguém pode já estar mentalmente preparado para enfrentar o terceiro estágio. Portanto, por favor, olhe ao seu redor e encontre um ponto de partida que seja confortável para você. Veja “</span><a href="../../pages/TL.DD.004/index.html" rel="noopener noreferrer" target="_blank" title="Where to Start on the Path?">Por onde começar no Caminho?</a>”. Só você conhece a si mesmo!</li>
+<li>Veja também “<a href="../../pages/LD.AA.004/index.html" rel="noopener noreferrer" target="_blank">Começando no Caminho Mesmo sem Acreditar no Renascimento</a>” e “<a href="../../pages/LD.EE.002/index.html" rel="noopener noreferrer" target="_blank">É Necessário que um Buddhista Elimine os Desejos Sensuais?</a>”.</li>
+</ul>
+<h5>O pensamento crítico é essencial</h5>
+<p style="text-align: justify;">5. É fundamental perceber que o “conhecimento” não é perfeito em nenhum nível, enquanto a pessoa permanecer “neste mundo”. Embora não estivesse falando sobre isso, o famoso físico Richard Feynman ilustra bem esse ponto neste vídeo:</p>
+<ul>
+<li style="text-align: justify;">Tomemos seu exemplo de alguém escorregando no gelo. Uma pessoa bêbada que pisa na superfície coberta de gelo nem percebe que ela está gelada e escorregadia. No nível seguinte, uma pessoa alerta sabe que a superfície está gelada e, portanto, tomará cuidado. Mas se for preciso entender por que a superfície gelada é escorregadia, então é necessário um pouco de física básica para compreender “por que o gelo é escorregadio”. Veja o próximo ensaio, “<a href="../../pages/BD.AA.004/index.html" rel="noopener noreferrer" target="_blank" title="The Importance of Purifying the Mind">A Importância de Purificar a Mente”.</a></li>
+<li style="text-align: justify;"><span>Não é necessário entender “por que o gelo é escorregadio” se a pessoa tiver uma mente imaculada; uma pessoa sóbria com uma mente calma tomará precauções ao pisar em uma superfície gelada. Situações mais complexas exigem uma purificação ainda maior da “mente comum”. É aí que o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> faz a diferença.</span></li>
+</ul>
+<h5><span>Uma mente contaminada é incapaz de compreender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> profundo</span></h5>
+<p style="text-align: justify;">6. Embora os seres humanos tenham um senso inato do certo e do errado, a mente fica turva devido aos Cinco Estorvos (veja <a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank" title="Key to Calming the Mind – The Five Hindrances">“A Chave para Acalmar a Mente – Os Cinco Estorvos”</a>).</p>
+<ul>
+<li style="text-align: justify;"><span>Uma vez compreendida a Teoria do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, apenas essa compreensão leva à eliminação de alguns desses obstáculos; além disso, a lógica de uma vida moral surge naturalmente da Teoria do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>. Pelo menos alguma noção dos fundamentos do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é FUNDAMENTAL antes do “estágio da prática”.</span></li>
+<li style="text-align: justify;"><span>Se alguém que leva uma vida moral ler sobre a Teoria do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, poderá se sentir motivado a explorar o segundo estágio, ou seja, a refletir sobre a validade do processo de Renascimento, que é um axioma fundamental do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+<li style="text-align: justify;"><span>Quando alguém VIVE uma vida com a crença de que o que faz nesta vida afetará como se sairá após esta vida, então pode perceber o perigo de atravessar este ciclo infinito de Renascimentos. Isso levará a explorar o terceiro estágio, que é A verdadeira mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<h5>Cada pessoa precisa tomar a iniciativa</h5>
+<p style="text-align: justify;"><strong><span style="color: #3366ff;">7. Ninguém mais pode conduzir outra pessoa a qualquer felicidade mundana significativa com <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> (nesta vida ou na próxima) ou a <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </span></strong></p>
+<ul>
+<li style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><i><span><span class="pali-term term-highlight" data-term="attā">Attā</span> hi <span class="pali-term term-highlight" data-term="attano">attano</span> nātho, kō hi nāthō parō siyā”, ou “A pessoa é, de fato, seu próprio refúgio; como os outros poderiam ser um refúgio para ela?”.</span></i></li>
+<li style="text-align: justify;"><span>A purificação da mente é a chave. Isso significa remover a ganância e a raiva e dissipar visões erradas por meio do aprendizado do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>. Essa é a chave para alcançar uma vida pacífica agora, um Renascimento melhor ou até mesmo atingir </span><em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li style="text-align: justify;">Cada um é responsável por sua própria mente. Os outros podem apenas ajudar.</li>
+<li>Depende inteiramente do indivíduo. Este site ajudará a encontrar o caminho certo.</li>
+</ul>
+<p>A seguir, “<a href="../../pages/BD.AA.004/index.html" rel="noopener noreferrer" target="_blank" title="The Importance of Purifying the Mind">A Importância de Purificar a Mente</a>”, .........</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.AA.002/index.html">What Is Buddha Dhamma</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.AA.004/index.html">The Importance Of Purifying The Mind 2</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.AA.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">What Is Buddha Dhamma</span>
+        
+        <span class="pathway-title title-pt">O que é o Buddha Dhamma</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.AA.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">The Importance Of Purifying The Mind 2</span>
+        
+        <span class="pathway-title title-pt">A Importância de Purificar a Mente 2</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

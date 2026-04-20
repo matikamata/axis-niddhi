@@ -1,0 +1,352 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Pali Dictionaries Reliability | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Sutta Interpretations</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 5 / 30</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">SI.AA.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Pali Dictionaries Reliability</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>SI.AA.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Sutta Interpretations</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="SI.AA.002"
+             data-section="Sutta Interpretations"
+             data-section-code="SI"
+             data-findex="0840"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>SI.AA.002</td></tr><tr><td>Fin-dex</td><td>0840</td></tr><tr><td>Slug</td><td>pali-dictionaries-reliability</td></tr><tr><td>Section</td><td>SI</td></tr><tr><td>Title EN</td><td>Pali Dictionaries Reliability</td></tr></table></div></div><p><strong>March 4, 2017; February 3, 2023; <span style="color: #3366ff;">October 21, 2024</span></strong></p>
+<p style="text-align: justify;"><span>In the website's early days, I received several emails pointing out that my interpretations of certain words were incompatible with those in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> dictionaries. I hope I can explain why one must be careful in using a <span class="pali-term term-highlight" data-term="pāli">Pāli</span> dictionary if one's goal is to grasp the actual teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Of course, I learned this from my Noble teacher, the late Waharaka </span><em>Thēro</em>.</p>
+<p style="text-align: justify;"><span>1. In <span class="pali-term term-highlight" data-term="pāli">Pāli</span>, a word can have different meanings depending on the context. Furthermore, sometimes, grammar rules are bypassed.</span></p>
+<ul style="text-align: justify;">
+<li>Many problems with an incorrect interpretation of the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> arise mainly because of those two misconceptions.</li>
+<li><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span> does not have an alphabet. It was a spoken language. The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Canon (</span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span>) was first written using the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> alphabet around 5 BCE (two thousand years ago); see "</span><a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Historical Background</a>."</li>
+</ul>
+<p style="text-align: justify;">2. Even in English, words can have different meanings depending on context. Following are some examples for three words:</p>
+<ul style="text-align: justify;">
+<li><strong>Right</strong>: You are <strong>right</strong>./Make a <strong>right</strong> turn at the light.</li>
+<li><strong>Rose:</strong> My favorite flower is a <strong>rose</strong>./He quickly <strong>rose</strong> from his seat.</li>
+<li><strong>Type:</strong> He can <strong>type</strong> over 100 words per minute. /That dress is not her <strong>type</strong>.</li>
+</ul>
+<p style="text-align: justify;">(Read more at "<a href="https://grammar.yourdictionary.com/for-students-and-parents/words-with-multiple-meanings.html" rel="noopener noreferrer" target="_blank">Words with Multiple Meanings</a>").</p>
+<ul style="text-align: justify;">
+<li><span>In the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> language, there are </span><strong>many</strong> keywords with different meanings. In many cases, there is a conventional and deeper meaning, as mentioned above: "<a href="../../pages/SI.AA.001/index.html" rel="noopener" target="_blank">Sutta Interpretation – Uddēsa, Niddēsa, Paṭiniddēsa</a>."</li>
+</ul>
+<p style="text-align: justify;"><span>3. <span class="pali-term term-highlight" data-term="pāli">Pāli</span> is a phonetic language. The </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> was faithfully transmitted for hundreds of years because verses were formulated for easy memorization. Grammar rules are different in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>. That is clear in verses "</span><em>Buddhaṃ Saranam gacchāmi</em>" and "<em>Dhamman Saranam gacchāmi,</em>" for example.</p>
+<ul style="text-align: justify;">
+<li><span>There is no apparent subject in the above verse. The first, of course, means, "I take refuge in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>," but "I" is missing in "</span><em>Buddhaṃ Saranam gacchāmi"</em>  because it is taken into account as “<em>Buddhaṃ Saranam gacchā<strong>mi</strong>.”</em></li>
+<li>If you look at <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em><span>, there is no clear grammatical structure in the sense of the structure we see in the English language. The sound gives the meaning, and most verses have "double meanings." There is a simple meaning, but deeper meanings may be hidden. I have discussed this to some extent in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/SI.AA.001/index.html" rel="noopener" target="_blank">Sutta Interpretation – Uddēsa, Niddēsa, Paṭiniddēsa</a>."</li>
+<li><span>Some key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words are discussed in: "</span><a href="../../pages/KD.HH.001/index.html" rel="noopener" target="_blank">Sorting out Some Key Pāli Terms (Taṇhā, Lobha, Dosa, Moha, etc)</a>" and "<a href="../../pages/KD.DD.002/index.html" rel="noopener" target="_blank">What is “San”? Meaning of Sansāra (or Saṃsāra)</a>."</li>
+</ul>
+<p style="text-align: justify;">4. Let us start with the word "<em>atta</em>" (pronounced "aththa" or "aththā" depending on where it is used). This word can have many meanings depending on the context.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><strong>In the conventional sense</strong>, <strong>"<em><span><span class="pali-term term-highlight" data-term="attā">attā</span></span></em>" </strong>means "a person." It is used with this meaning in some contexts; see below.</li>
+<li style="text-align: justify;"><strong>The deeper meaning of "<em>atta</em>" </strong>is "in full control," "the essence," or "the truth that is timeless." Just like the word "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>,"</span></em> it is impossible to translate as one word in English. <span style="color: #993366;">One has to get the idea by learning how it is used in various situations. </span>The opposite of "<em>atta</em>" is <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></em> <span style="color: #3366ff;"><strong>That means "helpless" in the case of a living being or "useless" in the case of an inert thing.</strong></span></li>
+<li style="text-align: justify;">At least, in this case, the difference in meaning can be seen by the way they are pronounced: <strong><em><span><span class="pali-term term-highlight" data-term="attā">attā</span> </span></em></strong>versus<strong><em> atta.</em></strong></li>
+<li style="text-align: justify;">Both these meanings appear in the <em>Dhammapada</em> verse (<em>gäthä</em>), "<a href="../../pages/DD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Attā Hi Attanō Nāthō</a>" that I am posting concurrently.</li>
+</ul>
+<p style="text-align: justify;">5. We can take more examples to illustrate the application of "<em>atta</em>" with those two very different meanings.</p>
+<ul style="text-align: justify;">
+<li>In "<em>atta kilamatānu yōga</em>"<em> atta</em> is used in the conventional sense to describe "procedures that cause suffering in a person."</li>
+<li><em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> comes from "<em>su</em>" and "<em>atta</em>": a <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> can make someone moral and ethical. So, here also, <em>atta</em> is used in the conventional sense.</li>
+<li>The phrase "<em>anattā asārakaṭṭhena</em>" means "(anything in this world) is <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> because it is devoid of any good or any usefulness." Something is <em>atta</em> only if it is the ultimate truth or has timeless value. Here, of course, the deeper meaning is used.</li>
+</ul>
+<p style="text-align: justify;">6. <em><span><span class="pali-term term-highlight" data-term="paramattha">Paramattha</span></span></em> comes from "<em>parama</em>" + "<em>attha,"</em> where "<em>parama</em>" means "at the highest level" and "<em>attha</em>" means "the truth that is timeless," the deeper meaning.</p>
+<ul style="text-align: justify;">
+<li><span>This word has been translated to <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> as "</span><em>artha</em><span>" to indicate "meaning" in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>. So, the Plai word </span><em><span><span class="pali-term term-highlight" data-term="paramattha">paramattha</span></span></em><span> has been translated to <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> as "</span><em>paramārtha</em>" or "ultimate meaning."</li>
+<li>Therefore, the four types of ñ<em>ā</em><em>na</em> (pronounced "gn<em>ā</em>na") involved in the <em>Patisambidha Ñana</em> are "<em><span>attha, <span class="pali-term term-highlight" data-term="dhamma">dhamma</span>, <span class="pali-term term-highlight" data-term="nirutti">nirutti</span>, paṭibhāna."</span></em><span> These days, they appear in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> as "</span><em><span>artha, <span class="pali-term term-highlight" data-term="dharma">dharma</span>, <span class="pali-term term-highlight" data-term="nirutti">nirutti</span>, paṭibhāna."</span></em></li>
+<li><span>I will write a separate <span class="pali-term term-highlight" data-term="post">post</span> to discuss those four terms in the </span><em>Paṭisambhidā Ñāna.</em><span> A person qualified to explain <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> to others is supposed to have the </span><em>Paṭisambhidā Ñāna</em><em>.</em><span> Otherwise, one could mislead others by providing incorrect explanations. Of course, no one but a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can provide entirely error-free answers. It does not make much sense to learn <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> from someone who is at least not a </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> (i.e., an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>).</li>
+</ul>
+<p style="text-align: justify;">7.<span style="color: #3366ff;"> Of course, the most problematic misuse of "<em>atta</em>" as "a person" or "a self" is in <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, the Three Characteristics of Nature. There, <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is commonly translated just as "no-self." One correct expression is "no-unchanging self."</span></p>
+<ul>
+<li style="text-align: justify;">We need to realize that "<em>atta</em>" is always "truth" and "<em><span><span class="pali-term term-highlight" data-term="attā">attā</span></span></em>" could be "person" in the conventional sense. <strong>So, the opposite of "<em>atta</em>" is ALWAYS "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" (pronounced "anatththa.") </strong></li>
+<li style="text-align: justify;">That -- together with translating <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> as "impermanence" -- had kept <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> hidden for a thousand years: see, "<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta</a>."</li>
+</ul>
+<p style="text-align: justify;">8. That is why a dictionary can't provide a fixed meaning for the word "<em>atta,"</em> nor for <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>, nicca, <span class="pali-term term-highlight" data-term="anicca">anicca</span>, </span></em>and many other words.</p>
+<ul style="text-align: justify;">
+<li>Many words are supposed to have both conventional and deeper meanings. Only someone who has the <em>Paṭisambhidā ñāna</em> can correctly explain the meaning of a verse in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>,</span></em> <span style="color: #3366ff;">regardless of where the word appears.</span></li>
+<li><span>Therefore, in most current English literature on <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, some explanations are correct, but many are not. That is because of the tendency to use a fixed meaning for a keyword without paying attention to context.</span></li>
+</ul>
+<p style="text-align: justify;">9. Another important such word is "<em>paṭi,"</em><span> which is also pronounced as "pati," not as "<span class="pali-term term-highlight" data-term="pathi">pathi</span>" (see #11 below.) I have received emails saying that <span class="pali-term term-highlight" data-term="pāli">Pāli</span> dictionaries say "</span><em>paṭi</em>" means "against."</p>
+<ul style="text-align: justify;">
+<li><em>Paṭi</em><span> is also a <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> word that is being used to this day. It means "bonds" or "ties," as in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>.</span></li>
+<li>If "<em>paṭi</em>" means "against," how would that be compatible with many other words with "<em>paṭi</em>"? For example, "<em>paṭisaṃvedī</em>" or "<em>paṭisanvedi</em>" ("<em>paṭi</em> + "<em>san</em>" + "<em>vedi</em>") means <em>vedana</em> due to bonds with "<em>san</em>" becoming apparent. <em><span><span class="pali-term term-highlight" data-term="paṭinissagga">Paṭinissagga</span></span></em> means "getting rid of bonds". <em>Paṭiniddesa</em> means "detailed instructions on sorting out knotty or difficult points," etc. The latter is explained in detail in "<a href="../../pages/SI.AA.001/index.html" rel="noopener" target="_blank">Sutta Interpretation – Uddēsa, Niddēsa, Paṭiniddēsa</a>."</li>
+</ul>
+<div style="text-align: justify;">10. One could get a better idea of a keyword by looking at its application in various situations. The word <em>paṭisambhidā </em>in<em> paṭisambhidā ñāna</em> is a good example.</div>
+<ul style="text-align: justify;">
+<li><em>Paṭisambhidā comes from paṭi + san + bidhā.</em> "<em>San</em>" is, of course, a keyword; see, "<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is “San”? Meaning of Sansara (or Samsara)</a>", and <em>bidhā </em>means to separate or to break apart; "<em>bindeema</em><span>" is the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> word.</span></li>
+<li>So, <em>Paṭisambhidā ñāna </em>is the knowledge to be able to sort out the meaning of a word by breaking it down to locate "<em>san,"</em> i.e., connection to defilements.</li>
+<li>And that interpretation must be consistent with "<em><span>attha, <span class="pali-term term-highlight" data-term="dhamma">dhamma</span>, <span class="pali-term term-highlight" data-term="nirutti">nirutti</span>, paṭibhāna,</span></em><span>" as discussed in a future <span class="pali-term term-highlight" data-term="post">post</span>. By the way, </span><em>paṭibhāna </em>means the ability to describe in detail with examples. <em><span><span class="pali-term term-highlight" data-term="nirutti">Nirutti</span></span></em> means finding the origins of keywords, i.e., how compound words are put together using critical words like <em>paṭi</em> and <em>atta </em>or<em> attha</em>.</li>
+</ul>
+<p style="text-align: justify;">11. Other examples come in the <em>gathā</em> to pay tribute to the <em>Saṅgha</em>: "<em>sup<strong>paṭ</strong><span>ipanno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, ujup</span><strong>paṭi</strong>panno.</em>..".</p>
+<ul>
+<li style="text-align: justify;">Here, "bonding" is about "good things." <em>Sup<strong>paṭ</strong>ipanno</em> means "bound to moral things," <em>Ujup<strong>paṭi</strong>panno </em>means "bound to be straightforward," <em>Ñāyappaṭipanno </em>means "bound with wisdom," and <em>Sāmīcippaṭipanno </em>means "good to associate with."</li>
+<li style="text-align: justify;">Another is "<em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span>,"</span></em> which comes from "<em>paṭi</em>" + "<em>sandhi,"</em> where <em>sandhi</em><span> (which is also a <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> word) means "to join." At the</span><em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment, one's mental body (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) dies, and one grasps a new existence. So, this joining of two adjacent lives is called <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em>.</li>
+<li style="text-align: justify;">Note that <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em> is pronounced as "chuthi." See "<a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1"</a> and "<a href="../../pages/HB.AA.009/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English” Convention Adopted by Early European Scholars – Part 2</a>."</li>
+<li style="text-align: justify;">Of course, the most important is "<em>paṭi</em>" in<em><span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>; see, "<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda</a>."</li>
+</ul>
+<p style="text-align: justify;"><span>12. Here is a table showing the conventional and deeper meanings of some key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words. Some meanings given in dictionaries are wrong, and they are in bold. Whether to use the correct conventional meaning or the more profound meaning depends on the context (where the word is used); a good example is "</span><a href="../../pages/DD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Attā Hi Attanō Nāthō</a>."<br/>
+[table id=13 /]</p>
+<ul>
+<li>Also, see "<a href="../../pages/TL.EE.012/index.html" rel="noopener noreferrer" target="_blank">Why is it Necessary to Learn Key Pāli Words?</a>" and “<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is “San”? Meaning of Sansara (or Samsara)</a>“</li>
+<li><span>Mainly, the deeper meanings of <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words can be found in: "</span><a href="../../pages/TS.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (A-K)</a>" and "<a href="../../pages/TS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (L-Z)</a>."</li>
+<li>Again, one must pay attention to ensure that the meaning found in a dictionary is compatible with the context.</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/SI.AA.001/index.html">Sutta Interpretation Uddesa Niddesa Patiniddesa</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/SI.AA.003/index.html">Nikaya Sutta Pitaka</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/SI.AA.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Sutta Interpretation Uddesa Niddesa Patiniddesa</span>
+        
+        <span class="pathway-title title-pt">Sutta Interpretation Uddesa Niddesa Patiniddesa</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/SI.AA.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Nikaya Sutta Pitaka</span>
+        
+        <span class="pathway-title title-pt">Nikaya Sutta Pitaka</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-SI">
+        ↑ Back to Sutta Interpretations
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

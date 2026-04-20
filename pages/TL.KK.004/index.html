@@ -1,0 +1,345 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Kama Asvada Phassa Paccaya Vedana Samphassa Ja Vedana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 90 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.KK.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Kama Asvada Phassa Paccaya Vedana Samphassa Ja Vedana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.KK.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.KK.004"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0500"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.KK.004</td></tr><tr><td>Fin-dex</td><td>0500</td></tr><tr><td>Slug</td><td>kama-asvada-phassa-paccaya-vedana-samphassa-ja-vedana</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Kama Asvada Phassa Paccaya Vedana Samphassa Ja Vedana</td></tr></table></div></div><p><strong>Revised April 29, 2021; <span style="color: #3366ff">January 23, 2023</span></strong></p>
+<p style="text-align: justify"><span>I have to use too many <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words in <span class="pali-term term-highlight" data-term="posts">posts</span> with advanced concepts. There are no short phrases in English to give the same meanings as phrases like "</span><em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em><span>." Thus it will be beneficial to learn the meanings of these <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words and phrases and be able to pronounce them if that seems to be helpful. I have included some audio files in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="http://localhost/beng_feb2026/tables-and-summaries/pali-words-and-pronounciation/" rel="noopener noreferrer" target="_blank">Pāli Glossary</a><span>."  Here is how to pronounce the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words in the title of this <span class="pali-term term-highlight" data-term="post">post</span>:</span></p>
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Kama-assada-phassa-paccaya-vedana-samphassa-ja-vedana.mp3" type="audio/mpeg"/></audio></p>
+<p style="text-align: justify"> </p>
+<p style="text-align: justify"><span>1. In the previous <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/PS.BB.004/index.html" rel="noopener noreferrer" target="_blank">What is “Kāma”? It is not Just Sex</a>", we saw that<em><span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em> is not sex or even attractive sense objects, ear-pleasing sounds, tasty food, pleasant smell, or a sensual body touch as many believe. <strong><span style="color: #0000ff"><em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span></span></em></span> is <span style="color: #0000ff"><em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em></span> <span style="color: #0000ff">about</span> sense-pleasing objects (constantly thinking about those pleasures)</strong>, whether it is an eye-catching object, ear-pleasing sound, tasty food, pleasant smell, or a body touch.</p>
+<ul style="text-align: justify">
+<li>We saw that <span style="color: #0000ff"><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> </span></em>(or <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>)<em> </em>is <em><span>saṅkappa <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em></span> which means <strong>thinking about</strong> such sense objects and giving priority to them. We also saw that such <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em> (or <em>āsvāda </em><span>in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) are </span><em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that arise when specific sensory inputs trigger our deep-seated <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span>/<span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> (which are related to our habits or "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>").</li>
+<li>Thus we can see that <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>, <em><span>saṅkappa <span class="pali-term term-highlight" data-term="rāga">rāga</span>, and vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>mean the same thing. Of course, <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>may also lead to <em>k<span style="color: #0000ff">āya</span><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em></li>
+<li><strong>To re-emphasize:</strong> <span style="color: #0000ff"><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span> </span></em>are beyond actually experiencing those sense inputs that come our way due to good <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> <span style="color: #000000">(even though one would need to stay away from high-pleasure activities because one could get used to them and make corresponding habits).</span><em><span> <span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em> are craving and thinking and planning about such sense inputs.</span></li>
+<li>Some extreme <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em><em> </em>(<strong>or at least actions and speech initiated by them</strong>) can be suppressed by understanding their harmful consequences (<em>ādinava.</em>) </li>
+<li><span>Without a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> appearing in the world, we would not realize that even milder </span><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span> </span></em>have dire consequences (<em>ā</em><em>dinava.</em><span>) Yet, as we saw in the previous <span class="pali-term term-highlight" data-term="post">post</span>, they have harmful consequences.</span></li>
+</ul>
+<p style="text-align: justify">2. The critical point we need to discuss is how to prevent milder -- but still harmful -- <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em><em> </em><span>from arising in our minds. We have to use the same tactic discussed in the previous <span class="pali-term term-highlight" data-term="post">post</span> and the introduction to this series, "</span><a href="../../pages/TL.KK.002/index.html" rel="noopener noreferrer" target="_blank">Assāda, Ādīnava, Nissarana – Introduction</a>."</p>
+<ul style="text-align: justify">
+<li><span>When a mind comprehends that specific actions are harmful, it avoids them. As discussed in that introductory <span class="pali-term term-highlight" data-term="post">post</span>, the best way to quit smoking is to understand that habit's destructive consequences fully. Another is cultivating a good habit (say, listening/reading <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>) instead.</span></li>
+<li><span>In the previous <span class="pali-term term-highlight" data-term="post">post</span>, we discussed how we avoid immoral actions via speech and bodily actions by comprehending the dire consequences of such actions.</span></li>
+<li>In other words, the primary way to effectively remove bad habits (<em>nissarana</em>) is to comprehend the dire consequences (<em>ādinava</em>) of such <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em><em> </em>from arising in our minds.</li>
+</ul>
+<p style="text-align: justify"><span>3. This is where another critical aspect of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s "previously unheard <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" comes into play. This unique message is that in addition to being harmful, </span><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span> </span></em><span>are unfruitful in the long run. Even though we usually value them, when analyzed with the way the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught, we can see that they are just mind-made due to our ignorance of the true nature of this world.</span></p>
+<p style="text-align: justify">4. It is essential to understand the big difference between <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span>.</span></em> We cannot stop <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> from arising, but we can stop <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span> </span></em>by cleansing our minds.</p>
+<p style="text-align: justify"><em><span>a <span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span> normally triggers <span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span>. </span></em>Also, <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span> </span></em>is <strong>made up in our minds.</strong> Let us take a simple example to gain more insight.</p>
+<ul style="text-align: justify">
+<li>Husband and wife are walking down the street, and the wife stops and looks at a beautiful painting on display in a store window. The husband looks at it, shrugs his shoulders, and wants to move on. It is somewhat expensive, so she is considering whether they can afford it now, but she would really like to buy it. The husband has no interest in it and thinks that it is a waste of money to buy it.</li>
+<li>They both saw the same painting as a <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>. That was just the "seeing event," and as we will discuss in <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, <strong>most<em><span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> are neutral, </strong>like seeing or hearing.  <span style="color: #0000ff">The exceptions are bodily contacts</span>, which can be either bodily <em><span>dukha <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> (like a cut or a headache) or<em><span> <span class="pali-term term-highlight" data-term="sukha vedanā">sukha vedanā</span></span></em> (like getting a massage or being in an air-conditioned room a hot day) depending on whether it is harmful or a good <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>.</li>
+<li>Now, any "happy feeling" generated in the wife's mind would have been due to <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span>. </span></em>The mind of the husband did not generate such a "happy feeling." This is an important point. <span style="color: #0000ff">The "happy feeling" in the wife's mind could not have been a property of the painting</span>; if so, it should have given the husband the same "happy feeling"!</li>
+</ul>
+<p style="text-align: justify">5. Thus, in the above case, only the wife enjoyed <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em> due to seeing the painting. In other words, a <em>pavutti</em> <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycle operated only for the wife. Her deep-seated craving (<em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span>/<span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>) for such an object led to acting with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span>.</span></em></p>
+<ul style="text-align: justify">
+<li>We could also state the same process by saying that "<em><span>cakkhuñca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> rūpē ca uppajjāti cakkhuviññāṇaṃ</span></em>" was followed by "<em><span>tiṇṇaṁ saṅgati <span class="pali-term term-highlight" data-term="phasso">phasso</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="phassa paccayā vedanā">phassa paccayā vedanā</span></span></em>"; see, "<a href="../../pages/KD.HH.003/index.html" rel="noopener noreferrer">Taṇhā – How We Attach Via Greed, Hate, and Ignorance</a>."</li>
+<li>Now she is attached and deliberately looks at the picture, "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" step started and then went through the step, "<em><span>(san)<span class="pali-term term-highlight" data-term="phassa paccayā vedanā">phassa paccayā vedanā</span></span></em>" in a fraction of a second; see, "<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Idappaccayatā Paṭicca Samuppāda</a>."</li>
+<li>However, for the husband, who saw the same painting, there was no <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span>/<span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> for such an object to "attach to it" and to act with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and to initiate those processes; also see, "<a href="../../pages/TL.DD.007/index.html" rel="noopener noreferrer" target="_blank">Self” and “no-self”: A Simple Analysis – Do We Always Act with Avijja?</a>".</li>
+<li><span>For some, this may be crystal clear, but those who are not very familiar with the concepts may want to review those relevant <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify">6. Now that she is "attached" to the painting, the wife keeps looking at it for a while, leading to numerous such <em>pavutti</em> <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycles. Not only that, she will be enjoying "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>" about that picture even after they leave that place by thinking back about it. Now she has made a "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" and a "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" for it.</p>
+<ul style="text-align: justify">
+<li>That "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>" can resurface with <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycles that involve only the mind when she is at home:  It starts with "<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃ</span></em>," i.e., she remembers the painting while washing dishes. How does she start thinking about the painting when she is busy with another task?</li>
+<li>One way to explain that is to say that "she had 'cultivated' a <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>"</span></em> for that painting, and now it can sometimes resurface even without a prompt. This is sometimes known as the "subconscious"; see, "<a href="../../pages/AB.CC.007/index.html" rel="noopener noreferrer" target="_blank">3. Viññāṇa, Thoughts, and the Subconscious</a>".</li>
+<li>Another way to explain it by saying that she had made a "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" for liking that painting, and it is a <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> that can enter the mind when the conditions are right: "<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃan</span></em>."  However, that particular <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> or concept or thought would never make contact with the mind successfully if she were listening to a discourse or thinking about a critical concept like <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span> since</span></em> she was doing a task that did not motivate her much (washing dishes) that is an opportunity for such "subconscious<em><span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" to come to the surface.</li>
+</ul>
+<p style="text-align: justify">7. Of course, now that the "<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃ</span></em>" step will be followed by "<em><span>tiṇṇaṁ san <span class="pali-term term-highlight" data-term="gati">gati</span> <span class="pali-term term-highlight" data-term="phasso">phasso</span></span></em>" and "(<em>san</em>)<em><span><span class="pali-term term-highlight" data-term="phassa paccayā vedanā">phassa paccayā vedanā</span></span></em>"; see, "<a href="../../pages/PS.II.007/index.html" rel="noopener noreferrer" target="_blank">Difference between Phassa and Samphassa</a>." Her "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" for liking such pictures will make her mind "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>," which in turn will lead to "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>."</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">This is a <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> that her husband will not get. He did not make a "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" or a  "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" for that painting, and thus it will not come to his mind.</li>
+</ul>
+<p style="text-align: justify">8. Now, suppose that they are walking by the same store a week later. The wife remembers the painting but finds that it is no longer there; someone had bought it. Now, think about what happens to the two of them.</p>
+<ul style="text-align: justify">
+<li>The wife will be distraught: "I should have bought it; now, I may not be able to find such a nice painting." But the husband will not have any bad feelings, except may be some bad feelings about his wife not being able to get what she wanted.</li>
+<li><span style="color: #0000ff">This is the suffering that we can stop from arising even in this life.</span> It is not a <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> but a "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>." The wife got distraught only because she got attached to that painting, but the husband did not.</li>
+</ul>
+<p style="text-align: justify">9. I just gave a straightforward example from real life. Of course, it is a relatively insignificant "<em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>" without drastic consequences. I just wanted to use it because most people can understand it. Of course, the consequences can be much harsher if one gets attached to something of more significance, keep thinking about it and make that "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> grow," and eventually does something terrible to acquire it.</p>
+<ul style="text-align: justify">
+<li>a) For example, X, who "falls in love" with Y, may be thinking about it all day and make a "very strong greedy <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" about X. So, X  makes all kinds of plans in his mind about Y, and the more he/she does it, the more strong that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> gets.</li>
+<li>b) The more strong that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> is, the more it is likely to "come to his mind" because it is a <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> that is constantly hovering around his/her mind (or in the subconscious). It is easy to start more PS process with "<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃ</span></em>."</li>
+</ul>
+<p style="text-align: justify">10. Note the difference between a) and b) above. In a), the process starts with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" when X first thinks about Y and starts thinking about Y with<em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and gets "bonded to Y" in his/her mind. At this point, a "baby <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" is formed about Y.</p>
+<ul style="text-align: justify">
+<li>Now, since it is at an early stage, this "baby <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> for Y" may not trigger "<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃ</span></em>" (process b) often. And that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> may start dying out if X does not get to think about Y for a while.</li>
+<li>But if X sees Y again in a few days, then that "baby <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> for Y" gets fed again. The sight of Y makes X go through many PS cycles and strengthens that "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> for Y."</li>
+<li>If X gets to see Y often and may be even "hang out with Y," that "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> for Y" will grow because now X is giving it a lot of food (<em>āhāra</em>).</li>
+<li>Now with a "strong <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> for Y," X's mind will constantly be bothered with "<em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> about Y," and it is more likely that "<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃ</span></em>" will be triggered even while X is doing something else.</li>
+</ul>
+<p style="text-align: justify">11. Then, one day, X hears Y is going to marry another person. What will happen to X? He will be highly distraught, and depending on the level of attraction (and his <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), he may do something terrible.</p>
+<ul style="text-align: justify">
+<li>For example, if the attraction (level of <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>) was firm, AND if X  has a "violent character" (i.e., "violent <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>"), then X may hurt Y or the person that Y got engaged to. <span style="color: #0000ff">Then not only will X suffer due to the "loss of Y," but it would also have made causes for FUTURE SUFFERING by committing a bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.</span></li>
+</ul>
+<p style="text-align: justify">12. We can now see how both <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> are critical concepts. One can lessen both by contemplating the dire consequences (<em>ādinava</em>) of acting foolishly.</p>
+<ul>
+<li style="text-align: justify">Comprehending <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span> </span></em>is the best way. Then one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> will change permanently to the "moral <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of a <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, and one will never do anything that will lead to the birth in the <em>apāyā</em>. Even though a <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> may still generate "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>," due to some sense inputs, those will be milder, and thus any suffering incurred would be mild.</li>
+<li style="text-align: justify"><span style="color: #0000ff"><span>I hope that it is clear from this discussion that it is impossible to suppress <span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="assāda">assāda</span> or thoughts about sense objects forcibly</span><em>. </em><span>The only way is via purifying the mind by learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> (especially the </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em><span> nature of this world) and thinking about the bad consequences of such thoughts (ādinava). This is what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> realized as the </span><em>asavakkhaya nana</em>, the way to get rid of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> (and <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>) via getting rid of bad habits (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) and cultivating good habits (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>).</span></li>
+<li style="text-align: justify">And this is discussed in the meditation (<em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>) section under "<a href="../../pages/BM.BB.001/index.html" rel="noopener noreferrer" target="_blank">9. Key to Ānāpānasati – How to Change Habits and Character (Gati)</a>".</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.KK.003/index.html">How Perceived Pleasures Assada Lead To Dukkha</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.JJ.011/index.html">Verify Sotapanna Stage</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.KK.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">How Perceived Pleasures Assada Lead To Dukkha</span>
+        
+        <span class="pathway-title title-pt">Como os prazeres aparentes acabam levando ao Dukkha</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.JJ.011/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Verify Sotapanna Stage</span>
+        
+        <span class="pathway-title title-pt">Verificar o estágio Sotāpanna</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

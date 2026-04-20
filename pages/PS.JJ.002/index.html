@@ -1,0 +1,365 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Pattana Dhamma Cause Effect Hetu Phala | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 84 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.JJ.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Pattana Dhamma Cause Effect Hetu Phala</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.JJ.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.JJ.002"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0644"
+             data-level="advanced"
+             data-reading-time="8"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.JJ.002</td></tr><tr><td>Fin-dex</td><td>0644</td></tr><tr><td>Slug</td><td>pattana-dhamma-cause-effect-hetu-phala</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>Pattana Dhamma Cause Effect Hetu Phala</td></tr></table></div></div><strong>October 22, 2016; revised October 25, 2016; June 15, 2018; April 11, 2021; <span style="color: #0000ff">June 28, 2022</span></strong>
+<p style="text-align: justify">1. <em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> is also cited as <em><span>pattāna <span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> in English.</p>
+<ul style="text-align: justify">
+<li>The word "<em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">paṭṭhāna</span></span></em>" comes from "<em>paṭṭha</em>" + "<em>āna</em>."  I have previously mentioned that "<em>āna</em>" means "bringing in" as in "<em>ānapāna</em>" in <em><span><span class="pali-term term-highlight" data-term="ānāpānasati bhāvanā">Ānāpānasati Bhāvanā</span></span></em>. "<em>Paṭṭha</em><span>" in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> or <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> means the layer of a tree trunk underneath the outermost layer of bark -- </span><em>consisting of phloem cells</em> -- which carry food between roots and leaves.</li>
+<li>So, the word "<em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">paṭṭhāna</span></span></em>" here conveys the idea that while the roots (<em>mūlika</em> <em>hetu</em>) are critical for the tree's survival, "<em>paṭṭha</em>" also plays an important role in the tree's growth. In the case of <em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em>, they play an important role in describing the conditions under which <em>hetu</em> or causes can bring in effects, as we will see below.</li>
+<li>By the way, "<em>paṭṭha</em>" are essential for the tree's survival, just as the tree's roots are. One could kill a tree simply by a process called "girdling," where those phloem cells are removed; see the Wikipedia article: "<a href="https://en.wikipedia.org/wiki/Girdling" rel="noopener noreferrer" target="_blank">Girdling</a>."</li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> frequently used analogies with the workings of a tree. We also need to remember that "</span><em>mula</em><span>" is a root in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> or <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, so "</span><em>mūlika héthu</em>" means "root causes." So, the tree's survival depends on its roots and its "<em>paṭṭha</em>" containing those critical phloem cells.</li>
+<li>This is the same as saying <em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> describes CONDITIONS are as important as ROOT CAUSES, which are <em>lōbha, dōsa,</em> and<em>, mōha</em> (for <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em>),<em> </em>and<em> alōbha, adōsa,</em> and<em> amōha </em>(for <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em>).</li>
+</ul>
+<p style="text-align: justify">2. It is also to be noted that "<em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">paṭṭhāna</span></span></em>" in "<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>" can be interpreted to mean "providing food" or "<em>paṭṭha</em>" +"<em>ā</em><em>na</em>" to cultivate <em><span><span class="pali-term term-highlight" data-term="sati">sati</span></span></em> or mindfulness.</p>
+<ul style="text-align: justify">
+<li>The word "<em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em>" has not been discussed that much in English. Therefore, it is good to get started the right way. Buddhaghosa did not discuss it because he did not comprehend <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em>and as a result, even many people who follow even <em>Theravāda</em><span> <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> are not familiar with </span><em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span>. </span></em>Ven. Ledi Sayadaw in Burma and Ven. Rerukane Chandawimala in Sri Lanka are clear exceptions. They have discussed <em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em>; see the references below.</li>
+<li>However, their interpretations of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) are incorrect.</li>
+</ul>
+<p style="text-align: justify">3. In the <span style="color: #0000ff">workings of living things (including plants) -- and in mental processes in particular --</span> the mechanism of how causes lead to effects is much more complex than material phenomena involving inert objects.</p>
+<ul style="text-align: justify">
+<li>In these cases, many conditions need to be satisfied, in addition to having sufficient causes.</li>
+<li>In many cases, such critical conditions are not satisfied even if the causes are there, so there is normally a TIME DELAY between causes and effects, i.e., between <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>.</li>
+<li>This is why it is hard for people to see the validity of cause and effect (<em><span>hetu <span class="pali-term term-highlight" data-term="phala">phala</span></span></em>) involving living things, especially the mind.</li>
+<li><span style="color: #000000">This is what is explained in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, with the help of <em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em>. There are 24 conditions or <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span></em>discussed in the "</span><em>Paṭṭhānapakaraṇa</em>" in the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>: "<a href="https://suttacentral.net/patthana1.1/en/agganyani" rel="noopener" target="_blank">1.1. Nikkhepavāra</a>." Of course, the English translation will likely have many errors, but one can get the basic idea.</li>
+<li><span style="color: #000000">Let us discuss some examples to understand the role of a few conditions or <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>. </span></li>
+</ul>
+<p style="text-align: justify">4. <span style="font-weight: 400">All necessary causes to bring about a tree are embedded in a seed. A seed is a CAUSE for the subsequent appearance of a tree. <strong>Yet, a seed cannot germinate unless suitable conditions are present.</strong> If one keeps a seed in a cool, dry place, it will just sit there for thousands of years without giving rise to a tree.</span></p>
+<ul style="text-align: justify">
+<li><span style="font-weight: 400">However, if one plants the seed in the ground where sunlight is available and provides water and nutrients, it will germinate and grow into a tree.</span></li>
+<li>The root condition to bring into existence a tree is embedded in a seed. That is in the <em><span>annantara <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>. But suitable conditions for that seed to germinate are in fertile soil with adequate sunlight and water; this is called <em><span>samanantara <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>. Therefore, both <em>annantara</em> AND <em><span>samanantara <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> MUST be satisfied to bring a tree into existence; see "<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Annantara and Samanantara Paccaya</a>" for details.</li>
+<li>So, AT WHAT TIME the seed will germinate will depend on when the <em>samanantara </em>condition (fertile soil) is satisfied. <em>Annantara</em> condition (presence of a seed) is not enough.</li>
+</ul>
+<p style="text-align: justify">5. Another important condition of <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> comes into play for the germinated seed to grow into a tree: The <em>ah<span style="color: #000000">ā</span><span>ra <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> (food condition) must be satisfied. If water, sunlight, and nutrients are unavailable after the seed germination, it cannot grow into a tree.</p>
+<ul style="text-align: justify">
+<li><span style="font-weight: 400">An essential type of <em>ahāra</em> is the "food for <em>viññ<span style="color: #000000">ā</span>na</em>." When one has bad thoughts about another person, that <em>viññāna</em> grows as long as one keeps thinking about that person and how bad he/she is.<em> Viññāna ahāra</em> are <em>manō sancetanā.</em> </span></li>
+</ul>
+<p style="text-align: justify">6.  Another example of <span style="font-weight: 400">such a condition or <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> is “<em><span style="color: #000000">ā</span></em><em><span>sevana <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>.” <em>Asevana</em> means to “associate with.” </span></p>
+<ul style="text-align: justify">
+<li><span style="font-weight: 400"><span style="font-weight: 400">An important example is an association with bad friends. Whether it is a child or an adult, one's behavior will be influenced by who one associates with; see "<a href="../../pages/TL.BB.003/index.html" rel="noopener noreferrer" target="_blank">The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)</a></span></span>."</li>
+<li>I have discussed several important conditions or <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em><span> in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/LD.DD.002/index.html" rel="noopener noreferrer" target="_blank">Micca Diṭṭhi – Connection to Hethu Phala (Cause and Effect)</a>." <strong> </strong>Here is that discourse:<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Episode-6-Micca-Ditthi-Connection-to-Hethu-Phala-Cause-and-Effect.mp3" type="audio/mpeg"/></audio>
+There are 24 such conditions in <em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em><span>. I will discuss them in detail in this subsection on "<span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" in a series of <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li>This is why mental phenomena are so complex. In many cases, several such conditions may need to be satisfied for a cause (<em>hetu</em>) to lead to a corresponding effect (<em><span><span class="pali-term term-highlight" data-term="phala">phala</span></span></em>).</li>
+</ul>
+<p style="text-align: justify">7. <span style="font-weight: 400">Similarly, the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies created by our actions do not disappear. A given action creates a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed with energy to bring in its fruits. It is like a seed waiting for the right conditions to germinate and bring a tree into existence.</span></p>
+<ul style="text-align: justify">
+<li><span style="font-weight: 400">Those <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds or <em><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></em> are out there waiting for suitable conditions to bring in their effect.</span></li>
+<li><span style="color: #0000ff">Whether they will bring <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span>,</span></em> AND at what strength, AND when will depend on the conditions or <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>. <span style="color: #000000">This is what is described by <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> with the help of <em><span><span class="pali-term term-highlight" data-term="paṭṭhāna">Paṭṭhāna</span> <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em>.</span></span></li>
+<li>See, "<a href="../../pages/PS.AA.004/index.html" rel="noopener noreferrer" target="_blank">What Does “Paccaya” Mean in Paṭicca Samuppāda?</a>", "<span style="font-weight: 400"><a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>" and "<a href="../../pages/KD.GG.002/index.html" rel="noopener noreferrer" target="_blank">Nāmagotta, Bhava, Kamma Bīja, and Mano Loka (Mind Plane)</a>" for more details.</span></li>
+</ul>
+<p style="text-align: justify">8. <span style="font-weight: 400">But some <strong>strong <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em></strong> will bring in <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> without exceptions. Those include <em><span>ānantariya pāpa <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. They are so strong that they do not require conditions to be just right. They bring <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> mostly at the dying moment, i.e., death of the physical body, and will not be delayed until the <em><span><span class="pali-term term-highlight" data-term="cuti-patisandhi">cuti-patisandhi</span></span></em> moment. Hence, the delay is only until death.</span></p>
+<ul style="text-align: justify">
+<li>Some people inherit wealth unexpectedly, and some people die of accidents. These are also strong <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>, though as not strong as <em><span>ānantariya pāpa <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.</li>
+<li><span style="font-weight: 400">But in most cases, conditions or <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> play major roles; sometimes, many conditions must be satisfied for <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> to bear fruit.</span></li>
+</ul>
+<p style="text-align: justify">9. <span style="font-weight: 400">This knowledge -- or rather this understanding of -- how <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> work -- is called <em><span>kammassakata <span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span></span></em> and is a REQUIREMENT to attain </span><b>mundane <em><span><span class="pali-term term-highlight" data-term="sammā samādhi">sammā samādhi</span></span></em></b><span style="font-weight: 400"><span>. When one fully understands this, it will be easier to see that the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process has a logical foundation.</span></span></p>
+<ul style="text-align: justify">
+<li><span style="font-weight: 400">This is because one can now clearly see that most of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> or one’s actions will have corresponding <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> or results when suitable CONDITIONS appear.</span></li>
+<li><span style="font-weight: 400">So, if one does actions suitable to be born in the <em>apāyās</em>, one COULD BE born in the <em>apāyās</em> until one REMOVES the ability to for such CONDITIONS to appear.</span></li>
+<li><span style="font-weight: 400">When one attains the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, one will never realize the conditions suitable for a birth in the <em>apāyās</em>. This requires another step BEYOND <em><span>kammassakata <span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span>, </span></em>which is the comprehension of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.</span></li>
+<li>Therefore, getting to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage is a two-step process: first to get to <em><span>kammassakata <span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span> </span></em>and then the comprehension of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.</li>
+<li>This is discussed in detail in the <em>desana</em> in #6 above.</li>
+</ul>
+<p style="text-align: justify">10. W<span style="font-weight: 400">e see people doing immoral things without being subjected to corresponding punishments, but that does not mean they are getting away with it. Those actions can bring their fruits in future lives if they are not realized in this life.</span></p>
+<ul style="text-align: justify">
+<li><span style="font-weight: 400">There are two ways to overcome <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>. First, such <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds will lose their energy with time; they can last at most 91 eons. They are like regular seeds, which lose their power over time.</span></li>
+<li><span style="font-weight: 400">The other way is to attain all four stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>.</span></em> That will remove the possibility of making conditions for ANY <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed from germinating.  </span></li>
+</ul>
+<p style="text-align: justify">11. These conditions or <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> play a critical role in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. When we say "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>," it means, “we do<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> with ignorance when necessary CONDITIONS are present.”</p>
+<ul>
+<li style="text-align: justify">For example, we do not do immoral acts or <em><span>apuññābhi <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> all the time. When we are attracted to or repulsed by something that we see (this is an example of <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>), we may generate craving or dislike, and then it can lead to an immoral action or <em><span>apuññābhi <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>; see, "<a href="../../pages/PS.AA.004/index.html" rel="noopener noreferrer" target="_blank">What Does “Paccaya” Mean in Paṭicca Samuppāda?</a>".</li>
+<li style="text-align: justify">This is the reason why <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> itself is not deterministic. Just because one has <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> does not mean one will necessarily do an immoral thing, generating (<em>apuññābhi</em>) <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. If we cultivate<em><span> <span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>, even if we get the urge to do something immoral, we can contemplate the bad consequences and stop that action, speech, or thoughts.</li>
+<li style="text-align: justify">When one keeps doing <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> --</span></em> and avoiding immoral acts -- one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> will change for the better, <span style="color: #0000ff">and then even the automatic urge to do something immoral will gradually fade</span>. In other words, one's <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> will reduce. This is why <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> is so important.</li>
+</ul>
+<h6><strong>References</strong></h6>
+<ol>
+<li><em><span>The Manuals of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> by Ven. Ledi Sayadaw (1999), pp. 31-57.</li>
+<li><em>Abhidharma Margaya</em><span> (in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) by Ven. Rerukane Chandawimala (2010), pp. 247-278.</span></li>
+</ol>
+<span style="color: #0000ff">Next in the series</span>, "<a href="../../pages/PS.AA.004/index.html" rel="noopener noreferrer" target="_blank">What Does “Paccaya” Mean in Paṭicca Samuppāda?</a>", ..
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.JJ.001/index.html">Patthana Dhamma</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.JJ.004/index.html">Asevana Annamanna Paccaya</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.JJ.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Patthana Dhamma</span>
+        
+        <span class="pathway-title title-pt">Patthana Dhamma</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.JJ.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Asevana Annamanna Paccaya</span>
+        
+        <span class="pathway-title title-pt">Asevana Annamanna Paccaya</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

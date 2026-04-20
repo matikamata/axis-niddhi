@@ -1,0 +1,350 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Kaya Kaya Kayanupassana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Sutta Interpretations</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 14 / 30</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">SI.BB.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Kaya Kaya Kayanupassana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>SI.BB.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Sutta Interpretations</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="SI.BB.007"
+             data-section="Sutta Interpretations"
+             data-section-code="SI"
+             data-findex="0849"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>SI.BB.007</td></tr><tr><td>Fin-dex</td><td>0849</td></tr><tr><td>Slug</td><td>kaya-kaya-kayanupassana</td></tr><tr><td>Section</td><td>SI</td></tr><tr><td>Title EN</td><td>Kaya Kaya Kayanupassana</td></tr></table></div></div><p><strong>Revised May 20, 2018; February 17, 2019; <span style="color: #3366ff;">June 7, 2024</span></strong></p>
+<p style="text-align: justify;">1. There are two meanings to “<i><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></i>”: (i) “<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>” for the body, and (ii) the other “<i><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></i>” means "collections" or "aggregates" of anything: <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, vēdana, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, or <em>viññāna</em>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">"<em>Sabba</em>" means all. Therefore, “<i><span>sabba <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></i>” is the same as “<i>pancakkhandha</i>” or, more correctly, “<i>pancup<em>ādāna</em>kkhandha</i>”; see "<a href="../../pages/KD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Five Aggregates – Introduction">Five Aggregates – Introduction.</a><span>" and follow-up <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li>In the <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span>,</span></em> one contemplates on the five aggregates via four categories (<em><span><span class="pali-term term-highlight" data-term="kāyānupassanā">kāyānupassanā</span>, vēdanānupassanā, <span class="pali-term term-highlight" data-term="cittānupassanā">cittānupassanā</span></span></em>,  and <em><span><span class="pali-term term-highlight" data-term="dhammānupassanā">dhammānupassanā</span></span></em>).</li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="kāyānupassanā">kāyānupassanā</span></span></em> deals with both types of “<i><span><span class="pali-term term-highlight" data-term="kāya">kāya</span>.”</span></i> "<em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>" + "<em><span><span class="pali-term term-highlight" data-term="anupassanā">anupassanā</span></span></em>" rhymes as "<em><span><span class="pali-term term-highlight" data-term="kāyānupassanā">kāyānupassanā</span></span></em>"; see, "<a href="../../pages/SI.BB.003/index.html" rel="noopener noreferrer" target="_blank">Satipaṭṭhāna – Introduction</a>".</li>
+</ul>
+<p style="text-align: justify;">2. We experience pictures, sounds, smells, tastes, touch (different types of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>), and <i>dhamm<em>ā</em></i> (things we think about or recall.)</p>
+<ul>
+<li style="text-align: justify;"><strong>Note that <i>dhamm<em>ā</em></i> are different from <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em><span> (without the long "a" at the end) in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>; the latter </span><em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em><span> refers to "teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>."</span></strong></li>
+<li>Even though “<i><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></i>” is commonly used to describe "material objects" (which are really “<i><span>vaṇṇa <span class="pali-term term-highlight" data-term="rūpa">rūpa</span>" </span></i>or<i><span> "<span class="pali-term term-highlight" data-term="rūpa">rūpa</span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></i>”),   <i><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> </span></i>includes sounds (<em><span>sadda <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>), smells (<em><span>gandha <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>), tastes (<em><span>rasa <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>), and touch (<em><span>phoṭṭhabba <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>).</li>
+<li><b><span>For the rest of the <span class="pali-term term-highlight" data-term="post">post</span>, I will just use the term “<span class="pali-term term-highlight" data-term="rūpa">rūpa</span>” to include sounds, smells, tastes, and touch, as well as visuals.</span></b></li>
+<li style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em> are a type of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>,</span></em> too, but they are below the <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> stage and "cannot be seen or touched": "<em>anidassanaṃ, appaṭighaṃ, dhamm<i>ā</i>yatana pariy<i>ā</i>panna rupam</em>"; see, "<a href="http://localhost/beng_feb2026/living-dhamma/rupa-aggregate/what-are-rupa-dhamma-are-rupa-too/" rel="noopener noreferrer" target="_blank">What are rūpa? – Dhammā are rūpa too!</a>".</li>
+</ul>
+<p style="text-align: justify;">3. Something is a picture or a visual object only when one sees it. A moment later, it is only a memory, now a “memory of an old picture.” If we visualize a house that we are building, that is also a picture in the memory plane, an “envisioned future picture.”</p>
+<ul>
+<li style="text-align: justify;">In the <a href="https://suttacentral.net/sn22.59/pli/ms" rel="noopener noreferrer" target="_blank">Anatta Lakkha Sutta (SN 22.59)</a>, "all <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>" are described as 11 categories: "<em><span><span class="pali-term term-highlight" data-term="tasmātiha">Tasmātiha</span>, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> kiñci rūpaṃ atītā­nāgata­pac­cup­pan­<span class="pali-term term-highlight" data-term="naṃ">naṃ</span> ajjhattaṃ vā bahiddhā vā oḷārikaṃ vā sukhumaṃ vā hīnaṃ vā paṇītaṃ vā <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> dūre santike vā, sabbaṃ rūpaṃ..</span></em>". They are past, present, future, near, far, likable, distasteful, fine (not strong), coarse (strong), internal, and external; see also "<a href="../../pages/KD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Five Aggregates – Introduction">Five Aggregates – Introduction</a>."</li>
+<li style="text-align: justify;">The <em>ajjhatta</em> and<em> bahidda</em><span> categories have a deeper meaning than internal and external. I will discuss that in another <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<p style="text-align: justify;">4. It is good to contemplate these concepts and understand how different representations mean the same things: <i>Pancup<em>ādāna</em>kkhandha</i> is the same as “<i><span>sabba <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></i>”; both include “everything in this world.” Please send me a comment if this is not clear. Many people think “<i>Kayānupassanā</i>” is just about one’s body, which is incorrect.</p>
+<ul style="text-align: justify;">
+<li>But we don’t think about the “whole world.” We think about a tiny fraction of that “world out there.” <b>AND we get attached to (</b><b><i><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></i></b><b>) even a smaller fraction.</b></li>
+<li>Thus, even though <em>pancakkhandha</em> (five aggregates) is unimaginably large, the fraction of <em>pancakkhandha</em> that we consciously interact with <span style="color: #0000ff;">form attachments (via greed, anger, or ignorance)</span> (<i>panc<strong>up<em>ādāna</em></strong>kkhandha</i>) is relatively small. <em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em> means "drawn to" (or "pull close to in the mind"), and that is what one grasps willingly because one thinks there is happiness in them.</li>
+</ul>
+<ol>
+<li>For example, we all know about the zillions of stars or other planets in our solar system, but we do not generate greed or hate about them. We only attach to <strong>some of the pictures</strong>, sounds, smells, tastes, and touch that we interact with daily, which is a tiny fraction of the “world out there.” The biggest component of our “<i>pancupādānakkhandha</i><span>” is the <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> aggregate, the things we think about. Let us discuss this a bit more.</span></li>
+</ol>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;">Thus, we are concerned with only a tiny fraction of "<em><span>sabba <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>": Only those that lead to greed, anger, or ignorance. This is the same as <em>pancaupādanakkhandha.</em> </span></li>
+</ul>
+<p style="text-align: justify;">6. When we contemplate this a bit more, we realize that most of the pictures, sounds, smells, tastes, and touches we think about belong to the <strong><em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em></strong> category; see #2 above.</p>
+<ul>
+<li style="text-align: justify;">A long series of thoughts may start with an “old picture” in our memory (say, an old friend), and then we start generating more thoughts about that person. Then we get into something altogether different: We may think about the nice neighborhood that person is living in and then start thinking about building a house there. Thus, we may think (generate <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>) about something totally different. Thus, it now belongs to the <i><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></i> category.</li>
+<li>Later, we must focus on such thoughts or <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> in the “<i>citt<em>ā</em>nupassana</i>” and “<i>dhamm<em>ā</em>nupassana</i>.” What we need to do in “<i>K<em>ā</em>yānupassanā</i>” is to mainly control our speech and actions first. This way, we can slowly change our habits (<i><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></i>) and start controlling our “automatic actions” that we used to do almost on impulse.</li>
+</ul>
+<p style="text-align: justify;">7. We already discussed how we need to be “morally mindful” while we are in any of the four main postures (<em>Iriyapathapabba</em>) and also in any of the “sub-postures” or any action (<em>sampajānapabba</em>).</p>
+<ul style="text-align: justify;">
+<li>For example, when we see a likable picture (a person or an item), we need to immediately think about whether it is appropriate to take the action that automatically comes to our mind with our old habits. We may be waiting at the airport for the next flight and see a bar; instead of going there and having a drink, it may be more productive to get on the internet and read something useful. It is more productive to take a nap if one is tired.</li>
+<li>In another example, someone may come to you and accuse you of doing something wrong. Instead of retaliating, it may be a good idea to calm down and listen to that person first to see whether you have unknowingly done something to aggravate that person.</li>
+</ul>
+<p style="text-align: justify;"><span>8. As we discussed in the <span class="pali-term term-highlight" data-term="post">post</span>, “</span><a href="../../pages/BM.AA.004/index.html" rel="noopener noreferrer" target="_blank" title="4. What do all these Different Meditation Techniques Mean?">What do all these Different Meditation Techniques Mean?</a>“  <i><span><span class="pali-term term-highlight" data-term="anupassanā">Anupassanā</span></span></i> means “see and discard defilements according to the principles learned” (“<i>anu</i>” means "defilements" and “<i>passanā</i>” means to "see"). We need to think logically about what would happen if a certain action were taken. If that leads to a “bad ending,” we must refrain from such an action.</p>
+<ul style="text-align: justify;">
+<li>Thus, “<i>K<em>ā</em>yānupassanā</i>” in the <i>iriy<em>ā</em>patapabba </i>and the <i>sampaj<em>ā</em>napabba</i> means to contemplate the moral consequences of an act one is about to do and abstain from doing it if it seems to have bad consequences.</li>
+</ul>
+<p style="text-align: justify;">9. <span style="color: #3366ff;"><strong>There are three sections in the<em><span> <span class="pali-term term-highlight" data-term="kāyānupassanā">Kāyānupassanā</span></span></em> where one specifically contemplates the physical body.</strong> <strong>These are <em>patikulamanasikāra pabba, dhātumanasikāra pabba</em>, and <em>navasivatika pabba</em>.</strong></span> These sections involve contemplating the nature of our physical bodies.</p>
+<ul>
+<li style="text-align: justify;">In the <em>patikulamanasikāra pabba, </em>the 32 parts of the body are discussed. Those body parts are not very appealing when separated from each other. It is amazing how our wrong perception of hair on the dinner plate differs from our admiration for the hair attached to our heads. The hair on the plate could be one of our own, but still, we do not like it.</li>
+<li style="text-align: justify;">We admire and care for the nails on our fingers, and some ladies paint them, too. But as soon as they are cut and separated, they become unappealing.</li>
+</ul>
+<p style="text-align: justify;">10. We form a liking for the "whole complete package" with all 32 parts that are in "good condition." We get distraught when hair starts greying or skin starts sagging. A beautiful person may become ugly instantly if the face becomes disfigured due to an injury.</p>
+<ul>
+<li style="text-align: justify;">The reality is that all of the above IS GOING TO HAPPEN to us in the future. As long as there is birth, there is decay and death.</li>
+</ul>
+<p style="text-align: justify;">11. The section (<em>pabba</em>) on <em>dhātumanasikāra pabba </em>is to contemplate the fact that all our bodies are composed of just four entities. They are <em>patavi</em> (solidness), <em>apo</em> (liquid-ness/tendency to bind together), <em>tejo</em> (heat or warmth), <em>vayo</em> (wind). Out of the six <em><span><span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>, <em>akāsa</em> (space) is there too, but <em>viññāna</em> (consciousness) does not belong to the physical body.</p>
+<ul style="text-align: justify;">
+<li> Those four things make all bodies -- whether beautiful or ugly. There is nothing special.</li>
+</ul>
+<p style="text-align: justify;">12. The third section (<em>pabba</em>) of the physical body, <em>navasivatika pabba,</em><span> is to contemplate what happens to a dead body over many months if left out on the ground to decay. (That was commonly done at the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.)</span></p>
+<ul style="text-align: justify;">
+<li>Again, whether it is the body of a homeless person or an emperor, the same decay process will take place. Eventually, all body parts will be absorbed into the ground or released into the air.</li>
+</ul>
+<p style="text-align: justify;">13. All three of those sections are to help us lose attachments to our physical bodies. The purpose is NOT to get distraught but to develop the wisdom to realize that body decay is bound to happen.</p>
+<ul style="text-align: justify;">
+<li>A major component of our suffering arises when we eventually realize we cannot maintain things to our satisfaction. Most people do not like to think about this inevitability. They want to do "whatever it takes" to maintain a beautiful body. The more one does that, the more one will be depressed later.</li>
+<li>Instead, we should try to maintain a healthy body by eating well and sticking to a good exercise program. The "eye-catching aspect" does not matter more. One should be more concerned with the health of the body.</li>
+<li>Eating healthy foods and exercising regularly (see <a href="../../pages/DP.BB.005/index.html" rel="noopener noreferrer" target="_blank" title="“Spark” by John Ratey">“Spark” by John Ratey</a>") will keep the body and mind in good condition so that we will have enough time to at least reach the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">14. It is important to remember that in all these "<em><span><span class="pali-term term-highlight" data-term="anupassanā">anupassanā</span></span></em>", we need to contemplate on the Three Characteristics of nature (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) when we contemplate on the unfruitfulness in attaching to "things and concepts".</p>
+<ul>
+<li style="text-align: justify;">Also, examining the potentially "bad outcomes" of immoral and unwise actions is essential.  We should also consider the wisdom of our stressful attempts to maintain our body appearances. (Especially using artificial techniques like Botox). The sooner we realize this, the less stressful it will be.</li>
+</ul>
+<p style="text-align: justify;">15. Finally, in those three sections on the body, <em>patikulamanasikāra pabba, dhātumanasikāra pabba</em>, and <em>navasivatika pabba, </em>we need to contemplate not only our own body (this is what <em>ajjhatta</em> means in these three sections), but also on the bodies of others (this is what <em> bahiddhā</em> means in these three sections).</p>
+<ul>
+<li style="text-align: justify;">We can contemplate other humans (famous, poor, rich, young, old, etc.) and animals. It does not matter who or what it is; we all will eventually become dust. But, for many, this realization comes only after going through much effort in vain to keep the body "beautiful" via artificial means; then it could be too late.</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/SI.BB.006/index.html">Prerequisites For The Satipatthana Bhavana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/SI.AA.005/index.html">Maha Cattarisaka Sutta Discourse On The Great Forty</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/SI.BB.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Prerequisites For The Satipatthana Bhavana</span>
+        
+        <span class="pathway-title title-pt">Prerequisites For The Satipatthana Bhavana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/SI.AA.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Maha Cattarisaka Sutta Discourse On The Great Forty</span>
+        
+        <span class="pathway-title title-pt">Maha Cattarisaka Sutta Discourse On The Great Forty</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-SI">
+        ↑ Back to Sutta Interpretations
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

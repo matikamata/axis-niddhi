@@ -1,0 +1,371 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Tipitaka English Convention Part 2 | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Historical Background</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 4 / 20</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">HB.AA.009</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Tipitaka English Convention Part 2</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>HB.AA.009</td></tr>
+          <tr><td><strong>Section</strong></td><td>Historical Background</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="HB.AA.009"
+             data-section="Historical Background"
+             data-section-code="HB"
+             data-findex="0329"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>HB.AA.009</td></tr><tr><td>Fin-dex</td><td>0329</td></tr><tr><td>Slug</td><td>tipitaka-english-convention-part-2</td></tr><tr><td>Section</td><td>HB</td></tr><tr><td>Title EN</td><td>Tipitaka English Convention Part 2</td></tr></table></div></div><p><strong>February 15, 2020;  revised July 23, 2020; <span style="color: #3366ff;">August 25, 2022</span></strong></p>
+<h5>Introduction</h5>
+<p style="text-align: justify;"><span>1. In the previous <span class="pali-term term-highlight" data-term="post">post</span>, we discussed the reasons for adopting a "</span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> English" convention to write <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words by European scholars in the 1800s. It is necessary to read that <span class="pali-term term-highlight" data-term="post">post</span> first: "</span><a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1</a>."</p>
+<ul style="text-align: justify;">
+<li><span>As we discussed,  those early European scholars realized the importance of preserving the "<span class="pali-term term-highlight" data-term="pāli">Pāli</span> sounds" as much as possible. Of course, the other requirement was to keep the corresponding English version short.</span></li>
+<li><span>In that <span class="pali-term term-highlight" data-term="post">post</span>, we discussed the adoption of "</span><span style="color: #3366ff;"><strong>t</strong></span>," "<span style="color: #800080;"><strong>d</strong></span>," and "<span style="color: #993366;"><strong>c</strong></span>" to represent the “<strong><span style="color: #0000ff;">ත</span>,</strong>” “<strong><span style="color: #800080;">ද</span>,</strong>” and the “<span style="color: #993366;"><strong>ච</strong></span><span>” sounds in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>.</span></li>
+<li>Here we will continue that discussion. The "<span style="color: #008000;"><strong>ṭ</strong></span>" (with a"dot" underneath the "t") represents the "<span style="color: #008000;"><strong>ට</strong></span><span>" sound in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>.</span></li>
+<li>Then there are <strong>aspirated</strong> sounds "<span style="color: #3366ff;"><strong>th</strong></span>", "<span style="color: #800080;"><strong>dh</strong></span>", "<span style="color: #993366;"><strong>c</strong><strong>h</strong></span>", and "<span style="color: #008000;"><strong>ṭh</strong></span>" respectively for the "<span style="color: #3366ff;"><strong>t</strong></span>", "<span style="color: #800080;"><strong>d</strong></span>", "<span style="color: #993366;"><strong>c</strong></span>", and "<span style="color: #008000;"><strong>ṭ</strong></span>" sounds. Some of those "aspirated words" represent "emphasized versions" of the "unaspirated words." I will explain it below.</li>
+</ul>
+<h5 style="text-align: justify;">We Need to Be Familiar With the “<em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English” Convention</h5>
+<p style="text-align: justify;"><span>2. As mentioned in the previous <span class="pali-term term-highlight" data-term="post">post</span>, the above convention was enacted before </span><strong>1900. Thus</strong><span> all <span class="pali-term term-highlight" data-term="pāli">Pāli</span> documents compiled by the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Text Society are consistent with this convention.</span></p>
+<ul style="text-align: justify;">
+<li>The <strong><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span> texts (with the English alphabet)</span></strong><span> available on the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central website are directly from the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Text Society. </span><strong>Those texts are accurate. </strong>For example, here is the "<a href="https://suttacentral.net/sn56.11/pli/ms" rel="noopener noreferrer" target="_blank">Dhamma­cakkap­pa­vat­ta­na Sutta (SN 56.11)</a><span>," which was the first discourse delivered by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>It is an excellent idea to examine that <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em><span> (and try pronunciations of those <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words) with the guidelines in my two <span class="pali-term term-highlight" data-term="posts">posts</span> on the "</span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English" Convention.</li>
+<li><span>Most of my <span class="pali-term term-highlight" data-term="posts">posts</span> on the <span class="pali-term term-highlight" data-term="puredhamma">puredhamma</span>.net website are consistent with the "</span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English" Convention. </li>
+<li>Of course, as I have repeatedly pointed out, many <strong>English translations </strong><span>of <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words at the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central site are </span><strong>incorrect.</strong> Examples include <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span>, </span></em>and <em>viññāna</em>. See, for example, "<a href="../../pages/HB.AA.018/index.html" rel="noopener noreferrer" target="_blank">Misinterpretation of Anicca and Anatta by Early European Scholars</a>."</li>
+<li>Now let us continue introducing the "<em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English" convention.</li>
+</ul>
+<h5 style="text-align: justify;">Only "<span style="color: #008000;">ṭ</span>" Represents the "<span style="color: #008000;">ට</span>" Sound</h5>
+<p style="text-align: justify;">2. The "<span style="color: #008000;"><strong>ට</strong></span><span>" sound in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> is the "ta" sound in English, as in "</span><span style="color: #008000;"><strong>T</strong></span>om." The "<span style="color: #008000;"><strong>ට</strong></span><span>" sound in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> is ALWAYS represented by "</span><span style="color: #008000;"><strong>ṭ."</strong></span> <span style="color: #3366ff;"><strong>Note the "dot" underneath the "t."</strong></span></p>
+<ul style="text-align: justify;">
+<li>Some examples are <em>Pa<span style="color: #008000;"><strong>ṭ</strong></span>icca, pa<strong><span style="color: #008000;">ṭ</span></strong>igha, pa<span style="color: #008000;"><strong>ṭ</strong></span>igha, pa<span style="color: #008000;"><strong>ṭ</strong></span>iloma, pa<span style="color: #008000;"><strong>ṭ</strong></span>isandahi, pa<strong><span style="color: #008000;">ṭ</span></strong>ipadā</em>.</li>
+<li><span>In the previous <span class="pali-term term-highlight" data-term="post">post</span>, we saw that the "</span><strong><span style="color: #0000ff;">ත</span></strong>" sound is ALWAYS represented by "<span style="color: #0000ff;"><strong>t</strong></span>" (without the "dot" underneath the t.)</li>
+<li>The word<em><span style="color: #3366ff;"><strong> T</strong></span>ipi<span style="color: #008000;"><strong>ṭ</strong></span>aka</em> is an excellent example of both sounds, the "<span style="color: #0000ff;"><strong>t</strong></span>" and the "<span style="color: #008000;"><strong>ṭ."</strong></span> I hope you <span style="color: #000000;">can</span> catch the difference in the audio in #4 below.<b></b></li>
+</ul>
+<h5 style="text-align: justify;">Aspirated Versions</h5>
+<p style="text-align: justify;">3. Now, consider the "aspirated versions" of those four sounds we discussed. We must remember that we are dealing with "<em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English" and NOT "Standard English."</p>
+<ul style="text-align: justify;">
+<li><strong>The aspirated version accompanies a forceful expulsion of air. </strong>If you hold a thin piece of paper in front of the mouth, it should move when you make an "aspirated sound."</li>
+<li>The following video explains that for English words. But it is the same idea. Further guidance in #12 is below.</li>
+</ul>
+<h5 style="text-align: justify;">Putting Emphasis on "<span style="color: #008000;"><strong>ට</strong></span>" Sound to Make the "<span style="color: #008000;"><strong>ඨ</strong></span>" Sound</h5>
+<p style="text-align: justify;">4. The "<span style="color: #008000;"><strong>ṭ</strong></span>" ("<span style="color: #008000;"><strong>ට</strong></span>") sound, when aspirated with  "<span style="color: #008000;"><strong>ṭh,"</strong></span> becomes the "<span style="color: #008000;"><strong>ඨ</strong></span>" sound. It is not that common to have the "<span style="color: #008000;"><strong>ṭh</strong></span>" by itself. An example is <em><span style="color: #008000;"><strong>ṭh</strong></span>apetvā</em>, meaning "placement."</p>
+<ul style="text-align: justify;">
+<li>In most cases, the "<span style="color: #008000;"><strong>ṭ</strong></span>" sound is in a word just before the "<span style="color: #008000;"><strong>ṭh</strong></span>" sound, as in <em>a<span style="color: #008000;"><strong>ṭṭh</strong></span>a</em> (අ<span style="color: #008000;"><strong>ට්ඨ</strong></span> for number 8.)</li>
+<li>Here are more examples of the "<span style="color: #008000;"><strong>ṭ</strong></span>" ("<span style="color: #008000;"><strong>ට</strong></span>") AND "<span style="color: #339966;"><strong>ṭh</strong></span>" ("<span style="color: #008000;"><strong>ඨ</strong></span>") sounds coming together: <em>di<span style="color: #008000;"><strong>ṭṭh</strong></span>i</em> (දි<span style="color: #008000;"><strong>ට්ඨි</strong></span> for view), <em>sandi<span style="color: #008000;">ṭ<strong>ṭh</strong></span>ika</em> (සන්දි<span style="color: #008000;"><strong>ට්ඨි</strong></span>ක for "seeing '<em>san</em>'"), <em>a<span style="color: #008000;"><strong>ṭṭh</strong></span>a</em> as in <em>a<span style="color: #008000;"><strong>ṭṭh</strong></span>a purisapuggalā</em> and <em>a<span style="color: #008000;"><strong>ṭṭh</strong></span><span>aṅgika, <span class="pali-term term-highlight" data-term="kamma">kamma</span></span><span style="color: #008000;"><strong>ṭṭh</strong></span>āna, satipa<span style="color: #008000;"><strong>ṭṭh</strong></span>āna</em>.</li>
+<li>In #2, we mentioned some example words with the "<span style="color: #008000;"><strong>ṭ" </strong><span style="color: #000000;">sound: </span></span> <em>Pa<span style="color: #008000;"><strong>ṭ</strong></span>icca, pa<strong><span style="color: #008000;">ṭ</span></strong>igha, pa<span style="color: #008000;"><strong>ṭ</strong></span>ilōma, pa<span style="color: #008000;"><strong>ṭ</strong></span>isandhi, pa<strong><span style="color: #008000;">ṭ</span></strong>ipadā</em>.</li>
+<li>Compare all those with the following words with just the "<span style="color: #3366ff;"><strong>t</strong></span>" ("<span style="color: #3366ff;"><strong>ත</strong></span>") sound: a<span style="color: #3366ff;"><strong>tt</strong></span>a (අත්ත for the truth), sa<span style="color: #3366ff;"><strong>tt</strong></span>a (සත්ත for a living being; note that <em>Bōdhisatta</em> is a living being who is striving to attain the <em>Buddhahood</em>.)</li>
+<li>Here is the pronunciation of the unaspirated <em>pa<span style="color: #008000;"><strong>ṭ</strong></span>icca, pa<strong><span style="color: #008000;">ṭ</span></strong>igha, pa<span style="color: #008000;"><strong>ṭ</strong></span>iloma, pa<span style="color: #008000;"><strong>ṭ</strong></span>isandhi, pa<strong><span style="color: #008000;">ṭ</span></strong>ipadā </em>AND aspirated <em><span style="color: #008000;"><strong>ṭh</strong></span>apetvā</em>. Both aspirated and unaspirated in <em>a<span style="color: #008000;"><strong>ṭṭh</strong></span>a, di<span style="color: #008000;"><strong>ṭṭh</strong></span>i, sandi<span style="color: #008000;">ṭ<strong>ṭh</strong></span>ika, a<span style="color: #008000;"><strong>ṭṭh</strong></span><span>aṅgika, <span class="pali-term term-highlight" data-term="kamma">kamma</span></span><span style="color: #008000;"><strong>ṭṭh</strong></span>āna, and satipa<span style="color: #008000;"><strong>ṭṭh</strong></span>āna</em>. Also, <em><span style="color: #0000ff;"><strong>T</strong></span>ipi<span style="color: #008000;"><strong>ṭ</strong></span>aka.</em></li>
+</ul>
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Pali-words-Tipitaka-English-Post-2-1.mp3" type="audio/mpeg"/></audio></p>
+<p style="text-align: justify;"> </p>
+<h5 style="text-align: justify;">Putting Emphasis on "<span style="color: #3366ff;"><strong>ත</strong></span>" Sound to Make "<span style="color: #3366ff;"><strong>ථ</strong></span>"  Sound</h5>
+<p style="text-align: justify;">5. The sound "<span style="color: #3366ff;"><strong>th</strong></span>" is the "aspirated version" of "<span style="color: #3366ff;"><strong>t</strong></span>" as in <em>Sama<span style="color: #3366ff;"><strong>th</strong></span>a</em><span> (සමථ in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) in </span><em>Sama<span style="color: #3366ff;"><strong>th</strong></span>a</em> <em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>. The word ra<span style="color: #3366ff;"><strong>th</strong></span>a<b> (</b>රථ for "vehicle") is another.</p>
+<ul style="text-align: justify;">
+<li>Here are more words with both the "<span style="color: #3366ff;"><strong>t</strong></span>" and the "<span style="color: #3366ff;"><strong>th</strong></span>" sounds: <span style="color: #3366ff;"><strong>t</strong></span>a<span style="color: #3366ff;"><strong>th</strong></span>āga<span style="color: #3366ff;"><strong>t</strong></span>a (තථාගත), na<span style="color: #3366ff;"><strong>tth</strong></span>i, a<span style="color: #3366ff;"><strong>tth</strong></span>i, ya<span style="color: #3366ff;"><strong>th</strong></span>ābhūta, hadaya va<strong>t<span style="color: #3366ff;">th</span></strong>u.</li>
+</ul>
+<p style="text-align: justify;">6. There are a few words with both aspirated and unaspirated versions. For example, when the "<em>a<span style="color: #3366ff;"><strong>t</strong><strong>t</strong></span>a</em>" (අත්ත) refers to the meaning "truth," it is (the "true-ness") emphasized with the word "<em>a<span style="color: #3366ff;"><strong>tth</strong></span>a</em>" (අත්ථ).</p>
+<ul style="text-align: justify;">
+<li>There are a few words like that where the<strong> meaning is emphasized with the aspirated version.</strong> We will discuss that with examples from the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> later on. Two more such words are addressed in #8 below.</li>
+<li>Many other words do not have such "emphasized" and "non-emphasized" versions. Here are some examples with ONLY the "<span style="color: #3366ff;"><strong>th</strong></span>" sound: <em>vi<span style="color: #3366ff;"><strong>th</strong></span>i, It<span style="color: #3366ff;"><strong>th</strong></span>i, Sama<span style="color: #3366ff;"><strong>th</strong></span>a, <span style="color: #3366ff;"><strong>Th</strong></span>ēro.</em> For example, <strong>there are no words such as</strong> vi<span style="color: #0000ff;"><strong>t</strong></span>i, It<span style="color: #0000ff;"><strong>t</strong></span>i, Sama<span style="color: #0000ff;"><strong>t</strong></span>a, or <span style="color: #0000ff;"><strong>T</strong></span>ēro.</li>
+<li>Here is the pronunciation of <em>Sama<span style="color: #3366ff;"><strong>th</strong></span>a, ra<span style="color: #3366ff;"><strong>th</strong></span>a, <span style="color: #3366ff;"><strong>t</strong></span>a<span style="color: #3366ff;"><strong>th</strong></span>āga<span style="color: #0000ff;"><strong>t</strong></span>a, na<span style="color: #3366ff;"><strong>tth</strong></span>i, a<span style="color: #3366ff;"><strong>tth</strong></span>i, ya<span style="color: #3366ff;"><strong>th</strong></span>ābhūta, hadaya va<span style="color: #3366ff;"><strong>tth</strong></span>u, vi<span style="color: #3366ff;"><strong>th</strong></span>i, It<span style="color: #3366ff;"><strong>th</strong></span>i, Sama<span style="color: #3366ff;"><strong>th</strong></span>a, <span style="color: #3366ff;"><strong>Th</strong></span>ēro</em>.</li>
+</ul>
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Pali-words-Tipitaka-English-Post-2-2.mp3" type="audio/mpeg"/></audio></p>
+<h5 style="text-align: justify;"> </h5>
+<h5 style="text-align: justify;">Putting Emphasis on "<span style="color: #800080;"><strong>ද</strong></span>" Sound to Make the "<span style="color: #800080;">ධ</span>" Sound</h5>
+<p style="text-align: justify;">7. The sound "<span style="color: #800080;"><strong>dh</strong></span>" is the "aspirated version" of "<span style="color: #800080;"><strong>d</strong></span>" as in <em><span style="color: #800080;"><strong>Dh</strong></span>amma</em> (ධම්ම). More examples of words with the "<span style="color: #800080;"><strong>dh</strong></span>" sound: <em> <span style="color: #800080;"><strong>Dh</strong></span>amma, a<span style="color: #800080;"><strong>dh</strong></span>amma, <span style="color: #800080;"><strong>dh</strong></span>ātu, gan<span style="color: #ff0000;"><span style="color: #800080;"><strong>dh</strong></span><span style="color: #000000;">a</span></span>, gan<span style="color: #800080;"><strong>dh</strong></span>abba, mid<span style="color: #800080;"><strong>dh</strong></span>a, nirō<span style="color: #800080;"><strong>dh</strong></span>a, sad<span style="color: #800080;"><strong>dh</strong></span>ā, <b>an<span style="color: #800080;">dh</span>a, san<span style="color: #800080;">dh</span>i, sā<span style="color: #800080;">dh</span>u, paṭisan<span style="color: #800080;">dh</span>i, samā<span style="color: #800080;">dhi.</span></b></em></p>
+<ul style="text-align: justify;">
+<li>Both the unaspirated and the aspirated sounds are in words, <em><span style="color: #800080;"><strong>Dh</strong></span>ammapa<span style="color: #800080;"><strong>d</strong></span>a</em><span> (ධම්මපද  in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) and </span><em>Bu<span style="color: #800080;"><strong>d</strong><strong>dh</strong></span>a</em> (බුද්ධ), i.e., both the <span style="color: #800080;"><strong>dh</strong></span> and <span style="color: #800080;"><strong>d</strong></span> sounds appear. More examples: <em>passa<b><span style="color: #800080;">ddh</span></b>i, i<b><span style="color: #800080;">ddh</span></b>i, mi<b><span style="color: #800080;">ddh</span></b>a.</em></li>
+<li>Here is the pronunciation of <em><span style="color: #800080;"><strong>Dh</strong></span>amma, a<span style="color: #800080;"><strong>dh</strong></span>amma, <span style="color: #800080;"><strong>dh</strong></span>ātu, gan<span style="color: #ff0000;"><span style="color: #800080;"><strong>dh</strong></span><span style="color: #000000;">a</span></span>, gan<span style="color: #800080;"><strong>dh</strong></span>abba, mid<span style="color: #800080;"><strong>dh</strong></span>a, nirō<span style="color: #800080;"><strong>dh</strong></span>a, sad<span style="color: #800080;"><strong>dh</strong></span>ā, <b>an<span style="color: #800080;">dh</span>a, san<span style="color: #800080;">dh</span>i, sā<span style="color: #800080;">dh</span>u, paṭisan<span style="color: #800080;">dh</span>i, samā<span style="color: #800080;">dhi, <strong>Dh</strong></span></b>ammapa<b><span style="color: #800080;"><strong>d</strong></span></b>a, Bu<span style="color: #800080;"><strong>d</strong><strong>dh</strong></span>a, passa<b><span style="color: #800080;">ddh</span></b>i, i<b><span style="color: #800080;">ddh</span></b>i, mi<b><span style="color: #800080;">ddh</span></b>a.</em></li>
+</ul>
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Pali-words-Tipitaka-English-Post-2-3.mp3" type="audio/mpeg"/></audio></p>
+<h5 style="text-align: justify;"> </h5>
+<h5 style="text-align: justify;">Putting Emphasis on "<span style="color: #993366;"><strong>ච</strong></span>" Sound to Make the "<span style="color: #993366;"><strong>ඡ</strong></span>"  Sound</h5>
+<p style="text-align: justify;">8. The sound "<span style="color: #993366;"><strong>c</strong><strong>h</strong></span>" ("<span style="color: #993366;"><strong>ඡ</strong></span>") is the "aspirated version" of "<span style="color: #993366;"><strong>c</strong></span>" ("<span style="color: #993366;"><strong>ච</strong></span>") as in <em><span style="color: #993366;"><b>ch</b></span>anda</em> (<span style="color: #993366;"><strong>ඡ</strong></span>න්ද) meaning "desire." The unaspirated is in <em><span style="color: #993366;"><strong>c</strong></span>alana</em> (<span style="color: #993366;"><strong>ච</strong></span>ලන), meaning "movement."</p>
+<ul style="text-align: justify;">
+<li><span>Most <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words with the "</span><span style="color: #993366;"><strong>c</strong><strong>h</strong></span>" sound also have the "<span style="color: #993366;"><strong>c</strong></span>" sound coming first. Some examples are,  <em>i<span style="color: #993366;"><strong>cch</strong></span>a, viciki<span style="color: #993366;"><strong>cch</strong></span>ā, appi<span style="color: #993366;"><strong>cch</strong></span>a</em> (<em>appa i<span style="color: #993366;"><strong>cch</strong></span>a</em>), <em>ma<span style="color: #993366;"><strong>ccha</strong></span>riya, mi<span style="color: #993366;"><strong>cch</strong></span>ā, mi<span style="color: #993366;"><strong>cch</strong></span>ācāra, mi<span style="color: #993366;"><strong>cch</strong></span>āvācā, pari<span style="color: #993366;"><strong>cch</strong></span>eda, ga<span style="color: #993366;"><strong>cch</strong></span>ati, u<span style="color: #993366;"><strong>cch</strong></span>eda</em>.</li>
+<li><span>Two more critical <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words have the aspirated version emphasizing the meaning of the unaspirated version, just like in the case of atta/attha discussed above in #6.</span></li>
+<li>Those two are <em>i<span style="color: #993366;"><strong>cc</strong></span>a/i<span style="color: #993366;"><strong>cch</strong></span>a</em> (ඉ<span style="color: #993366;"><strong>ච්ච</strong></span>/ඉ<span style="color: #993366;"><strong>ච්ඡ</strong></span>) and <em>ani<span style="color: #993366;"><strong>cc</strong></span>a/ani<span style="color: #993366;"><strong>cch</strong></span>a</em> (අනි<span style="color: #993366;"><strong>ච්ච</strong></span>/අනි<span style="color: #993366;"><strong>ච්ඡ</strong></span><span>).  The two aspirated words emphasize the meanings of unaspirated words. We will discuss that in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li>Here is the pronunciation of <em><span style="color: #993366;"><b>ch</b></span>anda, <span style="color: #993366;"><strong>c</strong></span>alana, i<span style="color: #993366;"><strong>cch</strong></span>a, viciki<span style="color: #993366;"><strong>cch</strong></span>ā, appi<span style="color: #993366;"><strong>cch</strong></span>a, ma<span style="color: #993366;"><strong>ccha</strong></span>riya, mi<span style="color: #993366;"><strong>cch</strong></span>ā, mi<span style="color: #993366;"><strong>cch</strong></span>ā<span style="color: #993366;"><strong>c</strong></span>āra, mi<span style="color: #993366;"><strong>cch</strong></span>āvā<span style="color: #993366;"><strong>c</strong></span>ā, pari<span style="color: #993366;"><strong>cch</strong></span>eda, ga<span style="color: #993366;"><strong>cch</strong></span>ati, u<span style="color: #993366;"><strong>cch</strong></span>eda, i<span style="color: #993366;"><strong>cc</strong></span>a, i<span style="color: #993366;"><strong>cch</strong></span>a, ani<span style="color: #993366;"><strong>cc</strong></span>a, ani<span style="color: #993366;"><strong>cch</strong></span>a.</em></li>
+</ul>
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Pali-words-Tipitaka-English-Post-2-4.mp3" type="audio/mpeg"/></audio></p>
+<h5 style="text-align: justify;"> </h5>
+<h5 style="text-align: justify;"><span>Connection to Key Concepts in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span></span></h5>
+<p style="text-align: justify;"><span>9. Over the past year, I have realized that many misconceptions could be easily avoided by looking at a few <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words and their inherent meanings.</span></p>
+<ul style="text-align: justify;">
+<li><span>For example, the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word </span><strong><em>atta</em></strong> has two different meanings. Furthermore, the word <strong><em>attha</em></strong> emphasizes just one of those two meanings.</li>
+<li>Similarly, the meanings of the words <strong><em>icca</em></strong> and <strong><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em></strong> become emphasized in <strong><em>iccha</em></strong> and <strong><em>aniccha</em></strong>.</li>
+<li>See "<a href="../../pages/KD.KK.003/index.html" rel="noopener" target="_blank">Icca, Nicca, Anicca – Important Connections</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><span>Many of <span class="pali-term term-highlight" data-term="posts">Posts</span> at <span class="pali-term term-highlight" data-term="puredhamma">Puredhamma</span>.net May Not be Up To the "</span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English" Convention</h5>
+<p style="text-align: justify;"><span>10. I gradually became aware of this issue over the past several months. During that time, I have progressively followed the above rules. I will stick to this convention in future <span class="pali-term term-highlight" data-term="posts">posts</span> and gradually revise old <span class="pali-term term-highlight" data-term="posts">posts</span> to be compatible. That will take some time.</span></p>
+<ul style="text-align: justify;">
+<li><span>All <span class="pali-term term-highlight" data-term="pāli">Pāli</span> literature on the <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central website is compatible with the "</span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English" convention.</li>
+<li>Once you select a <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, you can access translations to several languages using the "hamburger icon" on the top left.</li>
+<li>Of course, all translations there have errors, especially with keywords like <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span>, </span></em>and <em>viññāna</em>.</li>
+</ul>
+<h5 style="text-align: justify;"><span>Singular to Plural in <span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></h5>
+<p style="text-align: justify;">11. The following issue is somewhat unrelated, and many people could be aware of it. But I would mention it here since it is essential to know.</p>
+<ul style="text-align: justify;">
+<li><span>Many <span class="pali-term term-highlight" data-term="pāli">Pāli</span> nouns ending in "short </span><i>a</i> (<span class="IPA">/ə/</span>)" are converted to plural by replacing that "short a" with a "long a" or ā.</li>
+<li>For example, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span>, <span class="pali-term term-highlight" data-term="brahma">Brahma</span>, <span class="pali-term term-highlight" data-term="sutta">sutta</span>, <span class="pali-term term-highlight" data-term="citta">citta</span>, <span class="pali-term term-highlight" data-term="apāya">apāya</span>, <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>, <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are singular and the corresponding plural are <em><span><span class="pali-term term-highlight" data-term="devā">Devā</span>, <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>, <span class="pali-term term-highlight" data-term="suttā">suttā</span>, cittā, apāyā, gandhabbā, jhānā</span></em>.</li>
+<li><span>Finally, <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Glossary pages with pronunciation are available at "</span><a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Tables and Summaries</a>."</li>
+</ul>
+<h5 class="title style-scope ytd-video-primary-info-renderer" style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pali">Pali</span> Alphabet with Illustrations &amp; subtitles</span></h5>
+<p style="text-align: justify;"><span>12. The following video could be very useful in learning the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> alphabet (in English.) Moreover, it provides excellent instructions on pronunciation.</span></p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/HB.AA.008/index.html">Tipitaka English Convention Part 1</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/HB.AA.000/index.html">Historical Background</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/HB.AA.008/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Tipitaka English Convention Part 1</span>
+        
+        <span class="pathway-title title-pt">Tipitaka English Convention Part 1</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/HB.AA.000/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Historical Background</span>
+        
+        <span class="pathway-title title-pt">Historical Background</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-HB">
+        ↑ Back to Historical Background
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

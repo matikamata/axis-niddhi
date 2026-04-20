@@ -1,0 +1,359 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Connection Between Sankhara Vinnana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Living Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 7 / 52</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">LD.BB.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Connection Between Sankhara Vinnana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>LD.BB.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Living Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="LD.BB.005"
+             data-section="Living Dhamma"
+             data-section-code="LD"
+             data-findex="0202"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>LD.BB.005</td></tr><tr><td>Fin-dex</td><td>0202</td></tr><tr><td>Slug</td><td>connection-between-sankhara-vinnana</td></tr><tr><td>Section</td><td>LD</td></tr><tr><td>Title EN</td><td>Connection Between Sankhara Vinnana</td></tr></table></div></div><strong>January 11, 2019</strong>
+<p style="text-align: justify"><span>1. In a recent <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/LD.BB.004/index.html" rel="noopener noreferrer" target="_blank">Viññāṇa – Consciousness Together With Future Expectations</a>", I discussed how <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> </span></em>or "future expectations" are established when one gets attached to something and starts doing <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (conscious thinking, speech, and actions) about it.</p>
+<ul style="text-align: justify">
+<li><span>In this <span class="pali-term term-highlight" data-term="post">post</span>, I will elaborate more on the importance of </span><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>and the connection to <em>viññāna</em><span>. In a few <span class="pali-term term-highlight" data-term="posts">posts</span>, I will try to explain how we create our own future suffering by engaging in </span><em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> or "strong <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>".</li>
+<li>These <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> are nothing but how we think about, speak about, and take actions on moral/immoral issues. If we do any of the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>, then we are generating "bad <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>" (abbreviated as "<em>apunnābhisaṅkhāra</em>").</li>
+<li>Those <em>apunnābhisaṅkhāra</em> lead to suffering. Therefore, key to stop future suffering is to gradually reduce <em>apunnābhisaṅkhāra</em> and eventually to stop them.</li>
+</ul>
+<p style="text-align: justify"><span>2. In addition to what we discussed in that previous <span class="pali-term term-highlight" data-term="post">post</span>, another key point is to realize that all our speech and bodily actions are started by the mind.</span></p>
+<ul style="text-align: justify">
+<li>Can you do anything, if you (or your mind) does not want to do?</li>
+<li>You may be in the middle of doing something (say walking to the kitchen), but you can decide you don't really want to go the kitchen and instead walk to the living room. If you start saying something, you can stop in mid-sentence if you want to.</li>
+<li>Some people have strange ideas about humans not having free will. They should try what I just suggested above. It is not that hard to verify.</li>
+</ul>
+<p style="text-align: justify">3. All the progress that science has made is based on the "mind power" of the humans (scientists coming up with breakthrough innovations in their minds). Mind comes first and this is what is expressed in the very first <em>Dhammapada gāthā</em>: "<em><span>manōpubbangamā <span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>.." or "mind is at the forefront".</p>
+<ul style="text-align: justify">
+<li>A child's future depends on how well he learns. If the mind of the child goes in the wrong direction, he/she could become a drug addict or even a murderer.</li>
+<li><span>In the same way, we determine our own LONG TERM future in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process by the ways in which we think, speak, and act. That is what is really explained in </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span> (normally translated as "Dependent Origination"; again, it is much better to use the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> term and understand what is really meant by it).</span></li>
+</ul>
+<p style="text-align: justify">4. From the moment we wake up in the morning, we do nothing but generate <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>When we just experience a sense input (seeing, hearing, etc) , “<em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>“ are automatically generated.</li>
+<li><strong><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em>vēdanā, sañña</em> are <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>":</strong> we just experience the sense input by recognizing it and generating a "<em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>, or neutral feeling about it".</li>
+</ul>
+<p style="text-align: justify">5. When we start thinking consciously about a particular sense input (what we saw, heard, tasted, etc), we start generating <em><span>vacī  <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>; we may also speak with <em><span>vacī  <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. Here, <em>vacī</em> is pronounced “<em>vachee</em>”.</p>
+<ul style="text-align: justify">
+<li>For example, if we see a nice car and start thinking about how nice it would be to own such a car, how we can impress our friends with it, etc, we are fully aware of such thoughts.</li>
+<li>Such conscious generation of thoughts about "what to do about a given sense input and how to go about it", for example, are <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. Actual speech is also <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em></li>
+<li><strong><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em><span><span class="pali-term term-highlight" data-term="vitakka">vitakka</span>, <span class="pali-term term-highlight" data-term="vicāra">vicāra</span></span></em> are <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>": stay on the given sense input and generating thoughts about it or related things.</strong></li>
+<li>Furthermore, we can keep going with such "day dreaming" or we can stop them. If it is something we like, it may be hard to stop thinking about it, i.e.,  it may take will power.</li>
+<li>That is what is involved in <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>: <strong>stopping bad <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</strong></li>
+</ul>
+<p style="text-align: justify">6.  If we just proceed with those <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, our emotions may get strong and we may start speaking out (stronger <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>). If we get "really worked up" we may do bodily actions with such emotions, then those are done with<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>For example, let us say two people get into an argument and start shouting at each other. Each person is speaking harsh words (generated via <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>).</li>
+<li>Then one of them (person X)  gets "really worked up", loses all restraint, and hits the other person. That "hitting action" was done with<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (generating thoughts to raise the hand and hit that person).</li>
+</ul>
+<p style="text-align: justify">7. It is important to realize that both speech and bodily actions are initiated by the mind.</p>
+<ul style="text-align: justify">
+<li>In the above example, both people were engaged in generating "bad <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>", which are nothing but "bad speech", the opposite of "<em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vāca</span></em>" or "correct speech".</li>
+<li>Then person X took did an even worse thing by hitting the other person. That was a "bad action", opposite of "<em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Kammanta</span></em>".</li>
+<li>Therefore, they were both acting with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>" or ignorance of the consequences of their actions. That is "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>", the first step in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">8. Now, we can see what is meant by "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" (and "<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>").</p>
+<ul style="text-align: justify">
+<li>In the above example, both <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> generated by person X were "<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>" or "strong <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>".</li>
+<li>If those two people were just taking about something kammically neutral, say about the weather, then that would involve just "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>".</li>
+<li><strong>If they were talking about weather, while walking,</strong> then that would involve both <em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that are NOT of "<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>" type. That speech and action did not involve generation of "<em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy".</li>
+</ul>
+<p style="text-align: justify">9. Therefore, it is important to understand the difference between just <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>.</span></em> In the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, or in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, the word "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" is used often without specifically saying whether it is just "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>".</p>
+<ul style="text-align: justify">
+<li>Depending on the context, we should be able to determine whether it is  just "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>".</li>
+<li>Not only that, but <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> are also two types: <em>punnābhisaṅkhāra</em> (<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> or "good deeds") and <em>apunnābhisaṅkhāra</em> (<em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> or "bad deeds").</li>
+<li>Here by "deeds" we include all three types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>: <em>manō, vaci</em>, and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. We should AVOID all three types of <em>apunnābhisaṅkhāra</em> or immoral thoughts, speech, and actions.</li>
+</ul>
+<p style="text-align: justify">10. It is again important to emphasize that <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> arise AUTOMATICALLY based on two things: (1) the sense input, and (2) one's own <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span> (character/habits), as we discussed in the <span class="pali-term term-highlight" data-term="post">post</span>: "</span><a href="../../pages/LD.BB.003/index.html" rel="noopener noreferrer" target="_blank">Pāli to English – Serious Problems With Current Translations</a>".</p>
+<ul style="text-align: justify">
+<li>For example, if someone has a bad temper (that is a bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), then that person can be made angry by the slightest provocation.</li>
+<li>On the other hand, there are people who are calm and measured and are not easy to become angry. It will take much stronger provocation to make them angry.</li>
+<li>In the same way, some people are greedy and are easily attached to tasty foods. Some people are kind and quick to come to help for others in need, etc.</li>
+</ul>
+<p style="text-align: justify"><span>11. The key to making progress in the Path of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is to cultivate "good </span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" and gradually reduce "bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>".</p>
+<ul style="text-align: justify">
+<li>If one is "quick to anger", that is a bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>. One important way to reduce that bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> is to stop generating <em>vaci</em> and<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> by will power when they start arising.</li>
+<li>For example, some people get angry even when they hear the name of a person they do not like. Then they start thinking about all the bad things that person has done in the past. That is generating "bad <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>".</li>
+<li>Even though one may not be saying a single bad word, just consciously think about bad thoughts about another person will feed that bad habit. So, it is important to realize that generating such "silent bad thoughts" is as bad as saying harsh words.</li>
+<li>Of course actually speaking out (also <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) and doing bad things to person (hitting for example), are also bad <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">12. This "feeding bad habits" via (<em>apunnābhi</em>)<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> generation is explained via the step, "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>" in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</p>
+<ul style="text-align: justify">
+<li><strong>When person X has a "grudge against person Y", person X has a "<em>viññāna</em>" or an expectation in his mind to "get back to Y or hurt Y" whenever an opportunity arises. </strong></li>
+<li>That <em>viññāna</em> "gets food to grow" each time X starts generating bad thoughts about Y, speak against Y, or do something to hurt Y.  Those all belong to<em> vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em></li>
+<li>On the other hand, <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> about Y arise automatically in X's mind when X sees Y or even when Y's name is mentioned by someone else. Then X is likely to start generating <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> or "conscious thoughts about Y".</li>
+<li>The key to progress is to STOP such <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> AS SOON AS one becomes aware of them.</li>
+</ul>
+<p style="text-align: justify">13. Just like a person, an animal, or even a tree would grow when given food on a regular basis, one's <em>viññāna</em> would grow when "it is fed on a regular basis" by generating <em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>It works backwards too. If food is reduced, a tree will not grow well. If food and water are totally stopped, the tree will die.</li>
+<li><strong>In the same way, if one stops feeding a given "<em>viññāna</em>" (or a "future expectation") by stopping<em> vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, that <em>viññāna</em> will die with time.</strong></li>
+<li>In the same way, we want to "feed a good <em>viññāna</em>", say to act kindly towards other people and animals. So, we should INCREASE <em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> generation: generate more compassionate thoughts and engage in compassionate activities like giving.</li>
+</ul>
+<p style="text-align: justify">14. So, hopefully, we now have a good idea about what <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (and <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) are and how they lead to good or bad <em>viññāna</em>.</p>
+<ul>
+<li style="text-align: justify">We will discuss more on <em>viññāna</em><span> in the next <span class="pali-term term-highlight" data-term="post">post</span>. In the mean time, please do not hesitate to ask questions. It is important to understand these basic concepts.</span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/LD.BB.004/index.html">Vinnana Expectations Consciousness</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/LD.BB.006/index.html">Vinnana Sankhara Paticca Samuppada</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/LD.BB.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Vinnana Expectations Consciousness</span>
+        
+        <span class="pathway-title title-pt">Vinnana Expectations Consciousness</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/LD.BB.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Vinnana Sankhara Paticca Samuppada</span>
+        
+        <span class="pathway-title title-pt">Vinnana Sankhara Paticca Samuppada</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-LD">
+        ↑ Back to Living Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

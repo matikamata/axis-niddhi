@@ -1,0 +1,314 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Karaniya Metta Sutta Metta Bhavana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Bhāvanā (Meditation)</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 17 / 34</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BM.AA.011</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Karaniya Metta Sutta Metta Bhavana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BM.AA.011</td></tr>
+          <tr><td><strong>Section</strong></td><td>Bhāvanā (Meditation)</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>3</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BM.AA.011"
+             data-section="Bhāvanā (Meditation)"
+             data-section-code="BM"
+             data-findex="0731"
+             data-level="intermediate"
+             data-reading-time="3"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BM.AA.011</td></tr><tr><td>Fin-dex</td><td>0731</td></tr><tr><td>Slug</td><td>karaniya-metta-sutta-metta-bhavana</td></tr><tr><td>Section</td><td>BM</td></tr><tr><td>Title EN</td><td>Karaniya Metta Sutta Metta Bhavana</td></tr></table></div></div><p><strong>October 7, 2018; revised September 6, 2019; February 11, 2021</strong></p>
+<p style="text-align: justify;"><em><span>Karaniya <span class="pali-term term-highlight" data-term="metta">Metta</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> is one of the popular <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em><span> in <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> countries.  However, like many </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, it has not been appropriately translated in most current English translations.</p>
+<p style="text-align: justify;">1. First of all, the actual name of the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> is<em><span> Karaniyamattha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>. It comes from “<em>karaniyama</em><span>” meaning “essential to do” (කල යුතුම  in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) and “</span><em>attha</em>” meaning “oneself.” That means this <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em><span> summarizes what one must do (to make progress on the Path). But this is not a significant error since <span class="pali-term term-highlight" data-term="metta">Metta</span></span><em><span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> is there too.</p>
+<ul>
+<li style="text-align: justify;">Those "requirements" are in the first three verses.</li>
+<li style="text-align: justify;"><span>The actual "<span class="pali-term term-highlight" data-term="metta">Metta</span></span><em><span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>" part is in verses 4 through 8.</li>
+<li style="text-align: justify;">Verse 9 says that one should do this <em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> in all four postures. This <em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> is the "<em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> Vihāra</span></em>" or "living like a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>" or "living with the mindset of a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>.</span></em>"</li>
+<li style="text-align: justify;">Verse 10: When one fulfills the "requirements" at the basic level, one will get to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> stage. With the cultivation of <span class="pali-term term-highlight" data-term="metta">Metta</span></span><em><span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span>,</span></em> one will get to be an <em>Anāgāmi</em> (not born in a womb again).</li>
+</ul>
+<p>[table id=20 /]</p>
+<p style="text-align: justify;"><strong>Note:</strong> The pdf file of the<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> itself can be downloaded here: "<a href="http://localhost/beng_feb2026/wp-content/uploads/Karaniya-Metta-Sutta-1.pdf" rel="attachment wp-att-18736">Karaniya Metta Sutta</a>."</p>
+<p style="text-align: justify;">2. Deeper explanations are in some words like "<em>abhisamecca</em>" ("<em>abhi</em>" + "<em>san</em>" + "<em>avecca</em>"), and "<em>dukkhamicceyya</em>" ("<em>dukkham</em>" + "<em>avecceyya</em>").</p>
+<ul>
+<li style="text-align: justify;"><em>Avecca</em> is the keyword in both cases, and I discussed the deep connection to "<em>icca</em>" and thus <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em><span> in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – The Four Qualities of a Sotāpanna</a><span>" (starting at #9 in the <span class="pali-term term-highlight" data-term="post">post</span>).</span></li>
+<li style="text-align: justify;">If anyone needs more explanations of other words, we can discuss it at the discussion forum, but we will look at one more next.</li>
+</ul>
+<p style="text-align: justify;">3. Another keyword is "<em>mānasaṃbhāva,"</em> which comes from "<em>mānasan</em>" and  "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,"</span></em> meaning one's mind (ideally) does not contaminate beyond the "<em>mānasan</em>" stage.</p>
+<ul>
+<li style="text-align: justify;">When thoughts (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) arise, they get contaminated within a fraction of a second due to one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>.</span></em><span> That is discussed in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">Amazingly Fast Time Evolution of a Thought (Citta)</a>,"</li>
+<li style="text-align: justify;">Therefore, the goal is to improve one's<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>, so that one's <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> will not contaminate beyond the "<em>mānasan</em>" stage (reached the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage). <strong>One should strive to approach that mindset right now, at least while meditating.</strong></li>
+<li style="text-align: justify;">As one gets closer to that stage, one will have true <em><span><span class="pali-term term-highlight" data-term="mettā">mettā</span> </span></em>AUTOMATICALLY for increasingly more and more living beings. At <em>Arahanthood</em>, one will have boundless <em><span><span class="pali-term term-highlight" data-term="mettā">mettā</span> </span></em>to all: "<em>mānasaṃbhāva ye aparimāṇaṃ."</em></li>
+</ul>
+<p style="text-align: justify;">4. The first three verses in the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> state how one gets to the <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span style="text-align: justify;"> stage by getting to the <em>Ariyakānta sila</em> (unbreakable moral conduct). That is when one will have <em>aveccappasāda</em><span> (unbreakable faith in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, Saṅgha). That is discussed in detail in </span></span><span>the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – The Four Qualities of a Sotāpanna</a>."</p>
+<ul>
+<li style="text-align: justify;">Then by cultivating <em><span><span class="pali-term term-highlight" data-term="mettā">mettā</span>, </span></em>one can gradually get rid of <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>and get to the <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>and<em> Anāgāmi </em>stages<em>.</em></li>
+<li style="text-align: justify;">However, this is an excellent <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> to listen to and to recite even before getting to the <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span style="text-align: justify;"> stage. It is better <span style="font-weight: bolder;"><span>to recite <span class="pali-term term-highlight" data-term="pāli">Pāli</span> verses </span></span><strong>with an understanding of the meaning of those verses.  </strong><span style="color: #0000ff;">The sound itself is beneficial, especially when pronounced correctly, as done by the <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> in the recording below.</span></span></li>
+<li style="text-align: justify;">It is also good to play the recording in the background while doing other things or during meditation. In Asian countries, it is common practice to play this<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> in the mornings, while everyone is getting ready to go to school or work.</li>
+</ul>
+<p style="text-align: justify;">5. A recital of the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> by Waharaka <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> is below:</p>
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Karaniya-Matta-Sutta-14.mp3" type="audio/mpeg"/></audio></p>
+<p> </p>
+<p><strong>Download: </strong>"<em><a href="https://drive.google.com/uc" rel="noopener" target="_blank">Karaniya Metta Sutta</a>"</em></p>
+<p><strong>Note: </strong><span>In the recital, the <span class="pali-term term-highlight" data-term="sutta">sutta</span> ends around 4:45. The <span class="pali-term term-highlight" data-term="thero">Thero</span> starts reciting the following verse:</span></p>
+<p>"<em>Nakkhatta-yakkha-bhūtānaṃ</em><br/>
+<em>Pāpaggahā nivāranā</em><br/>
+<em>Parittassānubhāvena</em><br/>
+<em>Hantu mayhaṃ upaddave</em>"</p>
+<p>It is a verse from "<em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> Jayamaṅgala Gātha</span></em>" where merits are offered to other beings. See, p. 42 of the following booklet, which is a useful guide:</p>
+<p>"<a href="http://www.buddhistelibrary.org/en/albums/asst/ebook/vandana02.pdf" rel="noopener" target="_blank"><em>Vandanā</em>: The Album of Pāḷi Devotional Chanting &amp; Hymns</a>"</p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BM.BB.004/index.html">How Character Gathi Leads To Bhava And Jati</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BM.AA.012/index.html">10 Attaining The Sotapanna Stage Via Removing Ditthasava</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BM.BB.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">How Character Gathi Leads To Bhava And Jati</span>
+        
+        <span class="pathway-title title-pt">How Character Gathi Leads To Bhava And Jati</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BM.AA.012/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">10 Attaining The Sotapanna Stage Via Removing Ditthasava</span>
+        
+        <span class="pathway-title title-pt">10 Attaining The Sotapanna Stage Via Removing Ditthasava</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BM">
+        ↑ Back to Bhāvanā (Meditation)
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

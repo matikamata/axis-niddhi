@@ -1,0 +1,484 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anicca Nature The First Noble Truth And Paticca Samuppada | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 5 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.BB.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anicca Nature The First Noble Truth And Paticca Samuppada</h1>
+    
+    <h1 class="title-pt">Anicca: A Primeira Nobre Verdade e Paticca Samuppada</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.BB.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.BB.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0070"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.BB.004</td></tr><tr><td>Fin-dex</td><td>0070</td></tr><tr><td>Slug</td><td>anicca-nature-the-first-noble-truth-and-paticca-samuppada</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Anicca Nature The First Noble Truth And Paticca Samuppada</td></tr></table></div></div><p><strong>July 19, 2021; <span style="color: #3366ff">revised December 11, 2022</span></strong></p>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> Nature - Connection to the First Noble Truth</h5>
+<p style="text-align: justify"><span>1. In the previous <span class="pali-term term-highlight" data-term="post">post</span>, we discussed the inter-relationships among the "three pillars of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>," i.e., the Four Noble Truths, </span><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. If you do not recall the pronunciation of the words <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">paṭicca Samuppāda</span></span></em><em><span>, <span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>, icca, iccha, nicca, niccha, <span class="pali-term term-highlight" data-term="anicca">anicca</span>, aniccha, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, and <em>anattha, </em><span>go back and listen to the audio file in the previous <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/KD.BB.003/index.html" rel="noopener" target="_blank">Noble Truths, Paṭicca Samuppāda, Tilakkhana – Key Relationships</a>."</p>
+<ul style="text-align: justify">
+<li>The critical verses on suffering in the First Noble Truths are, “<em><strong class="text-strong">yam pi <span style="color: #993366">icchaṃ</span> na labhati tampi <span style="color: #993366">dukkhāṃ</span>” </strong></em>and "<em><strong>saṃkhittena pañca </strong></em><em><strong><span style="color: #993366">u­pādā­na</span> k­han­dhā <span style="color: #993366"><span><span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span></span></span>" </strong></em>both say that future suffering arises because of our attachment/craving (<span style="color: #993366"><strong><em>iccha</em></strong></span>) for things in this world.</li>
+<li>As we discussed, IF IT IS POSSIBLE to tailor our future to be free of the suffering that would be our liking (<span style="color: #993366"><strong><em>icca</em></strong></span> or <span style="color: #993366"><strong><em>iccha</em></strong></span>), then we can say that our world is of "<span style="color: #3366ff"><strong><em>nicca</em></strong></span>" or "<span style="color: #3366ff"><strong><em>niccha</em></strong></span>" nature, where there would be no suffering.</li>
+</ul>
+<p style="text-align: justify"><span>2. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pointed out that this world is of "</span><span style="color: #993366"><strong><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature,</strong></span>" i.e., the opposite of the "<span style="color: #3366ff"><strong><em>nicca </em>nature</strong></span>"</p>
+<ul style="text-align: justify">
+<li>That means craving/striving for ANYTHING in this world WILL NOT lead to a future without suffering. Instead, the more attachment we have for anything in this world WILL lead to more suffering.</li>
+<li><strong>The fundamental reason for this is that ANY <em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span>, vedan</span><strong class="highlight">ā</strong>, saññ<strong class="highlight">ā</strong>, <strong class="highlight"><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></strong></em>) in this world is inherently subject to unexpected changes and destruction.</strong><span> We will discuss that in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li>It is only in <span style="color: #000000"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></span> that there is no suffering. Therefore, it is <span style="color: #0000ff"><strong><em><span style="color: #3366ff"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></span> </em></strong><span style="color: #000000">that is</span></span> of a <span style="color: #3366ff"><strong><em>nicca</em></strong></span><span> nature. See #9 of the previous <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<p style="text-align: justify">3. Craving/striving (<em>icca</em>/<em>iccha</em>) for ANYTHING in this world leads to suffering in two ways.</p>
+<ul style="text-align: justify">
+<li>When one struggles to acquire things in this world, that effort itself is suffering and results in suffering. Even if one gets it, one will lose it at death.</li>
+<li>The second severe type of suffering is due to "bad rebirths" that will arise due to immoral deeds done while trying to get possession of worldly things that one craves. Let us discuss that now.</li>
+<li><span>(However, this craving CANNOT be removed without comprehending the "core" of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings: the Four Noble Truths, </span><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.)</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> Nature - Connection to <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify">4. Our efforts to "own and enjoy" things in this world ALWAYS lead to more suffering than any short period of happiness. That explanation comes via <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>, the "third pillar" of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. We got started on that in the previous <span class="pali-term term-highlight" data-term="post">post</span>. Let us continue that discussion.</span></p>
+<ul style="text-align: justify">
+<li>Humans do morally acceptable deeds with <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> and morally corrupt deeds with <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>. The former leads to births in the human, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span>,</span></em> and <em>rupāvacara</em> <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms and the latter leads to births in the <em>apāyās. </em></li>
+<li>Some humans cultivate <em><span>arupa <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. Those involve <em>āneñjā a­bhi­saṅ­khāra</em>  and lead to births in the <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. More on the types of <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>below.</li>
+<li><span>In the absence of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, that is all humans can do. None of those lead to a "state without suffering." All those births end up in death. The worst aspect is that due to the craving for sensual pleasures, humans frequently engage in immoral deeds with </span><em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> and end up in suffering-filled <em>apāyās</em>.</li>
+<li>The reason becomes clear when we examine what is meant by “<strong><em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></em></strong>” in the <strong><em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em></strong></li>
+</ul>
+<h5 style="text-align: justify">Births That End With Suffering Are Initiated by “<strong><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">Saṅkhārā</span></span></em></strong>”</h5>
+<p style="text-align: justify">5. <a href="https://suttacentral.net/vb6/pli/ms" rel="noopener noreferrer" target="_blank">Paṭic­ca­samup­pāda ­Vibhaṅga,</a> explains the term “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></em>” in <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (that leads to suffering) as follows: “<em><span>Tattha katame <span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>?</span></em> <em>Puññā­bhi­saṅ­khāro, apuññā­bhi­saṅ­khāro, āneñjā­bhi­saṅ­khāro, kāyasaṅkhāro, vacīsaṅkhāro, cittāaṅkhāro</em>“.</p>
+<p style="text-align: justify"><strong>Translated</strong>: “What is<em> <strong><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></strong></em>? <em> Apuññā­bhi­saṅ­khāra, <strong>puññā­bhi­saṅ­khāra</strong>, <strong>āneñjā­bhi­saṅ­khāra</strong><span>, <span class="pali-term term-highlight" data-term="kāyasaṅkhāra">kāyasaṅkhāra</span>, <span class="pali-term term-highlight" data-term="vacīsaṅkhāra">vacīsaṅkhāra</span>, cittāaṅkhāra</span></em>“. It is quite clear that <em>apuññā­bhi­saṅ­khāra </em>are due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>. But why are the other two are said to be done due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>?</p>
+<ul style="text-align: justify">
+<li><em><strong>Puññā­bhi­saṅ­khāra </strong></em>are, of course, Moral and good deeds AND also the cultivation of <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li><em><strong>Āneñjā­bhi­saṅ­khāra </strong></em>involve cultivating <em><span>arupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li>When a person who has NOT comprehended <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, or <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> engages in those two types of “good <em>saṅ­khāra</em>,” they are still done with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>! <span style="color: #ff0000"><strong><span style="color: #993366"><span>That is because one has not yet grasped the dangers of remaining in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></span> <span style="color: #3366ff">Thus, <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> </span></em>is the ignorance of the Four Noble Truths, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</span></strong></span></li>
+<li>Some examples are discussed in "<a href="../../pages/DS.FF.005/index.html" rel="noopener" target="_blank">Vacī Saṅkhāra – Saṅkappa (Conscious Thoughts) and Vācā (Speech).</a><span>" It is a good idea to read that <span class="pali-term term-highlight" data-term="post">post</span> to understand this point.</span></li>
+</ul>
+<p style="text-align: justify">6. We can summarize the above analysis in simple words as follows.</p>
+<ul style="text-align: justify">
+<li>ANYTHING that we do <strong>without understanding</strong> the concepts of <span style="color: #000000">the Four Noble Truths, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>involves three types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>: <strong><em>apuññā­bhi­saṅ­khāra, puññā­bhi­saṅ­khāra, āneñjā­bhi­saṅ­khāra.</em></strong></span></li>
+<li>Immoral deeds or <em><span>pāpa <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> done with <span style="color: #000000"><em>apuññā­bhi­saṅ­khāra </em>lead to rebirths in the <em>apāyās</em>. Moral deeds or <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> done with <em>puññā­bhi­saṅ­khāra </em>give rise to births in human, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, and <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms (good births.) Those who cultivate <em><span>arupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> with <em>āneñjā­bhi­saṅ­khāra </em>are reborn in <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms.</span></li>
+<li><strong><span>All those births end up in death. None of those will lead to a <span class="pali-term term-highlight" data-term="cessation">cessation</span> of suffering. </span></strong></li>
+<li>That is why all those three types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> are done with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>!</li>
+<li>So, what type of <em><span style="color: #000000">­saṅ­khārā</span></em> can lead to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>?</li>
+</ul>
+<h5 style="text-align: justify">Difference Between <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em></h5>
+<p style="text-align: justify">7. <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> are "good deeds" done with <span style="color: #000000"><strong><em>puññā­bhi­saṅ­khāra </em></strong>with a </span>mundane version of <em><span><span class="pali-term term-highlight" data-term="alobha">alobha</span>, <span class="pali-term term-highlight" data-term="adosa">adosa</span>, and <span class="pali-term term-highlight" data-term="amoha">amoha</span></span></em>. <span style="color: #0000ff"><strong><span style="color: #3366ff">Those SAME DEEDS would be </span><em><span style="color: #3366ff"><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></span> </em></strong></span><em>i</em>f done with the comprehension of<span style="color: #0000ff"><strong><span style="color: #3366ff"> the Four Noble Truths, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and </span><em><span style="color: #3366ff"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></span> </em></strong></span></p>
+<ul style="text-align: justify">
+<li><span style="color: #993366"><strong>While <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> leads to rebirths in the "good realms," <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em> leads to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong></span></li>
+<li>Thus, while <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> are done with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" in the <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> process, <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em> are done with "<em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>-mula <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" in the <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> process.</li>
+<li>For details see, "<a href="../../pages/PS.HH.004/index.html" rel="noopener noreferrer" target="_blank">Akusala-Mūla Uppatti Paṭicca Samuppāda"</a> and "<a href="http://localhost/beng_feb2026/paticca-samuppada/kusala-mula-paticca-samuppada/" rel="noopener noreferrer" target="_blank">Kusala-Mula Paṭicca Samuppāda </a>."</li>
+<li>That briefly explains the difference between <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span>.</span></em><span> Those who don't understand that difference should read the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="http://localhost/beng_feb2026/three-levels-of-practice/moral-living-and-fundamentals/dhamma-concepts/kusala-kamma-punna-kamma/" rel="noopener" target="_blank">Kusala and Akusala Kamma, Puñña and Pāpa Kamma</a>." <span style="color: #3366ff"><strong>It is critical to see the difference.</strong></span></li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> Result With the Wrong View of a "<em>Nicca</em> Nature"</h5>
+<p style="text-align: justify"><span>8. This is the CRITICAL point to understand. Without a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, humans have the innate idea that happiness can be attained by owning things one likes. As a child grows, he/she strives to keep friends and "things" that he/she likes. As an adult, he/she would strive to learn skills, get a good job, marry the person of his/her choice and live a "good life." In the absence of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, not many people would even think beyond that.</span></p>
+<ul style="text-align: justify">
+<li>Some people worry about what will happen after death, especially when they get old. The world's major religions teach that an everlasting Creator created this world and that one can "go to him" or 'merge with him" at death to have a permanent existence of happiness.</li>
+<li>Of course, there is no way to prove or disprove the existence of such a Creator. One would pledge allegiance to that Creator and promise to live a moral life. But there are many problems with this hypothesis. For example, no matter how grave, any immoral deed can be forgiven by just praying!</li>
+<li><span>In comparison, <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is a complete worldview. It is not a faith-based religion. It is not a religion! One cannot get to </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> by just praying or pledging to be a faithful follower of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. One needs to comprehend the worldview of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> on how suffering arises, and </span><strong>then it would become clear</strong> how to be free of any future suffering. See "<a href="../../pages/DP.AA.003/index.html" rel="noopener" target="_blank">Is Buddha Dhamma (Buddhism) a Religion?"</a>  <strong> </strong></li>
+</ul>
+<h5 style="text-align: justify">It Takes a Paradigm Shift to Understand the <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> Nature</h5>
+<p style="text-align: justify">9. We went off on a tangent there, but the point is that most people today fall into two categories. Atheists believe that life ends at death and one should try to "enjoy life" while it lasts. Those who belong to major religions believe in a Creator and expect that Creator will secure them a happy, permanent existence after death.</p>
+<ul style="text-align: justify">
+<li>Thus, either way, there is a sense of a "<em>nicca</em><span> nature." That is why most people don't even bother to examine the teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> in detail. That takes a considerable effort. Who would want to spend that much time when there is much fun to have by watching a movie, going to a party, or just having a day with family/friends?</span></li>
+<li><span>But if one makes an effort to study the profound teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, one can see that it is a fully self-consistent worldview based on the Principle of Causality. It is more profound than modern science because science only deals with material phenomena. That is why science cannot make any progress on the issue of consciousness. I have discussed this in detail in the series on "</span><a href="../../pages/DS.BB.001/index.html" rel="noopener" target="_blank">Origin of Life</a>."</li>
+<li><strong>From the above discussion, it should be clear that translating "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>" as "impermanence" is way off the mark! </strong>As explained, "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>" is intrinsically connected to "<em>icca/iccha</em>" and "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>."</li>
+</ul>
+<h5 style="text-align: justify">"<em>Nicca</em>" Worldview Leads to the Generation of <em><span><span class="pali-term term-highlight" data-term="sankhara">Sankhara</span></span></em> with <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>!</h5>
+<p style="text-align: justify">10. We don't just start acting with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and initiate <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (PS) processes with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>." Instead, PS processes start with an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> that comes to the mind via one of the six sensory inputs (eyes, ears, nose, tongue, body, mind.)</p>
+<ul style="text-align: justify">
+<li>If that <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> is "mind-pleasing," we attach to it and start thinking about enjoying it more. Thus, the PS processes start at "<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="phasso">phasso</span></span></em>." For example, if we see a mind-pleasing <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> via eyes, then it is the<em> cakkhāyatana</em> that is "activated," and this step is really "<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></strong></em> (<strong><em>san</em></strong> + <strong><em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em></strong><span>)." Of course, it is essential to read the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/KD.DD.002/index.html" rel="noopener" target="_blank">What is “San”? Meaning of Sansāra (or Saṃsāra)</a>."</li>
+<li>Immediately the mind goes through the "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" step, which is usually stated as "<em><span><span class="pali-term term-highlight" data-term="phassa paccayā vedanā">phassa paccayā vedanā</span></span></em>." This "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" is a MIND-MADE <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> that arises due to attachment with liking/craving (<em>icca/iccha</em>.)</li>
+<li>More information in "<a href="../../pages/PS.II.007/index.html" rel="noopener" target="_blank">Difference between Phassa and Samphassa</a>."</li>
+<li>The critical point here is that PS cycles start when we attach to an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span> </span></em>with liking/craving (<em>icca</em>/<em>iccha</em>) based on greed, anger, and ignorance of the Four Noble Truths, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify">Suffering - Not Getting the Desired (and Getting the Undesired)</h5>
+<p style="text-align: justify">11. As we have discussed many times, a passage in the “<a href="https://suttacentral.net/sn56.11/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(SN 56.11)</a>“ is "<em><strong class="text-strong">yamp<span style="color: #800080">icchaṃ</span> na labhati tampi <span style="color: #800080">dukkhāṃ</span>" </strong></em>meaning "<strong class="text-strong">If one does not get what one likes, that is suffering."</strong></p>
+<ul style="text-align: justify">
+<li>Even in the mundane sense, there is more to it than people perceive. For example, you work hard at your job and get a promotion. So, the outcome is a happy one. But you WORKED HARD to get there. That is "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>-<span class="pali-term term-highlight" data-term="dukkha">dukkha</span>,</span></em>" as we discussed in "<a href="../../pages/PS.II.003/index.html" rel="noopener" target="_blank">Introduction -2 – The Three Categories of Suffering</a>." That "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>-<span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>" is present in ALL our activities, including breathing. We don't feel breathing is difficult because we are used to it. An asthma patient knows how difficult it can be.</li>
+<li><span>The above succinct statement is true at a deeper level in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process, as we briefly mentioned in #3 above.</span></li>
+</ul>
+<p style="text-align: justify">12. we desire to have a "good birth." Some want to be reborn humans with good health and wealth. Others want to be born <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> to enjoy higher levels of sensual pleasures. Some cultivate <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> so that they can be born in <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms with "<em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures."</p>
+<ul>
+<li style="text-align: justify">However, our future rebirths do not materialize according to our wishes (<em>icca</em>/<em>iccha</em>). <span style="color: #993366"><strong>The world is of "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature."</strong></span></li>
+<li style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> nature naturally -- and inevitably -- leads to <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>. This is stated as "<i>yad <strong><span><span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span></span></strong><span> <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> </span><strong><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span>." </span></strong></i><span>We will discuss that in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<h5><span><span class="pali-term term-highlight" data-term="puredhamma">Puredhamma</span> Twitter Account</span></h5>
+<p>13. Twitter account for the website: <a href="https://twitter.com/puredhamma1" rel="noopener" target="_blank">puredhamma (@puredhamma1) / Twitter</a></p>
+<ul>
+<li><strong>Twitter handle:</strong> puredhamma1</li>
+<li>Will Tweet a <strong>new or re-written</strong><span> <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.BB.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0070"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.BB.004
+Language:     pt-BR
+Generated-At: 2026-04-18T04:02:47Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>19 de julho de 2021; <span style="color: #3366ff">revisado em 11 de dezembro de 2022</span></strong></p>
+<h5 style="text-align: justify">A Natureza <em><span>de <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> – Conexão com a Primeira Nobre Verdade</h5>
+<p style="text-align: justify"><span>1. Na postagem anterior, discutimos as inter-relações entre os “três pilares do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>”, ou seja, as Quatro Nobres Verdades, </span><em>Tilakkhaṇa</em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. Se você não se lembra da pronúncia das palavras <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, Tilakkhaṇa, icca, iccha, nicca, niccha, <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, Aniccha, Anattā</span></em> e <em>anattha, </em>volte e ouça o arquivo de áudio na postagem anterior “<a href="../../pages/KD.BB.003/index.html" rel="noopener" target="_blank">Verdade Nobre, Paṭicca Samuppāda, Tilakkhaṇa – Relações-chave</a>”.</p>
+<ul style="text-align: justify">
+<li>Os versos fundamentais sobre o sofrimento nas Primeiras Nobres Verdades são: “<em><strong class="text-strong">yam pi <span style="color: #993366">icchaṃ</span> na labhati tampi <span style="color: #993366">dukkhāṃ</span>” </strong></em>e <em><strong>“saṃkhittena pañca </strong></em><em><strong><span style="color: #993366"><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></span><span> <span class="pali-term term-highlight" data-term="khandha">khandha</span> </span><span style="color: #993366"><span><span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span></span></span>”; </strong></em>ambos afirmam que o sofrimento futuro surge devido ao nosso apego/desejo (<span style="color: #993366"><strong><em>iccha</em></strong></span>) pelas coisas deste mundo.</li>
+<li>Conforme discutimos, SE FOR POSSÍVEL moldar nosso futuro para que seja livre do sofrimento que seria do nosso agrado (<span style="color: #993366"><strong><em>icca</em></strong></span> ou <span style="color: #993366"><strong><em>iccha</em></strong></span>), então podemos dizer que nosso mundo é de natureza “<span style="color: #3366ff"><strong><em>nicca</em></strong></span>” ou “<span style="color: #3366ff"><strong><em>niccha</em></strong></span>”, onde não haveria sofrimento.</li>
+</ul>
+<p style="text-align: justify"><span>2. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> apontou que este mundo é de “</span><span style="color: #993366"><strong>natureza</strong></span><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>”</span><span style="color: #993366"><strong>,</strong></span> ou seja, o oposto da “<span style="color: #3366ff"><strong>natureza <em>nicca</em></strong></span>”</p>
+<ul style="text-align: justify">
+<li>Isso significa que o desejo/esforço por QUALQUER COISA neste mundo NÃO LEVARÁ a um futuro sem sofrimento. Em vez disso, quanto mais apego tivermos por qualquer coisa neste mundo, mais sofrimento isso nos trará.</li>
+<li><strong>A razão fundamental para isso é que QUALQUER <em><span><span class="pali-term term-highlight" data-term="saṅkhata">Saṅkhata</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, Vedan</span><strong class="highlight">ā</strong>, <strong class="highlight">Sañ</strong>ñ<strong class="highlight">ā</strong>, <strong class="highlight"><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></strong></em>) neste mundo está inerentemente sujeito a mudanças inesperadas e destruição.</strong> Discutiremos isso no próximo ensaio.</li>
+<li>É somente em <span style="color: #000000"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></span> que não há sofrimento. Portanto, é <span style="color: #0000ff"><strong><em><span style="color: #3366ff"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></span> </em></strong><span style="color: #000000">que é</span></span> de natureza <span style="color: #3366ff"><strong><em>nicca</em></strong></span>. Veja o nº 9 do ensaio anterior.</li>
+</ul>
+<p style="text-align: justify">3. O desejo/esforço (<em>icca</em>/<em>iccha</em>) por QUALQUER COISA neste mundo leva ao sofrimento de duas maneiras.</p>
+<ul style="text-align: justify">
+<li>Quando alguém se esforça para adquirir coisas neste mundo, esse esforço em si é sofrimento e resulta em sofrimento. Mesmo que se consiga, perder-se-á com a morte.</li>
+<li>O segundo tipo grave de sofrimento deve-se aos “renascimentos ruins” que surgirão devido a atos imorais cometidos ao tentar obter a posse das coisas mundanas pelas quais se anseia. Vamos discutir isso agora.</li>
+<li><span>(No entanto, esse desejo NÃO PODE ser removido sem compreender o “núcleo” dos ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: as Quatro Nobres Verdades, </span><em>Tilakkhaṇa</em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.)</li>
+</ul>
+<h5 style="text-align: justify">A Natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> – Conexão com <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify">4. Nossos esforços para “possuir e desfrutar” as coisas neste mundo SEMPRE levam a mais sofrimento do que qualquer breve período de felicidade. Essa explicação vem por meio de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>, o “terceiro pilar” do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Começamos a abordar isso no ensaio anterior. Vamos continuar essa discussão.</span></p>
+<ul style="text-align: justify">
+<li>Os seres humanos realizam atos moralmente aceitáveis com <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> e atos moralmente corruptos com <em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>. O primeiro leva a renascimentos nos reinos humano, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara,</span></em> e o segundo leva a renascimentos nos <em>apāyās. </em></li>
+<li>Alguns seres humanos cultivam <em><span>arupa <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Isso envolve <em><span>āneñjā <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> e leva a renascimentos nos reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> arupāvacara</span></em>. Mais sobre os tipos de <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>a seguir.</li>
+<li><span>Na ausência de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, isso é tudo o que os humanos podem fazer. Nenhum desses leva a um “estado sem sofrimento”. Todos esses nascimentos terminam em morte. O pior aspecto é que, devido ao desejo por prazeres sensuais, os humanos frequentemente se envolvem em atos imorais com </span><em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> e acabam nos <em>apāyās</em> repletos de sofrimento.</li>
+<li>A razão fica clara quando examinamos o que significa “<strong><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></em></strong>” no <strong><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> <span class="pali-term term-highlight" data-term="akusala">Akusala</span>-mula. </span></em></strong></li>
+</ul>
+<h5 style="text-align: justify">Nascimentos que terminam em sofrimento são iniciados por “<strong><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></em></strong>”</h5>
+<p style="text-align: justify">5. <a href="https://suttacentral.net/vb6/pli/ms" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda-Vibhaṅga</a> explica o termo “Av<em><span>ijjā <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></em>” no <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> <span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula</span></em> (que leva ao sofrimento) da seguinte forma: “<em><span>Tattha katame <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>?</span></em> <em>Puññā­bhi­saṅ­khāro, apuññā­bhi­saṅ­khāro, āneñjā­bhi­saṅ­khāro, kāyasaṅkhāro, vacīsaṅkhāro, cittāaṅkhāro</em>“.</p>
+<p style="text-align: justify"><strong>Traduzido</strong>: “O que são <em><strong><span>os <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> condicionados pela <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></strong></em>? <em><span> Apuññābhi-<span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, </span><strong><span>puññābhi-<span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></strong>, <strong><span>āneñjābhi-<span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></strong><span>, <span class="pali-term term-highlight" data-term="kāyasaṅkhāra">Kāyasaṅkhāra</span>, <span class="pali-term term-highlight" data-term="vacīsaṅkhāra">Vacīsaṅkhāra</span>, cittāaṅkhāra</span></em>“. É bastante claro que <em>os apuññā­bhi­saṅ­khāra </em>se devem à <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>. Mas por que se diz que os outros dois são realizados devido à <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>?</p>
+<ul style="text-align: justify">
+<li><em><strong>Puññā­bhi­saṅ­khāra </strong></em>são, naturalmente, ações morais e boas E também o cultivo do <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</li>
+<li><em><strong>Āneñjā­bhi­saṅ­khāra </strong></em>envolvem o cultivo de <em><span>arupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</li>
+<li>Quando uma pessoa que NÃO compreendeu <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> ou Anattā</span></em> se envolve nesses dois tipos de <em>“saṅ­khāra</em> bons”, ela ainda os realiza com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>! <span style="color: #ff0000"><strong><span style="color: #993366">Isso porque ela ainda não compreendeu os perigos de permanecer no processo de Renascimento.</span> <span style="color: #3366ff">Assim, <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> </span></em>é a ignorância das Quatro Nobres Verdades, dos <em>Tilakkhaṇa</em> e do <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</span></strong></span></li>
+<li>Alguns exemplos são discutidos em “<a href="../../pages/DS.FF.005/index.html" rel="noopener" target="_blank">Vacī Saṅkhāra – Saṅkappa (Pensamentos Conscientes) e Vācā (Fala)”.</a> É uma boa ideia ler esse ensaio para compreender este ponto.</li>
+</ul>
+<p style="text-align: justify">6. Podemos resumir a análise acima em palavras simples da seguinte forma.</p>
+<ul style="text-align: justify">
+<li>TUDO o que fazemos <strong>sem compreender</strong> os conceitos das<span style="color: #000000"> Quatro Nobres Verdades, <em>Tilakkhaṇa</em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>envolve três tipos de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>: <strong><em>apuññā­bhi­saṅ­khāra, puññā­bhi­saṅ­khāra, āneñjā­bhi­saṅ­khāra.</em></strong></span></li>
+<li>Ações imorais ou <em><span>pāpa <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> realizadas com <span style="color: #000000"><em>apuññā­bhi­saṅ­khāra </em>levam a renascimentos nos <em>apāyās</em>. Ações morais ou <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> realizadas com <em>puññā­bhi­saṅ­khāra </em>dão origem a nascimentos nos reinos humano, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara</span></em> (bons nascimentos). Aqueles que cultivam <em><span>o <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> arupāvacara</span></em> com <em>āneñjā­bhi­saṅ­khāra </em>renascem nos reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> arupāvacara</span></em>.</span></li>
+<li><strong><span>Todos esses nascimentos terminam em morte. Nenhum deles levará à <span class="pali-term term-highlight" data-term="cessation">Cessation</span> do sofrimento. </span></strong></li>
+<li>É por isso que todos esses três tipos de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> são realizados com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>!</li>
+<li>Então, que tipo de <em><span style="color: #000000"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></span></em> pode levar ao <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>?</li>
+</ul>
+<h5 style="text-align: justify">Diferença entre <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span> </span></em>e <em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em></h5>
+<p style="text-align: justify">7. <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> são “boas ações” realizadas com <span style="color: #000000"><strong><em><span>puññābhi-<span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em></strong>com uma</span> versão mundana de <em><span><span class="pali-term term-highlight" data-term="alobha">Alobha</span>, <span class="pali-term term-highlight" data-term="adosa">Adosa</span> e <span class="pali-term term-highlight" data-term="amoha">Amoha</span></span></em>. <span style="color: #0000ff"><strong><span style="color: #3366ff">Essas MESMAS AÇÕES seriam </span><em><span style="color: #3366ff"><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></span> </em></strong></span><em>se</em> fossem realizadas com a compreensão das<span style="color: #0000ff"><strong><span style="color: #3366ff"> Quatro Nobres Verdades, <em>Tilakkhaṇa</em> e </span><em><span style="color: #3366ff"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></span> </em></strong></span></p>
+<ul style="text-align: justify">
+<li><span style="color: #993366"><strong>Enquanto <em><span>o <span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> leva a renascimentos nos “reinos bons”, <em>o</em> <em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> leva ao <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong></span></li>
+<li>Assim, enquanto <em><span>o <span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> é realizado com “<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>” no processo de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> <span class="pali-term term-highlight" data-term="akusala">Akusala</span>-mula</span></em>, <em><span>o <span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> é realizado com “<em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span>-mula <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>” no processo de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> <span class="pali-term term-highlight" data-term="kusala">Kusala</span>-mula</span></em>.</li>
+<li>Para mais detalhes, consulte “<a href="../../pages/PS.HH.004/index.html" rel="noopener noreferrer" target="_blank">Akusala-mūla Uppatti Paṭicca Samuppāda”</a> e “<a href="http://localhost/beng_feb2026/paticca-samuppada/kusala-mula-paticca-samuppada/" rel="noopener noreferrer" target="_blank">Kusala-mūla Paṭicca Samuppāda</a>”.</li>
+<li>Isso explica resumidamente a diferença entre <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span>.</span></em> Aqueles que não compreendem essa diferença devem ler o ensaio “<a href="http://localhost/beng_feb2026/three-levels-of-practice/moral-living-and-fundamentals/dhamma-concepts/kusala-kamma-punna-kamma/" rel="noopener" target="_blank">Kusala Kamma e Akusala Kamma, Puñña e Pāpa Kamma</a>”. <span style="color: #3366ff"><strong>É fundamental perceber a diferença.</strong></span></li>
+</ul>
+<h5 style="text-align: justify">Resultado <em><span>do <span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> com a Visão Errada de uma “Natureza <em>Nicca</em>”</h5>
+<p style="text-align: justify"><span>8. Este é o ponto CRÍTICO a ser compreendido. Sem um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, os seres humanos têm a ideia inata de que a felicidade pode ser alcançada possuindo coisas de que se gosta. À medida que a criança cresce, ela se esforça para manter amigos e “coisas” de que gosta. Como adulto, ela se esforçaria para aprender habilidades, conseguir um bom emprego, casar-se com a pessoa de sua escolha e viver uma “boa vida”. Na ausência de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, poucas pessoas pensariam além disso.</span></p>
+<ul style="text-align: justify">
+<li>Algumas pessoas se preocupam com o que acontecerá após a morte, especialmente quando envelhecem. As principais religiões do mundo ensinam que um Criador eterno criou este mundo e que é possível “ir para ele” ou “fundir-se com ele” na morte para ter uma existência permanente de felicidade.</li>
+<li>É claro que não há como provar ou refutar a existência de tal Criador. A pessoa juraria lealdade a esse Criador e prometeria levar uma vida moral. Mas há muitos problemas com essa hipótese. Por exemplo, por mais grave que seja, qualquer ato imoral pode ser perdoado apenas rezando!</li>
+<li><span>Em comparação, o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é uma visão de mundo completa. Não é uma religião baseada na fé. Não é uma religião! Não se pode alcançar o </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> apenas rezando ou jurando ser um seguidor fiel do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. É preciso compreender a visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> sobre como surge o sofrimento, e </span><strong>então ficaria claro</strong> como se libertar de qualquer sofrimento futuro. Veja “<a href="../../pages/DP.AA.003/index.html" rel="noopener" target="_blank">O Buddha Dhamma (Buddhismo) é uma religião?”</a>  <strong> </strong></li>
+</ul>
+<h5 style="text-align: justify">É necessária uma mudança de paradigma para compreender a natureza <em><span>de <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em></h5>
+<p style="text-align: justify">9. Nós nos desviamos um pouco do assunto, mas o ponto é que a maioria das pessoas hoje se enquadra em duas categorias. Os ateus acreditam que a vida termina com a morte e que se deve tentar “aproveitar a vida” enquanto ela dura. Aqueles que pertencem às principais religiões acreditam em um Criador e esperam que esse Criador lhes garanta uma existência feliz e permanente após a morte.</p>
+<ul style="text-align: justify">
+<li>Assim, de qualquer forma, há uma sensação de uma “natureza <em>nicca</em><span>”. É por isso que a maioria das pessoas nem se dá ao trabalho de examinar os ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> em detalhes. Isso exige um esforço considerável. Quem gostaria de gastar tanto tempo quando há tanta diversão a ser aproveitada assistindo a um filme, indo a uma festa ou simplesmente passando um dia com a família/amigos?</span></li>
+<li><span>Mas se alguém se esforçar para estudar os ensinamentos profundos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, poderá ver que se trata de uma visão de mundo totalmente coerente, baseada no Princípio da Causalidade. É mais profunda do que a ciência moderna, porque a ciência lida apenas com fenômenos materiais. É por isso que a ciência não consegue avançar na questão da consciência. Discuti isso em detalhes na série sobre “</span><a href="../../pages/DS.BB.001/index.html" rel="noopener" target="_blank">Origem da Vida</a>”.</li>
+<li><strong>A partir da discussão acima, deve ficar claro que traduzir “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” como “impermanência” está muito longe do alvo! </strong>Conforme explicado, “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” está intrinsecamente ligado a “<em>icca/iccha</em>” e “<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>”.</li>
+</ul>
+<h5 style="text-align: justify">A visão de mundo “<em>Nicca</em>” leva à geração de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>!</h5>
+<p style="text-align: justify">10. Não começamos simplesmente a agir com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e a iniciar os processos <em><span>de <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (PS) com “<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>”. Em vez disso, os processos de PS começam com um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em> que chega à mente por meio de uma das seis entradas sensoriais (olhos, ouvidos, nariz, língua, corpo, mente).</p>
+<ul style="text-align: justify">
+<li>Se esse <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em> for “agradável à mente”, nos apegamos a ele e começamos a pensar em desfrutá-lo mais. Assim, os processos de PS começam em “<em><span><span class="pali-term term-highlight" data-term="saḷāyatana">Saḷāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="phasso">phasso</span></span></em>”. Por exemplo, se vemos um <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> agradável à mente através dos olhos, então é o<em> cakkhāyatana</em> que é “ativado”, e essa etapa é, na verdade, “<em><span><span class="pali-term term-highlight" data-term="saḷāyatana">Saḷāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span></span></strong></em> (<strong><em>san</em></strong> + <strong><em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span></span></em></strong>)”. É claro que é essencial ler o ensaio “<a href="../../pages/KD.DD.002/index.html" rel="noopener" target="_blank">O que é ‘San’? Significado de Saṃsāra (ou Saṃsāra)</a>”.</li>
+<li>Imediatamente, a mente passa pela etapa “<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>”, que geralmente é expressa como “<em><span><span class="pali-term term-highlight" data-term="phassa paccayā vedanā">Phassa Paccayā Vedanā</span></span></em>”. Esse “<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>” é uma <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> CRIADA PELA MENTE que surge devido ao apego com prazer/desejo (<em>icca/iccha</em>).</li>
+<li>Mais informações em “<a href="../../pages/PS.II.007/index.html" rel="noopener" target="_blank">Diferença entre Phassa e Samphassa</a>”.</li>
+<li>O ponto crítico aqui é que os ciclos PS começam quando nos apegamos a um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span> </span></em>com apreço/desejo (<em>icca</em>/<em>iccha</em>) baseado na ganância, na raiva e na ignorância das Quatro Nobres Verdades, do <em>Tilakkhaṇa</em> e do <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify">Sofrimento — Não obter o desejado (e obter o indesejado)</h5>
+<p style="text-align: justify">11. Como já discutimos muitas vezes, uma passagem do “<a href="https://suttacentral.net/sn56.11/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(SN 56.11)</a>” diz: “<em><strong class="text-strong">yamp<span style="color: #800080">icchaṃ</span> na labhati tampi <span style="color: #800080">dukkhāṃ</span>”,</strong></em> que significa “<strong class="text-strong">Se alguém não consegue o que deseja, isso é sofrimento.”</strong></p>
+<ul style="text-align: justify">
+<li>Mesmo no sentido mundano, há mais nisso do que as pessoas percebem. Por exemplo, você trabalha duro no seu emprego e consegue uma promoção. Portanto, o resultado é feliz. Mas você TRABALHOU DURO para chegar lá. Isso é “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>-<span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>”<em>,</em> como discutimos em “<a href="../../pages/PS.II.003/index.html" rel="noopener" target="_blank">Introdução -2 – As Três Categorias de Sofrimento</a>”. Esse “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>-<span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>” está presente em TODAS as nossas atividades, incluindo a respiração. Não sentimos que respirar é difícil porque estamos acostumados a isso. Um paciente com asma sabe como isso pode ser difícil.</li>
+<li>A afirmação sucinta acima é verdadeira em um nível mais profundo no processo de Renascimento, como mencionamos brevemente no ponto 3 acima.</li>
+</ul>
+<p style="text-align: justify">12. Desejamos ter um “bom renascimento”. Alguns querem renascer como humanos com boa saúde e riqueza. Outros querem nascer como <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> para desfrutar de níveis mais elevados de prazeres sensoriais. Alguns cultivam <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> para que possam nascer nos reinos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> com “prazeres <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>”.</p>
+<ul>
+<li style="text-align: justify">No entanto, nossos renascimentos futuros não se concretizam de acordo com nossos desejos (<em>icca</em>/<em>iccha</em>). <span style="color: #993366"><strong>O mundo é de “natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>”.</strong></span></li>
+<li style="text-align: justify">A natureza <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> leva naturalmente — e inevitavelmente — ao <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>. Isso é afirmado como “<i>yad <strong><span><span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span></span></strong><span> <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> </span><strong><span><span class="pali-term term-highlight" data-term="dukkhaṃ">dukkhaṃ</span>”.</span></strong></i> Discutiremos isso no próximo ensaio.</li>
+</ul>
+<h5><span>Conta do <span class="pali-term term-highlight" data-term="puredhamma">PureDhamma</span> no Twitter</span></h5>
+<p>13. Conta no Twitter do site: <a href="https://twitter.com/puredhamma1" rel="noopener" target="_blank">PureDhamma (@PureDhamma1) / Twitter</a></p>
+<ul>
+<li><strong>Nome de usuário no Twitter:</strong> puredhamma1</li>
+<li>Publicaremos tweets com ensaios <strong>novos ou reescritos</strong>.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.BB.003/index.html">Noble Truths Paticca Samuppada Tilakkhana Key Relationships</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.BB.005/index.html">Anicca Not Possible To Overcome Suffering</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.BB.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Noble Truths Paticca Samuppada Tilakkhana Key Relationships</span>
+        
+        <span class="pathway-title title-pt">As Nobres Verdades: Paticca Samuppada e Tilakkhaṇa – Relações Fundamentais</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.BB.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Anicca Not Possible To Overcome Suffering</span>
+        
+        <span class="pathway-title title-pt">Anicca: Não é possível superar o sofrimento</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sotapanna Anugami No Births In The Apaya | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 83 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.JJ.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sotapanna Anugami No Births In The Apaya</h1>
+    
+    <h1 class="title-pt">Sotāpanna Anugami Nenhum nascimento no Apāya</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.JJ.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.JJ.007"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0489"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.JJ.007</td></tr><tr><td>Fin-dex</td><td>0489</td></tr><tr><td>Slug</td><td>sotapanna-anugami-no-births-in-the-apaya</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Sotapanna Anugami No Births In The Apaya</td></tr></table></div></div><p><strong>February 11, 2019; revised April 12, 2020;<span style="color: #3366ff;"> July 25, 2023 (#4,#5)</span></strong></p>
+<p style="text-align: justify;">A human who attains a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> will never be reborn in an <em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span></span></em> (one of the four lowest realms). An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will not be reborn in any realm. An <em>Anāgāmi</em> will be reborn only in a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm. A <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> is born only in a<em><span> <span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realm, and a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> only in a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> or human realm.<span style="color: #3366ff;"> <strong>A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></em> is also free of the <em>apāyā</em></strong></span>. Here, we discuss the evidence from the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> that is indeed the case.</p>
+<h5>Eight Types of Noble Persons</h5>
+<p style="text-align: justify;">1. T<span style="font-size: 1.125rem; letter-spacing: 0px;">he "</span><a href="https://suttacentral.net/sn48.18/en/sujato" rel="noopener" target="_blank"><em><span>Patipanna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 48.18)</a><span style="font-size: 1.125rem; letter-spacing: 0px;">" describes the</span><span style="font-size: 1.125rem; letter-spacing: 0px;"> eight types of Noble Persons</span><span style="font-size: 1.125rem; letter-spacing: 0px;">:</span></p>
+<p style="text-align: justify;">“<em><span>Pañcimāni, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="indriyāni">indriyāni</span>. Katamāni pañca? Saddhindriyaṃ … pe … paññindriyaṃ—imāni kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcindriyāni. <span class="pali-term term-highlight" data-term="imesaṃ">Imesaṃ</span> kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcannaṃ indriyānaṃ samattā paripūrattā arahaṃ hoti, tato mudutarehi arahat­ta­<span class="pali-term term-highlight" data-term="phala">phala</span>­sacchi­kiriyāya paṭipanno hoti, tato mudutarehi anāgāmī hoti, tato mudutarehi anāgā­mi­<span class="pali-term term-highlight" data-term="phala">phala</span>­sacchi­kiriyāya paṭipanno hoti, tato mudutarehi sakadāgāmī hoti, tato mudutarehi sakadā­gāmi­<span class="pali-term term-highlight" data-term="phala">phala</span>­sacchi­kiriyāya paṭipanno hoti, tato mudutarehi sotāpanno hoti, tato mudutarehi </span><span style="color: #3366ff;"><strong><span>sotā­patti­<span class="pali-term term-highlight" data-term="phala">phala</span>­sacchi­kiriyāya paṭipanno</span></strong></span><span> hoti. Yassa kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, imāni pañcindriyāni sabbena sabbaṃ sabbathā sabbaṃ natthi, tamahāṃ ‘bāhiro puthuj­jana­pak­khe ṭhito’ti vadāmī”ti.</span></em></p>
+<p style="text-align: justify;"><strong>Translated:</strong></p>
+<p style="text-align: justify;">"<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, there are five <em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span> </span></em>(faculties): <em><span>Saddhindriya, vīriyindriya, satindriya, samādhindriya, <span class="pali-term term-highlight" data-term="paññindriya">paññindriya</span>. </span></em>One who has fully cultivated them is an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Someone who developed them less is <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> Anugāmi</span></i>. One who has even less is an <i>Anāgāmi,..</i> <em>Anāgāmi Anugāmi</em>, ..<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>, ...<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> Anugāmi</span></em>, ...<em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>, ...<span style="color: #3366ff;"><em><strong><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></strong></em>.</span>  Those who have not yet begun to cultivate the five faculties are ignorant humans (<em>puthuj­jana­bhūmiṃ</em>) who are unaware of the true nature (<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>One on the way to becoming an <em>Anāgāmi</em> is “<em><span>anāgā­mi­ <span class="pali-term term-highlight" data-term="phala">phala</span>­ sacchi­kiriyāya paṭipannō,“</span></em> etc. One on the way to become a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></em>(or <span style="color: #3366ff;"><i><span style="font-weight: bolder;"><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></span></i><span style="font-weight: bolder;">) </span></span>is "<span style="color: #3366ff;"><em><span style="font-weight: bolder;"><span>sotā­patti­<span class="pali-term term-highlight" data-term="phala">phala</span>­sacchi­kiriyāya paṭipanno."</span></span></em></span></li>
+<li>The eight Noble Persons (<em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em>) are also listed in other <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em>, including “<a href="https://suttacentral.net/an8.59/en/sujato" rel="noopener" target="_blank"><em><span>Paṭha­ma Pugga­la­ <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 8.59)</a>” and in “<a href="https://suttacentral.net/an9.9/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="puggala">Puggala</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 9.9)</a>“.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em> Is <i><em><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span> </span></em></i><span style="color: #000000;">or </span><i><em><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></em></i></h5>
+<p style="text-align: justify;">2. An important way of classification of the Noble Persons (<em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em>) relevant to our topic is given in the "<a href="https://suttacentral.net/sn48.14/en/sujato" rel="noopener" target="_blank"><em><span>Tatiyasankhita <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 48.14)</a>":</p>
+<p style="text-align: justify;">“<em><span>Pañcimāni, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="indriyāni">indriyāni</span>. Katamāni pañca? Saddhindriyaṃ … pe … paññindriyaṃ—imāni kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcindriyāni. <span class="pali-term term-highlight" data-term="imesaṃ">Imesaṃ</span> kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcannaṃ indriyānaṃ samattā paripūrattā arahaṃ hoti, tato mudutarehi anāgāmī hoti, tato mudutarehi sakadāgāmī hoti, tato mudutarehi sotāpanno hoti, tato mudutarehi </span><span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="dhammānusārī">dhammānusārī</span></span></strong> </span>hoti, tato mudutarehi <span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span></span></strong> </span><span>hoti. Iti kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, paripūraṃ paripūrakārī ārādheti, padesaṃ padesakārī ārādheti. ‘Avañjhāni tvevāhaṃ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcindriyānī’ti vadāmī”ti</span></em>.</p>
+<p style="text-align: justify;"><strong>Translated:</strong></p>
+<p style="text-align: justify;">"<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, there are five <em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>: <em><span>Saddhindriya, vīriyindriya, satindriya, samādhindriya, <span class="pali-term term-highlight" data-term="paññindriya">paññindriya</span>. </span></em>One who has fully cultivated them is an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. One who developed them less is an <i><span>Anāgāmi,..  akadāgāmi, ...<span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span>, ...</span><span style="color: #3366ff;"><em><strong><span><span class="pali-term term-highlight" data-term="dhammānusārī">dhammānusārī</span></span></strong>, ...</em></span><em><span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span></span></strong></span>, </em>".</i></p>
+<p style="text-align: justify;">3. From #1 and #2 above, we can see that a <i><span style="color: #0000ff;"><strong><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></span> </strong></span></i>is either a<span style="color: #3366ff;"> </span><i><em><span style="color: #0000ff;"><strong><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="dhammānusārī">dhammānusārī</span></span></span> </strong></span></em></i><span style="color: #000000;">or a <span style="color: #3366ff;"><i><em><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span>.</span></strong></em></i></span></span></p>
+<ul style="text-align: justify;">
+<li>This is confirmed in the following <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, which also confirms that one MUST start comprehending the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature to become a <span style="color: #3366ff;"><i><strong><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi.</span></strong></i></span></li>
+</ul>
+<h5>More on <em><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></em> <span style="color: #000000;">or </span><i><em><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></em></i></h5>
+<p style="text-align: justify;">4. From the "<a href="https://suttacentral.net/sn25.1/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 25.1)</a>":</p>
+<p style="text-align: justify;">“<em><span><span class="pali-term term-highlight" data-term="cakkhuṃ">Cakkhuṃ</span>, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, </span><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span> vipariṇāmi aññathābhāvi</span></strong></span><span>; sotaṃ <span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span> vipariṇāmi aññathābhāvi; ghānaṃ <span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span> vipariṇāmi aññathābhāvi; jivhā <span class="pali-term term-highlight" data-term="aniccā">aniccā</span> </span><span class="var" id="note282">vipariṇāmī aññathābhāvī</span><span>; <span class="pali-term term-highlight" data-term="kāyo">kāyo</span> anicco vipariṇāmi aññathābhāvi; <span class="pali-term term-highlight" data-term="mano">mano</span> anicco vipariṇāmī aññathābhāvī. </span></em></p>
+<p style="text-align: justify;"><em><span>Yo, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ime dhamme <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> saddahati adhimuccati—<span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> vuccati </span><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span>,</span></strong></span><span> okkanto sam­mat­tani­yā­<span class="pali-term term-highlight" data-term="maṃ">maṃ</span>, sap­purisa­bhūmiṃ okkanto, vītivatto puthuj­jana­bhūmiṃ; abhabbo <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> kammaṃ kātuṃ, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> kammaṃ katvā nirayaṃ vā tiracchā­na­yoniṃ vā pettivisayaṃ vā upapajjeyya; </span><span style="color: #3366ff;"><strong><span class="var">abhabbo ca</span>tāva kālaṃ kātuṃ yāva na sotā­patti­phalaṃ sacchikaroti.</strong></span></em></p>
+<p style="text-align: justify;"><em><span>Yassa kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ime <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> <span class="pali-term term-highlight" data-term="paññāya">paññāya</span> mattaso nijjhānaṃ khamanti, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> vuccati: ‘</span><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="dhammānusārī">dhammānusārī</span></span></strong></span><span>, okkanto sam­mat­tani­yā­<span class="pali-term term-highlight" data-term="maṃ">maṃ</span>, sap­purisa­bhūmiṃ okkanto, vītivatto puthuj­jana­bhūmiṃ; abhabbo <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> kammaṃ kātuṃ, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> kammaṃ katvā nirayaṃ vā tiracchā­na­yoniṃ vā pettivisayaṃ vā upapajjeyya; </span><span style="color: #3366ff;"><strong>abhabbo ca tāva kālaṃ kātuṃ yāva na sotā­patti­phalaṃ sacchikaroti’</strong>.</span></em></p>
+<p style="text-align: justify;"><em><span style="color: #3366ff;"><span>Yo, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ime dhamme <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> pajānāti <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> passati, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> vuccati: ‘sotāpanno avini­pāta­dhammo niyato sam­bodhi­parā­yano’”ti</span></span></em><span style="color: #3366ff;">.</span></p>
+<p style="text-align: justify;"><strong>Translated:</strong></p>
+<p style="text-align: justify;">"<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, <span style="color: #993366;"><strong>(the arising of) <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span></span></em> is of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</strong></span> (same for <em>sōta, </em><em>ghāna, jivhā, kāyō, manō). </em>For details, see "<a href="http://localhost/beng_feb2026/is-there-a-self/anicca%e1%b9%81-vipari%e1%b9%87ami-annathabhavi-a-critical-verse/" rel="noopener" target="_blank">Aniccaṁ Vipariṇāmi Aññathābhāvi - A Critical Verse</a>."</p>
+<p style="text-align: justify;">One who believes these phenomena are this way is called a faith-follower (<span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span></span></em></strong></span>). He/She has entered the Noble plane (<em><span>sam­mat­tani­yā­<span class="pali-term term-highlight" data-term="maṃ">maṃ</span></span></em>), has entered the realm of Noble Persons (<em>sap­purisa­bhūmiṃ</em>), and transcended the realm of the humans who are unaware of the true nature (<em>puthuj­jana­bhūmiṃ</em>). He is incapable of doing any deed by which he might be reborn in hell, in the animal womb, or in the realm of hungry ghosts. <span style="color: #0000ff;"><span style="color: #3366ff;"><strong>A <em><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span></span></em> is incapable of dying</strong> </span><strong><span style="color: #3366ff;">until he realizes the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage.</span></strong></span></p>
+<p style="text-align: justify;"><span>After pondering with wisdom, one who has accepted that these phenomena are this way is called a <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>-follower (</span><span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="dhammānusārī">dhammānusārī</span></span></em></strong></span>)..." (The rest is the same as for a <em><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span>).</span></em></p>
+<p style="text-align: justify;"><span style="color: #3366ff;">One who knows and sees that these phenomena are this way is called a <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>. </span></em>He will never again be born in the <em>apāyā</em>, headed for the <em>Arahanthood</em>."</span></p>
+<ul style="text-align: justify;">
+<li>Note that 11<em><span> <span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> (AN 25.1 through AN 25. 10) state the same in various ways.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi </span></em>Will Attain <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> Stage Before Death</h5>
+<p style="text-align: justify;">5. Therefore, from the above <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span>,</span></em> we can make the following deductions:</p>
+<ul style="text-align: justify;">
+<li><span style="color: #000000;">A <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> is never again to be born in the <em>apāyā </em>and is headed for <em>Arahanthood</em>.</span></li>
+<li>A <span style="color: #000000;"><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi </span></i></span>is either a<span style="color: #000000;"> <i><em><span><span class="pali-term term-highlight" data-term="dhammānusārī">dhammānusārī</span> </span></em></i>or a <i><em><span style="color: #0000ff;"><span style="color: #000000;"><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span>. </span></span></span></em></i></span></li>
+<li>In #4 above: "<span style="color: #0000ff;"><strong><span style="color: #3366ff;">A </span><em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="saddhānusārī">saddhānusārī</span></span></span> </em><span style="color: #993366;">(<em><span>or a <span class="pali-term term-highlight" data-term="dhammānusārī">dhammānusārī</span></span></em></span><span style="color: #ff0000;"><span style="color: #993366;">)</span> </span><span style="color: #3366ff;">is incapable of dying </span></strong><span style="color: #3366ff;"><strong>until he realizes the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage." </strong></span></span><span style="color: #008000;"><strong>Therefore, a</strong> <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi </span></i><strong>will attain</strong> <strong>the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> </span></em>stage within that lifetime</strong>.</span></li>
+<li>Once getting to the <span style="color: #000000;"><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></i></span>stage, there would be only seven maximum number of "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" left, within which one WILL attain the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. See "<a href="https://suttacentral.net/an6.92/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamaabhabbaṭṭhāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.92)</a>." The English translation there incorrectly translates "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em><span>" as "<span class="pali-term term-highlight" data-term="rebirth">rebirth</span>." The verse "..</span><em>abhabbo diṭṭhisampanno puggalo <strong>aṭṭhamaṁ bhavaṁ</strong> nibbattetuṁ</em>." should be translated as "And they can’t generate an <strong>eighth</strong> <strong><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>.</span></em></strong>" The translator does not understand the difference between <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>: "<a href="../../pages/KD.GG.006/index.html" rel="noopener" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>."</li>
+</ul>
+<h5>Who Has <em>Avecca Pas<i>ā</i>da</em>?</h5>
+<p style="text-align: justify;">6. Another <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> that provides more information is "<span class="var" id="note436"><a href="https://suttacentral.net/sn55.24/en/sujato" rel="noopener" target="_blank"><em><span>Paṭha­ma­saraṇā­ni­sakka­ <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.24)</a>". It is a long<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span>,</span></em> and a reasonably good translation is "<a href="https://www.accesstoinsight.org/tipitaka/sn/sn55/sn55.024.wlsh.html" rel="noopener noreferrer" target="_blank">Sarakaani Sutta: Sarakaani (Who Took to Drink)</a>."</span></p>
+<p style="text-align: justify;">Here are the relevant verses, which again describe the types of Noble Persons:</p>
+<p style="text-align: justify;">(1). “Mahānāma, take the case of a person<strong> endowed with</strong> <span style="color: #3366ff;"><strong>unwavering devotion (<em>avecca pasāda</em>)</strong></span><span> to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span><span style="color: #3366ff;"><strong><em>heva kho buddhe aveccappasādena samannāgato hoti</em></strong></span><span>), the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, the Saṅgha, and has attained the </span><em><strong>Arahanthood</strong></em><span>. By the destruction of defilements, he has gained release through wisdom in this very life. The man is entirely released from the hell-state, from <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> as an animal. He is free from the </span><em>apāyās</em>.</p>
+<p style="text-align: justify;">(2). “Take the case of another man. He has<strong> unwavering devotion (<em>avecca pasāda</em>)</strong><span> to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and the Saṅgha. He has wisdom but has not yet gained full release, but has destroyed the five lower </span><em>samyōjanā</em> (<strong>an <em>Anāgāmi</em></strong><span>). Upon death, he will be reborn spontaneously in a <span class="pali-term term-highlight" data-term="brahma">Brahma</span> realm where he will attain Nibbaana without returning from that world. That man is also entirely released from the </span><em>apāyās</em>.</p>
+<p style="text-align: justify;">(3). “Take the case of another man. He has<strong> unwavering devotion (<em>avecca pasāda</em>)</strong><span> to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and the Saṅgha. He has wisdom but has not yet gained release. By destroying the first three Samyojanā and weakening</span><em><span> <span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span>, </span></em>and <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>, he is a Once-returner (<em><strong><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></strong></em>) who will return once more to this <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>. That man is entirely freed from the <em>apāyās</em>.</p>
+<p style="text-align: justify;">(4). “Take the case of another man. He is <strong>endowed with unwavering devotion (<em>avecca pasāda</em>)</strong><span> to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and the Saṅgha. He has the wisdom but has not gained release. By destroying three fetters, he is a Stream-Winner (</span><em><strong><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></strong></em><span>), not subject to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in </span><em>apāyā</em>, assured of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. That man is entirely freed from the <em>apāyā</em>.</p>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi </span></em>Does Not Have <em>Avecca Pas<i>ā</i>da</em></h5>
+<p style="text-align: justify;">(5). “Take the case of another man. He <strong><span style="color: #3366ff;">does not have</span> unwavering devotion (<em>avecca pasāda</em>)</strong><span> to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span><strong><em><span style="color: #3366ff;">na</span> heva kho buddhe aveccappasādena samannāgato hoti</em></strong><span>), the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, the Saṅgha. He has not yet gained wisdom and has not gained release. </span><strong>But he has the following things to some extent</strong>: the faculty of faith, energy, mindfulness, concentration, and wisdom (<em><span><span class="pali-term term-highlight" data-term="saddhā">saddhā</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="viriya">viriya</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="sati">sati</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="samādhi">samādhi</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="paññā">paññā</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>). He understands, with insight <span style="color: #3366ff;"><strong>at least moderately</strong></span>, the <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> of the <em><span><span class="pali-term term-highlight" data-term="tathāgata">Tathāgata</span></span></em>. <strong>That man does not go to <em>apāyās</em>.</strong></p>
+<p style="text-align: justify;">(6). “Take the case of another man. He does not have<strong> unwavering devotion (<em>avecca pasāda</em>)</strong><span> to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, or the Saṅgha. He is not joyous and swift in wisdom and has not gained release.</span><strong> But he has </strong><span style="font-weight: bolder;">the following</span><strong> things to some extent</strong>: the faculty of faith, energy, mindfulness, concentration, and wisdom (<em><span><span class="pali-term term-highlight" data-term="saddhā">saddhā</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="viriya">viriya</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="sati">sati</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="samādhi">samādhi</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="paññā">paññā</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>). He understands, with insight, <span style="color: #3366ff;"><strong>at least slightly</strong></span><span>, the <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> of the </span><em><span><span class="pali-term term-highlight" data-term="tathāgata">Tathāgata</span></span></em>. <strong>He, too, will not go to the <em>apāyā</em>.</strong></p>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi </span></em>Is Also Free of Ap<em>ā</em>y<em>ā</em>s</h5>
+<p style="text-align: justify;">7. Note that in #6 above, for <strong>each of the four <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>:</strong><br/>
+“<em>Ayampi kho, mahānāma, puggalo <strong>parimutto</strong><span> nirayā parimutto tiracchā­na­yoniyā parimutto pettivisayā parimutto <span class="pali-term term-highlight" data-term="apāya">apāya</span>­dugga­ti­vini­pātā.</span></em>”<br/>
+“..That man is <strong>entirely free</strong>… from the<em> apāyā</em>.”</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><strong>For the last two types (<i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></i>):</strong><br/>
+“<em>Ayampi kho, mahānāma, puggalo <strong>agantā</strong> nirayaṃ agantā tiracchā­na­yoniṃ agantā pettivisayaṃ agantā apāyaṃ duggatiṃ vinipātaṃ</em>.”<br/>
+“..That man <strong>does not go to</strong> the <em>apāyā</em>”.</li>
+<li>Taken together with the statements in the<em><span> <span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> discussed above, that means the following.<span style="color: #3366ff;"><strong> A <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi </span></i>is also effectively released permanently from the <em>apāyā.</em></strong></span></li>
+</ul>
+<h5>What Is<em> Avecca Pas<i>ā</i>da</em></h5>
+<p style="text-align: justify;">8. A key phrase in many of the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> is <em>avecca pasāda. </em>It is frequently translated as "unwavering devotion," as in the above translation. But it has a deeper meaning.</p>
+<ul style="text-align: justify;">
+<li><em>Pasāda </em>means a combination of "trust, faith, reverence."</li>
+<li><span>That comes when one understands the deeper meanings in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. In particular, when one starts comprehending </span><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, one can begin to see the unfruitfulness AND danger in trying to seek happiness in this world of 31 realms.</li>
+<li><strong>Then one starts losing cravings ("<em>ava</em>" + "<em>icca</em>") for worldly things.</strong> We remember that <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> is "<em>na icca</em>"; see, "<a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Anicca – True Meaning</a>."</li>
+<li>Therefore, <em>avecca pasāda, </em>or "unwavering faith," is connected to realizing the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature or the "unsatisfactory nature" of worldly things. That craving for worldly things leads to suffering (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>). And that, in the end, leads to one becoming helpless (<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>), especially when born in the <em>apāyā</em>.</li>
+<li>One establishes <em>avecca pasāda </em><span>or "unwavering faith" in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and Saṅgha when one starts to comprehend </span><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>.</span></em></li>
+</ul>
+<h5>Four Qualities of a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em></h5>
+<p style="text-align: justify;">9. Four qualities of a <span class="var" id="note393"><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></em>are in all <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> in the <a href="https://suttacentral.net/sn55" rel="noopener noreferrer" target="_blank"><em><span><span class="pali-term term-highlight" data-term="sotāpatti">Sotāpatti</span> Saṃyutta</span></em></a> of the <em>Saṃyutta Nikāya</em> (SN). T</span>he "<span class="var" id="note393"><a href="https://suttacentral.net/sn55.2/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>­cari­yogadha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.2)</a>" has a concise statement about the qualities or qualifications of a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span><strong>. </strong></em></span></p>
+<p style="text-align: justify;"><em>“<span style="color: #ff0000;"><span style="color: #993366;"><strong>Catūhi, </strong></span><span style="color: #000000;"><span><span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>,</span></span><span style="color: #993366;"><strong> dhammehi samannāgato</strong></span> <span style="color: #000000;">ariyasāvako</span><span style="color: #993366;"><strong> sotāpanno</strong></span></span> hoti avini­pāta­dhammo niyato sam­bodhi­parā­yaṇo.</em><br/>
+<em><a class="sc" href="https://suttacentral.net/sn55.2/pli/ms#2" id="2" title="SuttaCentral paragraph number."></a><a class="pts" href="https://suttacentral.net/sn55.2/pli/ms#pts5.344" id="pts5.344" title="Pāli Text Society vol/page number."></a><span>Katamehi catūhi? Idha, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ariyasāvako </span><span style="color: #3366ff;"><strong>buddhe aveccap­pasā­dena</strong> <strong>samannāgato hoti:</strong></span><span> ‘itipi so <span class="pali-term term-highlight" data-term="bhagavā">bhagavā</span> arahaṃ sammāsambuddho vij­jācara­ṇa­sam­panno sugato lokavidū anuttaro purisa­damma­sāra­thi satthā devamanussānaṃ <span class="pali-term term-highlight" data-term="buddho">buddho</span> <span class="pali-term term-highlight" data-term="bhagavā">bhagavā</span>’ti.</span><span style="color: #3366ff;"><strong> Dhamme</strong></span> … pe … <span style="color: #3366ff;"><strong>saṅghe</strong></span> … pe … <span style="color: #3366ff;"><strong>ariyakantehi sīlehi samannāgato hoti</strong> </span><span>akhaṇḍehi … pe … samā­dhi­saṃ­vatta­ni­kehi. Imehi kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, catūhi dhammehi samannāgato ariyasāvako sotāpanno hoti avini­pāta­dhammo niyato sam­bodhi­parā­yaṇo”ti.</span></em></p>
+<p style="text-align: justify;"><strong>Translated: </strong></p>
+<p style="text-align: justify;"><span style="color: #993366;"><strong>A <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em></strong></span>, never again to be born in the <em>apāyā, </em><span style="color: #993366;"><strong>has acquired four qualities</strong>:</span></p>
+<p style="text-align: justify;">(1) He has<span style="color: #3366ff;"><strong> <em>avecca pasāda</em><span> in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong></span>, i.e., he understands the following verse. "<em><span>‘itipi so <span class="pali-term term-highlight" data-term="bhagavā">bhagavā</span> arahaṃ sammāsambuddho vij­jācara­ṇa­sam­panno sugato lokavidū anuttaro purisa­damma­sāra­thi satthā devamanussānaṃ <span class="pali-term term-highlight" data-term="buddho">buddho</span> <span class="pali-term term-highlight" data-term="bhagavā">bhagavā</span>’ti."</span></em></p>
+<p style="text-align: justify;">(2) He has <span style="color: #3366ff;"><strong><em>avecca pasāda</em><span> in the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></strong></span>, i.e., he understands the <span style="font-size: 1.125rem; letter-spacing: 0px;">following </span><span style="font-size: 1.125rem; letter-spacing: 0px;">verse. "S</span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span>vākkhāto bhagavatā dhammo sandiṭṭhiko <span class="pali-term term-highlight" data-term="akāliko">akāliko</span> <span class="pali-term term-highlight" data-term="ehipassiko">ehipassiko</span> opaneyyiko paccattaṃ veditabbo viññūhī’ti.</span></em><span style="font-size: 1.125rem; letter-spacing: 0px;">"</span></p>
+<p style="text-align: justify;">(3) He has <span style="color: #3366ff;"><strong><em>avecca pasāda</em> in the Saṅgha</strong></span>, i.e., he understands the <span style="font-size: 1.125rem; letter-spacing: 0px;">following </span><span style="font-size: 1.125rem; letter-spacing: 0px;">verse. "S</span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span>uppaṭipanno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, ujuppaṭipanno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, ñāyappaṭipanno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, sāmīcip­paṭi­panno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, yadidaṃ—cattāri purisayugāni aṭṭha purisapuggalā, esa <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho āhuneyyo pāhuneyyo dakkhiṇeyyo añjalikaraṇīyo anuttaraṃ puññakkhettaṃ lokassā’ti.</span></em></p>
+<p style="text-align: justify;">(4) He has the <span style="color: #3366ff;"><strong><em>Ariyakantha sila</em></strong></span> of the noble ones. It comes with <span style="font-size: 1.125rem; letter-spacing: 0px;">penetrating wisdom and</span><span style="font-size: 1.125rem; letter-spacing: 0px;"> is unbreakable. It leads to </span><em style="font-size: 1.125rem; letter-spacing: 0px;">samā­dhi­</em><span style="font-size: 1.125rem; letter-spacing: 0px;">.</span></p>
+<p style="text-align: justify;">"<em><span style="color: #3366ff;"><strong>Ariyakantehi sīlehi samannāgato</strong></span> hoti akhaṇḍehi acchiddehi asabalehi akammāsehi bhujissehi viññup­pasat­thehi aparāmaṭṭhehi samā­dhi­saṃ­vatta­ni­kehi</em>."</p>
+<h5>Recital Is Not Enough</h5>
+<p style="text-align: justify;"><span>10. We note that those first three verses are the same as those in the supreme qualities of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and Saṅgha; see "</span><a href="../../pages/BC.AA.004/index.html" rel="noopener noreferrer" target="_blank">Supreme Qualities of Buddha, Dhamma, Saṅgha</a>."</p>
+<ul style="text-align: justify;">
+<li>Therefore, those verses are not just for recitation. They must be recited with UNDERSTANDING before any serious mediation session.</li>
+<li>From #4 and #5 above, we see that one gets a “Noble birth” when attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></em> stage. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi </span></em>is one of the “<em>attha purisa puggalā.“</em></li>
+</ul>
+<p style="text-align: justify;">The four qualities of a <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> are discussed in<em> "</em></span><a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – The Four Qualities of a Sotāpanna</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.JJ.007"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0489"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.JJ.007
+Language:     pt-BR
+Generated-At: 2026-03-10T23:21:08Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>11 de fevereiro de 2019; revisado em 12 de abril de 2020; <span style="color: #3366ff;">25 de julho de 2023 (#4,#5)</span></strong></p>
+<p style="text-align: justify;">Um ser humano que alcança um <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> nunca renascerá em um <em><span><span class="pali-term term-highlight" data-term="apāya">Apāya</span></span></em> (um dos quatro reinos mais baixos). Um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não renascerá em nenhum reino. Um <em>Anāgāmi</em> renascerá apenas no reino <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. Um <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> renasce apenas no reino<em><span> dos <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em>, e um <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> apenas no reino <em><span>dos <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> ou dos humanos.<span style="color: #3366ff;"> <strong>Um <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></em> também está livre do <em>apāyā</em></strong></span>. Aqui, discutimos as evidências do <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> que comprovam que esse é realmente o caso.</p>
+<h5>Oito tipos de pessoas nobres</h5>
+<p style="text-align: justify;">1. <span style="font-size: 1.125rem; letter-spacing: 0px;">O “</span><a href="https://suttacentral.net/sn48.18/en/sujato" rel="noopener" target="_blank"><em><span>Patipanna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 48.18)</a><span style="font-size: 1.125rem; letter-spacing: 0px;">” descreve os oito tipos de Pessoas Nobres:</span></p>
+<p style="text-align: justify;">“<em><span>Pañcimāni, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="indriyāni">indriyāni</span>. Katamāni pañca? Saddhindriyaṃ … pe … paññindriyaṃ—imāni kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcindriyāni. <span class="pali-term term-highlight" data-term="imesaṃ">Imesaṃ</span> kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcannaṃ indriyānaṃ samattā paripūrattā arahaṃ hoti, tato mudutarehi arahat­ta­<span class="pali-term term-highlight" data-term="phala">phala</span>­sacchi­kiriyāya paṭipanno hoti, tato mudutarehi anāgāmī hoti, tato mudutarehi anāgāmi-<span class="pali-term term-highlight" data-term="phala">Phala</span>-sacchi-kiriyāya paṭipanno hoti, tato mudutarehi sakadāgāmī hoti, tato mudutarehi <span class="pali-term term-highlight" data-term="sakadāgāmi">sakadāgāmi</span>-<span class="pali-term term-highlight" data-term="phala">Phala</span>-sacchi-kiriyāya paṭipanno hoti, tato mudutarehi sotāpanno hoti, tato mudutarehi </span><span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="sotāpatti">sotāpatti</span>-<span class="pali-term term-highlight" data-term="phala">Phala</span>-sacchi-kiriyāya paṭipanno</span></strong></span><span> hoti. Yassa kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, imāni pañcindriyāni sabbena sabbaṃ sabbathā sabbaṃ natthi, tamahāṃ ‘bāhiro <span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span>-pakkhe ṭhito’ti vadāmī”ti.</span></em></p>
+<p style="text-align: justify;"><strong>Traduzido:</strong></p>
+<p style="text-align: justify;"><em>“Bhikkhūs</em>, existem cinco <em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span> </span></em>(faculdades): <em><span>Saddhindriya, vīriyindriya, satindriya, samādhindriya, <span class="pali-term term-highlight" data-term="paññindriya">Paññindriya</span>. </span></em>Aquele que as cultivou plenamente é um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Aquele que as desenvolveu menos é <i><span>um <span class="pali-term term-highlight" data-term="arahant">Arahant</span> Anugāmi</span></i>. Aquele que as desenvolveu ainda menos é um <i>Anāgāmi, ...</i> <em>Anāgāmi Anugāmi</em>, ... <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>, ... <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> Anugāmi</span></em>, ... <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, ... <span style="color: #3366ff;"><em><strong><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></strong></em>.</span>  Aqueles que ainda não começaram a cultivar as cinco faculdades são seres humanos ignorantes (<em>puthujana-bhūmiṃ</em>) que desconhecem a verdadeira natureza (<em>Tilakkhaṇa</em>).</p>
+<ul style="text-align: justify;">
+<li>Aquele que está a caminho de se tornar um <em>Anāgāmi</em> é “<em><span>anāgāmi <span class="pali-term term-highlight" data-term="phala">Phala</span> sacchi kiriyāya paṭipannō”,</span></em> etc. Aquele que está no caminho para se tornar um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> </span></em>(ou <span style="color: #3366ff;"><i><span style="font-weight: bolder;"><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></span></i><span style="font-weight: bolder;">) </span></span>é “<span style="color: #3366ff;"><em><span style="font-weight: bolder;"><span>sotā­patti­<span class="pali-term term-highlight" data-term="phala">Phala</span>­sacchi­kiriyāya paṭipanno”.</span></span></em></span></li>
+<li>As oito Pessoas Nobres (<em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em>) também estão listadas em outros <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>, incluindo “<a href="https://suttacentral.net/an8.59/en/sujato" rel="noopener" target="_blank"><em><span>Paṭha­ma Pugga­la­ <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 8.59)</a>” e em “<a href="https://suttacentral.net/an9.9/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="puggala">Puggala</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 9.9)</a>”.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> é <i><em><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span> </span></em></i><span style="color: #000000;">ou </span><i><em><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></em></i></h5>
+<p style="text-align: justify;">2. Uma forma importante de classificação das Pessoas Nobres (<em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em>) relevante para o nosso tópico é dada no <a href="https://suttacentral.net/sn48.14/en/sujato" rel="noopener" target="_blank"><em><span>“Tatiyasankhita <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 48.14)</a>”:</p>
+<p style="text-align: justify;">“<em><span>Pañcimāni, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="indriyāni">indriyāni</span>. Katamāni pañca? Saddhindriyaṃ … pe … paññindriyaṃ—imāni kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcindriyāni. <span class="pali-term term-highlight" data-term="imesaṃ">Imesaṃ</span> kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcannaṃ indriyānaṃ samattā paripūrattā arahaṃ hoti, tato mudutarehi anāgāmī hoti, tato mudutarehi sakadāgāmī hoti, tato mudutarehi sotāpanno hoti, tato mudutarehi </span><span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></strong> </span>hoti, tato mudutarehi <span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></strong> </span><span>hoti. Iti kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, paripūraṃ paripūrakārī ārādheti, padesaṃ padesakārī ārādheti. ‘Avañjhāni tvevāhaṃ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, pañcindriyānī’ti vadāmī”ti</span></em>.</p>
+<p style="text-align: justify;"><strong>Traduzido:</strong></p>
+<p style="text-align: justify;"><em>“Bhikkhūs</em>, existem cinco <em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em>: <em><span>Saddhindriya, vīriyindriya, satindriya, samādhindriya, <span class="pali-term term-highlight" data-term="paññindriya">Paññindriya</span>. </span></em>Aquele que os cultivou plenamente é um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Aquele que os desenvolveu menos é um <i>Anāgāmi, ... akadāgāmi, ... Sótapanna, ... <span style="color: #3366ff;"><em><strong><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></strong>, ...</em></span> <em><span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></strong></span></em>”.</i></p>
+<p style="text-align: justify;">3. A partir dos pontos 1 e 2 acima, podemos ver que um <i><span style="color: #0000ff;"><strong><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></span> </strong></span></i>é um<span style="color: #3366ff;"> </span><i><em><span style="color: #0000ff;"><strong><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></span> </strong></span></em></i><span style="color: #000000;">ou um <span style="color: #3366ff;"><i><em><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span>.</span></strong></em></i></span></span></p>
+<ul style="text-align: justify;">
+<li>Isso é confirmado no seguinte <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>, que também confirma que é necessário começar a compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> para se tornar um <span style="color: #3366ff;"><i><strong><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi.</span></strong></i></span></li>
+</ul>
+<h5>Mais sobre <em><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></em> <span style="color: #000000;">ou </span><i><em><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></em></i></h5>
+<p style="text-align: justify;">4. Do <a href="https://suttacentral.net/sn25.1/en/sujato" rel="noopener" target="_blank"><em><span>“<span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 25.1)</a>”:</p>
+<p style="text-align: justify;">“<em><span><span class="pali-term term-highlight" data-term="cakkhuṃ">Cakkhuṃ</span>, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, </span><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span> vipariṇāmi aññathābhāvi</span></strong></span><span>; sotaṃ <span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span> vipariṇāmi aññathābhāvi; ghānaṃ <span class="pali-term term-highlight" data-term="aniccaṃ">aniccaṃ</span> vipariṇāmi aññathābhāvi; jivhā <span class="pali-term term-highlight" data-term="aniccā">aniccā</span> </span><span class="var" id="note282">vipariṇāmī aññathābhāvī</span><span>; <span class="pali-term term-highlight" data-term="kāyo">kāyo</span> anicco vipariṇāmi aññathābhāvi; <span class="pali-term term-highlight" data-term="mano">Mano</span> anicco vipariṇāmī aññathābhāvī. </span></em></p>
+<p style="text-align: justify;"><em><span>Yo, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ime dhamme <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> saddahati adhimuccati—<span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> vuccati </span><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span>,</span></strong></span><span> okkanto sammattaññāmaṃ, sapurisaññāmiṃ okkanto, vītivatto puthajanaññāmiṃ; abhabbo <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> kammaṃ kātuṃ, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> kammaṃ katvā nirayaṃ vā tiracchā­na­yoniṃ vā pettivisayaṃ vā upapajjeyya; </span><span style="color: #3366ff;"><strong><span class="var">abhabbo ca</span><span>tāva kālaṃ kātuṃ yāva na <span class="pali-term term-highlight" data-term="sotāpatti">sotāpatti</span>-phalaṃ sacchikaroti.</span></strong></span></em></p>
+<p style="text-align: justify;"><em><span>Yassa kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ime <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> <span class="pali-term term-highlight" data-term="paññāya">paññāya</span> mattaso nijjhānaṃ khamanti, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> vuccati: ‘</span><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></strong></span><span>, okkanto sammattañāmaṃ, sappurisabhūmiṃ okkanto, vītivatto putujana-bhūmiṃ; abhabbo <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> kammaṃ kātuṃ, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> kammaṃ katvā nirayaṃ vā tiracchā-nayoniṃ vā pettivisayaṃ vā upapajjeyya; </span><span style="color: #3366ff;"><strong>abhabbo ca tāva kālaṃ kātuṃ yāva na sotā-patti-phalaṃ sacchikaroti’</strong>.</span></em></p>
+<p style="text-align: justify;"><em><span style="color: #3366ff;"><span>Yo, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ime dhamme <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> pajānāti <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> passati, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> vuccati: ‘sotāpanno avini­pāta­dhammo niyato sam­bodhi­parā­yano’”ti</span></span></em><span style="color: #3366ff;">.</span></p>
+<p style="text-align: justify;"><strong>Traduzido:</strong></p>
+<p style="text-align: justify;">“<em>Bhikkhūs</em>, <span style="color: #993366;"><strong>(o surgimento de) <em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span></span></em> é de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</strong></span> (o mesmo para <em>sōta, ghāna, jivhā, kāyō, manō). </em>Para mais detalhes, consulte “<a href="http://localhost/beng_feb2026/is-there-a-self/anicca%e1%b9%81-vipari%e1%b9%87ami-annathabhavi-a-critical-verse/" rel="noopener" target="_blank">Aniccaṁ Vipariṇāmi Aññathābhāvi - Um Verso Crítico</a>”.</p>
+<p style="text-align: justify;">Aquele que acredita que esses fenômenos são assim é chamado de seguidor da fé (<span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></em></strong></span>). Ele/ela entrou no plano Nobre (<em>sammatta-nayamaṃ</em>), entrou no reino das Pessoas Nobres (<em>sap-purisa-bhūmiṃ</em>) e transcendeu o reino dos humanos que desconhecem a verdadeira natureza (<em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span>-bhūmiṃ</span></em>). Ele é incapaz de realizar qualquer ação pela qual possa renascer no inferno, no ventre de um animal ou no reino dos fantasmas famintos. <span style="color: #0000ff;"><span style="color: #3366ff;"><strong>Um <em><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></em> é incapaz de morrer</strong> </span><strong><span style="color: #3366ff;">até que alcance o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</span></strong></span></p>
+<p style="text-align: justify;"><span>Depois de ponderar com sabedoria, aquele que aceitou que esses fenômenos são assim é chamado de seguidor do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> (</span><span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></em></strong></span>)...” (O resto é igual ao de um <em><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span>).</span></em></p>
+<p style="text-align: justify;"><span style="color: #3366ff;">Aquele que sabe e vê que esses fenômenos são assim é chamado de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>. </span></em>Ele nunca mais renascerá no <em>apāyā</em>, rumo à <em>Arahanthood</em>.</span></p>
+<ul style="text-align: justify;">
+<li>Observe que 11<em><span> <span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> (AN 25.1 a AN 25. 10) afirmam o mesmo de várias maneiras.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi </span></em>alcançará o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> antes da morte</h5>
+<p style="text-align: justify;">5. Portanto, a partir da <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> acima<em>,</em> podemos fazer as seguintes deduções:</p>
+<ul style="text-align: justify;">
+<li><span style="color: #000000;">Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> nunca mais renascerá no <em>apāyā </em>e está a caminho da <em>Arahanthood</em>.</span></li>
+<li>Um <span style="color: #000000;"><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi </span></i></span>é um<span style="color: #000000;"> <i><em><span><span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span> </span></em></i>ou um <i><em><span style="color: #0000ff;"><span style="color: #000000;"><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span>. </span></span></span></em></i></span></li>
+<li>No item 4 acima: “<span style="color: #0000ff;"><strong><span style="color: #3366ff;">Um </span><em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="saddhānusārī">Saddhānusārī</span></span></span> </em><span style="color: #993366;">(<em><span>ou um <span class="pali-term term-highlight" data-term="dhammānusārī">Dhammānusārī</span></span></em></span><span style="color: #ff0000;"><span style="color: #993366;">)</span> </span><span style="color: #3366ff;">é incapaz de morrer </span></strong><span style="color: #3366ff;"><strong>até que alcance o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.” </strong></span></span><span style="color: #008000;"><strong>Portanto, um</strong> <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi </span></i><strong>alcançará</strong> <strong>o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> dentro dessa vida</strong>.</span></li>
+<li>Uma vez alcançado o estágio <span style="color: #000000;"><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i></span>, restariam apenas sete “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” no máximo, dentro dos quais se alcançaria o estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Veja “<a href="https://suttacentral.net/an6.92/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamaabhabbaṭṭhāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.92)</a>”. A tradução em inglês traduz incorretamente “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” como “Renascimento”. O versículo “<em>..abhabbo diṭṭhisampanno puggalo <strong><span>aṭṭhamaṁ <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></strong></em>” deve ser traduzido como “E eles não podem gerar um <strong>oitavo</strong> <strong><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span>”.</span></em></strong> O tradutor não compreende a diferença entre <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>: “<a href="../../pages/KD.GG.006/index.html" rel="noopener" target="_blank">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>.”</li>
+</ul>
+<h5>Quem tem <em>Avecca Pas<i>ā</i>da</em>?</h5>
+<p style="text-align: justify;">6. Outro <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> que fornece mais informações é <span class="var" id="note436"><a href="https://suttacentral.net/sn55.24/en/sujato" rel="noopener" target="_blank"><em><span>“Paṭha­ma­saraṇā­ni­sakka­ <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.24)</a>”. É um<em><span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> longo<em>,</em> e uma tradução razoavelmente boa é “<a href="https://www.accesstoinsight.org/Tipiṭaka/sn/sn55/sn55.024.wlsh.html" rel="noopener noreferrer" target="_blank">Sarakaani Sutta: Sarakaani (Aquele que começou a beber)</a>”.</span></p>
+<p style="text-align: justify;">Aqui estão os versos relevantes, que novamente descrevem os tipos de Pessoas Nobres:</p>
+<p style="text-align: justify;">(1). “Mahānāma, considere o caso de uma pessoa<strong> dotada de </strong><span style="color: #3366ff;"><strong>devoção inabalável (<em>avecca pasāda</em>)</strong></span><span> ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span><span style="color: #3366ff;"><strong><em>heva kho buddhe aveccappasādena samannāgato hoti</em></strong></span><span>), ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, ao Saṅgha, e que alcançou o </span><em><strong><span>estado de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></strong></em>. Pela destruição das impurezas, ela obteve a libertação através da sabedoria nesta mesma vida. O homem está totalmente liberado do estado infernal, do Renascimento como animal. Ele está livre dos <em>apāyās</em>.</p>
+<p style="text-align: justify;">(2). “Considere o caso de outro homem. Ele tem <strong>devoção inabalável (<em>avecca pasāda</em>)</strong><span> ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e ao Saṅgha. Ele tem sabedoria, mas ainda não alcançou a libertação completa, mas destruiu os cinco </span><em>samyōjanā</em> inferiores (<strong>um <em>Anāgāmi</em></strong><span>). Após a morte, ele renascerá espontaneamente em um reino de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>, onde alcançará <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> sem retornar desse mundo. Esse homem também está totalmente liberto dos </span><em>apāyās</em>.</p>
+<p style="text-align: justify;">(3). “Considere o caso de outro homem. Ele tem <strong>devoção inabalável (<em>avecca pasāda</em>)</strong><span> ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e ao Saṅgha. Ele tem sabedoria, mas ainda não alcançou a libertação. Ao destruir os três primeiros Samyojanā e enfraquecer</span><em><span> <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>, ele é um que retorna uma vez (<em><strong><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></strong></em>), que retornará mais uma vez a este <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>. Esse homem está totalmente liberto dos <em>apāyās</em>.</p>
+<p style="text-align: justify;">(4). “Considere o caso de outro homem. Ele é <strong>dotado de devoção inabalável (<em>avecca pasāda</em>)</strong><span> ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e ao Saṅgha. Ele tem sabedoria, mas ainda não alcançou a libertação. Ao destruir três grilhões, ele é um Vencedor da Corrente (</span><em><strong><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></strong></em>), não sujeito ao Renascimento em <em>apāyā</em>, com a certeza do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Esse homem está totalmente livre do <em>apāyā</em>.</p>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi </span></em>não tem <em>Avecca Pas<i>ā</i>da</em></h5>
+<p style="text-align: justify;">(5). “Considere o caso de outro homem. Ele <strong><span style="color: #3366ff;">não tem</span> devoção inabalável (<em>avecca pasāda</em>)</strong><span> ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span><strong><em><span style="color: #3366ff;">na</span> heva kho buddhe aveccappasādena samannāgato hoti</em></strong><span>), ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, ao Saṅgha. Ele ainda não alcançou a sabedoria e não alcançou a libertação. </span><strong>Mas ele tem as seguintes coisas até certo ponto</strong>: a faculdade da fé, energia, atenção plena, concentração e sabedoria (<em><span><span class="pali-term term-highlight" data-term="saddhā">Saddhā</span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span>, <span class="pali-term term-highlight" data-term="viriya">Viriya</span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span>, <span class="pali-term term-highlight" data-term="sati">Sati</span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span>, <span class="pali-term term-highlight" data-term="samādhi">Samādhi</span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span>, <span class="pali-term term-highlight" data-term="paññā">Paññā</span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em>). Ele compreende, com discernimento <span style="color: #3366ff;"><strong>pelo menos moderado</strong></span>, o <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="tathāgata">Tathāgata</span></span></em>. <strong>Esse homem não vai para <em>apāyās</em>.</strong></p>
+<p style="text-align: justify;">(6). “Considere o caso de outro homem. Ele não tem <strong>devoção inabalável (<em>avecca pasāda</em>)</strong><span> ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> ou ao Saṅgha. Ele não é alegre e rápido na sabedoria e não alcançou a libertação.</span><strong> Mas ele tem </strong><span style="font-weight: bolder;">as seguintes</span><strong> coisas até certo ponto</strong>: a faculdade da fé, energia, atenção plena, concentração e sabedoria (<em><span><span class="pali-term term-highlight" data-term="saddhā">saddhā</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="viriya">viriya</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="sati">sati</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="samādhi">samādhi</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span>, <span class="pali-term term-highlight" data-term="paññā">paññā</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>). Ele compreende, com discernimento, <span style="color: #3366ff;"><strong>pelo menos ligeiramente</strong></span><span>, o <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> do </span><em><span><span class="pali-term term-highlight" data-term="tathāgata">Tathāgata</span></span></em>. <strong>Ele também não irá para o <em>apāyā</em>.</strong></p>
+<h5><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> também está livre dos <em>apā</em>y<em>ā</em>s</h5>
+<p style="text-align: justify;">
+7. Observe que no item 6 acima, para <strong>cada um dos quatro <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em></strong><br/><strong>:</strong>
+<em></em>
+“<em>Ayampi kho, mahānāma, puggalo <strong>parimutto</strong><span> nirayā parimutto tiracchā­na­yoniyā parimutto pettivisayā parimutto <span class="pali-term term-highlight" data-term="apāya">apāya</span>­dugga­ti­vini­pātā.</span></em><br/>
+”
+“... Esse homem está <strong>totalmente livre...</strong>
+do <em>apāyā</em>
+.”</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><strong>Para os dois últimos tipos (<i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i>):</strong>
+<br/>
+“<em>Ayampi kho, mahānāma, puggalo <strong>agantā</strong> nirayaṃ agantā tiracchā­na­yoniṃ agantā pettivisayaṃ agantā apāyaṃ duggatiṃ vinipātaṃ</em>
+.”<br/>
+
+“... Esse homem <strong>não vai para</strong>
+o <em>apāyā</em>
+”.</li>
+<li>Juntamente com as afirmações do <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> discutidas acima, isso significa o seguinte.<span style="color: #3366ff;"><strong> Um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i> também é efetivamente libertado permanentemente do <em>apāyā.</em></strong></span></li>
+</ul>
+<h5>O que é<em> Avecca Pas<i>ā</i>da</em></h5>
+<p style="text-align: justify;">8. Uma frase-chave em muitos dos <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> é <em>avecca pasāda. </em>É frequentemente traduzida como “devoção inabalável”, como na tradução acima. Mas tem um significado mais profundo.</p>
+<ul style="text-align: justify;">
+<li><em>Pasāda </em>significa uma combinação de “confiança, fé, reverência”.</li>
+<li><span>Isso ocorre quando se compreende os significados mais profundos do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Em particular, quando se começa a compreender </span><em>Tilakkhaṇa</em>, pode-se começar a ver a infrutuosidade E o perigo de tentar buscar a felicidade neste mundo de 31 reinos.</li>
+<li><strong>Então, a pessoa começa a perder o desejo (“<em>ava</em>” + “<em>icca</em>”) pelas coisas mundanas.</strong> Lembramos que <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> é “<em>na icca</em>”; veja “<a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Anicca – Significado Verdadeiro</a>”.</li>
+<li>Portanto, <em>avecca pasāda, </em>ou “fé inabalável”, está conectado à compreensão da natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> ou da “natureza insatisfatória” das coisas mundanas. Esse desejo por coisas mundanas leva ao sofrimento (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>). E isso, no final, leva a pessoa a se tornar impotente (<em>Anattā</em>), especialmente quando nasce no <em>apāyā</em>.</li>
+<li>Estabelece-se <em>avecca pasāda </em><span>ou “fé inabalável” no <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, no <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e no Saṅgha quando se começa a compreender </span><em>Tilakkhaṇa.</em></li>
+</ul>
+<h5>Quatro qualidades de um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em></h5>
+<p style="text-align: justify;">9. As quatro qualidades de um <span class="var" id="note393"><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> </span></em>estão em todos <em><span>os <span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> no <a href="https://suttacentral.net/sn55" rel="noopener noreferrer" target="_blank"><em><span><span class="pali-term term-highlight" data-term="sotāpatti">Sotāpatti</span> Saṃyutta</span></em></a> do <em>Saṃyutta Nikāya</em> (SN). </span>O <span class="var" id="note393"><a href="https://suttacentral.net/sn55.2/en/sujato" rel="noopener" target="_blank"><em><span>“<span class="pali-term term-highlight" data-term="brahma">Brahma</span>­cari­yogadha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 55.2)</a>” tem uma declaração concisa sobre as qualidades ou qualificações de um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span><strong>. </strong></em></span></p>
+<p style="text-align: justify;"><em>“<span style="color: #ff0000;"><span style="color: #993366;"><strong>Catūhi, </strong></span><span style="color: #000000;"><span><span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>,</span></span><span style="color: #993366;"><strong> dhammehi samannāgato</strong></span> <span style="color: #000000;">ariyasāvako</span><span style="color: #993366;"><strong> sotāpanno</strong></span></span> hoti avini­pāta­dhammo niyato sam­bodhi­parā­yaṇo.</em><br/>
+<em><a class="sc" href="https://suttacentral.net/sn55.2/pli/ms#2" id="2" title="SuttaCentral paragraph number."></a><a class="pts" href="https://suttacentral.net/sn55.2/pli/ms#pts5.344" id="pts5.344" title="Pāli Text Society vol/page number."></a><span>Katamehi catūhi? Idha, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ariyasāvako </span><span style="color: #3366ff;"><strong>buddhe aveccap-pasā-dena</strong> <strong>samannāgato hoti:</strong></span><span> ‘itipi so <span class="pali-term term-highlight" data-term="bhagavā">Bhagavā</span> arahaṃ sammāsambuddho vijjācaraṇa-sampanno sugato lokavidū anuttaro purisa-damma-sāra-thi satthā devamanussānaṃ <span class="pali-term term-highlight" data-term="buddho">Buddho</span> <span class="pali-term term-highlight" data-term="bhagavā">Bhagavā</span>’ti.</span><span style="color: #3366ff;"><strong> Dhamme</strong></span> … pe … <span style="color: #3366ff;"><strong>saṅghe</strong></span> … pe … <span style="color: #3366ff;"><strong>ariyakantehi sīlehi samannāgato hoti</strong> </span><span>akhaṇḍehi … pe … samā­dhi­saṃ­vatta­ni­kehi. Imehi kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, catūhi dhammehi samannāgato ariyasāvako sotāpanno hoti avini­pāta­dhammo niyato sam­bodhi­parā­yaṇo”ti.</span></em></p>
+<p style="text-align: justify;"><strong>Traduzido: </strong></p>
+<p style="text-align: justify;"><span style="color: #993366;"><strong>Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em></strong></span>, que nunca mais renascerá no <em>apāyā, </em><span style="color: #993366;"><strong>adquiriu quatro qualidades</strong>:</span></p>
+<p style="text-align: justify;">(1) Ele tem<span style="color: #3366ff;"><strong> <em>avecca pasāda</em><span> no <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong></span>, ou seja, ele compreende o seguinte versículo. “<em><span>‘itipi so <span class="pali-term term-highlight" data-term="bhagavā">Bhagavā</span> arahaṃ sammāsambuddho vijjācaraṇā sampanno sugato lokavidū anuttaro purisadammāsarathi satthā devamanussānaṃ <span class="pali-term term-highlight" data-term="buddho">Buddho</span> <span class="pali-term term-highlight" data-term="bhagavā">Bhagavā</span>’ti.”</span></em></p>
+<p style="text-align: justify;">(2) Ele tem <span style="color: #3366ff;"><strong><em>avecca pasāda</em><span> no <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></strong></span>, ou seja, ele compreende o <span style="font-size: 1.125rem; letter-spacing: 0px;">seguinte versículo. “S</span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span>vākkhāto bhagavatā dhammo sandiṭṭhiko <span class="pali-term term-highlight" data-term="akāliko">Akāliko</span> <span class="pali-term term-highlight" data-term="ehipassiko">Ehipassiko</span> opaneyyiko paccattaṃ veditabbo viññūhī’ti</span></em><span style="font-size: 1.125rem; letter-spacing: 0px;">.”</span></p>
+<p style="text-align: justify;">(3) Ele tem <span style="color: #3366ff;"><strong><em>avecca pasāda</em> no Saṅgha</strong></span>, ou seja, ele compreende o <span style="font-size: 1.125rem; letter-spacing: 0px;">seguinte versículo. “S</span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span>uppaṭipanno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, ujuppaṭipanno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, ñāyappaṭipanno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, sāmīcip­paṭi­panno <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho, yadidaṃ—cattāri purisayugāni aṭṭha purisapuggalā, esa <span class="pali-term term-highlight" data-term="bhagavato">bhagavato</span> sāvakasaṅgho āhuneyyo pāhuneyyo dakkhiṇeyyo añjalikaraṇīyo anuttaraṃ puññakkhettaṃ lokassā’ti.</span></em></p>
+<p style="text-align: justify;">(4) Ele tem o <span style="color: #3366ff;"><strong><em>Ariyakantha sila</em></strong></span> dos nobres. Ele vem com <span style="font-size: 1.125rem; letter-spacing: 0px;">sabedoria penetrante e é inquebrável. Ele leva ao </span><em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;">.</span></p>
+<p style="text-align: justify;">“<em><span style="color: #3366ff;"><strong>Ariyakantehi sīlehi samannāgato</strong></span> hoti akhaṇḍehi acchiddehi asabalehi akammāsehi bhujissehi viññupásatthehi aparāmaṭṭhehi samādhisamvattanikehi</em>.”</p>
+<h5>Recitar não é suficiente</h5>
+<p style="text-align: justify;"><span>10. Observamos que os três primeiros versos são os mesmos das qualidades supremas do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e do Saṅgha; veja “</span><a href="../../pages/BC.AA.004/index.html" rel="noopener noreferrer" target="_blank">Qualidades supremas do Buddha, do Dhamma e do Saṅgha</a>”.</p>
+<ul style="text-align: justify;">
+<li>Portanto, esses versos não são apenas para recitação. Eles devem ser recitados com COMPREENSÃO antes de qualquer sessão de meditação séria.</li>
+<li>A partir dos itens 4 e 5 acima, vemos que se obtém um “nascimento nobre” ao atingir o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em>. Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi </span></em>é um dos “<em>attha purisa puggalā”.</em></li>
+</ul>
+<p style="text-align: justify;">As quatro qualidades de um <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> são discutidas em<em> “</em></span><a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – As Quatro Qualidades de um Sotāpanna</a>”.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.JJ.006/index.html">Sotapanna Anugami And Sotapanna</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.JJ.008/index.html">Four Conditions For Attaining Sotapanna Magga Phala</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.JJ.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Sotapanna Anugami And Sotapanna</span>
+        
+        <span class="pathway-title title-pt">Sotāpanna Anugami e Sotāpanna</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.JJ.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Four Conditions For Attaining Sotapanna Magga Phala</span>
+        
+        <span class="pathway-title title-pt">Quatro condições para alcançar o Sotāpanna Magga Phala</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

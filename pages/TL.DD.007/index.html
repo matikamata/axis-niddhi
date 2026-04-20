@@ -1,0 +1,482 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Self And No Self Simple Analysis | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 28 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.DD.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Self And No Self Simple Analysis</h1>
+    
+    <h1 class="title-pt">Análise simples do eu e do não-eu</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.DD.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.DD.007"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0418"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.DD.007</td></tr><tr><td>Fin-dex</td><td>0418</td></tr><tr><td>Slug</td><td>self-and-no-self-simple-analysis</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Self And No Self Simple Analysis</td></tr></table></div></div><div style="text-align: justify"><strong>October 23, 2015; revised August 14, 2019; July 30, 2022</strong></div>
+<div style="text-align: justify"> </div>
+<div style="text-align: justify">I like to address two comments that I recently received. Questions such as these bring out significant issues that help clarify fundamental concepts.</div>
+<div style="text-align: justify">***</div>
+<div style="text-align: justify"><b>First comment </b><span style="font-weight: 400">(by Mr. Alexander Ausweger):</span></div>
+<div style="text-align: justify"> <span style="color: #0000ff">Premises:</span></div>
+<div style="text-align: justify">
+<p><span style="font-weight: 400">(1)   The number of rebirths of a single sentient being before now is infinite.</span></p>
+<p><span style="font-weight: 400">(2)   The probability of becoming an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> in one life-phase (from birth to death) is minuscule but not zero. (The possible probability-values range from 0 to 1 as usual in probability theory).</span></p>
+<p><span style="font-weight: 400"><span style="color: #0000ff">Conclusion:</span> In an infinite number of rebirths, the probability of reaching <em>Arahantship</em> would be one, which means that everyone would already have left <em>samsara</em>.</span></p>
+<p><span style="font-weight: 400"><span style="color: #0000ff">Conclusion: </span>Since we are still here, one of the premises must be wrong.</span></p>
+<p>***</p>
+</div>
+<div style="text-align: justify"><strong>Second comment </strong>(by Mr. Chamila Wickramasinghe):</div>
+<div style="text-align: justify">
+<p><span style="font-weight: 400"><span>"....in <span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, since "<span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span>" is remaining for a person below the <span class="pali-term term-highlight" data-term="arahant">Arahant</span> stage, is there not a single "<span class="pali-term term-highlight" data-term="citta">citta</span>-kshana" (or <span class="pali-term term-highlight" data-term="citta">citta</span>) that arises without <span class="pali-term term-highlight" data-term="avijjā">avijjā</span>? .."</span></span></p>
+<p>***</p>
+</div>
+<div style="text-align: justify"><span style="color: #0000ff"><strong>There is a perception of a well-defined "self" e</strong></span><span style="color: #0000ff;font-weight: bolder;font-size: 1.125rem;letter-spacing: 0px">mbedded in both the above comments. </span><strong style="color: #0000ff;font-size: 1.125rem;letter-spacing: 0px">That there is "a well-defined sentient being" that goes through a cycle of rebirths. Since we use names to label a person, that automatically gives the impression of a non-changing "self." Thus it is a bit hard to remove this "sense of a self" from our minds.</strong></div>
+<ul style="text-align: justify">
+<li>The other side of this issue is the common misconception that "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" means "no-self." That is correct in a strict sense. However, there is a sense of a "self" until one attains <em>Arahanthood</em>. The other meaning of "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" is "being helpless" and "subject to suffering" as long as one has the perception of a "self."</li>
+<li><span>That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said it is wrong to believe that there is a "self," It is also incorrect to think that "there is no self." That is a bit difficult to comprehend at first;  </span><strong><span>that is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "My <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> has never known to the world...".</span></strong> So we will discuss some examples to clarify why both these views are incorrect.</li>
+</ul>
+<div style="text-align: justify">Let us first discuss the <strong>First comment. </strong>The answer to the second comment will become apparent during that discussion.</div>
+<div style="text-align: justify"> </div>
+<div style="text-align: justify">1. The critical issue brought out by the first comment is the first premise: By assuming that "there is a single sentient being..." we are distorting the actual reality. That says there is a "soul" or "self." To assign an <strong>absolute identity</strong>, there must be something unchanging in it.</div>
+<ul style="text-align: justify">
+<li><span>Now, let us discuss HOW the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained that the above premise is incorrect.</span></li>
+<li><span>At the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, many believed in a "</span><em>ātma</em>" or a "soul" or a "self." When asked what is a "person" is unique to give that absolute identity, some said it was one's body (<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>). Others said either one's feelings (<em>vēdana</em>), one's perceptions (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>), one's actions (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>), one's thoughts (<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>), or some combinations of the above five. <strong>However, we are not talking about <em>pancakkhandha</em> here, i.e., not <em>rupakkhandha, </em><span>etc. I will write a series of <span class="pali-term term-highlight" data-term="posts">posts</span> later to clarify the difference.</span></strong></li>
+<li>There is nothing else that can be called "one's own."</li>
+</ul>
+<div style="text-align: justify"><span>2. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained in detail why none of the above remains the same in a "given person." Let us take a simple example to understand the basic idea. Let us consider person A when entering and leaving high school.</span></div>
+<ul style="text-align: justify">
+<li>Did any of the five categories (<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, vēdana, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>) remain the same at those two instances of time, several years apart? Person A would have grown and will not have the same body. At the time of his leaving high school, most of his primary thoughts (<em><span>vēdana, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, </span></em><em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>) are on getting a job or entering a university. Those would be very different from the time he entered high school.</li>
+</ul>
+<div style="text-align: justify">3. Now, we can reduce the time interval to the end of his first year at high school. All of the above arguments still hold. "He" would have changed in all five of the above characteristics that define "him."</div>
+<ul style="text-align: justify">
+<li>We can keep reducing the time interval for that person. When we think about this carefully, we can see that even his physical body would have changed a little by the time he got to school from home. Of course, all his "metal properties" keep changing moment-to-moment.</li>
+<li>To see a "significant change" over a long period, we need to look at time intervals several months apart. But when we keep narrowing down the time interval, we can see that all five characteristics of that person keep changing even moment-to-moment.</li>
+<li>When a person enters a room, walks to the other side, and leaves the room through the back door, is it the "same person" who left? Which of the above five characteristics would have remained the same?</li>
+<li>Once we start contemplating it, it is easy to see that all four of our mental characteristics keep changing moment-to-moment. It is a bit harder to "see" that our bodies change moment-to-moment, but the above argument logically extends to smaller and smaller time intervals. <span style="color: #0000ff">That is why it is called "seeing with wisdom."</span></li>
+<li>Furthermore, modern science indeed shows how fast our bodies change. Every few months, most cells in our bodies get completely REPLACED. We have a "new body" every year!</li>
+<li>Still, this is NOT the same as saying EVERY SINGLE <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> (smallest material unit) in a body is re-made moment-to-moment. See, "<a href="../../pages/PS.GG.019/index.html" rel="bookmark noopener noreferrer" target="_blank">Does any Object (Rupa) Last only 17 Thought Moments?</a>". However, at least SOME OF THE CELLS in a body of trillions of cells will change even moment-to-moment. Please re-read and understand the enormous difference. Also, see "<a href="../../pages/DS.BB.003/index.html" rel="noopener noreferrer" target="_blank">Human Life – A Mental Base (Gandhabba) and a Material Base (Cell)</a>."</li>
+<li><span style="color: #0000ff"><span>This way of "seeing" with wisdom (instead of "seeing" with the eyes) is what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> called "</span><em><span><span class="pali-term term-highlight" data-term="cakkhuṃ">cakkhuṃ</span> udapādi</span></em><span>.." or "seeing with <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> eye..".</span></span> Unless we do this, when we look at a person, we automatically get the perception (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>) of a "non-changing self," say John Smith.</li>
+</ul>
+<p style="text-align: justify">4. We assign a name to a person and talk about, say, a "John Smith." <span style="font-size: 1.125rem;letter-spacing: 0px"> But we can see there was nothing common about John Smith at various points in his life. </span><span style="font-size: 1.125rem;letter-spacing: 0px"> A newborn baby looks different when grown to be a young person; with more time, the older adult will appear very different.</span></p>
+<ul style="text-align: justify">
+<li>However, we also should not go to the other extreme and say that "there is no such person called John Smith." How can we say that, either? We can talk to John Smith and see him actively engaging in various activities, etc. That is the other extreme of "no-soul" or "no-self."</li>
+<li><span>That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejected both "self" and "no-self" as reality.</span></li>
+<li><span>We need to use the terminology of a person named John Smith to be able to communicate. Even the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> talked about "his previous lives." But we must remember that there is nothing to be called an "unchanging person."</span></li>
+<li>A "person" can acquire a "new identity" within moments. We have talked about several people who attained <em>Arahanthood</em> within a few minutes. Even these days, we have heard about people who have drastically changed their character within a few months. Of course, we can gain or lose significant weight in a month and change our appearance.</li>
+</ul>
+<div style="text-align: justify">5. The absolute truth (<em><span><span class="pali-term term-highlight" data-term="paramattha">paramattha</span></span></em>) is that all our mental phenomena CAN change moment-to-moment. Some of this mental activity arise due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and can lead to significant changes even in real-time; see "<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Idappaccayātā Paṭicca Samuppāda</a>."</div>
+<ul style="text-align: justify">
+<li> While using conventional terminology (<em>vohāra</em><span>), we need to <span class="pali-term term-highlight" data-term="keep in mind">keep in mind</span> that the absolute reality (</span><em><span><span class="pali-term term-highlight" data-term="paramattha">paramattha</span></span></em>) is that the "state of existence" changes moment-to-moment.</li>
+<li>Our physical bodies (and any material form or a <em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em>) change with time. Some change fast (a fruit fly lives a few days; thus, it goes from birth to ripe age to being dead in a few days), but others change slower (a tortoise lives about 200 years).</li>
+</ul>
+<div style="text-align: justify">6. Thus, "a person," in absolute reality, CAN change for better or worse even moment-to-moment, according to<em><span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.  </span></em></div>
+<ul style="text-align: justify">
+<li>A<em><span> <span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycle starts with "<em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>-mula <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>"; see, "<a href="http://localhost/beng_feb2026/paticca-samuppada/kusala-mula-paticca-samuppada/" rel="noopener noreferrer" target="_blank">Kusala-Mula Paṭicca Samuppāda</a>".</li>
+<li>An <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycle starts with  "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>"; see, "<a href="../../pages/PS.HH.004/index.html" rel="noopener noreferrer" target="_blank">Akusala-Mula Paṭicca Samuppāda</a>" and "<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Idappaccayātā Paṭicca Samuppāda</a>".</li>
+<li>But most of the time, we do things that are neither <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em> nor <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em>.</li>
+<li>Thus <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> is not there ALL THE TIME, even for a normal human being. <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> is triggered when a desirable/undesirable sense input tempts one.</li>
+</ul>
+<p style="text-align: justify">7. Now, we can address the <strong>second comment</strong>. Yes. The<span style="color: #0000ff"><em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em></span> is there with anyone who has not attained the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. But not all thoughts (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) arise due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span>, </span></em>and there are many levels of <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> when it appears.</p>
+<ul>
+<li style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> means our cravings and habits (that we have acquired through <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) that lie underneath the surface, waiting for a trigger to surface.</li>
+<li style="text-align: justify">Thus <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> itself is not something that is there all the time. An average human being acts without <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> most of the time. Only when one does something with greed, dislike, or without a full understanding of the situation does one takes action with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>.</li>
+<li style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> is <strong>triggered by a sensory input</strong> that is either pleasing or displeasing to our mind. Whether a given "trigger" will set off <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> will depend on one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) and <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>; see, "<a href="../../pages/TL.HH.003/index.html" rel="bookmark noopener noreferrer" target="_blank">Gati (Character), Anusaya (Temptations), and Āsava (Cravings)</a>," "<a href="../../pages/TL.GG.002/index.html" rel="bookmark noopener noreferrer" target="_blank">Saṃsāric Habits, Character (Gati), and Cravings (Āsava)</a>," and "<a href="../../pages/KD.GG.004/index.html" rel="bookmark noopener noreferrer" target="_blank">Gati to Bhava to Jāti – Ours to Control</a>."</li>
+<li style="text-align: justify">Thus it is not correct to say that an average human is an entity with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>. There is no such "fixed living being," i.e., one with "self." <strong>The only things associated with "a person" are his/her<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>; these keep changing too.</strong></li>
+</ul>
+<p style="text-align: justify">8. Even when <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> arises, it can occur at many levels ranging from <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em> (totally covered mind) to not knowing the Four Noble Truths. In that latter case, one may do moral acts (<em><span>punnābhi <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) but expect meritorious results. Here also, the <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula</span></em> PS cycle operates but will lead to good births within the 31 realms.</p>
+<ul>
+<li style="text-align: justify">The <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>-mula</span></em> PS cycle operates only when one acts meritoriously without any future expectations in return, i.e., without <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span>.</span></em> That happens when one becomes an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> or a Noble Person.</span></em> <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> knows that it is unfruitful to strive for anything in this world. An <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> below the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage may act with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> at lower levels (i.e., would not have <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>).</li>
+<li style="text-align: justify">But in most cases, we disregard what we see, hear, etc. Unless one becomes interested in something, <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> does not arise.</li>
+<li style="text-align: justify">Thus <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> is something that is not there all the time for any person. The <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> gets triggered by sensory input.</li>
+</ul>
+<div style="text-align: justify">9. Getting back to the <strong>first comment</strong><span>, instead of saying either "a person exists" or "a person does not exist," the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that a living being exists moment-to-moment. We cannot deny that a person exists, but there is nothing absolute about "a person." Instead, "a person" continually changes; we conventionally call a person "John Smith," etc.</span></div>
+<ul style="text-align: justify">
+<li>Another way to say the same thing is to say that "a living being" exists in a given state until the cause (and conditions) that give rise to that existence exist. Once root causes are changed, that existence will change to a new one. For example, if a human starts doing things that animals usually do, then that person will likely get an animal birth after death.</li>
+</ul>
+<div style="text-align: justify">10. We can get more insight into <strong>both comments</strong> by considering what happens when one attains <em>Arahanthood</em>.</div>
+<ul>
+<li style="text-align: justify"><span style="color: #0000ff">One attains the <em>Arahanthood</em> when one loses <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em></span>; see the links in #7. When that happens, <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> will not get triggered by ANY sense input. There is no "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" for any likes/dislikes. Thus at death, there in no "<em>sama uppada</em>" (birth of similar characteristics) corresponding to "<em><span><span class="pali-term term-highlight" data-term="paṭicca">Paṭicca</span></span></em>" (whatever one willingly attaches to).</li>
+<li style="text-align: justify">But the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy that fueled the present life is still there. So, just a rock thrown by someone will stay up until the energy given to it is exhausted, and the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will live until the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for his/her life is exhausted. Still, he/she will not be tempted by any sensory input since there is no <em><span><span class="pali-term term-highlight" data-term="asava">asava</span>/<span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> left.</li>
+<li style="text-align: justify">An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will experience all sense inputs just like any other human being but will not generate any likes/dislikes. And since he/she is likely to have many <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em><span> left, he/she could also experience pains and aches or even worse. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> himself suffered from some ailments, and Ven. Moggalana was beaten to death.</span></li>
+<li style="text-align: justify">It is the FUTURE SUFFERING that is removed at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em><span> stage. Since there is no <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, there is no future suffering. The mind is forever released from the material body that CAN AND WILL impart suffering to those who remain in the </span><em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span>, </span></em>the cycle of rebirths.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.DD.007"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0418"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.DD.007
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<div style="text-align: justify"><strong>23 de outubro de 2015; revisado em 14 de agosto de 2019; 30 de julho de 2022</strong></div>
+<div style="text-align: justify"> </div>
+<div style="text-align: justify">Gostaria de abordar dois comentários que recebi recentemente. Questões como essas trazem à tona questões importantes que ajudam a esclarecer conceitos fundamentais.</div>
+<div style="text-align: justify">***</div>
+<div style="text-align: justify"><b>Primeiro comentário </b><span style="font-weight: 400">(do Sr. Alexander Ausweger):</span></div>
+<div style="text-align: justify"> <span style="color: #0000ff">Premissas:</span></div>
+<div style="text-align: justify">
+<p><span style="font-weight: 400">(1) O número de renascimentos de um único ser senciente até agora é infinito.</span></p>
+<p><span style="font-weight: 400">(2) A probabilidade de se tornar um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> em uma fase da vida (do nascimento à morte) é minúscula, mas não zero. (Os valores de probabilidade possíveis variam de 0 a 1, como de costume na teoria da probabilidade).</span></p>
+<p><span style="font-weight: 400"><span style="color: #0000ff">Conclusão:</span> Em um número infinito de renascimentos, a probabilidade de alcançar <em><span>o <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> seria um, o que significa que todos já teriam deixado <em>o samsara</em>.</span></p>
+<p><span style="font-weight: 400"><span style="color: #0000ff">Conclusão: </span>Como ainda estamos aqui, uma das premissas deve estar errada.</span></p>
+<p>***</p>
+</div>
+<div style="text-align: justify"><strong>Segundo comentário </strong>(por Chamila Wickramasinghe):</div>
+<div style="text-align: justify">
+<p><span style="font-weight: 400"><span>“... em <span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, uma vez que “<span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="anusaya">Anusaya</span>” permanece para uma pessoa abaixo do estágio de <span class="pali-term term-highlight" data-term="arahant">Arahant</span>, não há um único “<span class="pali-term term-highlight" data-term="citta">citta</span>-kshana” (ou <span class="pali-term term-highlight" data-term="citta">citta</span>) que surja sem <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span>? ...”</span></span></p>
+<p>***</p>
+</div>
+<div style="text-align: justify"><span style="color: #0000ff"><strong>Há uma percepção de um “eu” bem definido e</strong></span><span style="color: #0000ff;font-weight: bolder;font-size: 1.125rem;letter-spacing: 0px">mbutida em ambos os comentários acima. </span><strong style="color: #0000ff;font-size: 1.125rem;letter-spacing: 0px">Que existe “um ser senciente bem definido” que passa por um ciclo de Renascimentos. Como usamos nomes para rotular uma pessoa, isso automaticamente dá a impressão de um “eu” imutável. Portanto, é um pouco difícil remover esse “sentido de eu” de nossas mentes.</strong></div>
+<ul style="text-align: justify">
+<li>O outro lado dessa questão é o equívoco comum de que “<em>Anattā</em>” significa “não-eu”. Isso é correto em um sentido estrito. No entanto, existe uma sensação de “eu” até que se alcance <em><span>o estado de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. O outro significado de “<em>Anattā</em>” é “estar desamparado” e “sujeito ao sofrimento” enquanto se tiver a percepção de um “eu”.</li>
+<li><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que é errado acreditar que existe um “eu”. Também é incorreto pensar que “não existe um eu”. Isso é um pouco difícil de compreender à primeira vista; </span><strong><span>é por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “Meu <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> nunca foi conhecido pelo mundo...”.</span></strong> Portanto, discutiremos alguns exemplos para esclarecer por que essas duas visões são incorretas.</li>
+</ul>
+<div style="text-align: justify">Vamos primeiro discutir o <strong>primeiro comentário. </strong>A resposta ao segundo comentário ficará clara durante essa discussão.</div>
+<div style="text-align: justify"> </div>
+<div style="text-align: justify">1. A questão crítica levantada pelo primeiro comentário é a primeira premissa: ao assumir que “existe um único ser senciente...”, estamos distorcendo a realidade. Isso significa que existe uma “alma” ou um “eu”. Para atribuir uma <strong>identidade absoluta</strong>, deve haver algo imutável nela.</div>
+<ul style="text-align: justify">
+<li><span>Agora, vamos discutir COMO o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explicou que a premissa acima está incorreta.</span></li>
+<li><span>Na época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, muitos acreditavam em um “</span><em>ātma</em>” ou uma “alma” ou um “eu”. Quando questionados sobre o que é uma “pessoa” que é única para dar essa identidade absoluta, alguns disseram que era o corpo (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>). Outros diziam que eram os sentimentos (<em>vēdana</em>), as percepções (<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>), as ações (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>), os pensamentos (<em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>) ou alguma combinação dos cinco itens acima. <strong>No entanto, não estamos falando aqui sobre <em>pancakkhandha</em>, ou seja, não sobre <em>rupakkhandha, </em>etc. Escreverei uma série de ensaios mais tarde para esclarecer a diferença.</strong></li>
+<li>Não há nada mais que possa ser chamado de “próprio”.</li>
+</ul>
+<div style="text-align: justify"><span>2. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explicou em detalhes por que nada do que foi mencionado acima permanece o mesmo em uma “determinada pessoa”. Vamos usar um exemplo simples para entender a ideia básica. Vamos considerar a pessoa A ao entrar e sair do ensino médio.</span></div>
+<ul style="text-align: justify">
+<li>Alguma das cinco categorias (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>) permaneceu a mesma nesses dois momentos, separados por vários anos? A pessoa A teria crescido e não teria o mesmo corpo. No momento em que saiu do ensino médio, a maioria de seus pensamentos primários (<em><span>vēdana, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>) estavam voltados para conseguir um emprego ou entrar na universidade. Esses pensamentos seriam muito diferentes daqueles que ela tinha quando entrou no ensino médio.</li>
+</ul>
+<div style="text-align: justify">3. Agora, podemos reduzir o intervalo de tempo até o final de seu primeiro ano do ensino médio. Todos os argumentos acima ainda se mantêm. “Ele” teria mudado em todas as cinco características acima que o definem.</div>
+<ul style="text-align: justify">
+<li>Podemos continuar reduzindo o intervalo de tempo para essa pessoa. Quando pensamos cuidadosamente sobre isso, podemos ver que até mesmo seu corpo físico teria mudado um pouco quando ele chegou da casa para a escola. É claro que todas as suas “propriedades mentais” continuam mudando a cada momento.</li>
+<li>Para ver uma “mudança significativa” ao longo de um longo período, precisamos observar intervalos de tempo de vários meses. Mas quando continuamos reduzindo o intervalo de tempo, podemos ver que todas as cinco características dessa pessoa continuam mudando a cada momento.</li>
+<li>Quando uma pessoa entra em uma sala, caminha até o outro lado e sai pela porta dos fundos, é a “mesma pessoa” que saiu? Qual das cinco características acima teria permanecido a mesma?</li>
+<li>Quando começamos a refletir sobre isso, é fácil perceber que todas as nossas quatro características mentais continuam mudando a cada momento. É um pouco mais difícil “ver” que nossos corpos mudam a cada momento, mas o argumento acima se estende logicamente a intervalos de tempo cada vez menores. <span style="color: #0000ff">É por isso que se chama “ver com sabedoria”.</span></li>
+<li>Além disso, a ciência moderna realmente mostra o quão rápido nossos corpos mudam. A cada poucos meses, a maioria das células do nosso corpo é completamente SUBSTITUÍDA. Temos um “novo corpo” a cada ano!</li>
+<li>Ainda assim, isso NÃO é o mesmo que dizer que CADA ÚNICO <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> (menor unidade material) em um corpo é refeito a cada momento. Veja “<a href="../../pages/PS.GG.019/index.html">Qualquer objeto (Rūpa) dura apenas 17 momentos de pensamento?</a>”. No entanto, pelo menos ALGUMAS DAS CÉLULAS em um corpo de trilhões de células mudarão a cada momento. Releia e compreenda a enorme diferença. Veja também “<a href="../../pages/DS.BB.003/index.html">Vida humana – uma base mental (Gandhabba) e uma base material (célula)</a>”.</li>
+<li><span style="color: #0000ff"><span>Essa maneira de “ver” com sabedoria (em vez de “ver” com os olhos) é o que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> chamou de “</span><em><span><span class="pali-term term-highlight" data-term="cakkhuṃ">cakkhuṃ</span> udapādi</span></em><span>...” ou “ver com os olhos do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>...”.</span></span> A menos que façamos isso, quando olhamos para uma pessoa, automaticamente temos a percepção (<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>) de um “eu imutável”, digamos, João Silva.</li>
+</ul>
+<p style="text-align: justify">4. Atribuímos um nome a uma pessoa e falamos, digamos, de um “João Silva”.<span style="font-size: 1.125rem;letter-spacing: 0px">Mas podemos ver que não havia nada de comum em João Silva em vários momentos de sua vida.Um bebê recém-nascido parece diferente quando cresce e se torna um jovem; com mais tempo, o adulto mais velho parecerá muito diferente.</span></p>
+<ul style="text-align: justify">
+<li>No entanto, também não devemos ir ao outro extremo e dizer que “não existe tal pessoa chamada João Silva”. Como podemos dizer isso? Podemos conversar com João Silva e vê-lo participando ativamente de várias atividades, etc. Esse é o outro extremo do “sem alma” ou “sem eu”.</li>
+<li><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejeitou tanto o “eu” quanto o “não-eu” como realidade.</span></li>
+<li><span>Precisamos usar a terminologia de uma pessoa chamada João Silva para podermos nos comunicar. Até mesmo o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> falou sobre “suas vidas anteriores”. Mas devemos lembrar que não existe nada que possa ser chamado de “pessoa imutável”.</span></li>
+<li>Uma “pessoa” pode adquirir uma “nova identidade” em questão de segundos. Falamos sobre várias pessoas que alcançaram <em><span>o estado de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> em poucos minutos. Mesmo nos dias de hoje, ouvimos falar de pessoas que mudaram drasticamente seu caráter em poucos meses. É claro que podemos ganhar ou perder peso significativo em um mês e mudar nossa aparência.</li>
+</ul>
+<div style="text-align: justify">5. A verdade absoluta (<em><span><span class="pali-term term-highlight" data-term="paramattha">Paramattha</span></span></em>) é que todos os nossos fenômenos mentais PODEM mudar a cada momento. Parte dessa atividade mental surge devido à <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e pode levar a mudanças significativas, mesmo em tempo real; veja “<a href="../../pages/PS.HH.002/index.html">Idappaccayātā Paṭicca Samuppāda</a>”.</div>
+<ul style="text-align: justify">
+<li> Ao usar a terminologia convencional (<em>vohāra</em>), precisamos ter em mente que a realidade absoluta (<em><span><span class="pali-term term-highlight" data-term="paramattha">Paramattha</span></span></em>) é que o “estado de existência” muda a cada momento.</li>
+<li>Nossos corpos físicos (e qualquer forma material ou <em><span><span class="pali-term term-highlight" data-term="saṅkhata">Saṅkhata</span></span></em>) mudam com o tempo. Algumas mudanças são rápidas (uma mosca-da-fruta vive alguns dias; assim, ela passa do nascimento à maturidade e à morte em poucos dias), mas outras são mais lentas (uma tartaruga vive cerca de 200 anos).</li>
+</ul>
+<div style="text-align: justify">6. Assim, “uma pessoa”, na realidade absoluta, PODE mudar para melhor ou para pior a cada momento, de acordo com<em><span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.  </span></em></div>
+<ul style="text-align: justify">
+<li>Um ciclo <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> começa com “<em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>-mula <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>”; veja “<a href="http://localhost/brasileirinho/paticca-samuppada/kusala-mula-paticca-samuppada/">Kusala-Mula Paṭicca Samuppāda</a>”.</li>
+<li>Um ciclo <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>-mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> começa com “<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>”; veja “<a href="../../pages/PS.HH.004/index.html">Akusala-Mula Paṭicca Samuppāda</a>” e “<a href="../../pages/PS.HH.002/index.html">Idappaccayātā Paṭicca Samuppāda</a>”.</li>
+<li>Mas, na maioria das vezes, fazemos coisas que não são nem <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em> nem <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span></span></em>.</li>
+<li>Portanto, <em><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> não está presente o tempo todo, mesmo para um ser humano normal. <em><span>A <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> é desencadeada quando uma informação sensorial desejável/indesejável nos tenta.</li>
+</ul>
+<p style="text-align: justify">7. Agora, podemos abordar o <strong>segundo comentário</strong>. Sim. A<span style="color: #0000ff"><em><span> <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em></span> está presente em qualquer pessoa que não tenha atingido o estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Mas nem todos os pensamentos (<em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>) surgem devido à <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span>, </span></em>e há muitos níveis de <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> quando ela aparece.</p>
+<ul>
+<li style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> significa nossos desejos e hábitos (que adquirimos através <em><span>da <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>) que estão sob a superfície, esperando por um gatilho para surgir.</li>
+<li style="text-align: justify">Portanto, <em><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> em si não é algo que está presente o tempo todo. Um ser humano comum age sem <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> na maioria das vezes. Somente quando alguém faz algo com ganância, aversão ou sem uma compreensão completa da situação é que age com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>.</li>
+<li style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> é <strong>desencadeada por um estímulo sensorial</strong> que é agradável ou desagradável para nossa mente. Se um determinado “gatilho” irá desencadear <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> dependerá da <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>) e do <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> de cada um; veja <a href="../../pages/TL.HH.003/index.html">“Gati (Característica), Anusaya (Tentações) e Āsava (Desejos)</a>”, “<a href="../../pages/TL.GG.002/index.html">Hábitos Saṃsáricos, Caráter (Gati) e Desejos (Āsava)</a>” e “<a href="../../pages/KD.GG.004/index.html">Gati para Bhava para Jāti – Nosso Controle</a>”.</li>
+<li style="text-align: justify">Portanto, não é correto dizer que um ser humano comum é uma entidade com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>. Não existe tal “ser vivo fixo”, ou seja, alguém com um “eu”. <strong>As únicas coisas associadas a “uma pessoa” são sua<em><span> <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> e<em><span> <span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>; estes também estão em constante mudança.</strong></li>
+</ul>
+<p style="text-align: justify">8. Mesmo quando <em><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> surge, ela pode ocorrer em muitos níveis, variando de <em><span><span class="pali-term term-highlight" data-term="moha">Moha</span></span></em> (mente totalmente obscurecida) a não conhecer as Quatro Nobres Verdades. Neste último caso, a pessoa pode realizar atos morais (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>), mas esperar resultados meritórios. Aqui também, o ciclo PS <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-mula</span></em> opera, mas levará a bons nascimentos dentro dos 31 reinos.</p>
+<ul>
+<li style="text-align: justify">O ciclo PS <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span>-mula</span></em> opera apenas quando se age meritório sem quaisquer expectativas futuras em troca, ou seja, sem <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span>.</span></em> Isso acontece quando se torna um <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> ou uma Pessoa Nobre.</span></em> <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> sabe que é infrutífero lutar por qualquer coisa neste mundo. Um <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> abaixo do estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> pode agir com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> em níveis mais baixos (ou seja, não teria <em><span><span class="pali-term term-highlight" data-term="moha">Moha</span></span></em>).</li>
+<li style="text-align: justify">Mas, na maioria dos casos, desconsideramos o que vemos, ouvimos, etc. A menos que alguém se interesse por algo, <em><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> não surge.</li>
+<li style="text-align: justify">Assim<em><span>, a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> é algo que não está presente o tempo todo para qualquer pessoa. O <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span> da <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> é desencadeado por estímulos sensoriais.</li>
+</ul>
+<div style="text-align: justify">9. Voltando ao <strong>primeiro comentário</strong><span>, em vez de dizer “uma pessoa existe” ou “uma pessoa não existe”, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que um ser vivo existe momento a momento. Não podemos negar que uma pessoa existe, mas não há nada de absoluto sobre “uma pessoa”. Em vez disso, “uma pessoa” muda continuamente; convencionalmente chamamos uma pessoa de “João da Silva”, etc.</span></div>
+<ul style="text-align: justify">
+<li>Outra maneira de dizer a mesma coisa é dizer que “um ser vivo” existe em um determinado estado até que a causa (e as condições) que dão origem a essa existência existam. Uma vez que as causas fundamentais sejam alteradas, essa existência mudará para uma nova. Por exemplo, se um humano começa a fazer coisas que os animais costumam fazer, então essa pessoa provavelmente terá um renascimento animal após a morte.</li>
+</ul>
+<div style="text-align: justify">10. Podemos obter mais insights sobre <strong>ambos os comentários</strong> considerando o que acontece quando alguém alcança <em>o Arahanthood</em>.</div>
+<ul>
+<li style="text-align: justify"><span style="color: #0000ff">Alcança-se o <em><span>estado de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> quando se perde <em><span>o <span class="pali-term term-highlight" data-term="anusaya">Anusaya</span> da <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em></span>; veja os links no nº 7. Quando isso acontece, <em><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> não será desencadeada por NENHUMA entrada sensorial. Não há “<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>” para quaisquer gostos/aversões. Assim, na morte, não há “<em>sama uppada</em>” (nascimento de características semelhantes) correspondente a “<em><span><span class="pali-term term-highlight" data-term="paṭicca">Paṭicca</span></span></em>” (aquilo a que alguém se apega voluntariamente).</li>
+<li style="text-align: justify">Mas a energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que alimentou a vida presente ainda está lá. Assim, uma pedra atirada por alguém permanecerá no ar até que a energia dada a ela se esgote, e o <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> viverá até que a energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> de sua vida se esgote. Ainda assim, ele/ela não será tentado(a) por nenhum estímulo sensorial, pois não há mais <em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span>/<span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>.</li>
+<li style="text-align: justify">Um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> experimentará todos os estímulos sensoriais como qualquer outro ser humano, mas não gerará gostos/aversões. E como ele/ela provavelmente ainda tem muitos <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em><span> restantes, ele/ela também pode experimentar dores e sofrimentos ou até mesmo coisas piores. O próprio <span class="pali-term term-highlight" data-term="buddha">Buddha</span> sofreu de algumas doenças, e o Ven. Moggalana foi espancado até a morte.</span></li>
+<li style="text-align: justify">É o SOFRIMENTO FUTURO que é removido no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Como não há renascimento, não há sofrimento futuro. A mente é liberada para sempre do corpo material que PODE E IRÁ transmitir sofrimento àqueles que permanecem no <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span>, </span></em>o ciclo de renascimentos.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.DD.006/index.html">Buddhism Without Rebirth And Nibbana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.EE.001/index.html">Dhamma Concepts</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.DD.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Buddhism Without Rebirth And Nibbana</span>
+        
+        <span class="pathway-title title-pt">Buddhismo sem Renascimento e Nibbāna</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.EE.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Dhamma Concepts</span>
+        
+        <span class="pathway-title title-pt">Conceitos de Dhamma</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

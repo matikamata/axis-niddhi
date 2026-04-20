@@ -1,0 +1,394 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Kamma Debt And Meditation | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 51 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.GG.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Kamma Debt And Meditation</h1>
+    
+    <h1 class="title-pt">Dívida Kamma e Meditação</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.GG.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.GG.007"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0446"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.GG.007</td></tr><tr><td>Fin-dex</td><td>0446</td></tr><tr><td>Slug</td><td>kamma-debt-and-meditation</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Kamma Debt And Meditation</td></tr></table></div></div><p style="text-align: justify"><strong>Revised April 7, 2016; September 4, 2019</strong></p>
+<p style="text-align: justify">1. "This world" of 31 realms is very complex; see, "<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>." Nothing happens due to a single cause, and nothing happens just by itself: Multiple causes lead to multiple effects.</p>
+<p style="text-align: justify">2. In a perfect world, everyone will share everything equally, and everyone will be happy. But people are born with different levels of not only wealth but also different levels of health, physical appearance, capabilities, etc. These are the results of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (good and bad) accrued over very long periods in the past.</p>
+<p style="text-align: justify">3. No one has everything "just right." So, we try to get what we don't have or like to have. Every time we crave something and try to acquire those things by immoral means, knowingly or unknowingly we get into debt.</p>
+<ul>
+<li style="text-align: justify">When those <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em> <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> (immoral deeds) involves another living being, we get into some "<em>saṃsāric</em> relationship" with that being; this is how we have friends, family, AND enemies. These things do not happen by chance.</li>
+</ul>
+<p style="text-align: justify">4. NOTHING in this world happens by chance. Everything happens due to a cause, a reason. B<strong>ut since results (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>) can materialize later, even in future lives, we cannot see this "cause and effect" in most cases.</strong> When we do something harmful to another being we become indebted to that being; that debt will have to be paid with interest that is many many times over. Thinks about the following:</p>
+<ul>
+<li style="text-align: justify">When we get a loan, we have to pay back the loan with interest. If we promise to pay back and do not fulfill that commitment, we will have to pay it with interest sometime in the future. Imagine how much interest we would have to pay on a $1000 loan at 6% interest over, say just 200 years, which is insignificant in the <em>saṃsāric</em> time scale. You can use the "72 rule". That means if you do not make any monthly payments, the amount you have to pay will double every (72/interest rate) year. In this case, it will double every 12 years. It will double again in another 12 years, i.e., after 24 years you will have to pay $4000. After only 40 years, the amount will be $10,000. Only after 200 years it will a billion dollars!</li>
+<li style="text-align: justify">Can you imagine how much money we may have to pay to settle even small loans that we took a long, long time ago?</li>
+<li style="text-align: justify">We have to pay back not only monetary transactions. Imagine how much would it cost to bring up a child, as a mother does? It is unimaginable over long times.</li>
+<li style="text-align: justify">When we have such debts, nature has set up many ways to pay off such debts. Many times the same group of people is born to the same families, paying back
+"old debts." Or one may become a servant for another.</li>
+<li style="text-align: justify"><span style="text-align: justify"><span>Many relationships that we have in this life arise from "long-term debt" from many lives in the past. For example, people are born in the same family, same community, or same geographical locations, for many, many lives. That is for just paying back debts and for claiming old debts. In <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, relationships are called "</span><em>sanbandha</em>" (="<em>san</em>" + "<em>bandha</em>" where "san" is defilement (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>), and "<em>bandha</em>" is a connection; thus connection due to<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>). Sometimes old creditors come back even in the form of annoying mosquitoes, ants, bugs, etc.</span></li>
+<li style="text-align: justify">Now if one takes another's life, one may have to sacrifice one's own life many times over. That is scary stuff, but we need to know that our actions will have consequences.</li>
+</ul>
+<p style="text-align: justify">5. Instead of paying off such "old debts" that way, there is another way to pay back old debts. When one does a good deed, one could transfer the merits of that good deed to old creditors called "<em>pattidana</em>" (this is commonly called "<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> anumodana</span></em>"; see, "<a href="../../pages/BD.AA.008/index.html" rel="noopener noreferrer" target="_blank" title="Transfer of Merits (Pattidāna) – How Does it Happen?">Transfer of Merits (Pattidāna)- How Does It Happen?</a>").</p>
+<p style="text-align: justify">6. In this beginning-less <em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span></span></em>, we have been indebted to unbelievably many beings. Thus we transfer the merits to all living beings. We think in our mind, "May the merits of this good deed be shared by all beings."</p>
+<ul>
+<li style="text-align: justify"><span>If one does this genuinely, it will be quite beneficial in the long term. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that this is the most efficient way to pay back old debts. However, one needs to do this with sincerity, truly understanding the suffering caused by one's actions to others.</span></li>
+</ul>
+<p style="text-align: justify"><span>7. One could accrue good merits not only by good deeds but also with insight meditation. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that if one cultivates </span><em><span><span class="pali-term term-highlight" data-term="vipassanā">vipassanā</span></span></em> meditation on <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, that leads many more merits compared to even donations or giving. After the meditation session, one transfers the merits to all beings.</p>
+<ul>
+<li style="text-align: justify">The beautiful thing is that one does not "lose any merits" either. Giving merits itself is meritorious. Also, one should forgive old debts from other beings. The mind is very powerful. If done with the right intention, also these thoughts will have beneficial consequences for oneself and other living beings.</li>
+</ul>
+<p style="text-align: justify">8. Therefore, we must try to alleviate the <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> from past <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> by using the methods mentioned above. But <strong>the main purpose of such methods is actually to purify one's mind.</strong></p>
+<ul>
+<li style="text-align: justify">We can pay off past debts gradually this way. However, bigger chunks are paid off by attaining <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi</span></em>, and <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>.</span></em><span> (Actually, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has said that if one does the </span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="metta">metta</span></span></em> mediation frequently, one could pay off the debts associated with the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em> (first 11 realms). See, "<a href="../../pages/BM.AA.005/index.html" rel="noopener noreferrer" target="_blank">5. Ariya Metta Bhavana (Loving Kindness Meditation)</a>."</li>
+<li style="text-align: justify">When one attains the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, all those <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em><span> that could have given <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the lowest four realms (</span><em>apāyās</em>) become nullified. When one reaches the <em>Arahanthood</em>, only those <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em><span> that get a chance to come to fruition during the remaining time in that life will be paid off. Since there is no more <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, all remaining </span><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> do not get a chance to come to fruition.</li>
+</ul>
+<p style="text-align: justify">9. The first step in purifying one's mind is to avoid <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>; see, "<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Ten Immoral Action (Dasa Akusala)</a><span>."  One does not need to try to do all at once (especially for those who are new to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>).</span></p>
+<ul>
+<li style="text-align: justify"><span>It is a life journey, and one can start slowly. First, try to avoid bad actions, and then do things that can be done without much stress. See the <span class="pali-term term-highlight" data-term="posts">posts</span> in the "</span><a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" target="_blank">Bhävanä (Meditation)</a>" section and in particular, "<a href="../../pages/TL.BB.001/index.html" rel="noopener noreferrer" target="_blank">2. The Basics in Meditation</a>".</li>
+<li style="text-align: justify">There is no one watching, and only you know what your intentions are: whether they are moral or immoral.</li>
+<li style="text-align: justify">You will feel the benefits in terms of a less-stressed mind over time. It takes time, especially in the beginning. Then it will accelerate when one starts seeing the benefits. When one starts understanding that <em>miccha diṭṭhi</em> (wrong views) play a big role, one's tendency to do some immoral acts will automatically reduce. See, "<a href="../../pages/TL.BB.005/index.html" rel="noopener noreferrer" target="_blank">Wrong Views (Miccā Diṭṭhi) – A Simpler Analysis</a>."</li>
+</ul>
+<p style="text-align: justify"><span>10. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said one could become indebted in four ways:</span></p>
+<ul>
+<li>Engaging in <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>.</li>
+<li>Getting someone else to do such acts.</li>
+<li>Helping another in carrying out such acts.</li>
+<li>Praising someone who is doing such acts.</li>
+</ul>
+<p style="text-align: justify">Thus one can become indebted in 40 ways. By avoiding all that will make one joyful  (<em>adhimokko</em> or sense of well being). That will give impetus to accelerate one's efforts. Also, see, "<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits and Goals">Habits and Goals</a>," and "<a href="../../pages/TL.EE.011/index.html" rel="noopener noreferrer" target="_blank" title="The Four Bases of Mental Power (Satara Iddhipada)">The Four Bases of Mental Power (Satara Iddhipada)</a>."</p>
+<p style="text-align: justify">Another more in-depth analysis at, "<a href="../../pages/TL.HH.011/index.html" rel="noopener noreferrer" target="_blank" title="Difference Between Giving Up Valuables and Losing Interest in Worthless">Difference Between Giving up Valuables and Losing Interest in Worthless</a>  ", .............</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.GG.007"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0446"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.GG.007
+Language:     pt-BR
+Generated-At: 2026-03-10T23:18:39Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify"><strong>Revisado em 7 de abril de 2016; 4 de setembro de 2019</strong></p>
+<p style="text-align: justify">1. “Este mundo” de 31 reinos é muito complexo; veja “<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">A Grande Teoria Unificada do Dhamma</a>”. Nada acontece devido a uma única causa, e nada acontece por si só: múltiplas causas levam a múltiplos efeitos.</p>
+<p style="text-align: justify">2. Em um mundo perfeito, todos compartilhariam tudo igualmente e todos seriam felizes. Mas as pessoas nascem com diferentes níveis não apenas de riqueza, mas também de saúde, aparência física, capacidades, etc. Esses são os resultados do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (bom e ruim) acumulado ao longo de períodos muito longos no passado.</p>
+<p style="text-align: justify">3. Ninguém tem tudo “perfeito”. Portanto, tentamos obter o que não temos ou gostaríamos de ter. Sempre que desejamos algo e tentamos adquirir essas coisas por meios imorais, consciente ou inconscientemente, nos endividamos.</p>
+<ul>
+<li style="text-align: justify">Quando esses <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em> <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> (atos imorais) envolvem outro ser vivo, entramos em algum tipo de “relação <em>saṃs</em>ārica” com esse ser; é assim que temos amigos, família E inimigos. Essas coisas não acontecem por acaso.</li>
+</ul>
+<p style="text-align: justify">4. NADA neste mundo acontece por acaso. Tudo acontece devido a uma causa, uma razão. <strong>Mas como os resultados (<em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>) podem se materializar mais tarde, mesmo em vidas futuras, não podemos ver essa “causa e efeito” na maioria dos casos.</strong> Quando fazemos algo prejudicial a outro ser<strong>,</strong> ficamos em dívida com esse ser; essa dívida terá que ser paga com juros muitas e muitas vezes superiores. Pense no seguinte:</p>
+<ul>
+<li style="text-align: justify">Quando obtemos um empréstimo, temos que pagá-lo com juros. Se prometemos pagar e não cumprimos esse compromisso, teremos que pagá-lo com juros em algum momento no futuro. Imagine quanto teríamos que pagar de juros sobre um empréstimo de R$ 1.000 a 6% de juros ao longo de, digamos, apenas 200 anos, o que é insignificante na escala de tempo <em>saṃsārica</em>. Você pode usar a “regra 72”. Isso significa que, se você não fizer nenhum pagamento mensal, o valor que terá que pagar dobrará a cada (72/taxa de juros) ano. Nesse caso, ele dobrará a cada 12 anos. Ele dobrará novamente em mais 12 anos, ou seja, após 24 anos você terá que pagar US$ 4.000. Após apenas 40 anos, o valor será de US$ 10.000. Somente após 200 anos ele chegará a um bilhão de dólares!</li>
+<li style="text-align: justify">Você consegue imaginar quanto dinheiro teremos que pagar para saldar até mesmo pequenos empréstimos que fizemos há muito, muito tempo?</li>
+<li style="text-align: justify">Não temos que pagar apenas transações monetárias. Imagine quanto custaria criar um filho, como uma mãe faz? É inimaginável ao longo do tempo.</li>
+<li style="text-align: justify">Quando temos essas dívidas, a natureza estabeleceu muitas maneiras de pagá-las. Muitas vezes, o mesmo grupo de pessoas nasce nas mesmas famílias, pagando
+“dívidas antigas”. Ou alguém pode se tornar servo de outro.</li>
+<li style="text-align: justify"><span style="text-align: justify">Muitos relacionamentos que temos nesta vida surgem de “dívidas de longo prazo” de muitas vidas no passado. Por exemplo, as pessoas nascem na mesma família, na mesma comunidade ou nos mesmos locais geográficos por muitas e muitas vidas. Isso é apenas para pagar dívidas e reivindicar dívidas antigas. Em cingalês, os relacionamentos são chamados de “<em>sanbandha</em>” (=”<em>san</em>” + “<em>bandha</em>”, onde “san” é impureza (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) e “<em>bandha</em>” é conexão; portanto, conexão devido ao<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>). Às vezes, antigos credores voltam até mesmo na forma de mosquitos, formigas, insetos irritantes, etc.</span></li>
+<li style="text-align: justify">Agora, se alguém tira a vida de outra pessoa, pode ter que sacrificar sua própria vida muitas vezes. Isso é assustador, mas precisamos saber que nossas ações terão consequências.</li>
+</ul>
+<p style="text-align: justify">5. Em vez de pagar essas “dívidas antigas” dessa forma, há outra maneira de saldar dívidas antigas. Quando alguém faz uma boa ação, pode transferir os méritos dessa boa ação para antigos credores chamados “<em>pattidana</em>” (isso é comumente chamado de “<em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> anumodana</span></em>”; veja “<a href="../../pages/BD.AA.008/index.html" rel="noopener noreferrer" target="_blank" title="Transfer of Merits (Pattidāna) – How Does it Happen?">Transferência de Méritos (Pattidāna) – Como Isso Acontece?</a>”).</p>
+<p style="text-align: justify">6. Neste <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em> sem início, ficamos em dívida com um número inacreditável de seres. Assim, transferimos os méritos para todos os seres vivos. Pensamos em nossa mente: “Que os méritos desta boa ação sejam compartilhados por todos os seres”.</p>
+<ul>
+<li style="text-align: justify"><span>Se alguém fizer isso genuinamente, será bastante benéfico a longo prazo. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que essa é a maneira mais eficiente de pagar dívidas antigas. No entanto, é preciso fazer isso com sinceridade, compreendendo verdadeiramente o sofrimento causado pelas próprias ações aos outros.</span></li>
+</ul>
+<p style="text-align: justify"><span>7. Pode-se acumular bons méritos não apenas com boas ações, mas também com meditação de insight. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou que, se cultivarmos a meditação </span><em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> sobre <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>, isso nos trará muito mais méritos do que mesmo doações ou oferendas. Após a sessão de meditação, transferimos os méritos para todos os seres.</p>
+<ul>
+<li style="text-align: justify">O bonito é que a pessoa também não “perde nenhum mérito”. Dar méritos em si é meritório. Além disso, deve-se perdoar dívidas antigas de outros seres. A mente é muito poderosa. Se feito com a intenção correta, esses pensamentos também terão consequências benéficas para si mesmo e para outros seres vivos.</li>
+</ul>
+<p style="text-align: justify">8. Portanto, devemos tentar aliviar o <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> passado usando os métodos mencionados acima. Mas <strong>o objetivo principal desses métodos é, na verdade, purificar a mente.</strong></p>
+<ul>
+<li style="text-align: justify">Podemos pagar dívidas passadas gradualmente dessa maneira. No entanto, parcelas maiores são pagas ao atingir os estágios <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi</span></em> e <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>.</span></em><span> (Na verdade, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que, se alguém fizer a meditação </span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="mettā">Mettā</span></span></em> com frequência, poderá pagar as dívidas associadas ao <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em> (primeiros 11 reinos). Veja “<a href="../../pages/BM.AA.005/index.html" rel="noopener noreferrer" target="_blank">5. Ariya Mettā Bhāvanā (Meditação da Mettā)</a>”.</li>
+<li style="text-align: justify">Quando alguém atinge o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, todos os <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> que poderiam ter dado origem ao renascimento nos quatro reinos mais baixos (<em>apāyās</em>) são anulados. Quando alguém alcança o <em>Arahanthood</em>, apenas os <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> que têm a chance de se concretizar durante o tempo restante nessa vida serão pagos. Como não há mais renascimento, todos <em>os</em> <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> restantes não têm a chance de se concretizar.</li>
+</ul>
+<p style="text-align: justify">9. O primeiro passo para purificar a mente é evitar <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>; veja “<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Dez Ações Imorais (Dasa Akusala)</a><span>”. Não é preciso tentar fazer tudo de uma vez (especialmente para aqueles que são novos no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>).</span></p>
+<ul>
+<li style="text-align: justify">É uma jornada de vida, e pode-se começar devagar. Primeiro, tente evitar más ações e, em seguida, faça coisas que possam ser feitas sem muito estresse. Veja os ensaios na seção “<a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" target="_blank">Bhävanä (Meditação)</a>” e, em particular, “<a href="../../pages/TL.BB.001/index.html" rel="noopener noreferrer" target="_blank">2. Noções básicas de meditação</a>”.</li>
+<li style="text-align: justify">Não há ninguém observando, e só você sabe quais são suas intenções: se são morais ou imorais.</li>
+<li style="text-align: justify">Com o tempo, você sentirá os benefícios em termos de uma mente menos estressada. Leva tempo, especialmente no início. Depois, isso se acelerará quando você começar a ver os benefícios. Quando você começa a entender que <em>miccha diṭṭhi</em> (visões erradas) desempenham um papel importante, sua tendência a cometer atos imorais diminui automaticamente. Veja “<a href="../../pages/TL.BB.005/index.html" rel="noopener noreferrer" target="_blank">Visões erradas (Miccā Diṭṭhi) – Uma análise mais simples</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>10. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que alguém pode se tornar devedor de quatro maneiras:</span></p>
+<ul>
+<li>Envolvendo-se em <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>.</li>
+<li>Fazer com que outra pessoa cometa tais atos.</li>
+<li>Ajudar outra pessoa a realizar tais atos.</li>
+<li>Elogiar alguém que está cometendo tais atos.</li>
+</ul>
+<p style="text-align: justify">Assim, pode-se ficar em dívida de 40 maneiras. Evitando tudo o que nos traz alegria (<em>adhimokko</em> ou sensação de bem-estar). Isso dará impulso para acelerar nossos esforços. Veja também “<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits and Goals">Hábitos e objetivos</a>” e “<a href="../../pages/TL.EE.011/index.html" rel="noopener noreferrer" target="_blank" title="The Four Bases of Mental Power (Satara Iddhipada)">As quatro bases do poder mental (Satara Iddhipada)</a>”.</p>
+<p style="text-align: justify">Outra análise mais aprofundada em “<a href="../../pages/TL.HH.011/index.html" rel="noopener noreferrer" target="_blank" title="Difference Between Giving Up Valuables and Losing Interest in Worthless">Diferença entre abrir mão de bens valiosos e perder o interesse em bens sem</a> <a href="../../pages/TL.HH.011/index.html" rel="noopener noreferrer" target="_blank" title="Difference Between Giving Up Valuables and Losing Interest in Worthless">valor</a>”, .............</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.GG.006/index.html">How To Avoid Birth In The Apayas</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.GG.008/index.html">How Do We Decide Which View Is Wrong View Ditthi</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.GG.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">How To Avoid Birth In The Apayas</span>
+        
+        <span class="pathway-title title-pt">Como evitar o nascimento nos Apāyas</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.GG.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">How Do We Decide Which View Is Wrong View Ditthi</span>
+        
+        <span class="pathway-title title-pt">Como decidimos qual visão está errada?</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

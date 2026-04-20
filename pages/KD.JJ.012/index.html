@@ -1,0 +1,384 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Namarupa Different Types | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 104 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.JJ.012</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Namarupa Different Types</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.JJ.012</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.JJ.012"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0191"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.JJ.012</td></tr><tr><td>Fin-dex</td><td>0191</td></tr><tr><td>Slug</td><td>namarupa-different-types</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Namarupa Different Types</td></tr></table></div></div><p><span style="text-align: justify;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span> </span></span></span></span></em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">has different meanings for inert objects and sentient beings. <span style="color: #000000;">Current English translations of <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span> <span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> only say <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> </span></em>means name and<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>means form!</span></span></span></span></span></p>
+<p><strong>April 23, 2023</strong></p>
+<h5 style="text-align: justify;"><em>Nāmarupa</em> Associated with Inert Objects</h5>
+<p style="text-align: justify;">1. <span style="text-align: justify;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span> </span></span></span></span></em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">of an inert object is very different from that of a sentient being. </span></span></span></span></p>
+<ul style="text-align: justify;">
+<li>For example, for an inert object, "<span style="text-align: justify;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></span></span></span></em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">" refers to the "name" given to it based on its shape (for a visual object.) A ball of clay can be molded into the shape of a bowl, plate, mug, etc. </span></span></span></span></li>
+<li><span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">The object's name cannot be changed without breaking the item. A mug can no longer be called a mug if it breaks;<span style="color: #3366ff;"> <strong>thus, the <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>of an inert object does not change until the<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> breaks into parts.</strong></span> </span></span></span></span></li>
+<li><span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><strong>An inert object does not have mental aspects (<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>), so </strong></span></span></span></span><strong>"<span style="text-align: justify;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></span></span></span></em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">" is used only as a "label" for identifying it. </span></span></span></span></strong></li>
+</ul>
+<h5 style="text-align: justify;">Three Types of "<em>Nāmarupa</em>" Associated with <span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">a Human</span></span></span></span></h5>
+<p style="text-align: justify;">2. "<span style="text-align: justify;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāma">Nāma</span></span></span></span></span></em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">" (name) of a sentient being is not just associated with just the shape; they have "mental aspects" associated with them. </span></span></span></span></p>
+<ul style="text-align: justify;">
+<li>Sentient beings in different realms have "bodies" with differing complexities. H<span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">umans and animals have the highest complexities, with an additional stage of a <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) making a series of "dense bodies" during their existence. Let us focus on a human for this discussion. </span></span></span></span><span style="text-align: justify;">Just after the death of a dense body, a human's "form" remain the same. But the mental aspects (</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em><span style="text-align: justify;">) are no longer associated with that dead body. </span><strong style="text-align: justify;">Thus, a human's <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> </span></em>can be separated from its physical form (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>.)</strong><span style="text-align: justify;"> </span></li>
+<li>However, the "primary body" of that human (<em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) survives the death of the "dense body."  It emerges from the dead body and remains with that invisible body (and the mental aspects) until pulled into a womb. It can make many "dense bodies" during its lifetime. The "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>" part of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of the mind) and a set of <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>. </li>
+<li>But that human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> also dies at some point at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment. But that is not the end because a moment later, a new <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> with a new <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of the mind) and a set of <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>is created by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy. (That <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> may or may not lead to a "dense body," depending on the realm it was born into.)</li>
+<li>The above process continues non-stop until dying as an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> at some point.</li>
+</ul>
+<p style="text-align: justify;">3. Thus, we can see that three primary types of "<em>nāmarupa</em>" can be associated with <span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">a sentient being. </span></span></span></span></p>
+<ol style="list-style-type: lower-roman; text-align: justify;">
+<li>The first type of <em>nāmarupa</em> helps create "<em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>" (energy to combine<em><span> <span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) in the <em>Idapaccayatā</em> PS.</li>
+<li>The second type of <em>nāmarupa</em> arises in <em><span>Uppatti <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em>where <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>combine to form the basis of human life (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>/<em>pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>.) <span style="color: #993366;"><strong>This is the "mental body" or "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" produced by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy!</strong></span></li>
+<li>When that <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> "descends to a womb" later and merges with a zygote, that is the third type of <em>nāmarupa</em> (that leads to the formation of a "dense human body.") <strong>This last step is there only in the human and animal realms.</strong></li>
+</ol>
+<ul style="text-align: justify;">
+<li>The mental aspects (<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em>) continue as the four mental aggregates (<span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em></span></span></span></span>) and never separate from the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (<em>rupakkhandha</em>) at any point.</li>
+<li>That process stops only at the death of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span>.</span></em></li>
+</ul>
+<h5 style="text-align: justify;">Significant Differences Between <em>Nāmarupa </em>of Inert Objects and Sentient Beings</h5>
+<p style="text-align: justify;">4. As we saw in #1 above, <span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> </span></em>and<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span> </span></em>of the <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>of an inert object can be separated. </strong></span></span></span></span></span><span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span style="color: #3366ff;"><span style="color: #000000;">That happens when the<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> breaks into parts.</span></span><span style="color: #000000;"> If a mug breaks, it can no longer be called a mug. </span></span></span></span></span><span class="segment" id="sn12.64:2.2"></span></p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><span style="color: #993366;">However, as we saw in #2 and #3, the </span><span style="text-align: justify;"><span style="color: #993366;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></span></span></span></em></span><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span style="color: #993366;">of a sentient being can be genuinely separated only at the death of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</span> That is equivalent to breaking an inert object. </span></span></span></span><span style="color: #993366;"><span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">Thus, for a living being, the "real break" of </span></span></span></span><span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em></span></span></span></span><span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><em> </em></span></span></span></span><em><span>happens only at the death of an <span class="pali-term term-highlight" data-term="arahant">Arahant</span>.</span></em></span></strong></span></li>
+<li><span>That is the "complete separation from this world of 31 realms" (i.e., complete <span class="pali-term term-highlight" data-term="cessation">cessation</span> of suffering) or "full </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>."</li>
+<li><span style="color: #3366ff;"><span style="color: #993366;"><span style="color: #000000;">Until then, the physical form of that lifestream can break and take different forms. <span style="color: #993366;"><strong>However, the <span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>stream continues as the five aggregates (<em>pancakkhandha</em>.)</span></span></span></span></strong></span></span></span></span></li>
+<li>In addition, there are other subtle types of <span style="color: #000000;"><span style="text-align: justify;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></span></span></span></em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">associated with sentient beings. </span></span></span></span></span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Nāmarupa</em> as "Mental Impressions of <em><span><span class="pali-term term-highlight" data-term="rupa">Rupa</span></span></em>"</h5>
+<p style="text-align: justify;">5. an entirely different category of <span style="color: #000000;"><span style="text-align: justify;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></span></span></span></em><span class="segment"><span class="root"><span class="text">involved in <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> accumulation (or the creation of </span></span></span></span></span><span style="text-align: justify;">"</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span style="text-align: justify;">" per #3(i) above</span><span style="color: #000000;"><span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">.) <span style="color: #993300;"><strong>That is yet another aspect of <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> critical to understand. </strong></span></span></span></span></span></span></p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong>I<span style="text-align: justify;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">n <em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>(PS),</span></span></span></span> a wholly different and <span style="text-align: justify;">unique </span>type of </strong></span><span style="color: #000000;"><span style="text-align: justify;"><span style="color: #3366ff;"><strong><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></span></span></span></em></strong></span><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span style="color: #3366ff;"><strong>comes into play. </strong><span style="color: #000000;">W</span></span><span>e discussed that in the previous <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="http://localhost/beng_feb2026/namarupa-in-pa%e1%b9%adicca-samuppada/" rel="noopener" target="_blank">Nāmarupa in Idappaccayātā Paṭicca Samuppāda.</a>" </span></span></span></span></span></li>
+<li><span style="text-align: justify;"><strong><em> </em></strong>They are "<strong>impressions of <em>nāmarupa </em>associated with external <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em></strong>." <span style="color: #993366;"><strong>They arise in one's mind! </strong><span style="color: #000000;">It is a good idea to re-read </span></span></span>"<a href="http://localhost/beng_feb2026/namarupa-in-pa%e1%b9%adicca-samuppada/" rel="noopener" target="_blank">Nāmarupa in Idappaccayātā Paṭicca Samuppāda.</a>"</li>
+<li><span>As discussed in that <span class="pali-term term-highlight" data-term="post">post</span>, </span><em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies are created during that process.<strong> Such <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies will stay in <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="dhatu">dhatu</span></span></em> as </span><span style="text-align: justify;">"</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em></strong><span style="text-align: justify;"><strong>"</strong> until their <em>vipaka</em> appear.</span></li>
+<li>Some of these <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies grow and can bring future rebirths via <span style="text-align: justify;"><em>Uppatti </em>PS. That involves yet another type of <span style="color: #000000;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span>.</span></span></span></span></em></span></span></li>
+</ul>
+<p style="text-align: justify;">6. As we can see, <span style="text-align: justify;">"</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span style="text-align: justify;">" are the precursors to all existences! Furthermore, "<em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>" are created by the mind (in <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>), as we saw in </span>"<a href="http://localhost/beng_feb2026/namarupa-in-pa%e1%b9%adicca-samuppada/" rel="noopener" target="_blank">Nāmarupa in Idappaccayātā Paṭicca Samuppāda.</a>"</p>
+<ul style="text-align: justify;">
+<li><span>That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated, "</span><a href="../../pages/DD.AA.001/index.html" rel="noopener" target="_blank">Manōpubbangamā Dhammā..</a>"</li>
+<li>Now, let us start from the <span style="text-align: justify;">"</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span style="text-align: justify;">" stage and go through the three stages in #3 above.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Nāmarupa</em> in <span style="text-align: justify;"><em><span>Uppatti <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></span></h5>
+<p style="text-align: justify;">7. In <span style="text-align: justify;"><em>Uppatti </em>PS, a new type of <span style="color: #000000;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></span></span></span></em><span class="segment"><span class="root"><span class="text">is created by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy with a strong "<em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>" (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> bija</span></em>) making contact with the mind at the </span></span></span></span></span><em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment.<span style="text-align: justify;"><span style="color: #000000;"><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"> That is the</span></span></span></span> "invisible body" (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) with a <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> and a set of <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em></span>.</p>
+<ul style="text-align: justify;">
+<li>Depending on the realm of birth, it could be <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>, <span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, etc. Those who start a new existence in the human or animal realm have a unique name of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</li>
+<li><span style="text-align: justify;">They all have associated <em>nāmarupa, </em>i.e., a set of subtle <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> </span>(<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>/<em>pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) and associated <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> </span></em>(</span><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>,<em><span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>.<span style="text-align: justify;">)</span></li>
+<li>A sentient being is ALWAYS associated with the five aggregates (<em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span>.</span></em>)</li>
+<li>Note that even though a new set of <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>/<em>pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>is created at the <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment, it is the continuation of an existing <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span>.</span></em></li>
+<li>Then there is yet another type of <span style="text-align: justify;"><em>nāmarupa </em>created when a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> "descends to a womb."</span></li>
+</ul>
+<h5 style="text-align: justify;">Another Type of <span style="text-align: justify;"><em>Nāmarupa</em></span> for Animals and Humans</h5>
+<p style="text-align: justify;">8. In the third step, that <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> "descends to a womb" and merges with a zygote generated by an egg and a sperm. This is described in the  "<a href="https://suttacentral.net/mn38/pli/ms" rel="noopener" target="_blank"><em>Mahātaṇhāsaṅkhaya Suta</em> (MN 38)</a>." </p>
+<ul style="text-align: justify;">
+<li>A better English translation is in "<a href="https://suttacentral.net/mn38/en/bodhi" rel="noopener" target="_blank">The Greater Discourse on the Destruction of Craving</a>" under the section "The Round of Existence: Conception to Maturity" as follows: “<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, the descent of the embryo takes place through the union of three things. Here, there is the union of the mother and father, but the mother is not in season, and the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is not present—in this case, no descent of an embryo takes place. Here, there is the union of the mother and father, and the mother is in season, but the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is not present—in this case, too, no descent of the embryo takes place. <strong>But when there is the union of the mother and father, and the mother is in season, and the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is present, through the union of these three things, the descent of the embryo takes place</strong>."</li>
+<li>This "seed of a human with a physical body" has a denser <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> and is assigned a name (human baby). Upon leaving the womb, that baby grows into a particular physical form (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span>.</span></em>)  </li>
+</ul>
+<h5 style="text-align: justify;">The "Essence" of a Human is the <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span></span></em>/<em>Pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rupa">Rupa</span></span></em>)</h5>
+<p style="text-align: justify;">9. <span style="color: #993366;"><strong>The set of <em><span>ajjhatta <span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em></strong></span>(<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>/<em>pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) <span style="color: #993366;"><strong>defines a living being.</strong> </span> <span style="color: #3366ff;"><strong>It is also the primary type of <em>nāmarupa </em>because it can generate <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> </span></em>without the dense human body</strong>! </span></p>
+<ul style="text-align: justify;">
+<li>"<em><span><span class="pali-term term-highlight" data-term="nāma">Nāma</span></span></em>" arises at the "seat of the mind" (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>) with the help of the five <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>. Each <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> is a "doorway" to the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>. For example, when a <em><span>vaṇṇa <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> makes contact with the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span>,</span></em> an impression of that <em><span>vaṇṇa <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> is transferred to the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>.</li>
+<li>We can see that this primary type of <em>nāmarupa</em> (<span style="color: #993366;"><strong><em><span>ajjhatta <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em></strong></span>) has the remarkable ability to generate <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em> or "mental attributes": <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>.</li>
+<li><span style="color: #993366;"><strong>This set of <em><span>ajjhatta <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> is called the "mental body" or <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em></strong></span> It has the unique ability to generate <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em> upon interactions with the five types of external <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya vatthu</span></span></em> and each of the <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> are the sizes of a<em><span> <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>, <strong>which is unimaginably tiny</strong>. See #12 below.</li>
+</ul>
+<div class="gdbbx-quote-wrapper" id="gdbbx-quote-wrapper-43825" style="text-align: justify;">
+<p><span style="text-align: justify;">10. Some living beings, particularly the </span><em style="text-align: justify;">Brahmas</em><span style="text-align: justify;"> in the highest 20 realms, have only such a "mental body." They do not have dense physical bodies like humans or animals.</span></p>
+</div>
+<ul style="text-align: justify;">
+<li><em>Rupāvacara Brahmas</em> in the first 16 <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms have <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> and two <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span></span></em> and <em>sota</em>.) Thus they can only see and hear.</li>
+<li><em>Arupāvacara Brahmas</em> in the four <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms have only the <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>. They cannot see or hear either. But they can think!</li>
+</ul>
+<h5 style="text-align: justify;">Internal (<strong><em>Ajjhatta</em></strong>) <em><span><span class="pali-term term-highlight" data-term="rupa">Rupa</span></span></em> Are Not Inert</h5>
+<p style="text-align: justify;">11. The critical observation is that the set of internal <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> and the set of <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) are not inert. That set is the "mental body" or "<em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em>"</p>
+<ul style="text-align: justify;">
+<li>Internal <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> are the ONLY <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> that can give rise to <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>.)</li>
+<li><span>The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word "</span><em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em><span>" can mean "to bend/adjust" (in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, නම්‍යතාවය.) The internal </span><em>rupā</em> generated by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy is compatible with that existence. For example, a ball of clay can be molded into the shape of a mug. That mug is given the same "mug" because of its shape. That meaning holds for the "<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em>" of an insert <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span>.</span></em></li>
+<li>Our dense physical bodies (like plants) are made of inert matter. "Consciousness" arises ONLY in the "mental body."</li>
+<li><strong>This is why current "Artificial Intelligence" (AI) efforts will NEVER lead to "consciousness" or "sentience."</strong> AI will be able to speed up processes but will never be "sentient," i.e., will never be able to generate <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>.)</li>
+</ul>
+<h5 style="text-align: justify;">Size of a <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em></h5>
+<p style="text-align: justify;">12. Any “<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>” (experienced with the five physical senses) is above the <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> stage. A <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> is the smallest “<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em><span>” defined by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<ul style="text-align: justify;">
+<li>Thus, a “<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>” can be light, sound, food particles, particles that carry odors (scents), or physical touch experienced by the body.</li>
+</ul>
+<p style="text-align: justify;">13. The easiest way is to look at particles of light or photons.</p>
+<ul style="text-align: justify;">
+<li>A photon in the visible range is about 2 eV in energy units.</li>
+<li>In comparison, the “mass” of a proton (roughly the mass of the smallest atom) is about 938 MeV or roughly a billion eV.</li>
+<li><span style="color: #993300;"><span style="color: #000000;">Therefore, a photon in the visible range is about a billion times smaller than an atom. </span><strong>A <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> </span></em>is smaller than any particle detected by scientists. Thus, a <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span> </span></em>has energy much less than 2 eV and is more than a billion times smaller than an atom.</strong></span></li>
+<li><span>Of course, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> could not give such an analogy those days since people knew nothing about atoms and photons. We are fortunate to be able to make such comparisons these days.</span></li>
+</ul>
+<p style="text-align: justify;">14. Such unimaginably small energies can be created by <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in our minds when “energized” by <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>, or <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>. <span style="color: #3366ff;"><strong>Yet it has abilities unmatched by any force in the universe.</strong></span> This is "mind power." There are many popular books about the "power of the mind," but they do not know that the origin of mind power is <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>!</p>
+<ul style="text-align: justify;">
+<li>As we have discussed, a <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of the mind) or a <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (like <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span>, sota,..kaya</span></em> responsible for the detection of the five types of external <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) is a single <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> each.</li>
+<li><span style="color: #993300;"><strong>For example, a <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> that detects light is a single <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span>. </span></em>A <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of the mind) is a single <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span>.</span></em></strong></span></li>
+</ul>
+<p style="text-align: justify;">15. Our physical bodies (that are hugely bigger) are just inert shells “powered by” such an unimaginably tiny set of <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> and <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span>.</span></em></p>
+<ul>
+<li style="text-align: justify;">One analogy is to consider an oak tree and a seed that gives rise to it. That tiny seed gets all the “material” from the earth and grows into a huge tree.</li>
+<li style="text-align: justify;">In the same way, a tiny <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (with a set of <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> and <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) has the "blueprint for the physical body." It grows by taking in food, first from the mother and then eating.</li>
+<li style="text-align: justify;">Ironically, the most critical set of <span style="text-align: justify;"><span style="color: #000000;"><em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></span></span></span></em><span class="segment" id="sn12.64:2.2"><span class="root"><span class="text">consists of</span></span></span><span class="segment"><span class="root"><span class="text"> several <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span>-</span></em>size entities (<em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>.)</span></span></span></span></span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.JJ.011/index.html">Namarupa In Pae1B9Adicca Samuppada</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.JJ.013/index.html">Kamma Vinnana And Namarupa Paricceda Nana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.JJ.011/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Namarupa In Pae1B9Adicca Samuppada</span>
+        
+        <span class="pathway-title title-pt">Namarupa In Pae1B9Adicca Samuppada</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.JJ.013/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Kamma Vinnana And Namarupa Paricceda Nana</span>
+        
+        <span class="pathway-title title-pt">Kamma Vinnana And Namarupa Paricceda Nana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

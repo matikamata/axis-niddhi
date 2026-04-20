@@ -1,0 +1,377 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Phassa Paccaya Vedana To Tanha | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 76 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.II.008</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Phassa Paccaya Vedana To Tanha</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.II.008</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.II.008"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0633"
+             data-level="advanced"
+             data-reading-time="7"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.II.008</td></tr><tr><td>Fin-dex</td><td>0633</td></tr><tr><td>Slug</td><td>phassa-paccaya-vedana-to-tanha</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>Phassa Paccaya Vedana To Tanha</td></tr></table></div></div><p>“<em><span><span class="pali-term term-highlight" data-term="phassa paccayā vedanā">Phassa paccayā vedanā</span></span></em>” in <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> processes is really “<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>.” That automatically leads to attachment or <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>.</span></em></p>
+<p><span><strong>Rewritten May 25, 2021;<span style="color: #3366ff;"> rewritten with new title June 3, 2023</span></strong></span></p>
+<h5><em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span> </span></em>Is a "Defiled Contact"</h5>
+<p style="text-align: justify;"><span>1. In a previous <span class="pali-term term-highlight" data-term="post">post</span>, we discussed the difference between “</span><em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>” and “<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>.” See “<a href="../../pages/PS.II.007/index.html" rel="noopener" target="_blank">Difference between Phassa and Samphassa</a>.” To summarize:</p>
+<ul style="text-align: justify;">
+<li>“<em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span></span></em>” is pure mental contact. It is just seeing, hearing, smelling, tasting, touching, or just an arbitrary thought that comes to the mind without one’s own likes/dislikes. <em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span></span></em> is a universal <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> and is present in ALL <em>cittā</em>. Whether it is an average person or an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>, sensory contact is made with "<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>."</li>
+<li>However, that sensory contact can turn into a "defiled contact" (<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>) for an average person. For example, one may walk down the street and see an expensive ring on the road. That initial “seeing” is due to a<em><span> <span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>; that involves only “<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>.” But now, greedy thoughts arise, and he picks it up and quickly puts it in his pocket. He did that action  with “<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>” ("greedy contact.")</li>
+<li>Thus, the <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> involves “<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>,” even though it is usually written as  “<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>” in the “<em>uddesa</em>” or “brief” statement.</li>
+<li>Only an<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will always have just “<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>”  and at no time “<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>.”</li>
+</ul>
+<p style="text-align: justify;">2. Because of that "defiled contact," a "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" (<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>) can arise in an average person but not in an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>If that "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" is a joyful/pleasant one, then one would instantly attach to that sensory contact with greed.</li>
+<li>If it is an unpleasant <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>, one will attach with anger/displeasure, for example, when seeing a person disliked.</li>
+<li>One may also attach to a "neutral <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>" </span></em>if one is unsure about the nature of that sensory input; that can happen due to <em>avijja</em> or ignorance.</li>
+</ul>
+<h5 style="text-align: justify;">Attachment to a Sensory Input (<em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>) Is Instantaneous</h5>
+<p style="text-align: justify;">3. In all the above cases, attachment is instantaneous, and it is called <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span> </span></em>means “getting attached.” The word <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span> </span></em>comes from “<em>thán</em>” meaning “place” + “<em>hā</em><span>” meaning getting fused/welded or attached (හා වීම in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>). Note that “</span><strong><em>tan</em></strong>” in<em> <strong>taṇ</strong>hā </em>pronounced like in “<strong>thun</strong>der.” See "<a href="../../pages/CH.AA.001/index.html" rel="noopener" target="_blank">Pāli Words – Writing and Pronunciation.</a>"</li>
+<li>What do we attach to?  We attach to sensory inputs or <i><span style="font-weight: 400;">ā</span></i><i><span style="font-weight: 400;">rammaṇa. </span></i></li>
+<li>Sensory inputs (<i><span style="font-weight: 400;">ā</span></i><i><span style="font-weight: 400;">rammaṇa</span></i>) come in through the six sense faculties, possibly leading attachment via <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>, sadda <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> through <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span> <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>:  "<a href="https://suttacentral.net/sn27.8/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 27.8)</a>." Of course, we don't attach to every sensory input. </li>
+</ul>
+<p style="text-align: justify;">4. We attach to specific sensory inputs based on the view/perception that those can provide us happiness (<em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>), and thus, they are fruitful (<em>atta</em>) and worthwhile pursuing. We like (<em>icca</em>) to acquire things that can make us happy and want to get rid of those things we dislike; that gives rise to a sense of "<em>nicca</em> nature" about the world. </p>
+<ul style="text-align: justify;">
+<li>But the things we like are based on our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>. If one has a matching <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> to attach to a type of <i>ā</i><i>rammaṇa</i>, the attachment happens instantaneously with exposure. <span style="color: #993366;"><strong>It is like a matchstick making contact with the rough surface of a matchbox; the matchstick catches fire instantly.   </strong></span></li>
+<li><span style="font-weight: 400;">That attachment</span><span style="font-weight: 400;"> is</span> automatic based on one's <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>. </li>
+<li> <strong><em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> cannot be removed directly by sheer willpower. The key to eliminating <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> is gradually reducing our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> to attach to certain types of <i>ā</i><i>rammaṇa. </i></strong></li>
+</ul>
+<h5 style="text-align: justify;">Reducing <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span> </span></em>Can Only be Done in the <em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em> Stage</h5>
+<p style="text-align: justify;">5. How do we gradually reduce our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> to attach to such <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>? The key to reducing such <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> lies in the next step of <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>, which starts with "<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>." </p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong>Once attached, "knowingly staying attached" to that <i>ā</i><i>rammaṇa </i>is <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>.</strong> </span>This is where we start accumulating <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> with <em><span><span class="pali-term term-highlight" data-term="mano">mano</span>, vaci</span></em>, and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> in that sequence. We become conscious of "being attached" in the early stage of <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, where we start "talking to ourselves" without speaking out. See "<a href="../../pages/KD.BB.007/index.html" rel="noopener" target="_blank">Correct Meaning of Vacī Sankhāra</a>."</li>
+<li> If we get interested, we may start speaking about it; that also involves <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. If that interest builds up, we may take action with <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. In other words, we may engage in <em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> even for hours.</li>
+<li><span style="color: #3366ff;"><strong><span>Unlike the instantaneous step of <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>, the mind stays in the "</span><em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" stage for a relatively long time.</strong></span></li>
+<li>By being mindful, we can break that <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> --</span></em> and reduce<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> to attach -- which is the key to <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>,  as outlined in the chart below.</li>
+</ul>
+<p style="text-align: justify;"><img alt="" class="alignnone wp-image-45166" height="338" src="http://localhost/beng_feb2026/wp-content/uploads/6-Tanha-is-Automatic-300x225.jpg" width="450"/></p>
+<p style="text-align: justify;"><strong>Print/Download:</strong> "<a href="https://drive.google.com/uc" rel="noopener" target="_blank">Ta<em>ṇ</em>hā is Automatic</a>"</p>
+<h5 style="text-align: justify;">"Unwise <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>" Are Cultivated  </h5>
+<p style="text-align: justify;">6. As discussed above, it is an immoral or unwise <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> that triggers a sequence of events in rapid succession leading to <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Understanding how various types of<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> are formed is critical to understanding <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span>.</span></em></li>
+<li><span style="color: #993366;"><strong>Even though <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> moves from birth to birth, various types of <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> are cultivated during a lifetime. </strong></span></li>
+<li>Without the presence of a "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> to attach," <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> cannot arise!</li>
+<li>However, until <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> are eradicated, the possibility of developing <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> for various sensory inputs remains. Once such a <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> is cultivated, attachment (<em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>) to the corresponding <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> is inevitable.</li>
+</ul>
+<h5 style="text-align: justify;">Removal of <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> (By Being Mindful) is the Key to the Eradication of <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em></h5>
+<p style="text-align: justify;">7. Each time we attach (<em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>) to <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>, we strengthen the corresponding <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> and associated <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>. The reverse is true, too: Each time we stop attaching to an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span> </span></em>at the <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em> stage, the corresponding <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> reduce too.  </p>
+<ul style="text-align: justify;">
+<li>That is why the cultivation of the Noble Path involves <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em><em>.</em></li>
+</ul>
+<h5 style="text-align: justify;">A Newborn Baby Has <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>, but Not<em><span> <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em></h5>
+<p style="text-align: justify;">8. A newborn baby does not have any <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>. Of course, all types of <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> are hidden in that baby's mind; different types of <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> keep changing but remain with a given lifestream.</p>
+<ul style="text-align: justify;">
+<li>As the baby grows and the brain develops, various types of <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> are acquired. The types of<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> acquired will depend a lot on the environment.  </li>
+<li>For example, a child growing up has no interest in drinking alcohol, taking drugs, or getting into fights. However, "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" to engage in such activities can be acquired within a few months. Let us consider an example.</li>
+</ul>
+<h5 style="text-align: justify;">Cultivation of<em><span> <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> to <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span> </span></em></h5>
+<p style="text-align: justify;">9. Suppose there is a teenager who comes to associate with friends that belong to a street gang. They tell him that one needs to enjoy life and has to do “whatever it takes” to make money to enjoy life. If the parents do not have close contact with the teenager, there is no one to explain the perils of such a way of life, and he embraces this wrong vision or “<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>.”</p>
+<ul style="text-align: justify;">
+<li>Thus due to ignorance (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>), the teenager starts doing things, speaking, and thinking like those gang members: “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.”</li>
+<li>Then what occupies his mind most of the time are defiled thoughts (<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) and expectations (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> viññāna</span></em>) related to gang activities and seeking pleasures by using drugs and alcohol: “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>.” Thus, a corresponding “defiled mindset” (<em>viññāna</em>) occupies his mind at those times. During gang activities, his thoughts are focused on them, and what is in his subconscious during other times is also related to such activities.</li>
+<li>Now the teenager has acquired a new <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>.</span></em></li>
+</ul>
+<p style="text-align: justify;">10. <span style="color: #3366ff;"><strong>The cultivation of various types of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> viññāna </span></em>is directly related to the cultivation of corresponding <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>. </strong><span style="color: #000000;">As that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> viññāna </span></em>grows, the corresponding <em><span><span class="pali-term term-highlight" data-term="gati">gati</span> </span></em>grows too.</span></span></p>
+<ul style="text-align: justify;">
+<li>That, in turn, leads to “<em><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>“.  He thinks about and visualizes various gang activities: How to sell drugs to make money and how he will enjoy the rest of the time hanging out with the gang.</li>
+<li>Thus all his six sense faculties become “<em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em>“: they all are used to find ways to optimize the gang activities and to think about ways to “have fun”: “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span></span></em>.” <span style="color: #993366;"><strong>Now the <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> has matured and is ready to be triggered instantaneously.</strong></span></li>
+<li>Now, any sensory contact (<em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>) related to a gang activity belongs to “<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>” or, more explicitly,  “<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>.” <span style="color: #000000;"><strong>As discussed above, that leads to <em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>and<em><span> <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span> </span></em>automatically.</strong></span></li>
+<li>Further details in "<a href="../../pages/PS.II.009/index.html" rel="noopener" target="_blank">Difference Between Tanhā and Upādāna.</a>"</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> Can be Broken Only at the <em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em> Stage</h5>
+<p style="text-align: justify;"><span>11. As further discussed in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/PS.II.009/index.html" rel="noopener" target="_blank">Difference Between Tanhā and Upādāna</a>," the "<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>" is a critical step in <em>Paticca Samuppada</em>. </p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em> (“<em>upa</em>” +”<em>ā</em><em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em>,” where “<em>upa</em>” means “close (to mind)” and “<em>ā</em><em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em>” means “pull.” Here, it means to "stay on that <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>" by engaging in more <em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</li>
+<li>That, of course, will lead to further strengthening of the corresponding <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> viññāna </span></em>and<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span>!</span></em></li>
+</ul>
+<p style="text-align: justify;">12. That vicious cycle can be broken only if the teenager understands the dangers of staying on that downward path. </p>
+<ul style="text-align: justify;">
+<li>Someone must explain to him the dire consequences (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>) of continuing such activities. </li>
+<li>It will take a considerable effort to "be mindful" and break such habits (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.) But that is the only way.</li>
+</ul>
+<p style="text-align: justify;"><strong>Note:</strong><span> This <span class="pali-term term-highlight" data-term="post">post</span> replaces the <span class="pali-term term-highlight" data-term="post">post</span> "<span class="pali-term term-highlight" data-term="phassa paccayā vedanā">Phassa paccayā Vedanā</span>….to </span><strong><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></strong><span>." Don't forget to read the related <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/PS.II.009/index.html" rel="noopener" target="_blank">Difference Between Tanhā and Upādāna.</a>"</p>
+<ul>
+<li style="text-align: justify;"><span>The complete series of <span class="pali-term term-highlight" data-term="posts">posts</span> at "</span><a href="../../pages/PS.II.009/index.html" rel="noopener" target="_blank">Paticca Samuppada in Plain English</a>."</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.II.007/index.html">Difference Between Phassa And Samphassa</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.II.010/index.html">Upadana Paccaya Bhava Two Types Of Bhava</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.II.007/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Difference Between Phassa And Samphassa</span>
+        
+        <span class="pathway-title title-pt">Difference Between Phassa And Samphassa</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.II.010/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Upadana Paccaya Bhava Two Types Of Bhava</span>
+        
+        <span class="pathway-title title-pt">Upadana Paccaya Bhava Two Types Of Bhava</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Pathama Metta Sutta | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Sutta Interpretations</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 25 / 30</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">SI.AA.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Pathama Metta Sutta</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>SI.AA.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Sutta Interpretations</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>2</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="SI.AA.007"
+             data-section="Sutta Interpretations"
+             data-section-code="SI"
+             data-findex="0862"
+             data-level="intermediate"
+             data-reading-time="2"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>SI.AA.007</td></tr><tr><td>Fin-dex</td><td>0862</td></tr><tr><td>Slug</td><td>pathama-metta-sutta</td></tr><tr><td>Section</td><td>SI</td></tr><tr><td>Title EN</td><td>Pathama Metta Sutta</td></tr></table></div></div><p><strong>June 7, 2018; revised June 8, 2018; September 13, 2018; August 30, 2020</strong></p>
+<p style="text-align: justify">1. <a href="https://suttacentral.net/an4.125/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Pathama <span class="pali-term term-highlight" data-term="metta">Metta</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 4.125)</a> clearly states the difference between <em>jhānā</em> cultivated by Noble Persons (<em>Ariyās</em>) and those who are merely on the mundane path (<em>assutavā puthujjano</em>). Here <em>assutavā puthujjano </em>means one who has not comprehended <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>; </span></em>one MUST have removed the ten types of <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> even to cultivate <em><span>anāriya <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Since <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states represent the same <em>rupavacara</em> realms, the <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> experience could be the same for both <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> </span></em>and <em>anāriya </em><em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em>(I am not sure).</li>
+<li style="text-align: justify">However, the critical difference is that Noble Persons (who have cultivated <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>) NEVER come back to <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em> and attain <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>, while the <em>anāriyās </em>come back to<em><span> <span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em> and could be born in the <em>apāyā</em> too.</li>
+<li style="text-align: justify"><span style="color: #0000ff">That is because the <em>Ariyās</em> have REMOVED <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>(<em><span>ucceda <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em>), while <em>anāriyās</em> have only SUPPRESSED them (<em><span>vikkhambana <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em>).</span></li>
+</ul>
+<p style="text-align: justify">2. The <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> Vihāra</span></em><span> in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> are four types: </span><em><span><span class="pali-term term-highlight" data-term="mettā">mettā</span></span></em> (loving-kindness), <em>karunā</em> (compassion, the opposite of <em>karunā</em> is anger), <em><span><span class="pali-term term-highlight" data-term="muditā">muditā</span></span></em> (empathetic joy), and <em><span><span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span> </span></em>(equanimity towards all beings).</p>
+<ul>
+<li style="text-align: justify">The four realms correspond to the four highest-intensity<em><span> rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> levels (in <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> categorization of <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>).</li>
+<li><span style="color: #0000ff">We can clearly see the concept of<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em></span>; most translators do not even know what that word means.</li>
+<li style="text-align: justify">Instead of translating the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> word-by-word, I have just provided the meaning of each verse.</li>
+</ul>
+<p>[table id=16 /]</p>
+<p><strong>Notes:</strong></p>
+<p style="text-align: justify">1. The four <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states attained by an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> discussed in this <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> are from <em><span>anāriya <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. <span style="color: #0000ff">Therefore, they are<em><span> <span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states attained specifically by a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>, by SUPPRESSING <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>.</span> If a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> attained even the first <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, then he/she would be born not in those four realms but in the realms reserved for those who attained the <em><span>Anāgami <span class="pali-term term-highlight" data-term="phala">phala</span></span></em> (realms #23 through #27; see "<a href="../../pages/TS.AA.013/index.html" rel="noopener noreferrer" target="_blank">31 Realms of Existence</a>".</p>
+<p style="text-align: justify">2. Note that by cultivating <em><span><span class="pali-term term-highlight" data-term="mettā">mettā</span>, karunā, mudutā</span></em>, and<em><span> <span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>, one is born in <em>Brahmakāyika, Abhassara, Subhakinha</em>, and <em><span>Vehappala <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms with lifetimes of 1, 8, 64, and 500 <em>kappā</em>.</p>
+<p style="text-align: justify">3. For more information on <em>jhānā</em>, see "<a href="../../pages/LD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Samādhi, Jhāna (Dhyāna), Magga Phala</a>" and "<a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank">Power of the Human Mind</a>."</p>
+<p style="text-align: justify">4. Information on 31 realms comes from <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> like this one. I have corrected the lifetimes of these four <em>rupavacara</em><span> realms in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/TS.AA.013/index.html" rel="noopener noreferrer" target="_blank">31 Realms of Existence</a>".</p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/SI.AA.006/index.html">Na Cetanakaraniya Sutta</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/SI.AA.008/index.html">Kukkuravatika Sutta Majjhima Nikaya 57 Kammakkhaya</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/SI.AA.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Na Cetanakaraniya Sutta</span>
+        
+        <span class="pathway-title title-pt">Na Cetanakaraniya Sutta</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/SI.AA.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Kukkuravatika Sutta Majjhima Nikaya 57 Kammakkhaya</span>
+        
+        <span class="pathway-title title-pt">Kukkuravatika Sutta Majjhima Nikaya 57 Kammakkhaya</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-SI">
+        ↑ Back to Sutta Interpretations
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

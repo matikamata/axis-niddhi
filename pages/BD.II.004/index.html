@@ -1,0 +1,486 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Power Of The Human Mind The Anariya Or Mundane Jhanas | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 51 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.II.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Power Of The Human Mind The Anariya Or Mundane Jhanas</h1>
+    
+    <h1 class="title-pt">O Poder da Mente Humana: Os Jhānas Anariya ou Mundanos</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.II.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.II.004"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0060"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.II.004</td></tr><tr><td>Fin-dex</td><td>0060</td></tr><tr><td>Slug</td><td>power-of-the-human-mind-the-anariya-or-mundane-jhanas</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Power Of The Human Mind The Anariya Or Mundane Jhanas</td></tr></table></div></div><p style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> (or mundane) <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are unnecessary to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>and can be a distraction if one is not careful.</p>
+<p style="text-align: justify;"><strong><span>Pre-2015 <span class="pali-term term-highlight" data-term="post">post</span>; rewritten December 15, 2022;</span><span style="color: #3366ff;"> revised April 19, 2024</span></strong></p>
+<h5 style="text-align: justify;">Introduction</h5>
+<p style="text-align: justify;">1. I will make general statements here to explain the "big picture." While there can be exceptions, the following statements generally hold.</p>
+<ul style="text-align: justify;">
+<li>Sentient beings in the 31 realms have different mental states and capabilities. The 26 realms above the human realm have better mental states with less mental and physical suffering. The four realms below the human (<em>apāyās</em>) have more mental and physical suffering. </li>
+<li>At the beginning of a world cycle or a <em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> Kappa</span></em> (with a newly-formed Earth), most sentient beings are "<em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>-kāyika</span></em> humans."  They have just descended from the <em><span>Ābhassara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm. However, the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms above the <em><span>Ābhassara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm were not destroyed. Thus, a new world cycle starts with only the Human and the 20 <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms populated. All <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> realms and the <em>apāyās</em> are empty at the beginning of a new world cycle!</li>
+<li>Over millions of years, those humans' hidden defilements (<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>) begin to surface. They gradually start committing immoral deeds, and their bodies transform into the dense physical bodies we have today. Like <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span>, </span></em>the "early humans" did not have sex organs. </li>
+<li><span>Those aspects are summarized in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/SI.AA.010/index.html" rel="noopener" target="_blank">Buddhism and Evolution – Aggañña Sutta (DN 27)</a>."</li>
+</ul>
+<h5 style="text-align: justify;">The "Early Humans" Branch Out into Other Realms</h5>
+<p style="text-align: justify;">2. In the newly-formed Earth, there were no plants or animals. Those evolved over hundreds of millions of years. With time, humans started engaging in immoral activities, and the physical environment (as well as their physical bodies) evolved according to that too.</p>
+<ul style="text-align: justify;">
+<li>Plants appeared, and the first batch of small animals was born with <em>opapatika</em> births. That took place long after humans evolved into bodies with sex organs. Those humans who got corrupted first were reborn animals. </li>
+<li><span>The lower three <span class="pali-term term-highlight" data-term="apāya">apāya</span> realms also formed over a longer time, according to the </span><em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies that evolved humans deposited when they started cultivating <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>. Of course, some humans cultivated <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>and were born in <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> realms.</li>
+</ul>
+<p style="text-align: justify;"><span>3. The early humans had long lifespans (lifetimes.) By the time the first <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (<span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kakusanda) was born, the human lifespan had decreased to 80,000 years. That happened after a long time, probably over a billion years after the formation of the Earth.</span></p>
+<ul style="text-align: justify;">
+<li>By that time, possibly the lower three realms had been populated by those humans who got "corrupted first" and engaged in immoral deeds and cultivated <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>. Of course, those who engaged in moral deeds (with <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) populated the <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> realms and the 16 <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. Furthermore, others cultivated <em>āneñjābhisaṅkhāra </em>(<em><span>āneñja <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) and were reborn in the four <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms.</li>
+<li>It is good to understand how the cultivation of the three types of <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em><span>leads to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in various realms: "</span><a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Rebirths Take Place According to Abhisaṅkhāra</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Future Rebirths Are According to One's <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em></h5>
+<p style="text-align: justify;">4. It is clear that rebirths in various existences (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) are according to the type of <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>. </span></em>A sentient being tends to cultivate a specific type of <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em><span style="color: #993366;"><strong>based on the <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (character/habits) at that time.</strong></span></p>
+<ul style="text-align: justify;">
+<li>No sentient beings (below the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em> stage) have "fixed <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>." We all had cultivated <em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span></span></em>, human, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span> and were born in all those realms! That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said there is no fixed "soul/</span><em>ātman</em><span>" traversing the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+<li>Only when one starts attaining various stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, that one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> will not "fall back" from that attainment. Thus, for example, an <em>Anāgāmi</em> will never again be born in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> because they had eliminated "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>."</li>
+<li>On the other hand, those born in even the highest <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms (without a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>) can "get back <em><span>apāyagāmi <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" and be reborn in an <em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span></span></em> in the future. As we saw, all sentient beings were in the <em><span>Ābhassara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm at the beginning of this world cycle, yet most are now in the <em>apāyās</em>.</li>
+</ul>
+<h5 style="text-align: justify;">Various Types of <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> Cultivated in the Human Realm</h5>
+<p style="text-align: justify;">5. The human realm is unique. It is where a sentient being can cultivate <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>of all three types. The human realm is like a "training school" where people train to be reborn in different realms by cultivating specific types of <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Animals and other sentient beings in the lowest realms do not cultivate <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>or <em><span>āneñja <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>.</span></em> They are primarily like robots. </li>
+<li>Even those in the <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms (without a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>) mostly spend time there enjoying their lives without accumulating significant <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>of any type. </li>
+<li>Humans have the unique ability to cultivate any <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>(that leads to rebirths in various realms) and also cultivate the Noble Path to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">6. Those humans with immoral <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (at a given time) cultivate <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>and are reborn in the <em>apāyās</em>. Others with moral <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> cultivate <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>(<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>) and are reborn in the human, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, and <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. Others cultivate <em><span>āneñja <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>and are reborn in the four <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. See "<a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Rebirths Take Place According to Abhisaṅkhāra</a>."</p>
+<ul style="text-align: justify;">
+<li>With that background, now we can discuss the cultivation of <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānās.</span></em> Cultivation of <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em><span> does not require the knowledge of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+<li>As we saw above, all sentient beings had to cultivate <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> by the time Earth was destroyed (in the previous world cycle) to be born in the <em><span>Ābhassara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm! That happened naturally.</li>
+</ul>
+<h5 style="text-align: justify;">Cultivation of "<em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>" - Two ways </h5>
+<p style="text-align: justify;">6. We are now in the human realm (in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>) because we all had cultivated "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>." </span></em>Those did not involve immoral actions, but we had craved "sensual pleasures."  <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> are according to the <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>cultivated via "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em><span>." Again, I refer to the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Rebirths Take Place According to Abhisaṅkhāra</a>."</p>
+<ul style="text-align: justify;">
+<li>Even though most of us enjoy sensual pleasures, we can also see their drawbacks.  To enjoy them (especially taste, smell, and bodily contacts, including sex), a dense physical body is required. But such a physical body can and will be subjected to various illnesses, injuries, and old age issues leading to inevitable suffering.</li>
+<li><span>There are two ways humans transcend the human realm (without the help of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>) and experience the higher mental states belonging to the </span><em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>. </li>
+</ul>
+<p style="text-align: justify;">7.<strong> First,</strong> to avoid such suffering in the human realm and with the expectation of being born in the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms, ancient <em>yogis</em> cultivated (<em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em>)<em> jhānās</em>. As we know, <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> do not have dense bodies; they only have the <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. They don't need to eat to sustain those subtle "energy bodies." </p>
+<ul style="text-align: justify;">
+<li>Those ancient <em>yogis</em> knew they had to avoid "mind-pleasing" contacts such as tasty food, perfumes, and even seeing women. (We know that is true since only such <em>arammana</em> can get a mind to generate <strong>"</strong><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>" </span></em>via<em><span> "<span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>." </span></em>See "<a href="../../pages/ER.CC.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda During a Lifetime</a><span>" and especially the second <span class="pali-term term-highlight" data-term="post">post</span>.)</span></li>
+<li>Avoidance of "mind-pleasing sensory objects" will happen naturally toward the end of a world cycle. When the Earth starts getting hot, such mind-pleasing objects will gradually be destroyed. Human minds will be naturally released from "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa</span></em>," or "thoughts of sensual pleasures." That is the <strong>second</strong> way of getting rebirths in <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms.</li>
+</ul>
+<h5 style="text-align: justify;">Mental States of <em><span>Rupāvacara <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em></h5>
+<p style="text-align: justify;">8. We are "bound" to this world via three types of "<em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>": <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span>, <span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, and <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>The "highest level of bondage to this world" is in the lower 11 realms where <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>is dominant. Here a conscious being highly values all six sensory inputs.</li>
+<li>When those ancient yogis realized the drawbacks of <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>, they found ways to detach their minds from <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa. </span></em>While being isolated in deep jungles helped, that was not enough. Their minds still wanted to recall the sensory pleasures of the old days. So, they started using "<em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> objects" to keep their minds focused on inert objects like clay balls, fires, etc. </li>
+<li>The easiest of such "mundane <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> meditations" was to focus the mind on the breath. That was available at all times! That is the origin of the "mundane <em>Ānapāna</em><span> meditation." That is not the "<span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> </span><em>Ānapāna<strong><span><span class="pali-term term-highlight" data-term="sati">sati</span></span></strong></em> meditation." See "<a href="../../pages/ER.FF.001/index.html" rel="noopener" target="_blank">Elephant in the Room 3 – Ānāpānasati</a>."</li>
+<li>Thus, those ancient <em>yogis</em> transcended the lowest mental states in the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> by cultivating <em><span><span class="pali-term term-highlight" data-term="nekkhamma">nekkhamma</span> saṅkappa</span></em> (i.e., absence of <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa</span></em>) by focusing the mind on "neutral <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> objects" to keep their minds off of <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa.</span></em></li>
+</ul>
+<h5 style="text-align: justify;">What Is a <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>?</span></em></h5>
+<p style="text-align: justify;">9. <strong style="color: #3366ff;">Those mental states reached via "transcending of the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>" are the <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, sensory experiences of <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em>. </strong></p>
+<ul style="text-align: justify;">
+<li>When a mind transcends the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, it gets to the mindset of <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span>.</span></em> Those are the four <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> </span></em>states (the first <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is split into two in <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> analysis.) Lower <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms have lower <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> </span></em>states, and higher <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms have higher <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> </span></em>states.</li>
+<li>From the discussion in #7, it should be clear that a mind must give up <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa. </span></em>The <strong>second</strong> mechanism happened naturally due to "mind-pleasing things" being destroyed naturally.</li>
+<li>But let us look into the <strong>first</strong> method used by ancient <em>yogis </em>to get some insights.</li>
+</ul>
+<h5 style="text-align: justify;">What Is a <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> </span></em><em>Samāpatti</em><em>?</em></h5>
+<p style="text-align: justify;">10. But when a human enters a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> (especially without much practice), the mind does not stay continuously in the <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> stream. It alternates between <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> and <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> belonging to the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span>, </span></em>i.e., <em><span><span class="pali-term term-highlight" data-term="kāmāvacara citta">kāmāvacara citta</span> vithi</span></em> also arise intermittently. <strong>Thus, the <em>yogi</em> may see and hear while in a <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> state.</strong></p>
+<ul style="text-align: justify;">
+<li>Initially, only 2-3 <em><span>jhānā <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> flow before a <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> comes in. As one cultivates the<em> jhānā</em>, there will be less and less <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> coming in between successive <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vith</span></em>i. </li>
+<li>With practice, one could be experiencing <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> continuously for many minutes. That means the <em>yogi</em> will not be aware of any sensory inputs through the five physical senses; <strong>thus, he will not see, hear, etc.</strong> <span style="color: #993366;"><strong>During that time, the <em>yogi</em> is in a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> <em>samāpatti.</em></strong></span></li>
+<li>The duration of a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> <em>samāpatti </em>can be increased to many hours with practice.</li>
+</ul>
+<h5 style="text-align: justify;"><em>Arupāvacara Samāpatti - </em>Third and Highest Mental States in This World</h5>
+<p style="text-align: justify;"><span>11. In the above, we learned that overcoming <span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> will advance a mind to the higher mental states  (</span><em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>) enjoyed by the <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em>. </p>
+<ul style="text-align: justify;">
+<li>When a <em>yogi</em> reaches the fourth (or fifth in <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> classification), their minds become detached from the physical body. They can even come out of their physical body with their <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> and perform many "miraculous feats" like going through walls. See "<a href="../../pages/BD.GG.001/index.html" rel="noopener" target="_blank">Buddhahood Associated Controversies</a>."</li>
+<li>Once getting to the highest <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, those <em>yogis</em> realized they could advance to the highest mental states available in the <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms.</li>
+<li>Those four highest mental states in this world of 31 realms are <em><span><span class="pali-term term-highlight" data-term="ākāsānañcāyatana">ākāsānañcāyatana</span>, <span class="pali-term term-highlight" data-term="viññāṇañcāyatana">viññāṇañcāyatana</span>,  <span class="pali-term term-highlight" data-term="ākiñcaññāyatana">ākiñcaññāyatana</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="nevasaññānāsaññāyatana">nevasaññānāsaññāyatana</span> </span><span style="color: #3366ff;"><strong>samāpatti</strong></span></em>. <strong>There are no <em>arupāvacara</em> <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states.</strong> </li>
+</ul>
+<h5 style="text-align: justify;">Even <em>Arupāvacara Samāpatti </em><span>Will Not Stop Suffering in the <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Process</span></h5>
+<p style="text-align: justify;">12. Before he attained <em>Buddhahood</em>, our <em>Bodhisatta</em> learned those mundane meditation techniques from two <em>yogis</em>: Alara Kalama and Uddaka Ramaputta. </p>
+<ul style="text-align: justify;">
+<li><span>But he soon realized that none of those "higher states" solve the problem of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. The main reason is that those techniques (mundane </span><em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> and <em>Ānapāna</em> meditations) only suppress l<em><span>obha, <span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em> defilements. They remain hidden as "<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>" and inevitably come to the surface under strong enough sensory attractions (temptations.) See "<a href="../../pages/TL.HH.003/index.html" rel="noopener" target="_blank">Āsava, Anusaya, and Gati (Gathi)</a>."</li>
+<li>Even though a <em>yogi</em> can be reborn in a <em>rupāvacara</em> realm with long lifespans or even an <em>arupāvacara</em> realm with very long lifespans, they all "come back" to lower realms at the end of their long lifespans. They can and will be reborn in <em>apāyās</em> unless they attain a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> on the way to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li> In other words, those meditation techniques do not break the mental bonds (<em>saṁyojana</em>) to the world of 31 realms. See "<a href="../../pages/TL.HH.006/index.html" rel="noopener" target="_blank">Dasa Samyōjana – Bonds in Rebirth Process</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Summary</h5>
+<p style="text-align: justify;">13. It should be clear that any <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em> <em>rupāvacara</em><em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>/<em>samāpatti</em> or <em>arupāvacara samāpatti</em><span> will not solve the issue of suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. We all have attained all of them uncountable times in the past.</span></p>
+<ul>
+<li style="text-align: justify;">Suffering in this world of 31 realms ends only with the <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em> of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.II.004"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0060"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.II.004
+Language:     pt-BR
+Generated-At: 2026-04-18T04:01:55Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;"><em><span>Os Jhānas <span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> (ou mundanos) não são necessários para alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>e podem ser uma distração se não se tomar cuidado.</p>
+<p style="text-align: justify;"><strong>Ensaio anterior a 2015; reescrito em 15 de dezembro de 2022;<span style="color: #3366ff;"> revisado em 19 de abril de 2024</span></strong></p>
+<h5 style="text-align: justify;">Introdução</h5>
+<p style="text-align: justify;">1. Farei aqui afirmações gerais para explicar o “quadro geral”. Embora possa haver exceções, as afirmações a seguir geralmente se aplicam.</p>
+<ul style="text-align: justify;">
+<li>Os seres sencientes nos 31 reinos têm diferentes estados mentais e capacidades. Os 26 reinos acima do reino humano apresentam melhores estados mentais, com menos sofrimento mental e físico. Os quatro reinos abaixo do humano (<em>apāyās</em>) apresentam mais sofrimento mental e físico. </li>
+<li>No início de um ciclo mundial ou de um <em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> Kappa</span></em> (com uma Terra recém-formada), a maioria dos seres sencientes são “humanos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>-kāyika</span></em>”.  Eles acabaram de descer do reino de <em><span>Ābhassara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. No entanto, os reinos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> acima do reino <em>de</em> <em><span>Ābhassara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> não foram destruídos. Assim, um novo ciclo mundial começa com apenas o reino humano e os 20 reinos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> povoados. Todos os reinos <em><span>de <span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> e os <em>apāyās</em> estão vazios no início de um novo ciclo mundial!</li>
+<li>Ao longo de milhões de anos, as impurezas ocultas (<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>) desses humanos começam a vir à tona. Eles gradualmente começam a cometer atos imorais, e seus corpos se transformam nos corpos físicos densos que temos hoje. Assim como <em><span>os <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span>, </span></em>os “primeiros humanos” não possuíam órgãos sexuais. </li>
+<li>Esses aspectos estão resumidos no ensaio “<a href="../../pages/SI.AA.010/index.html" rel="noopener" target="_blank">Buddhismo e Evolução – Aggañña Sutta (DN 27)</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Os “Primeiros Humanos” se ramificam para outros reinos</h5>
+<p style="text-align: justify;">2. Na Terra recém-formada, não havia plantas nem animais. Estes evoluíram ao longo de centenas de milhões de anos. Com o tempo, os humanos começaram a se envolver em atividades imorais, e o ambiente físico (assim como seus corpos físicos) evoluiu de acordo com isso também.</p>
+<ul style="text-align: justify;">
+<li>As plantas surgiram, e o primeiro grupo de pequenos animais nasceu por meio de nascimentos <em>opapatika</em>. Isso ocorreu muito tempo depois que os humanos evoluíram para corpos com órgãos sexuais. Os humanos que se corromperam primeiro renasceram como animais. </li>
+<li><span>Os três reinos <span class="pali-term term-highlight" data-term="apāya">apāya</span> inferiores também se formaram ao longo de um período mais extenso, de acordo com as energias </span><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que os humanos evoluídos depositaram quando começaram a cultivar <em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>. É claro que alguns humanos cultivaram <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>e nasceram nos reinos <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;"><span>3. Os primeiros humanos tinham longas esperanças de vida (vidas). Na época em que o primeiro <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (<span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kakusanda) nasceu, a esperança de vida humana havia diminuído para 80.000 anos. Isso aconteceu após um longo tempo, provavelmente mais de um bilhão de anos após a formação da Terra.</span></p>
+<ul style="text-align: justify;">
+<li>Naquela época, possivelmente os três reinos inferiores já haviam sido povoados por aqueles humanos que se “corromperam primeiro” e se envolveram em atos imorais, cultivando <em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>. É claro que aqueles que se envolveram em atos morais (com <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>) povoaram os reinos <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> e os 16 reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara</span></em>. Além disso, outros cultivaram <em>āneñjāAbhisaṅkhāra </em>(<em><span>āneñja <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>) e renasceram nos quatro reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> arupāvacara</span></em>.</li>
+<li>É bom compreender como o cultivo dos três tipos de <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>leva ao renascimento em vários reinos: “<a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Os renascimentos ocorrem de acordo com o Abhisaṅkhāra</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Os renascimentos futuros dependem da <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> de cada um</h5>
+<p style="text-align: justify;">4. É claro que os renascimentos em várias existências (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) dependem do tipo de <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span>. </span></em>Um ser senciente tende a cultivar um tipo específico de <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em><span style="color: #993366;"><strong>com base na <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> (caráter/hábitos) daquele momento.</strong></span></p>
+<ul style="text-align: justify;">
+<li>Nenhum ser senciente (abaixo do estágio <em><span>de <span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em>) tem “<em><span>uma <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> fixa”. Todos nós já cultivamos <em><span><span class="pali-term term-highlight" data-term="apāya">Apāya</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> humana, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em><span> e nascemos em todos esses reinos! É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que não existe </span><em>uma</em> “<em>alma</em>/<em>ātman</em>” fixa atravessando o processo de renascimento.</li>
+<li>Somente quando alguém começa a atingir vários estágios de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é que sua <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> não “retrocederá” a partir dessa realização. Assim, por exemplo, um <em>Anāgāmi</em> nunca mais nascerá em <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> porque eliminou a “<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>”.</li>
+<li>Por outro lado, aqueles que nasceram mesmo nos reinos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> mais elevados (sem um <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>) podem “recuperar <em><span>o apāyagāmi <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>” e renascer em um <em><span><span class="pali-term term-highlight" data-term="apāya">Apāya</span></span></em> no futuro. Como vimos, todos os seres sencientes estavam no reino de <em><span>Ābhassara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> no início deste ciclo mundial, mas a maioria está agora nos <em>Apāyās</em>.</li>
+</ul>
+<h5 style="text-align: justify;">Vários tipos de <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> cultivados no reino humano</h5>
+<p style="text-align: justify;">5. O reino humano é único. É onde um ser senciente pode cultivar <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>de todos os três tipos. O reino humano é como uma “escola de treinamento” onde as pessoas se preparam para renascer em diferentes reinos, cultivando tipos específicos de <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Animais e outros seres sencientes nos reinos mais baixos não cultivam <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>ou <em><span>āneñja <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span>.</span></em> Eles são, principalmente, como robôs. </li>
+<li>Mesmo aqueles nos reinos <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (sem um <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>) passam a maior parte do tempo ali desfrutando de suas vidas sem acumular <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> significativo de qualquer tipo. </li>
+<li>Os seres humanos têm a capacidade única de cultivar qualquer <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>(que leva a renascimentos em vários reinos) e também cultivam o Nobre Caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">6. Os seres humanos com <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> imoral (em um determinado momento) cultivam <em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>e renascem nos <em>apāyās</em>. Outros com <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> moral cultivam <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>(<em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> de rupāvacara</span></em>) e renascem nos reinos humano, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara</span></em>. Outros cultivam <em><span>āneñja <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>e renascem nos quatro reinos <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. Veja “<a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Os renascimentos ocorrem de acordo com o Abhisaṅkhāra</a>”.</p>
+<ul style="text-align: justify;">
+<li>Com esse pano de fundo, agora podemos discutir o cultivo de <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>.</span></em> O cultivo de <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em><span> não requer o conhecimento do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+<li>Como vimos acima, todos os seres sencientes tiveram que cultivar <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> antes da destruição da Terra (no ciclo mundial anterior) para nascerem no reino <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> Ābhassara</span></em>! Isso aconteceu naturalmente.</li>
+</ul>
+<h5 style="text-align: justify;">Cultivo do <em><span>“<span class="pali-term term-highlight" data-term="brahma">Brahma</span> </span></em><span><span class="pali-term term-highlight" data-term="gati">Gati</span>” – Duas maneiras </span></h5>
+<p style="text-align: justify;">6. Estamos agora no reino humano (em <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>) porque todos nós cultivamos “<em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span>”.</span></em> Isso não envolveu ações imorais, mas ansiamos por “prazeres sensuais”.  <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> estão de acordo com o <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>cultivado por meio de “<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>”. Mais uma vez, remeto-me ao ensaio “<a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Os renascimentos ocorrem de acordo com o Abhisaṅkhāra</a>”.</p>
+<ul style="text-align: justify;">
+<li>Embora a maioria de nós aprecie os prazeres sensuais, também podemos ver suas desvantagens. Para desfrutá-los (especialmente o paladar, o olfato e os contatos corporais, incluindo o sexo), é necessário um corpo físico denso. Mas tal corpo físico pode e será sujeito a várias doenças, lesões e problemas da velhice, levando a um sofrimento inevitável.</li>
+<li><span>Existem duas maneiras pelas quais os humanos transcendem o reino humano (sem a ajuda de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>) e experimentam os estados mentais superiores pertencentes ao </span><em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em>. </li>
+</ul>
+<p style="text-align: justify;">7.<strong> Primeiro,</strong> para evitar tal sofrimento no reino humano e com a expectativa de renascer nos reinos <em><span>de <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>, <em>os</em> antigos <em>iogues</em> cultivavam (<em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em>)<em> jhānās</em>. Como sabemos, <em><span>os <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> não possuem corpos densos; eles têm apenas o <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. Eles não precisam comer para sustentar esses “corpos energéticos” sutis. </p>
+<ul style="text-align: justify;">
+<li>Esses antigos <em>iogues</em> sabiam que precisavam evitar contatos “agradáveis à mente”, como comida saborosa, perfumes e até mesmo ver mulheres. (Sabemos que isso é verdade, pois somente tais <em>arammana</em> podem levar a mente a gerar <strong>“</strong><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span>” </span></em>por meio<em> </em>de <em><span>“<span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>”.</span></em> Veja “<a href="../../pages/ER.CC.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda Durante uma Vida</a>” e especialmente a segunda postagem.)</li>
+<li>A evitação de “objetos sensoriais que agradam à mente” ocorrerá naturalmente no final de um ciclo mundial. Quando a Terra começar a esquentar, tais objetos que agradam à mente serão gradualmente destruídos. As mentes humanas serão naturalmente libertadas do “<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> saṅkappa</span></em>”, ou “pensamentos de prazeres sensuais”. Essa é a <strong>segunda</strong> maneira de obter renascimentos nos reinos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Estados mentais dos <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span> de Rupāvacara</span></em></h5>
+<p style="text-align: justify;">8. Estamos “ligados” a este mundo por meio de três tipos de “<em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em>”: <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span>, <span class="pali-term term-highlight" data-term="rūpa rāga">Rūpa Rāga</span></span></em> e <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>O “nível mais elevado de apego a este mundo” encontra-se nos 11 reinos inferiores, onde <em><span>o <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span> </span></em>é dominante. Aqui, um ser consciente valoriza altamente todas as seis entradas sensoriais.</li>
+<li>Quando aqueles antigos iogues perceberam as desvantagens do <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>, encontraram maneiras de desligar suas mentes do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> saṅkappa. </span></em>Embora o isolamento em selvas profundas ajudasse, isso não era suficiente. Suas mentes ainda queriam relembrar os prazeres sensoriais dos velhos tempos. Assim, começaram a usar “objetos <em>Kasiṇa</em>” para manter suas mentes focadas em objetos inertes, como bolas de argila, fogos, etc. </li>
+<li>A mais fácil dessas “meditações <em>Kasiṇa</em> mundanas” era concentrar a mente na respiração. Isso estava disponível o tempo todo! Essa é a origem da “meditação <em>Ānapāna</em> Kasiṇa”. Essa não é a “meditação Buddhista <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span><strong><span><span class="pali-term term-highlight" data-term="sati">sati</span></span></strong></em>”. Veja “<a href="../../pages/ER.FF.001/index.html" rel="noopener" target="_blank">O Elefante na Sala 3 – Ānāpānasati</a>”.</li>
+<li>Assim, aqueles antigos <em>iogues</em> transcenderam os estados mentais mais baixos no <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> cultivando <em><span><span class="pali-term term-highlight" data-term="nekkhamma">Nekkhamma</span> saṅkappa</span></em> (ou seja, a ausência de <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa</span></em>) ao concentrar a mente em “objetos <em>Kasiṇa</em> neutros” para manter suas mentes afastadas do <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa.</span></em></li>
+</ul>
+<h5 style="text-align: justify;">O que é um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>?</span></em></h5>
+<p style="text-align: justify;">9. <strong style="color: #3366ff;">Esses estados mentais alcançados por meio da “transcendência do <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>” são os <em>Jhānas rupāvacara</em>, experiências sensoriais dos <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span> rupāvacara</span></em>. </strong></p>
+<ul style="text-align: justify;">
+<li>Quando uma mente transcende o <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>, ela alcança a mentalidade dos <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span> rupāvacara.</span></em> Esses são os quatro estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (o primeiro <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> é dividido em dois na análise <em><span>do <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>). Os reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> inferiores têm estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> inferiores, e os reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> superiores têm estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> superiores.</li>
+<li>A partir da discussão no nº 7, deve ficar claro que a mente deve abandonar o <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> saṅkappa. </span></em>O <strong>segundo</strong> mecanismo ocorreu naturalmente devido à destruição natural das “coisas que agradam à mente”.</li>
+<li>Mas vamos examinar o <strong>primeiro</strong> método usado pelos antigos <em>iogues </em>para obter algumas percepções.</li>
+</ul>
+<h5 style="text-align: justify;">O que é um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> Samāpatti?</span></em></h5>
+<p style="text-align: justify;">10. Mas quando um ser humano entra em um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (especialmente sem muita prática), a mente não permanece continuamente na corrente de <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>. Ela alterna entre <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="citta">Citta</span> vithi</span></em> e <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> pertencentes ao <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span>, </span></em>ou seja, <em><span><span class="pali-term term-highlight" data-term="kāmāvacara citta">Kāmāvacara Citta</span> vithi</span></em> também surge intermitentemente. <strong>Assim, o <em>iogue</em> pode ver e ouvir enquanto está em um estado <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</strong></p>
+<ul style="text-align: justify;">
+<li>Inicialmente, apenas 2-3 <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> fluem antes que um <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> surja. À medida que se cultiva o<em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, haverá cada vez menos <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> surgindo entre <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vith</span></em>i sucessivos. </li>
+<li>Com a prática, pode-se experimentar <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> continuamente por muitos minutos. Isso significa que o <em>iogue</em> não estará ciente de nenhum estímulo sensorial através dos cinco sentidos físicos; <strong>assim, ele não verá, ouvirá, etc.</strong> <span style="color: #993366;"><strong>Durante esse tempo, o <em>iogue</em> está em um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> <em>samāpatti.</em></strong></span></li>
+<li>A duração de um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> <em>samāpatti </em>pode ser aumentada para muitas horas com a prática.</li>
+</ul>
+<h5 style="text-align: justify;"><em>Arupāvacara Samāpatti - </em>Terceiro e Mais Elevado Estado Mental Neste Mundo</h5>
+<p style="text-align: justify;"><span>11. No texto acima, aprendemos que superar o <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span> levará a mente a estados mentais superiores (</span><em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>) desfrutados pelos <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> <em>rupāvacara</em>. </p>
+<ul style="text-align: justify;">
+<li>Quando um <em>iogue</em> alcança o quarto (ou quinto, na classificação <em><span>do <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>), sua mente se desliga do corpo físico. Ele pode até mesmo sair do corpo físico com seu <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> e realizar muitos “feitos milagrosos”, como atravessar paredes. Veja “<a href="../../pages/BD.GG.001/index.html" rel="noopener" target="_blank">Controvérsias Associadas à Iluminação</a>”.</li>
+<li>Uma vez alcançado o <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> rupāvacara</span></em> mais elevado, esses <em>iogues</em> perceberam que podiam avançar para os estados mentais mais elevados disponíveis nos reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> arupāvacara</span></em>.</li>
+<li>Esses quatro estados mentais mais elevados neste mundo de 31 reinos são <em><span><span class="pali-term term-highlight" data-term="ākāsānañcāyatana">Ākāsānañcāyatana</span>, <span class="pali-term term-highlight" data-term="viññāṇañcāyatana">Viññāṇañcāyatana</span>, <span class="pali-term term-highlight" data-term="ākiñcaññāyatana">Ākiñcaññāyatana</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="nevasaññānāsaññāyatana">Nevasaññānāsaññāyatana</span> </span><span style="color: #3366ff;"><strong>samāpatti</strong></span></em>. <strong>Não há estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> arupāvacara</span></em>.</strong> </li>
+</ul>
+<h5 style="text-align: justify;">Mesmo <em>o Arupāvacara Samāpatti</em> Não Acabará com o Sofrimento no Processo de Renascimento</h5>
+<p style="text-align: justify;">12. Antes de atingir <em>a iluminação</em>, nosso <em>Bodhisatta</em> aprendeu essas técnicas de meditação mundanas com dois <em>iogues</em>: Alara Kalama e Uddaka Ramaputta. </p>
+<ul style="text-align: justify;">
+<li>Mas ele logo percebeu que nenhum desses “estados superiores” resolve o problema do Renascimento. A principal razão é que essas técnicas (meditações mundanas <em>Kasiṇa</em> e <em>Ānapāna</em>) apenas suprimem as impurezas <em><span><span class="pali-term term-highlight" data-term="lobha">Lobha</span>, <span class="pali-term term-highlight" data-term="dosa">Dosa</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="moha">Moha</span></span></em>. Elas permanecem ocultas como “<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>” e inevitavelmente vêm à tona sob atrações sensoriais suficientemente fortes (tentações). Veja “<a href="../../pages/TL.HH.003/index.html" rel="noopener" target="_blank">Āsava, Anusaya e Gati (Gathi)</a>”.</li>
+<li>Embora um <em>iogue</em> possa renascer em um reino <em>rupāvacara</em> com longa expectativa de vida ou mesmo em um reino <em>arupāvacara</em> com expectativa de vida muito longa, todos eles “retornam” aos reinos inferiores ao final de suas longas vidas. Eles podem e irão renascer em <em>apāyās</em>, a menos que alcancem um <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> no caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li> Em outras palavras, essas técnicas de meditação não rompem os laços mentais (<em>saṁyojana</em>) com o mundo dos 31 reinos. Veja “<a href="../../pages/TL.HH.006/index.html" rel="noopener" target="_blank">Dasa Samyōjana – Laços no Processo de Renascimento</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Resumo</h5>
+<p style="text-align: justify;">13. Deve ficar claro que qualquer <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>/<em>samāpatti</em> ou <em>arupāvacara samāpatti</em> não resolverá a questão do sofrimento no processo de renascimento. Todos nós já alcançamos todos eles inúmeras vezes no passado.</p>
+<ul>
+<li style="text-align: justify;">O sofrimento neste mundo dos 31 reinos termina apenas com o <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em> de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.II.003/index.html">Jhana Stages Of Nibbana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.II.005/index.html">Power Of The Human Mind Ariya Jhanas</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.II.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Jhana Stages Of Nibbana</span>
+        
+        <span class="pathway-title title-pt">Estágios de Jhāna de Nibbāna</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.II.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Power Of The Human Mind Ariya Jhanas</span>
+        
+        <span class="pathway-title title-pt">O Poder da Mente Humana: Ariya Jhānas</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

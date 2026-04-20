@@ -1,0 +1,384 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Where To Start On The Path | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 25 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.DD.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Where To Start On The Path</h1>
+    
+    <h1 class="title-pt">Por onde começar no caminho</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.DD.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.DD.004"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0414"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.DD.004</td></tr><tr><td>Fin-dex</td><td>0414</td></tr><tr><td>Slug</td><td>where-to-start-on-the-path</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Where To Start On The Path</td></tr></table></div></div><p style="text-align: justify"><span>This is a very important <span class="pali-term term-highlight" data-term="post">post</span>. Please read the <span class="pali-term term-highlight" data-term="post">post</span> through without clicking on any link first, in order to get the main idea that I am trying to convey. You may want to re-read the <span class="pali-term term-highlight" data-term="post">post</span> several times, clicking on the links to find out more as you digest the key points. </span><strong><span>Actually, this is true of all the <span class="pali-term term-highlight" data-term="posts">posts</span>: It is better to read through a given <span class="pali-term term-highlight" data-term="post">post</span> first to get the main idea, and then to look into the details provided by the links as needed.</span></strong></p>
+<ul style="text-align: justify">
+<li><span>Anyone reading this website has been exposed to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> in the past; by "past" I mean beginning-less time. Each of us have been "living" and "dying" innumerable times, in most of the 31 realms of existence; see, "</span><a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a><span>". Even though a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> appears in the world after very long times, there have been innumerable Buddhas too. Some of you may not believe this, and that is fine. It may make sense later on.</span></li>
+</ul>
+<p style="text-align: justify"><span>Each of us has listened to a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> delivering a discourse, attained the highest</span><em> jhānā</em>, and also been born in the animal and <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (the lowest realm) too. Our character and habits may have changed from "good" to "bad" many times over. Infinite time is very hard to grasp with the mind; see, "<a href="../../pages/BD.AA.006/index.html" rel="noopener" target="_blank" title="Saṃsāric Time Scale">Saṃsāric Time Scale, Buddhist Cosmology, and the Big Bang Theory</a>", and "<a href="../../pages/DS.KK.004/index.html" rel="noopener" target="_blank" title="Infinity – How Big Is It?">Infinity - How Big is it?</a>". Also, you may want to read the excellent book, "The Beginning of Infinity" by David Deutsch (2011) IF you are interested in a "scientific opinion"; actually, the descriptions are very similar in both cases in the sense that many things that sound implausible are not scientifically implausible, and in fact are necessary to explain the scientific data.</p>
+<ul style="text-align: justify">
+<li>As in this life, it is easy to remember relatively recent events in the <em>sansaric</em> journey. Those who can remember past lives, remember only the past one or few lives; see, "<a href="../../pages/BD.AA.007/index.html" rel="noopener" target="_blank" title="Evidence for Rebirth">Evidence for Rebirth</a>". The 'habits" and "tendencies" that we have are the ones that we have had in the recent rebirths.</li>
+<li>Therefore, for some people, it may be easier to get into a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> (or to have a good meditative experience) just because they have had that experience in more recent lives; for another person, it may be harder just because that person may not have had that experience for very many births in the recent past.</li>
+</ul>
+<p style="text-align: justify"><span>One should not be discouraged if one's understanding of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> or "meditation experience" seems to be different from what one hears from others. The important thing is to first determine where one is in the relative scale of things and start at the right place. Most times there is no correlation between this evaluation and one's "book knowledge" either.</span></p>
+<p style="text-align: justify"><span>One could use the basic guidelines provided by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. There are five stages starting with </span><em>dana</em> and ending with<em><span> <span class="pali-term term-highlight" data-term="nekkhamma">nekkhamma</span></span></em>:</p>
+<ul style="text-align: justify">
+<li><em>Dana</em> (giving, generosity, caring for others' well being).</li>
+<li><em>Sila</em> (moral conduct).</li>
+<li><em><span><span class="pali-term term-highlight" data-term="sagga">Sagga</span></span></em> (literally heaven, but meaning calm and peaceful mind).</li>
+<li><em>Ädeenava</em><span> (seeing the fruitlessness and the danger of the 31 realms or the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process).</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="nekkhamma">Nekkhamma</span></span></em> (losing attachment to "things" in the 31 realms, and working diligently  towards <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>), which in turn leads to <em>nissarana</em><span> (stop this suffering-filled <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process) and thus </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>.</span></em></li>
+</ul>
+<p style="text-align: justify">These are not clear-cut steps, but are guidelines.</p>
+<p style="text-align: justify">1. Most people, irrespective of the religion, are generous and enjoy giving. Just like <em>sila</em> below, <em>dana</em> induces happiness in oneself.</p>
+<p style="text-align: justify"><span>2. In <span class="pali-term term-highlight" data-term="pāli">Pāli</span> it is </span><em>sila</em><span> (pronounced "seela"); in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> it is "</span><em>seelaya</em>" ("<em>sisil</em>" means cooling down and   "<em>laya</em>" means heart, so cooled heart), and thus is a bit more explanatory.</p>
+<ul style="text-align: justify">
+<li>Any act that makes one's heart to cool down is an act of <em>sila</em>, i.e., it is moral conduct.</li>
+<li>When we act with compassion, say give a meal to someone hungry or help out an elderly person to cross the street, it makes our heart cool down. On the other hand, when we do something immoral or inappropriate, our heart gets agitated and the heart rate goes up, and the whole body heats up; also see, "<a href="../../pages/TL.CC.006/index.html" rel="noopener" target="_blank" title="How to Taste Nibbāna">How to Taste Nibbāna</a>".</li>
+<li>It is the same compassion, extended to other living beings as well, that makes up the basis of the five precepts: avoiding any act that is harmful to any living being; see, "<a href="../../pages/TL.EE.005/index.html" rel="noopener" target="_blank" title="The Five Precepts – What the Buddha Meant by Them">Five Precepts - What the Buddha Meant by Them</a>".</li>
+<li><span style="color: #0000ff">The humans are at a much higher "consciousness level" compared to animals, so we need to pay special attention not to even hurt the feelings of another human being</span>; see, "<a href="../../pages/TL.EE.007/index.html" rel="noopener" target="_blank" title="How to Evaluate Weights of Different Kammas">How to Evaluate Weights of Different Kamma</a>". It is a good habit also to cultivate <em><span><span class="pali-term term-highlight" data-term="metta">metta</span></span></em> (loving kindness) to all beings; see, "<a href="../../pages/TL.GG.007/index.html" rel="noopener" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Debt, and Meditation</a>".</li>
+</ul>
+<p style="text-align: justify">3. When one gets to the <em><span><span class="pali-term term-highlight" data-term="sagga">Sagga</span></span></em> stage, it is relatively easy to calm the mind. One starts feeling the <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> (see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a>") or the happiness of "cooling down" by voluntarily "giving up" (and sharing with others)  things that one used to be quite possessive of. It is very subtle. One cannot just start giving everything that one owns; that will only lead to<em><span> <span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em> or internal friction. In addition, one has responsibilities and debts to pay; see, "<a href="../../pages/TL.GG.007/index.html" rel="noopener" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Debt, and Meditation</a>".</p>
+<ul style="text-align: justify">
+<li>Different people get "agitated" due to different "triggers". This is because we have very different <em>sansaric</em><span> habits: things we really like and things we really dislike; there are several <span class="pali-term term-highlight" data-term="posts">posts</span> on these habits and "</span><em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em>". It is a good idea to make a self-assessment, figure out the "bad triggers" and make an effort to remove them.</li>
+<li>For example, if one has an "explosive temper" it is a good idea to make an effort to restraint oneself and also to do <em><span><span class="pali-term term-highlight" data-term="metta">metta</span> <span class="pali-term term-highlight" data-term="bhavana">bhavana</span></span></em>. It is important to realize that the anger is within oneself; it is not in an outside person or thing. I could get mad by thinking about person A, but there are many other people who have loving thoughts about the same person A. Same with greed, it is inside of us, not outside. These all originate from our <em>sansaric</em> likes and dislikes.</li>
+</ul>
+<p style="text-align: justify">4. While it is hard for some to even start thinking about the 'bigger picture" of the 31 realms, and the possible suffering in future rebirths, some others may have thought about this "in the recent past in the <em>sansaric</em> rebirths", and thus may be motivated to explore more.</p>
+<p style="text-align: justify">5. The last stage is for those who have "seen the big picture" and the dangers of staying "in this world of 31 realms", or at least have some inkling of it. When one starts feeling the <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em><span> strongly, and also start seeing the suffering to come in the lower realms, giving up the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process becomes an urgent need, instead of being anxious about "giving up <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>". Again, this cannot be forced. One will feel it when one's mind is ready.</span></p>
+<ul>
+<li style="text-align: justify"><span>This website has <span class="pali-term term-highlight" data-term="posts">posts</span> that could be helpful in any of the above categories. One needs to look around and find the suitable topics; </span><span style="color: #0000ff"><span>even though I have tried to put <span class="pali-term term-highlight" data-term="posts">posts</span> into different categories, there may be <span class="pali-term term-highlight" data-term="posts">posts</span> suitable for anyone in any category</span></span>.</li>
+<li style="text-align: justify">My intention is to add material at all different levels, mainly up to the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. I hope that will help a wide spectrum of people and also illustrate that <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> describes the ultimate natural laws not only about our human world, but of all existence. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is not just a philosophical theory; one can actually experience the improvement in one's quality of life as one follows the Path.</span></li>
+</ul>
+<p style="text-align: justify"><strong>September 13, 2016:</strong> I recently started a new section, "<a href="../../pages/LD.AA.000/index.html" rel="noopener" target="_blank">Living Dhamma</a><span>" detailing a step-by-step process on how to get started on the Path. One could get started even without belief in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> or the existence of 31 realms. There we start by looking at the (hidden) suffering experienced in this life and how to eliminate it.</span></p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.DD.004"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0414"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.DD.004
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p style="text-align: justify">Este é um ensaio muito importante. Por favor, leia o ensaio inteiro sem clicar em nenhum link primeiro, a fim de compreender a ideia principal que estou tentando transmitir. Você pode querer reler o ensaio várias vezes, clicando nos links para saber mais à medida que assimila os pontos-chave. <strong>Na verdade, isso se aplica a todos os ensaios: é melhor ler um determinado ensaio primeiro para compreender a ideia principal e, em seguida, examinar os detalhes fornecidos pelos links, conforme necessário.</strong></p>
+<ul style="text-align: justify">
+<li><span>Qualquer pessoa que esteja lendo este site já foi exposta ao <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> no passado; por “passado” quero dizer um tempo sem início. Cada um de nós já “viveu” e “morreu” inúmeras vezes, na maioria dos 31 reinos da existência; veja “</span><a href="../../pages/BD.HH.001/index.html" title="The Grand Unified Theory of Dhamma">A Grande Teoria Unificada do Dhamma</a><span>”. Mesmo que um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> apareça no mundo após muito tempo, também já houve inúmeros Buddhas. Alguns de vocês podem não acreditar nisso, e tudo bem. Pode fazer sentido mais tarde.</span></li>
+</ul>
+<p style="text-align: justify"><span>Cada um de nós já ouviu um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> proferir um discurso, alcançou o </span><em>jhānā</em> mais elevado e também nasceu no reino animal e no <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (o reino mais baixo). Nosso caráter e hábitos podem ter mudado de “bons” para “ruins” muitas vezes. É muito difícil compreender o tempo infinito com a mente; veja “<a href="../../pages/BD.AA.006/index.html" title="Saṃsāric Time Scale">Escala de Tempo Saṃsárico, Cosmologia Buddhista e a Teoria do Big Bang</a>” e “<a href="../../pages/DS.KK.004/index.html" title="Infinity – How Big Is It?">Infinito – Quão Grande é?</a>”. Além disso, você pode querer ler o excelente livro “O Início do Infinito”, de David Deutsch (2011), SE estiver interessado em uma “opinião científica”; na verdade, as descrições são muito semelhantes em ambos os casos, no sentido de que muitas coisas que parecem improváveis não são cientificamente improváveis e, na verdade, são necessárias para explicar os dados científicos.</p>
+<ul style="text-align: justify">
+<li>Assim como nesta vida, é fácil lembrar eventos relativamente recentes na jornada <em>samsárica</em>. Aqueles que conseguem se lembrar de vidas passadas, lembram-se apenas da última ou de algumas vidas anteriores; veja “<a href="../../pages/BD.AA.007/index.html" title="Evidence for Rebirth">Evidências do Renascimento</a>”. Os “hábitos” e “tendências” que temos são aqueles que tivemos nos renascimentos recentes.</li>
+<li>Portanto, para algumas pessoas, pode ser mais fácil entrar em um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (ou ter uma boa experiência meditativa) simplesmente porque tiveram essa experiência em vidas mais recentes; para outra pessoa, pode ser mais difícil simplesmente porque essa pessoa pode não ter tido essa experiência em muitos nascimentos no passado recente.</li>
+</ul>
+<p style="text-align: justify"><span>Não se deve desanimar se a compreensão do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> ou a “experiência meditativa” parecer diferente do que se ouve dos outros. O importante é primeiro determinar onde se está na escala relativa das coisas e começar no lugar certo. Na maioria das vezes, também não há correlação entre essa avaliação e o “conhecimento acadêmico” de cada um.</span></p>
+<p style="text-align: justify"><span>Pode-se usar as orientações básicas fornecidas pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Existem cinco estágios, começando com </span><em>dana</em> e terminando com<em><span> <span class="pali-term term-highlight" data-term="nekkhamma">Nekkhamma</span></span></em>:</p>
+<ul style="text-align: justify">
+<li><em>Dana</em> (doação, generosidade, cuidado com o bem-estar dos outros).</li>
+<li><em>Sila</em> (conduta moral).</li>
+<li><em><span><span class="pali-term term-highlight" data-term="sagga">Sagga</span></span></em> (literalmente céu, mas significando mente calma e pacífica).</li>
+<li><em>Ädeenava</em> (ver a futilidade e o perigo dos 31 reinos ou do processo de Renascimento).</li>
+<li><em><span><span class="pali-term term-highlight" data-term="nekkhamma">Nekkhamma</span></span></em> (perder o apego às “coisas” nos 31 reinos e trabalhar diligentemente em direção <em><span>ao <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>), o que, por sua vez, leva ao <em>nissarana</em> (interromper esse processo de renascimento cheio de sofrimento) e, assim<em><span>, ao <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>.</span></em></li>
+</ul>
+<p style="text-align: justify">Essas não são etapas bem definidas, mas sim diretrizes.</p>
+<p style="text-align: justify">1. A maioria das pessoas, independentemente da religião, é generosa e gosta de dar. Assim como <em>sila</em> abaixo, <em>dana</em> induz a felicidade em si mesmo.</p>
+<p style="text-align: justify"><span>2. Em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> é </span><em>sila</em> (pronuncia-se “seela”); em Cingalês é “<em>seelaya</em>” (“<em>sisil</em>” significa arrefecer e “<em>laya</em>” significa coração, portanto, coração arrefecido), e assim é um pouco mais explicativo.</p>
+<ul style="text-align: justify">
+<li>Qualquer ato que faça o coração esfriar é um ato de <em>sila</em>, ou seja, é uma conduta moral.</li>
+<li>Quando agimos com compaixão, por exemplo, dando uma refeição a alguém com fome ou ajudando um idoso a atravessar a rua, isso acalma nosso coração. Por outro lado, quando fazemos algo imoral ou inadequado, nosso coração fica agitado, a frequência cardíaca aumenta e todo o corpo se aquece; veja também “<a href="../../pages/TL.CC.006/index.html" title="How to Taste Nibbāna">Como saborear o Nibbāna</a>”.</li>
+<li>É a mesma compaixão, estendida também a outros seres vivos, que constitui a base dos cinco preceitos: evitar qualquer ato que seja prejudicial a qualquer ser vivo; veja “<a href="../../pages/TL.EE.005/index.html" title="The Five Precepts – What the Buddha Meant by Them">Cinco Preceitos – O que o Buddha quis dizer com eles</a>”.</li>
+<li><span style="color: #0000ff">Os seres humanos estão em um “nível de consciência” muito mais elevado em comparação com os animais, por isso precisamos prestar atenção especial para não ferir os sentimentos de outro ser humano</span>; veja “<a href="../../pages/TL.EE.007/index.html" title="How to Evaluate Weights of Different Kammas">Como avaliar os pesos de diferentes Kamma</a>”. É um bom hábito também cultivar <em><span><span class="pali-term term-highlight" data-term="mettā">Mettā</span></span></em> (bondade amorosa) para com todos os seres; veja “<a href="../../pages/TL.GG.007/index.html" title="Kamma, Debt, and Meditation">Kamma, dívida e meditação</a>”.</li>
+</ul>
+<p style="text-align: justify">3. Quando se chega ao estágio <em><span><span class="pali-term term-highlight" data-term="sagga">Sagga</span></span></em>, é relativamente fácil acalmar a mente. Começa-se a sentir o <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> (veja “<a href="../../pages/TL.CC.005/index.html" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade – O que é Niramisa Sukha?</a>”) ou a felicidade de “esfriar” ao “abrir mão” voluntariamente (e compartilhar com os outros) das coisas das quais se era bastante possessivo. É muito sutil. Não se pode simplesmente começar a dar tudo o que se possui; isso só levará a<em><span> <span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em> ou atrito interno. Além disso, a pessoa tem responsabilidades e dívidas a pagar; veja “<a href="../../pages/TL.GG.007/index.html" title="Kamma, Debt, and Meditation">Kamma, Dívida e Meditação</a>”.</p>
+<ul style="text-align: justify">
+<li>Pessoas diferentes ficam “agitadas” devido a diferentes “gatilhos”. Isso ocorre porque temos hábitos <em>sansáricos</em> muito diferentes: coisas que realmente gostamos e coisas que realmente não gostamos; há vários ensaios sobre esses hábitos e “<em><span><span class="pali-term term-highlight" data-term="āsavā">Āsavā</span></span></em>”. É uma boa ideia fazer uma autoavaliação, descobrir os “gatilhos ruins” e se esforçar para removê-los.</li>
+<li>Por exemplo, se alguém tem um “temperamento explosivo”, é uma boa ideia fazer um esforço para se controlar e também praticar <em><span>a <span class="pali-term term-highlight" data-term="mettā">Mettā</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>. É importante perceber que a raiva está dentro de si mesmo; não está em uma pessoa ou coisa externa. Eu poderia ficar com raiva ao pensar na pessoa A, mas há muitas outras pessoas que têm pensamentos amorosos sobre a mesma pessoa A. O mesmo acontece com a ganância, ela está dentro de nós, não fora. Tudo isso se origina de nossos gostos e desgostos <em>sansáricos</em>.</li>
+</ul>
+<p style="text-align: justify">4. Embora seja difícil para alguns até mesmo começar a pensar sobre o “quadro geral” dos 31 reinos e o possível sofrimento em renascimentos futuros, outros podem ter pensado sobre isso “no passado recente, nos renascimentos <em>samsáricos</em>” e, portanto, podem estar motivados a explorar mais.</p>
+<p style="text-align: justify">5. O último estágio é para aqueles que “viram o panorama geral” e os perigos de permanecer “neste mundo dos 31 reinos”, ou pelo menos têm alguma noção disso. Quando alguém começa a sentir fortemente o <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> e também começa a ver o sofrimento que virá nos reinos inferiores, abandonar o processo de Renascimento se torna uma necessidade urgente, em vez de ficar ansioso por “abandonar o Renascimento”. Novamente, isso não pode ser forçado. A pessoa sentirá isso quando sua mente estiver pronta.</p>
+<ul>
+<li style="text-align: justify">Este site tem ensaios que podem ser úteis em qualquer uma das categorias acima. É preciso procurar e encontrar os tópicos adequados; <span style="color: #0000ff">embora eu tenha tentado colocar os ensaios em diferentes categorias, pode haver ensaios adequados para qualquer pessoa em qualquer categoria</span>.</li>
+<li style="text-align: justify">Minha intenção é adicionar material em todos os diferentes níveis, principalmente até o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. Espero que isso ajude um amplo espectro de pessoas e também ilustre que o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> descreve as leis naturais supremas não apenas sobre nosso mundo humano, mas de toda a existência. O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> não é apenas uma teoria filosófica; é possível realmente experimentar a melhoria na qualidade de vida à medida que se segue o Caminho.</span></li>
+</ul>
+<p style="text-align: justify"><strong>13 de setembro de 2016:</strong> Recentemente, comecei uma nova seção, “<a href="../../pages/LD.AA.000/index.html">Living Dhamma</a>” (<a href="../../pages/LD.AA.000/index.html">Vivendo o Dhamma</a>), detalhando um processo passo a passo sobre como começar no Caminho. É possível começar mesmo sem acreditar no Renascimento ou na existência dos 31 reinos. Lá, começamos observando o sofrimento (oculto) experimentado nesta vida e como eliminá-lo.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.DD.003/index.html">A Buddhist Or A Bhouddhaya</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.DD.005/index.html">Recent Evidence For Unbroken Memory Records Hsam</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.DD.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">A Buddhist Or A Bhouddhaya</span>
+        
+        <span class="pathway-title title-pt">Um Buddhista ou um Bhouddhaya</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.DD.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Recent Evidence For Unbroken Memory Records Hsam</span>
+        
+        <span class="pathway-title title-pt">Evidências recentes de registros de memória ininterrupta Hsam</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

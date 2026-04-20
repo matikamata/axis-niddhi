@@ -1,0 +1,420 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Hetu Phala Paccuppanna And Paticca Samuppada | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 3 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.EE.013</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Hetu Phala Paccuppanna And Paticca Samuppada</h1>
+    
+    <h1 class="title-pt">Hetu Phala Paccuppanna e Paticca Samuppada</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.EE.013</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.EE.013"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0151"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.EE.013</td></tr><tr><td>Fin-dex</td><td>0151</td></tr><tr><td>Slug</td><td>hetu-phala-paccuppanna-and-paticca-samuppada</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Hetu Phala Paccuppanna And Paticca Samuppada</td></tr></table></div></div><strong>July 2, 2016; Revised July 5, 2016</strong>
+<p style="text-align: justify">The existence of anything in this world (i.e., a <em>sankata</em>) can be explained in a step-wise process with three "steps": (i) there must be root causes, (ii) there must be suitable conditions, and (iii) whatever that arises due to those two steps will have characteristics (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) that can traced back to those causes and conditions.</p>
+<ul>
+<li style="text-align: justify"><span>The title is pronounced as :
+[sc_embed_player fileurl="http://localhost/beng_feb2026/wp-content/uploads/hetu-<span class="pali-term term-highlight" data-term="phala">phala</span>-paccuppanna-and-<span class="pali-term term-highlight" data-term="paṭicca">Paṭicca</span>-<span class="pali-term term-highlight" data-term="samuppāda">Samuppāda</span>.mp3"]</span></li>
+</ul>
+<p style="text-align: justify"><span>1. Nothing happens without causes in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. This is why there CANNOT be a beginning to the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. That is a logical impossibility, and is THE main argument against creation by a "Super Being" or a Creator.</span></p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff">CAUSE AND EFFECT</span> is the backbone of science. In order for a scientific theory to be accepted, that theory HAS TO have explanatory power to describe HOW a given effect takes place.</li>
+</ul>
+<p style="text-align: justify">2. It may be hard to fathom initially, but there are only 6 primary causes (roots) that causes anything and everything in this world to arise:<em><span> <span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></em> (three immoral roots or <em>hetu</em>), and <em><span><span class="pali-term term-highlight" data-term="alobha">alobha</span>, <span class="pali-term term-highlight" data-term="adosa">adosa</span>, <span class="pali-term term-highlight" data-term="amoha">amoha</span></span></em> (three moral roots).</p>
+<ul>
+<li>The word "<em>hetu</em><span>" comes from the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> words, "</span><em>hayen ethu</em>" which means "wrapped with six". Thus all causes are ultimately due to one more of the six roots mentioned above.</li>
+<li>Also, "<em><span><span class="pali-term term-highlight" data-term="phala">phala</span></span></em><span>" in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> and <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> ("</span><em>pala</em>") means "harvest" or the "result".</li>
+<li>Thus anything and everything in this world arises due to those six root causes.</li>
+</ul>
+<ol>
+<li>The  three immoral roots mainly give rise to the four lowest realms (<em>apāyā</em>) and the three moral roots mainly give rise to the other 27 realms.</li>
+</ol>
+<ul style="text-align: justify">
+<li>When one cultivates the three moral roots, one stays away from the<em> apāyā </em>and be able to be born in the higher 24 realms. Furthermore, one also cleanses one's mind so that one can begin to comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> (the true nature of the world); see, "<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma - In a Chart</a>".</li>
+<li>However, in most cases, we can see only the "immediate causes". For example, a wet floor is the immediate cause for someone to slip and fall. But if one was mindful  (aware) of the wet floor, the fall could have been avoided.</li>
+</ul>
+<p style="text-align: justify">4. Such immediate causes (that derive from those six) are easier to see or to deduce. The causes for a tree to come to life are embedded in a seed. When the seed is planted that causes a tree (or a plant) to grow.</p>
+<ul style="text-align: justify">
+<li>What causes an explosion from a bomb is in the explosive material in the bomb. There will not be an explosion unless the bomb has potent explosive material in it.</li>
+<li>How those are connected to the six root causes is a bit more involved, and needs a good knowledge of <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> to fully explain.</li>
+</ul>
+<p style="text-align: justify">5. Now, let us analyze how causes lead to corresponding effects. Just because there are causes, corresponding effects do not necessarily appear. There must be appropriate <span style="color: #0000ff">CONDITIONS</span> present to bring out the effects.</p>
+<ul style="text-align: justify">
+<li>A seed has embedded in it the causes to bring about a full-grown tree. But if that seed is in a cool, dry place, no tree will come to life because of it.</li>
+<li>But if the seed is planted in a good soil with exposure to sunlight, it can germinate and grow to be a healthy tree.</li>
+<li>The bomb will not explode unless it is triggered but a spark. If it is laying somewhere for many, many years, the explosives may degrade and lose their explosive power.</li>
+</ul>
+<p style="text-align: justify">6. This is called "<em>paccuppanna</em>" or "<em>pacca</em>" + "<em>uppanna</em>", where "<em>pacca</em>" is for "<em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>" or conditions. "<em>Uppanna</em>" means to come to life or birth.</p>
+<ul style="text-align: justify">
+<li><strong>Anything in this world (i.e., a <em>sankata</em>) is a <em>paccuppanna</em></strong>, i.e, is born when suitable conditions become available. But, of course, the root causes MUST also be there.</li>
+<li>Thus even if there is a field out there with good soil and sunlight, nothing will grow unless some seeds are planted.</li>
+<li><span style="color: #0000ff">Thus<em> paccuppanna</em> means "conditional arising". This term  "conditional arising" is used today INCORRECTLY as the translation of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. As we will see below, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>also describe the nature of things that arise due to <em> paccuppanna.</em></span></li>
+</ul>
+<p style="text-align: justify">7. You can put this "theory" to test by considering anything in this world.</p>
+<ul style="text-align: justify">
+<li>Any given living being is born due to a <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy that was created in the past. And that <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy was created by a good act with moral roots or a bad act with immoral roots.</li>
+<li>Even non-living things (vegetation, mountains, rivers, etc) are also there due to causes and conditions. The analyses are a bit deeper and we will discuss some in the future.</li>
+</ul>
+<p style="text-align: justify">8. The last step (in the three-step process that we started off with) says, whatever that arises due to those two preceding steps will have corresponding <span style="color: #0000ff">characteristics (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>)</span>. <span style="color: #0000ff">This is nothing but <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>; </span></em><span style="color: #000000">see, "</span></span><a href="../../pages/PS.EE.002/index.html" rel="bookmark">Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäd</a>a".</p>
+<ul style="text-align: justify">
+<li>In the example that we discussed above, a given seed will not give rise to any tree or a plant. A rice seed will give rise to a rice plant. An apple seed will not give rise to a rice plant but an apple tree, etc.</li>
+<li>The same is true for living beings. A chicken will be born of a chicken egg, not a turtle. Note that the other two conditions are satisfied here too: there was a being with "chicken <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" who came into that egg as a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>,</span></em> and that egg needs to be incubated correctly to be hatched and for that hatchling to come out.</li>
+</ul>
+<p style="text-align: justify">9. Actually, the steps <em>paccuppanna</em> and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> are not in a time sequence, but related. The necessary conditions (<em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>) in <em>paccuppanna</em> are analyzed in detail in the <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>steps.</p>
+<ul style="text-align: justify">
+<li>When an animal (say a dog) is born, the conditions that led to that birth can be traced in the "<a href="../../pages/PS.HH.004/index.html" rel="noopener noreferrer" target="_blank">Akusala-Mula Paṭicca Samuppāda</a>" cycle.</li>
+<li>First, "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> jathi</span></em>" step says, that dog was born due to a "dog <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>". The step, "<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">upādāna paccayā bhava</span></span></em>" says that "dog <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" arose due to a human grasping it at the dying (<em><span><span class="pali-term term-highlight" data-term="cuti-patisandhi">cuti-patisandhi</span></span></em>) moment; the step, "<em><span><span class="pali-term term-highlight" data-term="tanha">tanha</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" says that grasping was done due to craving for it, and so on.</li>
+<li>Note above that the human did not really crave to be a dog. Rather he/she enjoyed acts that are normally done by dog. And that process started off with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>", where due to ignorance of their consequences, he was cultivating "dog<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>": For example, thinking, speaking, and doing things that are done by dogs, for example, having indiscriminate sex (sometimes with even family members).</li>
+</ul>
+<p style="text-align: justify"><span>10. We will discuss this more depth in future <span class="pali-term term-highlight" data-term="posts">posts</span>, but I hope the main ideas can be grasped from the above description.</span></p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.EE.013"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0151"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.EE.013
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<strong>2 de julho de 2016; revisado em 5 de julho de 2016</strong>
+<p style="text-align: justify">A existência de qualquer coisa neste mundo (ou seja, um <em>sankata</em>) pode ser explicada em um processo gradual com três “etapas”: (i) deve haver causas fundamentais, (ii) deve haver condições adequadas e (iii) tudo o que surgir devido a essas duas etapas terá características (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>) que podem ser atribuídas a essas causas e condições.</p>
+<ul>
+<li style="text-align: justify"><span>O título é pronunciado como:
+[sc_embed_player fileurl="http://localhost/brasileirinho/wp-content/uploads/hetu-<span class="pali-term term-highlight" data-term="phala">phala</span>-<span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.mp3"]</span></li>
+</ul>
+<p style="text-align: justify"><span>1. Nada acontece sem causas no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. É por isso que NÃO PODE haver um início para o processo de Renascimento. Isso é uma impossibilidade lógica e é O principal argumento contra a criação por um “Ser Superior” ou um Criador.</span></p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff">CAUSA E EFEITO</span> são a espinha dorsal da ciência. Para que uma teoria científica seja aceita, ela TEM que ter poder explicativo para descrever COMO um determinado efeito ocorre.</li>
+</ul>
+<p style="text-align: justify">2. Pode ser difícil de compreender inicialmente, mas existem apenas 6 causas primárias (raízes) que fazem com que tudo neste mundo surja:<em><span> <span class="pali-term term-highlight" data-term="lobha">Lobha</span>, <span class="pali-term term-highlight" data-term="dosa">Dosa</span>, <span class="pali-term term-highlight" data-term="moha">Moha</span></span></em> (três raízes imorais ou <em>hetu</em>) e <em><span><span class="pali-term term-highlight" data-term="alobha">Alobha</span>, <span class="pali-term term-highlight" data-term="adosa">Adosa</span>, <span class="pali-term term-highlight" data-term="amoha">Amoha</span></span></em> (três raízes morais).</p>
+<ul>
+<li>A palavra “<em>hetu</em>” vem das palavras Cingalêses “<em>hayen ethu</em>”, que significa “envolvido por seis”. Assim, todas as causas são, em última análise, devidas a uma ou mais das seis raízes mencionadas acima.</li>
+<li>Além disso, “<em><span><span class="pali-term term-highlight" data-term="phala">Phala</span></span></em><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e cingalês (“</span><em>pala</em>”) significa “colheita” ou “resultado”.</li>
+<li>Assim, tudo neste mundo surge devido a essas seis causas fundamentais.</li>
+</ul>
+<ol>
+<li>As três raízes imorais dão origem principalmente aos quatro reinos mais baixos (<em>apāyā</em>) e as três raízes morais dão origem principalmente aos outros 27 reinos.</li>
+</ol>
+<ul style="text-align: justify">
+<li>Quando se cultiva as três raízes morais, fica-se longe do<em> apāyā </em>e pode-se renascer nos 24 reinos superiores. Além disso, também se purifica a mente para que se possa começar a compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> (a verdadeira natureza do mundo); veja “<a href="../../pages/MS.BB.001/index.html">Buddha Dhamma - Em um gráfico</a>”.</li>
+<li>No entanto, na maioria dos casos, só podemos ver as “causas imediatas”. Por exemplo, um piso molhado é a causa imediata para alguém escorregar e cair. Mas se a pessoa estivesse atenta (consciente) ao piso molhado, a queda poderia ter sido evitada.</li>
+</ul>
+<p style="text-align: justify">4. Essas causas imediatas (que derivam dessas seis) são mais fáceis de ver ou deduzir. As causas para uma árvore ganhar vida estão embutidas em uma semente. Quando a semente é plantada, isso faz com que uma árvore (ou planta) cresça.</p>
+<ul style="text-align: justify">
+<li>O que causa a explosão de uma bomba está no material explosivo dentro dela. Não haverá explosão a menos que a bomba contenha material explosivo potente.</li>
+<li>Como isso se relaciona com as seis causas fundamentais é um pouco mais complexo e requer um bom conhecimento do <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> para ser totalmente explicado.</li>
+</ul>
+<p style="text-align: justify">5. Agora, vamos analisar como as causas levam aos efeitos correspondentes. Só porque existem causas, os efeitos correspondentes não aparecem necessariamente. É preciso que haja <span style="color: #0000ff">CONDIÇÕES</span> adequadas para que os efeitos se manifestem.</p>
+<ul style="text-align: justify">
+<li>Uma semente tem embutidas as causas para produzir uma árvore totalmente crescida. Mas se essa semente estiver em um local frio e seco, nenhuma árvore nascerá a partir dela.</li>
+<li>Mas se a semente for plantada em um solo bom e exposta à luz solar, ela pode germinar e crescer até se tornar uma árvore saudável.</li>
+<li>A bomba não explodirá a menos que seja acionada por uma faísca. Se ficar em algum lugar por muitos e muitos anos, os explosivos podem se degradar e perder seu poder explosivo.</li>
+</ul>
+<p style="text-align: justify">6. Isso é chamado de “<em>paccuppanna</em>” ou “<em>pacca</em>” + “<em>uppanna</em>”, onde “<em>pacca</em>” significa “<em><span><span class="pali-term term-highlight" data-term="paccayā">Paccayā</span></span></em>” ou condições. “<em>Uppanna</em>” significa ganhar vida ou nascer.</p>
+<ul style="text-align: justify">
+<li><strong>Qualquer coisa neste mundo (ou seja, um <em>sankata</em>) é um <em>paccuppanna</em></strong>, ou seja, nasce quando as condições adequadas se tornam disponíveis. Mas, é claro, as causas fundamentais também DEVEM estar presentes.</li>
+<li>Assim, mesmo que exista um campo com solo fértil e luz solar, nada crescerá a menos que algumas sementes sejam plantadas.</li>
+<li><span style="color: #0000ff">Portanto,<em> paccuppanna</em> significa “surgimento condicional”. Este termo “surgimento condicional” é usado hoje INCORRETAMENTE como tradução de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. Como veremos abaixo, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>também descreve a natureza das coisas que surgem devido ao<em>paccuppanna.</em></span></li>
+</ul>
+<p style="text-align: justify">7. Você pode testar essa “teoria” considerando qualquer coisa neste mundo.</p>
+<ul style="text-align: justify">
+<li>Qualquer ser vivo nasce devido a uma energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que foi criada no passado. E essa energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> foi criada por um ato bom com raízes morais ou um ato ruim com raízes imorais.</li>
+<li>Mesmo as coisas não vivas (vegetação, montanhas, rios, etc.) também existem devido a causas e condições. As análises são um pouco mais profundas e discutiremos algumas delas no futuro.</li>
+</ul>
+<p style="text-align: justify">8. O último passo (no processo de três etapas que começamos) diz que tudo o que surge devido às duas etapas anteriores terá <span style="color: #0000ff">características</span> correspondentes <span style="color: #0000ff">(<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>)</span>. <span style="color: #0000ff">Isso nada mais é do que <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>; </span></em><span style="color: #000000">veja “</span></span><a href="../../pages/PS.EE.002/index.html">Paṭicca Samuppāda – “Pati+Ichch</a>a<a href="../../pages/PS.EE.002/index.html">”+”Sam</a>a<a href="../../pages/PS.EE.002/index.html">+uppäd</a>a”.</p>
+<ul style="text-align: justify">
+<li>No exemplo que discutimos acima, uma determinada semente não dará origem a nenhuma árvore ou planta. Uma semente de arroz dará origem a uma planta de arroz. Uma semente de maçã não dará origem a uma planta de arroz, mas a uma macieira, etc.</li>
+<li>O mesmo se aplica aos seres vivos. Uma galinha nascerá de um ovo de galinha, não de uma tartaruga. Observe que as outras duas condições também são satisfeitas aqui: havia um ser com <em><span>“<span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> de galinha” que entrou naquele ovo como um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>,</span></em> e esse ovo precisa ser incubado corretamente para ser chocado e para que o filhote saia.</li>
+</ul>
+<p style="text-align: justify">9. Na verdade, as etapas <em>paccuppanna</em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> não estão em uma sequência temporal, mas estão relacionadas. As condições necessárias (<em><span><span class="pali-term term-highlight" data-term="paccayā">Paccayā</span></span></em>) em <em>paccuppanna</em> são analisadas em detalhes nas etapas de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>Quando um animal (digamos, um cão) nasce, as condições que levaram a esse nascimento podem ser rastreadas no ciclo “<a href="../../pages/PS.HH.004/index.html">Akusala-Mula Paṭicca Samuppāda</a>”.</li>
+<li>Primeiro, a etapa “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> jathi</span></em>” diz que o cão nasceu devido a um <em><span>“<span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> de cão”. A etapa “<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">Upādāna Paccayā Bhava</span></span></em>” diz que <em>o</em> “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> de cão” surgiu devido a um humano agarrá-lo no momento da morte (<em><span><span class="pali-term term-highlight" data-term="cuti">Cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>); a etapa “<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">Taṇhā Paccayā Upādāna</span></span></em>” diz que o agarrar foi feito devido ao desejo por ele, e assim por diante.</li>
+<li>Observe acima que o humano não desejava realmente ser um cão. Em vez disso, ele/ela gostava de atos que normalmente são feitos por cães. E esse processo começou com “<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>”, onde, devido à ignorância de suas consequências, ele estava cultivando “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> de cão”: por exemplo, pensando, falando e fazendo coisas que são feitas por cães, como ter relações sexuais indiscriminadas (às vezes até com membros da família).</li>
+</ul>
+<p style="text-align: justify">10. Discutiremos isso mais profundamente em ensaios futuros, mas espero que as ideias principais possam ser compreendidas a partir da descrição acima.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.II.009/index.html">Two Types Of Vedana Feelings</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.EE.009/index.html">Ditthi Wrong Views Samma Ditthi Correct Views</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.II.009/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Two Types Of Vedana Feelings</span>
+        
+        <span class="pathway-title title-pt">Dois tipos de sentimentos de Vedanā</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.EE.009/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Ditthi Wrong Views Samma Ditthi Correct Views</span>
+        
+        <span class="pathway-title title-pt">Diṭṭhi Visões erradas Samma Ditthi Visões corretas</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anapana Satipatthana Fundamentals | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Living Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 11 / 52</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">LD.BB.009</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anapana Satipatthana Fundamentals</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>LD.BB.009</td></tr>
+          <tr><td><strong>Section</strong></td><td>Living Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="LD.BB.009"
+             data-section="Living Dhamma"
+             data-section-code="LD"
+             data-findex="0206"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>LD.BB.009</td></tr><tr><td>Fin-dex</td><td>0206</td></tr><tr><td>Slug</td><td>anapana-satipatthana-fundamentals</td></tr><tr><td>Section</td><td>LD</td></tr><tr><td>Title EN</td><td>Anapana Satipatthana Fundamentals</td></tr></table></div></div><strong>January 30, 2019</strong>
+<p style="text-align: justify">1. <em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> <span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 22) just describes in more detail the <em><span>Ānapānasati <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span> </span></em>that is in the<em><span> Ānapānasati <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 118).</p>
+<ul style="text-align: justify">
+<li><span>This <span class="pali-term term-highlight" data-term="post">post</span> discusses the fundamentals related to both </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>. More details at: "<a href="../../pages/SI.BB.001/index.html" rel="noopener noreferrer" target="_blank">Mahā Satipaṭṭhāna Sutta</a>".</li>
+</ul>
+<p style="text-align: justify">2. One synonym for <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is "cooled state", which means the mind is "permanently cooled down". There can be no anger, greed, or ignorance that can arise in such a mind.</p>
+<ul style="text-align: justify">
+<li>However, we start at a more basic state. When we start doing real <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>, we will start feeling a PERMANENT relief from our stressed minds.</li>
+<li>On the other hand, "breath meditation" provides only temporary relief.</li>
+</ul>
+<p style="text-align: justify"><span>3. We discussed how our thoughts can affect our minds in the previous <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/LD.BB.007/index.html" rel="noopener noreferrer" target="_blank">Breath Meditation Is Addictive and Harmful in the Long Run</a>".</p>
+<ul style="text-align: justify">
+<li>When angry thoughts arise, one's whole body becomes hot and agitated; blood pressure goes up; the face becomes dark because the blood becomes dark.</li>
+<li>On the other hand, when one has compassionate thoughts in one's mind, one's mind feels joyful and it shows up in the face too.</li>
+</ul>
+<p style="text-align: justify">4. Some people are more prone to generating angry thoughts; others are more like to generate compassionate thoughts. In other words, some people have "angry <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" while others have "compassionate <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>". Previously we discussed that there is a wide variation of <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> ranging from very bad to very good.</p>
+<ul style="text-align: justify">
+<li>Of course, these<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> do not show up all the time. Even a person with "angry<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" must be provoked for such angry thoughts to arise.</li>
+<li><span>In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>'s language, a person with "angry </span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" has "anger hiding in the mind" waiting for a trigger to come to the surface. These are called "<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="kilesa">kilesa</span></span></em>" (hidden defilements).</li>
+<li>The keyword <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span> (pronounced "<span class="pali-term term-highlight" data-term="gathi">gathI</span>") is related to one's habits and character; see "</span><a href="../../pages/TL.BB.003/index.html" rel="noopener noreferrer" target="_blank">The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)</a>".</li>
+</ul>
+<p style="text-align: justify">5. We can take an analogy to clarify this. <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> can be compared to dirt at the bottom of a glass of water. If the glass is not disturbed, the dirt will settle at the bottom, and the water may look clean at the top.</p>
+<ul style="text-align: justify">
+<li>If there is a lot of dirt at the bottom of the glass, only a slight disturbance can make the dirt come up and make the water dirty. But if it is only a little bit, most minor disturbances may not make the water dirty.</li>
+<li>Just like that, the more <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span> </span></em>(or corresponding defilements) one has, it will be easier for them to come to the surface. If one has a "very angry <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>", that person would be easy to be angered.</li>
+</ul>
+<p style="text-align: justify">6. On the other hand, if there is no dirt at the bottom of the glass, no matter what kind of disturbance it is, the water will remain pure.</p>
+<ul style="text-align: justify">
+<li>The mind of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is like that. He/she can live totally unaffected surrounded by the world’s most tempting sense objects.</li>
+<li>We have a long way to get to the<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. But we can start getting rid of these "bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>" or "defilements" by cultivating the correct  <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>.</li>
+<li>When one's mind becomes purified, it will be hard to make that person agitated or depressed. One will have a relatively calm mindset even under normally stressful conditions.</li>
+</ul>
+<p style="text-align: justify">7. Even though a glass of water has dirt in it, if the water is left undisturbed for a while, the dirt gets settled at the bottom and the water becomes relatively clear.</p>
+<ul style="text-align: justify">
+<li>That is what happens with "breath meditation". One focuses one's mind on a neutral thought object for a while and all "agitations" subside. <strong>But they do not go away.</strong></li>
+<li><strong>Breath meditation appears to provide relief.</strong> In particular, if one goes to a retreat and spends several days with one's mind removed from "enticing" AND "angry" thoughts, one feels a high sense of calmness.</li>
+<li>However, when one comes back and gets into the usual "rat race", with all kinds of enticing and aggravating inputs from the environment, all those <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>" come back to the surface!</li>
+</ul>
+<p style="text-align: justify">8. In real <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>, those<em><span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> or "hidden defilements" will be REMOVED gradually. The procedure involves the following:</p>
+<ul style="text-align: justify">
+<li>Get rid of bad thoughts (such as anger) that may arise due to whatever reasons.</li>
+<li>Let any "good thoughts" that may arise (such as compassion or just thoughts about <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> concepts) continue.</li>
+<li>Deliberately contemplate <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> concepts like <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span>, <span class="pali-term term-highlight" data-term="gati">gati</span>, <span class="pali-term term-highlight" data-term="anusaya">anusaya</span>, <span class="pali-term term-highlight" data-term="kilesa">kilesa</span>, <span class="pali-term term-highlight" data-term="kamma">kamma</span>, <span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em><span>, Noble Truths, Noble Eightfold Path, <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, etc.</span></li>
+<li><span>We will see in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>, how those "three components" are taken into account in the four types of </span><em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>: <em><span><span class="pali-term term-highlight" data-term="kāyānupassanā">kāyānupassanā</span>, <span class="pali-term term-highlight" data-term="vedanānupassanā">vedanānupassanā</span>, <span class="pali-term term-highlight" data-term="cittānupassanā">cittānupassanā</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="dhammānupassanā">dhammānupassanā</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">9. If a bad thought comes to the mind, one must think about the bad consequences of keeping such thoughts in one's mind and forcefully remove them. For example, if someone says something to make one angry, one could count to ten in one's mind (or just walk away) and not retaliate.</p>
+<ul style="text-align: justify">
+<li>This is hard to do at first. But with practice, one can see the benefits and one will be motivated to continue.</li>
+<li>The nice thing is that the more one trains, the easier it becomes to control one's impulsive reactions.</li>
+</ul>
+<p style="text-align: justify">10. In order to get rid of any bad habits (which are related to <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), it will be VERY HELPFUL to see the bad consequences of such bad habits.</p>
+<ul style="text-align: justify">
+<li>A smoker needs to convince himself that smoking can lead to various health problems, including cancer. That will be an incentive to get rid of smoking.</li>
+<li>Taking drugs is even worse, one could die with many health problems if one becomes addicted to drugs.</li>
+<li>Even eating too much is a bad habit. One should look at the statistics that clearly show the bad health consequences of over-eating.</li>
+</ul>
+<p style="text-align: justify">11. Learning <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> is like learning the bad consequences of bad habits. When one is engaged in immoral activities, one will have bad consequences of those actions, speech, and thoughts in two ways:</p>
+<ul style="text-align: justify">
+<li>Even if one is making a lot of money doing immoral things, one WILL have a stressed mind even in this life.</li>
+<li>The more important consequences may realize in future lives. Highly immoral activities lead to births in the four bad realms (the animal realm is one).</li>
+<li><span>Therefore, it is essential to learn true <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, where one can begin to understand </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">12. Another way to say this is that one needs to see the difference between "<em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>" and "<em>adhammā</em>". <strong><em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em> are the "good, moral deeds" and <em>adhammā</em> are the "bad immoral deeds".</strong></p>
+<ul>
+<li style="text-align: justify">Note that the <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span> here is different from the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, even though they are related. </span><em>Adhammā</em> are the opposite of <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>.</li>
+<li style="text-align: justify">As we have discussed before, <em>adhammā</em> lead to a stressed mind, and <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> lead to a calm mind at the very basic level.</li>
+<li style="text-align: justify">At the next level, strong <em>adhammā</em> or "highly immoral deeds" have very bad consequences in the future, especially in future lives (rebirths in the lowest 4 realms). On the other hand, strong <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> or "highly moral deeds" lead to good rebirths in the higher realms.</li>
+<li style="text-align: justify">I have discussed them previously. It would be beneficial to review them.</li>
+</ul>
+<p class="entry-title">"<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank">How the Buddha Described the Chance of Rebirth in the Human Realm</a>".</p>
+"<a href="../../pages/MR.AA.006/index.html" rel="noopener noreferrer" target="_blank">Does the Hell (Niraya) Exist?</a>".
+"<a href="../../pages/SI.DD.002/index.html" rel="noopener noreferrer" target="_blank">Dasa Akusala/Dasa Kusala – Basis of Buddha Dhamma</a>".
+"<a href="../../pages/KD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Gati to Bhava to Jāti – Ours to Control</a>"
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/LD.BB.008/index.html">Anapanasati Eliminate Mental Stress</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/LD.BB.010/index.html">Sati In Anapanasati Satipatthana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/LD.BB.008/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anapanasati Eliminate Mental Stress</span>
+        
+        <span class="pathway-title title-pt">Anapanasati Eliminate Mental Stress</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/LD.BB.010/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Sati In Anapanasati Satipatthana</span>
+        
+        <span class="pathway-title title-pt">Sati In Anapanasati Satipatthana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-LD">
+        ↑ Back to Living Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

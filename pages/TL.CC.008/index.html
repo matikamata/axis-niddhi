@@ -1,0 +1,399 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Need To Experience Suffering In Order To Understand It | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 20 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.CC.008</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Need To Experience Suffering In Order To Understand It</h1>
+    
+    <h1 class="title-pt">Necessidade de experimentar o sofrimento para compreendê-lo</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.CC.008</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>5</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.CC.008"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0409"
+             data-level="intermediate"
+             data-reading-time="5"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.CC.008</td></tr><tr><td>Fin-dex</td><td>0409</td></tr><tr><td>Slug</td><td>need-to-experience-suffering-in-order-to-understand-it</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Need To Experience Suffering In Order To Understand It</td></tr></table></div></div>// 
+<strong>Revised February 4, 2017; April 26, 2020</strong>
+<p style="text-align: justify">1. It is a common misconception that one needs to experience <strong>harsh suffering</strong><span> in order to understand what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> meant by the First Noble Truth, that there is "suffering in this world".</span></p>
+<ul>
+<li style="text-align: justify"><span>Thus, especially in the days of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, some people deliberately lived a miserable life, thinking that it will help understand suffering. They subjected their bodies to various forms of discomfort and even torture.</span></li>
+<li style="text-align: justify"><span>This is actually one extreme that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said NOT to follow: "</span><em>atta kilamathānu yoga</em>", or subjecting oneself to unnecessary suffering. Closest English translations would be "an ascetic life", where one forcefully abstains from any comforts.</li>
+</ul>
+<p style="text-align: justify"><span>2. <span class="pali-term term-highlight" data-term="buddha">Buddha</span> never encouraged anyone to deliberately undergo suffering. The suffering that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> talked about is hidden and is about future suffering in this life and in future lives. There are two kinds of "hidden suffering" that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> revealed to the world:</span></p>
+<ul>
+<li style="text-align: justify"><span>One is the very harsh suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (when one is born in the lowest four realms or the </span><em>apāyā</em>).</li>
+<li style="text-align: justify">The other is the "incessant distress" that we all undergo even without realizing it: "<a>The Incessant Distress ("Pīḷana") - Key to Dukkha Sacca</a>".</li>
+<li style="text-align: justify"><span style="color: #0000ff">Anyone, rich or poor, undergoes this latter type of suffering in this life.</span><span> The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pointed out that one could discover this type of hidden suffering and remove it too: "</span><a href="../../pages/LD.AA.004/index.html" rel="noopener noreferrer" target="_blank">Starting on the Path without Belief in Rebirth</a><span>" and other <span class="pali-term term-highlight" data-term="posts">posts</span> in the "</span><a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a>" section.</li>
+</ul>
+<p style="text-align: justify">3. If one needs to suffer more to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, then those who are in the <em>apāyā</em> would be the first attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>! Most of the suffering is experienced when one is born in the <em>apāyā </em>or the lower four realms, see, "<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>".</p>
+<ul style="text-align: justify">
+<li>In order to actually realize the true suffering, whether in this life or in the lower four realms, <span style="color: #0000ff">one needs to contemplate (<em>bhävanä</em>) with a healthy body and a clear mind. </span></li>
+<li>If one is hungry, one CANNOT understand the causes of suffering; rather one will be generating hateful thoughts. The same is true for all four necessities of life: food, shelter, clothing, and medicine. We NEED those things to survive.</li>
+<li><span>What we should NOT do is to over-indulge in any of the above four necessities of life. That is the other extreme that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said to avoid: "</span><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> sukhallikānu yoga</span></em>", or to over-indulge in sense pleasures, i.e., to live a hedonistic life.</li>
+</ul>
+<p style="text-align: justify"><span>4. It is commonly said that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> advocated the "middle ground", i.e., to avoid both an ascetic life (with self-induced suffering) or a hedonistic (over-indulgent) life. That is true, but there is more to it.</span></p>
+<p style="text-align: justify">There is a deeper meaning to "<em>majjhima paṭipadā</em>". The way to a peaceful existence (or to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>) is to get rid of greed, hate, AND ignorance. The two extremes that we talked about above do involve hate or at least <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em> or "friction" (when subjecting oneself to suffering) and greed (indulging in excessive sense pleasures).</p>
+<ul style="text-align: justify">
+<li>Just because one stays away from those two extremes does not necessarily mean one is on the "correct path". The Path is not just a "middle ground" between those two extremes.</li>
+<li><span style="color: #0000ff"><span>The key is to learn <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and to systematically reduce greed, hate, and ignorance.</span></span></li>
+<li><span>Of course, living a life away from the two extremes is conducive -- even necessary -- to learn <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and to gradually remove defilements from the mind.</span></li>
+</ul>
+<p style="text-align: justify">5. In between those two extremes, one needs to avoid being influenced by an "intoxicated mind". In between the above two extremes, people also act in improper ways intoxicated by power, beauty, position, (book) knowledge, lineage, etc as well as by alcohol and drugs. This is due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> or ignorance.</p>
+<ul>
+<li style="text-align: justify">Thus, "<em>majjhima paṭipadā</em>" really means to follow a simple lifestyle without veering to the extremes.</li>
+<li>Thus <em>majjhima paṭipadā</em> is to follow a lifestyle that avoids the corruption of the mind by excess attachments to sense pleasures. On the other hand, there is no need to subject one's body to unnecessary hardships either.</li>
+</ul>
+<p style="text-align: justify"><span>6. In summary, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> recommended a "common sense" comfortable, but simple, life that is conducive to meditation. Here meditation (</span><em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em><span>) is not necessarily "formal meditation". The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em>bhāvanāya bahuleekathāya</em>", or "contemplate as often as possible".</p>
+<ul>
+<li style="text-align: justify"><span>One also needs to be avoiding immoral actions, speech, or thoughts as much as possible, and actually cultivate moral actions, speech, and thoughts. That helps suppress the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> (</span><em>pañcanīvaraṇa</em>) and have a peaceful state of mind, i.e., one could start experiencing the <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> that arises due to a "more pure state of mind".</li>
+</ul>
+<p style="text-align: justify">7. One can be contemplating the nature of the world as one goes through daily chores. Another aspect of this is the ability to calm the mind; see, "<a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank" title="Key to Calming the Mind">Key to Calming the Mind</a>".</p>
+<ul style="text-align: justify">
+<li><span>A bigger picture implied here is that we need to educate our children so that they can find good employment and thus be able to live without having to worry about those four necessities of life. As they grow up, we need to educate them in <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> (how to live a moral life) too, but not at the expense of them getting a good education.</span></li>
+</ul>
+<p style="text-align: justify">8. <strong>Suffering  is NOT the Noble truth on Suffering</strong>, i.e., <strong><em>Dukha</em> (feeling of suffering) is NOT <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> (the Noble Truth that suffering can be stopped from arising)</strong>; <em><span><span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> pronounced "sachcha" and means "truth".</p>
+<ul>
+<li style="text-align: justify"><span style="color: #0000ff">The Noble Truth of <strong><em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span> </span></em></strong>is about comprehending how suffering ARISES due to greed, hate, and ignorance (of this fact).</span><span> One can understand that --and take steps to avoid future suffering -- by learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>: </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>, <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, etc.</li>
+<li style="text-align: justify"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, “This <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> is unlike anything that the world has ever seen”. The actual suffering is hidden WITHIN the apparent enjoyments. Also see, "</span><a title="The Incessant Distress (“Peleema”) – Key to Dukkha Sacca">The Incessant Distress (“Pīḷana”) - Key to Dukkha Sacca</a>".</li>
+<li style="text-align: justify">For another description of <em>majjhima paṭipadā, </em>see, "<a href="../../pages/SI.CC.001/index.html" rel="noopener noreferrer" target="_blank">Dhammacakkappavattana Sutta</a>".</li>
+</ul>
+<p style="text-align: justify">Next, "<a href="../../pages/TL.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is Unique in Buddha Dhamma?</a>", .........</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.CC.008"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0409"
+             data-level="intermediate"
+             data-reading-time="5"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.CC.008
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+
+// 
+<strong>Revisado em 4 de fevereiro de 2017; 26 de abril de 2020</strong>
+<p style="text-align: justify">1. É um equívoco comum pensar que é preciso passar por <strong>sofrimentos intensos</strong><span> para compreender o que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> quis dizer com a Primeira Nobre Verdade, que é “existe sofrimento neste mundo”.</span></p>
+<ul>
+<li style="text-align: justify"><span>Assim, especialmente nos dias do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, algumas pessoas viviam deliberadamente uma vida miserável, pensando que isso ajudaria a compreender o sofrimento. Elas submetiam seus corpos a várias formas de desconforto e até mesmo tortura.</span></li>
+<li style="text-align: justify"><span>Na verdade, esse é um extremo que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse para NÃO seguir: “</span><em>atta kilamathānu yoga</em>”, ou submeter-se a sofrimentos desnecessários. A tradução mais próxima em português seria “uma vida ascética”, em que a pessoa se abstém forçosamente de qualquer conforto.</li>
+</ul>
+<p style="text-align: justify"><span>2. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> nunca encorajou ninguém a se submeter deliberadamente ao sofrimento. O sofrimento de que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> falava é oculto e diz respeito ao sofrimento futuro nesta vida e em vidas futuras. Existem dois tipos de “sofrimento oculto” que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> revelou ao mundo:</span></p>
+<ul>
+<li style="text-align: justify">Um é o sofrimento muito severo no processo de renascimento (quando se nasce nos quatro reinos mais baixos ou <em>apāyā</em>).</li>
+<li style="text-align: justify">O outro é o “sofrimento incessante” que todos nós passamos, mesmo sem perceber: “<a>O Sofrimento Incessante (“Pīḷana”) - Chave para Dukkha Sacca</a>”.</li>
+<li style="text-align: justify"><span style="color: #0000ff">Qualquer pessoa, rica ou pobre, passa por esse último tipo de sofrimento nesta vida.</span><span> O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> apontou que é possível descobrir esse tipo de sofrimento oculto e removê-lo também: “</span><a href="../../pages/LD.AA.004/index.html">Começando o Caminho sem Crença no Renascimento</a>” e outros ensaios na seção “<a href="../../pages/LD.AA.000/index.html">Living Dhamma</a>”.</li>
+</ul>
+<p style="text-align: justify">3. Se fosse necessário sofrer mais para alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, então aqueles que estão no <em>apāyā</em> seriam os primeiros a <em>alcançá-lo</em>! A maior parte do sofrimento é experimentada quando se nasce no <em>apāyā </em>ou nos quatro reinos inferiores, veja “<a href="../../pages/BD.HH.001/index.html" title="The Grand Unified Theory of Dhamma">A Grande Teoria Unificada do Dhamma</a>”.</p>
+<ul style="text-align: justify">
+<li>Para realmente compreender o verdadeiro sofrimento, seja nesta vida ou nos quatro reinos inferiores, <span style="color: #0000ff">é preciso contemplar (<em>bhävanä</em>) com um corpo saudável e uma mente clara. </span></li>
+<li>Se alguém está com fome, NÃO PODE compreender as causas do sofrimento; em vez disso, irá gerar pensamentos odiosos. O mesmo se aplica às quatro necessidades da vida: comida, abrigo, roupa e medicamentos. PRECISAMOS dessas coisas para sobreviver.</li>
+<li><span>O que NÃO devemos fazer é nos entregar excessivamente a qualquer uma das quatro necessidades da vida acima. Esse é o outro extremo que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse para evitar: “</span><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> sukhallikānu yoga</span></em>”, ou entregar-se excessivamente aos prazeres dos sentidos, ou seja, viver uma vida hedonista.</li>
+</ul>
+<p style="text-align: justify"><span>4. Costuma-se dizer que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> defendia o “meio-termo”, ou seja, evitar tanto uma vida ascética (com sofrimento autoinduzido) quanto uma vida hedonista (excessiva). Isso é verdade, mas há mais do que isso.</span></p>
+<p style="text-align: justify">Há um significado mais profundo para “<em>majjhima paṭipadā</em>”. O caminho para uma existência pacífica (ou para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>) é livrar-se da ganância, do ódio E da ignorância. Os dois extremos que mencionamos acima envolvem ódio ou, pelo menos<em><span>, <span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em> ou “atrito” (quando nos submetemos ao sofrimento) e ganância (entregando-nos a prazeres sensoriais excessivos).</p>
+<ul style="text-align: justify">
+<li>O simples fato de alguém se manter longe desses dois extremos não significa necessariamente que esteja no “caminho correto”. O Caminho não é apenas um “meio-termo” entre esses dois extremos.</li>
+<li><span style="color: #0000ff"><span>A chave é aprender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e reduzir sistematicamente a ganância, o ódio e a ignorância.</span></span></li>
+<li><span>É claro que viver uma vida longe dos dois extremos é propício — até mesmo necessário — para aprender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e remover gradualmente as impurezas da mente.</span></li>
+</ul>
+<p style="text-align: justify">5. Entre esses dois extremos, é preciso evitar ser influenciado por uma “mente intoxicada”. Entre os dois extremos acima, as pessoas também agem de maneira imprópria, intoxicadas pelo poder, pela beleza, pela posição, pelo conhecimento (livros), pela linhagem, etc., bem como pelo álcool e pelas drogas. Isso se deve à <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> ou ignorância.</p>
+<ul>
+<li style="text-align: justify">Assim, “<em>majjhima paṭipadā</em>” significa realmente seguir um estilo de vida simples, sem se desviar para os extremos.</li>
+<li>Assim, <em>majjhima paṭipadā</em> é seguir um estilo de vida que evita a corrupção da mente pelo apego excessivo aos prazeres dos sentidos. Por outro lado, também não há necessidade de submeter o corpo a dificuldades desnecessárias.</li>
+</ul>
+<p style="text-align: justify"><span>6. Em resumo, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> recomendou um estilo de vida confortável, mas simples, baseado no “bom senso”, que seja propício à meditação. Aqui, </span><em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em><span> não é necessariamente “meditação formal”. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em>bhāvanāya bahuleekathāya</em>”, ou “contemple sempre que possível”.</p>
+<ul>
+<li style="text-align: justify">Também é preciso evitar, tanto quanto possível, ações, palavras ou pensamentos imorais e, na verdade, cultivar ações, palavras e pensamentos morais. Isso ajuda a suprimir os Cinco Estorvos (<em>pañcanīvaraṇa</em>) e a ter um estado mental tranquilo, ou seja, pode-se começar a experimentar o <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> que surge devido a um “estado mental mais puro”.</li>
+</ul>
+<p style="text-align: justify">7. Pode-se contemplar a natureza do mundo enquanto realiza as tarefas diárias. Outro aspecto disso é a capacidade de acalmar a mente; veja “<a href="../../pages/TL.CC.002/index.html" title="Key to Calming the Mind">Chave para acalmar a mente</a>”.</p>
+<ul style="text-align: justify">
+<li><span>Uma visão mais ampla implícita aqui é que precisamos educar nossos filhos para que possam encontrar um bom emprego e, assim, serem capazes de viver sem ter que se preocupar com essas quatro necessidades da vida. À medida que crescem, precisamos educá-los também no <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> (como viver uma vida moral), mas não à custa de uma boa educação.</span></li>
+</ul>
+<p style="text-align: justify">8. <strong>O sofrimento NÃO é a Nobre Verdade sobre o Sofrimento</strong>, ou seja, <strong><em>Dukha</em> (sensação de sofrimento) NÃO é <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> (a Nobre Verdade de que o sofrimento pode ser impedido de surgir)</strong>; <em><span><span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> é pronunciado “sachcha” e significa “verdade”.</p>
+<ul>
+<li style="text-align: justify"><span style="color: #0000ff">A Nobre Verdade de <strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span> </span></em></strong>trata da compreensão de como o sofrimento SURGE devido à ganância, ao ódio e à ignorância (desse fato).</span><span> É possível compreender isso — e tomar medidas para evitar o sofrimento futuro — aprendendo o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>: </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā, <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, etc.</li>
+<li style="text-align: justify"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “Este <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> é diferente de tudo que o mundo já viu”. O sofrimento real está oculto DENTRO dos prazeres aparentes. Veja também “</span><a title="The Incessant Distress (“Peleema”) – Key to Dukkha Sacca">A angústia incessante (“Pīḷana”) — Chave para Dukkha Sacca</a>”.</li>
+<li style="text-align: justify">Para outra descrição de <em>majjhima paṭipadā, </em>veja “<a href="../../pages/SI.CC.001/index.html">Dhammacakkappavattana Sutta</a>”.</li>
+</ul>
+<p style="text-align: justify">A seguir, “<a href="../../pages/TL.DD.002/index.html">O que há de único no Buddha Dhamma?</a>”, .........</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.CC.007/index.html">Learning Buddha Dhamma Leads To Niramisa Sukha</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.CC.009/index.html">Does Impermanence Lead To Suffering</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.CC.007/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Learning Buddha Dhamma Leads To Niramisa Sukha</span>
+        
+        <span class="pathway-title title-pt">Aprender o Buddha Dhamma leva ao Niramisa Sukha</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.CC.009/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Does Impermanence Lead To Suffering</span>
+        
+        <span class="pathway-title title-pt">A impermanência leva ao sofrimento?</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

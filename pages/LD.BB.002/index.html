@@ -1,0 +1,393 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Four Noble Truths | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Living Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 4 / 52</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">LD.BB.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Four Noble Truths</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>LD.BB.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Living Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="LD.BB.002"
+             data-section="Living Dhamma"
+             data-section-code="LD"
+             data-findex="0199"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>LD.BB.002</td></tr><tr><td>Fin-dex</td><td>0199</td></tr><tr><td>Slug</td><td>four-noble-truths</td></tr><tr><td>Section</td><td>LD</td></tr><tr><td>Title EN</td><td>Four Noble Truths</td></tr></table></div></div><p><span>Four Noble Truths are discussed. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, “my teachings have not been known in this world previously.” It is about stopping future suffering. </span></p>
+<p><strong>January 6, 2019; revised May 27, 2021; <span style="color: #3366ff;">March 27, 2023</span></strong></p>
+<h5>Introduction</h5>
+<p style="text-align: justify;">1. The First Noble Truth is about the suffering we can stop from arising.</p>
+<ul style="text-align: justify;">
+<li>The second describes how suffering arises from our cravings (<span style="color: #0000ff;"><strong>which we manifest via <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that we generate willingly, as we have discussed</strong></span>; see "<a href="../../pages/KD.BB.006/index.html" rel="noopener noreferrer" target="_blank">Sankhāra – What It Really Means</a><span>"). I will write a simpler version in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li><span>The Third Noble Truth says we can stop future suffering by eliminating those cravings. That REQUIRES an understanding of the broader worldview of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> with the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process within the 31 realms.</span></li>
+<li><span>The Fourth Noble Truth is the path to acquiring that understanding by "learning and living" that <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> (following the Noble Eightfold Path).</span></li>
+</ul>
+<p style="text-align: justify;"><span>2. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, “my </span><em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em> has not been previously known in this world.”</p>
+<ul style="text-align: justify;">
+<li><span>What is new about knowing that there is suffering around us? Everybody knows there is suffering from old age, diseases, poverty, etc. One does not have to be a <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> to see that.</span></li>
+<li><span style="color: #0000ff;"><strong>So, we need to figure out "what is new" about suffering explained in the First Noble Truth.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">The First Noble Truth - What is Suffering</h5>
+<p style="text-align: justify;"><span>3. I have discussed the First Noble Truth in the <span class="pali-term term-highlight" data-term="post">post</span>,  "</span><a href="../../pages/SI.CC.003/index.html" rel="noopener noreferrer" target="_blank">Essence of Buddhism – In the First Sutta</a>." Summary:</p>
+<p>“<strong class="text-strong">Birth is suffering, getting old is suffering, getting sick is suffering, dying is suffering.</strong> Having to associate with things one does not like is suffering, and so is separation from those things one likes.<strong class="text-strong"> If one does not get what one likes, that is suffering</strong> – in brief, the origin of suffering is the<strong> <span style="color: #0000ff;">craving</span></strong> for the five aggregates of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, viññāna</span></em> (<em>panc<span style="color: #0000ff;"><strong><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></strong></span>kkhandha</em>). All we crave in this world are represented by <em>pancupādānakkhandha </em>(<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> </span></em>or craving for the<em> pancakkhandha</em>)<em>.</em></p>
+<ul>
+<li>(Here, I have translated <em><strong><span style="color: #0000ff;"><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></span> </strong></em>as <strong><span style="color: #0000ff;">craving</span>. </strong>However, the word <em><strong><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> </span></strong></em>CANNOT BE translated by just one word. It is a good idea to grasp the meaning. See “<a href="../../pages/PS.CC.001/index.html" rel="noopener" target="_blank">Concepts of Upādāna and Upādānakkhandha</a>.”)</li>
+<li>There is a deeper meaning in part, "<span style="color: #0000ff;"><strong>If one does not get what one likes (<em>iccha</em>), that is suffering." </strong></span>That is connected to the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</li>
+</ul>
+<p style="text-align: justify;">4. Just as in science, something comes about due to causes. Our present life as humans has come about due to causes (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) done in the past. Some of those were "good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>,</span></em>" which is why we can enjoy some pleasures. Bad <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> has led to instances of suffering.</p>
+<ul style="text-align: justify;">
+<li>But there are lower realms, including the animal realm, where suffering is much higher. Bad <em>kammās</em> lead to such births.</li>
+<li><strong>Suffering in the four lowest realms is real suffering.</strong> That is what we first need to focus on.</li>
+<li><span style="color: #0000ff;"><strong>And all that suffering arises because we crave things in this world because of our <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> (not comprehending the Four Noble Truths).</strong></span></li>
+</ul>
+<p style="text-align: justify;">5. <strong>Seeing this hidden suffering is indeed difficult.</strong><span> When the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> attained Buddhahood, he was worried about whether he could convey these deep ideas to most people.</span></p>
+<ul style="text-align: justify;">
+<li>It is natural to seek pleasure and happiness. Some people act immorally, seeking such pleasures. The consequences of such immoral acts are not apparent. We can see a stone thrown up and coming down, but we cannot see any bad consequences to the drug dealer who seems to be enjoying life.</li>
+</ul>
+<h5 style="text-align: justify;">The Second Noble Truth - Causes for Future Suffering</h5>
+<p style="text-align: justify;">6. the cause of future suffering is indicated indirectly in the First Noble Truth: Craving sensory pleasures. Suppose we do immoral things to get such sensory pleasures. The worst outcomes (rebirths in the <em>apāyās</em>) will result.</p>
+<ul style="text-align: justify;">
+<li>For example, person X may kill another person to get money or marry his wife. Even though X may accomplish that goal and "enjoy life" for even 100 years, that is nothing compared to the millions of years of future suffering X will go through due to his immoral action.</li>
+</ul>
+<p style="text-align: justify;">7. When a fish bites the bait, it does not see the suffering hidden in that action. Looking from the ground, we can see the whole picture and know what will happen to the fish if it bites the bait. But the fish cannot see that whole picture and thus does not see the hidden suffering. It only sees a delicious bit of food.</p>
+<ul style="text-align: justify;">
+<li>In the same way, if we do not know about the wider world of 31 realms (with the suffering-filled four lowest realms), we only focus on what is easily accessible to our six senses.</li>
+<li>To comprehend suffering through repeated rebirths, one needs to comprehend that most suffering is encountered in the four lowest realms (<em>apāyās</em>); see “<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank">The Grand Unified Theory of Dhamma</a><span>“ at <span class="pali-term term-highlight" data-term="puredhamma">puredhamma</span>.net.</span></li>
+<li>Thus, stopping suffering requires one to be mindful of one's actions and stop doing bad<em> vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (i.e., immoral thinking, speech, and deeds).</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong><span>8. Therefore, the “previously unheard truth about suffering” that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> revealed is the suffering hidden in sense pleasures. </span></strong></span>The level of suffering depends on what we do (<em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) to get those pleasures. <strong>If they are immoral, then the worst suffering in the <em>apāyās</em> will result.</strong></p>
+<ul style="text-align: justify;">
+<li>We believe that those sensory pleasures are to be valued and enjoyed. That is because we do not immediately see the consequences of our harmful actions to get those sensory pleasures.</li>
+<li>For example, if one rapes a woman to get enjoyment for a short time, one could be spending millions of years as an animal in the future because of that immoral action.</li>
+<li>However, it may not be easy to grasp this point. One needs to advance step-by-step; see, "<a href="../../pages/LD.EE.002/index.html" rel="noopener noreferrer" target="_blank">Is It Necessary for a Buddhist to Eliminate Sensual Desires?</a>".</li>
+<li>The first step to reducing suffering in the future is to avoid doing evil deeds (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) via thoughts, speech, and bodily actions (again, these are associated with <em>manō</em>, <em>vaci</em>, and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>).</li>
+<li><span style="color: #0000ff;"><strong>Therefore, we create our own future happiness via <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> (good <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) or future suffering via <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>(bad <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>).</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">The Third Noble Truth - How to Stop Future Suffering</h5>
+<p style="text-align: justify;">9. As discussed above, such suffering can arise in this life due to our own (<em>apunnābhi</em>) <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (which we generate to satisfy our cravings).</p>
+<ul style="text-align: justify;">
+<li>In the same way, one can stop ALL FUTURE SUFFERING by controlling our <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</li>
+<li>We attach to things with greed and hate via <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> because of our ignorance of the Four Noble Truths (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>). As we have discussed, this is the first step in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> leading to "the whole mass of suffering": "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>."</li>
+</ul>
+<p style="text-align: justify;">10. The Third Noble Truth is about what can be achieved by systematically removing those causes.</p>
+<ul style="text-align: justify;">
+<li> <em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> increases from the point of embarking on the Path and has four levels of PERMANENT increases starting at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage and culminating at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. See, for example, “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness – What is Nirāmisa Sukha?</a>“.</li>
+</ul>
+<p style="text-align: justify;">11. To stop the rising of "bad<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>,</span></em>" we need to do two things: (1) remove <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em><span> by learning true <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and (2) make use of our free will to get control of our </span><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (this is the basis of <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span>/<span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>A systematic way to achieve this is stated in the Fourth Noble Truth.</li>
+</ul>
+<h5 style="text-align: justify;">The Fourth Noble Truth - The Way to Stop Future Suffering</h5>
+<p style="text-align: justify;">12. The second Noble Truth describes those CAUSES we need to work on. The root causes are greed, hate, and ignorance, but they need to be removed mainly via understanding the Three Characteristics (<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>) and also via removing our bad <em>saṃsāric</em><span> habits; see a series of <span class="pali-term term-highlight" data-term="posts">posts</span> starting with “</span><a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits, Goals, and Character (Gati)">Habits, Goals, Character (Gati)</a>” to “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank" title="The Way to Nibbāna – Removal of Āsavas">The Way to Nibbāna – Removal of Āsavā</a>. “</p>
+<ul style="text-align: justify;">
+<li>The way to achieve this is to follow the Noble Eightfold Path:<em><span> <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> (understanding what is embedded in the Four Noble Truths), and then thinking (<em>saṅkappa</em>), speaking (<em>vācā</em>), acting (<em>kammaṃta</em>), living one's whole life that way (<em>ājiva</em>), striving harder (<em><span><span class="pali-term term-highlight" data-term="vāyāma">vāyāma</span></span></em>), getting to the right mindset (<em><span><span class="pali-term term-highlight" data-term="sati">sati</span></span></em>), and finally to <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">13. When we follow the Noble Eightfold Path, <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> arises first, and then various stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> starts when one lives a moral life (see “<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank">Ten Immoral Actions (Dasa Akusala)</a><span>” and follow-up <span class="pali-term term-highlight" data-term="posts">posts</span>).</span></li>
+<li style="text-align: justify;">The root causes of immoral behavior are greed, hate, and ignorance. We can reduce ignorance to the level of the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage just via comprehending the Three Characteristics of “this world of 31 realms”, i.e., <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>; see, “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anatta – Wrong Interpretations</a><span>, “and the follow-up <span class="pali-term term-highlight" data-term="posts">posts</span>. It is that powerful.</span></li>
+</ul>
+<h5 style="text-align: justify;">Why Is It Hard to See the “Hidden Suffering”? – Time Lag</h5>
+<p style="text-align: justify;">14. The main problem in clearly seeing the “cause and effect of mind actions” is that the results of those actions have a time delay and that the time delay itself is not predictable.</p>
+<ul style="text-align: justify;">
+<li>In contrast, it is easy to predict what will happen with material things (moving an object, a vehicle, a rocket, etc.). The success of physical sciences is due to this reason. Once the underlying laws are found (laws of gravity, laws of motion, electromagnetism, nuclear forces, quantum mechanics, etc.), one has complete control.</li>
+</ul>
+<p style="text-align: justify;">15. But the mind is very different.  To begin with, no two minds work the same way. Under a given set of conditions, each mind will choose to act differently. With physical objects, that is not so; under a given set of conditions, what will happen can be predicted accurately.</p>
+<ul style="text-align: justify;">
+<li>Effects of some actions (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) may not materialize in this life and sometimes may come to fruition only in many lives down the road (but with accumulated interest).</li>
+<li>Even in this life, mental phenomena are complex: This is why economics is not a “real science.” It involves how people sometimes act “irrationally” for perceived gains. No economic theory can precisely predict how a given stock market will perform.</li>
+</ul>
+<p style="text-align: justify;"><b>16. This “cause and effect” that involves the mind is the principle of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em><span> in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></b></p>
+<ul style="text-align: justify;">
+<li>But unlike in Hinduism, <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> is not deterministic, i.e., not all <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> have to come to fruition; see, “<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank">What is Kamma? does Kamma determine Everything?</a>“.</li>
+<li><span>Suitable CONDITIONS must be there to bring good or bad <span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span> to fruition. That is why </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> is not deterministic, and we can stop ALL future suffering.</li>
+<li>We need to get rid of <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>, two critical steps in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. That is how <em>Angulimāla</em> overcame all that bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> of killing almost 1000 people.</li>
+</ul>
+<h5 style="text-align: justify;">We Can Eliminate Only a Part of the Suffering Encountered in This Life</h5>
+<p style="text-align: justify;"><span>Finally, let us look into what kind of suffering can be stopped from arising and gain confidence in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. One does not need to believe <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings blindly.</span></p>
+<p style="text-align: justify;">17. There are two types of <em>vēdanā</em> (feelings); see "<a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank">Vēdanā (Feelings) Arise in Two Ways</a>."</p>
+<ul style="text-align: justify;">
+<li>First is due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>. </span></em></li>
+<li>The second is mental suffering due to <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>(via attachment to sensual pleasures and friction (<em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em>) due to things we don't like). This could lead to depression.</li>
+</ul>
+<p style="text-align: justify;">18. This life is the RESULT of past <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. Once life starts, it cannot be stopped until "its <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy" is exhausted. This life WILL end up in old age, decay, and eventual death.</p>
+<ul style="text-align: justify;">
+<li>Therefore, if someone has aches and pains due to old age, it is impossible to get rid of them other than to use medications or therapy to lessen and manage the pain.</li>
+<li><span>Even the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> had back pain due to old age and had a severe stomach ache at the end.</span></li>
+<li>One may get injured, come down with a disease, etc.</li>
+<li>All these are due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">19. On the other hand, it is possible to stop the second type ("mental suffering") that arises due to our way of thinking (again, our own <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>Therefore, we can EXPERIENCE the relief from suffering (called <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>) in this life itself.</li>
+<li>The suffering (or <em>vēdanā</em>) that a living <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> has eliminated is called "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> ja vēdanā</span></em>." <strong>This is what leads to depression in some people</strong>.</li>
+<li>Here, "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>" is "<em>san</em>" + "<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>," or "contact with one's defilements (<em>san</em>)"; see, "<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is “San”? Meaning of Sansāra (or Samsāra)</a>".</li>
+</ul>
+<h5 style="text-align: justify;">Humans Have Free Will to Eliminate Future Suffering</h5>
+<p style="text-align: justify;">20. The life we have as humans is a RESULT of a past good deed—a dog's or an ant's life results from a past deed by that sentient being.</p>
+<ul>
+<li style="text-align: justify;">And what happens to us in this life is a COMBINATION of what we have done in the past (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>) AND what we do in this life.</li>
+<li style="text-align: justify;">What happens to an animal is MOSTLY due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> from the past.</li>
+<li style="text-align: justify;">The difference between a human and an animal is that the animal has little control over what will happen to it. But human birth is a special one: We have a higher level mind that CAN change the future to some extent, and with possible enormous consequences.</li>
+<li style="text-align: justify;"><span style="color: #0000ff;"><strong>We have free will, and animals (or those beings in other lower realms) do not. We can control our <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and they cannot. It is hard to get a human birth. We should not waste this opportunity.</strong></span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/LD.BB.001/index.html">Essential Buddhism</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/LD.BB.003/index.html">Citta Vedana Sanna Sankhara Vinnana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/LD.BB.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Essential Buddhism</span>
+        
+        <span class="pathway-title title-pt">Essential Buddhism</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/LD.BB.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Citta Vedana Sanna Sankhara Vinnana</span>
+        
+        <span class="pathway-title title-pt">Citta Vedana Sanna Sankhara Vinnana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-LD">
+        ↑ Back to Living Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

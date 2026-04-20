@@ -1,0 +1,382 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Vinaya The Nature Likes To Be In Equillibrium | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 56 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.AA.010</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Vinaya The Nature Likes To Be In Equillibrium</h1>
+    
+    <h1 class="title-pt">Vinaya: A natureza gosta de estar em equilíbrio</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.AA.010</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.AA.010"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0065"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.AA.010</td></tr><tr><td>Fin-dex</td><td>0065</td></tr><tr><td>Slug</td><td>vinaya-the-nature-likes-to-be-in-equillibrium</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Vinaya The Nature Likes To Be In Equillibrium</td></tr></table></div></div><p><strong><span>Pre-2016 <span class="pali-term term-highlight" data-term="post">post</span>; revised July 18, 2022; </span><span style="color: #3366ff;">April 30, 2023</span></strong></p>
+<p style="text-align: justify;">Our lives and existence are based on constantly getting into debt and then paying off debts. This latter is done by Nature whether we like it or not. When we steal, kill, lie, or do any of the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>, we get into debt, and nature keeps track of that via <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</p>
+<ul>
+<li style="text-align: justify;"><span>We are reborn to pay debts. This is another way of looking at the cycle of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. Nature will automatically ensure that the largest debts are paid off first; this is how the next existence (</span><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) is determined.</li>
+<li style="text-align: justify;">During a lifetime, debts are paid off when suitable conditions appear; see "<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Anantara Samanantara Paccaya</a>."</li>
+<li style="text-align: justify;">Nature is the final arbitrator. A criminal may get away with a crime by hiring a good lawyer but must pay for the crimes in nature's court. Similarly, when we do something good, we will get the rewards regardless of whether we wish for anything in return. Most people do not realize this because of the delay between the act (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) and its result (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>).</li>
+</ul>
+<p style="text-align: justify;">1. When we do either a moral or an immoral act, it is done with an intention and has associated energy. That is the<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy produced in <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. That energy resides in the universe until spent or otherwise reduced by some means (this is related to quantum entanglement; see, "<a href="../../pages/DS.KK.003/index.html" rel="noopener noreferrer" target="_blank" title="Quantum Entanglement – We Are All Connected">Quantum Entanglement - We are All Connected</a>"). It is the principle of energy conservation in physics.</p>
+<ul style="text-align: justify;">
+<li>We can become indebted to a living being or the "world as a whole."</li>
+<li>There were no<em><span> <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em><span> rules in <span class="pali-term term-highlight" data-term="buddha">Buddha</span> </span><em>säsana</em><span> for about 20 years after the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> attained Enlightenment. When <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> started flourishing, unscrupulous people started becoming monks to live comfortable lives depending on the devotees' kindness. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> admonished them about the consequences of becoming indebted and started setting up the </span><em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em> ("<em>vi</em>" + "<em><span><span class="pali-term term-highlight" data-term="naya">naya</span></span></em>," where "<em><span><span class="pali-term term-highlight" data-term="naya">naya</span></span></em><span>" in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> or <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> means debt) rules to rein in those people.</span></li>
+</ul>
+<p style="text-align: justify;">2. When there is an energy imbalance, nature tries to bring it to balance. For a given individual (in the conventional sense), i.e., a life-stream (absolute sense), the biggest imbalances are settled first.</p>
+<ul style="text-align: justify;">
+<li>Thus at the death when <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> takes place, the biggest <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed with the highest imbalance comes into play and releases that energy by initiating the next birth in the corresponding "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>"; see, "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava and Jāti – States of Existence and Births Therein</a>".  Thus the next "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" is determined by the biggest <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> seed at the end of the current "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" (this is a simple interpretation of a complex process).</li>
+<li>During a lifetime (<em><span>pavutti <span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>), in addition to the energy content, the prevailing conditions also come into play for delivering <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> or releasing <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds. This is why we can prevent many bad <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> from coming to fruition by acting with <em><span><span class="pali-term term-highlight" data-term="yoniso">yoniso</span> manasikara</span></em> or "being mindful"; see, "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">What is Kamma? Is Everything Determined by Kamma?</a>".</li>
+<li>In both cases (<em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> and <em><span>pavutti <span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>), "matching conditions" plays a big role; see "<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Annantara and Samanantara Paccaya">Annantara and Samanantara Paccaya</a>." For example, a seed does not germinate if it is in a dry place; it needs to be in the ground with water and sunlight to germinate.</li>
+</ul>
+<p style="text-align: justify;">3. Getting back to the issue of coming to equilibrium, a stone is in equilibrium when it stays on the ground. If we pick it up and throw it up, it goes up because we gave it some energy. But now, it is not in equilibrium and will fall to find its equilibrium position on the ground. The only difference with <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em><span> energy is that the <span class="pali-term term-highlight" data-term="kammic">kammic</span> energy could be released much later; </span><strong>it has to find suitable conditions to release that energy;</strong> see "<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>," and "<a href="../../pages/PS.AA.002/index.html" rel="noopener noreferrer" target="_blank" title="Paṭicca Samuppāda – Overview">Paṭicca Samuppāda - Overview</a>"; Thus the release of <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy is more akin to the process of germination of a seed; there is a time lag until suitable conditions appear.</p>
+<ul>
+<li style="text-align: justify;">When placed in the ground, a seed germinates and becomes a tree according to the "blueprint" in the seed. The energy for the tree's growth comes from the soil (through the roots) and the Sun (through the leaves.) But the tree, like any other <em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em>, has a finite lifetime.</li>
+<li style="text-align: justify;">Unless the tree made more seeds during its lifetime, that tree is the only "result" of that original seed.</li>
+</ul>
+<p style="text-align: justify;">4. Through numerous lives in the past, we have accumulated innumerable numbers of both good and bad <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy packets, or <em><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></em>, or<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds, and we keep producing them in this lifetime, too; some are big, and some are small (actually, those done beyond 91 <em><span><span class="pali-term term-highlight" data-term="mahā">mahā</span> kappā</span></em> have lost their energy unless they are <em><span>janaka <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> that can lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>; like everything else in this world, </span><em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy is not permanent either). The small <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> seeds bring in results (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>) during any lifetime, and the really big ones (<em><span><span class="pali-term term-highlight" data-term="kamma patha">kamma patha</span></span></em>) are the ones that determine "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" for a new life at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #0000ff;">Does that mean we must remove all <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> seeds to stop <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, i.e., to attain </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>? No. A new "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" is grasped at the "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span></span></em>" step in the <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycle; see  "<a href="../../pages/PS.HH.004/index.html" rel="noopener noreferrer" target="_blank" title="Akusala-Mula Paṭicca Samuppāda">Akusala-Mula Paṭicca Samuppāda</a>." </span></span><span style="color: #0000ff;">If one has removed ignorance (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) and understood the true nature of the world, then there is no "<em><span><span class="pali-term term-highlight" data-term="tanha">tanha</span>,</span></em>" and thus there is no <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em> at the "<em><span><span class="pali-term term-highlight" data-term="tanha">tanha</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" step, and thus no "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>," and no "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em><span>" or <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>.</span></span></li>
+<li><span style="color: #0000ff;">However, to remove ignorance (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>), we must purify our minds. For that, we must understand the true nature of "this world," i.e., <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>. We need to eliminate the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> (</span></span><em>pañca nīvaraṇ</em><span style="color: #0000ff;"><em>a</em>) that cover our minds and not let the mind comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>. That is where the removal of bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds and the accumulation of good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds (i.e., doing good deeds and avoiding bad deeds) become important; of course, "deeds" include actions, speech, and thoughts.</span></li>
+</ul>
+<p style="text-align: justify;">5. The point is that every time we do a moral or an immoral act, we generate a<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed that embeds the "<em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em> power" of the thought that led to the act; see, "<a href="../../pages/AB.BB.009/index.html" rel="noopener noreferrer" target="_blank" title="Javana of a Citta – The Root of Mental Power">Javana of a Citta - The Root of Mental Power</a>." The <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> power associated with a moral act can be considered surplus in one's "account" that can be used to enjoy things in life; an immoral act leads to debt, i.e., it appears on the negative side of the ledger. If one acts immoral against another living being, one is in debt to that being until it is paid off; see "<a href="../../pages/TL.GG.007/index.html" rel="noopener noreferrer" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Debt, and Meditation</a>."</p>
+<p style="text-align: justify;">6. Nature tries to keep things in balance: the good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> brings good results, and bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> brings bad results when nature implements this balancing act. We can take advantage of both by arranging conditions for good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds to germinate and not letting bad<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds germinate; see, "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">What is Kamma? Is Everything Determined by Kamma?</a>". The development of good habits and getting rid of bad habits go along with this process; see "<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits and Goals">Habits and Goals</a>" and "<a href="../../pages/TL.GG.002/index.html" rel="noopener noreferrer" target="_blank" title="Saṃsāric Habits and Āsavas">Saṃsāric Habits and Āsavas</a>." Please review these links carefully. All these tie up together.</p>
+<p style="text-align: justify;">7. Thus, we are bound to this <em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span></span></em> or the cycle of rebirths because we do things to make an "imbalance" through moral or immoral deeds: good deeds lead to good rebirths and bad ones to bad rebirths. They both extend the <em>sansaric</em> journey. However, it is essential to engage in moral deeds to avoid birth in the four lowest realms (<em>apāyā</em>), where the suffering is great, AND there is no opportunity for moral deeds. Thus one MUST do moral deeds until one attains<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Moral deeds WILL have consequences (they add up in the "plus side of the ledger"), whether or not one wishes for anything in return, i.e., nature will pay back. However, if one does a moral deed AND wishes for something other than <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, then that is done with greed, and thus one is simultaneously doing an immoral act.</li>
+<li>Only <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> does not do any moral or immoral deeds with <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em><span> consequences that are potent enough to bring <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. All an </span><em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> does is low-level<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> or "<em>kriya</em>" (like walking and talking) and is "in equilibrium" with nature.</li>
+</ul>
+<p style="text-align: justify;">8. When one goes "off the equilibrium," greed and anger intensify, and one is likely to do immoral acts to become indebted. On the other hand, when one is in some <em>samadhi</em>, the mind is close to equilibrium, and thus greed and hate are under control. If one attains<em> rupavacara </em>and then<em> arupavacara jhānā,</em> the mind gets even closer to equilibrium. <em>Samadhi</em> attains perfection when one becomes an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">This is why one must avoid immoral acts to get results in meditation. A purified mind can quickly get to <em>samadhi</em>; see "<a href="../../pages/TL.BB.001/index.html" rel="noopener noreferrer" target="_blank" title="2. The Basics in Meditation">The Basics in Meditation</a>."</li>
+<li style="text-align: justify;">One becomes indebted via greed, hate, or ignorance (here, ignorance means not knowing the true nature of the world or <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>); thus, there is <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span> <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span> <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span>, </span></em>and<em><span> <span class="pali-term term-highlight" data-term="moha">moha</span> <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em>.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.AA.010"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0065"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.AA.010
+Language:     pt-BR
+Generated-At: 2026-04-18T04:02:22Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>Ensaio anterior a 2016; revisado em 18 de julho de 2022; <span style="color: #3366ff;">30 de abril de 2023</span></strong></p>
+<p style="text-align: justify;">Nossas vidas e existência se baseiam em contrair dívidas constantemente e, em seguida, pagá-las. Isso é feito pela Natureza, quer queiramos quer não. Quando roubamos, matamos, mentimos ou praticamos qualquer um dos <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>, contraímos dívidas, e a natureza mantém registro disso por meio da energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">Nascemos de novo para saldar dívidas. Essa é outra maneira de encarar o ciclo de Renascimento. A Natureza garantirá automaticamente que as dívidas maiores sejam pagas primeiro; é assim que a próxima existência (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) é determinada.</li>
+<li style="text-align: justify;">Durante uma vida, as dívidas são pagas quando surgem condições adequadas; veja “<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Anantara Samanantara Paccaya</a>”.</li>
+<li style="text-align: justify;">A natureza é o árbitro final. Um criminoso pode escapar impune de um crime contratando um bom advogado, mas deve pagar pelos crimes no tribunal da natureza. Da mesma forma, quando fazemos algo de bom, receberemos as recompensas independentemente de desejarmos algo em troca. A maioria das pessoas não percebe isso devido ao intervalo entre o ato (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) e seu resultado (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>).</li>
+</ul>
+<p style="text-align: justify;">1. Quando praticamos um ato moral ou imoral, ele é feito com uma intenção e possui energia associada. Essa é a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> produzida no <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. Essa energia permanece no universo até ser gasta ou reduzida de alguma forma (isso está relacionado ao entrelaçamento quântico; veja “<a href="../../pages/DS.KK.003/index.html" rel="noopener noreferrer" target="_blank" title="Quantum Entanglement – We Are All Connected">Entrelaçamento Quântico – Estamos Todos </a>Conectados”). É o princípio da conservação de energia na física.</p>
+<ul style="text-align: justify;">
+<li>Podemos ficar em dívida com um ser vivo ou com o “mundo como um todo”.</li>
+<li>Não havia regras <em><span>do <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em> no <em>säsana</em><span> do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> por cerca de 20 anos após o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ter alcançado a Iluminação. Quando o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> começou a florescer, pessoas sem escrúpulos passaram a se tornar monges para viver uma vida confortável, dependendo da bondade dos devotos. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> advertiu-os sobre as consequências de se tornarem devedores e começou a estabelecer as regras </span><em><span>do <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em> (“<em>vi</em>” + “<em><span><span class="pali-term term-highlight" data-term="naya">naya</span></span></em>”, onde “<em><span><span class="pali-term term-highlight" data-term="naya">naya</span></span></em><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> ou Cingalês significa dívida) para controlar essas pessoas.</span></li>
+</ul>
+<p style="text-align: justify;">2. Quando há um desequilíbrio energético, a natureza tenta restabelecer o equilíbrio. Para um determinado indivíduo (no sentido convencional), ou seja, um fluxo de vida (no sentido absoluto), os maiores desequilíbrios são resolvidos primeiro.</p>
+<ul style="text-align: justify;">
+<li>Assim, na morte, quando ocorre <em><span>o <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>, a semente <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> maior com o maior desequilíbrio entra em ação e libera essa energia, iniciando o próximo nascimento no “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” correspondente; veja “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>”.  Assim, o próximo “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” é determinado pela maior semente <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> no final do “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” atual (esta é uma interpretação simples de um processo complexo).</li>
+<li>Durante uma vida (<em><span>pavutti <span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>), além do conteúdo energético, as condições predominantes também entram em jogo para a manifestação do <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> ou a liberação de sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>. É por isso que podemos impedir que muitos <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> ruins se concretizem agindo com <em><span><span class="pali-term term-highlight" data-term="yoniso">yoniso</span> manasikara</span></em> ou “estando atentos”; veja “<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">O que é Kamma? Tudo é determinado pelo Kamma?</a>”.</li>
+<li>Em ambos os casos (<em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>), as “condições correspondentes” desempenham um papel importante; veja “<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Annantara and Samanantara Paccaya">Annantara e Samanantara Paccaya</a>”. Por exemplo, uma semente não germina se estiver em um local seco; ela precisa estar no solo, com água e luz solar, para germinar.</li>
+</ul>
+<p style="text-align: justify;">3. Voltando à questão de atingir o equilíbrio, uma pedra está em equilíbrio quando permanece no chão. Se a pegarmos e a jogarmos para cima, ela sobe porque lhe demos alguma energia. Mas agora, ela não está em equilíbrio e cairá para encontrar sua posição de equilíbrio no chão. A única diferença com a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> é que ela pode ser liberada muito mais tarde; <strong>ela precisa encontrar condições adequadas para liberar essa energia;</strong> veja “<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>” e “<a href="../../pages/PS.AA.002/index.html" rel="noopener noreferrer" target="_blank" title="Paṭicca Samuppāda – Overview">Paṭicca Samuppāda – Visão</a> Geral”; Assim, a liberação da energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> é mais semelhante ao processo de germinação de uma semente; há um intervalo de tempo até que as condições adequadas apareçam.</p>
+<ul>
+<li style="text-align: justify;">Quando colocada no solo, uma semente germina e se torna uma árvore de acordo com o “projeto” contido na semente. A energia para o crescimento da árvore vem do solo (através das raízes) e do Sol (através das folhas). Mas a árvore, como qualquer outro <em><span><span class="pali-term term-highlight" data-term="saṅkhata">Saṅkhata</span></span></em>, tem uma vida finita.</li>
+<li style="text-align: justify;">A menos que a árvore tenha produzido mais sementes durante sua vida, essa árvore é o único “resultado” daquela semente original.</li>
+</ul>
+<p style="text-align: justify;">4. Ao longo de inúmeras vidas no passado, acumulamos um número incontável de pacotes de energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, tanto bons quanto maus, ou <em><span><span class="pali-term term-highlight" data-term="kamma bīja">Kamma Bīja</span></span></em>, ou sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, e continuamos a produzi-los nesta vida também; algumas são grandes e outras são pequenas (na verdade, aquelas realizadas além de 91 <em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> perderam sua energia, a menos que sejam <em><span>janaka <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que possam levar ao Renascimento; como tudo mais neste mundo, a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> também não é permanente). As pequenas sementes <em>kármicas</em> trazem resultados (<em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>) durante qualquer vida, e as realmente grandes (<em><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span></span></em>) são as que determinam <em>o</em> “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” para uma nova vida no momento do <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #0000ff;">Isso significa que devemos remover todas as sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> para interromper o renascimento, ou seja, para atingir <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>? Não. Um novo “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” é agarrado na etapa “<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span></span></em>” do ciclo <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>; veja “<a href="../../pages/PS.HH.004/index.html" rel="noopener noreferrer" target="_blank" title="Akusala-Mula Paṭicca Samuppāda">Akusala-Mula Paṭicca Samuppāda</a>”. </span></span><span style="color: #0000ff;">Se alguém removeu a <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e compreendeu a verdadeira natureza do mundo, então não há “<em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>” e<em>,</em> portanto, não há <em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em> na etapa “<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">Taṇhā Paccayā Upādāna</span></span></em>”; consequentemente, não há “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” e não há “<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>” ou Renascimento.</span></li>
+<li><span style="color: #0000ff;">No entanto, para remover a ignorância (<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>), devemos purificar nossas mentes. Para isso, devemos compreender a verdadeira natureza “deste mundo”, ou seja, <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>. Precisamos eliminar os Cinco Estorvos (</span><em>Pañca Nīvaraṇ</em><span style="color: #0000ff;"><em>a</em>) que obscurecem nossas mentes e impedem que a mente compreenda <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>. É aí que a remoção das sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruins e o acúmulo de sementes <em>de</em> <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> boas (ou seja, praticar boas ações e evitar más ações) se tornam importantes; é claro que “ações” incluem atos, palavras e pensamentos.</span></li>
+</ul>
+<p style="text-align: justify;">5. A questão é que toda vez que praticamos um ato moral ou imoral, geramos uma semente <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que incorpora o “poder <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span></span></em>” do pensamento que levou ao ato; veja “<a href="../../pages/AB.BB.009/index.html" rel="noopener noreferrer" target="_blank" title="Javana of a Citta – The Root of Mental Power">Javana de um Citta – A Raiz do Poder Mental</a>”. O poder <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> associado a um ato moral pode ser considerado um excedente na “conta” de alguém, que pode ser usado para desfrutar das coisas da vida; um ato imoral leva à dívida, ou seja, aparece no lado negativo do balanço. Se alguém age de forma imoral contra outro ser vivo, fica em dívida com esse ser até que a dívida seja quitada; veja “<a href="../../pages/TL.GG.007/index.html" rel="noopener noreferrer" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Dívida e Meditação</a>”.</p>
+<p style="text-align: justify;">6. A natureza tenta manter as coisas em equilíbrio: o bom <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> traz bons resultados, e <em>o</em> mau <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> traz maus resultados quando a natureza implementa esse ato de equilíbrio. Podemos tirar proveito de ambos, criando condições para que as sementes <em>do</em> bom <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> germinem e não permitindo que as sementes <em>do</em> mau<em><span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> germinem; veja “<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">O que é Kamma? Tudo é determinado pelo Kamma?</a>”. O desenvolvimento de bons hábitos e a eliminação dos maus hábitos acompanham esse processo; veja “<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits and Goals">Hábitos e Objetivos</a>” e “<a href="../../pages/TL.GG.002/index.html" rel="noopener noreferrer" target="_blank" title="Saṃsāric Habits and Āsavas">Hábitos Saṃsáricos e Āsavas</a>”. Por favor, analise esses links cuidadosamente. Tudo isso está interligado.</p>
+<p style="text-align: justify;">7. Assim, estamos presos a este <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span>,</span></em> ou ciclo de renascimentos, porque fazemos coisas que criam um “desequilíbrio” por meio de ações morais ou imorais: boas ações levam a bons renascimentos e más ações a maus renascimentos. Ambas prolongam a jornada <em>samsárica</em>. No entanto, é essencial praticar atos morais para evitar o nascimento nos quatro reinos inferiores (<em>apāyā</em>), onde o sofrimento é grande E não há oportunidade para atos morais. Assim, é PRECISO praticar atos morais até atingir<em><span> o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>As ações morais TERÃO consequências (elas se somam no “lado positivo do balanço”), quer se deseje algo em troca ou não, ou seja, a natureza retribuirá. No entanto, se alguém pratica uma ação moral E deseja algo além do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, então isso é feito com ganância e, assim, está simultaneamente cometendo um ato imoral.</li>
+<li>Somente <em><span>um <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não realiza atos morais ou imorais com consequências <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> potentes o suficiente para provocar o Renascimento. Tudo o que um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> faz são <em>Saṅkhāras</em> de baixo nível ou “<em>kriya</em>” (como caminhar e falar) e está “em equilíbrio” com a natureza.</li>
+</ul>
+<p style="text-align: justify;">8. Quando alguém sai “do equilíbrio”, a ganância e a raiva se intensificam, e é provável que cometa atos imorais para se tornar devedor. Por outro lado, quando se está em algum <em>samadhi</em>, a mente está próxima do equilíbrio e, assim, a ganância e o ódio estão sob controle. Se alguém alcança<em> o rupavacara </em>e depois<em> o arupavacara jhānā,</em> a mente fica ainda mais próxima do equilíbrio. <em>O samadhi</em> atinge a perfeição quando se torna um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">É por isso que deve-se evitar atos imorais para obter resultados na meditação. Uma mente purificada pode alcançar rapidamente o <em>samadhi</em>; consulte “<a href="../../pages/TL.BB.001/index.html" rel="noopener noreferrer" target="_blank" title="2. The Basics in Meditation">Os Fundamentos da Meditação</a>”.</li>
+<li style="text-align: justify;">A pessoa fica em dívida por meio da ganância, do ódio ou da ignorância (aqui, ignorância significa não conhecer a verdadeira natureza do mundo ou <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>); assim, há <em><span><span class="pali-term term-highlight" data-term="lobha">Lobha</span> <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span>, <span class="pali-term term-highlight" data-term="dosa">Dosa</span> <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em> e<em><span> <span class="pali-term term-highlight" data-term="moha">Moha</span> <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em>.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.AA.009/index.html">First Noble Truth Is Suffering Myths About Suffering</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.JJ.001/index.html">The Four Stages In Attaining Nibbana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.AA.009/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">First Noble Truth Is Suffering Myths About Suffering</span>
+        
+        <span class="pathway-title title-pt">A Primeira Nobre Verdade é o sofrimento: Mitos sobre o sofrimento</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.JJ.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">The Four Stages In Attaining Nibbana</span>
+        
+        <span class="pathway-title title-pt">As quatro etapas para alcançar o Nibbāna</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Vinnana Sankhara Paticca Samuppada | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Living Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 8 / 52</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">LD.BB.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Vinnana Sankhara Paticca Samuppada</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>LD.BB.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Living Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="LD.BB.006"
+             data-section="Living Dhamma"
+             data-section-code="LD"
+             data-findex="0203"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>LD.BB.006</td></tr><tr><td>Fin-dex</td><td>0203</td></tr><tr><td>Slug</td><td>vinnana-sankhara-paticca-samuppada</td></tr><tr><td>Section</td><td>LD</td></tr><tr><td>Title EN</td><td>Vinnana Sankhara Paticca Samuppada</td></tr></table></div></div><strong>February 25, 2019; <span style="color: #0000ff">revised August 28, 2002</span></strong>
+<p style="text-align: justify"><span>1. To review what we have covered in the last few <span class="pali-term term-highlight" data-term="posts">posts</span> in "</span><a href="../../pages/LD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Essential Buddhism</a>":</p>
+<ul style="text-align: justify">
+<li>A defiled consciousness or <em>viññāna</em> has an "expectation" for the future. The "<em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy" in "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> viññāna</span></em><span>" is responsible for "sustaining the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process."</span></li>
+<li>We do that willingly by generating (<em>abhi</em>)<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>,i.e., how we think, speak, and act.</li>
+<li>One who has not understood the First Noble Truth is willingly generating (<em>abhi</em>) <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> via "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>,</span></em>" which leads then to the cultivation of different types of <em>viññāna</em> via "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>" step. That is how <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycles start. They end up in "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="marana">marana</span>, soka, parideva, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>,.." the whole mass of suffering!</li>
+<li><strong>Therefore, "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>" lead to all future suffering.</strong> We will proceed step-by-step.</li>
+</ul>
+<p style="text-align: justify">2. The five types of<em> viññāna</em> can be called "just consciousness," i.e., without "future expectations." These are <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> viññāna</span></em> (a "seeing event"), <em>sōta viññāna</em> (a "hearing event"), etc. for the five physical sense inputs. One more special case with <em>manō</em> <em>viññāna</em> is discussed in #4 below.</p>
+<ul style="text-align: justify">
+<li>A "defiled <em>viññāna</em>" or "an expectation for the future" is associated only with the <em>manō viññāna</em>, which is what is normally referred to in a <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> cycle if a specific type is not mentioned. See "<a href="../../pages/KD.II.008/index.html" rel="noopener" target="_blank">Viññāṇa (Defiled Consciousness)</a>."</li>
+<li><span style="color: #0000ff"><strong>Therefore, in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> or any<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, if a reference is made to <em>viññāna</em>, that is referring to "<em>manō viññāna</em>" or "mind consciousness."</strong></span></li>
+<li>The mind generates the "<em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> power" to create "<em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy" or "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> bija</span></em>" ("<em>bija</em>" is pronounced "beeja"); see "<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank">Sankhāra, Kamma, Kamma Bīja, Kamma Vipāka</a>."</li>
+</ul>
+<p style="text-align: justify">3. Other five types of <em>viññāna</em> (e.g., <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> viññāna</span></em>, etc.) are only registered in the mind when we see, hear, taste, etc.</p>
+<ul style="text-align: justify">
+<li>This is stated as "<em><span>cakkhuñca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> rūpē ca uppajjāti cakkhuviññāṇaṃ</span></em>" in <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>. This normally translates as "eye-consciousness arises when a picture is seen or received by the eyes." That gives the basic idea but has a deeper meaning. See "<a href="../../pages/DS.EE.001/index.html" rel="noopener" target="_blank">Contact Between Āyatana Leads to Vipāka Viññāna</a>."</li>
+<li>Similarly, hearing happens with "<em><span>sōtañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> saddē ca uppajjāti sōtaviññāṇaṃ</span></em>" ("hearing consciousness arises when a sound is heard or received by the ears"), etc.</li>
+</ul>
+<p style="text-align: justify">4. In addition to the sensory inputs via the five physical senses, we also get sense inputs DIRECTLY to the mind. These are "memories and future hopes" that just come to the mind and are <em>manō</em> <em>viññāna</em>. Even though they seem to come to the mind for no reason, it also happens due to the mind DIRECTLY receiving a memory (called <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>; this <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> is different from <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em><span> in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>).</span></p>
+<ul style="text-align: justify">
+<li>This process is stated as "<em><span>manañca <span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> dhammē ca uppajjāti manōviññāṇaṃ</span></em><span>," or "mind consciousness arises when the <span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span> or the mind receives a </span><em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> (of a memory)."</li>
+<li>This event is also "just consciousness," remembering a past event or a future expectation; for a deeper discussion, see, "<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">What are Dhammā? – A Deeper Analysis</a>".</li>
+</ul>
+<p style="text-align: justify">5. Therefore, the mind can "receive" six types of "sensory inputs," i.e., the mind becomes "aware of" or "becomes conscious about" those six types of sense events.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff"><strong>Based on those, the mind may "take actions" (to think further, to speak, or to act using the body). Those are called<em> vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</strong></span></li>
+<li>Such <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> then leads to a defiled mindset or a "defiled<em> viññāna</em>" via the <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (PS) process. <span style="color: #0000ff"><strong>Therefore, such "defiled<em> viññāna</em>" can arise only via PS processes.</strong></span></li>
+<li><span style="color: #0000ff"><strong>And that happens ONLY IF the mind gets attached to that sense input (an attractive figure, a pleasing sound, tasty food, nice smell, soothing touch, or an important past event (or planned future event).</strong></span></li>
+</ul>
+<p style="text-align: justify"><span>6. Please read the above points in #5 carefully until the concept is understood. This is the key to understanding the key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words </span><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> and <em>viññāna</em> and also the concept of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>Whenever we willingly grasp something (or get attached to something), whatever results from that action has the corresponding nature. Because one got attached willingly, a similar <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (existence) will result: i.e.,<em> pati+icca</em> leading to <em><span>sama+<span class="pali-term term-highlight" data-term="uppāda">uppāda</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> (PS).</li>
+<li>Here, "<em>pati+icca"</em> means "getting attached willingly," and "<em><span>sama+<span class="pali-term term-highlight" data-term="uppāda">uppāda</span>" </span></em>means "giving rise to a corresponding (similar) existence."</li>
+</ul>
+<p style="text-align: justify">7. The "existence" one gets according to one's <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> generated according to one's mindset. As we have discussed before, the first <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> arises automatically based on one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (or<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) when one gets attached to a sensory event.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff"><span style="color: #0000ff"><strong>Then, if one does not act with mindfulness (i.e., does not see the bad consequences of generating such thoughts), one will start generating<em><span> vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. </strong><span style="color: #000000">If one's emotions get strong enough, one could start speaking (more <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) and even taking bodily actions (<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>). A deeper discussion at "</span></span></span><a href="../../pages/KD.BB.007/index.html" rel="noopener noreferrer" target="_blank">Correct Meaning of Vacī Sankhāra</a>."</li>
+<li>We will first consider a PS process that often happens during a lifetime. This PS process is not discussed in the <em>Visuddhimagga</em><span> or any current English texts on <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify">8.<span style="color: #0000ff"><strong> In <em>pavutti</em> PS,  <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or existence refers to a </strong><strong><span style="color: #0000ff">"temporary existence" during a given lifetime.</span><span style="color: #000000"> </span></strong><span style="color: #000000"><em>Pavutti</em> means "current."</span></span></p>
+<ul style="text-align: justify">
+<li>In the most fundamental sense, a “greedy state of mind” will result when we get attached via greed, i.e., one develops a habit or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> corresponding to that state of mind; a “hateful state” (habit/<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) results via hateful attachment; acts of greed and/or hate are always done with ignorance.</li>
+<li>The <em>pavutti</em> PS describes how we develop certain habits (or <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) during a given lifetime. It is often easier to use an example to illustrate these PS cycles.</li>
+<li><em>Pavutti</em> PS is important because the habits (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) cultivated during this lifetime can feed the <em>uppatti</em> PS process leading to future rebirths.</li>
+</ul>
+<p style="text-align: justify">9. Let us examine how a teenager becomes an alcoholic using the <em>pavutti</em> PS. The teenager becomes friendly with a group of other teenagers who are into drinking. Initially, he may be reluctant to join in, but due to ignorance (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>), he joins them and starts drinking.</p>
+<ul style="text-align: justify">
+<li>Suppose a good friend or a family member knew about the situation. In that case, they could have prevented the teenager from associating with such bad company, i.e., ignorance could have been dispelled by explaining to him the adverse effects of drinking and associating with such a group.</li>
+<li>Now we will examine in detail how this happens.</li>
+</ul>
+<p style="text-align: justify">10. The PS cycle thus starts with “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>“; due to ignorance of the adverse results, the teenager starts drinking with that group (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> = “<em>san</em> +<em>khāra</em>” or actions of accumulating, in this case, bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>).</p>
+<ul style="text-align: justify">
+<li>The more he is involved with such drinking activities, the more he thinks about it and develops a “defiled mindset” or a "defiled <em>viññāna</em>" for that activity. This is “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>“.</li>
+<li><span>This is explained in detail in the previous <span class="pali-term term-highlight" data-term="post">post</span>: "</span><a href="../../pages/LD.BB.005/index.html" rel="noopener noreferrer" target="_blank">Connection Between Sankhāra and Viññāna</a>."</li>
+</ul>
+<p style="text-align: justify">11. When he begins to like drinking, he starts thinking about it while doing other things. <span style="color: #0000ff"><strong>This is “<em><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>“ step. </strong></span></p>
+<ul style="text-align: justify">
+<li>In this case, <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> are the mental images associated with that<em> viññāna</em>, i.e., the names and shapes of particular alcohol bottles, the places where he normally drinks, the friends who drink with him, etc.</li>
+<li>He also thinks about the next “event” and visualizes the scene, all these are associated with <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>. Thus, here<em><span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> are the mental images of “things” and “concepts” that one would like to enjoy.</li>
+<li>"<em><span><span class="pali-term term-highlight" data-term="nāma">Nāma</span></span></em>" means "name" assigned to a person/object, and "<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>" means "spatial profile" associated with that <em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em>.</li>
+<li>"<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></em>" are the "mental images" together with the associated feelings (<em>védanā</em>), perceptions (<em>sañña</em>), <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and <em>viññāna</em>, the COMBINED effect of "<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>."</li>
+</ul>
+<p style="text-align: justify">12. Now, his six senses become “involved” to provide reality to those <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em><span>; to provide the desired sensory pleasures. In <span class="pali-term term-highlight" data-term="pāli">Pāli</span> terms, the six </span><em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em> (senses) become “<em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em>“. For lack of a single English word, I will call an “<em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em>” an “import/export facility” and get involved in the actions associated with drinking events.</p>
+<ul style="text-align: justify">
+<li>Eyes are used as<em><span> <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em> when they are used just to identify things out there. When eyes are used to repeatedly look at an object TO ENJOY IT, then the eyes are used as “<em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em>.”</li>
+<li>His mind is often thinking about the next “event” (where, when, with whom, etc.), and he makes necessary preparations for the “event” using all six senses (now <em>āyatanas</em>) compatible with those <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>(that he is cultivating.)</li>
+<li><span style="color: #0000ff"><strong>Therefore, this is the “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span></span></em>“ step</strong></span>, where <em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span></span></em> means the six <em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span>.</span></em> Eyes are now not merely for seeing, they have become an assistant looking for a “good drink” or a “good friend to chat with,” etc.</li>
+</ul>
+<p style="text-align: justify">13. <span style="color: #0000ff"><strong>Then we have “<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="phassa">phassa</span>, “</span></em>i.e., all six <em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em> become actively engaged in making contact with relevant sense objects.</strong></span></p>
+<ul style="text-align: justify">
+<li>His eyes are on the lookout for a favorite drink or a favorite person to chat with, etc. Here instead of <em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>, it is (more appropriately) called “<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>” (= “<em>san</em>” + “<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>“), where “<em>san</em>” implies it is not just contact but a “<em>san</em> contact" or "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>." See "<a href="../../pages/TL.II.009/index.html" rel="noopener" target="_blank">Vedanā (Feelings) Arise in Two Ways</a>."</li>
+<li>This may be a good time to review the term "<em>san</em>" if you have not already done so: "<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank" title="What is “San”? Meaning of Sansara (or Samsara)">What is “San”? Meaning of Sansara (or Samsara)</a>".</li>
+</ul>
+<p style="text-align: justify">14. Such “<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>” lead to <em>védanā</em> (feelings), i.e., “(<em>san</em>)<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> védanā</span></em>“. He experiences “good (but immoral) feelings” with all those sense contacts.</p>
+<ul style="text-align: justify">
+<li>Because of such “good feelings,” he gets further attached: “<em><span>védanā <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>“; see, “<a href="../../pages/KD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Tanhā – How We Attach via Greed, Hate, and Ignorance</a>. “</li>
+</ul>
+<p style="text-align: justify">15. Now comes, “<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>“. <em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em> means “grabbing or getting hold of something automatically,” like an octopus grabbing its prey with all eight legs.</p>
+<ul style="text-align: justify">
+<li>In the present case, the teenager wants to re-live this experience and gets immersed in it. When he is experiencing the event, his mind is absorbed in it; he does not have the mindset to think about any adverse consequences. This is the critical “habit-forming” or “<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> forming” step.</li>
+</ul>
+<p style="text-align: justify">16. So, the next inevitable step is “<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span></span></em>“; this particular state of getting drunk becomes increasingly ingrained in his mind. It becomes “a<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>” or “existence” or habit that is important to him. He very much wants to re-live that experience.</p>
+<ul style="text-align: justify">
+<li>And that is exactly what he gets: “<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span>. “</span></em> This “<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>” or the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed is now well established, and he can be born in that state quite easily. All he needs is an invitation from a friend or even a sight of a bar while traveling, for example.</li>
+<li>Getting into that state or being “born” there will happen more frequently. So, he gets drunk at every opportunity. See “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jati – States of Existence and (Repeated) Births Therein</a>” for more details.</li>
+</ul>
+<p style="text-align: justify">17. However, like everything else, any birth is subjected to decay and suffering: “<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="marana">marana</span>.., </span><strong>eva me tassa dukkhandha samudhayō hōti</strong></em>“, i.e., "the whole mass of suffering."</p>
+<ul style="text-align: justify">
+<li>But in the case of a single drinking event, that state of intoxication comes to an end, possibly with a big headache and a huge hangover. That episode ends with nothing to show for it but a hangover.</li>
+<li>Even worse, now he is “hooked’; he has formed a bad habit, which only strengthens even more if he does it repeatedly. Because each time the PS runs, the <em>viññāna</em> for that habit gets more fuel, and the<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> gets stronger.</li>
+</ul>
+<p style="text-align: justify">18. The more the teenager gets trapped in that <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, the more <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> that occurs, i.e., more frequently he will be drunk.</p>
+<ul style="text-align: justify">
+<li>And it is not even necessary to participate in a “drinking event” to run another PS cycle. He may be sitting at a desk trying to study and may start going through the PS cycle MENTALLY.</li>
+<li>He can start right at “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>” and be generating <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="vitakka">vitakka</span>/<span class="pali-term term-highlight" data-term="vicara">vicara</span></span></em> or planning), thus generating (and strengthening) the<em> viññāna</em> for drinking, generating <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> (visuals of places, friends, alcohol bottles, etc.), and thus going through the rest of the cycle: <em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span>, <span class="pali-term term-highlight" data-term="samphassa">samphassa</span>, védanā, <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>, <span class="pali-term term-highlight" data-term="upādāna">upādāna</span>, <span class="pali-term term-highlight" data-term="bhava">bhava</span>, <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> (“living it”), repeatedly.</li>
+<li>Thus numerous such PS cycles can run at any time, probably increasing their frequency as the <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or the habit builds up. The stronger the <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or habit is, it will be harder it to break.</li>
+<li>This is why meditation, together with another good habit to work on, should be undertaken to replace a bad habit. While in meditation, one can contemplate the adverse consequences of the bad habit.</li>
+</ul>
+<p style="text-align: justify">19. It is important to realize that the above PS cycle does not run to its conclusion when the drinking “event” is over. Rather the cycle can repeatedly run unless it is stopped willfully, deliberately.</p>
+<ul style="text-align: justify">
+<li><strong> And the way to do that is to act with "mindfulness" and stop those bad first conscious thoughts (<em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) that start arising. </strong>This is the key to "real <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em><span> meditations" in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+<li>Then one would stop the "a<em><span>vijjā <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" step. That will stop "bad <em>viññāna</em>" from arising or being cultivated by the elimination of the "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>" step. That will, of course, stop the result of suffering.</li>
+</ul>
+<p style="text-align: justify">20. If those <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em><span> cultivated get strong enough, they can also lead to future births. The <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process proceeds via the</span><em> uppatti</em> PS process, which is very similar; see "<a href="../../pages/PS.HH.004/index.html" rel="noopener" target="_blank">Akusala-Mūla Upapatti Paṭicca Samuppāda</a>."</p>
+<ul>
+<li style="text-align: justify">Only by cultivating <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em><span>can we break that cycle of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>: "</span><a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhana, Four Noble Truths</a>."</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/LD.BB.005/index.html">Connection Between Sankhara Vinnana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/LD.BB.007/index.html">Breath Meditation Addictive Harmful</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/LD.BB.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Connection Between Sankhara Vinnana</span>
+        
+        <span class="pathway-title title-pt">Connection Between Sankhara Vinnana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/LD.BB.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Breath Meditation Addictive Harmful</span>
+        
+        <span class="pathway-title title-pt">Breath Meditation Addictive Harmful</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-LD">
+        ↑ Back to Living Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

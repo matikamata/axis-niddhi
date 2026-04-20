@@ -1,0 +1,350 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>The Way To Nibbana Transcription Of A Discourse By Waharaka Thero | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 28 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">The Way To Nibbana Transcription Of A Discourse By Waharaka Thero</h1>
+    
+    <h1 class="title-pt">O Caminho para o Nibbāna: Transcrição de um discurso do Venerável Waharaka Thero</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>2</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0101"
+             data-level="intermediate"
+             data-reading-time="2"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.004</td></tr><tr><td>Fin-dex</td><td>0101</td></tr><tr><td>Slug</td><td>the-way-to-nibbana-transcription-of-a-discourse-by-waharaka-thero</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>The Way To Nibbana Transcription Of A Discourse By Waharaka Thero</td></tr></table></div></div><strong>July 6, 2020</strong>
+<p style="text-align: justify">This was one of the first discourses by the late Venerable Waharaka Abayarathanalankara<em><span> <span class="pali-term term-highlight" data-term="thero">Thero</span>.</span></em><span> Janith Boniface Fernando has made it into a youtube video with transcription in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> and English languages.</span></p>
+<p style="text-align: justify">1. This discourse is an introduction to <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) that is critical for one to start on the Noble Eightfold Path.</p>
+<ul style="text-align: justify">
+<li>I have revised and expanded the English transcript that can be downloaded as a pdf file: <a href="http://localhost/beng_feb2026/wp-content/uploads/Waharaka-Thero-Discourse-The-Way-to-Nibbana.pdf">Waharaka Thero Discourse - The Way to Nibbana</a></li>
+<li>This is an updated version of the document that I posted in the discussion forum (see #3).</li>
+</ul>
+<p style="text-align: justify">2. A few comments:</p>
+<ul style="text-align: justify">
+<li>As I mentioned, this was one of the early discourses, soon after Waharaka <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em><span> started explaining the correct meanings of the <span class="pali-term term-highlight" data-term="pali">Pali</span> words </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.</li>
+<li>At that time, Waharaka <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> was also used to the incorrect interpretation of "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>"</span></em> and "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>"</span></em> as "<em>anitya"</em> and "<em>anātma"</em><span> in the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language (and "impermanence" and "no-self" in English.)</span></li>
+<li>Therefore, even while describing the correct interpretation, he also inadvertently referred to "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>"</span></em> as "<em>anitya"</em> and "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>"</span></em> as "<em>anātma"</em> once-in-a-while. I have corrected those, of course.</li>
+<li><span>Furthermore, I have expanded the original text and also referred to a few relevant <span class="pali-term term-highlight" data-term="posts">posts</span> at <span class="pali-term term-highlight" data-term="puredhamma">puredhamma</span>.net.</span></li>
+</ul>
+<p style="text-align: justify">3. Any comments/questions can be discussed at the discussion forum: <a href="http://localhost/beng_feb2026/forums/topic/waharaka-thero-english-subs-discourse/" rel="noopener noreferrer" target="_blank">Waharaka Thero English Subs Discourse</a></p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>Janith Fernando has transcribed a few more of Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span>'s discourses and both English and <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> transcripts (from him) are available under my entry at that forum on June 19, 2020. As he transcribes more discourses, I will add them there. I do not plan to work on other discourses (than the one posted above in #1) any time soon.</span></li>
+<li style="text-align: justify">Many merits to Janith and several readers at the discussion forum who contributed to this effort.</li>
+</ul>
+<p style="text-align: justify">4. I just finished updating the section on "<a href="../../pages/KD.II.001/index.html" rel="noopener noreferrer" target="_blank">The Five Aggregates (Pañcakkhandha)</a>."</p>
+<ul>
+<li style="text-align: justify">It has a subsection on "<a href="../../pages/KD.KK.001/index.html" rel="noopener noreferrer" target="_blank">Five Aggregates – Connection to Tilakkhaṇa</a>."</li>
+<li style="text-align: justify">There is a new section on "<a href="../../pages/BD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Buddhahood Associated Controversies</a><span>" Most people are not aware of the qualities of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> and the capabilities of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.FF.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0101"
+             data-level="intermediate"
+             data-reading-time="2"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.FF.004
+Language:     pt-BR
+Generated-At: 2026-04-18T04:05:01Z
+Engine:       DeepL API (Glossary V5)
+-->
+<strong>6 de julho de 2020</strong>
+<p style="text-align: justify">Este foi um dos primeiros discursos do falecido Venerável Waharaka Abayarathanalankara<em><span> <span class="pali-term term-highlight" data-term="thero">Thero</span>.</span></em> Janith Boniface Fernando transformou-o em um vídeo no YouTube com transcrição nos idiomas cingalês e inglês.</p>
+<p style="text-align: justify">1. Este discurso é uma introdução ao <em>Tilakkhaṇa</em> (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>), essencial para quem deseja iniciar-se no Nobre Caminho Óctuplo.</p>
+<ul style="text-align: justify">
+<li>Revisamos e ampliamos a transcrição em inglês, que pode ser baixada como arquivo PDF: <a href="http://localhost/beng_feb2026/wp-content/uploads/Waharaka-Thero-Discourse-The-Way-to-Nibbana.pdf">Discurso de Waharaka Thero – O Caminho para Nibbāna</a></li>
+<li>Esta é uma versão atualizada do documento que publiquei no fórum de discussão (ver #3).</li>
+</ul>
+<p style="text-align: justify">2. Alguns comentários:</p>
+<ul style="text-align: justify">
+<li>Como mencionei, este foi um dos primeiros discursos, logo após Waharaka <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em><span> ter começado a explicar os significados corretos das palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em>.</li>
+<li>Naquela época, Waharaka <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> também estava acostumado com a interpretação incorreta de “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>”</span></em> e “<em>Anattā”</em> como “<em>anitya”</em> e “<em>anātma”</em> na língua cingalês (e “impermanência” e “não-eu” em inglês).</li>
+<li>Portanto, mesmo ao descrever a interpretação correta, ele também, inadvertidamente, se referia a “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>”</span></em> como “<em>anitya”</em> e a “<em>Anattā”</em> como “<em>anātma”</em> de vez em quando. Corrigi isso, é claro.</li>
+<li><span>Além disso, ampliei o texto original e também mencionei alguns ensaios relevantes no site <span class="pali-term term-highlight" data-term="puredhamma">PureDhamma</span>.net.</span></li>
+</ul>
+<p style="text-align: justify">3. Quaisquer comentários/perguntas podem ser discutidos no fórum de discussão: <a href="http://localhost/beng_feb2026/forums/topic/waharaka-thero-english-subs-discourse/" rel="noopener noreferrer" target="_blank">Waharaka Thero English Subs Discourse</a></p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>Janith Fernando transcreveu mais alguns discursos de Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span>, e as transcrições em inglês e cingalês (fornecidas por ele) estão disponíveis na minha postagem nesse fórum, de 19 de junho de 2020. À medida que ele transcrever mais discursos, irei adicioná-los lá. Não pretendo trabalhar em outros discursos (além do publicado acima no nº 1) tão cedo.</span></li>
+<li style="text-align: justify">Muitos méritos a Janith e aos vários leitores do fórum de discussão que contribuíram para este esforço.</li>
+</ul>
+<p style="text-align: justify">4. Acabei de atualizar a seção sobre “<a href="../../pages/KD.II.001/index.html" rel="noopener noreferrer" target="_blank">Os Cinco Agregados (Pañcakkhandha)</a>”.</p>
+<ul>
+<li style="text-align: justify">Ela tem uma subseção sobre “<a href="../../pages/KD.KK.001/index.html" rel="noopener noreferrer" target="_blank">Os Cinco Agregados – Conexão com Tilakkhaṇa</a>”.</li>
+<li style="text-align: justify">Há uma nova seção sobre “<a href="../../pages/BD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Controvérsias Associadas à Iluminação Búdica</a><span>”. A maioria das pessoas não tem consciência das qualidades de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> e das capacidades de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.FF.003/index.html">Anicca Dukkha Anatta</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.005/index.html">Anicca True Meaning</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.FF.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anicca Dukkha Anatta</span>
+        
+        <span class="pathway-title title-pt">Anicca, Dukkha, Anattā</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Anicca True Meaning</span>
+        
+        <span class="pathway-title title-pt">O verdadeiro significado de Anicca</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

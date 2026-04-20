@@ -1,0 +1,544 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Four Noble Truths Recipe For Problem Solving | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 12 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.BB.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Four Noble Truths Recipe For Problem Solving</h1>
+    
+    <h1 class="title-pt">Quatro Nobres Verdades Receita para a solução de problemas</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.BB.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>13</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.BB.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0399"
+             data-level="intermediate"
+             data-reading-time="13"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.BB.006</td></tr><tr><td>Fin-dex</td><td>0399</td></tr><tr><td>Slug</td><td>four-noble-truths-recipe-for-problem-solving</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Four Noble Truths Recipe For Problem Solving</td></tr></table></div></div><p style="text-align: justify"><strong>Pre-2016;</strong><strong> re-written August 6, 2022;</strong><span style="color: #3366ff"><strong> revised January 27,2023</strong></span></p>
+<p style="text-align: justify"><span>Problem-solving can be reduced to four simple steps. That is the same approach the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> used in discovering the Four Noble Truths to solve the problem of suffering.</span></p>
+<h5 style="text-align: justify">Four Steps to Solving a Problem</h5>
+<p style="text-align: justify">1. When solving any problem, there are four steps:</p>
+<ul style="text-align: justify">
+<li>One needs to know <span style="color: #3366ff"><strong>the problem</strong></span> or even realize there is a problem.</li>
+<li>The reason or the <span style="color: #3366ff"><strong>cause for that problem</strong></span> (some may be <strong>superficial causes</strong>, but there are <strong>root causes</strong>).</li>
+<li><span style="color: #3366ff"><strong>Knowing what result can be expected by solving the problem</strong></span> (there may be many possible outcomes depending on the approach).</li>
+<li><span style="color: #3366ff"><strong>A procedure to systematically solve the problem</strong></span> based on the superficial or root causes.</li>
+</ul>
+<p style="text-align: justify">Those were the exact steps that our <em>Bodhisatta</em> used to attain Buddhahood.</p>
+<h5 style="text-align: justify">Figuring Out the Causes</h5>
+<p style="text-align: justify">2. Let us discuss an example. If a car would not start, the cause may not be apparent to someone who does not have a technical background in automobiles, but a qualified technician will be able to find the cause quickly.</p>
+<ul style="text-align: justify">
+<li>He may find that it is a simple problem of some wires becoming loose in the ignition circuit, or it could be as bad as a problem with the engine itself.</li>
+<li>The solution to the problem will lead to being able to start the car.</li>
+<li>And the way to get there depends on the actual problem and going through the standard procedures to solve the problem. One could re-connect the loose wires if the problem is with a loose wire. If it is a failed engine, one could either replace the engine or fix it if it is a minor problem with the engine.</li>
+</ul>
+<h5 style="text-align: justify">Root Causes and Secondary Causes</h5>
+<p style="text-align: justify">3. Sometimes, there can be a temporary or a permanent solution.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">If we get a headache, In most cases, we take an aspirin or Tylenol, which would "fix it." But if the headache keeps returning, we may realize there could be a more serious <strong>root cause</strong>. Now we need to figure out why we are getting headaches frequently. First, we look at easy solutions. For example, if we can connect the timing of the headaches to eating some specific food, we can stop eating that and see whether it goes away.</li>
+<li>If we cannot figure it out, and if the problem persists, we go to a specialist, in this case, a physician. The physician will ask a series of questions and may do a series of tests. The goal is to figure out the root cause that may not be obvious.</li>
+<li>Depending on the results of the diagnostic tests, the physician may find the root cause to be cancer. Then that cancer needs to be treated, etc. He will prescribe a method of treatment. If that root cause is removed, we would have removed recurring headaches.</li>
+</ul>
+<p style="text-align: justify">4. There is an essential difference between <strong>superficial causes and root causes</strong>. Superficial causes do not lead to severe problems. For example, if too many drinks taken by a person not used to alcohol causes a headache, which can be 'fixed" by taking an aspirin. But some problems have root causes that are hard to see, like the one in #3 above.</p>
+<ul style="text-align: justify">
+<li><span>It is interesting to note that root causes give the exact meaning of the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> term "</span><em>mūlika hetu</em>"; "<em>mula</em>" is the root of a tree. Even if a tree is cut down, the tree may not be killed if the roots remain intact. It may still sprout new limbs and finally grow into a full-fledged tree.</li>
+<li>However, removing the deep roots of a tree will permanently kill the tree. Similarly, removing root causes will eradicate a persisting problem.</li>
+</ul>
+<h5 style="text-align: justify">Not Prudent to Apply Temporary Solutions</h5>
+<p style="text-align: justify">5. Most times, when a problem arises, we tend to do the most expedient thing to get it out of the way and move on. If the headache goes away until one gets through the day, one may take an aspirin and handle it daily like that.</p>
+<ul style="text-align: justify">
+<li>Even when the wife (or husband) says, "You have been taking aspirins almost every day for this many days. Why don't you see a doctor and see whether there is something else going on?" we may continue with the "temporary fix" especially if we are busy.</li>
+<li>If that person was starting to develop cancer, postponing the "root cause" diagnosis could be a grave mistake. Cancer cells multiply rapidly and could spread to other body parts.</li>
+<li>Even though one could get temporary relief by taking aspirin daily (may be by gradually increasing the dose, too), that is NOT the solution. <span style="color: #993366"><strong>The result in the short term could be temporary relief, but one is heading into a much more dangerous outcome.</strong></span></li>
+<li>The ideal solution to the problem is not to temporarily be free from the headache but to be free from cancer!</li>
+</ul>
+<h5 style="text-align: justify">Suffering Associated with the Existence</h5>
+<p style="text-align: justify">6. The Four Noble Truths handle the most critical problem of all: the suffering associated with existence.</p>
+<ul style="text-align: justify">
+<li><span style="color: #3366ff"><strong>First, most of us are unaware that temporary solutions cannot handle it.</strong></span></li>
+<li><span>For example, even if we don't suffer significantly in this life, there will be suffering in future lives. Some people do not realize that there is a <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process and that most rebirths are filled with unimaginable suffering. They are unaware that the problem is much more than just suffering in this life.</span></li>
+</ul>
+<p style="text-align: justify">7. In complex situations, the root causes of a given problem will not be evident if one does not have a sufficiently broad view of the situation. <strong>That means the ideal solution may not be obvious.</strong></p>
+<ul style="text-align: justify">
+<li>When that happens, the problem leads to ever-increasing severity and may not be solvable. Therefore, postponing finding the root causes of a problem can be dangerous.</li>
+<li>In the example discussed in #3 above, cancer may grow if one keeps postponing getting a good diagnosis by a qualified physician. It will be too late when cancer has spread through the body. <span style="text-align: justify">Thus, after some point, cancer may not be treatable.</span></li>
+<li><span>In the same way, our ability to grasp the profound teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> will decrease as we get old and our brains start deteriorating. Don't postpone this most critical task of learning <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>!</span></li>
+</ul>
+<h5 style="text-align: justify">The Solution to the Existence of Suffering Requires a Wider Worldview</h5>
+<p style="text-align: justify"><span>8. That more significant problem of existence can be "seen" only by the highly-purified mind of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. During the night of Enlightenment, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> achieved three types of higher knowledge:</span></p>
+<ol style="list-style-type: lower-roman;text-align: justify">
+<li>Ability to recall one’s past lives (<span><strong><em>pubbe nivāsānussati ñāṇa</em></strong></span>),</li>
+<li>The ability to see any living being’s <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em> (end of <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) and <em>patisandhi</em> (grasping of new <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>). This is the <span><strong><em><span><span class="pali-term term-highlight" data-term="cutūpapāta ñāṇa">cutūpapāta ñāṇa</span></span></em></strong></span>.</li>
+<li>The attainment of the <em>Buddhahood</em> with <span><strong><em><span><span class="pali-term term-highlight" data-term="āsavakkhaya ñāṇa">āsavakkhaya ñāṇa</span></span></em></strong></span>. That involved grasping the Four Noble Truths and the Noble Eightfold Path to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ol>
+<ul style="text-align: justify">
+<li><span>Therefore, his worldview of a wider world with 31 realms and <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> is NOT speculation. He could recall past lives, and he visited many other realms. Many </span><em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> describe those recollections and visits. See "<a href="../../pages/BD.GG.002/index.html" rel="noopener" target="_blank">Buddhahood Controversies – Introduction</a>."</li>
+<li>Of course, we have to believe that based on faith. Yet, that should not be blind faith: "<a href="../../pages/BD.AA.005/index.html" rel="noopener" target="_blank">Buddha Dhamma: Non-Perceivability and Self-Consistency</a>."</li>
+</ul>
+<h5 style="text-align: justify">Focusing on This Life Yield Only Temporary Solutions</h5>
+<p style="text-align: justify">9. Of course, one can find temporary solutions by fixing superficial causes. Just like fixing a headache by taking an aspirin, one could find temporary happiness in this life <strong>by "trouble-shooting" each problem as it arises. </strong>That is the "rat race" most of us are engaged in.</p>
+<ul style="text-align: justify">
+<li><span style="text-align: justify">For example, most of our time is spent solving problems that pop up at the office or at home. At the office, one is assigned a task to finish within a specific time. When finished, one gets another. That goes on until retirement! </span></li>
+<li>It is not that different at home. One must take care of the kids, house, cars, etc.</li>
+<li>At the end of this life, another WILL start. Then we do it all over again. There is no permanent solution to this short-sighted approach.</li>
+<li>But it could be much worse when future birth is in an <em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span></span></em>. That is when one will be helpless. The only way to avoid that possibility is to get to at least the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify">Only One Permanent Solution</h5>
+<p style="text-align: justify">10. Tackling superficial causes that we can readily see or discern is what we have been doing since the beginning-less time. Life after life, we strive to "maintain things to our satisfaction," and EACH time, we fail.</p>
+<ul style="text-align: justify">
+<li>Most times, we suffer trying to "<strong>get things going</strong> in the way we want," and by the time we achieve at least some success, our bodies start falling apart, so we will not be enjoying what we have gained with so much effort.</li>
+<li><strong>Think carefully about any famous personality we believe has achieved their life goals.</strong> They all will have to leave behind their achievements at death. Furthermore, those things would not mean anything in their new life; they will have to start all over. The only things carried over to the new life are any good/bad habits or deeds they cultivated, not material gains.</li>
+</ul>
+<h5 style="text-align: justify">Root Causes of <em>Saṁsāric</em> Suffering</h5>
+<p style="text-align: justify"><span>11. If we understand where this never-ending process gets the required fuel from (i.e., the root cause for rebirths), then by ELIMINATING those causes, we can permanently solve the problem of perpetual suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></p>
+<ul style="text-align: justify">
+<li>As long as we crave "mind-pleasing things" in this world by generating <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em><span>, <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> (</span><em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) is inevitable. Depending on the type of <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em><span>, <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> may be in an </span><em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span></span></em>, human, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, or <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm. <span style="color: #993366"><strong>But they all end up in old age and death (<em><span><span class="pali-term term-highlight" data-term="maraṇa">maraṇa</span>.</span></em>)</strong></span></li>
+<li><span>It is critical to realize that six root causes maintain this world for anyone: greed, hate, ignorance, and mundane versions of non-greed, non-hate, and non-ignorance. It is relatively easy to see how greed, hate, and ignorance can lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em>apāyās</em>.</li>
+<li><span style="color: #0000ff"><strong>It is impossible to understand how mundane versions of non-greed, non-hate, and non-ignorance can be destructive </strong><span style="color: #000000">u</span></span>ntil those "bad roots" of greed, hate, and ignorance are removed. An understanding of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>is necessary to see the "hidden suffering" in apparently harmless sensory pleasures.  See "<a href="../../pages/PS.BB.009/index.html" rel="noopener" target="_blank">Six Root Causes – Loka Samudaya (Arising of Suffering) and Loka Nirodhaya (Nibbāna)</a>."</li>
+<li><strong>Thus, stated succinctly, the root cause of our suffering is not being able to "see" the hidden suffering in sensory pleasures.</strong></li>
+<li>Not understanding that is <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> or ignorance.</li>
+</ul>
+<h5 style="text-align: justify">Removal of the Root Causes</h5>
+<p style="text-align: justify">12. The third step is to see that the successful solution to this problem is the attainment of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> or stopping the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. This is probably the hardest step to latch on to because it requires eliminating the root of cravings (attachments.)</span></p>
+<ul style="text-align: justify">
+<li>We can see that "mind-pleasing things" bring us happiness. It is not easy to "see" the suffering hidden in that.</li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> likened this to the case of an ox dragging a fully-loaded cart eagerly while its owner is holding a stack of hay on a pole in front of it. The ox has its mind set on reaching the stack of hay and does not even realize the heavy load it is pulling.</span></li>
+<li><span>A fish can see only the tasty worm but not the dangerous hook hidden inside. We are not that different from the fish, as the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained in the "</span><a href="https://suttacentral.net/sn17.2/en/sujato" rel="noopener" target="_blank"><em><span>Baḷisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 17.2)</a>."</li>
+<li>It is only when one truly comprehends that "it is fruitless to struggle to find happiness in this world of 31 realms" that one attains the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage.</li>
+<li>Thus, cravings for worldly things can ONLY be removed via wisdom (<em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em><span>) when one can accept the broader worldview discovered by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (<span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process) and how </span><em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>(generated with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) leads to rebirths in various realms, i.e., understanding <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>. That <strong>understanding</strong> leads to the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. It is a change in one's worldview!</li>
+</ul>
+<h5 style="text-align: justify">Following the Path to Remove Future Suffering</h5>
+<p style="text-align: justify"><span>13. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that when one sees one Noble Truth, one sees all four. Thus at the attainment of the </span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage, <strong>the way to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></strong> also becomes apparent.</p>
+<ul style="text-align: justify">
+<li>The way of removing the root causes of <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> is the Fourth Noble Truth, the <em><span><span class="pali-term term-highlight" data-term="magga sacca">magga sacca</span>,</span></em> or the Truth of the Path, where "<em><span><span class="pali-term term-highlight" data-term="magga">magga</span></span></em>" is a path. And this path is eightfold, and it is the <strong>Noble Eightfold Path</strong>.</li>
+<li>The Path has to be followed systematically. The first step is to realize the "correct vision" or <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> to eliminate "<em>san.</em>" A <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> has achieved this to a significant extent by comprehending <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> to a certain extent.</li>
+</ul>
+<h5 style="text-align: justify">The Four-Step Process Is Universal</h5>
+<p style="text-align: justify">14. Therefore, the four-step process stated in #1 above is a fundamental principle that can solve any problem. That means solving a mundane problem temporarily and providing a permanent solution to the ultimate problem of existence. That approach is based on the principle of cause and effect, the same one that Nature is based on.</p>
+<ul style="text-align: justify">
+<li><span>One could find a longer-term solution by working towards a better <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. We must do that too, but always the goal MUST BE to remove all root causes.</span></li>
+</ul>
+<h5 style="text-align: justify">First Step - Understanding the Existence of the Problem</h5>
+<p style="text-align: justify">15. <span style="color: #3366ff"><strong><span>The critical point that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was trying to make was that we do not realize that there is a "problem of existence."</span></strong></span><span> The first step in the four-step process is to realize the validity of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Since we cannot readily see the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process, most of us focus on just this life.</span></p>
+<ul style="text-align: justify">
+<li>All we have been doing is to "take aspirins" as headaches resurfaced instead of finding a permanent solution to the "problem of never-ending headaches."</li>
+<li><span>In every life, what we have done has been to "take aspirin" to (temporarily) solve problems as they materialize. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught that one must address the root causes of </span><em>Saṁsāric </em>suffering to remove any future suffering.</li>
+<li>This is the First Noble Truth of "<em><span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em><span>" (pronounced "<span class="pali-term term-highlight" data-term="dukkha">dukkha</span> sachcha.") It means "existence in this world of 31 realms is filled with suffering, and it is a never-ending process. </span><span style="color: #3366ff"><strong>But that can be overcome permanently".</strong></span></li>
+<li>Therefore, the main goal must be <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. There is no other permanent solution!</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> - Elimination of All Six Root Causes</h5>
+<p style="text-align: justify">16.  <strong><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> does not have a cause. Eliminating all six root causes in #11 leads to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong> All these are removed via <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em> or wisdom. It is essential to realize that wisdom means understanding the Four Noble Truths/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">But for now, it suffices to say that the four lowest realms of this world are "maintained" via the "bad roots" of greed, hate, and ignorance. <strong>The remaining 31 realms are "supported" by (the mundane versions of) non-greed, non-hate, and non-ignorance, the so-called "good roots."</strong></li>
+<li style="text-align: justify">This is why the Noble Eightfold Path is two-fold: the mundane (<em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span></span></em>)  Noble Eightfold Path must be followed first to avoid birth in the lowest four realms and cleanse the mind to a certain extent. <strong>But one could "fall back" in future lives unless one gets to the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> stage.</strong></li>
+<li style="text-align: justify">Then one follows the transcendental (<em>lokottara</em>) Noble Eightfold Path to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> by thoroughly cleansing the mind of all six roots. It is a step-by-step process. See "<a href="../../pages/LD.EE.002/index.html" rel="noopener" target="_blank">Is It Necessary for a Buddhist to Eliminate Sensual Desires?</a>."</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.BB.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0399"
+             data-level="intermediate"
+             data-reading-time="13"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.BB.006
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p style="text-align: justify"><strong>Antes de 2016; reescrito em 6 de agosto de 2022;</strong><span style="color: #3366ff"><strong> revisado em 27 de janeiro de 2023</strong></span></p>
+<p style="text-align: justify"><span>A resolução de problemas pode ser reduzida a quatro etapas simples. Essa é a mesma abordagem que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> usou ao descobrir as Quatro Nobres Verdades para resolver o problema do sofrimento.</span></p>
+<h5 style="text-align: justify">Quatro etapas para resolver um problema</h5>
+<p style="text-align: justify">1. Ao resolver qualquer problema, há quatro etapas:</p>
+<ul style="text-align: justify">
+<li>É preciso conhecer <span style="color: #3366ff"><strong>o problema</strong></span> ou mesmo perceber que existe um problema.</li>
+<li>A razão ou a <span style="color: #3366ff"><strong>causa desse problema</strong></span> (algumas podem ser <strong>causas superficiais</strong>, mas existem <strong>causas fundamentais</strong>).</li>
+<li><span style="color: #3366ff"><strong>Saber qual resultado pode ser esperado ao resolver o problema</strong></span> (pode haver muitos resultados possíveis, dependendo da abordagem).</li>
+<li><span style="color: #3366ff"><strong>Um procedimento para resolver sistematicamente o problema</strong></span> com base nas causas superficiais ou fundamentais.</li>
+</ul>
+<p style="text-align: justify">Essas foram as etapas exatas que nosso <em>Bodhisatta</em> usou para alcançar a iluminação.</p>
+<h5 style="text-align: justify">Descobrindo as causas</h5>
+<p style="text-align: justify">2. Vamos discutir um exemplo. Se um carro não der partida, a causa pode não ser aparente para alguém que não tem conhecimento técnico em automóveis, mas um técnico qualificado será capaz de encontrar a causa rapidamente.</p>
+<ul style="text-align: justify">
+<li>Ele pode descobrir que é um problema simples de alguns fios soltos no circuito de ignição, ou pode ser algo tão grave quanto um problema no próprio motor.</li>
+<li>A solução para o problema permitirá que o carro dê partida.</li>
+<li>E a maneira de chegar lá depende do problema real e da execução dos procedimentos padrão para resolvê-lo. Pode-se reconectar os fios soltos se o problema for um fio solto. Se for uma falha no motor, pode-se substituir o motor ou consertá-lo, se for um problema menor.</li>
+</ul>
+<h5 style="text-align: justify">Causas principais e causas secundárias</h5>
+<p style="text-align: justify">3. Às vezes, pode haver uma solução temporária ou permanente.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Se tivermos dor de cabeça, na maioria dos casos, tomamos uma aspirina ou Tylenol, o que “resolve o problema”. Mas se a dor de cabeça continuar voltando, podemos perceber que pode haver uma <strong>causa raiz</strong> mais séria. Agora precisamos descobrir por que estamos tendo dores de cabeça com frequência. Primeiro, procuramos soluções fáceis. Por exemplo, se pudermos relacionar o momento das dores de cabeça com a ingestão de algum alimento específico, podemos parar de comer esse alimento e ver se a dor passa.</li>
+<li>Se não conseguirmos descobrir e se o problema persistir, procuramos um especialista, neste caso, um médico. O médico fará uma série de perguntas e poderá realizar uma série de exames. O objetivo é descobrir a causa principal que pode não ser óbvia.</li>
+<li>Dependendo dos resultados dos exames diagnósticos, o médico pode descobrir que a causa principal é um câncer. Então, esse câncer precisa ser tratado, etc. Ele prescreverá um método de tratamento. Se essa causa principal for removida, teremos eliminado as dores de cabeça recorrentes.</li>
+</ul>
+<p style="text-align: justify">4. Há uma diferença essencial entre <strong>causas superficiais e causas fundamentais</strong>. As causas superficiais não levam a problemas graves. Por exemplo, se uma pessoa não acostumada a beber álcool toma bebidas em excesso e tem dor de cabeça, isso pode ser “resolvido” tomando uma aspirina. Mas alguns problemas têm causas fundamentais difíceis de perceber, como o do item 3 acima.</p>
+<ul style="text-align: justify">
+<li><span>É interessante notar que as causas fundamentais dão o significado exato do termo <span class="pali-term term-highlight" data-term="pālī">Pālī</span> “</span><em>mūlika hetu</em>”; “<em>mula</em>” é a raiz de uma árvore. Mesmo que uma árvore seja cortada, ela pode não morrer se as raízes permanecerem intactas. Ela ainda pode brotar novos galhos e finalmente crescer e se tornar uma árvore completa.</li>
+<li>No entanto, remover as raízes profundas de uma árvore irá matá-la permanentemente. Da mesma forma, remover as causas fundamentais irá erradicar um problema persistente.</li>
+</ul>
+<h5 style="text-align: justify">Não é prudente aplicar soluções temporárias</h5>
+<p style="text-align: justify">5. Na maioria das vezes, quando surge um problema, tendemos a fazer o mais conveniente para resolvê-lo e seguir em frente. Se a dor de cabeça passar até o fim do dia, podemos tomar uma aspirina e lidar com isso diariamente dessa forma.</p>
+<ul style="text-align: justify">
+<li>Mesmo quando a esposa (ou o marido) diz: “Você tem tomado aspirina quase todos os dias há muitos dias. Por que não consulta um médico para ver se há algo mais acontecendo?”, podemos continuar com a “solução temporária”, especialmente se estivermos ocupados.</li>
+<li>Se essa pessoa estivesse começando a desenvolver câncer, adiar o diagnóstico da “causa raiz” poderia ser um grave erro. As células cancerosas se multiplicam rapidamente e podem se espalhar para outras partes do corpo.</li>
+<li>Embora seja possível obter alívio temporário tomando aspirina diariamente (talvez aumentando gradualmente a dose), essa NÃO é a solução. <span style="color: #993366"><strong>O resultado a curto prazo pode ser um alívio temporário, mas a pessoa está caminhando para um desfecho muito mais perigoso.</strong></span></li>
+<li>A solução ideal para o problema não é ficar temporariamente livre da dor de cabeça, mas ficar livre do câncer!</li>
+</ul>
+<h5 style="text-align: justify">Sofrimento associado à existência</h5>
+<p style="text-align: justify">6. As Quatro Nobres Verdades tratam do problema mais crítico de todos: o sofrimento associado à existência.</p>
+<ul style="text-align: justify">
+<li><span style="color: #3366ff"><strong>Primeiro, a maioria de nós não tem consciência de que soluções temporárias não podem lidar com isso.</strong></span></li>
+<li>Por exemplo, mesmo que não soframos significativamente nesta vida, haverá sofrimento em vidas futuras. Algumas pessoas não percebem que existe um processo de Renascimento e que a maioria dos Renascimentos é repleta de sofrimento inimaginável. Elas não têm consciência de que o problema é muito mais do que apenas o sofrimento nesta vida.</li>
+</ul>
+<p style="text-align: justify">7. Em situações complexas, as causas fundamentais de um determinado problema não serão evidentes se não se tiver uma visão suficientemente ampla da situação. <strong>Isso significa que a solução ideal pode não ser óbvia.</strong></p>
+<ul style="text-align: justify">
+<li>Quando isso acontece, o problema leva a uma gravidade cada vez maior e pode não ter solução. Portanto, adiar a descoberta das causas fundamentais de um problema pode ser perigoso.</li>
+<li>No exemplo discutido no item 3 acima, o câncer pode crescer se a pessoa continuar adiando a obtenção de um bom diagnóstico por um médico qualificado. Será tarde demais quando o câncer se espalhar pelo corpo. <span style="text-align: justify">Assim, depois de um certo ponto, o câncer pode não ter mais tratamento.</span></li>
+<li><span>Da mesma forma, nossa capacidade de compreender os ensinamentos profundos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> diminuirá à medida que envelhecemos e nosso cérebro começa a se deteriorar. Não adie essa tarefa tão importante de aprender o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>!</span></li>
+</ul>
+<h5 style="text-align: justify">A solução para a existência do sofrimento requer uma visão de mundo mais ampla</h5>
+<p style="text-align: justify"><span>8. Esse problema mais significativo da existência só pode ser “visto” pela mente altamente purificada de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Durante a noite da Iluminação, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> alcançou três tipos de conhecimento superior:</span></p>
+<ol style="list-style-type: lower-roman;text-align: justify">
+<li>Capacidade de recordar as vidas passadas (<span><strong><em>pubbe nivāsānussati ñāṇa</em></strong></span>),</li>
+<li>A capacidade de ver <em><span>o <span class="pali-term term-highlight" data-term="cuti">Cuti</span></span></em> (fim do <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) e <em><span>o <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> (apego ao novo <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) de qualquer ser vivo. Isso é o <span><strong><em><span><span class="pali-term term-highlight" data-term="cutūpapāta ñāṇa">Cutūpapāta Ñāṇa</span></span></em></strong></span>.</li>
+<li>A obtenção da <em>iluminação</em> com <span><strong><em><span><span class="pali-term term-highlight" data-term="āsavakkhaya ñāṇa">Āsavakkhaya Ñāṇa</span></span></em></strong></span>. Isso envolveu compreender as Quatro Nobres Verdades e o Nobre Caminho Óctuplo para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ol>
+<ul style="text-align: justify">
+<li>Portanto, sua visão de mundo de um mundo mais amplo com 31 reinos e Renascimento NÃO é especulação. Ele podia se lembrar de vidas passadas e visitou muitos outros reinos. Muitas <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> descrevem essas lembranças e visitas. Veja “<a href="../../pages/BD.GG.002/index.html">Controvérsias sobre a iluminação – Introdução</a>”.</li>
+<li>É claro que temos que acreditar nisso com base na fé. No entanto, isso não deve ser fé cega: “<a href="../../pages/BD.AA.005/index.html">Buddha Dhamma: Não Perceptibilidade e Autoconsistência</a>”.</li>
+</ul>
+<h5 style="text-align: justify">Focar nesta vida traz apenas soluções temporárias</h5>
+<p style="text-align: justify">9. É claro que é possível encontrar soluções temporárias corrigindo causas superficiais. Assim como corrigir uma dor de cabeça tomando uma aspirina, é possível encontrar felicidade temporária nesta vida <strong>“resolvendo” cada problema à medida que ele surge. </strong>Essa é a “corrida desenfreada” em que a maioria de nós está envolvida.</p>
+<ul style="text-align: justify">
+<li><span style="text-align: justify">Por exemplo, passamos a maior parte do tempo resolvendo problemas que surgem no escritório ou em casa. No escritório, somos designados a uma tarefa a ser concluída dentro de um prazo específico. Quando terminamos, recebemos outra. Isso continua até a aposentadoria! </span></li>
+<li>Em casa, não é muito diferente. É preciso cuidar dos filhos, da casa, dos carros, etc.</li>
+<li>No final desta vida, outra VAI começar. Então, fazemos tudo de novo. Não há solução permanente para essa abordagem míope.</li>
+<li>Mas poderia ser muito pior se o nascimento futuro fosse em um <em><span><span class="pali-term term-highlight" data-term="apāya">Apāya</span></span></em>. É aí que a pessoa ficaria desamparada. A única maneira de evitar essa possibilidade é chegar pelo menos ao estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify">Apenas uma solução permanente</h5>
+<p style="text-align: justify">10. Lidar com causas superficiais que podemos ver ou discernir facilmente é o que temos feito desde o início dos tempos. Vida após vida, nos esforçamos para “manter as coisas a nosso gosto” e, TODAS as vezes, falhamos.</p>
+<ul style="text-align: justify">
+<li>Na maioria das vezes, sofremos tentando “<strong>fazer as coisas acontecerem</strong> da maneira que queremos” e, quando alcançamos pelo menos algum sucesso, nossos corpos começam a se desgastar, de modo que não podemos desfrutar do que conquistamos com tanto esforço.</li>
+<li><strong>Pense cuidadosamente em qualquer personalidade famosa que acreditamos ter alcançado seus objetivos de vida</strong>. Todos eles terão que deixar para trás suas conquistas ao morrer. Além disso, essas coisas não significariam nada em sua nova vida; eles teriam que começar tudo de novo. As únicas coisas levadas para a nova vida são os bons/maus hábitos ou ações que cultivaram, não os ganhos materiais.</li>
+</ul>
+<h5 style="text-align: justify">Causas fundamentais do sofrimento <em>samsárico</em></h5>
+<p style="text-align: justify">11. Se compreendermos de onde esse processo interminável obtém o combustível necessário (ou seja, a causa raiz dos renascimentos), então, ao ELIMINAR essas causas, podemos resolver permanentemente o problema do sofrimento perpétuo no processo de renascimento.</p>
+<ul style="text-align: justify">
+<li>Enquanto ansiarmos por “coisas que agradam a mente” neste mundo, gerando <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>, o renascimento (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) será inevitável. Dependendo do tipo de <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>, o renascimento pode ser em um reino <em><span><span class="pali-term term-highlight" data-term="apāya">Apāya</span></span></em>, humano, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. <span style="color: #993366"><strong>Mas todos eles terminam em velhice e morte (<em><span><span class="pali-term term-highlight" data-term="maraṇa">Maraṇa</span></span></em>)<em>.</em></strong></span></li>
+<li>É fundamental perceber que seis causas fundamentais mantêm este mundo para qualquer pessoa: ganância, ódio, ignorância e versões mundanas de não ganância, não ódio e não ignorância. É relativamente fácil ver como a ganância, o ódio e a ignorância podem levar ao Renascimento nos <em>apāyās</em>.</li>
+<li><span style="color: #0000ff"><strong>É impossível compreender como as versões mundanas da não ganância, do não ódio e da não ignorância podem ser destrutivas </strong></span>até que essas “raízes ruins” da ganância, do ódio e da ignorância sejam removidas. É necessário compreender <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> para ver o “sofrimento oculto” nos prazeres sensoriais aparentemente inofensivos.  Veja “<a href="../../pages/PS.BB.009/index.html">Seis Causas Fundamentais – Loka Samudaya (Surgimento do Sofrimento) e Loka Nirodhaya (Nibbāna)</a>”.</li>
+<li><strong>Assim, resumidamente, a causa raiz do nosso sofrimento é não sermos capazes de “ver” o sofrimento oculto nos prazeres sensoriais.</strong></li>
+<li>Não compreender isso é <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> ou ignorância.</li>
+</ul>
+<h5 style="text-align: justify">Remoção das causas fundamentais</h5>
+<p style="text-align: justify">12. O terceiro passo é ver que a solução bem-sucedida para esse problema é a obtenção do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> ou a interrupção do processo de Renascimento. Este é provavelmente o passo mais difícil de seguir, pois requer a eliminação da raiz dos desejos (apegos).</p>
+<ul style="text-align: justify">
+<li>Podemos ver que “coisas que agradam à mente” nos trazem felicidade. Não é fácil “ver” o sofrimento oculto nisso.</li>
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comparou isso ao caso de um boi puxando avidamente uma carroça totalmente carregada, enquanto seu dono segura uma pilha de feno em uma vara à sua frente. O boi está concentrado em alcançar a pilha de feno e nem percebe a carga pesada que está puxando.</span></li>
+<li><span>Um peixe só consegue ver a minhoca saborosa, mas não o anzol perigoso escondido dentro dela. Não somos tão diferentes do peixe, como o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explicou no “</span><a href="https://suttacentral.net/sn17.2/en/sujato"><em><span>Baḷisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 17.2)</a>”.</li>
+<li>Somente quando se compreende verdadeiramente que “é inútil lutar para encontrar a felicidade neste mundo de 31 reinos” é que se atinge o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</li>
+<li>Assim, os desejos pelas coisas mundanas SÓ podem ser removidos por meio da sabedoria (<em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em><span>) quando se aceita a visão de mundo mais ampla descoberta pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (processo de renascimento) e como </span><em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></em>(gerado com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>) leva ao renascimento em vários reinos, ou seja, compreendendo <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em>Tilakk</em>haṇa. Essa <strong>compreensão</strong> leva ao estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. É uma mudança na visão de mundo de uma pessoa!</li>
+</ul>
+<h5 style="text-align: justify">Seguindo o Caminho para Remover o Sofrimento Futuro</h5>
+<p style="text-align: justify"><span>13. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que quando se vê uma Nobre Verdade, vê-se todas as quatro. Assim, ao atingir o estágio de </span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, <strong>o caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></strong> também se torna aparente.</p>
+<ul style="text-align: justify">
+<li>O caminho para remover as causas profundas de <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e<em><span> <span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> é a Quarta Nobre Verdade, o <em><span><span class="pali-term term-highlight" data-term="magga sacca">Magga Sacca</span>,</span></em> ou a Verdade do Caminho, onde “<em><span><span class="pali-term term-highlight" data-term="magga">Magga</span></span></em>” é um caminho. E esse caminho é óctuplo, e é o <strong>Nobre Caminho Óctuplo</strong>.</li>
+<li>O Caminho deve ser seguido sistematicamente. O primeiro passo é realizar a “visão correta” ou <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> para eliminar “<em>san”.</em> Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> alcançou isso em grande medida ao compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em> até certo ponto.</li>
+</ul>
+<h5 style="text-align: justify">O processo de quatro etapas é universal</h5>
+<p style="text-align: justify">14. Portanto, o processo de quatro etapas mencionado no item 1 acima é um princípio fundamental que pode resolver qualquer problema. Isso significa resolver um problema mundano temporariamente e fornecer uma solução permanente para o problema último da existência. Essa abordagem é baseada no princípio de causa e efeito, o mesmo em que a Natureza se baseia.</p>
+<ul style="text-align: justify">
+<li>Pode-se encontrar uma solução de longo prazo trabalhando para um Renascimento melhor. Devemos fazer isso também, mas o objetivo SEMPRE DEVE SER remover todas as causas fundamentais.</li>
+</ul>
+<h5 style="text-align: justify">Primeira etapa - Compreender a existência do problema</h5>
+<p style="text-align: justify">15. <span style="color: #3366ff"><strong><span>O ponto crítico que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> estava tentando destacar era que não percebemos que existe um “problema da existência”.</span></strong></span> O primeiro passo no processo de quatro etapas é perceber a validade do processo de Renascimento. Como não podemos ver facilmente o processo de Renascimento, a maioria de nós se concentra apenas nesta vida.</p>
+<ul style="text-align: justify">
+<li>Tudo o que temos feito é “tomar aspirinas” quando as dores de cabeça ressurgem, em vez de encontrar uma solução permanente para o “problema das dores de cabeça intermináveis”.</li>
+<li><span>Em todas as vidas, o que temos feito é “tomar aspirina” para resolver (temporariamente) os problemas à medida que eles surgem. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ensinou que é preciso abordar as causas profundas do sofrimento </span><em>saṁsárico</em> para eliminar qualquer sofrimento futuro.</li>
+<li>Essa é a Primeira Nobre Verdade de “<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em><span>” (pronuncia-se “<span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> sachcha”). Significa que “a existência neste mundo de 31 reinos é repleta de sofrimento, e é um processo sem fim. </span><span style="color: #3366ff"><strong>Mas isso pode ser superado permanentemente”.</strong></span></li>
+<li>Portanto, o objetivo principal deve ser <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Não há outra solução permanente!</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> - Eliminação de todas as seis causas fundamentais</h5>
+<p style="text-align: justify">16. <strong><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> não tem causa. Eliminar todas as seis causas fundamentais em #11 leva a <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong> Todas elas são removidas por meio de <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em> ou sabedoria. É essencial perceber que sabedoria significa compreender as Quatro Nobres Verdades/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em>Tilakk</em>haṇa.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Mas, por enquanto, basta dizer que os quatro reinos mais baixos deste mundo são “mantidos” por meio das “raízes ruins” da ganância, do ódio e da ignorância. <strong>Os 31 reinos restantes são “sustentados” por (as versões mundanas da) não ganância, não ódio e não ignorância, as chamadas “raízes boas”.</strong></li>
+<li style="text-align: justify">É por isso que o Nobre Caminho Óctuplo é duplo: o Nobre Caminho Óctuplo mundano (<em><span><span class="pali-term term-highlight" data-term="lokiya">Lokiya</span></span></em>) deve ser seguido primeiro para evitar o nascimento nos quatro reinos mais baixos e purificar a mente até certo ponto. <strong>Mas é possível “recair” em vidas futuras, a menos que se alcance o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em>.</strong></li>
+<li style="text-align: justify">Então, segue-se o Nobre Caminho Óctuplo transcendental (<em>lokottara</em>) para atingir <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, purificando completamente a mente de todas as seis raízes. É um processo passo a passo. Veja “<a href="../../pages/LD.EE.002/index.html">É necessário que um Buddhista elimine os desejos sensuais?</a>”.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.BB.005/index.html">Miccha Ditthi Simpler Analysis</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.BB.007/index.html">First Noble Truth A Simple Explanation Of One Aspect</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.BB.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Miccha Ditthi Simpler Analysis</span>
+        
+        <span class="pathway-title title-pt">Análise mais simples de Diṭṭhi</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.BB.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">First Noble Truth A Simple Explanation Of One Aspect</span>
+        
+        <span class="pathway-title title-pt">Primeira Nobre Verdade Uma Explicação Simples de um Aspecto</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

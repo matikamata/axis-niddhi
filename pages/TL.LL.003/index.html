@@ -1,0 +1,478 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Nibbatti Lakkhana In Udayavaya Nana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 95 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.LL.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Nibbatti Lakkhana In Udayavaya Nana</h1>
+    
+    <h1 class="title-pt">Nibbatti Lakkhaṇa em Udayavaya Nana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.LL.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.LL.003"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0506"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.LL.003</td></tr><tr><td>Fin-dex</td><td>0506</td></tr><tr><td>Slug</td><td>nibbatti-lakkhana-in-udayavaya-nana</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Nibbatti Lakkhana In Udayavaya Nana</td></tr></table></div></div><p><strong>February 26, 2016</strong></p>
+<p style="text-align: justify;"><span>1. In the previous <span class="pali-term term-highlight" data-term="post">post</span>, we discussed the first 25 factors that encompass what is involved in the "</span><em>udaya</em>" stage of <em>udayavaya</em>: "<a href="../../pages/TL.LL.002/index.html" rel="noopener" target="_blank">Uadayavaya Nana – Introduction</a>." Each of the five aggregates has five factors associated with it, leading to its formation; thus, 25 factors give rise to <strong>each person's world</strong>.</p>
+<ul style="text-align: justify;">
+<li>The five aggregates, or the <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span>,</span></em><span> are much more complex than most realize. Please read the <span class="pali-term term-highlight" data-term="posts">posts</span> on </span><em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em> to familiarize yourself with it if you really want to grasp the <em>udayavaya nana</em>: "<a href="../../pages/KD.II.001/index.html" rel="bookmark noopener noreferrer" target="_blank">The Five Aggregates (Pancakkhandha)</a>".</li>
+<li>Also, note that a given <em>sankhata</em> is a tiny fraction of <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span>. </span></em><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is so profound all these different descriptions are well-connected at some level.</span></li>
+<li><span>Do not worry if all this seems overwhelming (of course, some people will be able to see the connections). It will make sense with time. Just keep reading <span class="pali-term term-highlight" data-term="posts">posts</span> that you have already read. They will make more sense each time you go back and read, especially after reading other relevant <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify;">2. It is important to grasp the fact that anything that we experience, we experience only for a fraction of a second. Then it is gone to the "past pile" (<em>atita; </em>pronounced "atheetha") of the five aggregates or piles.</p>
+<ul style="text-align: justify;">
+<li>Anything that we are only imagining or hoping to experience has not yet materialized; those are in the "future pile" (<em>anägata; pronounced "anägatha"</em>) of the five aggregates.</li>
+<li>Only a negligibly small fraction is being experienced at a given moment: the "present pile" (<em>paccuppanna; pronounced "pachchuppanna"</em>); see "<a href="../../pages/KD.II.002/index.html" rel="bookmark noopener noreferrer" target="_blank">Five Aggregates – Introduction</a>".</li>
+</ul>
+<p style="text-align: justify;">3. All these things arise as a <em>sankhata</em>, whether it is material (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) or mental (<em><span>vedana, sanna, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>). A given <em>sankhata</em> itself (not the experience) may exist briefly, or some may last a long time (especially those belonging to <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> aggregate). But even then, parts of it are continually "passed on" to the past.</p>
+<ul style="text-align: justify;">
+<li>Think about a human being X. He/she starts with a single cell and grows by the day, becomes a baby, a child, a young person, an old person, and then is perished. So, when another person Y, is watching X grow, the "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em>" of Y continuously grew, all the while making the "past <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em>" bigger each moment. See "<a href="../../pages/KD.II.003/index.html" rel="noopener" target="_blank">Difference Between Physical Rūpa and Rūpakkhandha</a>."</li>
+<li>At a given time, we can see only a momentary "snapshot" of a <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em>. When X dies, all those stages --moment by moment -- have gone to the past and thus now belong to the "past <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> <em><span><span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em>" of X and Y. Note that they are different: each one's experience of X is different.</li>
+<li>Now we can see why each person's <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em> is unique to that person.</li>
+</ul>
+<p style="text-align: justify;">4. Now we will analyze why all five aggregates have their origin in <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span>, <span class="pali-term term-highlight" data-term="tanha">tanha</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>:</span></em> Because we have the wrong perception (<em>nicca sanna</em>) that we can eventually reach happiness by craving for things in this world (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>), we get attached to somethings or hate other things (<em><span><span class="pali-term term-highlight" data-term="tanha">tanha</span></span></em>), and then act accordingly (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>).</p>
+<ul>
+<li style="text-align: justify;">After one attains <em>parinibbana </em>(i.e., when an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> dies), there is no world to experience. No more <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">5. The other two factors of <em>āhāra</em> and <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> describe the "progression" of a <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em> that have origins in <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span>, <span class="pali-term term-highlight" data-term="tanha">tanha</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">If it is a material thing (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>) it needs <em>āhāra</em> (food) to grow; it can be food that living beings eat or nutrients that plants need.</li>
+<li style="text-align: justify;">If it is a mental thing (<em><span>vedana, sanna, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>), it needs "mental food": <em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em> (contact), <em><span><span class="pali-term term-highlight" data-term="mano">mano</span> sañcetanā</span></em>, and <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> āhāra</span></em>. We will discuss these later.</li>
+</ul>
+<p style="text-align: justify;">6. Any one of those five aggregates needs a "blueprint" or a set mechanism to arise, grow, mature, decay, and eventually cease to exist. This is what the fifth factor, <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em>, is about.</p>
+<ul style="text-align: justify;">
+<li>This "blueprint" is made according to those three causes: it is a complex plan which takes into account many aspects that are formed by the level of <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> (ignorance), kind of <em><span><span class="pali-term term-highlight" data-term="tanha">tanha</span></span></em> (greed, hate), and <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (kind of acts that were done with body, speech, and mind).</li>
+<li>Those complex factors give rise to <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em>, a "blueprint" for any one of the five aggregates to rise. It can be called "production characteristics" of that particular <em>sankhata</em> belonging to one of the five aggregates.</li>
+<li>As we learn more, we will see that all five factors actually become causes and are interrelated.</li>
+</ul>
+<p style="text-align: justify;">7. This is easier to see this with a human (or an animal). When one gets human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, which is based on a specific <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> that came to focus at the time of death in the previous <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, a blueprint for the <em><span>human <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is automatically generated by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</p>
+<ul style="text-align: justify;">
+<li>That blueprint is the <em>manomaya kaya</em> or the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span> that we have discussed many times; see the <span class="pali-term term-highlight" data-term="posts">posts</span> under the section "</span><a href="../../pages/AB.DD.001/index.html" rel="bookmark noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)</a>."</li>
+<li>The arising of that human, starting from a single cell in the mother's womb, happens according to the "blueprint" in that <em>manomaya kaya: </em>eventual height, eye color, skin color, etc., were determined when a suitable womb was automatically selected according to the "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of that being. That "selection process" -- which happens automatically and is not decided by any superior being -- had chosen the matching parents for the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</li>
+<li>That was the role played by the <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> in this particular case.</li>
+</ul>
+<p style="text-align: justify;">8. Thus, the particular <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is determined by the specific action (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>): if that action were suitable for a dog <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, one would get a "dog <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>."</p>
+<ul style="text-align: justify;">
+<li>But other characteristics of that dog are determined by the overall "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of that being that it had acquired through uncountable previous births.</li>
+<li>Thus <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> is a complex entity that takes into account numerous things, but two are prominent: the specific <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and overall <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">9. For example, two different beings could get the same "dog <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>." But no two dogs will look and behave alike. Some are vicious, and some are loving. Some are big, and some are small. The possible varieties are basically infinite. Even two "twin dogs" that look exactly the same will have at least some behavior differences when they grow. The same thing applies to two humans.</p>
+<ul style="text-align: justify;">
+<li>Thus <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em><span> is a complex mold of multiple factors. But only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can see why certain features are in a given being. Even spots on a dog are said to be due to some reason.</span></li>
+<li>Even though the "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" is determined by a specific strong <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> </span></em>(called a <em><span>janaka <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>), the body will reflect numerous <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> from numerous lives in the past.</li>
+<li>But as we have discussed elsewhere, what kinds of<em><span> <span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> can bring fruits will depend to a large extent on having suitable conditions available. If one acts foolishly, that will allow some lousy <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> from the past to bear fruit. In the same way, by acting with mindfulness, one can avoid such bad outcomes and even bring about good outcomes due to past good <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>.</li>
+<li><span>Several <span class="pali-term term-highlight" data-term="posts">posts</span> discuss the above important fact. For example, "</span><a href="../../pages/TL.EE.006/index.html" rel="bookmark noopener noreferrer" target="_blank">What is Kamma? – Is Everything Determined by Kamma?</a>" and "<a href="../../pages/PS.JJ.003/index.html" rel="bookmark noopener noreferrer" target="_blank">Annantara and Samanantara Paccaya</a>."</li>
+</ul>
+<p style="text-align: justify;">10. Therefore, it is essential to realize that <em>manomaya kaya</em> does not determine one's future rigidly; some of the "production characteristics" can change. It is not like making a robot in a factory according to a set blueprint.</p>
+<ul style="text-align: justify;">
+<li>It is easy to see that one's body structure can change according to one's lifestyle. If one becomes careless and starts eating indiscriminately, one will become obese. Even one's character can change by one's motivation and due to external influences.</li>
+<li>Thus <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> are not deterministically set. The overall <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> can change, and the <em>manomaya kaya</em> and the physical body, in turn, can change.</li>
+</ul>
+<p style="text-align: justify;">11. The main reason for this flexibility is that the <em>manomaya kaya</em> has three "components": <em>kammaja kaya, cittaja kaya</em>, and <em>utuja kaya; </em><span>see previous <span class="pali-term term-highlight" data-term="posts">posts</span> on </span><em>manomaya kaya</em>.</p>
+<ul style="text-align: justify;">
+<li>The <em>kammaja kaya </em>is the one that is really pre-set. It had accounted for the reasons (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>) that led to the particular <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+<li><span style="color: #0000ff;">The critical component that is under OUR CONTROL is the <em>cittaja kaya</em>.</span> This is basically how we think (that leads to our speech and bodily actions). And how we think depends on our level of ignorance (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>).</li>
+<li>The third component is the <em>utuja kaya</em>, which is basically the subtle/invisible body of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>. It is being created and changed CONTINUOUSLY due to both the <em>kammaja kaya</em> and <em>cittaja kaya</em>. The fine matter based on <em>suddhashtaka</em> are being created due to <em>kammaja kaya</em> and <em>cittaja kaya</em>; see "<a href="../../pages/AB.GG.004/index.html" rel="bookmark noopener noreferrer" target="_blank">The Origin of Matter – Suddhashtaka</a>."</li>
+</ul>
+<p style="text-align: justify;">12. Thus, the evolvement of a human being is a complex process. But one could get an excellent basic understanding by comprehending the above basic structure. We will go into more detail in the future, but let us discuss a few more important aspects.</p>
+<ul style="text-align: justify;">
+<li>Now we can see that the physical body is just a "shell". There is <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> inside that physical body and controlling it;  see, "<a href="../../pages/AB.DD.004/index.html" rel="bookmark noopener noreferrer" target="_blank">Ghost in the Machine – Synonym for the Manomaya Kaya?</a>".</li>
+</ul>
+<p style="text-align: justify;">13. Thus, these physical bodies that we value so much are really lifeless shells. The essence -- <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> -- is hidden inside that physical body.</p>
+<ul style="text-align: justify;">
+<li>The <em>utuja kaya</em> of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is the one that is spread over the whole physical body and gives it a "life." It is a fine grid that overlaps our nervous system, and that is how we feel body sensations.</li>
+<li>Under some extreme stresses, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> can get out of the physical body. This is what is known as the out-of-body experience (OBE); see "<a href="../../pages/AB.DD.007/index.html" rel="bookmark noopener noreferrer" target="_blank">Manomaya Kaya and Out-of-Body Experience (OBE)</a>." When that happens, the physical body is lifeless, and doctors have declared many heart patients undergoing operations dead for several minutes only to find out later that the patient is alive (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> had returned to the body).</li>
+</ul>
+<p style="text-align: justify;">14. The critical point for our present discussion is the fact that once born with a human body, the human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> can determine its own <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> to some extent by wisely using the <em>cittaja kaya</em>.</p>
+<ul style="text-align: justify;">
+<li>It is this <em>cittaja kaya</em> that ultimately makes it possible for a human to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li>One can change one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (habits/character) by comprehending first moral versus immoral and then comprehending the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature of this world.</li>
+<li>Most people do not realize the importance of the <em>cittaja kaya</em><span>. This is, in essence, why a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is needed to reveal the true nature of this world and to teach how to use the </span><em>cittaja kaya</em> (i.e., the way one thinks and therefore speaks and acts): First to stay away from immoral behavior to cleanse the mind to some extent, and then to comprehend the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</li>
+</ul>
+<p style="text-align: justify;">15. The <em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> for any <em>sankhata</em> associated with the five aggregates works similarly. Let us consider a certain <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> that we experience when seeing a person X.</p>
+<ul>
+<li style="text-align: justify;">That<em><span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> depends on who is looking at X. If it is a loving parent for Y, then Y will generate a "loving <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" upon seeing X. That <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em><span> will arise, stay there for a certain time, and fade away as the mind is directed to something else. But when that <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> arises, it arises with some </span><em><span>nibbatti <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> associated with one's own past experiences with X. An enemy of X (say, Z) could generate a "hateful <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>".</li>
+</ul>
+<p style="text-align: justify;">16. It is easy to see that the other three aggregates in the above example will also arise accordingly.</p>
+<ul style="text-align: justify;">
+<li>Y will generate happy feelings (<em>vedana</em>), will recognize (<em>sanna</em>) X as a parent, and may generate some action or speech via <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. On the other hand, Z will generate an entirely different set.</li>
+<li>Thus the four mental aggregates are related to each other.</li>
+</ul>
+<p style="text-align: justify;"><span>17. In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, everything that we learn about is connected to each other at some level. It is the whole fabric of nature. Each and every piece of information is part of a complex puzzle. When one begins to see how it all fits together, one's mind becomes joyful and provides incentive and desire to learn more about the true nature of this complex world.</span></p>
+<p>Next in the series, "<a href="../../pages/TL.LL.004/index.html" rel="noopener noreferrer" target="_blank">Āhāra (Food) in Udayavaya Ñāna</a>".</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.LL.003"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0506"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.LL.003
+Language:     pt-BR
+Generated-At: 2026-03-10T23:21:51Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>26 de fevereiro de 2016</strong></p>
+<p style="text-align: justify;">1. No ensaio anterior, discutimos os primeiros 25 fatores que abrangem o que está envolvido no estágio “<em>udaya</em>” do <em>udayavaya</em>: “<a href="../../pages/TL.LL.002/index.html" rel="noopener" target="_blank">Uadayavaya Nana – Introdução</a>”. Cada um dos cinco agregados tem cinco fatores associados a ele, levando à sua formação; assim, 25 fatores dão origem ao <strong>mundo de</strong> <strong>cada pessoa</strong>.</p>
+<ul style="text-align: justify;">
+<li>Os cinco agregados, ou <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span>,</span></em> são muito mais complexos do que a maioria imagina. Leia os ensaios sobre <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em> para se familiarizar com o assunto, se você realmente deseja compreender o <em>udayavaya nana</em>: “<a href="../../pages/KD.II.001/index.html" rel="bookmark noopener noreferrer" target="_blank">Os Cinco Agregados (Pañcakkhandha)</a>”.</li>
+<li>Além disso, observe que um determinado <em>sankhata</em> é uma pequena fração do <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span>. </span></em><span>O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é tão profundo que todas essas diferentes descrições estão bem conectadas em algum nível.</span></li>
+<li>Não se preocupe se tudo isso parecer muito complicado (é claro que algumas pessoas serão capazes de ver as conexões). Com o tempo, tudo fará sentido. Continue lendo os ensaios que você já leu. Eles farão mais sentido cada vez que você voltar e ler, especialmente depois de ler outros ensaios relevantes.</li>
+</ul>
+<p style="text-align: justify;">2. É importante compreender o fato de que tudo o que experimentamos, experimentamos apenas por uma fração de segundo. Em seguida, isso vai para a “pilha do passado” (<em>atita; </em>pronunciado “atheetha”) dos cinco agregados ou pilhas.</p>
+<ul style="text-align: justify;">
+<li>Tudo o que estamos apenas imaginando ou esperando vivenciar ainda não se materializou; isso está na “pilha do futuro” (<em>anägata; pronunciado “anägatha”</em>) dos cinco agregados.</li>
+<li>Apenas uma fração insignificante está sendo vivenciada em um determinado momento: a “pilha do presente” (<em>paccuppanna; pronunciado “pachchuppanna”</em>); consulte “<a href="../../pages/KD.II.002/index.html" rel="bookmark noopener noreferrer" target="_blank">Cinco Agregados – Introdução</a>”.</li>
+</ul>
+<p style="text-align: justify;">3. Todas essas coisas surgem como um <em>sankhata</em>, seja ele material (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>) ou mental (<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, Sanna, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>). Um determinado <em>sankhata</em> em si (não a experiência) pode existir brevemente, ou alguns podem durar muito tempo (especialmente aqueles pertencentes ao agregado <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>). Mas, mesmo assim, partes dele são continuamente “passadas” para o passado.</p>
+<ul style="text-align: justify;">
+<li>Pense em um ser humano X. Ele/ela começa com uma única célula e cresce a cada dia, torna-se um bebê, uma criança, um jovem, um idoso e, então, morre. Assim, quando outra pessoa Y observa X crescer, o “<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> <span class="pali-term term-highlight" data-term="khandha">Khandha</span></span></em>” de Y cresce continuamente, ao mesmo tempo em que torna o “<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> <span class="pali-term term-highlight" data-term="khandha">Khandha</span></span></em> passado” maior a cada momento. Veja “<a href="../../pages/KD.II.003/index.html" rel="noopener" target="_blank">Diferença entre Rūpa físico e Rūpakkhandha</a>”.</li>
+<li>Em um determinado momento, podemos ver apenas um “instantâneo” momentâneo de um <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em>. Quando X morre, todos esses estágios — momento a momento — passaram para o passado e, portanto, agora pertencem ao “<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> <em><span><span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em> passado” de X e Y. Observe que eles são diferentes: a experiência de cada um com X é diferente.</li>
+<li>Agora podemos ver por que <em><span>o <span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em> de cada pessoa é único para essa pessoa.</li>
+</ul>
+<p style="text-align: justify;">4. Agora analisaremos por que todos os cinco agregados têm sua origem em <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span>, <span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>:</span></em> como temos a percepção errada (<em>nicca sanna</em>) de que podemos eventualmente alcançar a felicidade desejando coisas neste mundo (<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>), nos apegamos a algumas coisas ou odiamos outras (<em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>) e, então, agimos de acordo com isso (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>).</p>
+<ul>
+<li style="text-align: justify;">Depois que alguém alcança <em>parinibbana </em>(ou seja, quando um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> morre), não há mais mundo para experimentar. Não há mais <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">5. Os outros dois fatores, <em>āhāra</em> e <em>Lakkhaṇa</em> de <em>nibbatti,</em> descrevem a “progressão” de um <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em> que tem origem em <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span>, <span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">Se for uma coisa material (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>), ela precisa de <em>āhāra</em> (alimento) para crescer; pode ser o alimento que os seres vivos comem ou os nutrientes de que as plantas precisam.</li>
+<li style="text-align: justify;">Se for uma coisa mental (<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, sanna, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>), ela precisa de “alimento mental”: <em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span></span></em> (contato), <em><span><span class="pali-term term-highlight" data-term="mano">Mano</span> Sañcetanā</span></em> e <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> āhāra</span></em>. Discutiremos isso mais tarde.</li>
+</ul>
+<p style="text-align: justify;">6. Qualquer um desses cinco agregados precisa de um “plano” ou mecanismo definido para surgir, crescer, amadurecer, decair e, eventualmente, deixar de existir. É disso que trata o quinto fator, <em>Lakkhaṇa</em>.</p>
+<ul style="text-align: justify;">
+<li>Esse “plano” é feito de acordo com essas três causas: é um plano complexo que leva em consideração muitos aspectos que são formados pelo nível de <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> (ignorância), tipo de <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> (ganância, ódio) e <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (tipo de atos que foram realizados com o corpo, a fala e a mente).</li>
+<li>Esses fatores complexos dão origem ao <em>nibbatti Lakkhaṇa</em>, um “plano” para que qualquer um dos cinco agregados surja. Ele pode ser chamado de “características de produção” daquele <em>sankhata</em> específico pertencente a um dos cinco agregados.</li>
+<li>À medida que aprendemos mais, veremos que todos os cinco fatores se tornam causas e estão inter-relacionados.</li>
+</ul>
+<p style="text-align: justify;">7. Isso é mais fácil de ver em um ser humano (ou animal). Quando alguém obtém <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano, que se baseia em um <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> específico que se concentrou no momento da morte no <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> anterior, um plano para o <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span> humano</span></em> é automaticamente gerado pela energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Esse projeto é o <em>manomaya kaya</em> ou o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> que discutimos muitas vezes; veja os ensaios na seção “<a href="../../pages/AB.DD.001/index.html" rel="bookmark noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)</a>”.</li>
+<li>O surgimento desse ser humano, a partir de uma única célula no útero da mãe, acontece de acordo com o “projeto” nesse <em>manomaya kaya:</em> a altura final, a cor dos olhos, a cor da pele, etc., foram determinadas quando um útero adequado foi automaticamente selecionado de acordo com a “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” desse ser. Esse “processo de seleção” — que ocorre automaticamente e não é decidido por nenhum ser superior — escolheu os pais adequados para o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</li>
+<li>Esse foi o papel desempenhado pelo <em>nibbatti Lakkhaṇa</em> neste caso específico.</li>
+</ul>
+<p style="text-align: justify;">8. Assim, o <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> específico é determinado pela ação específica (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>): se essa ação fosse adequada para um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> de cão, a pessoa obteria um “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> de cão”.</p>
+<ul style="text-align: justify;">
+<li>Mas outras características desse cão são determinadas pela <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> geral daquele ser, que ele adquiriu através de incontáveis nascimentos anteriores.</li>
+<li>Assim<em>, Lakkhaṇa</em> é uma entidade complexa que leva em consideração inúmeras coisas, mas duas são proeminentes: o <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> específico e <em><span><span class="pali-term term-highlight" data-term="a gati">a Gati</span></span></em> geral.</li>
+</ul>
+<p style="text-align: justify;">9. Por exemplo, dois seres diferentes poderiam obter o mesmo “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> de cão”. Mas não há dois cães com aparência e comportamento iguais. Alguns são ferozes e outros são amorosos. Alguns são grandes e outros são pequenos. As variedades possíveis são basicamente infinitas. Mesmo dois “cães gêmeos” com aparência exatamente igual terão pelo menos algumas diferenças de comportamento quando crescerem. O mesmo se aplica a dois seres humanos.</p>
+<ul style="text-align: justify;">
+<li>Assim<em>, Lakkhaṇa</em><span> é um molde complexo de múltiplos fatores. Mas somente um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pode ver por que certas características estão em um determinado ser. Diz-se que até mesmo as manchas em um cão se devem a alguma razão.</span></li>
+<li>Embora o “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” seja determinado por um <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> forte específico (chamado <em><span>janaka <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>), o corpo refletirá inúmeros <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> de inúmeras vidas no passado.</li>
+<li>Mas, como discutimos em outro lugar, os tipos de<em><span> <span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> que podem trazer frutos dependerão, de modo geral, da disponibilidade de condições adequadas. Se alguém agir de forma tola, isso permitirá que algum <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> ruim do passado dê frutos. Da mesma forma, ao agir com atenção plena, é possível evitar tais resultados ruins e até mesmo trazer bons resultados devido ao bom <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> do passado.</li>
+<li>Vários ensaios discutem o fato importante acima. Por exemplo, “<a href="../../pages/TL.EE.006/index.html" rel="bookmark noopener noreferrer" target="_blank">O que é Kamma? – Tudo é determinado pelo Kamma?</a>” e “<a href="../../pages/PS.JJ.003/index.html" rel="bookmark noopener noreferrer" target="_blank">Annantara e Samanantara Paccaya</a>”.</li>
+</ul>
+<p style="text-align: justify;">10. Portanto, é essencial perceber que <em>manomaya kaya</em> não determina o futuro de alguém de forma rígida; algumas das “características de produção” podem mudar. Não é como fabricar um robô em uma fábrica de acordo com um projeto definido.</p>
+<ul style="text-align: justify;">
+<li>É fácil perceber que a estrutura corporal de uma pessoa pode mudar de acordo com seu estilo de vida. Se alguém se tornar descuidado e começar a comer indiscriminadamente, ficará obeso. Até mesmo o caráter de uma pessoa pode mudar devido à sua motivação e a influências externas.</li>
+<li>Assim,<em> Lakkhaṇa</em> não são determinados de forma determinística. A <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> geral pode mudar e, por sua vez, o <em>manomaya kaya</em> e o corpo físico podem mudar.</li>
+</ul>
+<p style="text-align: justify;">11. A principal razão para essa flexibilidade é que o <em>manomaya kaya</em> tem três “componentes”: <em>kammaja kaya, cittaja kaya</em> e <em>utuja kaya; </em>veja ensaios anteriores sobre <em>manomaya kaya</em>.</p>
+<ul style="text-align: justify;">
+<li>O <em>kammaja kaya </em>é o que realmente é pré-definido. Ele foi responsável pelas razões (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>) que levaram ao <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> específico.</li>
+<li><span style="color: #0000ff;">O componente crítico que está sob NOSSO CONTROLE é o <em>cittaja kaya</em>.</span> Isso é basicamente como pensamos (o que leva à nossa fala e ações corporais). E como pensamos depende do nosso nível de ignorância (<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>).</li>
+<li>O terceiro componente é o <em>utuja kaya</em>, que é basicamente o corpo sutil/invisível do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>. Ele está sendo criado e alterado CONTINUAMENTE devido ao <em>kammaja kaya</em> e ao <em>cittaja kaya</em>. A matéria sutil baseada no <em>suddhashtaka</em> está sendo criada devido ao <em>kammaja kaya</em> e ao <em>cittaja kaya</em>; veja “<a href="../../pages/AB.GG.004/index.html" rel="bookmark noopener noreferrer" target="_blank">A Origem da Matéria – Suddhashtaka</a>”.</li>
+</ul>
+<p style="text-align: justify;">12. Assim, a evolução de um ser humano é um processo complexo. Mas é possível obter uma excelente compreensão básica ao compreender a estrutura básica acima. Entraremos em mais detalhes no futuro, mas vamos discutir mais alguns aspectos importantes.</p>
+<ul style="text-align: justify;">
+<li>Agora podemos ver que o corpo físico é apenas uma “concha”. Há <em><span>um <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dentro desse corpo físico e controlando-o; veja “<a href="../../pages/AB.DD.004/index.html" rel="bookmark noopener noreferrer" target="_blank">Fantasma na máquina – Sinônimo de Manomaya Kaya?</a>”.</li>
+</ul>
+<p style="text-align: justify;">13. Assim, esses corpos físicos que tanto valorizamos são, na verdade, cascas sem vida. A essência — <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> — está escondida dentro desse corpo físico.</p>
+<ul style="text-align: justify;">
+<li>O <em>utuja kaya</em> do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é o que se espalha por todo o corpo físico e lhe dá “vida”. É uma fina rede que se sobrepõe ao nosso sistema nervoso, e é assim que sentimos as sensações corporais.</li>
+<li>Sob alguns estresses extremos, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode sair do corpo físico. Isso é conhecido como experiência fora do corpo (OBE); veja “<a href="../../pages/AB.DD.007/index.html" rel="bookmark noopener noreferrer" target="_blank">Manomaya Kaya e Experiência Fora do Corpo (OBE)</a>”. Quando isso acontece, o corpo físico fica sem vida, e os médicos já declararam muitos pacientes cardíacos em cirurgia como mortos por vários minutos, apenas para descobrir mais tarde que o paciente estava vivo (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> havia retornado ao corpo).</li>
+</ul>
+<p style="text-align: justify;">14. O ponto crítico para nossa discussão atual é o fato de que, uma vez nascido com um corpo humano, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> humano pode determinar seu próprio <em>Lakkhaṇa de Nibbatti</em> até certo ponto, usando sabiamente o <em>cittaja kaya</em>.</p>
+<ul style="text-align: justify;">
+<li>É esse <em>cittaja kaya</em> que, em última análise, torna possível para um ser humano atingir <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li>É possível mudar a <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> (hábitos/caráter) compreendendo primeiro o que é moral versus imoral e, em seguida, compreendendo a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> deste mundo.</li>
+<li>A maioria das pessoas não percebe a importância do <em>cittaja kaya</em><span>. É por isso, em essência, que um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> é necessário para revelar a verdadeira natureza deste mundo e ensinar como usar o </span><em>cittaja kaya</em> (ou seja, a maneira como se pensa e, portanto, fala e age): primeiro, para se afastar do comportamento imoral a fim de purificar a mente até certo ponto e, em seguida, para compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">15. O <em>Lakkhaṇa do nibbatti</em> para qualquer <em>sankhata</em> associado aos cinco agregados funciona de maneira semelhante. Vamos considerar um certo <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> que experimentamos ao ver uma pessoa X.</p>
+<ul>
+<li style="text-align: justify;">Esse<em><span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> depende de quem está olhando para X. Se for um pai amoroso para Y, então Y irá gerar um “<em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> amoroso” ao ver X. Esse <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em><span> irá surgir, permanecerá lá por um certo tempo e desaparecerá quando a mente for direcionada para outra coisa. Mas quando esse <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> surge, ele surge com algum </span><em>Lakkhaṇa</em> associado às próprias experiências passadas com X. Um inimigo de X (digamos, Z) poderia gerar um “<em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> odioso”.</li>
+</ul>
+<p style="text-align: justify;">16. É fácil ver que os outros três agregados no exemplo acima também surgirão de acordo.</p>
+<ul style="text-align: justify;">
+<li>Y irá gerar sentimentos felizes (<em><span>uma <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>), irá reconhecer (<em>sanna</em>) X como um pai e poderá gerar alguma ação ou fala através de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>. Por outro lado, Z irá gerar um conjunto totalmente diferente.</li>
+<li>Assim, os quatro agregados mentais estão relacionados entre si.</li>
+</ul>
+<p style="text-align: justify;"><span>17. No <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, tudo o que aprendemos está conectado entre si em algum nível. É toda a estrutura da natureza. Cada informação é parte de um quebra-cabeça complexo. Quando começamos a ver como tudo se encaixa, nossa mente se alegra e nos dá incentivo e desejo de aprender mais sobre a verdadeira natureza deste mundo complexo.</span></p>
+<p>Próximo na série, “<a href="../../pages/TL.LL.004/index.html" rel="noopener noreferrer" target="_blank">Āhāra (Alimento) em Udayavaya Ñāna</a>”.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.LL.002/index.html">Udayavaya Nana Introduction</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.LL.004/index.html">Ahara Food In Udayavaya Nana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.LL.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Udayavaya Nana Introduction</span>
+        
+        <span class="pathway-title title-pt">Introdução ao Udayavaya Nana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.LL.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Ahara Food In Udayavaya Nana</span>
+        
+        <span class="pathway-title title-pt">Ahara Food em Udayavaya Nana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

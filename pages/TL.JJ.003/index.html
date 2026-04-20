@@ -1,0 +1,474 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>The Sotapanna Stage | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 79 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.JJ.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">The Sotapanna Stage</h1>
+    
+    <h1 class="title-pt">O estágio Sotāpanna</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.JJ.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.JJ.003"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0484"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.JJ.003</td></tr><tr><td>Fin-dex</td><td>0484</td></tr><tr><td>Slug</td><td>the-sotapanna-stage</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>The Sotapanna Stage</td></tr></table></div></div><p><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em><span>can be attained only by learning the true teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<p><strong>Revised February 24, 2020; <span style="color: #3366ff;">last revision August 19, 2025</span></strong></p>
+<p style="text-align: justify;"><span>It is imperative to learn the correct <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> from an </span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> to attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage (one of the four requirements). See, "<a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Four Conditions for Attaining Sōtapanna Magga/Phala</a>." We will discuss an analogy for the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage in that regard. We will briefly discuss <i><span>the Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></i> to illustrate the importance of eliminating wrong views in order to attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage.</p>
+<p><span style="color: #008000;"><strong>Note:</strong></span> Now you can select the "dark mode" (good for nighttime reading) or the "regular mode" by clicking the "crescent Moon icon" at the bottom right.</p>
+<h5 class="sutta-title" style="text-align: justify;"><span class="segment" id="sn45.2:0.3"><span class="root"><span class="text"><em><span>Upaḍḍha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> (SN 45.2) - Need to Know the Correct <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> From a Noble Friend</span></span></span></span></h5>
+<p style="text-align: justify;">1. According to the "<span class="segment" id="sn45.2:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/sn45.2/pli/ms" rel="noopener" target="_blank"><em><span>Upaḍḍha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 45.2)</a><span>", once, Ven. Ananda told the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> that he thinks half (</span><em>"upaḍḍhamidaṁ.."</em>) of the factors contributing to someone getting to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (by completing the <em>brahmacariya</em>) can be attributed to association with a Noble Friend (<em>kalyāṇamittā</em>). Here, "<em><span><span class="pali-term term-highlight" data-term="kalyāṇa">kalyāṇa</span>" </span></em>means to "help remove defilements," and "<em>mittā</em>" is a friend.</span></span></span></p>
+<ul style="text-align: justify;">
+<li><span>But the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explains that not just half, but the FULL contribution ("</span><em>sakalamevidaṁ.."</em>) comes from a <span class="segment" id="sn45.2:0.3"><span class="root"><span class="text"><em>kalyāṇamittatā. </em><strong><span>Of course, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is the best </span><em>kalyāṇamittā.</em></strong></span></span></span></li>
+<li>The reason is clear. <span style="color: #0000ff;"><strong><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is not known to the world until it is discovered by a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></span><span style="color: #000000;"> An average human can learn about it ONLY from</span> <span style="color: #3366ff;"><span>a <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></span> <span style="color: #000000;">or</span> <span style="color: #3366ff;"><span>a true disciple of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></span> <span style="color: #000000;"><span>who has also understood that <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></span></strong></span></li>
+<li>However, the guidance is REQUIRED only to understand this "new worldview" that has never been known to the world. That means that once a person reaches the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage, they will understand the Eightfold Noble Path and how to follow it to attain <em>Arahanthood</em>.</li>
+<li><span>That is why attaining the <span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> stage is equivalent to attaining </span><em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span> Samma <span class="pali-term term-highlight" data-term="ditthi">Ditthi</span></span></em>, not just mundane <em><span>Samma <span class="pali-term term-highlight" data-term="ditthi">Ditthi</span>.</span></em> Mundane <em><span>Samma <span class="pali-term term-highlight" data-term="ditthi">Ditthi</span> </span></em>would enable one to live a "moral life." In contrast, <em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span> Samma <span class="pali-term term-highlight" data-term="ditthi">Ditthi</span> </span></em>enables one to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. See, "</li>
+<li><span style="color: #0000ff;"><strong><span style="color: #3366ff;">Just by understanding the "new worldview," a large number of defilements (<em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span>/<span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>) are removed from the mind,</span> <span style="color: #000000;">and that is referred to as "<em><span><span class="pali-term term-highlight" data-term="dassanā">dassanā</span> pahātabbā</span></em>" (removal with vision) in the <em><span>Sabbasava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (see below.)</span></strong></span></li>
+<li>We can use the following mundane analogy to illustrate the above concept.</li>
+</ul>
+<h5 style="text-align: justify;"><strong>An Analogy for <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> (attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> Stage)</strong></h5>
+<p style="text-align: justify;">2. Suppose a man (X) lives in an area usually full of sense pleasures. But there are occasional flooding, droughts, and also Earthquakes. When such calamities occur, he gets distraught, and thus, his mind is not at ease most of the time.</p>
+<ul style="text-align: justify;">
+<li>Yet, he has accumulated some wealth, and he believes that "everything will be OK" in the long run in the back of his mind.</li>
+</ul>
+<p style="text-align: justify;">3. Then, one day, an old friend (who has been on travel for many years) comes back and tells him that the reason he left was to find a better place to live. The friend says that he did some research and found out that this land is inherently unstable, and within several years, an Earthquake will destroy this area.</p>
+<ul style="text-align: justify;">
+<li>Furthermore, he says that he found a very prosperous place and that there are no worries about flooding, drought, or Earthquakes. But it is a long journey to that place.</li>
+</ul>
+<p style="text-align: justify;">4. X tells the friend that he had heard about such beautiful places from other people before. He had followed them at times, but every time came back after trekking for some time because he could not see any benefit. Plus, he says, "How do I know what you say is right? I know that everything is not perfect here, but can you provide evidence for your theory that a big earthquake will occur? Also, how can I believe you that this place you found is so wonderful?"</p>
+<p style="text-align: justify;">5. The friend shows him all the evidence that he had gathered, why this area is unsuitable for living in the long run. He also provides evidence of the prosperity of the new place and describes the travel path.</p>
+<ul style="text-align: justify;">
+<li>The evidence is compelling, and X decides to follow the friend's advice and see what happens. That is analogous to becoming a<i><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i>.</li>
+</ul>
+<p style="text-align: justify;">6. X spends a lot of time reading about and contemplating all the evidence. Then he begins to realize that what the friend is saying is true. He decides to take an exploratory trip and makes suitable preparations, as suggested by the friend.</p>
+<ul style="text-align: justify;">
+<li>Once in a while, he wonders whether all these preparations will be a waste of time. However, as he continues to assess the evidence, he becomes increasingly convinced that he needs to take that trip.</li>
+</ul>
+<p style="text-align: justify;">7. Then X starts on the trip and is encouraged by seeing some "landmarks" that the friend told him about. Even though he occasionally thinks about the "pleasures" he could have had if he had stayed home, these "landmarks" encourage him to go further and then reach one of the four "major stopovers" that the friend mentioned.</p>
+<ul style="text-align: justify;">
+<li>At a certain point on the way, he becomes fully convinced of his friend's conclusions. Now there is no going back for him. That is equivalent to reaching the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i> stage.</li>
+</ul>
+<h5 style="text-align: justify;"><strong>The Way to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> Stage</strong></h5>
+<p style="text-align: justify;"><span>8. The key here is that without knowing about the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s world view (31 realms of existence and the suffering in the four lower realms, see "</span><a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>"), one does not comprehend the "<em>saṃsāric</em> suffering." <strong>Most suffering occurs when one is born in any of the four lowest realms</strong><span>. That is important because it is possible that (especially young and wealthy people) may not experience that much physical and mental suffering. To have faith in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview, one needs to spend time examining the evidence for it.</span></p>
+<p style="text-align: justify;">9. When one sees why it is not fruitful to stay in "this world" of 31 realms, they have understood the true nature, the three characteristics <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>, of "this world."</p>
+<ul style="text-align: justify;">
+<li><i><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></i><span> is the realization that there is nothing "substantial" to be had by staying in "this world." This clear vision concludes that there is no point in doing immoral things (those that cause <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the four lower realms).</span></li>
+</ul>
+<p style="text-align: justify;">10. We strive to gain or own "things" in this world because we perceive that we can achieve happiness eventually; this is <i><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></i> or <i>sathkāya diṭṭhi</i> (both "<i>Sakka</i>" and "<i>sath</i>" mean "good" or fruitful, and "<i><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></i>" means "<i>kriyā</i>" or actions. <em>Diṭṭhi</em> means views. Thus, <i><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></i> is our wrong idea that our efforts to acquire "things" or "seek happiness" are beneficial and fruitful.</p>
+<ul style="text-align: justify;">
+<li>When one truly understands <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, </span></i>and<i><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>, this wrong view goes away. One realizes that nothing we do can lead to permanent happiness "in this world."</li>
+</ul>
+<p style="text-align: justify;">11. Furthermore, for one who has seen <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>, the mind does not allow serious wrongdoings (<i>vici</i>+<i> ki</i>+<i>iccha</i> = liking for wrong actions or things) that could lead to birth in the lower four realms.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">There is no doubt regarding the "world vision" that they realized. Thus,<i><span> <span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></i>, or the liking (mindset) for unfruitful and harmful actions, is removed at the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i> stage.</li>
+</ul>
+<p style="text-align: justify;">12. Therefore, one needs to contemplate the true nature of the world. It is achieved by purifying the mind and cannot be accomplished simply by following certain rituals, such as obeying precepts on specific days.</p>
+<ul style="text-align: justify;">
+<li>Thus, the idea that "<em><span><span class="pali-term term-highlight" data-term="sīlabbata parāmāsa">sīlabbata parāmāsa</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> can definitely be attained by following rituals" is abandoned at the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i><span> stage. One realizes what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said by "</span><i>saṃvaraṭṭhena sīlaṃ.</i>"</li>
+<li>Unbreakable "<i><span><span class="pali-term term-highlight" data-term="sīla">sīla</span></span></i>" (or moral behavior) comes with the correct vision/view. That will be automatically monitored at ALL TIMES, not by "observing precepts" for a day or several days.</li>
+</ul>
+<p style="text-align: justify;">13. For one who has become "<i><span><span class="pali-term term-highlight" data-term="dassanā">dassanā</span> sampanno</span></i>" (one with clear vision), the mindset changes not by following formal procedures. The change of perspective comes from understanding the futility of breaking any precepts or wrongdoings. Even if one does a wrong act, they would immediately realize it and avoid it in the future.</p>
+<p style="text-align: justify;"><span>14. This is not to discourage people from observing precepts as a formality. Even mechanically observing those precepts is beneficial. It is also a good habit to instill in children. It is customary in <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> countries for entire families to visit the temple and observe the "</span><em><span>pañca <span class="pali-term term-highlight" data-term="sīla">sīla</span></span></em>" (five precepts) or the "<i><span>aṭṭhaṅgika <span class="pali-term term-highlight" data-term="sīla">sīla</span></span></i>" (eight precepts) on <i>Poya</i> (Full Moon) days.</p>
+<h5 style="text-align: justify;"><strong>Key Points from the <em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(MN 2)</strong></h5>
+<p style="text-align: justify;">15. The key to attaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is to remove the <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> (residue from the fermentation of immoral thoughts/habits over many <em>saṃsāric</em> births). In the <em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span>, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> outlines seven steps to eliminate the </span><em>āsavās</em> (cravings) and purify the mind, thereby paving the way to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.  The seven steps are:</p>
+<ol style="text-align: justify;">
+<li style="text-align: justify;">Removal by <span style="color: #3366ff;"><strong>clear vision ("<em><span><span class="pali-term term-highlight" data-term="dassanā">dassanā</span> pahātabbā</span></em>,"</strong></span> where <em><span><span class="pali-term term-highlight" data-term="dassana">dassana</span></span></em> is vision and <em>pahātabbā</em> is removal). That is a clear understanding of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.</li>
+<li style="text-align: justify;">Removal by the restrained use of the sense faculties ("<em>saṃvarā pahātabbā</em>," where<em> saṃvara</em> is the disciplined use of the sense faculties: not to over-indulge in the senses).</li>
+<li style="text-align: justify;">Removal by good associations ("<em>paṭisevanā pahātabbā</em>," where <em>sevana</em> is an association: for example, with good friends and good deeds).</li>
+<li style="text-align: justify;">Removal by tolerance and patience ("<em>adhivāsanā pahātabbā</em>"). For example, even if one is tempted to steal because of hunger, one should consider the consequences of doing so. There are ways to earn a living.</li>
+<li style="text-align: justify;">Removal by staying clear of "bad influences and environments" ("<em>parivajjanā pahātabbā</em>"). One needs to avoid bad friends, unwise locations for living (due to floods, bad neighbors, etc.), and avoid inappropriate times to go out, among other things.</li>
+<li style="text-align: justify;">Removal by getting rid of certain things ("<em>vinodanā pahātabbā</em>"). One needs to get rid of immoral thoughts that come to mind, such as excessive sensory pleasure, hate, etc.</li>
+<li style="text-align: justify;"><span style="color: #993366;"><strong>Removal by meditation ("<em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span> pahātabbā</span></em>"). When one has a clear vision in #1, it becomes apparent what to contemplate.</strong></span></li>
+</ol>
+<p style="text-align: justify;"><strong>Clear vision is the first on the list.</strong> One should not undertake a journey without knowing the reason for the journey. Furthermore, one needs to understand how to get to the destination.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>Similarly, having a clear understanding of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview is a prerequisite for embarking on the Noble Path. What is </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, </span></em>and how to get there? See,"<a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a>" and  "<a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhana, Four Noble Truths</a>."</li>
+<li style="text-align: justify;">There are four types of <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em>:<em> kāmāsava</em> (craving for sense pleasures), <em>diṭṭhāsava</em> (cravings due to wrong views), <em>bhavāsava</em> (craving for existence), and <em>avijjāsava</em> (cravings due to ignorance).</li>
+</ul>
+<p style="text-align: justify;">16. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> removes the <em>diṭṭhāsava</em> through clear vision. Once one understood the true nature of "this world" by contemplating <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, one would not commit any immoral acts to gain anything in "this world." See, "<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anatta</a>." That alone saves one from future rebirths in the lower four realms.</p>
+<ul>
+<li style="text-align: justify;">A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> still has the other three <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> left. Those are removed mainly by the meditation on the <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span> </span></em>(seven <em><span><span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span></span></em>.)</li>
+<li style="text-align: justify;">After attaining the<i><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i> stage, one sees the Path to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (and how to MEDITATE to get to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.) That is <span style="color: #ff0000;"><strong>"<em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span> pahātabbā</span></em>" </strong><span style="color: #000000;">in #7 above. </span></span>Then he diligently follows the Path and reaches the following three stages, culminating in <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>.</li>
+<li style="text-align: justify;">As one can see, the other five steps (#2 through #6) listed in the <em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> are common sense things to do AT ANY TIME. They make sense at any stage. Anyone can use those steps to enhance the quality of life and remove any bad habits—for example, alcohol/ drug use or even overeating can be bad for health.</li>
+</ul>
+<h5>A <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> Knows "What to Meditate On"</h5>
+<p style="text-align: justify;">17. Many people start "meditating" even before understanding "what to meditate on." <strong>Of course, if one is doing "breath meditation," there is nothing to learn</strong><span>. It is an insult to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s meditations help one to stop future suffering from arising. For that, one must first realize the unfruitfulness/danger in remaining in this world (via the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.) See, "</span><a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhana, Four Noble Truths</a>."</p>
+<ul>
+<li style="text-align: justify;">The <em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> <span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> covers all seven steps in #15 above in a somewhat different fashion. The correct <em><span>Anapānasati <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> (not the breath meditation version) covers those in a general way.</li>
+<li style="text-align: justify;">As stated in the "<a href="https://suttacentral.net/mn118/pli/ms" rel="noopener" target="_blank">Ānāpānassati Sutta (MN 118)</a>": "<em><span>Evaṁ bhāvitā kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, </span><strong>ānāpānassati</strong> evaṁ bahulīkatā <strong>cattāro satipaṭṭhāne</strong> paripūreti</em>" or "<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, that is how <strong><em>ānāpānassati</em></strong>, developed and cultivated, fulfills <em><strong><span>cattāro <span class="pali-term term-highlight" data-term="satipaṭṭhāna">satipaṭṭhāna</span></span></strong></em>."</li>
+<li><span style="color: #ff0000;"><strong><span style="color: #993366;">Can "breath meditation" fulfill the </span><em><span style="color: #993366;"><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span>?</span></span> </em></strong></span>One needs to be a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> to properly cultivate <em>Ānāpānassati</em> or <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> (i.e., to have optimum results). See "<a href="../../pages/ER.FF.001/index.html" rel="noopener" target="_blank">Elephant in the Room 3 – Ānāpānasati</a>."</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.JJ.003"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0484"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.JJ.003
+Language:     pt-BR
+Generated-At: 2026-03-10T23:20:47Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p>O estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> só pode ser alcançado através do aprendizado dos verdadeiros ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<p><strong>Revisado em 24 de fevereiro de 2020; <span style="color: #3366ff;">última revisão em 19 de agosto de 2025</span></strong></p>
+<p style="text-align: justify;"><span>É imperativo aprender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> correto com um </span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> para atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> (um dos quatro requisitos). Veja “<a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Quatro condições para atingir Sotāpanna Magga/Phala</a>”. Discutiremos uma analogia para o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> a esse respeito. Discutiremos brevemente <i><span>o Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></i> para ilustrar a importância de eliminar visões erradas a fim de atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</p>
+<p><span style="color: #008000;"><strong>Observação:</strong></span> agora você pode selecionar o “modo escuro” (bom para leitura noturna) ou o “modo normal” clicando no “ícone da lua crescente” no canto inferior direito.</p>
+<h5 class="sutta-title" style="text-align: justify;"><span class="segment" id="sn45.2:0.3"><span class="root"><span class="text"><em><span>Upaḍḍha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> (SN 45.2) - Necessidade de conhecer o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> correto por meio de um amigo nobre</span></span></span></span></h5>
+<p style="text-align: justify;">1. De acordo com o <span class="segment" id="sn45.2:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/sn45.2/pli/ms" rel="noopener" target="_blank"><em><span>“Upaḍḍha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 45.2)</a><span>”, certa vez, o Venerável Ananda disse ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span> que ele acha que metade (</span><em>“upaḍḍhamidaṁ..”</em>) dos fatores que contribuem para que alguém alcance o <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (ao completar o <em>brahmacariya</em>) pode ser atribuída à associação com um amigo nobre (<em>kalyāṇamittā</em>). Aqui, “<em><span><span class="pali-term term-highlight" data-term="kalyāṇa">Kalyāṇa</span>” </span></em>significa “ajudar a remover as impurezas” e “<em>mittā</em>” é um amigo.</span></span></span></p>
+<ul style="text-align: justify;">
+<li><span>Mas o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explica que não apenas metade, mas a contribuição TOTAL (“</span><em>sakalamevidaṁ...”</em>) vem de um <span class="segment" id="sn45.2:0.3"><span class="root"><span class="text"><em>kalyāṇamittatā. </em><strong><span>É claro que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> é o melhor </span><em>kalyāṇamittā.</em></strong></span></span></span></li>
+<li>A razão é clara. <span style="color: #0000ff;"><strong><span style="color: #3366ff;"><span>O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> não é conhecido pelo mundo até ser descoberto por um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></span><span style="color: #000000;"> Um ser humano comum só pode aprender sobre ele com</span> <span style="color: #3366ff;"><span>um <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></span> <span style="color: #000000;">ou</span> <span style="color: #3366ff;"><span>um verdadeiro discípulo de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></span> <span style="color: #000000;"><span>que também tenha compreendido esse <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></span></strong></span></li>
+<li>No entanto, a orientação é NECESSÁRIA apenas para compreender essa “nova visão de mundo” que nunca foi conhecida pelo mundo. Isso significa que, uma vez que uma pessoa atinge o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, ela compreenderá o Nobre Caminho Óctuplo e como segui-lo para alcançar <em>o Arahanthood</em>.</li>
+<li><span>É por isso que atingir o estágio de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> é equivalente a atingir </span><em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span> Samma Diṭṭhi</span></em>, não apenas <em>Samma Diṭṭhi</em> mundano<em>. Samma Diṭṭhi</em> mundano permitiria que alguém vivesse uma “vida moral”. Em contraste, <em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span> Samma Diṭṭhi </span></em>permite que alguém alcance <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Veja “</li>
+<li><span style="color: #0000ff;"><strong><span style="color: #3366ff;">Apenas compreendendo a “nova visão de mundo”, um grande número de impurezas (<em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span>/<span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>) são removidas da mente,</span> <span style="color: #000000;">e isso é referido como “<em><span><span class="pali-term term-highlight" data-term="dassanā">dassanā</span> pahātabbā</span></em>” (remoção com visão) no <em><span>Sabbasava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (veja abaixo).</span></strong></span></li>
+<li>Podemos usar a seguinte analogia mundana para ilustrar o conceito acima.</li>
+</ul>
+<h5 style="text-align: justify;"><strong>Uma analogia para <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> (atingir o estágio <em>Sótapanna</em>)</strong></h5>
+<p style="text-align: justify;">2. Suponha que um homem (X) viva em uma área normalmente repleta de prazeres sensoriais. Mas ocasionalmente há inundações, secas e também terremotos. Quando tais calamidades ocorrem, ele fica perturbado e, portanto, sua mente não está tranquila na maior parte do tempo.</p>
+<ul style="text-align: justify;">
+<li>No entanto, ele acumulou alguma riqueza e acredita que, no fundo, “tudo ficará bem” no longo prazo.</li>
+</ul>
+<p style="text-align: justify;">3. Então, um dia, um velho amigo (que viajou por muitos anos) volta e lhe diz que a razão pela qual ele partiu foi para encontrar um lugar melhor para viver. O amigo diz que fez algumas pesquisas e descobriu que esta terra é inerentemente instável e que, dentro de alguns anos, um terremoto destruirá esta área.</p>
+<ul style="text-align: justify;">
+<li>Além disso, ele diz que encontrou um lugar muito próspero e que não há preocupações com inundações, secas ou terremotos. Mas é uma longa viagem até esse lugar.</li>
+</ul>
+<p style="text-align: justify;">4. X diz ao amigo que já tinha ouvido falar de lugares tão bonitos por outras pessoas antes. Ele já tinha seguido essas pessoas algumas vezes, mas sempre voltava depois de caminhar por algum tempo, porque não via nenhum benefício. Além disso, ele diz: “Como posso saber se o que você diz é verdade? Sei que nem tudo é perfeito aqui, mas você pode fornecer provas para sua teoria de que ocorrerá um grande terremoto? Além disso, como posso acreditar que esse lugar que você encontrou é tão maravilhoso?”</p>
+<p style="text-align: justify;">5. O amigo mostra a ele todas as evidências que reuniu, explicando por que essa área não é adequada para se viver a longo prazo. Ele também fornece evidências da prosperidade do novo lugar e descreve o trajeto da viagem.</p>
+<ul style="text-align: justify;">
+<li>As evidências são convincentes, e X decide seguir o conselho do amigo e ver o que acontece. Isso é análogo a se tornar um<i><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i>.</li>
+</ul>
+<p style="text-align: justify;">6. X passa muito tempo lendo e refletindo sobre todas as evidências. Então, ele começa a perceber que o que o amigo está dizendo é verdade. Ele decide fazer uma viagem exploratória e faz os preparativos adequados, conforme sugerido pelo amigo.</p>
+<ul style="text-align: justify;">
+<li>De vez em quando, ele se pergunta se todos esses preparativos serão uma perda de tempo. No entanto, à medida que continua avaliando as evidências, ele fica cada vez mais convencido de que precisa fazer essa viagem.</li>
+</ul>
+<p style="text-align: justify;">7. Então X começa a viagem e se sente encorajado ao ver alguns “marcos” sobre os quais o amigo lhe falou. Embora ocasionalmente pense nos “prazeres” que poderia ter tido se tivesse ficado em casa, esses “marcos” o encorajam a ir mais longe e então chegar a uma das quatro “principais paradas” que o amigo mencionou.</p>
+<ul style="text-align: justify;">
+<li>Em um determinado ponto do caminho, ele se convence totalmente das conclusões do amigo. Agora não há mais volta para ele. Isso é equivalente a alcançar o estágio <i><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i>.</li>
+</ul>
+<h5 style="text-align: justify;"><strong>O Caminho para o Estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em></strong></h5>
+<p style="text-align: justify;"><span>8. A chave aqui é que, sem conhecer a visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (31 reinos de existência e o sofrimento nos quatro reinos inferiores, veja “</span><a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">A Grande Teoria Unificada do Dhamma</a>”), não se compreende o “sofrimento <em>saṃsárico</em>”. <strong>A maior parte do sofrimento ocorre quando se nasce em qualquer um dos quatro reinos inferiores</strong><span>. Isso é importante porque é possível que (especialmente pessoas jovens e ricas) não experimentem tanto sofrimento físico e mental. Para ter fé na visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, é preciso dedicar tempo examinando as evidências para isso.</span></p>
+<p style="text-align: justify;">9. Quando se percebe por que não é proveitoso permanecer neste “mundo” de 31 reinos, compreende-se a verdadeira natureza, as três características <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></i>, deste “mundo”.</p>
+<ul style="text-align: justify;">
+<li><i><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></i> é a compreensão de que não há nada “substancial” a ser obtido permanecendo neste “mundo”. Essa visão clara conclui que não há sentido em fazer coisas imorais (aquelas que causam o Renascimento nos quatro reinos inferiores).</li>
+</ul>
+<p style="text-align: justify;">10. Nós nos esforçamos para ganhar ou possuir “coisas” neste mundo porque percebemos que podemos alcançar a felicidade eventualmente; isso é <i><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span></span></i> ou <i>sathkāya diṭṭhi</i> (tanto <i><span>“<span class="pali-term term-highlight" data-term="sakkāya">Sakkāya</span></span></i>” quanto “<i>sath</i>” significam “bom” ou frutífero, e “<i><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></i>” significa “<i>kriyā</i>” ou ações. <em>Diṭṭhi</em> significa visões. Assim, <i><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span></span></i> é nossa ideia errada de que nossos esforços para adquirir “coisas” ou “buscar a felicidade” são benéficos e frutíferos.</p>
+<ul style="text-align: justify;">
+<li>Quando alguém compreende verdadeiramente <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></i> e<i> Anattā</i>, essa visão errada desaparece. A pessoa percebe que nada do que fazemos pode levar à felicidade permanente “neste mundo”.</li>
+</ul>
+<p style="text-align: justify;">11. Além disso, para quem viu <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></i>, a mente não permite erros graves (<i>vici</i>+<i> ki</i>+<i>iccha</i> = gosto por ações ou coisas erradas) que poderiam levar ao nascimento nos quatro reinos inferiores.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Não há dúvida quanto à “visão do mundo” que eles compreenderam. Assim,<i><span> <span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span></span></i>, ou o gosto (mentalidade) por ações infrutíferas e prejudiciais, é removido no estágio <i>Sótapanna</i>.</li>
+</ul>
+<p style="text-align: justify;">12. Portanto, é preciso contemplar a verdadeira natureza do mundo. Isso é alcançado através da purificação da mente e não pode ser realizado simplesmente seguindo certos rituais, como obedecer a preceitos em dias específicos.</p>
+<ul style="text-align: justify;">
+<li>Assim, a ideia de que “<em><span><span class="pali-term term-highlight" data-term="sīlabbata parāmāsa">Sīlabbata Parāmāsa</span></span></em>” ou “<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> pode definitivamente ser alcançado seguindo rituais” é abandonada no estágio <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i><span>. A pessoa percebe o que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse com “</span><i>saṃvaraṭṭhena sīlaṃ”.</i></li>
+<li><i>O</i> “<i><span><span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></i>” (ou comportamento moral) inquebrantável vem com a visão/perspectiva correta. Isso será monitorado automaticamente em TODOS OS MOMENTOS, não pela “observância de preceitos” por um dia ou vários dias.</li>
+</ul>
+<p style="text-align: justify;">13. Para aquele que se tornou “<i><span><span class="pali-term term-highlight" data-term="dassanā">dassanā</span> sampanno</span></i>” (aquele com visão clara), a mentalidade muda não por seguir procedimentos formais. A mudança de perspectiva vem da compreensão da futilidade de quebrar quaisquer preceitos ou cometer erros. Mesmo que alguém cometa um ato errado, ele imediatamente perceberá isso e evitará no futuro.</p>
+<p style="text-align: justify;">14. Isso não é para desencorajar as pessoas a observar os preceitos como uma formalidade. Mesmo observar mecanicamente esses preceitos é benéfico. É também um bom hábito a incutir nas crianças. É costume nos países Buddhistas que famílias inteiras visitem o templo e observem os “<em><span>pañca <span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></em>” (cinco preceitos) ou os <i><span>“aṭṭhaṅgika <span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></i>” (oito preceitos) nos dias <i>de</i> <i>Poya</i> (Lua Cheia).</p>
+<h5 style="text-align: justify;"><strong>Pontos-chave do <em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(MN 2)</strong></h5>
+<p style="text-align: justify;">15. A chave para alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é remover o <em><span><span class="pali-term term-highlight" data-term="āsavā">Āsavā</span></span></em> (resíduo da fermentação de pensamentos/hábitos imorais ao longo de muitos nascimentos <em>saṃsāricos</em>). No <em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span>, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descreve sete passos para eliminar os </span><em>Āsavās</em> (desejos) e purificar a mente, abrindo assim o caminho para <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Os sete passos são:</p>
+<ol style="text-align: justify;">
+<li style="text-align: justify;">Remoção por <span style="color: #3366ff;"><strong>visão clara (“<em><span><span class="pali-term term-highlight" data-term="dassanā">dassanā</span> pahātabbā</span></em>”,</strong></span> onde <em><span><span class="pali-term term-highlight" data-term="dassana">dassana</span></span></em> é visão e <em>pahātabbā</em> é remoção). Isso é uma compreensão clara de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>.</li>
+<li style="text-align: justify;">Remoção pelo uso restrito das faculdades sensoriais (“<em>saṃvarā pahātabbā</em>”, onde<em> saṃvara</em> é o uso disciplinado das faculdades sensoriais: não se entregar excessivamente aos sentidos).</li>
+<li style="text-align: justify;">Remoção por boas associações (“<em>paṭisevanā pahātabbā</em>”, onde <em>sevana</em> é uma associação: por exemplo, com bons amigos e boas ações).</li>
+<li style="text-align: justify;">Remoção por tolerância e paciência (“<em>adhivāsanā pahātabbā</em>”). Por exemplo, mesmo que alguém seja tentado a roubar por causa da fome, deve considerar as consequências de fazê-lo. Existem maneiras de ganhar a vida.</li>
+<li style="text-align: justify;">Remoção mantendo-se longe de “más influências e ambientes” (“<em>parivajjanā pahātabbā</em>”). É preciso evitar maus amigos, locais impróprios para se viver (devido a inundações, maus vizinhos, etc.) e evitar horários inadequados para sair, entre outras coisas.</li>
+<li style="text-align: justify;">Remoção livrando-se de certas coisas (<em>“vinodanā pahātabbā</em>”). É preciso livrar-se de pensamentos imorais que vêm à mente, como prazer sensorial excessivo, ódio, etc.</li>
+<li style="text-align: justify;"><span style="color: #993366;"><strong>Remoção por meio da meditação (“<em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span> pahātabbā</span></em>”). Quando se tem uma visão clara no nº 1, torna-se evidente o que se deve contemplar.</strong></span></li>
+</ol>
+<p style="text-align: justify;"><strong>A visão clara é a primeira da lista.</strong> Não se deve empreender uma jornada sem saber o motivo da jornada. Além disso, é preciso entender como chegar ao destino.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>Da mesma forma, ter uma compreensão clara da visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> é um pré-requisito para embarcar no Nobre Caminho. O que é </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> e como chegar lá? Veja “<a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a>” e “<a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhaṇa, Quatro Nobres Verdades</a>”.</li>
+<li style="text-align: justify;">Existem quatro tipos de <em><span><span class="pali-term term-highlight" data-term="āsavā">Āsavā</span></span></em>:<em> kāmāsava</em> (desejo pelos prazeres dos sentidos), <em>diṭṭhāsava</em> (desejos devido a visões erradas), <em>bhavāsava</em> (desejo pela existência) e <em>avijjāsava</em> (desejos devido à ignorância).</li>
+</ul>
+<p style="text-align: justify;">16. Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> remove o <em>diṭṭhāsava</em> através da visão clara. Uma vez que se compreende a verdadeira natureza “deste mundo” contemplando <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>, não se cometeria nenhum ato imoral para ganhar qualquer coisa “neste mundo”. Veja “<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anattā</a>”. Isso por si só salva a pessoa de renascimentos futuros nos quatro reinos inferiores.</p>
+<ul>
+<li style="text-align: justify;">Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> ainda tem os outros três <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> restantes. Estes são removidos principalmente pela meditação sobre o <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span> </span></em>(sete <em><span><span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span></span></em>).</li>
+<li style="text-align: justify;">Depois de atingir o estágio <i><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i>, a pessoa vê o Caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (e como MEDITAR para chegar a <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>). Isso é <span style="color: #ff0000;"><strong>“<em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span> pahātabbā</span></em>” </strong><span style="color: #000000;">no nº 7 acima. </span></span>Então, ela segue diligentemente o Caminho e alcança os três estágios seguintes, culminando em <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>.</li>
+<li style="text-align: justify;">Como se pode ver, os outros cinco passos (nº 2 a nº 6) listados no <em><span>Sabbāsava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> são coisas de bom senso a serem feitas A QUALQUER MOMENTO. Eles fazem sentido em qualquer estágio. Qualquer pessoa pode usar esses passos para melhorar a qualidade de vida e remover quaisquer maus hábitos — por exemplo, o uso de álcool/drogas ou mesmo comer em excesso pode ser ruim para a saúde.</li>
+</ul>
+<h5>Um <em>Sótapanna</em> sabe “sobre o que meditar”</h5>
+<p style="text-align: justify;">17. Muitas pessoas começam a “meditar” antes mesmo de entender “sobre o que meditar”. <strong>É claro que, se alguém está fazendo “meditação da respiração”, não há nada a aprender</strong><span>. Isso é um insulto ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. As meditações do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ajudam a impedir que o sofrimento futuro surja. Para isso, é preciso primeiro perceber a infrutuosidade/perigo de permanecer neste mundo (por meio do processo de Renascimento). Veja “</span><a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhaṇa, Quatro Nobres Verdades</a>”.</p>
+<ul>
+<li style="text-align: justify;">O <em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> <span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> abrange todos os sete passos do nº 15 acima de uma forma um pouco diferente. O <em><span>Anapānasati <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> correto (não a versão da meditação da respiração) abrange esses passos de uma forma geral.</li>
+<li style="text-align: justify;">Conforme declarado no <a href="https://suttacentral.net/mn118/pli/ms" rel="noopener" target="_blank">“Ānāpānassati Sutta (MN 118)</a>”: “<em><span>Evaṁ bhāvitā kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, </span><strong>ānāpānassati</strong> evaṁ bahulīkatā <strong>cattāro Satipaṭṭhānae</strong> paripūreti</em>” ou “<em>Bhikkhūs</em>, é assim que <strong><em>ānāpānassati</em></strong>, desenvolvido e cultivado, cumpre <em><strong><span>cattāro <span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></strong></em>.”</li>
+<li><span style="color: #ff0000;"><strong><span style="color: #993366;">A “meditação da respiração” pode cumprir o </span><em><span style="color: #993366;"><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span>?</span></span> </em></strong></span>É preciso ser um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> para cultivar adequadamente <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> (ou seja, para obter resultados ótimos). Veja “<a href="../../pages/ER.FF.001/index.html" rel="noopener" target="_blank">Elefante na sala 3 – Ānāpānasati</a>”.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.II.014/index.html">Kalahavivada Sutta Origin Of Fights And Disputes</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.JJ.004/index.html">Why A Sotapanna Is Better Off Than Any King Emperor Deva Or Brahma</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.II.014/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Kalahavivada Sutta Origin Of Fights And Disputes</span>
+        
+        <span class="pathway-title title-pt">Kalahavivada Suttta Origem das brigas e disputas</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.JJ.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Why A Sotapanna Is Better Off Than Any King Emperor Deva Or Brahma</span>
+        
+        <span class="pathway-title title-pt">Por que um Sotāpanna é melhor do que qualquer rei, imperador, Devā ou Brahmā</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

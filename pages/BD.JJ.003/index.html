@@ -1,0 +1,431 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Niramisa Sukha Happiness Arising From Dissociating From The 31 Realms | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 59 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.JJ.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Niramisa Sukha Happiness Arising From Dissociating From The 31 Realms</h1>
+    
+    <h1 class="title-pt">Niramisa Sukha: A felicidade que surge da dissociação dos 31 reinos</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.JJ.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.JJ.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0092"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.JJ.003</td></tr><tr><td>Fin-dex</td><td>0092</td></tr><tr><td>Slug</td><td>niramisa-sukha-happiness-arising-from-dissociating-from-the-31-realms</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Niramisa Sukha Happiness Arising From Dissociating From The 31 Realms</td></tr></table></div></div><p style="text-align: justify;"><em>Sāmisa, nirāmisa, </em>and <em>nirāmisatara </em>are qualities associated with <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, above <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<p style="text-align: justify;"><strong>Revised September 15, 2017; September 17, 2021; October 15, 2022;<span style="color: #0000ff;"> July 30, 2023</span></strong></p>
+<h5 style="text-align: justify;"><em>Sāmisa, Nir</em><em>āmisa, </em><em>Nir</em><em>āmisatara</em></h5>
+<p style="text-align: justify;">1. Those three terms describe various qualities associated with <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, above <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span> </span></em>(<em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>), and <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">The basic concepts can be understood by looking at the three types of <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span>.</span></em> See "<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank">Three Kinds of Happiness – What is Nirāmisa Sukha?</a>"</li>
+<li>Thus <em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> is the pleasure that arises while enjoying all five sensory inputs, particularly those associated with taste, smell, and body touch. Those are present only in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, which includes the six <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> realms. </li>
+<li style="text-align: justify;">There is better happiness in giving up sensory pleasures (i..e., transcending <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em><em><span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>) and getting to <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. That is <em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>experienced in <em>rupāvacara</em><em><span> <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. Those are temporary for <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em> versions and permanent for <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> (Noble) versions.</li>
+<li>The <strong>ultimate</strong> <em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>is <em>nirāmisa<strong>tara</strong>. </em>It is reached at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage and holds for a living <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+<li>The "<a href="https://suttacentral.net/sn36.31/en/sujato" rel="noopener" target="_blank"><em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 36.31)</a>" describes various aspects of the three terms in detail. Let us go through the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 36.31)</h5>
+<p style="text-align: justify;">2. <em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>discusses several aspects of <em>sāmisa, nirāmisa, </em>and <em>nirāmisatara. </em>Those are <em><span><span class="pali-term term-highlight" data-term="pīti">pīti</span></span></em> (joy,) <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> (happiness,) <em><span><span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span></span></em> (neutral mindset,) and <em><span><span class="pali-term term-highlight" data-term="vimokkha">vimokkha</span></span></em> (freedom/liberation.) Let us quickly discuss what these entities mean.</p>
+<ul style="text-align: justify;">
+<li>As discussed in <span style="text-align: justify;">"</span><a href="../../pages/TL.CC.005/index.html" rel="noopener" style="text-align: justify;" target="_blank">Three Kinds of Happiness – What is Nirāmisa Sukha?</a><span style="text-align: justify;">" <em><span><span class="pali-term term-highlight" data-term="pīti">pīti</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em><em> </em>are different mental factors (<em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>.) <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> is a type of <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>.</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span> </span></em>means neutrality. </li>
+<li><em><span><span class="pali-term term-highlight" data-term="vimokkha">Vimokkha</span> </span></em>means transcending some state or overcoming that state, i.e., freedom/liberation from that state.</li>
+<li>In general, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is the release from this world, and the world consists of <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span>, <span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>, and <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>. But <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="pīti">pīti</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>are not present in certain higher realms, particularly in <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>.</span></li>
+<li>I will translate the descriptions of each category.</li>
+</ul>
+<h5 style="text-align: justify;"><em>Sāmisa, Nirāmisa, </em>and <em>Nirāmisatara </em>Categories for <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em></span></h5>
+<p style="text-align: justify;">3. <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em><span style="text-align: justify;"> and </span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em><span style="text-align: justify;">are fully experienced in the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span> </span></em>and are associated with the five types of <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> guṇa</span></em>. They are associated with sights, sounds, tastes, smells, and bodily contacts. See "</span><a href="../../pages/IS.CC.004/index.html" rel="noopener" target="_blank">Kāma Guṇa – Origin of Attachment (Tanhā)</a>" and “<a href="http://localhost/beng_feb2026/forums/topic/kama-guna-kama-kama-raga-kamaccanda/" rel="noopener noreferrer" target="_blank">Kāma Guna, Kāma, Kāma Rāga, Kāmaccanda.</a>”</p>
+<ul style="text-align: justify;">
+<li>Thus, <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">pīti</span></span></em><span style="text-align: justify;"> and </span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em><span style="text-align: justify;">arising from sensory contact with eyes, ears, tongue, nose, and the body are <em>sāmisa <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">pīti</span></span></em> and <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sukha">sukha</span>.</span></em></em></span></li>
+<li>When one transcends the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> and enters the first or the second<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, a different kind of <span style="text-align: justify;"><em><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">pīti</span> </span></em></em>is experienced in those two <em>jhānās</em>. They are <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> factors (<em><span><span class="pali-term term-highlight" data-term="jhānaṅga">jhānaṅga</span></span></em>) and are of "higher quality." That is <em><span>nirāmisa <span class="pali-term term-highlight" data-term="pīti">pīti</span>.</span></em></span></li>
+<li>Proceeding to the next (third)<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, <span style="text-align: justify;"><em><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">pīti</span> <span class="pali-term term-highlight" data-term="jhānaṅga">jhānaṅga</span> </span></em></em>goes away, and only <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> remains. Thus, <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>experienced in the first three <em>jhānās</em>.</span></li>
+<li>The ultimate versions of <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="pīti">pīti</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>(</span><em>nirāmisa<strong>tara</strong><span> <span class="pali-term term-highlight" data-term="pīti">pīti</span></span></em> and <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>) are reached at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Sāmisa, Nirāmisa, </em>and <em>Nirāmisatara </em>Categories for <em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em></h5>
+<p style="text-align: justify;">4. When sensory contact with<span style="text-align: justify;"> eyes, ears, tongue, nose, and the body leads to a "neutral state of mind," that is, <em><span>sāmisa <span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span></span></em> (also called "<em>adukkhamasukha</em>.")</span></p>
+<ul style="text-align: justify;">
+<li>When <span style="text-align: justify;">a "neutral state of mind" is reached at the fourth <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> (after overcoming <em><span>nirāmisa <span class="pali-term term-highlight" data-term="pīti">pīti</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>; see #3 above), that is <em><span>nirāmisa <span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span>.</span></em></span></li>
+<li>The ultimate version of <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span></span></em></span><span style="text-align: justify;"><em> </em>(</span><em>nirāmisa<strong>tara</strong> <span style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span></span></span></em><span style="text-align: justify;">) is reached at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Sāmisa, Nirāmisa, </em>and <em>Nirāmisatara </em>Categories for <em>Vimo</em><em>kkha</em></h5>
+<p style="text-align: justify;">5. When one transcends the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> and enters <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> (i.e., <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>), that is liberation from the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>. In the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> this is expressed by "<em>Rūpappaṭisaṁyutto vimokkho sāmiso vimokkho</em>" or "entering the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> is <em>sāmiso vimokkho."</em></p>
+<ul style="text-align: justify;">
+<li><em><span>Nirāmisa <span class="pali-term term-highlight" data-term="vimokkha">vimokkha</span> </span></em>is attained when one overcomes the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span> </span></em>and enters <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span> </span></em>(i.e., <em><span>arupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>.</span></em>) That is liberation from the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span> </span></em>and entering the higher <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span>. </span></em>Suffering is even less there.</li>
+<li>But the "ultimate release from all suffering" is with the <em>Arahanthood</em>. That is <em><span>nirāmisatara <span class="pali-term term-highlight" data-term="vimokkha">vimokkha</span>.</span></em></li>
+<li>What we discussed above is the essence of the <em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(SN 36.31.)</li>
+</ul>
+<h5 style="text-align: justify;">Discussion</h5>
+<p style="text-align: justify;">6. The <em>nirāmisa<strong>tara</strong><span> <span class="pali-term term-highlight" data-term="pīti">pīti</span>,</span></em> <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span>, </span></em>or <em><span><span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span></span></em> are experienced by a living <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> who has transcended the corresponding</span> <em>āmisa</em> and <em>nirāmisa </em>states.</p>
+<ul style="text-align: justify;">
+<li><span style="text-align: justify;">There are no words to describe the <strong>“</strong><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em><strong>” </strong>state of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> after <em>Parinibbana </em>(or an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> in <em><span><span class="pali-term term-highlight" data-term="nirodha samāpatti">nirodha samāpatti</span></span></em>.) They will not be reborn in ANY realm of this world. All we can say is that there will be absolutely no suffering after <em>Parinibbana</em>. </span>Ven. Sariputta explained that in the <span style="text-align: justify;">"<a href="https://suttacentral.net/an9.34/en/sujato" rel="noopener" target="_blank"><em><span>Nibbānasukha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 9.34)</a>."</span></li>
+<li>The status of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is not understandable to those just starting on the Path. It is better not to think that far at the beginning because that could lead to confusion.</li>
+<li><strong>The closest analogy for the “<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>” or “<em><span><span class="pali-term term-highlight" data-term="nibbānic">Nibbānic</span></span></em> bliss” is the following:</strong> Think of someone who has had a chronic headache from the time as a baby. That person has never experienced a moment without a headache. How would that person feel if that headache went away? That relief is not a <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> but a “blissful experience” for that person.</li>
+<li>Further information is in “<a href="https://suttacentral.net/sn48.36/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamavibhaṅga <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 48.36)</a>.”</li>
+</ul>
+<p style="text-align: justify;"><span>7. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> never said there is no </span><em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span>/piti</span></em> (sensory pleasure/joy) to be had in this world. The only reason people cling to this world is BECAUSE of the sensory delights available.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught that such sensory pleasures are short-lived and lead to harmful consequences in the future. Even if one inherits a fortune and lives in luxury the whole life, suffering is inevitable in the next life or the next life. The real suffering (</span><em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>) is in the four lowest realms (<em>apāyā</em>).</li>
+<li style="text-align: justify;">We all live with a baseline "chronic headache" that we don't even realize. We have gotten used to it and don't even realize we have headaches. Only when that ever-present "stress" goes away, that one starts feeling the "reduced stress" of <em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>. That is the real inspiration for attaining the higher stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">8. It is essential to realize that <em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> cannot be attained by “just giving up things” or by leaving everything behind and going to seclusion. Some <em>yogis</em> (even today) cultivate <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> by "hiding from sensual pleasures in jungles." But any <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> cultivated without comprehension of the Four Noble Truths/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> are mundane (<em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span></span></em>) <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Such <em>yogis</em> will be born in a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm and will enjoy <em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span>/piti </span></em>until the end of that existence. After that, they can be reborn in any realm because they are not released from even the <em>apāyās</em>.</li>
+<li>Only when one gets to the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage by comprehending the Four Noble Truths/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span> </span></em>that one will be free from the <em>apāyās</em>.</li>
+<li style="text-align: justify;">Thus, “giving up worldly things” needs to come through a proper understanding of the fundamental nature of “this world.” Many people gave up worldly things and became <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em>, but only after seeing the fruitlessness of craving for material things.</li>
+</ul>
+<p style="text-align: justify;">9. The mind's nature to see the benefit or pleasure of something before embracing it.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">One may force the mind to “forcibly give up” some sensory pleasures, but one cannot sustain that effort. "Giving up" happens automatically with realizing <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>/<span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature. </li>
+<li style="text-align: justify;">The mind has to “see” that there is a better option than the <em>sāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> or sensory pleasures. When one starts on the Path and living a moral life, one will gradually see the <em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> emerge.</li>
+</ul>
+<p style="text-align: justify;"><span>10. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> gave a simile to explain this effect. When people took to the oceans to look for new lands in the old days, they took caged birds. When they got lost, they released a bird. The bird would fly around and return to the ship if it did not see land.</span></p>
+<ul>
+<li style="text-align: justify;">The same is true for the mind. It will not latch on to something new (<em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>) unless it is better than the one it already has (<em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>).</li>
+<li style="text-align: justify;">The <em>nirāmisa<strong>tara </strong><span><span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>experienced by a living <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> or the <strong><em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></span> </em></strong>(which is not a <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em></span>) realized after the <em>Parinibbana</em> of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is even better. When one realizes that it is possible to get there (by recovering the "hidden pure mind"), one will start seeing <strong>both <em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span> in the <span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span> </span></em>and <em>nirāmisa</em><em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>in <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> to be of "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature</strong>;" see "<a href="../../pages/CH.BB.002/index.html" rel="noopener" target="_blank">True Happiness Is the Absence of Suffering</a>."</li>
+<li style="text-align: justify;">The points in #9 and #10 are discussed in the "<a href="https://suttacentral.net/mn14/en/sujato" rel="noopener" target="_blank"><em><span>Cūḷa­duk­khak­khan­dha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 14)</a>".  </li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.JJ.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0092"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.JJ.003
+Language:     pt-BR
+Generated-At: 2026-04-18T04:04:29Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;"><em>Sāmisa, nirāmisa</em> e <em>nirāmisatara </em>são qualidades associadas ao <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>, ao que está acima do <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> e <em><span>a <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<p style="text-align: justify;"><strong>Revisado em 15 de setembro de 2017; 17 de setembro de 2021; 15 de outubro de 2022; <span style="color: #0000ff;">30 de julho de 2023</span></strong></p>
+<h5 style="text-align: justify;"><em>Sāmisa, Nirāmisa, Nirāmisatara</em></h5>
+<p style="text-align: justify;">1. Esses três termos descrevem várias qualidades associadas ao <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>, acima do <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span> </span></em>(<em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>) e <em><span>ao <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Os conceitos básicos podem ser compreendidos observando-se os três tipos de <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span>.</span></em> Veja “<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank">Três tipos de felicidade – O que é Nirāmisa Sukha?</a>”</li>
+<li>Assim, <em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> é o prazer que surge ao desfrutar de todas as cinco entradas sensoriais, particularmente aquelas associadas ao paladar, ao olfato e ao toque corporal. Essas estão presentes apenas no <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>, que inclui os seis reinos <em><span>dos <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em>. </li>
+<li style="text-align: justify;">Há uma felicidade superior em renunciar aos prazeres sensoriais (ou seja, transcender <em><span>o <span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>) e alcançar o <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Essa é <em><span>a nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>experimentada nos reinos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupāvacara</span></em>. Esses são temporários para as versões <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> e permanentes para as versões <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> (Nobres).</li>
+<li>O <em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> <strong>definitivo</strong> é <em>o nirāmisa<strong>t</strong>a<strong>ra</strong>. </em>Ele é alcançado no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> e permanece para um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> vivo.</li>
+<li>O “<a href="https://suttacentral.net/sn36.31/en/sujato" rel="noopener" target="_blank"><em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 36.31)</a>” descreve vários aspectos dos três termos em detalhes. Vamos examinar a <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 36.31)</h5>
+<p style="text-align: justify;">2. <em><span>O Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>discute vários aspectos de <em>sāmisa, nirāmisa</em> e <em>nirāmisatara.</em> São eles: <em><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em> (alegria), <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> (felicidade), <em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em> (mentalidade neutra) e <em><span><span class="pali-term term-highlight" data-term="vimokkha">Vimokkha</span></span></em> (liberdade/libertação). Vamos discutir rapidamente o que essas entidades significam.</p>
+<ul style="text-align: justify;">
+<li>Conforme discutido em <span style="text-align: justify;">“</span><a href="../../pages/TL.CC.005/index.html" rel="noopener" style="text-align: justify;" target="_blank">Três Tipos de Felicidade – O que é Nirāmisa Sukha?</a><span style="text-align: justify;">”, <em><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>são fatores mentais (<em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em>) diferentes. <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> é um tipo de <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>.</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span> </span></em>significa neutralidade. </li>
+<li><em><span><span class="pali-term term-highlight" data-term="vimokkha">Vimokkha</span> </span></em>significa transcender algum estado ou superar esse estado, ou seja, liberdade/libertação desse estado.</li>
+<li>Em geral, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é a libertação deste mundo, e o mundo consiste em <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span>, <span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em> e <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>. Mas <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> não estão presentes em certos reinos superiores, particularmente no <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>.</span></li>
+<li>Traduzirei as descrições de cada categoria.</li>
+</ul>
+<h5 style="text-align: justify;">Categorias <em>Sāmisa, Nirāmisa</em> e <em>Nirāmisatara</em> para <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span> </span></em>e <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em></span></h5>
+<p style="text-align: justify;">3. <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em><span style="text-align: justify;"> e </span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span> </span></em><span style="text-align: justify;">são plenamente experimentados no <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span> </span></em>e estão associados aos cinco tipos de <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> guṇa</span></em>. Estão associados a imagens, sons, sabores, odores e contatos corporais. Veja </span><a href="../../pages/IS.CC.004/index.html" rel="noopener" target="_blank">“Kāma Guṇa – Origem do Apego (Tanhā)</a>” e “<a href="http://localhost/beng_feb2026/forums/topic/kama-guna-kama-kama-raga-kamaccanda/" rel="noopener noreferrer" target="_blank">Kāma Guna, Kāma, Kāma Rāga, Kāmaccanda”.</a></p>
+<ul style="text-align: justify;">
+<li>Assim, <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em><span style="text-align: justify;"> e </span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span> </span></em><span style="text-align: justify;">que surgem do contato sensorial com os olhos, ouvidos, língua, nariz e corpo são <em>sāmisa <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em> e <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span>.</span></em></em></span></li>
+<li>Quando alguém transcende o <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> e entra no primeiro ou no segundo<em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, um tipo diferente de <span style="text-align: justify;"><em><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span> </span></em></em>é experimentado nesses dois <em>Jhānās</em>. Eles são fatores <em><span>do <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="jhānaṅga">Jhānaṅga</span></span></em>) e são de “qualidade superior”. Isso é <em><span>nirāmisa <span class="pali-term term-highlight" data-term="pīti">Pīti</span>.</span></em></span></li>
+<li>Passando para o próximo (terceiro)<em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, <span style="text-align: justify;"><em><em style="text-align: justify;"><span>o <span class="pali-term term-highlight" data-term="pīti">Pīti</span> <span class="pali-term term-highlight" data-term="jhānaṅga">Jhānaṅga</span> </span></em></em>desaparece, e apenas <em><span>o <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> permanece. Assim, <em><span>o nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span> </span></em>é experimentado nos três primeiros <em>Jhānās</em>.</span></li>
+<li>As versões definitivas de <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span> </span></em>(</span><em>nirāmisa<strong>t</strong>a<strong>ra</strong><span> <span class="pali-term term-highlight" data-term="pīti">Pīti</span></span></em> e <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>) são alcançadas no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</span></li>
+</ul>
+<h5 style="text-align: justify;">Categorias <em>de Sāmisa, Nirāmisa</em> e <em>Nirāmisatara</em> para <em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em></h5>
+<p style="text-align: justify;">4. Quando o contato sensorial com<span style="text-align: justify;"> os olhos, ouvidos, língua, nariz e corpo leva a um “estado mental neutro”, ou seja, <em><span>a <span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em> (também chamada de “<em>adukkhamasukha</em>”).</span></p>
+<ul style="text-align: justify;">
+<li>Quando <span style="text-align: justify;">um “estado mental neutro” é alcançado no quarto <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (após superar <em><span>nirāmisa <span class="pali-term term-highlight" data-term="pīti">Pīti</span> </span></em>e <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>; ver nº 3 acima), isso é <em><span>nirāmisa <span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span>.</span></em></span></li>
+<li>A versão definitiva de <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span> </span></em></span><span style="text-align: justify;">(</span><em>nirāmisa<strong>t</strong>a<strong>ra</strong> <span style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></span></em><span style="text-align: justify;">) é alcançada no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</span></li>
+</ul>
+<h5 style="text-align: justify;">Categorias <em>de Sāmisa, Nirāmisa</em> e <em>Nirāmisatara</em> para <em><span><span class="pali-term term-highlight" data-term="vimokkha">Vimokkha</span></span></em></h5>
+<p style="text-align: justify;">5. Quando alguém transcende o <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> e entra <em><span>no <span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em> (ou seja, <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>), isso é a libertação do <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>. No <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>, isso é expresso por “<em>Rūpappaṭisaṁyutto vimokkho sāmiso vimokkho</em>” ou “entrar no <em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em> é <em>sāmiso vimokkho”.</em></p>
+<ul style="text-align: justify;">
+<li><em><span>Nirāmisa <span class="pali-term term-highlight" data-term="vimokkha">Vimokkha</span> </span></em>é alcançado quando alguém supera o <em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span> </span></em>e entra <em><span>no arupa <span class="pali-term term-highlight" data-term="loka">Loka</span> </span></em>(ou seja, <em><span>arupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>)<em>.</em> Isso é a libertação do <em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span> </span></em>e a entrada no <em><span>arupa <span class="pali-term term-highlight" data-term="loka">Loka</span></span></em> superior<em>. </em>O sofrimento é ainda menor ali.</li>
+<li>Mas a “libertação definitiva de todo o sofrimento” está na condição <em><span>de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Isso é <em><span>nirāmisatara <span class="pali-term term-highlight" data-term="vimokkha">Vimokkha</span>.</span></em></li>
+<li>O que discutimos acima é a essência do <em><span>Nirāmisa <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(SN 36.31).</li>
+</ul>
+<h5 style="text-align: justify;">Discussão</h5>
+<p style="text-align: justify;">6. O <em>nirāmisa<strong>t</strong>a<strong>ra</strong><span> <span class="pali-term term-highlight" data-term="pīti">Pīti</span>,</span></em> <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em> são experimentados por um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> vivo que transcendeu os</span> estados <span style="text-align: justify;">correspondentes</span> <em>de āmisa</em> e <em>nirāmisa</em>.</p>
+<ul style="text-align: justify;">
+<li><span style="text-align: justify;">Não há palavras para descrever o estado de <strong>“</strong><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em><strong>”</strong> de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> após <em>o Parinibbana </em>(ou de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> em <em><span><span class="pali-term term-highlight" data-term="nirodha samāpatti">Nirodha Samāpatti</span></span></em>). Eles não renascerão em NENHUM reino deste mundo. Tudo o que podemos dizer é que não haverá absolutamente nenhum sofrimento após <em>o Parinibbana</em>. </span>O Venerável Sariputta explicou isso no <span style="text-align: justify;">“<a href="https://suttacentral.net/an9.34/en/sujato" rel="noopener" target="_blank"><em><span>Nibbānasukha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 9.34)</a>”.</span></li>
+<li>O status de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não é compreensível para aqueles que estão apenas começando no Caminho. É melhor não pensar tão longe no início, pois isso pode levar à confusão.</li>
+<li><strong>A analogia mais próxima para o “<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>” ou “felicidade <em>Nibbā</em>na” é a seguinte:</strong> pense em alguém que tenha tido uma dor de cabeça crônica desde que era bebê. Essa pessoa nunca experimentou um momento sem dor de cabeça. Como essa pessoa se sentiria se a dor de cabeça desaparecesse? Esse alívio não é uma <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>,</span></em> mas uma “experiência de felicidade” para essa pessoa.</li>
+<li>Mais informações estão em “<a href="https://suttacentral.net/sn48.36/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamavibhaṅga <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 48.36)</a>”.</li>
+</ul>
+<p style="text-align: justify;"><span>7. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> nunca disse que não há </span><em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span>/piti</span></em> (prazer/alegria sensorial) a ser obtida neste mundo. A única razão pela qual as pessoas se apegam a este mundo é POR CAUSA das delícias sensoriais disponíveis.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ensinou que tais prazeres sensoriais são efêmeros e levam a consequências prejudiciais no futuro. Mesmo que alguém herde uma fortuna e viva no luxo a vida inteira, o sofrimento é inevitável na próxima vida ou na vida seguinte. O verdadeiro sofrimento (</span><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>) está nos quatro reinos inferiores (<em>apāyā</em>).</li>
+<li style="text-align: justify;">Todos nós vivemos com uma “dor de cabeça crônica” de base da qual nem sequer nos damos conta. Acostumamo-nos a ela e nem percebemos que temos dores de cabeça. Somente quando esse “estresse” sempre presente desaparece é que se começa a sentir o “estresse reduzido” do <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>. Essa é a verdadeira inspiração para alcançar os estágios superiores do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">8. É essencial perceber que <em><span>o nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> não pode ser alcançado “apenas desistindo das coisas” ou deixando tudo para trás e indo para o isolamento. Alguns <em>iogues</em> (até hoje) cultivam <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> “escondendo-se dos prazeres sensuais nas selvas”. Mas qualquer <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> cultivado sem compreensão das Quatro Nobres Verdades/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em>Tilakkhaṇa</em> é <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> mundano (<em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Tais <em>iogues</em> nascerão no reino <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> e desfrutarão de <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span>/piti </span></em>até o fim dessa existência. Depois disso, eles podem renascer em qualquer reino, pois não estão liberados nem mesmo dos <em>apāyās</em>.</li>
+<li>Somente quando alguém alcança o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, compreendendo as Quatro Nobres Verd<em>ades</em>/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em>Tilakkhaṇa</em>, é que estará livre dos <em>apāyās</em>.</li>
+<li style="text-align: justify;">Assim, “renunciar às coisas mundanas” precisa vir por meio de uma compreensão adequada da natureza fundamental “deste mundo”. Muitas pessoas renunciaram às coisas mundanas e se tornaram <em>Bhikkhūs</em>, mas somente depois de verem a futilidade do desejo por bens materiais.</li>
+</ul>
+<p style="text-align: justify;">9. A natureza da mente de ver o benefício ou o prazer de algo antes de abraçá-lo.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Pode-se forçar a mente a “abrir mão à força” de alguns prazeres sensoriais, mas não é possível sustentar esse esforço. “Abrir mão” acontece automaticamente com a compreensão da natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>/Anattā</span></em>. </li>
+<li style="text-align: justify;">A mente precisa “perceber” que existe uma opção melhor do que o <em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span>,</span></em> ou prazeres sensoriais. Quando alguém inicia o Caminho e passa a viver uma vida moral, gradualmente verá surgir o <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;"><span>10. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> deu uma parábola para explicar esse efeito. Quando as pessoas partiam para os oceanos em busca de novas terras nos tempos antigos, levavam pássaros enjaulados. Quando se perdiam, soltavam um pássaro. O pássaro voava ao redor e voltava para o navio se não visse terra.</span></p>
+<ul>
+<li style="text-align: justify;">O mesmo se aplica à mente. Ela não se apegará a algo novo (<em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>) a menos que seja melhor do que aquilo que já possui (<em><span>sāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>).</li>
+<li style="text-align: justify;">O <em>nirāmisa<strong>t</strong>a<strong>ra </strong><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span> </span></em>experimentado por um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> vivo ou o <strong><em><span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></span> </em></strong>(que não é uma <span style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em></span>) alcançado após o <em>Parinibbana</em> de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> é ainda melhor. Quando se percebe que é possível chegar lá (recuperando a “mente pura oculta”), começa-se a ver <strong>tanto <em><span>o sāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span> no <span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span> </span></em>quanto <em><span>o nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span> </span></em>no <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> <span class="pali-term term-highlight" data-term="loka">Loka</span></span></em> como sendo de “natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em></strong>”; veja “<a href="../../pages/CH.BB.002/index.html" rel="noopener" target="_blank">A Verdadeira Felicidade é a Ausência de Sofrimento</a>”.</li>
+<li style="text-align: justify;">Os pontos nos itens 9 e 10 são discutidos no “<a href="https://suttacentral.net/mn14/en/sujato" rel="noopener" target="_blank"><em><span>Cūḷa­duk­khak­khan­dha <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 14)</a>”.  </li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.JJ.002/index.html">What Are Rupa Relation To Nibbana</a>
+    </div>
+    
+    
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.JJ.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">What Are Rupa Relation To Nibbana</span>
+        
+        <span class="pathway-title title-pt">Qual é a relação entre a Rūpa e Nibbāna?</span>
+        
+    </a>
+    
+
+    <span class="pathway-placeholder"></span>
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

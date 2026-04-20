@@ -1,0 +1,365 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Bhava And Jati Within A Lifetime Example | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Elephants in the Room</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 17 / 33</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">ER.CC.012</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Bhava And Jati Within A Lifetime Example</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>ER.CC.012</td></tr>
+          <tr><td><strong>Section</strong></td><td>Elephants in the Room</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="ER.CC.012"
+             data-section="Elephants in the Room"
+             data-section-code="ER"
+             data-findex="0375"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>ER.CC.012</td></tr><tr><td>Fin-dex</td><td>0375</td></tr><tr><td>Slug</td><td>bhava-and-jati-within-a-lifetime-example</td></tr><tr><td>Section</td><td>ER</td></tr><tr><td>Title EN</td><td>Bhava And Jati Within A Lifetime Example</td></tr></table></div></div><p><strong>May 22, 2022</strong></p>
+<p><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> </span></em>within a lifetime discussed with an example of how a "thief is born."</p>
+<h5 class="entry-title"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> During a Lifetime</h5>
+<p style="text-align: justify"><span>1. As the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> advised Ven. Ananda, in the “</span><a href="https://suttacentral.net/dn15/en/sujato" rel="noopener" target="_blank"><em><span>Mahānidāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 15)</a>,” it is necessary to understand how one can be "born" in very different "births" <span style="color: #3366ff"><strong>during a lifetime</strong></span>. The <span style="color: #0000ff"><span style="color: #3366ff"><strong><em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></strong></span> <span style="color: #000000">explains that process.</span></span></p>
+<ul style="text-align: justify">
+<li>The same principle operates in the <span style="color: #993366"><strong><em><span>Uppatti <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>,</span></em></strong></span> which explains <span style="color: #993366"><strong>future births</strong></span> in various realms.</li>
+<li><span>We are at the last <span class="pali-term term-highlight" data-term="post">post</span> in this subsection on the "</span><a href="../../pages/ER.CC.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda During a Lifetime</a><span>." After reading this <span class="pali-term term-highlight" data-term="post">post</span>, you can review the previous <span class="pali-term term-highlight" data-term="posts">posts</span> to "fill in" any gaps. Please don't hesitate to ask questions at the discussion forum.</span></li>
+<li>With the help of the material we discussed, let us discuss a couple of examples of "births within a lifetime."</li>
+</ul>
+<h5 style="text-align: justify">An Easy Way to Understand <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify">2. There are many ways to analyze and understand <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></em>In the current section, I have discussed it a bit deeper. That analysis will help get rid of <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>But we can get the basic ideas behind <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>by looking at the easy-to-understand relationships between causes and effects.</li>
+<li>The critical point is that we tend to engage in "mind-pleasing activities" without thinking about their consequences. Let us take an example.</li>
+</ul>
+<h5 style="text-align: justify">No One Is Born a Thief - Birth Within a lIfetime</h5>
+<p style="text-align: justify">3. Let us consider a hypothetical situation. A man (say, person X) is in prison for stealing.</p>
+<ul style="text-align: justify">
+<li>X was NOT born a thief by birth. At birth, he was like any other human baby.</li>
+<li>If we ask X to explain how he became a thief, the explanation could be the following.</li>
+</ul>
+<p style="text-align: justify">"I now understand what happened to me. I was born into a good family, but I started associating with bad friends at school. Their influence led me to participate in immoral activities for fun. We started drinking, and then we got into drugs. When we ran out of money, we started stealing.</p>
+<p style="text-align: justify">My parents worked, and it was too late by the time they found out and started advising me. But then, it was too late. I enjoyed the time with my friends, and we got deeper into drugs and stealing to pay for the drugs. Eventually, I got fed up with my parents' " interference " and moved out of their house. I quit school and joined a gang. We resorted to selling drugs and stealing to make a living. Eventually, several of us were caught in a robbery and sent to prison.</p>
+<p style="text-align: justify">I would not be a thief if I did not come under the influence of those bad friends. I could have been "saved" if my parents had intervened earlier."</p>
+<h5 style="text-align: justify">Connection to <em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify">4. That is indeed a sad story. But it is also apparent that the person has now realized the basic principles of <em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em></p>
+<ul style="text-align: justify">
+<li>When X started enjoying the "bad activities" with his friends, he never thought about the dire consequences of such actions. They were "fun activities." He was probably too young to realize that such "fun activities" would have harmful consequences.</li>
+<li>His parents were too busy to notice him "going down the wrong path;" if they had realized what was happening to X early enough, they could have advised him about the bad consequences of drinking, taking drugs, and stealing.</li>
+<li><span style="color: #993366"><strong>He was "born a thief" because his mindset changed to that of a thief</strong>,</span> i.e., he engaged in activities matching the mindset of a thief. That led to cultivating "thief <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" from his early school days.</li>
+<li><span>We can figure out the <span class="pali-term term-highlight" data-term="pali">Pali</span> terms in </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>that contributed to X becoming a thief.</li>
+</ul>
+<h5 style="text-align: justify"><span>Understand the <span class="pali-term term-highlight" data-term="pali">Pali</span> Terms - Not Memorize</span></h5>
+<p style="text-align: justify">5. X went down the wrong path because he started liking the activities of his evil friends and was constantly thinking about such activities. That is the critical "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" step, where such activities become priorities. Instead, he would engage in such activities rather than spend time at home or playing with other kids.</p>
+<ul style="text-align: justify">
+<li>He got attached to such activities (<em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>) because he enjoyed such activities. Drinking and using drugs provided "good sensations" (<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>.) X got attached to such <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>: "<em><span><span class="pali-term term-highlight" data-term="vedanā paccayā taṇhā">vedanā paccayā taṇhā</span>.</span></em>" But that <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> was a "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>."</li>
+<li><strong>Those are "mend-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" or "s<em><span>amphassa-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>."</strong></li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span></span></em></h5>
+<p style="text-align: justify">6. Now, we have traced back to the critical step. How did X start liking alcohol?</p>
+<ul style="text-align: justify">
+<li>We can understand the difference between "<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>." A natural sensory contact is "<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>." That is the contact between the sensory input and the corresponding sensory faculty. In our example, contact (<em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em>) is alcohol touching the tongue.</li>
+<li>Most people don't like that <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> (taste of alcohol.) It is a bitter taste, especially for strong alcohol. So, our teenager was probably not attracted to that taste, and he may have even refused to drink at first. But he probably drank under "peer pressure" and got drunk. With more drinking, one gets used to the taste and likes the feeling of "being drunk." Furthermore, the drunken mindset in a party atmosphere gets teenagers into the "party mood."</li>
+</ul>
+<p style="text-align: justify">8. With time, X's mind generates not the natural "<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" but the mind-made "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>."</p>
+<ul style="text-align: justify">
+<li>Thus, the "<em><span><span class="pali-term term-highlight" data-term="phassa paccayā vedanā">phassa paccayā vedanā</span></span></em>" step in PS is only a brief version. The expanded version is "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span></em><em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>."</li>
+<li>Thus, it was the "<em>jivhāyatana</em>" (<em><span>jivhā <span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em>) that mainly contributed to the "<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>" step leading to the "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>." In other words, the taste of alcohol generated a "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" of happiness, especially in a party atmosphere.</li>
+</ul>
+<h5 style="text-align: justify">Once on the Wrong Path, It Is Hard to Change</h5>
+<p style="text-align: justify">9. Thus, it became a habit (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) for X to get drunk and have a good time with his friends. Then one day, someone brought drugs to a party, and they all got hooked on drugs.</p>
+<ul style="text-align: justify">
+<li>Over time, X cultivated a "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" or an "expectation" to enjoy alcohol, drugs, and partying with friends. That <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> slowly got established as X started enjoying those activities more. His mind was constantly looking for opportunities to get together with friends and have a good time. That is the critical "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" step.</li>
+<li>That means it became easier to get to that mindset with an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>. All X needed was prompted by a friend. Even the sight of a familiar drug dealer may prompt him to buy some drugs and enjoy them by himself.</li>
+<li>Any bad habit (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), when cultivated, leads to more bad habits. When X and his friends didn't have money to buy alcohol/drugs, they resorted to stealing. That is how X was "born a thief."</li>
+</ul>
+<h5 style="text-align: justify">Most People Realize the Problem Only After Damage Is Done</h5>
+<p style="text-align: justify">10. It was only after getting caught stealing and sent to prison that X realized what had happened to him.</p>
+<ul style="text-align: justify">
+<li>Even though he was not born a thief when his mother gave birth to him, X is now known as a thief. Everyone knows him as a thief.</li>
+<li>Of course, he had no desire to become a thief. His goal was to "enjoy life" with his friends. But that way of enjoying life involved an immoral way of thinking, immoral speech, and immoral deeds.</li>
+<li>He unknowingly got <em>paticca</em> ("<em>paṭi</em>" + "<em>icca</em>" or "willingly attached") to things that would inevitably lead to <em><span><span class="pali-term term-highlight" data-term="samuppāda">samuppāda</span></span></em> ("<em>sama</em>" + "<em><span><span class="pali-term term-highlight" data-term="uppāda">uppāda</span></span></em>" or "corresponding births"), i.e., to be "born a thief."</li>
+<li>In other words, his mind generated <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> due to his ignorance (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) of their consequences.</li>
+<li>Such <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></em>arise as to<em><span> <span class="pali-term term-highlight" data-term="mano">mano</span>, vaci</span></em>, and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>. </span></em>They are immoral thinking, speech, and actions.</li>
+</ul>
+<h5 style="text-align: justify">Need to Look at the Root Causes (<em><span><span class="pali-term term-highlight" data-term="lobha">Lobha</span>, <span class="pali-term term-highlight" data-term="dosa">Dosa</span>, <span class="pali-term term-highlight" data-term="moha">Moha</span></span></em>)</h5>
+<p style="text-align: justify">11. Note that X just focused on the immediate gratification of such activities. He never realized (and thus never thought about) the possible harmful consequences of such actions.</p>
+<ul style="text-align: justify">
+<li>Stealing was the secondary effect of X starting to drink, use drugs, and generally have a good time with his friends. The initial attraction was for the <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> experienced with drugs and alcohol. Drinking alcohol led to craving that taste and the accompanying "feel good" mindset.</li>
+<li><span style="color: #993366"><strong>X got attached or <em>paticca</em> ("<em>paṭi</em>" + "<em>icca</em>" or "willingly attached") to things that gave immediate sensory pleasure.</strong></span> We could say that he was "born" in a "joyful state" at that time.</li>
+<li>However, in a deeper sense he got attached to immoral causes with much more drastic and dangerous "births" in the future. Those deeper causes would inevitably lead to <em><span><span class="pali-term term-highlight" data-term="samuppāda">samuppāda</span></span></em> ("<em>sama</em>" + "<em><span><span class="pali-term term-highlight" data-term="uppāda">uppāda</span></span></em>" or "corresponding births"), i.e., to be "born a thief" later in life.</li>
+<li>But it does not end there. Part of that <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy can even bring future rebirths, depending on the severity of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> done with that mindset. For example, if X killed someone during a robbery, that would definitely lead to a "bad <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>." </span><span style="color: #3366ff"><strong>That comes under <em><span>Uppatti <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</strong></span></li>
+</ul>
+<h5 style="text-align: justify">Review of the Steps</h5>
+<p style="text-align: justify">12. Let us review the steps that led to X becoming a Thief.</p>
+<ul style="text-align: justify">
+<li>It all started with X starting his associating with bad friends. Under their influence, he started drinking due to his ignorance about bad future outcomes. That is "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" or, more precisely, "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>."</li>
+<li>With frequent cultivation of <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>, he developed a desire/future expectation (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>) to enjoy drinking/partying. That is "(<em>abhi</em>) <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> <em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>)<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>."</li>
+<li>His mind constantly visualized scenes of such get-togethers, alcohol, his favorite friends, etc. Those are the "<em>nāmarupa</em>" that arise in his mind with that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>: "(<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>)<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> nāmarupa</span></em>."</li>
+<li>When such <em>nāmarupa</em> arises in his mind, he will start using his sensory faculties. For example, he may call a friend to meet for a drink or organize a party. He may look for a drug dealer to get more drugs, etc. That is "<em><span>nāmarupa <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span></span></em>."</li>
+<li>When such encounters occurred, he would fully engage in drinking, taking drugs, etc., and enjoy such experiences (<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>.) That involves "<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>."</li>
+<li>The more he does those things, the more he will attach to such activities: "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā paccayā taṇhā">vedanā paccayā taṇhā</span></span></em>." That will make the "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" stronger: "<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>."</li>
+<li>With such a strong attachment to those activities, he would do it again and again with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>," and the whole cycle repeated repeatedly.</li>
+</ul>
+<p style="text-align: justify">13. If he didn't have money for such activities, he would steal. It probably started by stealing from his parents. As X got into drugs, he and his friends had to start stealing more. Thus they cultivated the <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> of thieves and got into "thief <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" and "thief <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>."</p>
+<ul>
+<li style="text-align: justify">That "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" can arise even without taking a sip of alcohol but seeing an alcohol bottle or even mentioning an upcoming party.</li>
+<li style="text-align: justify">One can understand the above steps even if one has not studied the formal <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</li>
+<li style="text-align: justify"><span>However, it is imperative to understand the meanings of those <span class="pali-term term-highlight" data-term="pali">Pali</span> words so we can understand them in other contexts.</span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/ER.CC.011/index.html">Sakkaya Ditthi And Pancupadanakkhandha</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/ER.DD.001/index.html">Often Mistranslated Pali Keywords</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/ER.CC.011/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Sakkaya Ditthi And Pancupadanakkhandha</span>
+        
+        <span class="pathway-title title-pt">Sakkaya Ditthi And Pancupadanakkhandha</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/ER.DD.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Often Mistranslated Pali Keywords</span>
+        
+        <span class="pathway-title title-pt">Palavras-chave em Pālī frequentemente mal traduzidas</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-ER">
+        ↑ Back to Elephants in the Room
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Pabhassara Citta And Sanna Vipallasa | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 71 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.II.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Pabhassara Citta And Sanna Vipallasa</h1>
+    
+    <h1 class="title-pt">Pabhassara Citta e Sanna Vipallasa</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.II.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.II.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0471"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.II.006</td></tr><tr><td>Fin-dex</td><td>0471</td></tr><tr><td>Slug</td><td>pabhassara-citta-and-sanna-vipallasa</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Pabhassara Citta And Sanna Vipallasa</td></tr></table></div></div><p style="text-align: justify;"><em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (mind) indicates the "suffering-free state" of mind. Two main reasons for blocking that state are the "wrong views" and "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em><span>/perception" (which the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> compared to a mirage or illusion) automatically arising with sensory inputs. A </span><em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em> (or even a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em>) attaches to that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>"</span></em> since they do not comprehend that it is an illusion. </p>
+<p style="text-align: justify;"><strong>November 25, 2023</strong></p>
+<h5 style="text-align: justify;">Introduction</h5>
+<p style="text-align: justify;">1. During the past couple of months, I focused on two critically important concepts: <em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>(mind) and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span>.</span></em><span> Those two are different concepts but are related to each other. (I have discussed "wrong views" in many <span class="pali-term term-highlight" data-term="posts">posts</span>.) In this <span class="pali-term term-highlight" data-term="post">post</span>, I will summarize what I have discussed about those two concepts since August 5, 2023. </span></p>
+<ul style="text-align: justify;">
+<li>I first introduced the concept of a "suffering-free state of mind" or <em>pabhassara </em><span>mind in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/CH.BB.003/index.html" rel="noopener" target="_blank">Uncovering the Suffering-Free (Pabhassara) Mind</a>" on August 5, 2023. This discussion expanded into a subsection, "<a href="../../pages/CH.BB.001/index.html" rel="noopener" target="_blank">Recovering the Suffering-Free Pure Mind</a>."</li>
+<li>Then I started another subsection, "<a href="../../pages/IS.BB.001/index.html" rel="noopener" target="_blank">Does “Anatta” Refer to a “Self”?</a>" because I realized that this would be another approach to understanding the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>-<span class="pali-term term-highlight" data-term="dukkha">dukkha</span>-<span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span> nature. That discussion led to the last <span class="pali-term term-highlight" data-term="post">post</span> in that subsection, i.e., "</span><a href="../../pages/IS.BB.009/index.html" rel="noopener" target="_blank">Saññā Vipallāsa – Distorted Perception</a><span>." That <span class="pali-term term-highlight" data-term="post">post</span> discusses how the </span><em><span>pabhassara <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> remains hidden because of our "built-in" distorted perception of reality.</li>
+</ul>
+<p style="text-align: justify;">2. That "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>"</span></em><span> is unknown to the world until a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> discovers the following: The </span><em>pabhassara </em>mind remains hidden because that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>" </span></em>inevitably leads to "defiled <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>"</span></em> and to adding MORE defilements. (The other factor is the "distorted/defiled views.") In other words, one cannot start cleansing one's mind because a thought process ALWAYS starts with the mind already defiled!</p>
+<ul style="text-align: justify;">
+<li><strong>Another way to state the above:</strong> A mind of a <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em> (average human) ALWAYS starts at the <em>pañc<strong><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></strong>kkhandha</em> state and NEVER at the <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">pañcakkhandha</span></span></em> state.</li>
+<li>Even the first <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> of a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> arising upon receiving a sensory input arises with a "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>" </span></em>and then immediately attaches to it and leads to "contaminated/defiled <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>" </span></em>("distorted/defiled views" will also automatically come into play.) Thus, the mind of a <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em> starts at the <em>pañc<strong><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></strong>kkhandha</em> state.</li>
+<li>The first step in "unblocking" the <em>pabhassara </em>mind is eliminating the wrong views at the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. Even after that, it is impossible to go backward toward fully capturing the "suffering-free state of mind" or <em><span>pabhassara <span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>UNTIL one understands this issue with the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>" </span></em>or<em> "sanna vipallasa."</em> We will discuss that below.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em></h5>
+<p style="text-align: justify;">3.<span style="color: #3366ff;"> <strong>The <em>pabhassara</em> mind (generating undefiled, pure <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) arises upon attaining the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> <span class="pali-term term-highlight" data-term="phala">phala</span></span></em>.</strong></span> It has only the seven universal <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> (mental factors) of <em><span><span class="pali-term term-highlight" data-term="phassa">phassa</span></span></em> (contact), <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> (feeling), <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> (perception), <em>cētanā</em> (volition), <em>Ekaggata</em> (One-pointedness), <em>jivitindriya</em> (life faculty), and<em><span> <span class="pali-term term-highlight" data-term="manasikāra">manasikāra</span></span></em> (memory). In this <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>are pure. That <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is incapable of creating <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong>We all have that "pure state" deep inside our minds. </strong></span>In the mind (i.e., in any <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> that arises) of a <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em>, that <em>pabhassara</em> state remains covered with several layers of defilements. Those defilements can be characterized in several ways, for example, as ten<em> saṁyojana</em> or seven <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>; see below.</li>
+<li><em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (or the "suffering-free state of the mind")<strong> is like a gem hidden under layers of dirt.</strong> However, unlike in the case of a gem, <strong>the "dirt"</strong> covering the<em><span> pabhassara <span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>is not "physical" but "mental." They are the deep-rooted defilements (<em>saṁyojana</em>/<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>) that cannot be removed by a "physical process."  </li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> used several alternative ways to describe/quantify</span><span style="color: #000000;"><strong> the "dirt"</strong></span> (or defilements) covering the <em><span>pabhassara <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. We will focus on the ten<em> saṁyojana</em> AND seven <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> listed among others in "<a href="../../pages/TS.AA.011/index.html" rel="noopener" target="_blank">Conditions for the Four Stages of Nibbāna</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Removal of <em>Saṁyojana </em>and <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em></h5>
+<p style="text-align: justify;">4. <span style="color: #993366;"><strong><span>The "dirt" or "defilements" can only be removed from the mind by understanding the "big picture" of this world discovered by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. </span></strong></span>That involves two steps (after completing the mundane eightfold path.)</p>
+<p style="text-align: justify;"><span style="color: #993366;"><span style="color: #000000;">The</span><strong> <span style="color: #254525;">FIRST step </span></strong></span><span>is to understand the primary worldview of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, i.e., that the world of 31 realms is of </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature. This UNDERSTANDING is <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>. This step <span style="color: #993366;"><strong>removes "<em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>" (distorted/wrong views.)</strong></span></p>
+<ul style="text-align: justify;">
+<li>In this <span style="color: #254525;"><strong>FIRST step</strong></span> toward <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, three of the ten <em>saṁyojana </em>and two of the seven <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em><strong> associated with wrong views</strong> are removed; see "<a href="../../pages/TS.AA.011/index.html" rel="noopener" target="_blank">Conditions for the Four Stages of Nibbāna</a>."</li>
+<li><span style="color: #3366ff;"><strong>Getting to </strong><em><strong><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span> </span></strong></em><strong>stops future rebirths in the lowest four realms (<em>apāyās</em>) and becomes a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em>. </strong></span></li>
+</ul>
+<p style="text-align: justify;"><span style="color: #000000;">T</span><span style="color: #000000;">he <span style="color: #993366;"><strong><span style="color: #254525;">SECOND step </span></strong><span style="color: #003300;">is</span></span></span><span> to see the finer details within the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview. That is primarily to understand how that "distorted </span><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" arises. With that understanding, a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> can then start cultivating the rest of the steps in the Noble Eightfold Path and <span style="color: #993366;"><strong>remove</strong></span> <span style="color: #993366;"><strong>"<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>" (distorted/wrong <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em>)</strong></span></p>
+<ul style="text-align: justify;">
+<li>That understanding ultimately leads to the removal of the rest of the <em>saṁyojana </em>and <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span> </span></em>with the cultivation of the deeper version of <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>.</span></em></li>
+<li>It is impossible to stop that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" from arising with willpower. Stopping that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" requires someone to explain it first (<em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> have it in the summary form); then, one must comprehend it. </li>
+<li><strong>Note:</strong> It is true that a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> will reach <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> within seven <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em> even in the absence of further instructions on "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>."</span></em><span>  However, that could take millions of years. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that a </span><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> can get to the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> or <em>Anāgāmi</em> stage within seven days if <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em><em><span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> is practiced correctly without pause; see "<a href="https://suttacentral.net/dn22/en/sujato" rel="noopener" target="_blank"><em><span>Mahāsatipaṭṭhāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 22)</a>" (I have linked to that statement.) </li>
+</ul>
+<p style="text-align: justify;"><span>We had briefly discussed the above in just one <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/KD.JJ.006/index.html" rel="noopener" target="_blank">Vipallāsa (Diṭṭhi, Saññā, Citta) Affect Saṅkhāra</a><span>"; it is described in detail in the current series of <span class="pali-term term-highlight" data-term="posts">posts</span>. There is also a "</span><span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em></strong></span>," which is also removed in the <span style="color: #000000;"><strong><span style="color: #003366;">SECOND</span></strong></span><span style="color: #003366;"><strong> step.</strong></span></p>
+<h5 style="text-align: justify;">Reasoning Behind the "Dirt Removal" -  First Step</h5>
+<p style="text-align: justify;">5. We have discussed the reasoning behind removing the three <em>samyojanas</em> (<em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span>, <span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></em>, and <em><span>sīlabbata <span class="pali-term term-highlight" data-term="parāmasa">parāmasa</span></span></em>) for attaining the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em><span> stage via comprehending part of the "big picture" of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview in many <span class="pali-term term-highlight" data-term="posts">posts</span>. This step is the removal of wrong views (or "</span><em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span>.</span></em>")</p>
+<ul style="text-align: justify;">
+<li>Here, it is best to focus on <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em>; the other two<em> saṁyojana</em> are automatically removed with the removal of <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span>. </span></em>Thus, we have adequately discussed the reasoning behind the <span style="color: #254525;"><strong>FIRST step.</strong></span> </li>
+<li>However, I believe that the recent section "<a href="../../pages/IS.BB.001/index.html" rel="noopener" target="_blank">Does “Anatta” Refer to a “Self”?</a>" provides another (may be a more straightforward) way to grasp the "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em><span> nature." We finished that section with the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/IS.BB.009/index.html" rel="noopener" target="_blank">Saññā Vipallāsa – Distorted Perception</a>," which transitioned us to the discussion on "distorted/defiled <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" and to the section "<a href="http://localhost/beng_feb2026/is-there-a-self/sensory-experience-a-deeper-analysis/" rel="noopener" target="_blank">Sensory Experience – A Deeper Analysis</a><span>" with only two <span class="pali-term term-highlight" data-term="posts">posts</span>. That is where we started discussing the reasoning behind the </span><span style="color: #254525;"><strong>SECOND step.</strong></span></li>
+<li>From there, we started the new section, “<a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">Sotapanna Stage via Understanding Perception (Saññā)</a>, “ to transition into explaining the <span style="color: #254525;"><strong>SECOND step.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Reasoning Behind the "Dirt Removal" - Second Step </h5>
+<p style="text-align: justify;">6. A more profound understanding is needed to proceed beyond the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. In particular, it is necessary to understand how "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" at the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" stage (upon receiving a sensory input) arises automatically, i.e., how "<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>" arises. That happens at the "<em>upaya</em>" stage, which arises earlier than the "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>" stage; <strong><span>make sure to read the <span class="pali-term term-highlight" data-term="post">post</span></span></strong> "<a href="../../pages/IS.BB.011/index.html" rel="noopener" target="_blank">Upaya and Upādāna – Two Stages of Attachment</a>." <span style="color: #993366;"><strong>That "<em>upaya</em>" step takes place automatically with</strong></span> <span style="color: #993366;"><strong><em><span>diṭṭhi, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></em>and <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span>. </span></em></strong><span style="color: #000000;">In the following, we focus mainly on the latter two, and especially <strong><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span>.</span></em></strong></span></span></p>
+<ul style="text-align: justify;">
+<li>Without understanding <span style="color: #993366;"><span style="color: #000000;"><strong><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em></strong></span></span>, one will continue to perceive that some things (food, houses, cars, etc.) and some people (especially those who look attractive) have a built-in "mind-pleasing nature." For example, without seeing that deeper analysis, we would think that taste is inherent in sugar; certain odors are foul, while others are good; some people are more attractive, etc.</li>
+<li><span style="color: #993366;"><strong>However, all those perceptions are "mind-made."</strong></span> That is not to say that they are unreal. <strong>They are "real" because our physical bodies are formed by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy to embed that perception.</strong> That is why even an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> (who was born a human) gets that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>/perception." But an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> has comprehended how that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" arises and thus will not reach the "defiled <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" stage.</li>
+<li><span style="color: #3366ff;"><strong>Once one can understand the origin of the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>,"</span></em><span> one can see why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> called "</span><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" a mirage/illusion.</strong></span> See the “<a href="https://suttacentral.net/sn22.95/en/sujato" rel="noopener" target="_blank"><em><span>Pheṇapiṇḍūpama <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.95)</a>” discussed in "<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/sotapanna-stage-and-distorted-defiled-sanna/" rel="noopener" target="_blank">Sotapanna Stage and Distorted/Defiled Saññā</a>." That knowledge itself helps get rid of two of the remaining<em> saṁyojana</em> (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span>.</span></em>) That happens via two stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: <em>Sakadāgami </em>and <em>Anāgāmi. </em>This process is summarized in "<a href="../../pages/IS.BB.011/index.html" rel="noopener" target="_blank">Upaya and Upādāna – Two Stages of Attachment</a>."</li>
+<li>Proceeding further, one can eliminate the remaining five <em>saṁyojana </em>and reach the<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage, as we discuss next.</li>
+</ul>
+<p style="text-align: justify;">7. Once released from the "<em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>" at the <em>Anāgāmi </em>stage, a mind gets to the next higher level of "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>." The "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>" included the 16 realms in the <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms.</p>
+<ul style="text-align: justify;">
+<li>Just like one needs to realize that "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" at the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" stage arises automatically for anyone born in the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, here one needs to realize that "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" at the "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" stage arises automatically for anyone born in the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span> </span></em>or one of the 16 <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. <strong>Note</strong> that "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" here refer to both <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (sights) and <em><span>sadda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (sounds) accessible in the <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms.</li>
+<li><span style="color: #993366;"><strong>Here, "defiled <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" is to perceive that "<em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> experience/pleasure" is real and absolute.</strong></span> But it is not. Thus, an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> getting into a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> may have the same experience as an <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> yogi</span></em> (<em><span>piti, <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>, etc.). But while the <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> yogi</span></em> perceives that experience to be "real," the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> would not be attached to it (in the same way that an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> would not attach to the taste of a delicious meal in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>.)</li>
+<li><strong>Note 1:</strong> It is possible to transcend to the mindset of the "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>" without the removal of those two <em>saṁyojana</em> of <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span>. </span></em>That can be done by temporarily transcending the "<em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>" by focusing the mind on a neutral object like breath or another <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> object. They reach the mindset of "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>" by cultivating <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. See "<a href="../../pages/ER.FF.002/index.html" rel="noopener" target="_blank">Ānāpānasati – Overview</a>."</li>
+<li><strong>Note 2: </strong>There can be many <em>Anāgāmis</em> (and even <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>) who may not have cultivated <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. We have also discussed this before. See, for example, #13 of "<a href="../../pages/ER.DD.002/index.html" rel="noopener" target="_blank">Rāga and Jhāna – Two Commonly Misunderstood Words</a>."</li>
+</ul>
+<p style="text-align: justify;">8. Once purifying the mind to transcend to the <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> (representing the four <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms), one needs to repeat the process there too.</p>
+<ul style="text-align: justify;">
+<li>Once released from the four realms in the <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>, one reaches the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. Then, the mind will not grasp any future <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> within the 31 realms of this suffering-filled world.</span></li>
+<li>The above description summarizes the removal of the remaining seven <em>saṁyojana </em>and five <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> for a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> </span></em>by removing<em><span> <span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, and <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Second Step and Release from the Three <em>Lokās</em></h5>
+<p style="text-align: justify;">9. Note that upon receiving sensory input, a mind MUST start at one of the three <em>dhātus</em> (initial stages) corresponding to the three <em>lokās</em>: <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>, <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>. </p>
+<ul>
+<li style="text-align: justify;">If a mind had been released from a given <em><span><span class="pali-term term-highlight" data-term="loka">loka</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>), it would not contaminate beyond the <em><span><span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em> stage. </li>
+<li style="text-align: justify;">Both <em>Anāgāmis</em> and <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> are released from the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, and thus, their minds will only latch onto the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> sanna</span></em> but will not get to the next step of automatically generating <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa.</span></em></li>
+<li style="text-align: justify;">Only an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>'s mind has been released from the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> and <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+<li style="text-align: justify;">It is a good idea to read the “<a href="https://suttacentral.net/sn14.12/en/sujato" rel="noopener" target="_blank"><em><span>Sanidāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 14.12)</a>“ and the “<a href="https://suttacentral.net/an3.76/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamabhava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 3.76)</a><span>“ to understand that fully. Even though those English translations may not be right, one can use the discussion in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/IS.BB.011/index.html" rel="noopener" target="_blank">Upaya and Upādāna – Two Stages of Attachment</a>" where parts of those <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> are discussed. Print the <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> and correct the wrong translations.</li>
+<li style="text-align: justify;">It will immensely help if you start to keep notes because I cannot repeat things too many times. But I try to do that as much as possible because this discussion is deeper.</li>
+</ul>
+<h5 style="text-align: justify;">Summary</h5>
+<p style="text-align: justify;">10. We all have a suffering-free, pure state (<em>pabhassara</em>) of mind within ourselves. It can be uncovered in two steps: (i) removal of wrong views and (ii) removal of distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em><span>. The two steps involve comprehending the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview in two stages. For the past few months, we have laid the groundwork for understanding the second, more profound worldview.</span></p>
+<ul>
+<li style="text-align: justify;">To proceed beyond the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em><span> stage, those finer details in <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview are necessary. Furthermore, understanding that "more detailed picture" can also speed up getting to the </span><em>Sotapnna </em>stage. There are other ways of reaching the <em>Sotapanns</em> stage (that we have discussed). But in my opinion, the current approach could be better for some, if not for all.</li>
+<li style="text-align: justify;"><span>The above is a succinct summary, and I need to make more "connections" to present the complete picture. However, it is imperative to understand the background. I suggest re-reading those <span class="pali-term term-highlight" data-term="posts">posts</span> in the sections referred to above and making notes to prepare a logical description in your own words. Then, one can fill in further details as new <span class="pali-term term-highlight" data-term="posts">posts</span> are posted. It will take an effort to understand these deep concepts fully. </span><span style="color: #993366;"><strong><span>Please don't think it can done by just reading through <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></strong></span></li>
+<li style="text-align: justify;"><span style="color: #3366ff;"><strong><span>The main point is that the current series of <span class="pali-term term-highlight" data-term="posts">posts</span> is the most critical I have written so far. It will help one get to the </span><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage (or further solidify the understanding of a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugami</span></em>), as well as help with reaching higher <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</strong></span></li>
+<li style="text-align: justify;">Finally, don't hesitate to ask questions in the forum. It is also possible that I made mistakes or that something could be explained better; please point them out.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.II.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0471"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.II.006
+Language:     pt-BR
+Generated-At: 2026-03-10T23:20:08Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;"><em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em><span> (<span class="pali-term term-highlight" data-term="citta">Citta</span>) indica o “estado livre de sofrimento” da mente. As duas principais razões para bloquear esse estado são as “visões erradas” e </span><em>a</em> “S<em>aññā</em><span>/percepção distorcida” (que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comparou a uma miragem ou ilusão) que surgem automaticamente com os estímulos sensoriais. Um </span><em><span><span class="pali-term term-highlight" data-term="puthujjana">Puthujjana</span></span></em> (ou mesmo um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>) apega-se a essa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> distorcida”</span></em>, pois não compreende que se trata de uma ilusão. </p>
+<p style="text-align: justify;"><strong>25 de novembro de 2023</strong></p>
+<h5 style="text-align: justify;">Introdução</h5>
+<p style="text-align: justify;">1. Nos últimos dois meses, concentrei-me em dois conceitos extremamente importantes: <em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span> </span></em>(mente) e <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span>.</span></em> Esses dois são conceitos diferentes, mas estão relacionados entre si. (Discuti “visões erradas” em muitos ensaios.) Neste ensaio, vou resumir o que discuti sobre esses dois conceitos desde 5 de agosto de 2023. </p>
+<ul style="text-align: justify;">
+<li>Primeiro, apresentei o conceito de “estado mental livre de sofrimento” ou mente <em>pabhassara</em> no ensaio “<a href="../../pages/CH.BB.003/index.html" rel="noopener" target="_blank">Descobrindo a mente livre de sofrimento (Pabhassara)</a>” em 5 de agosto de 2023. Essa discussão se expandiu para uma subseção, “<a href="../../pages/CH.BB.001/index.html" rel="noopener" target="_blank">Recuperando a mente pura livre de sofrimento</a>”.</li>
+<li>Então, comecei outra subseção, <a href="../../pages/IS.BB.001/index.html" rel="noopener" target="_blank">“Anatta se refere ao ‘eu’?</a>”, porque percebi que essa seria outra abordagem para compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>-<span class="pali-term term-highlight" data-term="dukkha">dukkha</span>-Anattā</span></em>. Essa discussão levou ao último ensaio dessa subseção, ou seja, “<a href="../../pages/IS.BB.009/index.html" rel="noopener" target="_blank">Saññā Vipallāsa – Percepção distorcida</a>”. Esse ensaio discute como o <em><span>pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> permanece oculto devido à nossa percepção distorcida “inerente” da realidade.</li>
+</ul>
+<p style="text-align: justify;">2. Essa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida<em>”</em><span> é desconhecida para o mundo até que um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descobre o seguinte: A mente </span><em>pabhassara</em> permanece oculta porque essa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida<em>” </em>inevitavelmente leva à “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> contaminada<em>”</em> e à adição de MAIS contaminações. (O outro fator são as “visões distorcidas/contaminadas”.) Em outras palavras, não se pode começar a purificar a mente porque o processo de pensamento SEMPRE começa com a mente já contaminada!</p>
+<ul style="text-align: justify;">
+<li><strong>Outra maneira de afirmar o acima exposto:</strong> A mente de um <em><span><span class="pali-term term-highlight" data-term="puthujjana">Puthujjana</span></span></em> (ser humano comum) SEMPRE começa no estado <em>pañc<strong><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></strong>kkhandha</em> e NUNCA no estado <em><span><span class="pali-term term-highlight" data-term="pañcakkhandha">Pañcakkhandha</span></span></em>.</li>
+<li>Mesmo o primeiro <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> de um <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> vithi</span></em> que surge ao receber um estímulo sensorial surge com uma “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida<em>” </em>e, em seguida, imediatamente se apega a ela e leva a <em>uma</em> “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> contaminada/sujada<em>” </em>(“visões distorcidas/sujas” também entrarão em ação automaticamente). Assim, a mente de um <em><span><span class="pali-term term-highlight" data-term="puthujjana">Puthujjana</span></span></em> começa no estado <em>pañc<strong><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></strong>kkhandha</em>.</li>
+<li>O primeiro passo para “desbloquear” a mente <em>pabhassara</em> é eliminar as visões erradas no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Mesmo depois disso, é impossível retroceder para capturar totalmente o “estado mental livre de sofrimento” ou <em><span>pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span> </span></em>ATÉ que se compreenda essa questão com o “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido<em>” </em>ou<em> “sanna vipallasa”.</em> Discutiremos isso abaixo.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em></h5>
+<p style="text-align: justify;">3.<span style="color: #3366ff;"> <strong>A mente <em>pabhassara</em> (gerando <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> imaculado e puro) surge ao atingir o <em><span><span class="pali-term term-highlight" data-term="phala">Phala</span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</strong></span> Ele tem apenas os sete <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> (fatores mentais) universais de <em><span><span class="pali-term term-highlight" data-term="phassa">Phassa</span></span></em> (contato), <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> (sensação), <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> (percepção), <em>cētanā</em> (vontade), <em>Ekaggata</em> (concentração), <em>jivitindriya</em> (faculdade da vida) e<em><span> <span class="pali-term term-highlight" data-term="manasikāra">Manasikāra</span></span></em> (memória). Nesse <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> </span></em>são puros. Esse <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> é incapaz de criar energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong>Todos nós temos esse “estado puro” no fundo de nossas mentes. </strong></span>Na mente (ou seja, em qualquer <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> que surge) de um <em><span><span class="pali-term term-highlight" data-term="puthujjana">Puthujjana</span></span></em>, esse estado <em>pabhassara</em> permanece coberto por várias camadas de impurezas. Essas impurezas podem ser caracterizadas de várias maneiras, por exemplo, como dez<em> saṁyojana</em> ou sete <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>; veja abaixo.</li>
+<li><em><span>Pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> (ou o “estado mental livre de sofrimento”)<strong> é como uma joia escondida sob camadas de sujeira.</strong> No entanto, ao contrário do caso de uma joia, <strong>a “sujeira”</strong> que cobre o<em><span> Pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> não é “física”, mas “mental”. São as impurezas profundamente enraizadas (<em>saṁyojana</em>/<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>) que não podem ser removidas por um “processo físico”.  </li>
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> usou várias maneiras alternativas para descrever/quantificar</span><span style="color: #000000;"><strong> a “sujeira”</strong></span> (ou impurezas) que cobre o <em><span>pabhassara <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>. Vamos nos concentrar nos dez<em> saṁyojana</em> E nos sete <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> listados entre outros em “<a href="../../pages/TS.AA.011/index.html" rel="noopener" target="_blank">Condições para os Quatro Estágios do Nibbāna</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Remoção de <em>Saṁyojana </em>e <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em></h5>
+<p style="text-align: justify;">4. <span style="color: #993366;"><strong><span>A “sujeira” ou “impurezas” só podem ser removidas da mente através da compreensão do “quadro geral” deste mundo descoberto pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. </span></strong></span>Isso envolve duas etapas (após completar o caminho óctuplo mundano).</p>
+<p style="text-align: justify;"><span style="color: #993366;"><span style="color: #000000;">O</span><strong> <span style="color: #254525;">PRIMEIRO passo </span></strong></span><span>é compreender a visão de mundo primária do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ou seja, que o mundo dos 31 reinos é de natureza </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>. Essa COMPREENSÃO é <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>. Este passo <span style="color: #993366;"><strong>remove <em>“diṭṭhi </em>Vip<em>allāsa</em>” (visões distorcidas/erradas).</strong></span></p>
+<ul style="text-align: justify;">
+<li>Nesta <span style="color: #254525;"><strong>PRIMEIRA etapa</strong></span> em direção ao <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, três dos dez <em>saṁyojana </em>e dois dos sete <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em><strong> associados a visões erradas</strong> são removidos; veja “<a href="../../pages/TS.AA.011/index.html" rel="noopener" target="_blank">Condições para os Quatro Estágios do Nibbāna</a>”.</li>
+<li><span style="color: #3366ff;"><strong>Alcançar </strong><em><strong><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span> </span></strong></em><strong>interrompe renascimentos futuros nos quatro reinos mais baixos (<em>apāyās</em>) e torna-se um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. </strong></span></li>
+</ul>
+<p style="text-align: justify;"><span style="color: #000000;">O <span style="color: #993366;"><strong><span style="color: #254525;">SEGUNDO passo </span></strong><span style="color: #003300;">é</span></span></span><span> ver os detalhes mais sutis da visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Isso significa, principalmente, compreender como surge o “</span><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido”. Com essa compreensão, um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> pode então começar a cultivar os demais passos do Nobre Caminho Óctuplo e <span style="color: #993366;"><strong>remover</strong></span> <span style="color: #993366;"><strong>o “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em>” (<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido/errado)<em>.</em></strong></span></p>
+<ul style="text-align: justify;">
+<li>Essa compreensão leva, em última instância, à remoção do restante do <em>saṁyojana </em>e <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span> </span></em>com o cultivo da versão mais profunda do <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>.</span></em></li>
+<li>É impossível impedir que essa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida” surja com força de vontade. Para impedir essa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida”, é necessário que alguém a explique primeiro (<em><span>as <span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> a apresentam de forma resumida); então, é preciso compreendê-la. </li>
+<li><strong>Observação:</strong> é verdade que um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> alcançará <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> em sete <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span>,</span></em> mesmo na ausência de instruções adicionais sobre <em><span>“<span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida<em>”.</em><span>  No entanto, isso pode levar milhões de anos. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou que um </span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> pode chegar ao estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> ou <em>Anāgāmi</em> em sete dias se <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> for praticado corretamente, sem pausas; veja “<a href="https://suttacentral.net/dn22/en/sujato" rel="noopener" target="_blank"><em><span>Mahāsatipaṭṭhāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 22)</a>” (coloquei um link para essa afirmação). </li>
+</ul>
+<p style="text-align: justify;">Discutimos brevemente o acima exposto em apenas um ensaio, “<a href="../../pages/KD.JJ.006/index.html" rel="noopener" target="_blank">Vipallāsa (Diṭṭhi, Saññā, Citta) Afeta Saṅkhāra</a>”; isso é descrito em detalhes na série atual de ensaios. Há também um “<span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em></strong></span>”, que também é removido na <span style="color: #000000;"><strong><span style="color: #003366;">SEGUNDA</span></strong></span><span style="color: #003366;"><strong> etapa.</strong></span></p>
+<h5 style="text-align: justify;">Raciocínio por trás da “remoção da sujeira” – Primeiro Passo</h5>
+<p style="text-align: justify;">5. Discutimos o raciocínio por trás da remoção dos três <em>samyojanas</em> (<em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span>, <span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="parāmāsa">Parāmāsa</span></span></em>) para atingir o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span> através da compreensão de parte do “quadro geral” da visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> em muitos ensaios. Esta etapa é a remoção de visões erradas (ou “</span><em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em>”)<em>.</em></p>
+<ul style="text-align: justify;">
+<li>Aqui, é melhor focar em <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span></span></em>; os outros dois<em> saṁyojana</em> são automaticamente removidos com a remoção de <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span>. </span></em>Assim, discutimos adequadamente o raciocínio por trás do <span style="color: #254525;"><strong>PRIMEIRO passo.</strong></span> </li>
+<li>No entanto, acredito que a seção recente <a href="../../pages/IS.BB.001/index.html" rel="noopener" target="_blank">“Anattā” se refere a um “eu”?</a> oferece outra maneira (talvez mais direta) de compreender a “natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>”. Concluímos essa seção com o ensaio “<a href="../../pages/IS.BB.009/index.html" rel="noopener" target="_blank">Saññā Vipallāsa – Percepção Distorcida</a>”, que nos levou à discussão sobre “<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> distorcida/contaminada” e à seção “<a href="http://localhost/beng_feb2026/is-there-a-self/sensory-experience-a-deeper-analysis/" rel="noopener" target="_blank">Experiência Sensorial – Uma Análise Mais Profunda</a>” com apenas dois ensaios. Foi aí que começamos a discutir o raciocínio por trás do <span style="color: #254525;"><strong>SEGUNDO passo.</strong></span></li>
+<li>A partir daí, começamos a nova seção, <a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">“Estágio Sotāpanna através da compreensão da percepção (Saññā)</a>”, para fazer a transição para a explicação do <span style="color: #254525;"><strong>SEGUNDO passo.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Raciocínio por trás da “remoção da sujeira” – Segundo passo </h5>
+<p style="text-align: justify;">6. É necessária uma compreensão mais profunda para avançar além do estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Em particular, é necessário compreender como “<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” no estágio “<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">Dhātu</span></span></em>” (ao receber um estímulo sensorial) surge automaticamente, ou seja, como surge “<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em>”. Isso acontece no estágio “<em>upaya</em>”, que surge antes do estágio “<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>”; <strong>certifique-se de ler o ensaio</strong> “<a href="../../pages/IS.BB.011/index.html" rel="noopener" target="_blank">Upaya e Upādāna – Dois Estágios do Apego</a>”. <span style="color: #993366;"><strong>Essa etapa “<em>upaya</em>” ocorre automaticamente com</strong></span> <span style="color: #993366;"><strong><em><span>diṭṭhi, <span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span>. </span></em></strong><span style="color: #000000;">A seguir, vamos nos concentrar principalmente nos dois últimos, especialmente em <strong><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span>.</span></em></strong></span></span></p>
+<ul style="text-align: justify;">
+<li>Sem compreender <span style="color: #993366;"><span style="color: #000000;"><strong><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em></strong></span></span>, a pessoa continuará a perceber que algumas coisas (comida, casas, carros, etc.) e algumas pessoas (especialmente aquelas que parecem atraentes) têm uma “natureza agradável à mente” inerente. Por exemplo, sem ver essa análise mais profunda, pensaríamos que o sabor é inerente ao açúcar; certos odores são desagradáveis, enquanto outros são bons; algumas pessoas são mais atraentes, etc.</li>
+<li><span style="color: #993366;"><strong>No entanto, todas essas percepções são “criadas pela mente”.</strong></span> Isso não quer dizer que elas sejam irreais. <strong>Elas são “reais” porque nossos corpos físicos são formados por energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para incorporar essa percepção.</strong> É por isso que mesmo um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> (que nasceu humano) obtém essa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>/per<em>cep</em>ção distorcida”. Mas um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> compreendeu como essa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida” surge e, portanto, não alcançará o estágio de <em><span>“<span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> contaminada”.</li>
+<li><span style="color: #3366ff;"><strong>Uma vez que se compreende a origem da “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida<em>”,</em><span> pode-se entender por que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> chamou a “</span><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>” de miragem/ilusão.</strong></span> Veja o “<a href="https://suttacentral.net/sn22.95/en/sujato" rel="noopener" target="_blank"><em><span>Pheṇapiṇḍūpama <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.95)</a>” discutido em “<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/sotapanna-stage-and-distorted-defiled-sanna/" rel="noopener" target="_blank">Estágio Sotapanna e Saññā Distorcida/Contaminada</a>”. Esse conhecimento em si ajuda a se livrar de dois dos <em>saṁyojana</em> restantes (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span> </span></em>e <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em>)<em>.</em> Isso acontece por meio de dois estágios de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: <em>Sakadāgami </em>e <em>Anāgāmi. </em>Esse processo está resumido em “<a href="../../pages/IS.BB.011/index.html" rel="noopener" target="_blank">Upaya e Upādāna – Dois Estágios do Apego</a>”.</li>
+<li>Prosseguindo, é possível eliminar os cinco <em>saṁyojana</em> restantes e alcançar o estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>, como discutiremos a seguir.</li>
+</ul>
+<p style="text-align: justify;">7. Uma vez liberada do “<em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>” no estágio <em>Anāgāmi</em>, a mente chega ao próximo nível superior, o “<em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em>”. O “<em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em>” incluía os 16 reinos nos reinos <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Assim como é preciso perceber que “<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” no estágio “<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">Dhātu</span></span></em>” surge automaticamente para qualquer pessoa nascida no <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>, aqui é preciso perceber que “<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” no estágio “<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>Dh<em>ātu</em>” surge automaticamente para qualquer pessoa nascida no <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">Loka</span> </span></em>ou em um dos 16 reinos <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>. <strong>Observe</strong> que <em><span>“<span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>Sañ<em>ñā</em>” e <em><span>“<span class="pali-term term-highlight" data-term="rupa">rupa</span> </span></em>Dh<em>ātu</em>” aqui se referem tanto a <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (visões) quanto a <em><span>sadda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (sons) acessíveis nos reinos <em><span>rupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.</li>
+<li><span style="color: #993366;"><strong>Aqui, “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> contaminada” é perceber que a “experiência/prazer Jh<em>ā</em>na” é real e absoluta.</strong></span> Mas não é. Assim, um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> entrando em um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> pode ter a mesma experiência que um <em><span>iogue <span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> (<em><span>piti, <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>, etc.). Mas enquanto o <em><span>iogue <span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em> percebe essa experiência como “real”, o <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não se apega a ela (da mesma forma que um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não se apega ao sabor de uma refeição deliciosa em <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>).</li>
+<li><strong>Nota 1:</strong> É possível transcender para a mentalidade do “<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>” sem a remoção desses dois <em>saṁyojana</em> de <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span> </span></em>e <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span>. </span></em>Isso pode ser feito transcendendo temporariamente o “<em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>”, concentrando a mente em um objeto neutro, como a respiração ou outro objeto <em>Kasiṇa</em>. Eles alcançam a mentalidade do “<em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em>” cultivando <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> rupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Veja “<a href="../../pages/ER.FF.002/index.html" rel="noopener" target="_blank">Ānāpānasati – Visão geral</a>”.</li>
+<li><strong>Nota 2: </strong>Pode haver muitos <em>Anāgāmis</em> (e até mesmo <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>) que podem não ter cultivado <em><span>rupāvacara <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Também já discutimos isso antes. Veja, por exemplo, o nº 13 de “<a href="../../pages/ER.DD.002/index.html" rel="noopener" target="_blank">Rāga e Jhāna – Duas Palavras Comumente Mal Interpretadas</a>”.</li>
+</ul>
+<p style="text-align: justify;">8. Depois de purificar a mente para transcender para o <em><span>arupa <span class="pali-term term-highlight" data-term="loka">Loka</span></span></em> (representando os quatro reinos <em><span>arupāvacara <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>), é preciso repetir o processo lá também.</p>
+<ul style="text-align: justify;">
+<li>Uma vez liberado dos quatro reinos no <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>, alcança-se o estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Então, a mente não se apegará a nenhum renascimento futuro dentro dos 31 reinos deste mundo cheio de sofrimento.</li>
+<li>A descrição acima resume a remoção dos sete <em>saṁyojana </em>e cinco <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> restantes para um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, removendo<em><span> <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="rūpa rāga">Rūpa Rāga</span></span></em> e <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Segundo Passo e Libertação dos Três <em>Lokās</em></h5>
+<p style="text-align: justify;">9. Observe que, ao receber estímulos sensoriais, a mente DEVE começar em um dos três <em>dhātus</em> (estágios iniciais) correspondentes aos três <em>lokās</em>: <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="rūpa loka">Rūpa Loka</span></span></em>, <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>. </p>
+<ul>
+<li style="text-align: justify;">Se uma mente tivesse sido liberada de um determinado <em><span><span class="pali-term term-highlight" data-term="loka">Loka</span></span></em> (ou <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>), ela não contaminaria além do estágio <em><span><span class="pali-term term-highlight" data-term="dhātu">Dhātu</span></span></em>. </li>
+<li style="text-align: justify;">Tanto <em>os Anāgāmis</em> quanto <em><span>os <span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> são libertados do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> </span></em><span><span class="pali-term term-highlight" data-term="loka">Loka</span>/</span><em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> e, portanto, suas mentes apenas se apegarão ao <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> sanna</span></em>, mas não chegarão ao próximo passo de gerar automaticamente <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa.</span></em></li>
+<li style="text-align: justify;">Somente a mente de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> foi libertada do <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> e <em><span>arupa <span class="pali-term term-highlight" data-term="loka">Loka</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>.</li>
+<li style="text-align: justify;">É uma boa ideia ler o “<a href="https://suttacentral.net/sn14.12/en/sujato" rel="noopener" target="_blank"><em><span>Sanidāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 14.12)</a>” e o “<a href="https://suttacentral.net/an3.76/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamabhava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 3.76)</a>” para compreender isso plenamente. Mesmo que essas traduções em inglês possam não estar corretas, pode-se usar a discussão na postagem <a href="../../pages/IS.BB.011/index.html" rel="noopener" target="_blank">“Upaya e Upādāna – Dois Estágios do </a>Apego”, onde partes desses <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> são discutidas. Imprima os <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> e corrija as traduções erradas.</li>
+<li style="text-align: justify;">Será de grande ajuda se você começar a fazer anotações, pois não posso repetir as coisas muitas vezes. Mas tento fazer isso o máximo possível, pois esta discussão é mais profunda.</li>
+</ul>
+<h5 style="text-align: justify;">Resumo</h5>
+<p style="text-align: justify;">10. Todos nós temos um estado mental puro e livre de sofrimento (<em>pabhassara</em>) dentro de nós mesmos. Ele pode ser descoberto em duas etapas: (i) remoção de visões erradas e (ii) remoção de <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em><span> distorcida. As duas etapas envolvem compreender a visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> em dois estágios. Nos últimos meses, estabelecemos as bases para compreender a segunda visão de mundo, mais profunda.</span></p>
+<ul>
+<li style="text-align: justify;">Para avançar além do estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span>, esses detalhes mais sutis da visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> são necessários. Além disso, compreender essa “imagem mais detalhada” também pode acelerar o alcance do estágio </span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Existem outras maneiras de alcançar o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> (que já discutimos). Mas, na minha opinião, a abordagem atual pode ser melhor para alguns, se não para todos.</li>
+<li style="text-align: justify;">O texto acima é um resumo sucinto, e preciso fazer mais “conexões” para apresentar o quadro completo. No entanto, é imperativo compreender o contexto. Sugiro reler os ensaios nas seções mencionadas acima e fazer anotações para preparar uma descrição lógica com suas próprias palavras. Então, é possível preencher mais detalhes à medida que novas postagens forem publicadas. Será necessário um esforço para compreender totalmente esses conceitos profundos. <span style="color: #993366;"><strong>Por favor, não pense que isso pode ser feito apenas lendo os ensaios.</strong></span></li>
+<li style="text-align: justify;"><span style="color: #3366ff;"><strong>O ponto principal é que a série atual de ensaios é a mais crítica que escrevi até agora. Ela ajudará a alcançar o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> (ou solidificará ainda mais a compreensão de um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugami</span></em>), além de ajudar a alcançar <em>um</em> <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> mais elevado.</strong></span></li>
+<li style="text-align: justify;">Por fim, não hesite em fazer perguntas no fórum. Também é possível que eu tenha cometido erros ou que algo possa ser explicado melhor; por favor, aponte-os.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.II.005/index.html">Sotapanna Stage And Distorted Sanna</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.II.007/index.html">Mulapariyaya Sutta The Root Of All Things</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.II.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Sotapanna Stage And Distorted Sanna</span>
+        
+        <span class="pathway-title title-pt">Sotāpanna Stage e Distorted Sanna</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.II.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Mulapariyaya Sutta The Root Of All Things</span>
+        
+        <span class="pathway-title title-pt">Mulapariyaya Suttta A raiz de todas as coisas</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Gandhabba Netherworld Paraloka | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Abhidhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 27 / 37</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">AB.DD.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Gandhabba Netherworld Paraloka</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>AB.DD.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Abhidhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="AB.DD.003"
+             data-section="Abhidhamma"
+             data-section-code="AB"
+             data-findex="0782"
+             data-level="advanced"
+             data-reading-time="10"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>AB.DD.003</td></tr><tr><td>Fin-dex</td><td>0782</td></tr><tr><td>Slug</td><td>gandhabba-netherworld-paraloka</td></tr><tr><td>Section</td><td>AB</td></tr><tr><td>Title EN</td><td>Gandhabba Netherworld Paraloka</td></tr></table></div></div><strong>February 18, 2016; updated April 5, 2016; July 14, 2021</strong>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> Is Human</h5>
+<p style="text-align: justify">1. I have discussed the fact that when a living being gets a "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" it does not necessarily mean that it is born with a human body during all that time; see, "<a href="../../pages/KD.GG.006/index.html" rel="bookmark noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>".</p>
+<ul style="text-align: justify">
+<li> For example, when a human dies and still has <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy left for the human<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, then it is very unlikely that it will be conceived as a human baby right away. At death, a "human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" with a fine body leaves the dead body and has to wait in that state until a suitable womb becomes available. There are a large (uncountable?) number of such human<em> gandhabbā</em> waiting for a suitable womb.</li>
+<li>This is one reason that a mother and father are so revered. No matter how bad they may be in some cases, just the fact that they made it possible for a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> to have a human body, makes them invaluable.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> Is a Human (or Animal) Without a Physical Body</h5>
+<p style="text-align: justify">2. Beings are born as humans because they crave the sensory pleasures associated with the human body. The most valued are the tastes and the bodily pleasures. A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has an "energy body" that we cannot see weighing much less than 0.01 g; see, "<a href="../../pages/AB.DD.005/index.html" rel="bookmark noopener noreferrer" target="_blank">Manomaya Kaya (Gandhabba) and the Physical Body</a>". A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> born at the <em><span><span class="pali-term term-highlight" data-term="cuti-patisandhi">cuti-patisandhi</span></span></em> moment is much smaller than an atom in modern science. Some could inhale the aroma (<em>gandha</em>) and get a bit denser; thus the name "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" ("<em>gandha</em>" + "<em>abba</em>").</p>
+<ul style="text-align: justify">
+<li>A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is unable to taste solid food or experience physical touch. But they can see and hear very well. Thus their life is miserable since they can see normal humans engaging in "pleasurable activities". That is what they crave too, but they are unable to experience them.</li>
+<li>When a zygote is created in a womb as a result of intercourse (see, "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>"), there are a huge number of <em>gandhabbā</em> waiting to "get hold of that zygote". But of course, they don't have a choice; only the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> matching the "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of the father -- and especially the mother -- is pulled into the womb.</li>
+</ul>
+<p style="text-align: justify">3. Therefore, even though a human "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" may last thousands of years, the actual time that one is "born with a human body" (human<em><span> <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) could be a fraction of that time. This is another reason why a "human birth" is so precious that it should not be wasted.</p>
+<ul style="text-align: justify">
+<li>Among the 31 realms, it is only in the human and animal realms that physical bodies can manifest from time to time within a <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. Within animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, some animals are born via eggs, while others are "womb-born." There are an uncountable number of "animal <em>gandhabbā</em>" waiting for a suitable womb at any given time.</li>
+</ul>
+<h5><em>Gandhabbas</em> Live in <em>Paraloka</em></h5>
+<p style="text-align: justify">4. Both the human and animal <em>gandhabbā</em> can be said to live in "<em>paraloka;</em>" see "<a href="../../pages/LD.GG.009/index.html" rel="noopener" target="_blank">Micchā Diṭṭhi, Gandhabba, and Sōtapanna Stage</a>." It is a world that a normal human cannot see, even though they can see us. Of course, there is no English word for it, but "netherworld" or "the hidden world" seems to convey the idea.</p>
+<ul>
+<li style="text-align: justify"><span style="color: #0000ff"><em>Paraloka</em> is not a distinct realm in the 31 realms. Just like human and animal realms co-exist, the <em>paraloka</em> co-exists with the human and animal realms, but we normally cannot see those beings in the <em>paraloka</em> (unless one develops <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers). One can imagine there is another world with human and animal <em>gandhabbā</em>. </span></li>
+<li style="text-align: justify">Pronunciation ("<em>paralowa</em><span>" or පරලොව is the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> word for the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word "</span><em>paraloka</em>"):<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Paralowa.mp3" type="audio/mpeg"/></audio></li>
+<li style="text-align: justify"><span style="color: #0000ff">Those with "human (or animal)<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" spend their time either in "this world that we can see" or in the "<em>paraloka</em>" or the "hidden world" (netherworld).</span></li>
+<li style="text-align: justify"> Many people are not even aware of the existence of "<em>paraloka</em>", because (like the concept of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>), it is not discussed in the <em>Visuddhimagga</em>. <span style="color: #0000ff">It is unfortunate that the current <em>Theravada</em> relies on <em>Visuddhimagga</em> (written by an <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span></span></em>) rather than the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>.</span></em></span></li>
+</ul>
+<h5><em>Tirokuṭṭa - "</em>Able to Go Through Walls"</h5>
+<p style="text-align: justify">5. The "<a href="https://suttacentral.net/kp7/pli/ms" rel="noopener" target="_blank"><em><span>Tirokuṭṭa <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(kp 7)</a>" in the <em><span class="segment" id="kp7:0.1"><span class="root"><span class="text">Khuddakapāṭha </span></span></span></em><span class="segment" id="kp7:0.1"><span class="root"><span class="text">describes a</span></span></span> “<em>tirokuṭṭa</em>” who hangs around the home that he/she departed from. An English translation there: "<span class="segment" id="kp7:0.2"><span class="translation"><span class="text"><a href="https://suttacentral.net/kp7/en/sujato" rel="noopener" target="_blank">Outside the Walls</a>."</span></span></span></p>
+<ul>
+<li style="text-align: justify">The meaning of the word “<em>tirokuṭṭa</em>” becomes apparent in the "<span class="segment" id="sn51.17:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/sn51.17/pli/ms" rel="noopener" target="_blank"><em><span>Dutiyasamaṇabrāhmaṇa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (51.17)</a>." The phrase, "<em><strong>tirokuṭṭaṁ tiropākāraṁ tiropabbataṁ</strong> asajjamānā agamaṁsu, seyyathāpi ākāse</em>" appears at the beginning of that<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>. That means, "going unimpeded <strong>through a wall, a rampart, or a mountain</strong> as if through space."</span></span></span></li>
+<li style="text-align: justify">Therefore, “<em>tirokuṭṭa</em>” is a being who can travel unimpeded through the walls. Those with <em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span></span></em> (supernormal) powers can do that as detailed in the <span class="segment" id="sn51.17:0.3"><span class="root"><span class="text"><em><span>Dutiyasamaṇabrāhmaṇa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (51.17.)</span></span></span></li>
+<li style="text-align: justify">However, the <em><span>Tirokuṭṭa <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(kp 7) is specifically about persons who died and have come back to "hang around" their formal homes. These could be <em>gandhabb<span class="segment" id="sn51.17:0.3"><span class="root"><span class="text">ā</span></span></span>s</em> or <em>pret<span class="segment" id="sn51.17:0.3"><span class="root"><span class="text">ā</span></span></span>s</em> (<em>pet<span class="segment" id="sn51.17:0.3"><span class="root"><span class="text">ā</span></span></span>s</em>.)</li>
+<li style="text-align: justify"><span style="color: #0000ff">However<em>, gandhabbās</em> are not <em>pretās </em>(or <em>petās</em>.) <em>Pretās</em> do not make "dense bodies" as human and animal <em>gandhabbas</em> do. </span></li>
+</ul>
+<h5><em>Pretās </em>Are Different from <em>Gandhabbās</em></h5>
+<p style="text-align: justify">6. The idea behind giving special offerings ("<em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em>") to the <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> after the death of a person is mainly for the benefit of the <em>gandhabbā </em>(and also <em>pretās</em><span>). This is a common practice in <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> countries. Normally it is done after seven days and after three months etc of death, and I will discuss the reasons for those specific dates in a future <span class="pali-term term-highlight" data-term="post">post</span>.</span></p>
+<ul style="text-align: justify">
+<li>Not all beings can receive merits. Especially those in the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell) are unable to do so because they don't have the right mindset to receive merits (absence of<em><span> samanantara <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>). See "<a href="../../pages/PS.JJ.003/index.html" rel="noopener" target="_blank">Anantara and Samanantara Paccayā</a>."
+Those who can benefit most are the <em>gandhabbā</em> and <em>pretās</em>.</li>
+<li>Also, note that a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>is totally distinct from <em>pretās</em> or hell-beings in the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em>. <span style="color: #0000ff">Only <em>gandhabbās</em> live in "<em>paraloka</em>" waiting for suitable wombs.</span> <em>Pretās</em> and hell beings have instantaneous (<em>opapatika</em>) births, just like <em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.</li>
+</ul>
+<p style="text-align: justify"><span>7. It has been described how the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> saw human beings wander from life to life when he first comprehended the </span><em>cutūpapāda ñāna</em> during the night of his Enlightenment; "<em>cutūpapāda</em>" comes from "<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em>" for death and "<em>upapāda</em>" for birth.</p>
+<ul style="text-align: justify">
+<li style="list-style-type: none">
+<ul style="text-align: justify">
+<li>Thus<em> cutūpapāda ñāna</em><span> is the knowledge about the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span><span style="color: #0000ff">But this particular description was restricted to births and deaths associated with a single human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</span></li>
+</ul>
+</li>
+</ul>
+<ul style="text-align: justify">
+<li>Here is the pronunciation of "<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>":<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/cuti-citta.mp3" type="audio/mpeg"/></audio></li>
+<li>Here is the pronunciation of "<em>cutūpapāda ñāna</em>":<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/Cutupapada-nana.mp3" type="audio/mpeg"/></audio></li>
+</ul>
+<p style="text-align: justify"><span>8. That description by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was not about the general wandering among the 31 realms, but is on how a being in a human </span><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> wanders from human birth to human birth with<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> states in between (i.e., going back and forth between "this world that we can see" and the "other world that we cannot see" or the <em>paraloka</em>).</p>
+<ul style="text-align: justify">
+<li>The description is as follows: If one is situated in the upper level of a building at a four-way junction, he can see the street below. He can see many people wandering in the street (<em>gandhabbā</em> wandering around). Sometimes, one goes into a house and stays there for a long time. This is compared to a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> entering a womb and making himself a physical body; that house is the analogy of a physical body.</li>
+<li>Then at the death of that physical body, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> comes out and starts wandering again (a person walking on the street); he may be wandering the streets for a long time before entering "another house", i.e., to get a chance to go into a matching womb.</li>
+<li>Sometimes, he may enter a house and may come right out. This can be compared to an unsuccessful pregnancy. A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is pulled to a zygote (by<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> power,) but for some reason cannot stay there and has to come out, mostly because it turns out to be a mismatch of "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of the potential mother.</li>
+<li>Thus it describes a human being going back and forth between "this world" and the "other world" or the "netherworld" ("<em>paraloka</em>"). Once the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy of the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is exhausted, a new "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" is grasped.</li>
+<li> If the new <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is not human or animal, then one would be born instantaneously in another realm (<em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>, <span class="pali-term term-highlight" data-term="deva">deva</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="asura">asura</span>, preta</span></em>, or<em><span> <span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em>). There are no<em> gandhabbā</em> associated with those realms.</li>
+<li>Thus we can see that <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> mean the same in all the other realms. In those realms, <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> automatically leads to<em><span> <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>. For example, one with <em><span><span class="pali-term term-highlight" data-term="deva">deva</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is always a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span>.</span></em></li>
+</ul>
+<h5>Rebirths With Human Bodies</h5>
+<p style="text-align: justify"><span>9. When one studies the accounts of people (of mostly children) describing their <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> stories, there are always "gaps" between births; see, the references (books) cited in "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence of Rebirth</a>". For example, see, "<span class="a-size-large" id="productTitle"><span>Children Who Remember Previous Lives: A Question of <span class="pali-term term-highlight" data-term="reincarnation">Reincarnation</span>", by Ian Stevenson (2000).</span></span></p>
+<ul style="text-align: justify">
+<li>During those "gaps" in between successive human births, they had been in the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state, i.e., they were in <em>paraloka</em>.</li>
+<li>When one dies in an accident, especially at a younger age, it is more likely that their <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> had not been exhausted. Thus they are more likely to be in the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state, waiting for a suitable womb.</li>
+<li><span>This is why in most <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> stories the previous life tends to have been terminated by an unexpected incident (killed by someone, a natural disaster, etc).</span></li>
+<li>This "memory from the past life" fades away as children grow, and that is why it is mostly children who provide these accounts. As they grow old, these memories disappear gradually.</li>
+</ul>
+<p style="text-align: justify">10. A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> changes with time (just like everything else).  In fact, it is even possible that if a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> properly receives merits from a giving (<em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em>) mentioned in #5 above, he/she can gain a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and be born instantly in such a realm.</p>
+<ul style="text-align: justify">
+<li>On the other hand, another human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>, who had been engaged in behavior appropriate for an animal (say, a dog) in the previous human life, could cultivate those "dog <em>sañkhāra</em>" as a<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> and slowly transform into a "dog <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" while in<em> paraloka</em>.</li>
+<li>When we think about these possibilities we realize how complex life is, and why we need to be mindful of the consequences of our actions. Not only that, we need to avoid doing things mechanically and understand the reasons behind even meritorious actions like almsgiving (<em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span>)</span></em>. I have seen many alms givings that are conducted in a "party-like" atmosphere. One needs to do it with the proper mindset with the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>(s)</span></em> in mind.</li>
+</ul>
+<h5>Other Related Issues</h5>
+<p style="text-align: justify">11. Another interesting bit of deduction is how the concept of a soul or "<em>ā</em><em>thma</em>" came to be established by the ancient Hindu<em> yogis</em>.  Even to attain higher <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānās</span></em> (above the fourth <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>) that enable one to acquire the ability to see previous lives, one has to have that "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of cultivating<em> jhānās</em> through recent human lives. Therefore, such a <em>yogi</em> with powerful <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers can be expected to have had many recent human lives.</p>
+<ul style="text-align: justify">
+<li>Thus it is possible that such <em>yōgis</em> would have been born human hundreds of times (with<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> states in between). When they looked at their previous lives, they could see that every time they died a<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> came out, and sooner or later took hold of another human body. Thus it is this <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> that they thought was the indestructible "ā<em>thma</em>" or "soul". They could look back on hundreds of lives and always see that they were born humans again and again.</li>
+<li>Thus, in the Hindu scripture <em>Bhagavad Gita,</em> getting hold of a new body is compared to discarding an old suit and wearing a new suit. As far as those <em>yōgis</em> could see, it was the same<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span> that came back in a different physical appearance! Thus for them, it appeared that there was an unchanging entity coming back in a different form; this is why it is called "<span class="pali-term term-highlight" data-term="reincarnation">reincarnation</span>".</span></li>
+</ul>
+<p style="text-align: justify"><span>12. Our world is much more complex than we can ever imagine. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can truly comprehend the complexity of this world: There are 4 “unthinkable” or “</span><em>acinteyya</em>” subjects for us; see, “<a href="https://suttacentral.net/an4.77/pli/ms" rel="noopener" target="_blank"><em><span>Acinteyya <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 4.77)</a>“. English translation there: “<a href="https://suttacentral.net/an4.77/en/thanissaro" rel="noopener" target="_blank">Unconjecturable</a>“.</p>
+<ul>
+<li style="text-align: justify">Even though we do not need to comprehend everything (and we cannot), it is beneficial to learn these concepts at least to some extent.</li>
+<li style="text-align: justify">If one can comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>,  these in-depth analyses are not needed. But especially these days, humans do not have the ability to grasp <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em><span> right away.  So, learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and appreciating the unmatched knowledge of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> gives one the confidence to persevere in one's efforts.</span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/AB.DD.002/index.html">Gandhabbaya Manomaya Kaya Introduction</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/AB.DD.004/index.html">Ghost In The Machine Manomaya Kaya</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/AB.DD.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Gandhabbaya Manomaya Kaya Introduction</span>
+        
+        <span class="pathway-title title-pt">Gandhabbaya Manomaya Kaya Introduction</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/AB.DD.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Ghost In The Machine Manomaya Kaya</span>
+        
+        <span class="pathway-title title-pt">Ghost In The Machine Manomaya Kaya</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-AB">
+        ↑ Back to Abhidhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

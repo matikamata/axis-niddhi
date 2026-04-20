@@ -1,0 +1,377 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Cetasika Connection To Gati | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Abhidhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 18 / 37</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">AB.BB.010</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Cetasika Connection To Gati</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>AB.BB.010</td></tr>
+          <tr><td><strong>Section</strong></td><td>Abhidhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="AB.BB.010"
+             data-section="Abhidhamma"
+             data-section-code="AB"
+             data-findex="0770"
+             data-level="advanced"
+             data-reading-time="10"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>AB.BB.010</td></tr><tr><td>Fin-dex</td><td>0770</td></tr><tr><td>Slug</td><td>cetasika-connection-to-gati</td></tr><tr><td>Section</td><td>AB</td></tr><tr><td>Title EN</td><td>Cetasika Connection To Gati</td></tr></table></div></div><p><strong>Revised March 26, 2022;<span style="color: #3366ff;"> December 12, 2023 (#9)</span></strong></p>
+<p style="text-align: justify;"><i><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span> </span></i>that arise in <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> influence a person's moral and immoral character (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>).</p>
+<h5>Seven Universal <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em></h5>
+<p style="text-align: justify;"><span>1. In the introductory <span class="pali-term term-highlight" data-term="posts">posts</span> in </span><em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>,</span></em> we saw that there are <strong>seven universal <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em></strong> <strong>(mental factors)</strong> that arise with every <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (loosely translated as a thought, but not correct); <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is pronounced "chiththä" and <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> pronounced "chethasikä."</span></p>
+<ul style="text-align: justify;">
+<li>The seven universal <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> are essential in forming any <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, whether immoral (<em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span></span></em>) <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, moral (<em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em>) <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>,</span></em> or a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> that does not have any <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span> </span></em>potential.</li>
+<li>Some other<em><span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> provide "character" to <em>cittā. </em>Whether a given <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is good or bad depends on whether a "good" or "bad" set of <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> arises with it; see "<a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">Citta and Cetasika – How Viññāṇa (Consciousness) Arises</a>." They are listed in "<a href="../../pages/TS.AA.005/index.html" rel="noopener noreferrer" target="_blank">Cetasika (Mental Factors)</a><span>," and you may want to print them out for reference when reading this <span class="pali-term term-highlight" data-term="post">post</span>. There is no need to memorize them.  With time, one may even know them by heart.</span></li>
+<li>Out of the 54 types of<em> cittā </em>in the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, there are 12 <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em> and 8 <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. The other 34 are <em><span><span class="pali-term term-highlight" data-term="vipāka citta">vipāka citta</span></span></em> and <em><span>kriya <span class="pali-term term-highlight" data-term="citta">citta</span>,</span></em> which do not generate <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> power.</li>
+</ul>
+<h5 style="text-align: justify;">Six <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> That May Appear in <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="akusala citta">Akusala Citta</span></span></em></h5>
+<p style="text-align: justify;">2. Then, there are six <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> called <strong>particulars (also called occasional) </strong>or <em>pakinnaka<b> </b></em>that<em><b> </b></em><b>MAY</b> appear in any <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. Therefore, they do not determine the PURPOSE of the <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, but they HELP with any type of purpose that was intended.</p>
+<ul style="text-align: justify;">
+<li>For example, <em><span><span class="pali-term term-highlight" data-term="viriya">viriya</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> could be in a <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> and it can also be in an <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em>. In either case, the <em><span><span class="pali-term term-highlight" data-term="viriya">viriya</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> will HELP intensify the effort with that <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> That Appear Only in <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="akusala citta">Akusala Citta</span></span></em></h5>
+<p style="text-align: justify;">3. Out of a total of 52 <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>, the other 39 (= 52-7-6) <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> determine whether a given <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> will be  an <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em> or a<em><span> <span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;">14 <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> (called<em> asobhana </em>or immoral<em> </em>or bad<em><span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>) could be present in an <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span>.</span></em> Out of those, 4 ALWAYS are present in any <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em>; those 4 are <em>asobhana</em><em> universals</em>.</span></li>
+<li><span style="color: #3366ff;">The other 25 <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> (called<em> sobhana </em>or moral or good<em><span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>) can be present only in <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, and 19 of those are ALWAYS in any given <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>; those 19 are <em>sobhana</em><em> universals</em>.</span></li>
+<li>Therefore, 11 <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> (7 universal plus four universal immoral) arise with every <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em>. There may be other immoral and particular <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>as well.</li>
+<li>There are 26 <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> (7 universal plus 19 universal morals) that arise with every <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. Six more moral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> may arise in some <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><em>Saṁsāric</em> Habits ("G<em>ati</em>") and<em><span> <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em></h5>
+<p style="text-align: justify;">4. Therefore, <em><span>sobhana and asobhana <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> determine the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> nature of a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.<span style="color: #3366ff;"> If we want to eliminate all <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em>, we need to remove the 14 <em>asobhana</em> <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>from our minds (they come up automatically with our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em>).</span></p>
+<ul style="text-align: justify;">
+<li><strong>In other words, our <em>Saṁsāric</em> habits ("<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>") and cravings ("<em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em>") are embedded in the 14 <em>asobhana</em> (and 25 <em>sobhana</em>) <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>, <em> </em></strong>such as <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>. For example, one may have dominant "<em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" (excess greed) or "<em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" (strong hate). But typically, we have a mixture of many different inter-mixed <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.</li>
+<li>In the same way, cultivating good "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" and "<em>cravings</em>" (basically for moral deeds) leads to "good <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>."</li>
+</ul>
+<h5 style="text-align: justify;"><em>Saṁsāric</em> Habits ("G<em>ati</em>") and <em><span>Asobhana <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> in <em><span><span class="pali-term term-highlight" data-term="akusala citta">Akusala Citta</span></span></em></h5>
+<p style="text-align: justify;">5. As we follow the Noble Eightfold Path, the 14 <em>asobhana</em> <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>are reduced in strength and eventually removed. When reaching the <em>Sotāpaññā</em> stage, the two <em>asobhana</em> <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>of <em>diṭṭhi</em> and <em>vicikicca</em> are REMOVED, and all others reduced to some extent. In particular,<em><span> <span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em> is reduced to <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> level, and <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em> is reduced to<em><span> <span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em>. That is why a <em>Sotāpaññā </em>will never be born in the <em>apāyā</em>.</p>
+<ul style="text-align: justify;">
+<li><em>Raga</em> has 3 components: <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, and <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, corresponding to attachment to the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span>, <span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>, and <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> respectively. At the <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> stage, <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em> are REDUCED to the level that one will never be born at or below the human realm.</li>
+<li>At the <em>Anāgāmi</em> stage, both <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em> are REMOVED. Thus, all bonds to <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> are broken, and one will never be born again in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>.</li>
+<li>All <em><span>asobhana <span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>are removed at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</li>
+</ul>
+<p style="text-align: justify;">6. We can easily see why <strong>four immoral universal <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em></strong> arise with every <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em>. These four are<em><span> <span class="pali-term term-highlight" data-term="moha">moha</span></span></em> (delusion or moral blindness),<em> ahirika</em> (shamelessness of wrong), <em><span><span class="pali-term term-highlight" data-term="anottappa">anottappa</span></span></em> (fearlessness of immoral), and <em>uddacca</em> (restlessness).</p>
+<ul style="text-align: justify;">
+<li>We do not realize it, but when we get greedy or hateful enough, we can become morally blind. One loses any sense of decency just for a short time, but that is enough to commit an immoral act.</li>
+<li>Then we lose the fear of doing wrong and the shame of doing wrong because our minds are covered (it takes only a fraction of a second to generate a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> and sometimes even to act on it if the <em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em> is strong enough). That inevitably leads to a restless mind (<em>uddacca</em>) too.</li>
+</ul>
+<h5 style="text-align: justify;"><em>Saṁsāric</em> Habits ("G<em>ati</em>") and <em><span><span class="pali-term term-highlight" data-term="sobhana cetasika">Sobhana Cetasika</span></span></em> in <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em></h5>
+<p style="text-align: justify;">7. Now, let us discuss the seven pairs in the universal moral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> list</span></em>, starting with the pair of <em>kāyapassaddhi</em> (tranquility of the mental body, which leads to the tranquility of the physical body itself); <em>cittapassaddhi</em> (tranquility of consciousness). These seven pairs are states of mind and body corresponding to some "cooling down." When doing a <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em>, the body and mind relax and "cool down." That is the first glimpse of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> as one is already on the mundane eightfold Path.</p>
+<ul style="text-align: justify;">
+<li><span>That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that the state of mind does affect the state of the body. When one starts on the</span><em> lokottara</em> eightfold Path, these <em>cetasikas</em> all get more robust, one starts feeling the "<em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>," and thus, one becomes motivated to follow the Path.</li>
+<li>But it is important to emphasize (as I have stated many times), that things COULD get worse before getting better. <strong>When one deprives the mind of things it has gotten used to, it does not like that.</strong> Until it sees the benefits of staying on the Path, it may try to pull one firmly in the "wrong direction." One needs to be persistent, and this is where one needs to cultivate the four <em><span><span class="pali-term term-highlight" data-term="iddhipāda">iddhipāda</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span>, <span class="pali-term term-highlight" data-term="citta">citta</span>, <span class="pali-term term-highlight" data-term="viriya">viriya</span>, vīmaṁsā</span></em>).</li>
+</ul>
+<p style="text-align: justify;">8. <span style="color: #0000ff;">It is important to realize that the 19 universal moral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> can arise in ANYONE regardless of one's religion or any other "label."</span> All of them will arise when doing a good deed (or speech or thought). They can occur when one is on the mundane eightfold Path (nothing to do with a religion <em>per se</em>); see "<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma - In a Chart</a>."</p>
+<ul style="text-align: justify;">
+<li>Also, note that <em><span><span class="pali-term term-highlight" data-term="hiri">hiri</span></span></em> (shame of immoral deeds) and <em><span><span class="pali-term term-highlight" data-term="ottappa">ottappa</span></span></em> (fear of the consequences of evil deeds) are the two that are opposed to the immoral ones of <em><span><span class="pali-term term-highlight" data-term="ahiri">ahiri</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anottappa">anottappa</span></span></em>.  That means one can sort out right from wrong (moral from corrupt) in that instance.</li>
+<li>Then there is <em><span><span class="pali-term term-highlight" data-term="saddhā">saddhā</span></span></em> (faith) and <em><span><span class="pali-term term-highlight" data-term="sati">sati</span></span></em> (mindfulness), which grow even more after embarking on the Path. Here, <em><span><span class="pali-term term-highlight" data-term="saddhā">saddhā</span></span></em><span> is not the faith in <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, or Saṅgha, but the faith that such a moral act will bring about good outcomes.</span></li>
+<li>And<em><span> <span class="pali-term term-highlight" data-term="sati">sati</span></span></em> is NOT <em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span></span></em>, but just the mindfulness of being involved in a moral act. However, once one gets on the<em> lokottara</em> eightfold Path, it can become <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span>.</span></em></strong></span></li>
+<li>The other two familiar ones are <em><span><span class="pali-term term-highlight" data-term="alobha">alobha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="adosa">adosa</span></span></em> <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>; they are opposite to the immoral ones of <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>. <em><span><span class="pali-term term-highlight" data-term="alobha">Alobha</span></span></em> is not a mere absence of <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em> but also embodies generosity. <em><span><span class="pali-term term-highlight" data-term="adosa">Adosa</span></span></em> is not the mere absence of <em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em> but embodies compassion.</li>
+<li>Then there is <em>tatramajjhattatā</em> (neutrality of mind; "<em>majjhatta</em>" means "in the middle"). That is not <em>upekkha</em>, one of the  <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="bojjhaṅga">Bojjhaṅga</span></span></em>; see "<a href="../../pages/TS.AA.010/index.html" rel="noopener noreferrer" target="_blank">37 Factors of Enlightenment</a>".</li>
+<li>Thus far, we have discussed the 19  universal moral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>in #7 and #8. Now let us discuss the six moral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> that arise only with some <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span>Six <span class="pali-term term-highlight" data-term="sobhana cetasika">Sobhana Cetasika</span> </span></em>Require Understanding of <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em></h5>
+<p style="text-align: justify;">9. It is easier to list the six moral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> that do not necessarily arise with each <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. <span style="color: #3366ff;">These are the ones that NEED TO BE CULTIVATED with the comprehension of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.</span></p>
+<ul style="text-align: justify;">
+<li>They are <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vācā</span></em></strong></span> (speech that is conducive to eliminating "<em>san</em>"), <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Kammanta</span></em></strong></span> (actions that are conducive to eliminating "<em>san</em>"), <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Ājiva</span></em></strong></span> (a lifestyle that is conducive to eliminating "<em>san</em>"), <span style="color: #3366ff;"><strong><em>karunā</em> </strong></span>("<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>" compassion), <span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="muditā">muditā</span></span></em></strong></span> ("<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>" appreciative joy), and <span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em></strong></span> (wisdom) which is the same as <em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></strong></span>.</em></li>
+<li>Of course, <strong>mundane versions of those</strong> are developed to some extent when someone lives one's life morally, but they will NEVER grow to higher stages until one understands <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, </span></em>and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span>, </span></em>at least to some extent. In particular, <span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em></strong></span> (wisdom) starts emerging ONLY when one starts grasping <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, </span></em>and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>; that happens at an early stage of <em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span></span></em> (not mundane) <em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></strong></span>.</em></li>
+<li>That is why <em><span><span class="pali-term term-highlight" data-term="sammā">sammā</span> vācā</span></em> is not just "good speech," or <em><span><span class="pali-term term-highlight" data-term="sammā">sammā</span> kammaṃta</span></em> is not just "good deeds." <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span></span></em> ("<em>san</em>" + "<em>ma</em>") means "to remove "<em>san</em>'," i.e., done with an understanding of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>; see, "<a href="../../pages/TL.HH.008/index.html" rel="noopener noreferrer" target="_blank">Why is Correct Interpretation of Anicca, Dukkha, Anatta so Important?</a>".</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="amoha">Amoha</span> </span></em>Is Not<em><span> <span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em></h5>
+<p style="text-align: justify;"><strong>10. However, <em><span><span class="pali-term term-highlight" data-term="amoha">amoha</span></span></em> does not mean wisdom (<em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em>)!</strong> <em><span><span class="pali-term term-highlight" data-term="amoha">Amoha</span></span></em> is not a <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> but is a root cause.<strong>  <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em> is in all <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in the sense that the immoral <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> of<em><span> <span class="pali-term term-highlight" data-term="moha">moha</span></span></em> is not present at that moment, i.e., the mind is not "covered."</strong></p>
+<ul style="text-align: justify;">
+<li>Some people interpret <em><span><span class="pali-term term-highlight" data-term="amoha">amoha</span></span></em> to be <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em>; not so. <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em> (wisdom) or<em><span> lokottara <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> needs to be cultivated via comprehending <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, and starts when one is on the <em><span>Sotāpaññā <span class="pali-term term-highlight" data-term="magga">magga</span></span></em>; see, "<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma - In a Chart</a>" and "<a href="../../pages/TL.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is Unique in Buddha Dhamma</a>."</li>
+<li>The more <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em> one has, the more likely one will generate <em><span><span class="pali-term term-highlight" data-term="amoha">amoha</span></span></em> thoughts more frequently!</li>
+<li>No matter how intelligent one is, one cannot start cultivating <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em> until one hears the correct interpretations of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></em></li>
+</ul>
+<h5 style="text-align: justify;">Directing <em><span>Pakinnaka <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> Toward Noble Path</h5>
+<p style="text-align: justify;">11. Now, let us briefly revisit the six <strong>particulars (also called occasionals) </strong>or <em>pakinnaka</em> we mentioned in #2 above.<em> </em>They are <em><span><span class="pali-term term-highlight" data-term="vitakka">vitakka</span></span></em> (focused application), <em><span><span class="pali-term term-highlight" data-term="vicāra">vicāra</span></span></em> (sustained application), <em><span><span class="pali-term term-highlight" data-term="adhimokkha">adhimokkha</span></span></em> (dominate), <em><span><span class="pali-term term-highlight" data-term="viriya">viriya</span></span></em> (effort), <em>piti</em> (joy), <em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span></span></em> (desire).</p>
+<ul style="text-align: justify;">
+<li>As we can readily see, these six can be in <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em> and make them stronger.</li>
+<li>That is why it is said that "<em>Dhammo ha ve rakkhati dhammacāriṁ</em><span>" or "<span class="pali-term term-highlight" data-term="dhamma">dhamma</span> will guide one in the direction of <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> that one follows" applies to both moral AND immoral paths.</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="vitakka">Vitakka</span> </span></em>(focused application of thoughts), when cultivated in the <em>lokottara</em> Path, can become <em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">sammā saṅkappa</span></span></strong></span>.</em> Similarly, <em><span><span class="pali-term term-highlight" data-term="viriya">viriya</span> (effort) can become </span><em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="sammā vāyāma">sammā vāyāma</span></span></strong></span>. </em></em></li>
+</ul>
+<h5 style="text-align: justify;">Good and Bad <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> Associated with <em>Sobhana</em> and <em><span>Asobhana <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em></h5>
+<p style="text-align: justify;">12. Therefore, <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> helps us understand the connection between <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> and how "bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>"</span></em> are removed at each stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>(see #5 above). We can also see from the above discussion how 8 of the <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> (related to "good <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>") turn into components of the Noble Eightfold Path when one starts on the <em><span>Sotāpaññā <span class="pali-term term-highlight" data-term="magga">magga</span></span></em>. We discussed only seven above (highlighted in bold red). The eighth one is the universal <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>, <em>ekaggata</em> (one-pointedness), which can become <em><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="sammā samādhi">sammā samādhi</span></span></strong></span>.</em></p>
+<ul style="text-align: justify;">
+<li>However, depending on one's behavior and understanding, all these eight could be developed in the direction of the immoral (<em><span><span class="pali-term term-highlight" data-term="micchā">micchā</span></span></em> eightfold Path), mundane moral (<em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span> </span></em>eightfold Path), or the <em>lokottara</em> Noble Eightfold Path; see "<a href="../../pages/TL.GG.009/index.html" rel="noopener noreferrer" target="_blank">Three Kinds of Diṭṭhi, Eightfold Paths, and Samadhi</a>."</li>
+<li>Looking from different perspectives, there could be many types of <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>. For a discussion on three other types of <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>, see "<a href="../../pages/BM.DD.006/index.html" rel="noopener noreferrer" target="_blank">What is Samadhi? – Three Kinds of Mindfulness</a>".</li>
+</ul>
+<p style="text-align: justify;"><span>13. This world is very complex. And the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has analyzed it in many different ways. But they are all self-consistent. If one can get some traction, there is no other pleasure better than finding out about this world, the pleasure of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></p>
+<ul>
+<li style="text-align: justify;">"<em>Sabba<strong>ratiṁ</strong><span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span><strong>ratiṁ </strong> jināti</em><span>" means "from all tastes in the world, the taste of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> wins." Here "</span><strong><em>rati</em></strong><span>" means "taste." Thus, The "taste of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" optimizes for an </span><em>Anāgāmi</em>.</li>
+<li style="text-align: justify;">However, at <em>Arahanthood</em><span>, one loses all interest in worldly things, including <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "A boat is needed only to cross a river; one should not carry it after crossing it.  Just like that, even my <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> needs to be used only to find the true nature of this world, and then it should be discarded too".</span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/AB.BB.009/index.html">Javana Of A Citta The Root Of Mental Power</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/AB.CC.001/index.html">The Mind</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/AB.BB.009/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Javana Of A Citta The Root Of Mental Power</span>
+        
+        <span class="pathway-title title-pt">Javana Of A Citta The Root Of Mental Power</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/AB.CC.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">The Mind</span>
+        
+        <span class="pathway-title title-pt">The Mind</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-AB">
+        ↑ Back to Abhidhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>How To Cultivate The Noble Eightfold Path Starting With Anicca Dukkha Anatta | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 65 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.HH.009</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">How To Cultivate The Noble Eightfold Path Starting With Anicca Dukkha Anatta</h1>
+    
+    <h1 class="title-pt">Como Cultivar o Nobre Caminho Óctuplo Começando com Anicca Dukkha Anattā</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.HH.009</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.HH.009"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0460"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.HH.009</td></tr><tr><td>Fin-dex</td><td>0460</td></tr><tr><td>Slug</td><td>how-to-cultivate-the-noble-eightfold-path-starting-with-anicca-dukkha-anatta</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>How To Cultivate The Noble Eightfold Path Starting With Anicca Dukkha Anatta</td></tr></table></div></div><p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> describe the true nature of this world with 31 realms. Thus one needs to comprehend these "three characteristics of nature" in order to "see" the path to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> before starting to follow it.</p>
+<p style="text-align: justify"><span>1. Before one starts on a journey one needs to decide why one should take the journey, exactly where one is going to, and the correct path towards that destination. Thus it is worthwhile to examine why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said  our goal should be to move away from this world towards </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>, why he said that, why one should believe that to be true, and what the correct path towards that goal is. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> himself recommended that approach:</span></p>
+<ul style="text-align: justify">
+<li>One starts on the Noble Eightfold Path with <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>, which means the needed "vision" on why, what to expect at the end , and an idea about the path to achieve it.</li>
+<li>Out of the twelve <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span> cittā</span></em>, five are permanently removed when one attains the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage: the four greedy <em>cittā</em>  that arise with wrong view ("<em>diṭṭhi sahagatha</em>"), and the delusion<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> based on<em> vicikicca</em>. All five of these <em>cittā</em> arise because one does not know the true nature of the world; all <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> that lead one to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the</span><em> apāyā</em> are done with these five<em> cittā</em>. Thus when they are removed by partially completing <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> at the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span> stage, one is permanently prevented from accumulating <span class="pali-term term-highlight" data-term="kamma">kamma</span> that destines one to a <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the lowest four realms (</span><em>apāyā</em>).</li>
+<li>Furthermore, any such <em><span>apāyagāmi <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds previously accumulated are prevented from proving a potent enough <em><span><span class="pali-term term-highlight" data-term="nimitta">nimitta</span></span></em> at the moment of death; thus birth in the <em>apāyā</em> is automatically prevented.</li>
+<li>Looking at it from another angle, out of the 10 <em>samyojanas</em> (those that binds one to <em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span></span></em>), three are removed at the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage: <em>sathkaya diṭṭhi</em> (the idea that all actions one does with the six sense bases to achieve <em><span>amisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> are beneficial), <em>vicikicca</em> (distorted mindset), and <em>silabbata paramasa</em> (the idea that <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> can be attained just by following precepts, without purifying one's mind). All three are due to not having <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>, or not knowing  the true nature of the world: <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></em></li>
+<li>In the <em><span>Sabbasava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>, there are seven recommended methods for removing defilements for anyone starting on the Path. The first item on the list describes how one can get rid of a bulk of defilements just with correct vision of "this world", i.e., "<em>dassanena pahathabba</em>"; this is what was discussed above.</li>
+<li>Once one understands the true nature of "this world" and understands how to remove the rest of the defilements, then the other six steps are taken, of which "<em>bhavanaya pahathabba</em>" (i.e., removal by meditation) comes last. Today, most people start meditating without clearly understanding what to meditate about.</li>
+</ul>
+<p style="text-align: justify">2. Thus,first one needs to understand why we need to escape from "this world".</p>
+<ul style="text-align: justify">
+<li>The three characteristics of "this world" (see, "<a href="../../pages/KD.FF.001/index.html" rel="noopener" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anatta</a>") tell us that we can NEVER achieve AND maintain whatever we desire (characteristic of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>), thus we mostly end up with suffering (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>), and thus one is not in control and becomes helpless (<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>). The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> merely DISCOVERED this true nature of the world. Many people take <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> to be pessimistic, but <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was just a messenger.</span></li>
+<li><span>Moreover, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> gave us an optimistic message too. For those who are willing to examine the true nature of the world, there is a better version of happiness that comes from moving away from "this world", i.e., by voluntarily giving up craving for things in this world. This is the </span><em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a><span>), which increases as one starts on the Path and becomes complete and PERMANENT at the <span class="pali-term term-highlight" data-term="arahant">Arahant</span> stage. Even if one does not get to the first stage of </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage, one could experience this <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em><span>, and may help shorten the path to <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> in the upcoming lives.</span></li>
+</ul>
+<p style="text-align: justify">3. Therefore it is CRITICAL to understand <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>, before we proceed further here. If you have not done so, please spend some time critically examining and contemplating on these concepts described under many <span class="pali-term term-highlight" data-term="posts">posts</span> on this website, in particular, "</span><a href="../../pages/KD.FF.001/index.html" rel="noopener" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anatta</a>", "<a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>" and the links following that on "<a href="../../pages/BD.AA.006/index.html" rel="noopener" target="_blank" title="Saṃsāric Time Scale">Saṃsāric Time Scale, Buddhist Cosmology, and the Big Bang Theory</a>", and "<a href="../../pages/BD.AA.007/index.html" rel="noopener" target="_blank" title="Evidence for Rebirth">Evidence for Rebirth</a>", and "<a href="../../pages/TL.HH.008/index.html" rel="noopener" target="_blank" title="Why is Correct Interpretation of Anicca, Dukkha, Anatta so Important?">Why is Correct Interpretation of Anicca. Dukkha, Anatta so Important?</a><span>". It may be even helpful for many to scan through many other <span class="pali-term term-highlight" data-term="posts">posts</span> before reading those <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></p>
+<ul>
+<li style="text-align: justify"><span>That is a lot of reading. But "this world" of 31 realms is very complex. Please keep re-reading all <span class="pali-term term-highlight" data-term="posts">posts</span> until you understand the message. Most of these concepts have been hidden for thousand years, and have been badly distorted, especially </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>. <strong>Think about the fact that all biological matter is constituted from just four bases of DNA, and all computer codes are based on two units, 0 and 1.</strong> Thus, one could see how complex the "whole existence" with 31 realms is when there are 28 types of<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>, 89 types of <em>cittā</em> and 52 types of <em>cetasikas</em> are involved!</li>
+</ul>
+<p style="text-align: justify">4. The main conclusion from <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is "<em><span>asarattena <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>", i.e., "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span> in the sense of it is fruitless to crave for anything in  this world". Thus the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em><span>anissitoca viharathi, na ca kinci <span class="pali-term term-highlight" data-term="loke">loke</span> upadiyathi</span></em>", i.e., "There is nothing in this world that is  fruitful, there is nothing to be craved".</p>
+<ul style="text-align: justify">
+<li>People "behave badly" in order to "get what they perceive to be valuable". All immoral acts are done to "get what we want". We crave for something and greed arise, and then when we don't get what we wish for, we get angry and hate arises. We first think bad thoughts (<em><span><span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>), then follow through with bad words (<em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>), and bodily action (<em><span>kaya <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>). We do all this because we do not have an understanding of the true nature of the world, i.e., <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>, and related facts: knowledge of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in a wider world  of 31 realms with suffering. Thus we do all other bad acts with established wrong views (</span><em><span>niyata <span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>); see, "<a href="../../pages/TL.EE.003/index.html" rel="noopener" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Ten Immoral Actions (Dasa Akusala)</a>".</li>
+</ul>
+<p style="text-align: justify">5. Now let us see what happens when one starts learning the true nature of the world including <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, and ALSO the consequences of immoral actions: Then one thinks, "Is it worthwhile to steal from someone to get what I want, which in the end will do me more harm than good (because those will not provide any permanent happiness, AND one has to pay the price of an immoral action if not in this life but in upcoming lives?)".</p>
+<ul style="text-align: justify">
+<li>Same for any other immoral act: to hurt someone by, uttering false, slandering, harsh, or frivolous speech; stealing, killing, or engaging in sexual misconduct (hurting other parties involved). AND all those start with covetousness, ill-will, and all those are done because of established false views that fruitful things can be had in this world by hurting others without any bad consequences for oneself.</li>
+</ul>
+<p style="text-align: justify">6. Thus when one is about to think of doing such a bad deed or having bad thoughts, this "clear vision" or <em>samma diṭṭhi</em> will help get rid of such thoughts and instead think, "this person is in the same boat, struggling to survive in a world setup for failure". Thus instead of bad thoughts one will have thoughts of fellowship and compassion for other beings.</p>
+<ul>
+<li style="text-align: justify"><span>Also one will be working to learn more <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and will be constantly thinking about  <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> concepts like </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>; the joy from deeper understanding will provide incentive to dig deeper on concepts that are not clear. Thus <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> leads to the next step in the Noble Eightfold Path: <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">7. With such a mindset one will avoid the four forms of bad speech (lying, slandering, vicious talk, vain talk), because one realizes that such acts will only lead to loss of peace of mind as well as hurting others. Thus one will start living with <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vaca</span></em>; also see, "<a href="../../pages/TL.CC.004/index.html" rel="noopener" target="_blank" title="Right Speech – How to Avoid Accumulating Kammas">Right Speech - How to Avoid Accumulating Kamma</a>".</p>
+<p style="text-align: justify">8. Similarly, one will clearly see that there is no point in engaging in immoral bodily acts (killing, stealing, and sexual misconduct) in order to get some temporary satisfaction, which in the end will come back to haunt oneself with magnified bad consequences. This will AUTOMATICALLY guide one to act in a moral fashion, i.e., one will have <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Kammanta</span></em>.</p>
+<p style="text-align: justify">9. In standard texts, it says one will not undertake the five lifestyles that are to be avoided:</p>
+<p style="text-align: justify">(a) Dealing and killing animals for meat trade.
+(b) Dealing in poisons.
+(c) Dealing in weapons and arms.
+(d) Dealing in slave trade and prostitution.
+(e) Dealing in intoxicants or liquors and drugs.</p>
+<ul style="text-align: justify">
+<li><em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> ajiva</span></em> is more than that. Thus one's lifestyle will automatically change to not only moral living, but also to avoid any kind of act which will be harmful to oneself and/or others. One will take care of one's responsibilities towards one's family and the society, because otherwise one will get in deeper debt, and will not have the mindset to contemplate; see, "<a href="../../pages/TL.GG.007/index.html" rel="noopener" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Debt, and Meditation</a>".</li>
+<li><strong><span>Following the Path is much more than just abandoning everything and becoming a <span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span> or just following some guidelines or precepts. It needs to be done with wisdom gained through learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></strong> This is <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Ajiva</span></em>.</li>
+</ul>
+<p style="text-align: justify">10. As one feels the benefits of such a lifestyle, one will start feeling the <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> (see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a><span>)".  Then one will be motivated to stay on that Path, and also to learn more about the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> and to contemplate  more on the Three Characteristics (one is said to have a complete understanding of </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> only when one reaches the <em>Arahanthood</em> or full <em><span><span class="pali-term term-highlight" data-term="nibbana">NIbbana</span></span></em>). This renewed effort is <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vayama</span></em>.</p>
+<p style="text-align: justify">11. The above six factors will make one's mind purified and one will start "seeing" better. One will start working with "<em><span><span class="pali-term term-highlight" data-term="yoniso">yoniso</span> manasikara</span></em>" (clear vision). It is more than clear thinking; even a master thief plans his work with clear thinking (on the wrong side).</p>
+<ul>
+<li style="text-align: justify">Here what it means is one always looks at any issue with <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> in the mind: that it is not possible to maintain things to our satisfaction in the long run; that the more we attach either via greed or hate, the more we will suffer; that it is unwise to do immoral things for temporary happiness to become helpless at the end. This is <em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">12. When one starts meditating (and this does not have to be last; one can start slowly from the beginning), <strong>one will be easily able to get to <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Samadhi</span></em></strong>, focused attention (<em>ekaggata</em>). The more one proceeds on the Path (i.e., the more the mind becomes purified), easier <em>samadhi</em> starts to grow in oneself.; one starts feeling a "lightness" even when not doing formal meditation.</p>
+<ul>
+<li style="text-align: justify">If one works on developing <em>jhānā</em>, one will be able to get to <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> jhānā</span></em>.  Whether one will be using meditation on the Three Characteristics, <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em>, or any other other type of mediation, that will eventually lead to the four levels of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">13. It is important to realize that "<em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span></span></em>" in all these eight steps means "<em>san</em><span>" (adding things to perpetuate the suffering/<span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process) + "</span><em>ma</em>" (remove or get rid of). Thus <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> is the vision (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) that helps removing "<em>san</em>"; <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span></span></em> are the thoughts that help remove '<em>san</em>"; <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vaca</span></em> is the kind of speech that helps remove '<em>san</em>", etc.</p>
+<ul>
+<li style="text-align: justify">Thus, one adheres to the eight steps through the UNDERSTANDING of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>, and not merely for the sake of following some guidelines or precepts. One understands the futility of continuing this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+</ul>
+<p style="text-align: justify">Next, "<a href="../../pages/TL.HH.010/index.html" rel="noopener" target="_blank" title="Akusala Citta – How a Sotāpanna Avoids Apayagami Citta">Akusala Citta - How  a Sotāpanna Avoids Apayagami Citta</a>", ............</p>
+<p style="text-align: justify"></p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.HH.009"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0460"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.HH.009
+Language:     pt-BR
+Generated-At: 2026-03-10T23:19:43Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> descrevem a verdadeira natureza deste mundo com 31 reinos. Assim, é preciso compreender essas “três características da natureza” para “ver” o caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> antes de começar a segui-lo.</p>
+<p style="text-align: justify"><span>1. Antes de iniciar uma jornada, é preciso decidir por que se deve empreendê-la, para onde exatamente se está indo e qual é o caminho correto para chegar ao destino. Portanto, vale a pena examinar por que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que nosso objetivo deve ser afastar-nos deste mundo em direção </span><em><span>ao <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>, por que ele disse isso, por que devemos acreditar que isso é verdade e qual é o caminho correto para alcançar esse objetivo. O próprio <span class="pali-term term-highlight" data-term="buddha">Buddha</span> recomendou essa abordagem:</span></p>
+<ul style="text-align: justify">
+<li>Começa-se o Nobre Caminho Óctuplo com <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>, que significa a “visão” necessária sobre o porquê, o que esperar no final e uma ideia sobre o caminho para alcançá-lo.</li>
+<li>Das doze <em><span><span class="pali-term term-highlight" data-term="akusala citta">Akusala Citta</span></span></em>, cinco são removidas permanentemente quando se atinge o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>: as quatro <em>Cittā</em> gananciosas que surgem com a visão errada (“<em>diṭṭhi sahagatha</em>”) e a ilusão<em><span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> baseada em<em> vicikicca</em>. Todas essas cinco <em>cittā</em> surgem porque a pessoa não conhece a verdadeira natureza do mundo; todo <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que leva alguém ao renascimento no <em>apāyā</em> é feito com essas cinco<em> cittā</em>. Assim, quando elas são removidas ao completar parcialmente <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span>, a pessoa é permanentemente impedida de acumular <span class="pali-term term-highlight" data-term="kamma">Kamma</span> que a destina a um renascimento nos quatro reinos mais baixos (</span><em>apāyā</em>).</li>
+<li>Além disso, quaisquer sementes de <em><span>apāyagāmi <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> acumuladas anteriormente são impedidas de se provarem um <em><span><span class="pali-term term-highlight" data-term="nimitta">Nimitta</span></span></em> potente o suficiente no momento da morte; assim, o nascimento no <em>apāyā</em> é automaticamente impedido.</li>
+<li>Olhando por outro ângulo, dos 10 <em>samyojanas</em> (aqueles que prendem a pessoa ao <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em>), três são removidos no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>: <em>sathkaya diṭṭhi</em> (a ideia de que todas as ações que se realizam com as seis bases sensoriais para alcançar <em><span>amisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> são benéficas), <em>vicikicca</em> (mentalidade distorcida) e <em>silabbata paramasa</em> (a ideia de que <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> pode ser alcançado apenas seguindo os preceitos, sem purificar a mente). Todos os três são devidos à falta de <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>, ou ao desconhecimento da verdadeira natureza do mundo: <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā.</span></em></li>
+<li>No <em><span>Sabbasava <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>, há sete métodos recomendados para remover as impurezas para qualquer pessoa que esteja começando no Caminho. O primeiro item da lista descreve como alguém pode se livrar de grande parte das impurezas apenas com a visão correta deste mundo, ou seja, <em>“dassanena pahathabba</em>”; isso foi discutido acima.</li>
+<li>Uma vez que se compreende a verdadeira natureza deste mundo e se entende como remover o resto das impurezas, então os outros seis passos são dados, dos quais “<em>bhavanaya pahathabba</em>” (ou seja, remoção por meditação) vem por último. Hoje, a maioria das pessoas começa a meditar sem entender claramente sobre o que meditar.</li>
+</ul>
+<p style="text-align: justify">2. Assim, primeiro é preciso compreender por que precisamos escapar deste mundo.</p>
+<ul style="text-align: justify">
+<li>As três características deste mundo (ver “<a href="../../pages/KD.FF.001/index.html" rel="noopener" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, An</a><span><span class="pali-term term-highlight" data-term="attā">attā</span>”) nos dizem que NUNCA podemos alcançar E manter tudo o que desejamos (característica de </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>), portanto, na maioria das vezes acabamos sofrendo (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>) e, assim, não temos controle e nos tornamos impotentes (<em>Anattā</em><span>). O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> apenas DESCOBRIU essa verdadeira natureza do mundo. Muitas pessoas consideram o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> pessimista, mas o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> era apenas um mensageiro.</span></li>
+<li><span>Além disso, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> também nos deu uma mensagem otimista. Para aqueles que estão dispostos a examinar a verdadeira natureza do mundo, existe uma versão melhor da felicidade que vem de se afastar deste mundo, ou seja, de voluntariamente abandonar o desejo pelas coisas deste mundo. Esta é a </span><em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (ver “<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade - O que é Niramisa Sukha?</a><span>”), que aumenta à medida que se inicia o Caminho e se torna completa e PERMANENTE no estágio de <span class="pali-term term-highlight" data-term="arahant">Arahant</span>. Mesmo que não se chegue ao primeiro estágio do </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, é possível experimentar este <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em><span>, o que pode ajudar a encurtar o caminho para o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> nas próximas vidas.</span></li>
+</ul>
+<p style="text-align: justify">3. Portanto, é FUNDAMENTAL compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>, antes de prosseguirmos adiante aqui. Se você ainda não o fez, por favor, dedique algum tempo examinando e contemplando criticamente esses conceitos descritos em muitos ensaios neste site, em particular, <a href="../../pages/KD.FF.001/index.html" rel="noopener" target="_blank" title="Anicca, Dukkha, Anatta">“Anicca, Dukkha, Anattā</a>”, “<a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank" title="The Grand Unified Theory of Dhamma">A Grande Teoria Unificada do Dhamma</a>” e os links a seguir sobre “<a href="../../pages/BD.AA.006/index.html" rel="noopener" target="_blank" title="Saṃsāric Time Scale">Escala de Tempo Saṃsāric, Cosmologia Buddhista e a Teoria do Big Bang</a>”, “<a href="../../pages/BD.AA.007/index.html" rel="noopener" target="_blank" title="Evidence for Rebirth">Evidências do Renascimento</a>” e “<a href="../../pages/TL.HH.008/index.html" rel="noopener" target="_blank" title="Why is Correct Interpretation of Anicca, Dukkha, Anatta so Important?">Por que a interpretação correta de Anicca, Dukkha e Anattā é tão importante?</a>”. Pode ser útil para muitos dar uma olhada em muitos outros ensaios antes de ler esses ensaios.</p>
+<ul>
+<li style="text-align: justify">É muita leitura. Mas “este mundo” de 31 reinos é muito complexo. Por favor, continue relendo todos os ensaios até entender a mensagem. A maioria desses conceitos ficou oculta por milhares de anos e foi gravemente distorcida, especialmente <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em>. <strong>Pense no fato de que toda a matéria biológica é constituída por apenas quatro bases de DNA, e todos os códigos de computador são baseados em duas unidades, 0 e 1.</strong> Assim, pode-se ver como é complexa a “existência total” com 31 reinos, quando há 28 tipos de<em><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>, 89 tipos de <em>cittā</em> e 52 tipos de <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> envolvidos!</li>
+</ul>
+<p style="text-align: justify">4. A principal conclusão de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> é “<em>asarattena Anattā</em>”, ou seja, “<em>Anattā</em><span> no sentido de que é inútil desejar qualquer coisa neste mundo”. Assim, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span>anissitoca viharathi, na ca kinci <span class="pali-term term-highlight" data-term="loke">loke</span> upadiyathi</span></em>”, ou seja, “Não há nada neste mundo que seja frutífero, não há nada a ser desejado”.</p>
+<ul style="text-align: justify">
+<li>As pessoas “se comportam mal” para “obter o que consideram valioso”. Todos os atos imorais são feitos para “obter o que queremos”. Desejamos algo e a ganância surge, e então, quando não conseguimos o que desejamos, ficamos com raiva e o ódio surge. Primeiro temos pensamentos ruins (<em><span><span class="pali-term term-highlight" data-term="mano">Mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>), depois seguimos com palavras ruins (<em><span>Vaci <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) e ações corporais (<em><span>Kaya <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>). Fazemos tudo isso porque não compreendemos a verdadeira natureza do mundo, ou seja, <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> e fatos relacionados: o conhecimento do renascimento em um mundo mais amplo de 31 reinos com sofrimento. Assim, praticamos todos os outros atos ruins com visões erradas estabelecidas (<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em>); veja “<a href="../../pages/TL.EE.003/index.html" rel="noopener" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Dez Ações Imorais (Dasa Akusala)</a>”.</li>
+</ul>
+<p style="text-align: justify">5. Agora, vamos ver o que acontece quando alguém começa a aprender a verdadeira natureza do mundo, incluindo <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> e TAMBÉM as consequências das ações imorais: Então a pessoa pensa: “Vale a pena roubar alguém para conseguir o que quero, o que no final me trará mais mal do que bem (porque isso não proporcionará nenhuma felicidade permanente, E a pessoa terá que pagar o preço de uma ação imoral, se não nesta vida, então nas próximas vidas?)”.</p>
+<ul style="text-align: justify">
+<li>O mesmo vale para qualquer outro ato imoral: ferir alguém com palavras falsas, caluniosas, duras ou frívolas; roubar, matar ou se envolver em conduta sexual imprópria (ferindo outras partes envolvidas). E tudo isso começa com cobiça, má vontade, e tudo isso é feito por causa de visões falsas estabelecidas de que coisas frutíferas podem ser obtidas neste mundo ferindo os outros, sem quaisquer consequências ruins para si mesmo.</li>
+</ul>
+<p style="text-align: justify">6. Assim, quando alguém está prestes a pensar em fazer uma ação ruim ou ter pensamentos ruins, essa “visão clara” ou <em>samma diṭṭhi</em> ajudará a se livrar desses pensamentos e, em vez disso, pensar: “essa pessoa está no mesmo barco, lutando para sobreviver em um mundo configurado para o fracasso”. Assim, em vez de pensamentos ruins, terá pensamentos de companheirismo e compaixão por outros seres.</p>
+<ul>
+<li style="text-align: justify"><span>Além disso, a pessoa se esforçará para aprender mais sobre o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e pensará constantemente sobre conceitos do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, como </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>; a alegria de uma compreensão mais profunda fornecerá incentivo para aprofundar conceitos que não estão claros. Assim<em><span>, <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> leva ao próximo passo no Nobre Caminho Óctuplo: <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">7. Com essa mentalidade, evitará as quatro formas de fala ruim (mentir, caluniar, falar maliciosamente, falar em vão), porque perceberá que tais atos só levarão à perda da paz de espírito, além de ferir os outros. Assim, começará a viver com <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vaca</span></em>; veja também “<a href="../../pages/TL.CC.004/index.html" rel="noopener" target="_blank" title="Right Speech – How to Avoid Accumulating Kammas">Fala Correta - Como Evitar Acumular Kamma</a>”.</p>
+<p style="text-align: justify">8. Da mesma forma, ver-se-á claramente que não faz sentido envolver-se em atos corporais imorais (matar, roubar e conduta sexual imprópria) para obter alguma satisfação temporária, que no final acabará por voltar para assombrar a pessoa com consequências ruins ampliadas. Isso guiará AUTOMATICAMENTE a pessoa a agir de maneira moral, ou seja, ela terá <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Kammanta</span></em>.</p>
+<p style="text-align: justify">9. Nos textos padrão, diz-se que não se deve adotar os cinco estilos de vida que devem ser evitados:</p>
+<p style="text-align: justify">(a) Negociar e matar animais para o comércio de carne.
+(b) Negociar com venenos.
+(c) Negociar com armas e armamentos.
+(d) Negociar com escravos e prostituição.
+(e) Negociar com substâncias intoxicantes ou bebidas alcoólicas e drogas.</p>
+<ul style="text-align: justify">
+<li><em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> ajiva</span></em> é mais do que isso. Assim, o estilo de vida de alguém mudará automaticamente não apenas para uma vida moral, mas também para evitar qualquer tipo de ato que seja prejudicial a si mesmo e/ou aos outros. Alguém cuidará de suas responsabilidades para com sua família e a sociedade, porque, caso contrário, ficará em dívidas mais profundas e não terá a mentalidade para contemplar; veja “<a href="../../pages/TL.GG.007/index.html" rel="noopener" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Dívida e Meditação</a>”.</li>
+<li><strong><span>Seguir o Caminho é muito mais do que simplesmente abandonar tudo e se tornar um <span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span> ou apenas seguir algumas diretrizes ou preceitos. É preciso fazê-lo com a sabedoria adquirida através do aprendizado do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></strong> Isso é <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Ajiva</span></em>.</li>
+</ul>
+<p style="text-align: justify">10. À medida que se sente os benefícios desse estilo de vida, começa-se a sentir o <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> (veja “<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade — O que é Niramisa Sukha?</a><span>”).  Então, a pessoa ficará motivada a permanecer nesse Caminho e também a aprender mais sobre o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> e a contemplar mais as Três Características (diz-se que só se tem uma compreensão completa de </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> quando se alcança o <em>Arahanthood</em> ou <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> completo). Esse esforço renovado é <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vayama</span></em>.</p>
+<p style="text-align: justify">11. Os seis fatores acima purificarão a mente e a pessoa começará a “ver” melhor. Ela começará a trabalhar com “<em><span><span class="pali-term term-highlight" data-term="yoniso">yoniso</span> manasikara</span></em>” (visão clara). É mais do que pensar com clareza; até mesmo um ladrão experiente planeja seu trabalho com clareza (do lado errado).</p>
+<ul>
+<li style="text-align: justify">Aqui, o que isso significa é que a pessoa sempre encara qualquer questão com <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> na mente: que não é possível manter as coisas a nosso gosto a longo prazo; que quanto mais nos apegamos, seja por ganância ou ódio, mais sofreremos; que não é sensato fazer coisas imorais por felicidade temporária para nos tornarmos impotentes no final. Isso é <em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">12. Quando se começa a meditar (e isso não precisa ser o último passo; pode-se começar devagar desde o início), <strong>será fácil chegar a <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Samadhi</span></em></strong>, atenção focada (<em>ekaggata</em>). Quanto mais se avança no Caminho (ou seja, quanto mais a mente se purifica), mais fácil se torna <em>o samadhi</em>; começa-se a sentir uma “leveza” mesmo quando não se está fazendo meditação formal.</p>
+<ul>
+<li style="text-align: justify">Se a pessoa trabalhar no desenvolvimento <em>de jhānā</em>, será capaz de alcançar <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> jhānā</span></em>. Seja usando a meditação sobre as Três Características, <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> ou qualquer outro tipo de meditação, isso acabará levando aos quatro níveis de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">13. É importante perceber que “<em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span></span></em>” em todos esses oito passos significa “<em>san</em>” (adicionar coisas para perpetuar o processo de sofrimento/Renascimento) + “<em>ma</em>” (remover ou se livrar). Assim, <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> é a visão (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>) que ajuda a remover “<em>san</em>”; <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span></span></em> são os pensamentos que ajudam a remover “<em>san</em>”; <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vaca</span></em> é o tipo de discurso que ajuda a remover “<em>san</em>”, etc.</p>
+<ul>
+<li style="text-align: justify">Assim, a pessoa adere aos oito passos através da COMPREENSÃO de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>, e não apenas para seguir algumas diretrizes ou preceitos. A pessoa compreende a futilidade de continuar esse processo de Renascimento.</li>
+</ul>
+<p style="text-align: justify">A seguir, <a href="../../pages/TL.HH.010/index.html" rel="noopener" target="_blank" title="Akusala Citta – How a Sotāpanna Avoids Apayagami Citta">“Akusala Citta - Como um Sotāpanna evita Apayagami Citta</a>”, ............</p>
+<p style="text-align: justify"></p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.HH.008/index.html">Why The Correct Interpretation Of Anicca Dukkha Anatta So Important</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.HH.010/index.html">Akusala Citta How A Sotapanna Avoids Apayagami Citta</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.HH.008/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Why The Correct Interpretation Of Anicca Dukkha Anatta So Important</span>
+        
+        <span class="pathway-title title-pt">Por que a interpretação correta de Anicca Dukkha Anattā é tão importante?</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.HH.010/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Akusala Citta How A Sotapanna Avoids Apayagami Citta</span>
+        
+        <span class="pathway-title title-pt">Akusala Citta Como um Sotāpanna evita o Apayagami Citta</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

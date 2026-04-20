@@ -1,0 +1,375 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Dhamma | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 1 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.AA.000</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Dhamma</h1>
+    
+    <h1 class="title-pt">Dhamma</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.AA.000</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>1</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.AA.000"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0002"
+             data-level="intermediate"
+             data-reading-time="1"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.AA.000</td></tr><tr><td>Fin-dex</td><td>0002</td></tr><tr><td>Slug</td><td>dhamma</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Dhamma</td></tr></table></div></div><p class="entry-title"><a href="../../pages/BD.AA.001/index.html" rel="noopener noreferrer" target="_blank">User’s Guide to Pure Dhamma Website</a></p>
+<p><a href="../../pages/CH.AA.000/index.html" rel="noopener" target="_blank">Buddhism - In Charts</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/CH.AA.002/index.html" rel="noopener" target="_blank">Buddha Dhamma - Foundation</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – A Scientific Approach</a></p>
+<p class="entry-title"><a href="../../pages/BD.GG.001/index.html" title="Buddhahood Associated Controversies"><strong>Buddhahood Associated Controversies</strong></a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/BD.GG.002/index.html" rel="noopener noreferrer" target="_blank">Buddhahood Controversies – Introduction</a></li>
+<li class="entry-title"><a href="../../pages/BD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Pāṭihāriya (Supernormal Abilities) of a Buddha – Part I</a></li>
+<li class="entry-title"><a href="../../pages/BD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Pāṭihāriya (Supernormal Abilities) of a Buddha – Part II</a></li>
+<li class="entry-title"><a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – A Scientific Approac</a><a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">h</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.AA.002/index.html" rel="noopener noreferrer" target="_blank">What is Buddha Dhamma?</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.003/index.html" rel="noopener noreferrer" target="_blank">Foundation of Dhamma</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.004/index.html" rel="noopener noreferrer" target="_blank">The Importance of Purifying the Mind</a></p>
+<p class="entry-title"><a href="../../pages/BD.HH.001/index.html" title="The Grand Unified Theory of Dhamma"><strong><span>The Grand Unified Theory of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></strong></a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/BD.HH.002/index.html" rel="noopener noreferrer" target="_blank">The Grand Unified Theory of Dhamma – Introduction</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Our Two Worlds : Material and Mental</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Realms Associated with the Earth</a></li>
+<li class="entry-title">
+<p class="entry-title"><a href="../../pages/BD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Gandhabba – Only in Human and Animal Realms</a></p>
+</li>
+<li class="entry-title"><a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Body Types in 31 Realms – Importance of Manomaya Kāya</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.006/index.html" rel="noopener noreferrer" target="_blank">Gandhabba Sensing the World – With and Without a Physical Body</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.007/index.html" rel="noopener noreferrer" target="_blank">Nibbāna in the Big Picture</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.AA.005/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma: Non-Perceivability and Self-Consistency</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank">Saṃsāric Time Scale, Buddhist Cosmology, and the Big Bang Theory</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a></p>
+<p class="entry-title"><a href="../../pages/BD.II.002/index.html" title="Power of the Human Mind"><strong>Power of the Human Mind</strong></a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank">Power of the Human Mind – Introduction</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.003/index.html" rel="noopener noreferrer" target="_blank">Difference Between Jhāna and Stages of Nibbāna</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.004/index.html" rel="noopener noreferrer" target="_blank">Power of the Human Mind – Anāriya or Mundane Jhānas</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.005/index.html" rel="noopener noreferrer" target="_blank">Power of the Human Mind – Ariya Jhānas</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.006/index.html" rel="noopener noreferrer" target="_blank">Are There Procedures for Attaining Magga Phala, Jhāna and Abhiññā?</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.AA.008/index.html" rel="noopener noreferrer" target="_blank">Transfer of Merits (Pattidāna) – How Does it Happen?</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.009/index.html" rel="noopener noreferrer" target="_blank">First Noble Truth is Suffering? Myths about Suffering</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.010/index.html" rel="noopener noreferrer" target="_blank">Vinaya – The Nature Likes to be in Equilibrium</a></p>
+<p class="entry-title"> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.AA.000"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0002"
+             data-level="intermediate"
+             data-reading-time="1"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.AA.000
+Language:     pt-BR
+Generated-At: 2026-04-17T21:30:35Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p class="entry-title"><a href="../../pages/BD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Guia do usuário do site Pure Dhamma</a></p>
+<p><a href="../../pages/CH.AA.000/index.html" rel="noopener" target="_blank">Buddhismo - Em Gráficos</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/CH.AA.002/index.html" rel="noopener" target="_blank">Buddha Dhamma - Fundamentos</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Uma Abordagem Científica</a></p>
+<p class="entry-title"><a href="../../pages/BD.GG.001/index.html" title="Buddhahood Associated Controversies"><strong>Controvérsias relacionadas à iluminação</strong></a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/BD.GG.002/index.html" rel="noopener noreferrer" target="_blank">Controvérsias sobre a Iluminação – Introdução</a></li>
+<li class="entry-title"><a href="../../pages/BD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Pāṭihāriya (Habilidades Sobrenaturais) de um Buddha – Parte I</a></li>
+<li class="entry-title"><a href="../../pages/BD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Pāṭihāriya (Habilidades Sobrenaturais) de um Buddha – Parte II</a></li>
+<li class="entry-title"><a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Uma Abordagem Científica</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.AA.002/index.html" rel="noopener noreferrer" target="_blank">O que é o Buddha Dhamma?</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.003/index.html" rel="noopener noreferrer" target="_blank">Fundamentos do Dhamma</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.004/index.html" rel="noopener noreferrer" target="_blank">A Importância de Purificar a Mente</a></p>
+<p class="entry-title"><a href="../../pages/BD.HH.001/index.html" title="The Grand Unified Theory of Dhamma"><strong><span>A Grande Teoria Unificada do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></strong></a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/BD.HH.002/index.html" rel="noopener noreferrer" target="_blank">A Grande Teoria Unificada do Dhamma – Introdução</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Nossos Dois Mundos: Material e Mental</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Reinos Associados à Terra</a></li>
+<li class="entry-title">
+<p class="entry-title"><a href="../../pages/BD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Gandhabba – Apenas nos reinos humano e animal</a></p>
+</li>
+<li class="entry-title"><a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Tipos de Corpo nos 31 Reinos – Importância do Manomaya Kāya</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.006/index.html" rel="noopener noreferrer" target="_blank">Gandhabba Percebendo o Mundo – Com e sem um Corpo Físico</a></li>
+<li class="entry-title"><a href="../../pages/BD.HH.007/index.html" rel="noopener noreferrer" target="_blank">Nibbāna no panorama geral</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.AA.005/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma: Imperceptibilidade e Auto-Consistência</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank">Escala de tempo samsárica, cosmologia Buddhista e a teoria do Big Bang</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências do Renascimento</a></p>
+<p class="entry-title"><a href="../../pages/BD.II.002/index.html" title="Power of the Human Mind"><strong>O Poder da Mente Humana</strong></a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank">O poder da mente humana – Introdução</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.003/index.html" rel="noopener noreferrer" target="_blank">Diferença entre Jhāna e os Estágios de Nibbāna</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.004/index.html" rel="noopener noreferrer" target="_blank">O poder da mente humana – Anāriya ou jhānas mundanos</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.005/index.html" rel="noopener noreferrer" target="_blank">O poder da mente humana – Ariya Jhānas</a></li>
+<li class="entry-title"><a href="../../pages/BD.II.006/index.html" rel="noopener noreferrer" target="_blank">Existem procedimentos para alcançar Magga Phala, Jhāna e Abhiññā?</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/BD.AA.008/index.html" rel="noopener noreferrer" target="_blank">Transferência de Méritos (Pattidāna) – Como Isso Acontece?</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.009/index.html" rel="noopener noreferrer" target="_blank">A Primeira Nobre Verdade é o Sofrimento? Mitos sobre o Sofrimento</a></p>
+<p class="entry-title"><a href="../../pages/BD.AA.010/index.html" rel="noopener noreferrer" target="_blank">Vinaya – A Natureza Gosta de Estar em Equilíbrio</a></p>
+<p class="entry-title"> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.AA.001/index.html">Users Guide Puredhamma Website</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    <span class="pathway-placeholder"></span>
+
+    
+    <a class="pathway-link next" href="../../pages/BD.AA.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Users Guide Puredhamma Website</span>
+        
+        <span class="pathway-title title-pt">Guia do usuário do site PureDhamma</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

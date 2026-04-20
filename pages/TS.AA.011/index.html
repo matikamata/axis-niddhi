@@ -1,0 +1,316 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Four Stages Of Nibbana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Tables and Summaries</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 12 / 14</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TS.AA.011</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Four Stages Of Nibbana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TS.AA.011</td></tr>
+          <tr><td><strong>Section</strong></td><td>Tables and Summaries</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>4</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TS.AA.011"
+             data-section="Tables and Summaries"
+             data-section-code="TS"
+             data-findex="0526"
+             data-level="intermediate"
+             data-reading-time="4"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TS.AA.011</td></tr><tr><td>Fin-dex</td><td>0526</td></tr><tr><td>Slug</td><td>four-stages-of-nibbana</td></tr><tr><td>Section</td><td>TS</td></tr><tr><td>Title EN</td><td>Four Stages Of Nibbana</td></tr></table></div></div><p style="text-align: justify;"><strong>Revised August 3, 2016; November 19, 2018; August 21, 2022;<span style="color: #0000ff;"> rewritten March 22, 2023</span></strong></p>
+<p style="text-align: justify;">1. The following Table shows the conditions to be fulfilled (i.e., factors to be eliminated) to attain each stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </p>
+<ul>
+<li>Each stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> can be characterized in various ways: The removal of ten <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span> cittās</span></em>, fourteen types of <em><span>asobhana <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> associated with <em>cittās</em>, ten <em>samyōjana, </em>seven types of<em><span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span>,</span></em> four types of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span>, </span></em>three types of <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>, </span></em>etc.</li>
+<li><span>See #4 below for links to <span class="pali-term term-highlight" data-term="posts">posts</span> explaining those terms.</span></li>
+</ul>
+<p style="text-align: justify;">2. For example, to attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, three of the ten <em>samyōjana</em> (or the ten fetters) are removed,<em><span> <span class="pali-term term-highlight" data-term="akusala">akusala</span> cittās</span></em> #1, 2, 5, 6, and 11 are removed (see #6 below for a list of the 12 types of <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span> cittās.</span></em>) Also, the <em>apāyagāmi</em> strength in the other<em> cittās</em> is removed at the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. <em>Cittas</em> #9 and 10 weaken at lower stages and are removed at the <em>Anāgāmi</em> stage. The remaining <em>cittās</em> (#3,4,7,8 and 12) weaken with each stage of <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> and are removed at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. There is a nice chart on p. 112 of <em><span><span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span></em><span> Bodhi's book "Comprehensive Manual of <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>."</span></p>
+<p style="text-align: justify;">[table id=6 /]</p>
+<p style="text-align: justify;">3. There is another categorization based on "<em>yogā</em>": <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> yoga, <span class="pali-term term-highlight" data-term="bhava">bhava</span> yoga, diṭṭhi yoga</span></em>, and<em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span> yoga</span></em>. See "<a href="https://suttacentral.net/an4.10/pli/ms" rel="noopener" target="_blank"><em><span>Yoga <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 4.10)</a>." But these four are identical to the four types of <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span> </span></em>listed in the above table.</p>
+<p style="text-align: justify;">4. The ability to commit <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em> also is removed in stages as one progresses and is completely removed only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. It is important to note that a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> completely removes only one <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span>, </span></em>that of having wrong views (<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>): "<a href="../../pages/TL.JJ.012/index.html" rel="noopener" target="_blank">What is the only Akusala Removed by a Sōtapanna?</a>". <span style="color: #0000ff;">But this leads to removing many <em><span><span class="pali-term term-highlight" data-term="kilesa">kilesa</span></span></em> (mental impurities); see the Table.</span></p>
+<p style="text-align: justify;">5.<em><span> <span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em><span> are discussed in the <span class="pali-term term-highlight" data-term="post">post</span>, “</span><a href="../../pages/TL.HH.003/index.html" rel="noopener" style="color: #ea9629;" target="_blank" title="Gati (Character), Anusaya (Temptations), and Āsava (Cravings)">Gati (Character), Anusaya (Temptations), and Āsava (Cravings)</a>. “ <em><span><span class="pali-term term-highlight" data-term="kilesa">Kilesa</span></span></em> is discussed in "<a href="../../pages/TL.EE.009/index.html" rel="noopener" target="_blank">Diṭṭhi (Wrong Views), Sammā Diṭṭhi (Good/Correct Views)</a>." For a discussion on <em>Dasa Samyōjana, </em>see "<a href="../../pages/TL.HH.006/index.html" rel="noopener" target="_blank">Dasa Samyōjana – Bonds in Rebirth Process."</a> The fourteen types of <em><span>asobhana <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> are discussed in "<a href="../../pages/TS.AA.005/index.html" rel="noopener" target="_blank">Cetasika (Mental Factors)</a>."</p>
+<ul>
+<li>See "<a href="../../pages/KD.HH.002/index.html" rel="noopener" target="_blank">Kāma Tanhā, Bhava Tanhā, Vibhava Tanhā</a>" for the three types of <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>. </span></em>Another way is to categorize into three types of <i><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></i>, i.e., <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span>, <span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, and <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>; see "<a href="../../pages/KD.HH.005/index.html" rel="noopener" target="_blank">Lōbha, Dōsa, Mōha versus Rāga, Paṭigha, Avijjā</a>."</li>
+</ul>
+<p style="text-align: justify;">6. The 12 types of <em><span><span class="pali-term term-highlight" data-term="akusala citta">akusala citta</span></span></em> are listed in "<a href="../../pages/TS.AA.009/index.html" rel="noopener" target="_blank" title="Akusala Citta and Akusala Vipaka Citta">Akusala Citta and Akusala Vipaka Citta</a>." But I thought it would be more explanatory to list them. The numbers below correspond to the numbers in the Table.</p>
+<p style="text-align: justify;"><strong><em>Lōbha</em> (Greedy) <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> <span style="font-weight: normal;">(Also has the <em>mōha</em> root)</span></strong></p>
+<p style="text-align: justify;">1. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> <strong>connected with a wrong view</strong>, accompanied by pleasure, and done with habit.</p>
+<p style="text-align: justify;">2. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> <strong>connected with a wrong view</strong>, accompanied by pleasure, and done reluctantly.</p>
+<p style="text-align: justify;">3. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> NOT connected with a wrong view, accompanied by pleasure and done with habit.</p>
+<p style="text-align: justify;">4. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> NOT connected with a wrong view, accompanied by pleasure, and done reluctantly.</p>
+<p style="text-align: justify;">5. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> <strong>connected with a wrong view</strong>, accompanied by a neutral mind, and done with habit.</p>
+<p style="text-align: justify;">6. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> <strong>connected with a wrong view</strong>, accompanied by a neutral mind, and done reluctantly.</p>
+<p style="text-align: justify;">7. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> NOT connected with a wrong view, accompanied by a neutral mind and done with habit.</p>
+<p style="text-align: justify;">8. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> NOT connected with a wrong view, accompanied by a neutral mind and done reluctantly.</p>
+<p style="text-align: justify;"><strong><em>Dōsa</em> (Hateful) <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> </strong>(Also has the <em>mōha</em> root)</p>
+<p style="text-align: justify;">9. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> associated with hate, accompanied by displeasure, done with habit.</p>
+<p style="text-align: justify;">10. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> associated with hate, accompanied by displeasure, done reluctantly.</p>
+<p style="text-align: justify;"><em><strong><span>Mōha <span class="pali-term term-highlight" data-term="citta">Citta</span></span></strong></em> (only with the <em>mōha</em> root)</p>
+<p style="text-align: justify;">11. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> accompanied by a neutral mind, associated with <em>vicikiccā</em> (not aware of bad consequences)</p>
+<p style="text-align: justify;">12. <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> accompanied by neutral mind, associated with <em>uddacca</em> (unfocused).</p>
+<p style="text-align: justify;"><strong>Notes:</strong></p>
+<p style="text-align: justify;">1. Even though recent <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> literature categorizes <em>lōbha</em> and <em><span>dōsa <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> as <em>asankhārika</em> (unprompted) and<em> sasankhārika</em> (prompted), in original <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, they were not categorized as such.</p>
+<p style="text-align: justify;">2. For example, the two <em>dōsa-mula cittā</em> are:</p>
+<ol style="list-style-type: lower-roman; text-align: justify;">
+<li><em><span>Dōmanassa <span class="pali-term term-highlight" data-term="sahagata">sahagata</span> <span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span>-sampayutta <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+<li><em><span>Dōmanassa <span class="pali-term term-highlight" data-term="sahagata">sahagata</span> sasankhārika <span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span>-sampayutta <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+</ol>
+<ul>
+<li style="text-align: justify;">The first <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> arises due to <em>saṃsāric</em> habits and thus is more potent. For example, someone who tends to easily get angry normally generates such potent <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+<li style="text-align: justify;">On the other hand, another person without such a habit may not generate such a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> unless "forced hard"; it is done with reluctance, "when pushed to the limit," or if the perceived "sense pleasures" are enticing. Then he/she is actually "incorporating new "<em>san</em>" or initiating a new habit; thus, the name "<em>sasankhārika</em>."</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TS.AA.010/index.html">37 Factors Of Enlightenment</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TS.AA.012/index.html">Ultimate Realities Table</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TS.AA.010/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">37 Factors Of Enlightenment</span>
+        
+        <span class="pathway-title title-pt">37 Factors Of Enlightenment</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TS.AA.012/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Ultimate Realities Table</span>
+        
+        <span class="pathway-title title-pt">Ultimate Realities Table</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TS">
+        ↑ Back to Tables and Summaries
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

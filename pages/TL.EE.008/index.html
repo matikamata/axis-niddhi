@@ -1,0 +1,541 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Details Of Kamma Intention Who Is Affected Kamma Patha | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 36 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.EE.008</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Details Of Kamma Intention Who Is Affected Kamma Patha</h1>
+    
+    <h1 class="title-pt">Detalhes da intenção de Kamma Quem é afetado Kamma Patha</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.EE.008</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.EE.008"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0427"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.EE.008</td></tr><tr><td>Fin-dex</td><td>0427</td></tr><tr><td>Slug</td><td>details-of-kamma-intention-who-is-affected-kamma-patha</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Details Of Kamma Intention Who Is Affected Kamma Patha</td></tr></table></div></div><p style="text-align: justify;">We discuss several factors that determine the strength of a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, including intention, who is affected, and how a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> becomes a <em><span><span class="pali-term term-highlight" data-term="kamma patha">kamma patha</span>.</span></em></p>
+<p style="text-align: justify;"><strong>July 24, 2022; revised December 14, 2022;<span style="color: #3366ff;"> February 26, 2025</span></strong></p>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em> in<em><span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span> </span></em>Is Different from <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em></h5>
+<div style="text-align: justify;">1. <span style="color: #000000;">In the "<a href="https://suttacentral.net/an6.63/en/sujato" rel="noopener" target="_blank"><em><span>Nibbedhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.63)</a>", t</span><span>he <span class="pali-term term-highlight" data-term="buddha">Buddha</span> declared, "</span><em><span>cetanāhaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, kammaṁ vadāmi.</span></em>" Thus, what determines the type of <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> is the <em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span> </span></em>or the "intention."</div>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>Did the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> refer to the </span><em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>in the above verse? No, because the <em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>is in EVERY <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. I introduced <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> in "<a href="../../pages/TS.AA.005/index.html" rel="noopener noreferrer" target="_blank">Cetasika (Mental Factors)</a>" and have discussed some aspects of them in the "<a href="http://localhost/beng_feb2026/abhidhamma/citta-and-cetasika/" rel="noopener noreferrer" target="_blank">Citta and Cetasika</a>" section.</li>
+<li>The meaning becomes more apparent with the next verse in the <span style="color: #000000;">"<a href="https://suttacentral.net/an6.63/en/sujato" rel="noopener" target="_blank"><em><span>Nibbedhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.63)</a>"</span>: "<em><strong>Cetayitvā kammaṁ karoti</strong><span>—<span class="pali-term term-highlight" data-term="kāyena">kāyena</span> vācāya <span class="pali-term term-highlight" data-term="manasā">manasā</span>,</span></em>" meaning "<strong>After making an intention, one takes action (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>)</strong><em>—</em>by way of body, speech, and mind."</li>
+<li>Thus, one acts with intention ONLY AFTER an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> comes to mind first. One decides how to respond to a sensory input that just came in as a <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>. The intention depends on the type of action one chooses to take.</li>
+<li>A <em><span><span class="pali-term term-highlight" data-term="vipāka citta">vipāka citta</span></span></em> only brings in an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>. In such cases, we see, hear, taste, smell, touch something, or recall a past event. <span style="color: #993366;"><strong>There is no "intention" of doing something with such <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <em>cittās</em>. </strong></span>For example, upon seeing an enemy, one may decide to say something harsh to that person.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> </span></em>in <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> Generation Refers to <em>Sañcetanā</em></h5>
+<p style="text-align: justify;">2. Six types of <span style="color: #3366ff;"><strong><em>sañcetanā</em> (<em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span></span></em> with "<em>san</em>" or defilements of <em>r<span class="segment" id="sn22.56:10.2"><span class="root"><span class="text">ā</span></span></span><span>ga, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></em>)</strong></span> can arise based on the six types of sensory inputs. <span style="color: #3366ff;"><strong>In many <em>sutt<span class="segment" id="sn22.56:10.2"><span class="root"><span class="text">ā</span></span></span>s</em>, "<em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span></span></em>" is used to mean "<em>sañcetanā."</em></strong></span></p>
+<ul style="text-align: justify;">
+<li>That is stated in the "<a href="https://suttacentral.net/sn22.56/en/sujato" rel="noopener" target="_blank"><em><span>Upādānaparipavatta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.56)</a>: "<em><span class="segment" id="sn22.56:10.2"><span class="root"><span class="text"><span>Chayime, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, cetanākāyā—</span></span></span></span><span class="segment" id="sn22.56:10.3"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> sañcetanā, sadda sañcetanā, gandha sañcetanā, rasa sañcetanā, phoṭṭhabba sañcetanā, <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> sañcetanā. </span></span></span></span></em><span class="segment" id="sn22.56:10.4"><span class="root"><span class="text"><em><span>Ime vuccanti, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></em>."</span></span></span></li>
+<li>Thus, <strong>it is with <em>sañcetanā </em>that one engages in <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> with (<em>abhi</em>)<span class="segment" id="sn22.56:10.4"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em></span></span></span></strong></li>
+</ul>
+<p style="text-align: justify;"><span>3. We are not talking about neutral actions like walking to the kitchen for a glass of water. In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, the discussions are about how we do </span><em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span>/<span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span>/<span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span> </span></em>that can lead to good or bad <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> in the future.</p>
+<ul style="text-align: justify;">
+<li>Thus, the "intention" involves <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span>/<span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span>/<span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em>. Based on that, we can see that the critical point is whether "good <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>," like compassion, or "bad <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>," like greed or anger, arises in the mind.</li>
+<li> <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em> <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> combines the cumulative effect of many <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> that come into play. "<span style="font-family: arial, helvetica, sans-serif; font-size: 12pt; color: #993366;"><strong>The " DEFILED intention" (<em><span class="segment" id="sn22.56:10.3"><span class="root"><span class="text">sañcetanā</span></span></span></em>) comes from the types of <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em></strong><strong>"incorporated by the <em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>" based on one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.</strong><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;">"</span></span></li>
+</ul>
+<h5 style="text-align: justify;">Connection to <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em></h5>
+<p style="text-align: justify;">4. <strong>The "intention" in committing an <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span> </span></em>is one of the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>.</strong> That intention arises BECAUSE OF one's<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span>.</span></em> A particular set of <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> will arise automatically according to one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span> </span></em><span>(pronounced "<span class="pali-term term-highlight" data-term="gathi">gathi</span>.") Of course, </span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> is closely related to one's <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>When committing an <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>, a set of four universal <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> always comes into play. Those are <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em> (ignorance), <em>Ahirika</em> (shamelessness),  <em>Anottapa</em> (fearlessness in the wrong), and <em><span><span class="pali-term term-highlight" data-term="uddhacca">uddhacca</span></span></em> (restlessness or agitation.)</li>
+<li>Other "<em><span><span class="pali-term term-highlight" data-term="akusala cetasika">akusala cetasika</span>,</span></em>" like <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, diṭṭhi</span></em>, <em>vicikicca, </em>etc., may also be present depending on the situation and the person committing the act; see "<a href="../../pages/AB.BB.010/index.html" rel="noopener" target="_blank">Cetasika – Connection to Gati</a>." <strong>For example, one may lie about something because of greed (<em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em>); another person may tell the same lie because of hate (<em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span>.</span></em>) </strong>The consequences are worse for the latter.</li>
+<li>When committing an <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span>/<span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, the intention is to do one (or more) of the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>. Thus <em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>is not the "intention." The "intention" depends on how the <em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> incorporates one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> when it "prepares" a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in response to <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span>/<span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> work the same way. Here the "intention" is to commit one or more <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>/<span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>, and here a set of moral (or <em>sobhana</em>) <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> come into play.</li>
+</ul>
+<p style="text-align: justify;">5. From #4, it may appear that we don't have control over the response to an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>. But #4 only describes the initial "automatic response" to an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> with <em><span><span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>However, we can change that automatic response when generating <em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. If we are mindful, we can catch ourselves starting to engage in a bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> </span></em>and stop it. See "<a href="../../pages/KD.BB.007/index.html" rel="noopener" target="_blank">Correct Meaning of Vacī Sankhāra</a>."</li>
+<li>Suppose we instead keep generating bad <em>vaci</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (by going along with bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>). In that case, we will strengthen that bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> by strengthening our expectation, i.e., "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" that arose based on that <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Connection to <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span> Vinnana</span></em><span> and <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span></span></h5>
+<p style="text-align: justify;">6. In the <span style="color: #000000;">"<a href="https://suttacentral.net/sn12.38/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 12.38)</a>," we get further clarification on how this "intention" relates to our "future expectations" that manifest as "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>."  </span></p>
+<p style="text-align: justify;">“<em><span>Yañca, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ceteti yañca pakappeti </span><span style="color: #0000ff;"><strong><span>yañca <span class="pali-term term-highlight" data-term="anuseti">anuseti</span></span></strong></span><span>, ārammaṇametaṁ hoti <span class="pali-term term-highlight" data-term="viññāṇassa">viññāṇassa</span> ṭhitiyā. </span></em><br/>
+<em><strong><span>Ārammaṇe <span class="pali-term term-highlight" data-term="sati">sati</span></span></strong><span> patiṭṭhā <span class="pali-term term-highlight" data-term="viññāṇassa">viññāṇassa</span> hoti.</span></em><br/>
+<em><span>Tasmiṁ patiṭṭhite <span class="pali-term term-highlight" data-term="viññāṇe">viññāṇe</span> virūḷhe </span><span style="color: #993366;"><strong>āyatiṁ punabbhavābhinibbatti hoti</strong></span></em>."</p>
+<p style="text-align: justify;"><strong>Translated: </strong></p>
+<p style="text-align: justify;">"<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>,  what you intend or plan <span style="color: #000000;">(based on your underlying tendencies or <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>)</span><strong>,</strong> <strong>help grow that <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em></strong> and become a support for the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>.</span><br/>
+</em><strong>When one focuses on an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em></strong> (with an expectation/intention), <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> becomes established.<br/>
+When that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> is established and grows, that can bring <strong><span style="color: #993366;"><span><span class="pali-term term-highlight" data-term="rebirth">rebirth</span> into a new state of existence in the future."</span></span><em><br/>
+</em></strong></p>
+<ul style="text-align: justify;">
+<li>That is what I mentioned in #1 above. For an intention/expectation to arise, an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> must first bring in sensory input. For greedy anticipation for a particular food to occur, one must either taste that food or the memory of consuming that food must come to mind first.</li>
+<li>Then we start thinking, speaking, and acting about how to get more of it to eat. The more we do, the more that "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" will grow ("<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccaya">paccaya</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.)</li>
+<li>Growing the "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" is the same as "growing the strength of the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>." Such <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> are <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>!</li>
+<li><strong>That is how we accumulate <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> with intention (<em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span></span></em>.)</strong></li>
+</ul>
+<h5 style="text-align: justify;">Strength of <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em></h5>
+<div style="text-align: justify;">7. There are two key factors to be remembered in evaluating how to assess the relative strength of a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>:</div>
+<div>
+<ol style="list-style-type: lower-roman; text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #000000;"><strong><span style="color: #000000;">Which of the </span><em style="color: #000000;"><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span> </span></em><span style="color: #000000;">is the intention?</span> </strong></span><span style="color: #000000;">For example, it could be taking a life, stealing, or harsh speech. As we see, the relative strengths decrease in that order. </span></span>Who is affected is not involved in this step. The “<em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span></span></em>” in “<em><span>cetanāhaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, kammaṁ vadāmi</span></em>”, is just which <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em> is in one’s mind.</li>
+<li><span style="color: #000000;">Then the <strong>strength of the <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span> </span></em>will also depend on the "level of consciousness" or "status" of the living beings affected</strong> by that <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>. </span>For example, killing a human will bring stronger <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> than killing an animal.</li>
+</ol>
+<h5 style="text-align: justify;">Some Examples</h5>
+<p style="text-align: justify;">8. In the case of a person killing a bunch of people with a bomb, h<span style="text-align: justify;">is intention (</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span></span></em><span style="text-align: justify;">) is to kill. Thus the </span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em><span style="text-align: justify;"> involved is "</span><em style="text-align: justify;">pānatipāta</em><span style="text-align: justify;">," that of taking a life.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Now to the second step. He may not even know who got killed. By some coincidence, if the bomb killed a parent of the killer, then he would have done an <em>ā</em><em><span>nantariya pāpa <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>. If an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></em>died, the same. If a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> died, it would not be a <em>ā</em><em><span>nantariya <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> but still be equivalent to killing thousands of ordinary humans.</li>
+<li style="text-align: justify;">So, it is essential to understand that "<em><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span></span></em>" is which of <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em> are in one's mind while committing a <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span>.</span></em> It could be more than one. In the case of the bomber, there is <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> and likely greed also, in addition to "<em>pānātipātā</em>."</li>
+<li style="text-align: justify;">One can analyze various situations with the two steps in #7 above.</li>
+</ul>
+<p style="text-align: justify;">9. Let us consider some prominent examples from the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span>Ascetic Siddhartha had to endure such hardships for six years to attain the Buddhahood because he had said some insulting things regarding the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kassapa in his previous life. At that time, Siddhartha was a wealthy person named Jotipala and had a friend called Gatikara who listened to </span><em>desanas</em><span> from <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kassapa and became an</span><em> Anāgāmi</em><span>. Gatikara tried to persuade Jotipala to go and listen to <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kassapa, but Jotipala kept refusing, saying, "I do not want to go and listen to the bald monk."</span></li>
+<li>That <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> forced ascetic Siddhartha to undergo such hardships before attaining Buddhahood. That is a clear example that one DOES NOT NEED TO KNOW that one is insulting a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> to accumulate the corresponding </span><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>.</li>
+<li>Eleven more such <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em><span> brought adverse effects to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama even after attaining Buddhahood. Three of those were for bad </span><em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> committed against <em>Pacceka Buddhas</em>. It is not possible to recognize a <em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span> as such because they appear when a </span><em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Sambuddha</span></em><span> (like <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama) is not present, and they cannot teach <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> to others.</span></li>
+<li><span>Therefore, NOT KNOWING the status of the person (to whom the wrongful act was directed) is not an excuse. These are not rules made up by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, and the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> himself was not immune from those laws.</span><em><span> <span class="pali-term term-highlight" data-term="kammic">Kammic</span></span></em><span> laws are Nature's laws, just like laws of gravity. A <span class="pali-term term-highlight" data-term="buddha">Buddha</span> discovers them, not make those laws.</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> is a complex subject. Let us consider one more aspect of a "completed <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="kamma patha">kamma patha</span></span></em>."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span></span></em></h5>
+<p style="text-align: justify;">10. A given <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em> takes <strong>four stages</strong> to be "completed."</p>
+<ul style="text-align: justify;">
+<li>For example, in the case of taking a life, the following are the four steps:<br/>
+(i) one must think that it is alive,<br/>
+(ii)  making a plan to kill that being intentionally<br/>
+(iii) executing the plan to kill<br/>
+(iv) a living being ends up dead.</li>
+<li>Upon completing all five steps, that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> becomes a "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> with maximum strength" or a <em><strong><span><span class="pali-term term-highlight" data-term="kamma patha">kamma patha</span>. </span></strong></em></li>
+<li> As the number of completed steps keeps increasing, the severity of the <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> will increase. <span style="color: #993366;"><strong>When all are complete, a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> becomes a <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span> patha,</span></em> and the <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> will be the strongest possible.</strong></span></li>
+<li>When we walk on grass, we may unintentionally kill many small insects. But since the "intention" is not there, none of the five factors will come to play. If someone hits a toy snake intending to kill, only the last factor will not be fulfilled.</li>
+</ul>
+<p style="text-align: justify;">11. Let us consider another example of the four steps that constitute a <em><span><span class="pali-term term-highlight" data-term="kamma patha">kamma patha</span></span></em> involving lying/deceiving (<em><span><span class="pali-term term-highlight" data-term="musāvāda">musāvāda</span></span></em>.)</p>
+<ul style="text-align: justify;">
+<li>(i) there must be a person(s) to be deceived,<br/>
+(ii) one plans to deceive that person(s),<br/>
+(iii) carries out the deception,<br/>
+(iv) that person (and possibly others not even intended) suffer due to that deception.</li>
+<li>I have been trying to find a <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> reference for these "five factors." Please comment in the discussion forum if you know.</li>
+<li>If all factors are completed, the "<em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy" will be optimized, and it becomes a "<em><span>janaka <span class="pali-term term-highlight" data-term="kamma">kamma</span>,</span></em><span>" possibly leading to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in a bad realm. If only some factors are completed, such a </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> can bring <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> during a lifetime.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em> Expand to Forty</h5>
+<p style="text-align: justify;">12.<span><span> In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, it is always one’s intention that matters.</span></span> <strong>Based on that, each <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em> expands to 40.</strong> For example, the following four are inclusive in <em>pāṇātipātā</em>:</p>
+<ol style="list-style-type: lower-roman; text-align: justify;">
+<li>Taking life by oneself</li>
+<li>Getting someone else to kill</li>
+<li>Helping another to kill</li>
+<li>Praising a killing by another</li>
+</ol>
+<ul style="text-align: justify;">
+<li>There are ten<em><span> <span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>­patha­vagga</span></em> of the <em>Aṅguttara Nikāya</em> that lists those “four divisions” for each of the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>, AN 4.264 through AN 4.273. The first <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span> </span></em>is “<a href="https://suttacentral.net/an4.264/en/sujato" rel="noopener noreferrer" target="_blank">Killing Living Creatures (AN 4.264)</a>.” You can click the “next” arrow at the bottom of the webpage to get to all ten <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>.</li>
+<li>In another example, regarding <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span>,</span></em> the following also count. Propagating <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> to others, encouraging others to cultivate <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em><span> (say, for instance, that the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process is not valid), or praising such practices.</span></li>
+<li>That is how ten <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span> </span></em>expand to forty.</li>
+<li>As one starts avoiding more and more of these forty actions, one will start feeling the early stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> or “<em>nivana,” i</em>.e., cooling down the mind.</li>
+</ul>
+<h5 style="text-align: justify;">Complexity of Life</h5>
+<p style="text-align: justify;"><span>13. <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has taught us how to understand why different living beings are born that way and why people are born with wide-ranging health, wealth, beauty, etc.</span></p>
+<ul>
+<li style="text-align: justify;">One time a <em>Brahmin</em><span> asked about how that happens. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span>’s description is in the “</span><a href="https://suttacentral.net/mn135/en/sujato" rel="noopener" target="_blank"><em><span>Cūḷakammavibhaṅga <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 135.)</a>.”</li>
+<li style="text-align: justify;">Also, see "<a href="../../pages/TL.GG.003/index.html" rel="noopener" target="_blank">Complexity of Life and the Way to Seek 'Good Rebirths</a>.'”</li>
+</ul>
+</div>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.EE.008"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0427"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+Derived Translation
+PD#PN: TL.EE.008
+Lang: pt-BR
+Date: 2026-02-24T02:06:03Z
+-->
+<!--
+Canonical CSL Artifact
+Derived from PureDhamma.net SRO
+PD#PN: TL.EE.008
+Extraction: 2026-02-23T21:10:02Z
+Integrity: PENDING_CALCULATION
+-->
+<p style="text-align: justify;">Discutimos vários fatores que determinam a força de um <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, incluindo a intenção, quem é afetado e como um <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> se torna um <em><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span>.</span></em></p>
+<p style="text-align: justify;"><strong>24 de julho de 2022; revisado em 14 de dezembro de 2022; <span style="color: #3366ff;">26 de fevereiro de 2025</span></strong></p>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em> em<em><span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span> </span></em>é diferente de <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em></h5>
+<div style="text-align: justify;">1. <span style="color: #000000;">No “<a href="https://suttacentral.net/an6.63/en/sujato" target="_blank"><em><span>Nibbedhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.63)</a>”, </span><span>o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> declarou: “</span><em><span>cetanāhaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, kammaṁ vadāmi”.</span></em> Assim, o que determina o tipo de <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> é a <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> </span></em>ou a “intenção”.</div>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> se referiu ao </span><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>no versículo acima? Não, porque o <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>está em TODOS <em><span>os <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. Apresentei <em><span>o <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> em “<a href="../../pages/TS.AA.005/index.html" target="_blank">Cetasika (Fatores Mentais)</a>” e discuti alguns aspectos deles na seção “<a href="http://localhost/brasileirinho/abhidhamma/citta-and-cetasika/" target="_blank">Citta e Cetasika</a>”.</li>
+<li>O significado se torna mais evidente com o próximo versículo do <span style="color: #000000;">“<a href="https://suttacentral.net/an6.63/en/sujato" target="_blank"><em><span>Nibbedhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.63)</a>”</span>: “<em><strong>Cetayitvā kammaṁ karoti</strong><span>—<span class="pali-term term-highlight" data-term="kāyena">kāyena</span> vācāya <span class="pali-term term-highlight" data-term="manasā">manasā</span></span></em>”<em>,</em> que significa “<strong>Depois de formar uma intenção, a pessoa age (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>)</strong> <em>—</em> por meio do corpo, da fala e da mente”.</li>
+<li>Assim, a pessoa age com intenção SOMENTE DEPOIS que um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em> vem à mente primeiro. A pessoa decide como responder a um estímulo sensorial que acabou de chegar como um <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>. A intenção depende do tipo de ação que a pessoa escolhe realizar.</li>
+<li>Um <em><span><span class="pali-term term-highlight" data-term="vipāka citta">Vipāka Citta</span></span></em> apenas traz um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em>. Nesses casos, vemos, ouvimos, provamos, cheiramos, tocamos algo ou nos lembramos de um evento passado. <span style="color: #993366;"><strong>Não há “intenção” de fazer algo com tais <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> <em>Cittās</em>. </strong></span>Por exemplo, ao ver um inimigo, pode-se decidir dizer algo duro a essa pessoa.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> </span></em>na geração <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> refere-se a <em>Sañcetanā</em></h5>
+<p style="text-align: justify;">2. Seis tipos de <span style="color: #3366ff;"><strong><em>sañcetanā</em> (<em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em> com “<em>san</em>” ou impurezas de <em><span class="segment" id="sn22.56:10.2"><span class="root"><span class="text">Rā</span></span></span><span>ga, <span class="pali-term term-highlight" data-term="dosa">Dosa</span>, <span class="pali-term term-highlight" data-term="moha">Moha</span></span></em>)</strong></span> podem surgir com base nos seis tipos de estímulos sensoriais. <span style="color: #3366ff;"><strong>Em muitos <em><span class="segment" id="sn22.56:10.2"><span class="root"><span class="text">S</span></span></span>uttās</em>, “<em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em>” é usado para significar “<em>sañcetanā”.</em></strong></span></p>
+<ul style="text-align: justify;">
+<li>Isso é afirmado no <a href="https://suttacentral.net/sn22.56/en/sujato" target="_blank"><em><span>“Upādānaparipavatta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.56)</a>: <span class="segment" id="sn22.56:10.4"><span class="root"><span class="text">“</span></span></span><em><span class="segment" id="sn22.56:10.2"><span class="root"><span class="text"><span>Chayime, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, cetanākāyā</span></span></span></span><span class="segment" id="sn22.56:10.3"><span class="root"><span class="text"><span>—<span class="pali-term term-highlight" data-term="rūpa">rūpa</span> sañcetanā, sadda sañcetanā, gandha sañcetanā, rasa sañcetanā, phoṭṭhabba sañcetanā, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> sañcetanā. Ime</span></span></span></span></em><span> vuccanti, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>.”</span></li>
+<li>Assim, <strong>é com <em>sañcetanā </em>que alguém se envolve em <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> com (<em>abhi</em>)<span class="segment" id="sn22.56:10.4"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>.</span></em></span></span></span></strong></li>
+</ul>
+<p style="text-align: justify;"><span>3. Não estamos falando de ações neutras, como ir até a cozinha para pegar um copo d'água. No <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, as discussões são sobre como fazemos </span><em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span>/<span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span>/<span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span>,</span></em> que podem levar a um bom ou mau <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> no futuro.</p>
+<ul style="text-align: justify;">
+<li>Assim, a “intenção” envolve <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span>/<span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="apuñña">Apuñña</span>/<span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em>. Com base nisso, podemos ver que o ponto crítico é se “<em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> bom”, como compaixão, ou “<em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> ruim”, como ganância ou raiva, surge na mente.</li>
+<li> <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em> <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> combina o efeito cumulativo de muitos <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> que entram em ação. <span style="font-family: arial, helvetica, sans-serif; font-size: 12pt; color: #993366;"><strong>A “intenção IMPURA” (<em><span class="segment" id="sn22.56:10.3"><span class="root"><span class="text">sañcetanā</span></span></span></em>) vem dos tipos de <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span> </span></em></strong><strong>“incorporados pela <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>” com base na sua <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Conexão com <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em></h5>
+<p style="text-align: justify;">4. <strong>A “intenção” ao cometer um <em><span><span class="pali-term term-highlight" data-term="akusala">akusala</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span> </span></em>é uma das <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>.</strong> Essa intenção surge POR CAUSA da <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> de alguém<em>.</em> Um conjunto específico de <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> surgirá automaticamente de acordo com <em>a</em> <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span> </span></em><span>(pronuncia-se “<span class="pali-term term-highlight" data-term="gathi">Gathi</span>”) de alguém. É claro que </span><em><span><span class="pali-term term-highlight" data-term="a gati">a Gati</span></span></em> está intimamente relacionada ao <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> de alguém.</p>
+<ul style="text-align: justify;">
+<li>Ao cometer um <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>, um conjunto de quatro <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> universais sempre entra em ação. São eles: <em><span><span class="pali-term term-highlight" data-term="moha">Moha</span></span></em> (ignorância), <em>Ahirika</em> (descaramento), <em>Anottapa</em> (destemor no erro) e <em><span><span class="pali-term term-highlight" data-term="uddhacca">Uddhacca</span></span></em> (inquietação ou agitação).</li>
+<li>Outros “<em><span><span class="pali-term term-highlight" data-term="akusala cetasika">Akusala Cetasika</span></span></em>”<em>,</em> como <em><span><span class="pali-term term-highlight" data-term="lobha">Lobha</span>, diṭṭhi</span></em>, <em>vicikicca, </em>etc., também podem estar presentes, dependendo da situação e da pessoa que comete o ato; veja “<a href="../../pages/AB.BB.010/index.html" target="_blank">Cetasika – Conexão com Gati</a>”. <strong>Por exemplo, alguém pode mentir sobre algo por causa da ganância (<em><span><span class="pali-term term-highlight" data-term="lobha">Lobha</span></span></em>); outra pessoa pode contar a mesma mentira por causa do ódio (<em><span><span class="pali-term term-highlight" data-term="dosa">Dosa</span></span></em>)<em>.</em></strong> As consequências são piores para o último.</li>
+<li>Ao cometer um <em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em>, a intenção é fazer um (ou mais) dos <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>. Assim<em><span>, <span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> não é a “intenção”. A “intenção” depende de como o <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> incorpora <em>a</em> G<em>ati</em>/Anus<em>aya</em> de alguém quando “prepara” um <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> em resposta ao <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span>/<span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> funcionam da mesma maneira. Aqui, a “intenção” é cometer um ou mais <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span>/<span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>, e aqui um conjunto de <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em> moral (ou <em><span><span class="pali-term term-highlight" data-term="sobhana cetasika">Sobhana Cetasika</span></span></em>) entra em ação.</li>
+</ul>
+<p style="text-align: justify;">5. A partir do nº 4, pode parecer que não temos controle sobre a resposta a um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em>. Mas o nº 4 descreve apenas a “resposta automática” inicial a um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em> com <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>No entanto, podemos mudar essa resposta automática ao gerar <em>vaci</em> e <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>. Se estivermos atentos, podemos perceber quando começamos a nos envolver em um <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruim e interrompê-lo. Veja “<a href="../../pages/KD.BB.007/index.html" target="_blank">Significado correto de Vacī Saṅkhāra</a>”.</li>
+<li>Suponha que, em vez disso, continuemos gerando <em>vaci</em> e <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> ruins (seguindo o <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> ruim). Nesse caso, fortaleceremos esse <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> ruim ao fortalecer nossa expectativa, ou seja, “<em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>” que surgiu com base nesse <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Conexão com <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span> Vinnana</span></em> e Renascimento</h5>
+<p style="text-align: justify;">6. No <span style="color: #000000;">“<a href="https://suttacentral.net/sn12.38/en/sujato" target="_blank"><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 12.38)</a>”, obtemos mais esclarecimentos sobre como essa “intenção” se relaciona com nossas “expectativas futuras” que se manifestam como “<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>”.  </span></p>
+<p style="text-align: justify;">
+“<em><span>Yañca, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, ceteti yañca pakappeti </span><span style="color: #0000ff;"><strong><span>yañca <span class="pali-term term-highlight" data-term="anuseti">anuseti</span></span></strong></span><span>, ārammaṇametaṁ hoti <span class="pali-term term-highlight" data-term="viññāṇassa">viññāṇassa</span> ṭhitiyā.</span></em><br/>
+<em><strong><span>Ārammaṇe uma <span class="pali-term term-highlight" data-term="sati">Sati</span></span></strong><span> patiṭṭhā <span class="pali-term term-highlight" data-term="viññāṇassa">viññāṇassa</span> hoti.</span></em><br/>
+<em><span>Tasmiṁ patiṭṭhite <span class="pali-term term-highlight" data-term="viññāṇe">viññāṇe</span> virūḷhe </span><span style="color: #993366;"><strong>āyatiṁ punabbhavābhinibbatti hoti</strong></span></em>
+.”</p>
+<p style="text-align: justify;"><strong>Traduzido: </strong></p>
+<p style="text-align: justify;">“<em><span><span class="pali-term term-highlight" data-term="bhikkhū">Bhikkhū</span></span></em>, o que vocês pretendem ou planejam <span style="color: #000000;">(com base em suas tendências subjacentes ou <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>)</span> <strong>ajuda a cultivar esse <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em></strong> e se torna um suporte para o <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em><em><span>
+<span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span>.</span><br/>
+</em><strong>Quando alguém se concentra em um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em></strong> (com uma expectativa/intenção), <em><span>o <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> se estabelece.<br/>
+Quando esse <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> se estabelece e cresce, isso pode trazer <strong><span style="color: #993366;">o Renascimento para um novo estado de existência no futuro.”</span><em><br/>
+</em></strong></p>
+<ul style="text-align: justify;">
+<li>Isso é o que mencionei no nº 1 acima. Para que uma intenção/expectativa surja, um <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em> deve primeiro trazer informações sensoriais. Para que ocorra uma antecipação gananciosa por um determinado alimento, é preciso provar esse alimento ou a memória de consumi-lo deve vir à mente primeiro.</li>
+<li>Então começamos a pensar, falar e agir sobre como conseguir mais para comer. Quanto mais fazemos isso, mais o “<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>” crescerá (“<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccaya">Paccaya</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em>” em <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>).</li>
+<li>Aumentar o “<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>” é o mesmo que “aumentar a força do <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>”. Tais <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> são <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>!</li>
+<li><strong>É assim que acumulamos <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> com intenção (<em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em>).</strong></li>
+</ul>
+<h5 style="text-align: justify;">Força do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em></h5>
+<div style="text-align: justify;">7. Há dois fatores-chave a serem lembrados ao avaliar como determinar a força relativa de um <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>:</div>
+<div>
+<ol style="list-style-type: lower-roman; text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #000000;"><strong><span style="color: #000000;">Qual dos </span><em style="color: #000000;"><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span> </span></em><span style="color: #000000;">é a intenção?</span> </strong></span><span style="color: #000000;">Por exemplo, pode ser tirar uma vida, roubar ou falar com dureza. Como vemos, as forças relativas diminuem nessa ordem. </span></span>Quem é afetado não está envolvido nesta etapa. A <em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em> em “<em><span>cetanāhaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, kammaṁ vadāmi</span></em>” é apenas qual <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em> está na mente de alguém.</li>
+<li><span style="color: #000000;">Então, a <strong>força do <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> também dependerá do “nível de consciência” ou “status” dos seres vivos afetados</strong> por esse <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>. </span>Por exemplo, matar um ser humano trará <em>um</em> <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> mais forte do que matar um animal.</li>
+</ol>
+<h5 style="text-align: justify;">Alguns exemplos</h5>
+<p style="text-align: justify;">8. No caso de uma pessoa matar várias pessoas com uma bomba, <span style="text-align: justify;">sua intenção (</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em><span style="text-align: justify;">) é matar. Assim, o </span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em><span style="text-align: justify;"> envolvido é “</span><em style="text-align: justify;">pānatipāta</em><span style="text-align: justify;">”, o de tirar uma vida.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Agora, vamos para o segundo passo. Ele pode nem saber quem foi morto. Por alguma coincidência, se a bomba matasse um dos pais do assassino, ele teria cometido um <em><span>ānantariya pāpa <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>. Se um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></em>morresse, o mesmo se aplicaria. Se um <em>Sótapanna</em> morresse, não seria um <em><span>ānantariya <span class="pali-term term-highlight" data-term="kammā">kammā</span>,</span></em> mas ainda assim seria equivalente a matar milhares de seres humanos comuns.</li>
+<li style="text-align: justify;">Portanto, é essencial entender que “<em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em>” é qual das <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em> está na mente de alguém ao cometer um <em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span>.</span></em> Pode ser mais de uma. No caso do bombardeiro, há <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> e provavelmente ganância também, além de “<em>pānātipātā</em>”.</li>
+<li style="text-align: justify;">Pode-se analisar várias situações com as duas etapas do nº 7 acima.</li>
+</ul>
+<p style="text-align: justify;">9. Vamos considerar alguns exemplos proeminentes do <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span>O asceta Siddhartha teve que suportar tais dificuldades por seis anos para atingir a iluminação, porque ele havia dito algumas coisas insultantes sobre o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kassapa em sua vida anterior. Naquela época, Siddhartha era uma pessoa rica chamada Jotipala e tinha um amigo chamado Gatikara que ouvia os </span><em>desanas</em><span> do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kassapa e se tornou um</span><em> Anāgāmi</em><span>. Gatikara tentou persuadir Jotipala a ir ouvir o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Kassapa, mas Jotipala continuou recusando, dizendo: “Não quero ir ouvir o monge careca”.</span></li>
+<li>Esse <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> forçou o asceta Siddhartha a passar por tantas dificuldades antes de atingir a iluminação. Esse é um exemplo claro de que NÃO É NECESSÁRIO SABER que se está insultando um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> para acumular o </span><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> correspondente.</li>
+<li>Mais onze <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em><span> semelhantes trouxeram efeitos adversos ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama, mesmo depois de alcançar a iluminação. Três deles foram por </span><em><span><span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> ruim cometido contra <em>Pacceka Buddhas</em>. Não é possível reconhecer um <em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span> como tal porque eles aparecem quando um </span><em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Sambuddha</span></em><span> (como o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama) não está presente e não podem ensinar o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> aos outros.</span></li>
+<li><span>Portanto, NÃO SABER o status da pessoa (a quem o ato errado foi dirigido) não é uma desculpa. Essas não são regras criadas pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, e o próprio <span class="pali-term term-highlight" data-term="buddha">Buddha</span> não estava imune a essas leis. As leis </span><em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em><span> são leis da Natureza, assim como as leis da gravidade. Um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> as descobre, não as cria.</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> é um assunto complexo. Vamos considerar mais um aspecto de um “<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> completo” ou “<em><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span></span></em>”.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span></span></em></h5>
+<p style="text-align: justify;">10. Um determinado <em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em> leva <strong>quatro etapas</strong> para ser “completado”.</p>
+<ul style="text-align: justify;">
+<li>
+Por exemplo, no caso de tirar uma vida, os quatro passos são:<br/>
+(i) é preciso pensar que o ser está vivo,<br/>
+(ii) fazer um plano para matar esse ser intencionalmente<br/>
+, (iii) executar o plano para matar<br/>
+, (iv) o ser vivo acaba morto.</li>
+<li>Ao completar todas as cinco etapas, esse <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> se torna um “<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> com força máxima” ou um <em><strong><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span>. </span></strong></em></li>
+<li> À medida que o número de etapas concluídas continua aumentando, a severidade do <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> aumentará. <span style="color: #993366;"><strong>Quando todas estiverem concluídas, um <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> se torna um <em><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span>,</span></em> e o <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> será o mais forte possível.</strong></span></li>
+<li>Quando caminhamos na grama, podemos matar muitos insetos pequenos sem intenção. Mas, como não há “intenção”, nenhum dos cinco fatores entrará em ação. Se alguém bater em uma cobra de brinquedo com a intenção de matá-la, apenas o último fator não será cumprido.</li>
+</ul>
+<p style="text-align: justify;">11. Vamos considerar outro exemplo das quatro etapas que constituem um <em><span><span class="pali-term term-highlight" data-term="kamma patha">Kamma Patha</span></span></em> envolvendo mentir/enganar (<em><span><span class="pali-term term-highlight" data-term="musāvāda">Musāvāda</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>
+(i) deve haver uma ou mais pessoas a serem enganadas,<br/>
+(ii) alguém planeja enganar essa(s) pessoa(s),<br/>
+(iii) executa o engano,<br/>
+(iv) essa pessoa (e possivelmente outras que nem mesmo eram intencionais) sofre devido a esse engano.</li>
+<li>Tenho tentado encontrar uma referência <em><span>no <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> para esses “cinco fatores”. Por favor, comente no fórum de discussão se você souber.</li>
+<li>Se todos os fatores forem completados, a “energia <em>cármica</em>” será otimizada e se tornará um “<em><span>janaka <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>”<em>,</em> possivelmente levando ao renascimento em um reino ruim. Se apenas alguns fatores forem completados, tal <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> pode trazer <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> durante a vida.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em> Expandir para Quarenta</h5>
+<p style="text-align: justify;">12.<span><span> No <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, é sempre a intenção de cada um que importa.</span></span> <strong>Com base nisso, cada <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em> se expande para 40.</strong> Por exemplo, os quatro seguintes estão incluídos em <em>pāṇātipātā</em>:</p>
+<ol style="list-style-type: lower-roman; text-align: justify;">
+<li>Tirar a própria vida</li>
+<li>Fazer com que outra pessoa mate</li>
+<li>Ajudar outra pessoa a matar</li>
+<li>Elogiar o assassinato cometido por outra pessoa</li>
+</ol>
+<ul style="text-align: justify;">
+<li>Existem dez<em><span> <span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> no <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> <em>Patha</em> do <em>Aṅguttara Nikāya</em> que listam essas “quatro divisões” para cada um dos <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>, AN 4.264 a AN 4.273. O primeiro <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>é “Matar <a href="https://suttacentral.net/an4.264/en/sujato" target="_blank">criaturas vivas (AN 4.264)</a>”. Você pode clicar na seta “próximo” na parte inferior da página da web para acessar todos os dez <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>.</li>
+<li>Em outro exemplo, em relação ao <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span>,</span></em> o seguinte também conta. Propagar <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> para outros, encorajar outros a cultivar <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> (digamos, por exemplo, que o processo de Renascimento não é válido) ou elogiar tais práticas.</li>
+<li>É assim que os dez <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span> </span></em>se expandem para quarenta.</li>
+<li>À medida que se começa a evitar cada vez mais essas quarenta ações, começa-se a sentir os estágios iniciais do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> ou “<em>nivana”, ou</em> seja, o arrefecimento da mente.</li>
+</ul>
+<h5 style="text-align: justify;">Complexidade da vida</h5>
+<p style="text-align: justify;"><span>13. <span class="pali-term term-highlight" data-term="buddha">Buddha</span> nos ensinou como entender por que diferentes seres vivos nascem dessa forma e por que as pessoas nascem com diferentes níveis de saúde, riqueza, beleza, etc.</span></p>
+<ul>
+<li style="text-align: justify;">Certa vez, um <em>brâmane</em><span> perguntou como isso acontece. A descrição do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> está no “</span><a href="https://suttacentral.net/mn135/en/sujato" target="_blank"><em><span>Cūḷakammavibhaṅga <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 135.)</a>”.</li>
+<li style="text-align: justify;">Veja também “<a href="../../pages/TL.GG.003/index.html" target="_blank">A complexidade da vida e o caminho para buscar ‘bons Renascimentos</a>’”.</li>
+</ul>
+</div>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.EE.007/index.html">How To Evaluate Weights Of Different Kammas</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.EE.010/index.html">Account Of Angulimala Insights</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.EE.007/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">How To Evaluate Weights Of Different Kammas</span>
+        
+        <span class="pathway-title title-pt">Como avaliar os pesos de diferentes Kammas</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.EE.010/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Account Of Angulimala Insights</span>
+        
+        <span class="pathway-title title-pt">Relato das percepções de Angulimala</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

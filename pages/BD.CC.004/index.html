@@ -1,0 +1,474 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Persistent Vegetative State Buddhist View | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 12 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.CC.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Persistent Vegetative State Buddhist View</h1>
+    
+    <h1 class="title-pt">Perspectiva Buddhista sobre o estado vegetativo persistente</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.CC.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.CC.004"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0015"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.CC.004</td></tr><tr><td>Fin-dex</td><td>0015</td></tr><tr><td>Slug</td><td>persistent-vegetative-state-buddhist-view</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Persistent Vegetative State Buddhist View</td></tr></table></div></div><p><strong> September 18, 2020; revised September 19, 2020</strong></p>
+<p style="text-align: justify;"><span>Some people in a "persistent vegetative state" may have awareness per <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. (1). As long as the physical body is alive, there is life. (2). Depending on the extent of brain damage, awareness of the external world may or may not exist.</span></p>
+<h5 style="text-align: justify;">What Is a "Vegetative State" or Unresponsive Wakefulness Syndrome?</h5>
+<p style="text-align: justify;">1. A persistent vegetative state is when a person is awake but showing no signs of awareness for an extended time. Such a patient may have awoken from a coma but still don't seem to have regained awareness (Refs. 1,2).</p>
+<ul style="text-align: justify;">
+<li>Ref. 1 states, "A vegetative state is when a person is awake but showing <strong>no signs of awareness</strong>."</li>
+<li>According to Ref. 2, a person in a vegetative state "<strong>completely lacks cognitive function</strong>."</li>
+<li>The term "vegetative state" may have come from "vegetable-like" in that the body is alive but does not show any sign of awareness. A vegetable is also "alive" but has no awareness.</li>
+<li>But there is a clear difference between "<strong>being aware</strong>" and "<strong>being able to communicate that one is aware</strong><span>." Some people classified to be in a "vegetative state" may be aware but not able to communicate that they are aware. This difference is VERY CLEAR in the <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> explanation.</span></li>
+</ul>
+<h5 style="text-align: justify;">There Could be Awareness in a Person Classified to be in a "Vegetative State"</h5>
+<p style="text-align: justify;">2. Scientists are beginning to realize that there is a <strong>"thinking being" in a human body in a "persistent vegetative state."</strong> In 2010, it was proposed to refer to this condition as <em>unresponsive wakefulness syndrome </em>or UWS (Ref. 3.)</p>
+<ul style="text-align: justify;">
+<li>However, many still consider ANY person in a vegetative state to be "clinically dead." Disconnecting life-support is legally allowed.</li>
+<li><span>In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, the issues become much clearer. </span><strong><span style="color: #800080;">The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is fully alive inside.</span></strong> Since the brain's areas controlling body movement and speech are disabled, it cannot show awareness. But depending on the condition of the other brain areas, <span style="color: #800080;"><strong>it may or may not be aware of the surroundings. That means a person in a vegetative state COULD BE fully aware of his/her surroundings just like a normal person.</strong></span></li>
+<li><span>Progress in neuroscience now makes it possible to check whether such a person is aware of the surroundings, even if he/she cannot express that via speech or bodily movements. We will discuss that below. Let us first discuss the general picture per <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;"><span>A Person in a Persistent Vegetative State - <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Explanation</span></h5>
+<p style="text-align: justify;"><span>3. In the previous <span class="pali-term term-highlight" data-term="post">post</span>, we described the workings of the </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (mental body) and the physical body where the brain plays a significant role.</p>
+<ul style="text-align: justify;">
+<li>One part of the brain (neocortex) provides the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> with the sensory inputs coming through the physical sense faculties (eyes, ears, nose, tongue, body.)</li>
+<li>There is a separate brain circuit (brain stem) that controls speech and bodily movements. Per <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>'s instructions, that part of the brain controls the movement of body parts.</li>
+<li>We discussed those two aspects using an analogy of a military tank operated by a soldier. Here, an onboard computer has two circuits: One to bring in external video and audio to the soldier. The other part of the computer-controlled circuit drives the tank and fires the guns mounted on the soldier's tank per instructions. See "<a href="../../pages/BD.CC.003/index.html" rel="noopener noreferrer" target="_blank">Gandhabba in a Human Body – an Analogy</a>."</li>
+</ul>
+<h5 style="text-align: justify;">"Vegetative State" is Proper Terminology If the Brain Is Fully Damaged</h5>
+<p style="text-align: justify;">4. If there is extensive damage to the onboard computer and all circuits under its control, the soldier is completely isolated. He/she would not be able to see/hear what is happening outside OR to drive the tank or fire its guns.</p>
+<ul style="text-align: justify;">
+<li>Similarly, <span style="color: #993366;"><strong>if the brain is fully damaged</strong></span>, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> will not be able to see, hear, taste, smell, or touch (It will also not be able to recall any past events as we will discuss later.) Furthermore, since the brain cannot help with speech or other body movements, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> cannot show any life sign.</li>
+<li>However, the soldier inside the tank is alive. Similarly, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> inside the physical body is also fully alive.</li>
+<li>It is because the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is alive that the physical body stays alive. <strong>The physical body can be in that "persistent vegetative state" as long as the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> stays inside AND the physical body is on life-support (food and water provided.)  </strong></li>
+<li><span style="color: #993366;"><strong>Thus, the term "vegetative state" is appropriate in this case</strong></span> since the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> cannot respond AND is unaware of what is happening. <strong>In <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> terminology, the mind is in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state. There are no "active thoughts" or <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>.</strong></li>
+</ul>
+<h5 style="text-align: justify;">If Only the Brain Stem Damaged, <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> May Have “Awareness”</h5>
+<p style="text-align: justify;">5. Now, let us consider the second possible scenario. <span style="color: #0000ff;"><strong>If only the brain stem is damaged, </strong></span>that person may see and hear but cannot move body parts to respond to them.</p>
+<ul style="text-align: justify;">
+<li>In the military tank analogy, this is similar to when the computer circuits for driving and firing guns are damaged. The video and audio equipment work so the soldier can see and hear what is happening outside but cannot move the tank or fire its guns. To someone looking from the outside, the military tank appears to be totally disabled.</li>
+<li>Similarly, some people who appear to be in persistent vegetative states may be fully aware of what is going on. They have no abilities for body movements and cannot speak or move even a finger. Thus, they are unable to express anything with words or bodily movements.</li>
+<li>The following video is about a woman in a vegetative state for two years and was able to recover. <span style="color: #0000ff;"><strong>During those two years, she heard and saw what was going on.</strong></span> However, there was "no sign of life" in her other than her vital signs.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/J4CG8DYkp9A?si=Cfoo1Z4fOfab9aVG" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> of a Person in a Persistent Vegetative State is Fully Alive in All Cases</h5>
+<p>6. Therefore, as long as the body's vital functions are intact, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> inside is alive and well. In other words, the fact that the physical body does not decay MEANS that the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> inside is alive.</p>
+<ul>
+<li>Of course, the physical body will die if life-support is disconnected. Then, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> would move out of the dead body.</li>
+<li>Some people in a "vegetative state" may not be able to think, in addition to not being able to respond. That is a "strong vegetative state," as discussed in #4. That resembles a living being in the <em>asañña</em> realm with no thoughts or perceptions.</li>
+<li>On the other hand, some who are classified to be in a "persistent vegetative state" may be fully aware of what is happening, as discussed in #5.</li>
+<li>The following amazing video describes the accounts of three people who were in vegetative states for years per #5. They recovered and said that they were able to see or hear everything. But they could not even move a finger, let alone talk, so they could not acknowledge that they knew what was happening. You can watch it on YouTube by clicking the link.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/3NQ_EPw73_c?si=qoxZUGhl5r_dRPyv" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> of a Person in a Persistent Vegetative State is Fully Alive in All Cases</h5>
+<p style="text-align: justify;">6. Therefore, as long as the body's vital functions are intact, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> inside is alive and well. In other words, the fact that the physical body does not decay MEANS that the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> inside is alive.</p>
+<ul style="text-align: justify;">
+<li>Of course, if life-support disconnected the physical body will die. Then the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> would move out of the dead body.</li>
+<li>Some people in a "vegetative state" may not be able to think in addition to not being able to respond. That is a "strong vegetative state," as discussed in #4. That is similar to a living being in the <em>asañña</em> realm with no thoughts or perceptions.</li>
+<li>On the other hand, some who are classified to be in a "persistent vegetative state" may be fully aware of what is happening, as discussed in #5.</li>
+<li>The following amazing video describes the accounts of three people who were in vegetative states for years per #5. They recovered and say that they were able to see or hear everything. But they were incapable of even moving a finger, let alone talk, so they could not acknowledge that they knew what was happening.</li>
+</ul>
+<ul style="text-align: justify;">
+<li>Imagine being in a situation like that! Totally helpless. <span style="color: #ff0000;"><strong>That is one example of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature!</strong> </span><strong class="text-strong"><span style="color: #ff0000;">This is why <em class="text-italics"><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> means much more than just "impermanence."</span> </strong>One can get into situations where one loses any control over one's situation. Most animals are like that throughout their lives. They have to bear whatever happens.</li>
+</ul>
+<h5 style="text-align: justify;">Is There a Way to Check if a Person In a Vegetative Stats Is Aware of Surroundings?</h5>
+<p style="text-align: justify;">7. It would be horrible to discontinue life-support for a person who cannot communicate but is fully aware of what is happening. As we saw in the above video, some people in persistent vegetative states CAN see and hear everything. They cannot speak or even make bodily gestures to indicate that they can see and hear.</p>
+<ul style="text-align: justify;">
+<li>Imagine being in such a situation. In some cases, the medical staff and even the family members may be talking about taking away life support! That would be a cruel punishment even though not intended.</li>
+<li>But new imaging technology developments have made it possible to find out whether a given patient is aware, even though unable to communicate. The following video explains the technology. A Neuroscientist Used fMRI to Communicate With People in a Vegetative State:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/JbWHAIDHUQ4?si=6AdsmQdB85vwOWWg" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><strong>According to this doctor, about 1 in 5 patients (from a sample of several hundred in his study) were fully aware! </strong><span style="color: #000000;">Hopefully, this technique will be adopted in the future before deciding to remove life support.</span></span></li>
+<li>Note that the third person discussed in the video in #6 (@9.06) underwent this brain scan diagnosis.</li>
+</ul>
+<h5 style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Explanations Are Very Clear on Many Moral Issues</span></h5>
+<p style="text-align: justify;">8. The prevalent "materialistic view" makes clarifying some critical moral issues challenging. What we discussed above is just one example.</p>
+<ul>
+<li style="text-align: justify;">Another actively debated issue is related to the fact that there is no clear understanding of the conception of a baby per the materialistic view. The only thing universally accepted is that conception STARTS with the formation of a single cell (zygote) when a sperm cell joins an egg cell in the mother's womb.</li>
+<li style="text-align: justify;">But that zygote is inert. When does it become alive? Some people even say it is not alive until it is born! Yet, one can clearly see that the baby is alive in the womb with the heart pumping.</li>
+<li style="text-align: justify;"><span>In the <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> view, the situation is crystal clear. The inert zygote becomes alive when a </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> "descends to the womb" (<em>okkanti</em>) and merges with that zygote. That normally happens within a day or two of sexual intercourse. Thus, the time of conception is well-defined. See "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>."</li>
+</ul>
+<h5>References</h5>
+<p>1. Brain Foundation article: "<a href="https://brainfoundation.org.au/disorders/vegetative-state/#:~:text=A%20vegetative%20state%20is%20when,lacks%20both%20awareness%20and%20wakefulness." rel="noopener noreferrer" target="_blank">Vegetative State (Unresponsive Wakefulness Syndrome)</a>"</p>
+<p>2. Wikipedia article: "<a href="https://en.wikipedia.org/wiki/Persistent_vegetative_state" rel="noopener noreferrer" target="_blank">Persistent vegetative state</a>"</p>
+<p>3. S. Laureys et al., "<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2987895/" rel="noopener noreferrer" target="_blank">Unresponsive wakefulness syndrome: a new name for the vegetative state or apallic syndrome (2010)</a>"</p>
+<p>4. An insightful summary:</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IUudigFnfa0?si=3Jt9hBZMoCJbcYlr" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p>5. Here is a longer video on two subjects. One was in a vegetative state for 20 years before recovering. She recovered in 2004 but remembers others talking about the terrorist attack on 9/11/2001 (@34:30.)</p>
+<p><span>All relevant <span class="pali-term term-highlight" data-term="posts">posts</span> in the subsection, "</span><a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – A Scientific Approach</a><span>." <span class="pali-term term-highlight" data-term="posts">Posts</span> on the connection between the brain and <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> (mental body) at "</span><a href="../../pages/BD.CC.001/index.html" rel="noopener noreferrer" target="_blank">Brain and the Gandhabba</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.CC.004"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0015"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.CC.004
+Language:     pt-BR
+Generated-At: 2026-04-17T21:31:36Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong> 18 de setembro de 2020; revisado em 19 de setembro de 2020</strong></p>
+<p style="text-align: justify;"><span>Algumas pessoas em “estado vegetativo persistente” podem ter consciência, de acordo com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. (1). Enquanto o corpo físico estiver vivo, há vida. (2). Dependendo da extensão do dano cerebral, a consciência do mundo externo pode ou não existir.</span></p>
+<h5 style="text-align: justify;">O que é um “estado vegetativo” ou síndrome de vigília sem resposta?</h5>
+<p style="text-align: justify;">1. Um estado vegetativo persistente é quando uma pessoa está acordada, mas não mostra sinais de consciência por um período prolongado. Tal paciente pode ter acordado de um coma, mas ainda assim não parece ter recuperado a consciência (Ref. 1,2).</p>
+<ul style="text-align: justify;">
+<li>A Ref. 1 afirma: “Um estado vegetativo é quando uma pessoa está acordada, mas <strong>não</strong> apresenta <strong>sinais de consciência</strong>.”</li>
+<li>De acordo com a Ref. 2, uma pessoa em estado vegetativo “<strong>carece completamente de função cognitiva</strong>”.</li>
+<li>O termo “estado vegetativo” pode ter origem em “vegetal”, no sentido de que o corpo está vivo, mas não apresenta nenhum sinal de consciência. Um vegetal também está “vivo”, mas não tem consciência.</li>
+<li>Mas há uma diferença clara entre “<strong>estar consciente</strong>” e “<strong>ser capaz de comunicar que se está consciente</strong>”. Algumas pessoas classificadas como estando em “estado vegetativo” podem estar conscientes, mas não ser capazes de comunicar que estão conscientes. Essa diferença é MUITO CLARA na explicação Buddhista.</li>
+</ul>
+<h5 style="text-align: justify;">Pode haver consciência em uma pessoa classificada como estando em “estado vegetativo”</h5>
+<p style="text-align: justify;">2. Os cientistas estão começando a perceber que existe um <strong>“ser pensante” no corpo humano em “estado vegetativo persistente”.</strong> Em 2010, foi proposto referir-se a essa condição como <em>síndrome de vigília sem resposta</em> ou UWS (Ref. 3.)</p>
+<ul style="text-align: justify;">
+<li>No entanto, muitos ainda consideram QUALQUER pessoa em estado vegetativo como “clinicamente morta”. A desconexão do suporte de vida é legalmente permitida.</li>
+<li><span>No <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, as questões ficam muito mais claras. </span><strong><span style="color: #800080;">O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> está plenamente vivo por dentro.</span></strong> Como as áreas do cérebro que controlam os movimentos corporais e a fala estão desativadas, ele não consegue demonstrar consciência. Mas, dependendo da condição das outras áreas cerebrais, <span style="color: #800080;"><strong>ele pode ou não estar ciente do ambiente ao redor. Isso significa que uma pessoa em estado vegetativo PODE ESTAR plenamente consciente do ambiente ao seu redor, assim como uma pessoa normal.</strong></span></li>
+<li><span>Os avanços na neurociência agora tornam possível verificar se tal pessoa está ciente do ambiente ao seu redor, mesmo que não consiga expressar isso por meio da fala ou de movimentos corporais. Discutiremos isso a seguir. Vamos primeiro discutir o panorama geral segundo o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;">Uma Pessoa em Estado Vegetativo Persistente – Explicação Buddhista</h5>
+<p style="text-align: justify;">3. No ensaio anterior, descrevemos o funcionamento do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (corpo mental) e do corpo físico, onde o cérebro desempenha um papel significativo.</p>
+<ul style="text-align: justify;">
+<li>Uma parte do cérebro (neocórtex) fornece ao <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> os estímulos sensoriais que chegam através dos órgãos dos sentidos físicos (olhos, ouvidos, nariz, língua, corpo).</li>
+<li>Existe um circuito cerebral separado (tronco cerebral) que controla a fala e os movimentos corporais. De acordo com as instruções de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>, essa parte do cérebro controla o movimento das partes do corpo.</li>
+<li>Discutimos esses dois aspectos usando uma analogia com um tanque militar operado por um soldado. Aqui, um computador de bordo possui dois circuitos: um para transmitir vídeo e áudio externos ao soldado. A outra parte do circuito controlado pelo computador conduz o tanque e dispara as armas montadas no tanque do soldado de acordo com as instruções. Veja “<a href="../../pages/BD.CC.003/index.html" rel="noopener noreferrer" target="_blank">Gandhabba em um Corpo Humano – uma Analogia</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">“Estado vegetativo” é a terminologia correta se o cérebro estiver totalmente danificado</h5>
+<p style="text-align: justify;">4. Se houver danos extensos ao computador de bordo e a todos os circuitos sob seu controle, o soldado fica completamente isolado. Ele/ela não seria capaz de ver/ouvir o que está acontecendo do lado de fora NEM de dirigir o tanque ou disparar suas armas.</p>
+<ul style="text-align: justify;">
+<li>Da mesma forma, <span style="color: #993366;"><strong>se o cérebro estiver totalmente danificado</strong></span>, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não será capaz de ver, ouvir, saborear, cheirar ou tocar (também não será capaz de recordar quaisquer eventos passados, como discutiremos mais adiante). Além disso, como o cérebro não pode auxiliar na fala ou em outros movimentos corporais, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não pode mostrar qualquer sinal de vida.</li>
+<li>No entanto, o soldado dentro do tanque está vivo. Da mesma forma, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dentro do corpo físico também está totalmente vivo.</li>
+<li>É porque o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> está vivo que o corpo físico permanece vivo. <strong>O corpo físico pode permanecer nesse “estado vegetativo persistente” enquanto o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> permanecer dentro dele E o corpo físico estiver em suporte de vida (recebendo alimento e água).  </strong></li>
+<li><span style="color: #993366;"><strong>Assim, o termo “estado vegetativo” é apropriado neste caso</strong></span>, uma vez que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não pode responder E não tem consciência do que está a acontecer. <strong>Na terminologia <em><span>do <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, a mente encontra-se no estado <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">Bhavaṅga</span></span></em>. Não há “pensamentos ativos” nem <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> vithi</span></em>.</strong></li>
+</ul>
+<h5 style="text-align: justify;">Se apenas o tronco cerebral estiver danificado, <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode ter “consciência”</h5>
+<p style="text-align: justify;">5. Agora, vamos considerar o segundo cenário possível. <span style="color: #0000ff;"><strong>Se apenas o tronco cerebral estiver danificado, </strong></span>essa pessoa pode ver e ouvir, mas não consegue mover partes do corpo para responder a esses estímulos.</p>
+<ul style="text-align: justify;">
+<li>Na analogia do tanque militar, isso é semelhante a quando os circuitos do computador responsáveis pela direção e pelo disparo das armas estão danificados. Os equipamentos de vídeo e áudio funcionam, de modo que o soldado pode ver e ouvir o que está acontecendo do lado de fora, mas não consegue mover o tanque nem disparar suas armas. Para alguém que observa de fora, o tanque militar parece estar totalmente incapacitado.</li>
+<li>Da mesma forma, algumas pessoas que parecem estar em estado vegetativo persistente podem estar plenamente conscientes do que está acontecendo. Elas não têm capacidade para movimentos corporais e não conseguem falar nem mover sequer um dedo. Assim, são incapazes de expressar qualquer coisa com palavras ou movimentos corporais.</li>
+<li>O vídeo a seguir é sobre uma mulher que ficou em estado vegetativo por dois anos e conseguiu se recuperar. <span style="color: #0000ff;"><strong>Durante esses dois anos, ela ouvia e via o que estava acontecendo.</strong></span> No entanto, não havia “nenhum sinal de vida” nela além de seus sinais vitais.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/J4CG8DYkp9A?si=Cfoo1Z4fOfab9aVG" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5><em><span>O <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> de uma pessoa em estado vegetativo persistente está plenamente vivo em todos os casos</h5>
+<p>6. Portanto, enquanto as funções vitais do corpo estiverem intactas, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dentro dele está vivo e bem. Em outras palavras, o fato de o corpo físico não se decompor SIGNIFICA que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dentro dele está vivo.</p>
+<ul>
+<li>É claro que o corpo físico morrerá se o suporte de vida for desligado. Então, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> sairia do corpo morto.</li>
+<li>Algumas pessoas em “estado vegetativo” podem não ser capazes de pensar, além de não conseguirem responder. Esse é um “estado vegetativo grave”, conforme discutido no ponto 4. Isso se assemelha a um ser vivo no reino <em>asañña</em>, sem pensamentos ou percepções.</li>
+<li>Por outro lado, algumas pessoas classificadas como estando em um “estado vegetativo persistente” podem estar plenamente conscientes do que está acontecendo, conforme discutido no nº 5.</li>
+<li>O vídeo incrível a seguir descreve os relatos de três pessoas que permaneceram em estado vegetativo por anos, conforme o nº 5. Elas se recuperaram e disseram que eram capazes de ver ou ouvir tudo. Mas não conseguiam nem mover um dedo, muito menos falar, então não podiam demonstrar que sabiam o que estava acontecendo. Você pode assistir no YouTube clicando no link.</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/3NQ_EPw73_c?si=qoxZUGhl5r_dRPyv" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<h5 style="text-align: justify;"><em><span>O <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> de uma pessoa em estado vegetativo persistente está plenamente vivo em todos os casos</h5>
+<p style="text-align: justify;">6. Portanto, enquanto as funções vitais do corpo estiverem intactas, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dentro dele está vivo e bem. Em outras palavras, o fato de o corpo físico não se decompor SIGNIFICA que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dentro dele está vivo.</p>
+<ul style="text-align: justify;">
+<li>É claro que, se o suporte de vida for desligado, o corpo físico morrerá. Então, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> sairia do corpo morto.</li>
+<li>Algumas pessoas em “estado vegetativo” podem não ser capazes de pensar, além de não conseguirem responder. Esse é um “estado vegetativo grave”, conforme discutido no nº 4. Isso é semelhante a um ser vivo no reino <em>asañña</em>, sem pensamentos ou percepções.</li>
+<li>Por outro lado, algumas pessoas classificadas como estando em um “estado vegetativo persistente” podem estar plenamente conscientes do que está acontecendo, conforme discutido no nº 5.</li>
+<li>O vídeo incrível a seguir descreve os relatos de três pessoas que permaneceram em estado vegetativo por anos, conforme o nº 5. Elas se recuperaram e afirmam que eram capazes de ver ou ouvir tudo. Mas eram incapazes de mover sequer um dedo, muito menos falar, de modo que não podiam demonstrar que sabiam o que estava acontecendo.</li>
+</ul>
+<ul style="text-align: justify;">
+<li>Imagine estar numa situação como essa! Totalmente indefeso. <span style="color: #ff0000;"><strong>Esse é um exemplo da natureza <em>de</em> <em>Anattā</em>!</strong> </span><strong class="text-strong"><span style="color: #ff0000;">É por isso que <em class="text-italics">Anattā</em> significa muito mais do que apenas “impermanência”.</span> </strong>Pode-se entrar em situações em que se perde todo o controle sobre a própria situação. A maioria dos animais é assim ao longo de suas vidas. Eles têm de suportar tudo o que acontece.</li>
+</ul>
+<h5 style="text-align: justify;">Existe uma maneira de verificar se uma pessoa em estado vegetativo está ciente do que acontece ao seu redor?</h5>
+<p style="text-align: justify;">7. Seria horrível interromper o suporte de vida de uma pessoa que não consegue se comunicar, mas está plenamente consciente do que está acontecendo. Como vimos no vídeo acima, algumas pessoas em estado vegetativo persistente PODEM ver e ouvir tudo. Elas não conseguem falar nem mesmo fazer gestos corporais para indicar que podem ver e ouvir.</p>
+<ul style="text-align: justify;">
+<li>Imagine estar nessa situação. Em alguns casos, a equipe médica e até mesmo os familiares podem estar discutindo a possibilidade de desligar o suporte de vida! Isso seria um castigo cruel, mesmo que não intencional.</li>
+<li>Mas novos avanços na tecnologia de imagem tornaram possível descobrir se um determinado paciente está consciente, mesmo que incapaz de se comunicar. O vídeo a seguir explica a tecnologia. Um neurocientista usou a ressonância magnética funcional (fMRI) para se comunicar com pessoas em estado vegetativo:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/JbWHAIDHUQ4?si=6AdsmQdB85vwOWWg" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><strong>De acordo com esse médico, cerca de 1 em cada 5 pacientes (de uma amostra de várias centenas em seu estudo) estava plenamente consciente! </strong><span style="color: #000000;">Esperamos que essa técnica seja adotada no futuro antes da decisão de retirar o suporte de vida.</span></span></li>
+<li>Observe que a terceira pessoa mencionada no vídeo no nº 6 (@9.06) passou por esse diagnóstico por exame cerebral.</li>
+</ul>
+<h5 style="text-align: justify;">As explicações Buddhistas são muito claras sobre muitas questões morais</h5>
+<p style="text-align: justify;">8. A prevalente “visão materialista” torna desafiador esclarecer algumas questões morais críticas. O que discutimos acima é apenas um exemplo.</p>
+<ul>
+<li style="text-align: justify;">Outra questão amplamente debatida está relacionada ao fato de que não há um entendimento claro sobre a concepção de um bebê segundo a visão materialista. A única coisa universalmente aceita é que a concepção COMEÇA com a formação de uma única célula (zigoto) quando um espermatozoide se une a um óvulo no útero da mãe.</li>
+<li style="text-align: justify;">Mas esse zigoto é inerte. Quando ele ganha vida? Algumas pessoas chegam a dizer que ele não está vivo até nascer! No entanto, pode-se ver claramente que o bebê está vivo no útero, com o coração batendo.</li>
+<li style="text-align: justify;">Na visão Buddhista, a situação é cristalina. O zigoto inerte ganha vida quando um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> “desce ao útero” (<em>okkanti</em>) e se funde com esse zigoto. Isso normalmente acontece dentro de um ou dois dias após a relação sexual. Assim, o momento da concepção é bem definido. Veja “<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Explicações Buddhistas sobre concepção, aborto e contracepção</a>”.</li>
+</ul>
+<h5>Referências</h5>
+<p>1. Artigo da Brain Foundation: <a href="https://brainfoundation.org.au/disorders/vegetative-state/#:~:text=A%20vegetative%20state%20is%20when,lacks%20both%20awareness%20and%20wakefulness." rel="noopener noreferrer" target="_blank">“Estado vegetativo (Síndrome de vigília sem resposta)</a>”</p>
+<p>2. Artigo da Wikipedia: <a href="https://en.wikipedia.org/wiki/Persistent_vegetative_state" rel="noopener noreferrer" target="_blank">“Estado vegetativo persistente</a>”</p>
+<p>3. S. Laureys et al., “<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2987895/" rel="noopener noreferrer" target="_blank">Síndrome de vigília sem resposta: um novo nome para o estado vegetativo ou síndrome apálica (2010)</a>”</p>
+<p>4. Um resumo esclarecedor:</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IUudigFnfa0?si=3Jt9hBZMoCJbcYlr" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p>5. Aqui está um vídeo mais longo sobre dois casos. Um deles esteve em estado vegetativo por 20 anos antes de se recuperar. Ela se recuperou em 2004, mas lembra-se de outras pessoas falando sobre o ataque terrorista de 11 de setembro de 2001 (@34:30.)</p>
+<p>Todos os ensaios relevantes na subseção “<a href="../../pages/BD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Uma Abordagem Científica</a><span>”. Ensaios sobre a conexão entre o cérebro e o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> (corpo mental) em “</span><a href="../../pages/BD.CC.001/index.html" rel="noopener noreferrer" target="_blank">O Cérebro e o Gandhabba</a>”.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.CC.003/index.html">Gandhabba In A Human Body An Analogy</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.CC.005/index.html">Patient H M Brain And Memory</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.CC.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Gandhabba In A Human Body An Analogy</span>
+        
+        <span class="pathway-title title-pt">Um Gandhabba em um corpo humano: uma analogia</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.CC.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Patient H M Brain And Memory</span>
+        
+        <span class="pathway-title title-pt">Paciente H M: Cérebro e Memória</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

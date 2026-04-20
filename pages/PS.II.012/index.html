@@ -1,0 +1,398 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Bhava Paccaya Jati Jara Marana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 79 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.II.012</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Bhava Paccaya Jati Jara Marana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.II.012</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>15</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.II.012"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0637"
+             data-level="advanced"
+             data-reading-time="15"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.II.012</td></tr><tr><td>Fin-dex</td><td>0637</td></tr><tr><td>Slug</td><td>bhava-paccaya-jati-jara-marana</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>Bhava Paccaya Jati Jara Marana</td></tr></table></div></div><p><strong>Revised June 16, 2019; <span style="color: #3366ff;"><span style="color: #000000;">re-written May 29, 2021;</span> revised June 6, 2023</span></strong></p>
+<p style="text-align: justify;">An existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) can result in this life (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) or future lives (<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>). Both types lead to more suffering in the end. Repetition of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>(i.e., engaging in similar activities) adds to <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> bija</span></em>) that can fuel future <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</p>
+<h5><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="upapatti">Upapatti</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em></h5>
+<p style="text-align: justify;"><span>1. In a previous <span class="pali-term term-highlight" data-term="post">post</span> ("</span><a href="../../pages/PS.CC.007/index.html" rel="noopener" target="_blank">Nāmarūpa Paccayā Salāyatana</a>"), we discussed how repeated immoral actions of a teenager could bring about a specific type of existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) during the current life. That is a "temporary existence" (in that example, as a drunkard/alcoholic). Still, it<strong><span style="color: #ff0000;"> <span style="color: #993366;">creates <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy that will remain as <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</span></span></strong></p>
+<ul style="text-align: justify;">
+<li>We also discussed how such <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> could get stronger with time and become strong enough to lead to a new existence at death. <span style="color: #993366;"><strong>This is called a <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span></span></em><em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</strong></span></li>
+<li>Therefore, there are two types of "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>": those that can bring about "experiences" during the current life (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) and those that become strong enough to power a whole new existence (<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>).</li>
+<li>This is explained in the "<a href="https://suttacentral.net/vb6/pli/ms" rel="noopener" target="_blank"><em>Paṭic­ca­samup­pāda­ vibhaṅga</em></a>": "<em><span>Tattha katamo <span class="pali-term term-highlight" data-term="upādāna">upādāna</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span>? <span class="pali-term term-highlight" data-term="bhavo">Bhavo</span> duvidhena—atthi <span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span>, atthi <span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span></span></em>", i.e., <strong>"What is <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="bhavo">bhavo</span>? </span></em>Two types of <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> - <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>".</strong></li>
+<li><span>This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> emphasized the importance of the </span><em><span>Idapaccayātā <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em> <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> is NOT there all the time. Any unwise action done at a given time is due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> present AT THAT TIME. See, "<a href="https://suttacentral.net/an10.61/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> </span></em><em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 10.61)</a>": <span class="segment" id="an10.61:1.1"><span class="root"><span class="text">“<em><span>Purimā, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, koṭi na paññāyati <span class="pali-term term-highlight" data-term="avijjāya">avijjāya</span>: ‘ito pubbe <span class="pali-term term-highlight" data-term="avijjā">avijjā</span> nāhosi, atha pacchā samabhavī’ti. </span></em></span></span></span><span class="segment" id="an10.61:1.2"><span class="root"><span class="text"><em><span>Evañcetaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, vuccati, atha ca pana paññāyati: ‘</span><strong><span>idappaccayā <span class="pali-term term-highlight" data-term="avijjā">avijjā</span>’ti</span></strong></em><strong>.</strong>" Thus, <span class="segment" id="an10.61:1.1"><strong><em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> </span></em>may arise based on the conditions at a given time</strong>, mainly depending on the <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span> </span></em>(sensory input.)</span></span></span></span></li>
+<li>One's actions (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) DURING a lifetime lead to the accumulation/growth of different types of "<em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span> </span></em><span>energies;" strong ones will lead to rebirths. Of course, in some cases, a single immoral action (like killing a human) can lead to a bad <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>.</span></li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> as a "Seed"</h5>
+<p style="text-align: justify;">2. Another way to look at the "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em><span>" concept is to treat it as a seed. As we discussed in the previous <span class="pali-term term-highlight" data-term="post">post</span> when we act with ignorance (and greed or hate), that helps the </span><strong>growth of a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.)</strong> With more related <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> done, that seed can grow and bring<strong> a new birth (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) in the future (with <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.)</strong>  This concept of a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed is easier to comprehend.</p>
+<ul style="text-align: justify;">
+<li>Just like an ordinary seed <strong>has the potential</strong> to give rise to a plant, <strong>a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed (or a “<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>“) has the potential to bring about a "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" or a "birth," </strong>either during this life or in preparing a new life.</li>
+<li>Of course, once the <em>Arahanthood</em> is attained, an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will not grasp another <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (since there is no <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>.) Thus even if there could be many <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds, they don't get to "germinate." Ven. Angulimals's account is a good example. See "<a href="../../pages/TL.EE.010/index.html" rel="noopener" target="_blank">Account of Angulimāla – Many Insights to Buddha Dhamma</a>."</li>
+<li>I write it as <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> (the conventional "<em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> English"), but it is pronounced: "<em>jāthi</em>." See <a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1"</a></li>
+</ul>
+<h5><span>An Example from the Previous <span class="pali-term term-highlight" data-term="post">Post</span> - </span><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em> During a Life</h5>
+<p style="text-align: justify;"><span>3. Let us take the example of the teenager we discussed in the previous <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="http://localhost/beng_feb2026/paticca-samuppada/paticca-samuppada-in-plain-english/phassa-paccaya-vedana-to-bhava/" rel="noopener noreferrer" target="_blank">Phassa paccayā Vēdanā….to Bhava</a>". Because of the influence of his friends, the teenager starts dealing and using drugs and gradually gets drawn into the gang to become a gang member, and eventually starts doing violent acts of beating and killing people.</p>
+<ul style="text-align: justify;">
+<li>When he did the first beating, his friends probably encouraged or even forced him to do it. Let us suppose he did not have a <em>saṃsāric</em> habit of doing that violent act. So, when he did the first act, that energized a small <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed (or a "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>.</span></em>")</li>
+</ul>
+<p style="text-align: justify;">4. The next time he did something similar, this initial <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed made it easier for him to do the second act. Once he did that, the seed got bigger, and the next time he may not need much encouragement, and so on. The more he does it, the more easily he can get into that "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>," i.e., the stronger the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed becomes.</p>
+<p style="text-align: justify;">This is none other than many <em>idapaccayātā  </em>PS cycles running that start with “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>” (doing immoral deeds due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>) and lead to “<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">upādāna paccayā bhava</span></span></em>,” making the corresponding <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed) strong.</p>
+<ul style="text-align: justify;">
+<li>This is another way of expressing "habit (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span>; pronounced “<span class="pali-term term-highlight" data-term="gathi">gathi</span>”) formation" that I have discussed in many other <span class="pali-term term-highlight" data-term="posts">posts</span>. The more one does actions suitable for a specific "</span><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>," </span></em>the <em>viññāna</em> for similar behavior grows, and it is easier for one to be "born" in a corresponding state; this is "<em><span>pati+<span class="pali-term term-highlight" data-term="ichcha">ichcha</span>,</span></em>" leading to "<em><span>sama+<span class="pali-term term-highlight" data-term="uppāda">uppāda</span></span></em><span>" as pointed out in the introductory <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+” Sama+uppāda</a>."</li>
+<li>Thus, the more the teenager acts violently, the easier it becomes for him to be "born in that state," i.e., easier/habitual for him to do similar acts.</li>
+<li>In other words, repeated <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> leads to strengthening the corresponding mindset or <em>viññāna</em>, and it propagates down the<em><span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> series to make "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>."</li>
+</ul>
+<p style="text-align: justify;">5. Now, let us consider when that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed or "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" gives rise to a "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" in <em><span>idapaccayātā <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span>. </span></em>One day, his drug deal is sabotaged by a rival gang member, and he gets angry. He is easily "born" in that "animal-like violent state." He starts beating up that guy. This is a "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" or "birth" in a violent existence.</p>
+<ul style="text-align: justify;">
+<li>When the beating is almost done, that "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" is almost over with; it is at the "<em><span><span class="pali-term term-highlight" data-term="jarā">jarā</span></span></em>" (decay) stage, and when it is done, that is the end or death ("<em><span><span class="pali-term term-highlight" data-term="maraṇa">maraṇa</span></span></em>") of that "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>."</li>
+<li>Thus when that episode is over, that temporary "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" of "a violent existence" is over.</li>
+<li>The rest of it, "<em><span>sōka, paridēva, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, dōmanassa,</span></em>" or many forms of suffering, comes later in that life or even in future births. The <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed that helped him do that act itself got even stronger.</li>
+</ul>
+<p style="text-align: justify;">6. That violent action now gives rise to another <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed.</p>
+<ul style="text-align: justify;">
+<li>Now, if during that confrontation with the other rival gang member, he gets beaten up, then that is due to a <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span> </span></em>of that new <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>.</span></em></li>
+<li>In either case, that "birth" or '<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" (the confrontation with the rival gang member) would give him only misery at the end: "<em><span>sōka, paridēva, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, dōmanassa."</span></em></li>
+<li>Many such <em><span>idapaccayātā <span class="pali-term term-highlight" data-term="samuppāda">samuppāda</span> cycles</span></em> can operate during even a day, and he may be "born" repeatedly in that confrontational state. Some may be minor, like getting mad at his friends, but some could be violent. He has prepared the "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em>" and he can get into "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" or be "born in that <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" easily.</li>
+<li>Just like when a seed is made, it is easy to get that seed to germinate. Once we prepare a "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>," it is easy to be born in that type of existence.</li>
+</ul>
+<p style="text-align: justify;">7. Now, we can see that a "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" or a "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed" is the potentiality for a particular kind of existence or a "state of mind" during the current life itself.</p>
+<ul style="text-align: justify;">
+<li>He can easily transition to that “state of mind” (or <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>). For example, he may have a good time with his family and be in a “normal state of mind.” Then he gets a phone call from a fellow gang member asking for his help with the gang-related activity.</li>
+<li>He will instantly be transitioned to the “gang mentality” and be born a gang member. Then he will engage in whatever gang activity.</li>
+<li>But any birth (or <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) will come to an end. When that activity is over, he may come home and be part of the typical family life.</li>
+<li>However, that “bad <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>” will ALWAYS lead to “<em><span><span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="maraṇa">maraṇa</span>, soka, parideva, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span> domanassa</span></em>.” Even if that particular was successful and left there happily, that ACTIVITY will lead to suffering in the future. He had accumulated more <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span> </span></em>energy for that “bad <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.”</li>
+</ul>
+<p style="text-align: justify;">8. But the important thing to remember is that "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> <span class="pali-term term-highlight" data-term="paccaya">paccaya</span> <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" <strong>does not mean he is guaranteed to be born in that state. </strong>He will likely be born in that state under suitable conditions, for example, upon urged by friends.</p>
+<ul style="text-align: justify;">
+<li>But if he comes to his senses and realizes the perils of such actions, he can make an effort and slowly degrade the potency of that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed.  The first thing is to stop doing those more violent acts. If the teenager has enough determination and moral support from his family, he may get into the moral path.</li>
+<li>If he determines to change, it will be challenging in the beginning. It is like trying to stop a moving car. If the car has a lot of speed, it takes a considerable effort to stop. It is easier to stop a slowly moving car before it gains speed. In the same way, it is easier to revert if one realizes that one is on the wrong path early.</li>
+</ul>
+<h5>Same Example <em>-</em><span> Future <span class="pali-term term-highlight" data-term="bhava">Bhava</span> and </span><em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span> </span></em>(via <em><span><span class="pali-term term-highlight" data-term="upapatti">Upapatti</span></span></em> PS)</h5>
+<p style="text-align: justify;">9. If the teenager does not change his ways but only gets involved more and more with violent activities, then that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed (or <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em><span>) will grow bigger and can become strong enough to energize a whole new existence (<span class="pali-term term-highlight" data-term="rebirth">rebirth</span>) or "</span><em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>." Or he can even make a single huge <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed by killing someone.</p>
+<ul style="text-align: justify;">
+<li>We all likely have acquired several or even many such large bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds (i.e., many bad "<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>") suitable to yield rebirths in the lowest four realms; we have no way of finding out.</li>
+<li>Of course, we are also likely to have many good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds (i.e., many good "<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>") suitable to yield rebirths in the higher realms.</li>
+</ul>
+<h5>No Control Over the Next <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span> </span></em>(in <em><span><span class="pali-term term-highlight" data-term="upapatti">Upapatti</span></span></em> PS)</h5>
+<p style="text-align: justify;">10. And we do not have any control over which "<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" is selected at the end of the current <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. The strongest with the most "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em><span>" associated gets to the front automatically. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> gave a simile to explain how this selection of a "</span><em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" or a strong <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed happens at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> transition at death.</p>
+<ul style="text-align: justify;">
+<li>Imagine a barn that keeps the cows in for the night. All the cows are anxious to get out and roam around in the morning. But when the gate opens, it is the most muscular cow that has come to the front and is out of the gate when it is opened. The weaker ones don't even try to be at the front.</li>
+<li>Just like that, it is the most potent "<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed" or a "<em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" that wins at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> transition.</li>
+<li>Let us get back to the teenager that we discussed above. Suppose the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed he nourished during this life as a violent person with "animal-like" behavior is the strongest one of all his accumulated <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds. In that case, it will bring about an animal existence at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> transition.</li>
+</ul>
+<p style="text-align: justify;"><span>11. A <span class="pali-term term-highlight" data-term="buddha">Buddha</span> could analyze such a </span><em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em><span> cycle in finer detail to pinpoint exactly what type of animal it would be. This is because a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can see not only a person's whole history in the present life but going back to many eons; thus, he can see which </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed will bring the following existence and exactly which kind of "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" are embedded in that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed. We can only discuss the general trends, and here we have discussed only the main ideas of how these<em>  </em><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> cycles operate.</p>
+<ul style="text-align: justify;">
+<li>Going back to the teenager, In this case, it is the <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> cycle that operates, and "<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span></span></em>" here leads to the birth in a new existence as an animal using that <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+</ul>
+<h5>Many Births Within a <em><span><span class="pali-term term-highlight" data-term="upapatti">Upapatti</span></span></em>  <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> - For Humans and Animals</h5>
+<p style="text-align: justify;">12. Once born in such an animal existence, that animal will grow and then start old age ("<em><span><span class="pali-term term-highlight" data-term="jarā">jarā</span></span></em>") and eventually die ("<em><span><span class="pali-term term-highlight" data-term="maraṇa">maraṇa</span></span></em>").</p>
+<ul style="text-align: justify;">
+<li>The<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy of that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed may not deplete in just one birth (this applies only to humans and animals.)</li>
+<li>Since most animals have shorter lifetimes, only a fraction of that <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy is likely to have been spent. That animal will keep going through many similar births ("<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>") until the energy of that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed is spent. It is said that many animals keep coming back to the same life many hundreds of times.</li>
+</ul>
+<p style="text-align: justify;">13. This is the difference between "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>." Once one gets a new existence or "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>," one could have many births ("<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>") in that existence until the energy of the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed is spent. See "<a href="../../pages/KD.GG.006/index.html" rel="noopener" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>."</p>
+<ul style="text-align: justify;">
+<li>Thus we can see that the last step of "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="maraṇa">maraṇa</span>, sōka, paridēva, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, dōmanassa</span></em>" will be with "him" for a long time to come. It is not just one birth but many that will correspond to that existence as that animal.</li>
+</ul>
+<ul style="text-align: justify;">
+<li>In general, within the human "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em>" one could be reborn many times before the energy of that "good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed" is depleted. This is why some children can recall previous recent lives. However, it is tough to get another "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>"; see "<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank" title="How the Buddha Described the Chance of Rebirth in the Human Realm">How the Buddha Described the Chance of Rebirth in the Human Realm."</a></li>
+<li>However, especially in <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms, there is only one birth during that existence as a <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> or a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> Seeds Removed for Those With <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>? - No</h5>
+<p style="text-align: justify;">14. Before closing this section, let us discuss another critical point. We mentioned earlier that everyone had accumulated numerous good and bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds strong enough to give rise to good and bad rebirths. Then the question arises: Does a person attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage (i.e., make bad rebirths in the lowest four realms void) by eliminating all those bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds?</p>
+<ul style="text-align: justify;">
+<li>While it is possible to reduce the potency of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds and maybe even eliminate some, it may not be possible to remove all. The <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="metta">Metta</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> may remove many <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds, as discussed in the "<em><span><span class="pali-term term-highlight" data-term="bhavana">Bhavana</span></span></em><span> (Meditation)" section, but there could be leftovers. It is said that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> had 11 instances of bad </span><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>,</span></em> including a back problem.</li>
+<li>Therefore, it is very likely that we all have many good and bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds strong enough to energize many good and bad rebirths.</li>
+<li>What happens at the<em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment involves the "<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">upādāna paccayā bhava</span></span></em>" step in the<em><span> <span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> cycle. As we recall, this is the step responsible for energizing "<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" to bring in a new existence.</li>
+<li>But this same step is involved in grasping the strongest "<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" at the end of the current "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>." Suppose a person dies, and that was the last possible human birth for him/her. Then at the dying moment, he/she will willingly grasp something they crave, i.e., matching the dominant "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" of him/her.</li>
+</ul>
+<p style="text-align: justify;">15. Let us consider the case of the violent teenager again. Suppose he continued his violent acts and built up a "<em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" suitable for a violent animal. Then at the dying moment, he could see in his mind (like in a dream) a rival gang member trying to "steal a drug deal"; he would also see a gun close by. By his instincts, he will get angry, grab the gun, and shoot that person. <strong>This is an example of a "<em><span><span class="pali-term term-highlight" data-term="gati nimitta">gati nimitta</span></span></em>."</strong></p>
+<ul style="text-align: justify;">
+<li>That is the "<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">upādāna paccayā bhava</span></span></em>" step for the new existence. He has willingly grasped the mindset of an animal, and he will be born as an animal. His next thought-moment is in that animal that comes out of the dead body of the teenager as a "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" with an invisible fine body.</li>
+<li><span>This is described in detail in other <span class="pali-term term-highlight" data-term="posts">posts</span>; it needs more background material in "</span><em>manomaya kaya</em>" to understand the technical details, which is not critical here. However, now we can understand how a new existence is grasped at the end of a "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" in the <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> cycle.</li>
+</ul>
+<p style="text-align: justify;">16. Let us go back to how a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> avoids such bad rebirths even if he/she has many bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds. Suppose that <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> has the same kind of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed as that teenager (it could be from a previous life) and that it is strong enough to come to the forefront of his/her mind at the dying moment.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">What happens is that a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> will not grab the gun and shoot that person even if it is his/her worst enemy doing something that could make him/her mad. His/her mindset or "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" has been permanently changed. Thus "<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">upādāna paccayā bhava</span></span></em>" step will not be executed for that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed.</li>
+<li style="text-align: justify;">In that case, now the next potent <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em><span> will come to the forefront. That will also be rejected if that is also a bad one suitable for <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the lowest four realms (</span><em>apāyās</em><span>.) Eventually, he/she will grasp a <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> compatible with his/her "</span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" at that dying moment, which for a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> will never be the "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" to be born in an <em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span>.</span></em></li>
+<li style="text-align: justify;">That process happens automatically and very quickly. We do not have conscious control over it.</li>
+<li style="text-align: justify;"><span>Thus one's <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> will be determined by how one lives (and had lived previous lives). If one lived like an animal, one would be born an animal no matter how much one wishes for a "good birth." As discussed above, the real danger is that we do not know how we lived our previous lives.</span></li>
+<li style="text-align: justify;">This is why <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> means "<em><span>pati + <span class="pali-term term-highlight" data-term="ichcha">ichcha</span>,</span></em>" leading to "<em><span>sama" + "<span class="pali-term term-highlight" data-term="uppāda">uppāda</span>,"</span></em> or what one grasps willingly and habitually is what one that will operate automatically at the dying moment; see, "<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda”">Paṭicca Samuppāda – “Pati+ichcha”+” Sama+uppāda</a>."</li>
+</ul>
+<p style="text-align: justify;">Also, see "<a href="../../pages/ER.CC.012/index.html" rel="noopener" target="_blank">Bhava and Jāti Within a Lifetime – Example</a>."</p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.II.011/index.html">Namarupa Vinnae1B987A Dhamma Closely Related</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.AA.003/index.html">How Are Paticca Samuppada Cycles Initiated</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.II.011/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Namarupa Vinnae1B987A Dhamma Closely Related</span>
+        
+        <span class="pathway-title title-pt">Namarupa Vinnae1B987A Dhamma Closely Related</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.AA.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">How Are Paticca Samuppada Cycles Initiated</span>
+        
+        <span class="pathway-title title-pt">How Are Paticca Samuppada Cycles Initiated</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

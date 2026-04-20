@@ -1,0 +1,434 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Nibbana In The Big Picture | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 44 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.HH.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Nibbana In The Big Picture</h1>
+    
+    <h1 class="title-pt">Nibbāna no panorama geral</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.HH.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.HH.007"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0053"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.HH.007</td></tr><tr><td>Fin-dex</td><td>0053</td></tr><tr><td>Slug</td><td>nibbana-in-the-big-picture</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Nibbana In The Big Picture</td></tr></table></div></div><p><strong>July 8, 2016</strong></p>
+<p style="text-align: justify;">Here we will discuss how one can understand <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> within the Grand Unified Theory of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></p>
+<p style="text-align: justify;"><span>1. In the <span class="pali-term term-highlight" data-term="posts">posts</span> in this series, I described the wider world of 31 realms according to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> and why ALL living beings have been just meandering through these 31 realms from beginning-less time.  We can summarize the results succinctly as follows:</span></p>
+<ul style="text-align: justify;">
+<li>The lowest four realms (<em>apāyā</em><span>) are where all beings suffer the most during the beginning-less <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Unfortunately, this is where every living-being spends the most time in the long run. </span><strong><span style="color: #3366ff;"><span>This is the real suffering that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> tried to convey.</span></span></strong></li>
+<li><span>The fifth realm, or the human realm, is where one is most likely to be able to grasp <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> and become a</span><em><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. This is the only realm where one can experience (or at least see) both suffering and sensory pleasures.</li>
+<li>A <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> in the higher six realms can also become a <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>. </span></em>Still, due to the absence of much visible suffering, the incentive to strive for the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage is almost non-existent (think about a healthy, wealthy teenager!).</li>
+<li>The same is true for <em>rupi</em> and <em><span>arupi <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>, who enjoy<em><span> <span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures in the higher realms.</li>
+</ul>
+<p style="text-align: justify;">2. Thus, one can see that suffering is reduced in stages as one proceeds to higher realms. The worst sufferings are in the lowest four realms (<em>apāyā</em>), and we can see animal suffering if we pay attention and think mainly about the animals in the wild. <strong><span style="color: #993366;">There are no "old animals" in the wild.</span></strong> As soon as they get a bit slow due to old age, they are killed for food by stronger animals.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong>One could try to stay away from the</strong> <em>apāyā</em> (in future births) by avoiding immoral acts. But the problem with just that approach is that we have almost certainly done such immoral acts in our previous lives</span> and thus are likely to have accumulated enough <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds to be born many times over in the <em>apāyā</em>.</li>
+<li><span style="color: #993366;"><strong>Thus the key is to cleanse our minds of the worst defilements, which will prevent <em><span>apāyagāmi <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> from arising at the <em><span><span class="pali-term term-highlight" data-term="cuti-patisandhi">cuti-patisandhi</span></span></em> moment</strong></span>; see "<a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta – How a Sotāpanna Avoids Apayagami Citta</a>." Such thoughts cannot be suppressed; they arise in a billionth of a second. Thus the practical way to do that is to reduce cravings (<em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em>) in STAGES; see "<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Removal of Āsavā</a>" and "<a href="../../pages/TL.HH.003/index.html" rel="noopener noreferrer" target="_blank">Gati (Character), Anusaya (Temptations), and Āsava (Cravings)</a>."</li>
+<li>As mentioned above, the first stage of the cleansing process is possible mainly in the human and <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realms, but the incentive to do that is virtually non-existent in the<em><span> <span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realms.</li>
+</ul>
+<p style="text-align: justify;">2. Another subtle reason for the uniqueness of the human realm is that one's future destiny is MOSTLY determined while in the human realm. Humans are the unique species that can access all 89 types of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> that are present in all 31 realms. Moreover, they are the ones who can generate the all-important <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> that can produce <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em>bīja</em> (seeds) for future existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>Here is a simile that hopefully will convey this idea: <strong><span style="color: #3366ff;">Human realm can be compared to a training school, and the other realms can be compared to where one gets employment depending on one's qualifications upon completing the training.</span></strong></li>
+<li>Those who did not make progress and caused problems for others are born in the <em>apāyā</em> and will have to suffer the consequences. Another way to say this is to say that they cultivated<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> or habits) suitable for a being in the <em>apāyā</em>: cruel and hateful <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> correspond to the lowest realm of <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell); extreme greed corresponds to the <em>pretha</em> realm; those who are lazy and depend on others are born in the <em><span><span class="pali-term term-highlight" data-term="asura">asura</span></span></em> realm; those with different combinations of those bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> are born in the animal realm.</li>
+<li>Once born in the <em>apāyā</em>, they are more like programmed machines. They suffer their fate without being able to even lessen the suffering (in contrast, humans can devise ways to make their lives better).</li>
+</ul>
+<p style="text-align: justify;">3. This last point is worth discussing a bit more.</p>
+<p style="text-align: justify;">As we can see, animals live their lives like robots. They are incapable of sorting out morals from immoral and being able to come up with ways to improve their lives. Birds have been building the same kind of nest for billions of years. Ants have been building the same types of anthills, and dolphins (one of the animals with higher intelligence) have been the same way for billions of years.</p>
+<ul style="text-align: justify;">
+<li>In the same way, <em>rupi</em> or <em><span>arupi <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> also live their serene lives until their lifetime is exhausted. It is like a nice vacation. Then they come back to the human realm and start over.</li>
+<li>It is primarily humans and <em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em> who are CAPABLE of forging their future, but the <em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em> enjoy so much sensory pleasure they have no incentive to think about <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">4. Continuing that analogy, those who do well in the training school can go to one of the 27 higher realms. Those who cultivate <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> jhānā</span></em> are born in the 16 <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> realms. Those who cultivate higher<em> jhānā</em> are born in the four <em>arupa</em> realms. The<em><span> <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> in those 20 realms are like beings who are on a nice, very long vacation. They live happy lives in <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> bliss.</p>
+<ul style="text-align: justify;">
+<li>Of course, some <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> had attained a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> in either human or a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realm previously, and they can proceed to higher stages. And there are a few<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> realms reserved for the <em>Anāgāmis</em> only.</li>
+<li>But in general, the <em>rupi</em> and<em><span> arupi <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> are the ones who graduated with high qualifications and thus got to enjoy the fruits of those efforts for a long time. Yet, when they return to the human realm, they may be born into environments where they could go on the wrong path and fail the next time and thus be born in the <em>apāyā</em>.</li>
+</ul>
+<p style="text-align: justify;">5. Those who want to enjoy sense pleasures without causing problems to others work on it by doing meritorious deeds and are qualified to be born in the six <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em><span> realms (according to the level of merits accrued). They may not have even known about <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, but they knew moral from immoral.</span></p>
+<ul style="text-align: justify;">
+<li>Life in a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realm is more like a vacation to a "pleasure island." Those who cultivate "<em><span><span class="pali-term term-highlight" data-term="deva">deva</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" (high moral character, but with attachment to sense pleasures) are qualified for those realms. <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> are more like humans but with fine bodies that do not age (until close to death) and are not subject to diseases. <strong><span style="color: #3366ff;">Thus if one wants to "enjoy sensory pleasures," one should focus more on doing good deeds instead of just focusing on making a lot of money in this life. </span></strong>This human life is so short, and the human body is subjected to diseases and old age problems.</li>
+<li>However, <em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em> can build up extreme attachments to sensory pleasures and tailor their future lives to the animal realm. After their "pleasurable vacation," they could return to the animal realm instead of the human realm.</li>
+</ul>
+<p style="text-align: justify;">6. Finally, those who cultivate "human <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" are born in the human realm. They are more like <em><span><span class="pali-term term-highlight" data-term="deva">deva</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> but generally have more attachment to sensory pleasures at close contact.</p>
+<ul style="text-align: justify;">
+<li>However, those humans who may have cultivated high moral values AND had some inkling of the <em>sansaric</em><span> suffering (via exposure to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>) are like to return to the human realm to "complete their training". That is because that is what they desired (</span><em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>).</li>
+<li>That is a simple outline of the existence in the 31 realms.</li>
+</ul>
+<p style="text-align: justify;">7. Now, if one has attained the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage in the human realm, then his/her number of possible destinations becomes less and better. In #7 and #8, we will discuss how a <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> goes through higher realms as he/she approaches<em> Arahanthood.</em></p>
+<ul style="text-align: justify;">
+<li>Of course, that person will never be born in the <em>apāyā</em> because those "<em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" have been permanently removed via <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> with a grasp of the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</li>
+<li>A <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> starts comprehending the futility and even dangers of sense pleasures (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>).</li>
+<li>Then one first loses the desire to "own" sense objects ("<em><span><span class="pali-term term-highlight" data-term="vatthu">vatthu</span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>") that provide sense pleasures; one is merely satisfied with enjoying them. Thus one has not given up all <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span>, </span></em>just "<em><span><span class="pali-term term-highlight" data-term="vatthu">vatthu</span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>". Now one is at that <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> stage and will not be born again below the<em><span> <span class="pali-term term-highlight" data-term="deva">deva</span></span></em><span> realms. Thus one is freed from <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> where diseases are possible (including the human realm), and one is said to be "healthy forever."</span></li>
+</ul>
+<p style="text-align: justify;">8. When a <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> contemplates the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature more (while in the human or <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realms) he/she can remove <em><span><span class="pali-term term-highlight" data-term="kilesa">kilesa</span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em> and also <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em> from their minds and become free of all <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> realms. Then one becomes an <em>Anāgāmi</em>, i.e., not returning to the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> ever again.</p>
+<ul style="text-align: justify;">
+<li>But an <em>Angami</em><span> has not removed the liking for <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and thus will be born in one of the five </span><em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> realms reserved for the<em> Anāgāmis</em>. He/she will attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> from there.</li>
+<li>An <em>Anāgāmi</em><span> becomes an <span class="pali-term term-highlight" data-term="arahant">Arahant</span> by removing </span><em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, <em><span>arupa <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="māna">māna</span></span></em>, <em>uddacca</em>, and remaining <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>.</li>
+<li>Of course, one can proceed all the way to the <em>Arahanthood</em><span> while in the human realm. An <span class="pali-term term-highlight" data-term="arahant">Arahant</span> will not be born anywhere in the 31 realms at death. His/her mind becomes free of even a trace of matter subject to decay and destruction; see "</span><a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank">What Are Rupa? (Relation to Nibbāna)</a>".</li>
+</ul>
+<p style="text-align: justify;"><span>9. This summarizes how a living-being goes from realm to realm in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process until the </span><em>Arahanthood</em> is attained. It is NOT a random process. Everything happens due to causes. The following are two (related) ways to analyze that process.</p>
+<ul style="text-align: justify;">
+<li>The key point to comprehend is that a birth in a given realm occurs because one has developed a <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> suitable for that realm; see "<a href="../../pages/TL.GG.012/index.html" rel="noopener noreferrer" target="_blank">Patisandhi Citta – How the Next Life is Determined According to Gati</a>".</li>
+<li>One develops any <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> by cultivating corresponding <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, i.e., one tends to think, speak, and act in ways suitable for that realm. This is what is described in detail in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>; see, "<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda</a>".</li>
+</ul>
+<p style="text-align: justify;">10. It is also clear why seeking happiness anywhere in the 31 realms is futile.</p>
+<ul>
+<li style="text-align: justify;">One could live for millions of years in the <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realm with much higher sense pleasures than in the human realm (without being subjected to diseases), but then one has to return to the human realm or even a lower realm.</li>
+<li style="text-align: justify;">Even if one is born in the highest <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> world (31st realm) and lives 84,000 eons in <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> bliss there (each eon is roughly 30 billion years!), one has to come back to the human realm and start over eventually. Then at some point after that, birth in the <em>apāyā</em> is unavoidable. This is why infinite time (or beginning-less time) is a concept that is hard to wrap one's mind around; see "<a href="../../pages/DS.KK.004/index.html" rel="noopener noreferrer" target="_blank">Infinity – How Big Is It?</a>" and "<a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank">Saṃsāric Time Scale, Buddhist Cosmology, and the Big Bang Theory</a>."</li>
+<li style="text-align: justify;">Thus one must contemplate whether seeking happiness in a 100-year human life is worthwhile! I know by experience that this is not easy to fully grasp, even when logically proven because our minds are enamored and blinded with sense pleasures. <strong><span style="color: #993366;">That truth starts to sink in when the mind loses more and more defilements (greed, hate, and ignorance) and starts seeing the perils of sense pleasures to some extent.</span></strong></li>
+</ul>
+<p> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.HH.007"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0053"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.HH.007
+Language:     pt-BR
+Generated-At: 2026-04-18T04:01:33Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>8 de julho de 2016</strong></p>
+<p style="text-align: justify;">Aqui discutiremos como se pode compreender <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> dentro da Grande Teoria Unificada do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></p>
+<p style="text-align: justify;"><span>1. Nas ensaios desta série, descrevi o mundo mais amplo dos 31 reinos segundo o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> e por que TODOS os seres vivos vêm vagando por esses 31 reinos desde tempos imemoriais. Podemos resumir os resultados sucintamente da seguinte forma:</span></p>
+<ul style="text-align: justify;">
+<li>Os quatro reinos mais baixos (<em>apāyā</em>) são onde todos os seres sofrem mais durante o processo de renascimento sem início. Infelizmente, é aqui que todo ser vivo passa a maior parte do tempo a longo prazo. <strong><span style="color: #3366ff;"><span>Este é o verdadeiro sofrimento que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> tentou transmitir.</span></span></strong></li>
+<li><span>O quinto reino, ou reino humano, é onde é mais provável que alguém consiga compreender o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> e se tornar um</span><em><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Este é o único reino onde se pode experimentar (ou pelo menos ver) tanto o sofrimento quanto os prazeres sensoriais.</li>
+<li>Um <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> nos seis reinos superiores também pode se tornar um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>. </span></em>Ainda assim, devido à ausência de muito sofrimento visível, o incentivo para se esforçar para alcançar o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> é quase inexistente (pense em um adolescente saudável e rico!).</li>
+<li>O mesmo se aplica aos <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupi</span></em> e <em>arupi</em>, que desfrutam dos prazeres <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> nos reinos superiores.</li>
+</ul>
+<p style="text-align: justify;">2. Assim, pode-se ver que o sofrimento é reduzido em estágios à medida que se avança para os reinos superiores. Os piores sofrimentos estão nos quatro reinos inferiores (<em>apāyā</em>), e podemos ver o sofrimento animal se prestarmos atenção e pensarmos principalmente nos animais na natureza. <strong><span style="color: #993366;">Não há “animais idosos” na natureza.</span></strong> Assim que ficam um pouco lentos devido à velhice, são mortos para servir de alimento por animais mais fortes.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong>Poderíamos tentar nos manter afastados dos </strong><em>apāyā</em> (em nascimentos futuros) evitando atos imorais. Mas o problema com essa abordagem é que quase certamente já cometemos tais atos imorais em nossas vidas anteriores</span> e, portanto, provavelmente acumulamos sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> suficientes para nascer muitas vezes nos <em>apāyā</em>.</li>
+<li><span style="color: #993366;"><strong>Portanto, a chave é purificar nossas mentes das piores impurezas, o que impedirá que <em><span>o Apayagami <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> surja no momento do <em><span><span class="pali-term term-highlight" data-term="cuti">Cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em></strong></span>; veja “<a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta – Como um Sotāpanna evita o Apayagami Citta</a>”. Tais pensamentos não podem ser suprimidos; eles surgem em um bilionésimo de segundo. Assim, a maneira prática de fazer isso é reduzir os desejos (<em><span><span class="pali-term term-highlight" data-term="āsavā">Āsavā</span></span></em>) em ETAPAS; veja “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">O Caminho para Nibbāna – Remoção de Āsavā</a>” e “<a href="../../pages/TL.HH.003/index.html" rel="noopener noreferrer" target="_blank">Gati (Característica), Anusaya (Tentações) e Āsava (Desejos)</a>”.</li>
+<li>Conforme mencionado acima, a primeira etapa do processo de purificação é possível principalmente nos reinos humano e <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, mas o incentivo para fazê-lo é praticamente inexistente nos reinos<em><span> <span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">2. Outra razão sutil para a singularidade do reino humano é que o destino futuro de alguém é PRINCIPALMENTE determinado enquanto se está no reino humano. Os humanos são a única espécie capaz de acessar todos os 89 tipos de <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> presentes em todos os 31 reinos. Além disso, são eles que podem gerar o importantíssimo <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>, capaz de produzir <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> <em>Bīja</em> (sementes) para a existência futura (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>Aqui está uma comparação que, espero, transmita essa ideia: <strong><span style="color: #3366ff;">o reino humano pode ser comparado a uma escola de treinamento, e os outros reinos podem ser comparados ao local onde se consegue um emprego, dependendo das qualificações de cada um após concluir o treinamento.</span></strong></li>
+<li>Aqueles que não progrediram e causaram problemas aos outros nascem nos <em>apāyā</em> e terão de sofrer as consequências. Outra maneira de dizer isso é afirmar que eles cultivaram<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (ou <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span>,</span></em> ou hábitos) adequados para um ser nos <em>apāyā</em>: <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> cruéis e odiosos correspondem ao reino mais baixo de <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno); a ganância extrema corresponde ao reino <em>dos pretha</em>; aqueles que são preguiçosos e dependem dos outros nascem no reino <em><span>dos <span class="pali-term term-highlight" data-term="asura">Asura</span></span></em>; aqueles com diferentes combinações dessas <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> ruins nascem no reino animal.</li>
+<li>Uma vez nascidos no <em>apāyā</em>, eles são mais como máquinas programadas. Eles sofrem seu destino sem conseguir sequer diminuir o sofrimento (em contraste, os humanos podem criar maneiras de melhorar suas vidas).</li>
+</ul>
+<p style="text-align: justify;">3. Vale a pena discutir um pouco mais este último ponto.</p>
+<p style="text-align: justify;">Como podemos ver, os animais vivem suas vidas como robôs. Eles são incapazes de distinguir o moral do imoral e de encontrar maneiras de melhorar suas vidas. Os pássaros vêm construindo o mesmo tipo de ninho há bilhões de anos. As formigas vêm construindo os mesmos tipos de formigueiros, e os golfinhos (um dos animais com maior inteligência) têm feito o mesmo há bilhões de anos.</p>
+<ul style="text-align: justify;">
+<li>Da mesma forma, <em><span>os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupi</span></em> ou <em>arupi</em> também vivem suas vidas serenas até que sua existência se esgote. É como umas férias agradáveis. Então, eles retornam ao reino humano e recomeçam.</li>
+<li>São principalmente os humanos e <em><span>os <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> que são CAPAZES de forjar seu futuro, mas os <em><span><span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> desfrutam de tanto prazer sensorial que não têm incentivo para pensar em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">4. Continuando essa analogia, aqueles que se saem bem na escola de treinamento podem ir para um dos 27 reinos superiores. Aqueles que cultivam <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> jhānā</span></em> nascem nos 16 reinos <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>. Aqueles que cultivam <em>jhānā</em> superior nascem nos quatro reinos <em>arupa</em>. Os<em><span> <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> nesses 20 reinos são como seres que estão em férias agradáveis e muito longas. Eles vivem vidas felizes na bem-aventurança <em><span>do <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>É claro que alguns <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> já haviam alcançado um <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> no reino humano ou no reino <em><span>dos <span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> anteriormente, e podem avançar para estágios superiores. E há alguns reinos <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> reservados exclusivamente para os <em>Anāgāmis</em>.</li>
+<li>Mas, em geral, os <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span> rupi</span></em> e<em> arupi</em> são aqueles que se formaram com altas qualificações e, assim, puderam desfrutar dos frutos desses esforços por um longo tempo. No entanto, quando retornam ao reino humano, podem nascer em ambientes onde poderiam seguir o caminho errado e falhar na próxima vez, sendo assim nascidos nos <em>apāyā</em>.</li>
+</ul>
+<p style="text-align: justify;">5. Aqueles que desejam desfrutar dos prazeres sensoriais sem causar problemas aos outros trabalham para isso praticando atos meritórios e estão qualificados para nascer nos seis reinos <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em><span> (de acordo com o nível de méritos acumulados). Eles podem nem mesmo ter conhecido o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, mas sabiam distinguir o moral do imoral.</span></p>
+<ul style="text-align: justify;">
+<li>A vida em um reino <em><span>dos <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> é mais como férias em uma “ilha do prazer”. Aqueles que cultivam “<em><span><span class="pali-term term-highlight" data-term="deva">deva</span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>” (alto caráter moral, mas com apego aos prazeres sensoriais) estão qualificados para esses reinos. <em><span>Os <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> são mais parecidos com os humanos, mas com corpos refinados que não envelhecem (até perto da morte) e não estão sujeitos a doenças. <strong><span style="color: #3366ff;">Assim, se alguém deseja “desfrutar dos prazeres sensoriais”, deve se concentrar mais em praticar boas ações, em vez de apenas se concentrar em ganhar muito dinheiro nesta vida. </span></strong>Esta vida humana é tão curta, e o corpo humano está sujeito a doenças e aos problemas da velhice.</li>
+<li>No entanto, <em><span>os <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> podem desenvolver apegos extremos aos prazeres sensoriais e moldar suas vidas futuras para o reino animal. Após suas “férias prazerosas”, eles poderiam retornar ao reino animal em vez do reino humano.</li>
+</ul>
+<p style="text-align: justify;">6. Finalmente, aqueles que cultivam <em>a</em> “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> humana” nascem no reino humano. Eles se assemelham mais <em><span>à <span class="pali-term term-highlight" data-term="gati">Gati</span> dos <span class="pali-term term-highlight" data-term="devā">Devā</span>,</span></em> mas geralmente têm mais apego aos prazeres sensoriais quando em contato próximo.</p>
+<ul style="text-align: justify;">
+<li>No entanto, aqueles humanos que possam ter cultivado altos valores morais E tido algum vislumbre do sofrimento <em>samsárico</em><span> (por meio da exposição ao <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>) tendem a retornar ao reino humano para “completar seu treinamento”. Isso porque é isso que eles desejaram (</span><em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>).</li>
+<li>Esse é um esboço simples da existência nos 31 reinos.</li>
+</ul>
+<p style="text-align: justify;">7. Agora, se alguém atingiu o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> no reino humano, então seu número de destinos possíveis torna-se menor e melhor. Nos itens 7 e 8, discutiremos como um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> passa por reinos superiores à medida que se aproxima<em> da Arahantidade.</em></p>
+<ul style="text-align: justify;">
+<li>É claro que essa pessoa nunca nascerá nos <em>apāyā</em>, pois essas “<em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span> </span></em>G<em>ati</em>” foram permanentemente removidas por meio <em><span>do <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>,</span></em> com a compreensão da natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</li>
+<li>Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> começa a compreender a futilidade e até mesmo os perigos dos prazeres sensoriais (<em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em>).</li>
+<li>Então, primeiro perde-se o desejo de “possuir” objetos sensoriais (“<em><span><span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>”) que proporcionam prazeres sensoriais; fica-se meramente satisfeito em desfrutá-los. Assim, não se abandonou todo <em><span>o <span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span>, </span></em>apenas o “<em><span><span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>”. Agora, a pessoa está no estágio de <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> e não renascerá abaixo dos reinos <em><span>dos <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em>. Assim, a pessoa está livre do renascimento onde as doenças são possíveis (incluindo o reino humano), e diz-se que ela é “saudável para sempre”.</li>
+</ul>
+<p style="text-align: justify;">8. Quando um <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> contempla mais profundamente a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> (enquanto está nos reinos humano ou <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>), ele/ela pode remover <em><span><span class="pali-term term-highlight" data-term="kilesa">Kilesa</span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em> e também <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em> de suas mentes e se tornar livre de todos os reinos <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>. Então, torna-se um <em>Anāgāmi</em>, ou seja, não retornando ao <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> jamais.</p>
+<ul style="text-align: justify;">
+<li>Mas um <em>Angami</em><span> não removeu o apego ao <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e, portanto, renascerá em um dos cinco reinos </span><em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> reservados para os<em> Anāgāmis</em>. Ele/ela alcançará <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> a partir de lá.</li>
+<li>Um <em>Anāgāmi</em><span> torna-se um <span class="pali-term term-highlight" data-term="arahant">Arahant</span> ao remover </span><em><span><span class="pali-term term-highlight" data-term="rūpa rāga">Rūpa Rāga</span></span></em>, <em><span>Arupa <span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="māna">Māna</span></span></em>, <em>Uddacca</em> e <em><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> remanescente.</li>
+<li>É claro que é possível avançar até a <em>Arahantidade</em><span> enquanto se está no reino humano. Um <span class="pali-term term-highlight" data-term="arahant">Arahant</span> não renascerá em nenhum dos 31 reinos após a morte. Sua mente se torna livre até mesmo de um traço de matéria sujeita à decadência e destruição; veja “</span><a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank">O que são Rūpa? (Relação com Nibbāna)</a>”.</li>
+</ul>
+<p style="text-align: justify;">9. Isso resume como um ser vivo passa de reino em reino no processo de Renascimento até que a <em><span>condição de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> seja alcançada. NÃO é um processo aleatório. Tudo acontece devido a causas. A seguir estão duas maneiras (relacionadas) de analisar esse processo.</p>
+<ul style="text-align: justify;">
+<li>O ponto-chave a compreender é que um nascimento em um determinado reino ocorre porque se desenvolveu uma <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> adequada para esse reino; veja “<a href="../../pages/TL.GG.012/index.html" rel="noopener noreferrer" target="_blank">Patisandhi Citta – Como a Próxima Vida é Determinada de Acordo com a Gati</a>”.</li>
+<li>Desenvolve-se qualquer <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> cultivando <em><span>o <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> correspondente, ou seja, tende-se a pensar, falar e agir de maneiras adequadas para aquele reino. É isso que é descrito em detalhes em <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>; veja “<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – ‘Pati+ichcha’+’Sama+uppäda</a>’”.</li>
+</ul>
+<p style="text-align: justify;">10. Também fica claro por que buscar a felicidade em qualquer lugar dos 31 reinos é fútil.</p>
+<ul>
+<li style="text-align: justify;">Poderíamos viver por milhões de anos no reino <em><span>dos <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> com prazeres sensoriais muito superiores aos do reino humano (sem estar sujeitos a doenças), mas então teríamos que retornar ao reino humano ou mesmo a um reino inferior.</li>
+<li style="text-align: justify;">Mesmo que alguém nasça no mundo <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> mais elevado (31º reino) e viva 84.000 eons em êxtase <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> lá (cada eon tem aproximadamente 30 bilhões de anos!), terá que voltar ao reino humano e recomeçar eventualmente. Então, em algum momento depois disso, o nascimento no <em>apāyā</em> é inevitável. É por isso que o tempo infinito (ou tempo sem começo) é um conceito difícil de compreender; veja “<a href="../../pages/DS.KK.004/index.html" rel="noopener noreferrer" target="_blank">Infinito – Quão Grande É?</a>” e “<a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank">Escala de Tempo Saṃsárica, Cosmologia Buddhista e a Teoria do Big Bang</a>”.</li>
+<li style="text-align: justify;">Assim, deve-se refletir se vale a pena buscar a felicidade em uma vida humana de 100 anos! Sei por experiência própria que isso não é fácil de compreender plenamente, mesmo quando provado logicamente, porque nossas mentes estão encantadas e cegas pelos prazeres sensoriais. <strong><span style="color: #993366;">Essa verdade começa a se tornar clara quando a mente perde cada vez mais impurezas (ganância, ódio e ignorância) e começa a perceber, em certa medida, os perigos dos prazeres sensoriais.</span></strong></li>
+</ul>
+<p> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.HH.006/index.html">Gandhabba Sensing The World With And Without A Physical Body</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.AA.005/index.html">Buddha Dhamma Non Perceivability Self Consistency</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.HH.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Gandhabba Sensing The World With And Without A Physical Body</span>
+        
+        <span class="pathway-title title-pt">Gandhabba: Percebendo o mundo com e sem um corpo físico</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.AA.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Buddha Dhamma Non Perceivability Self Consistency</span>
+        
+        <span class="pathway-title title-pt">Buddha Dhamma, Imperceptibilidade, Coerência Interna</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

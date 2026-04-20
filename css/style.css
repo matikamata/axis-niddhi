@@ -1,0 +1,1232 @@
+/* pipeline/13-ssg/static/css/style.css */
+
+/* Design Principle:
+   "Visual silence is a feature, not an absence."
+*/
+
+/* =========================================================
+   BRASILEIRINHO — MUSEUM POLISH V1.7.1 (PERMANENCE LAYER)
+   Integrated: Sprints 1-7 (Nav, Digest, Contemplation, Transmission, Print)
+   ========================================================= */
+
+/* ---------- RESET ---------- */
+* { box-sizing: border-box; }
+header, .threshold-header { text-align: center; }
+
+/* ---------- AXIOMS ---------- */
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --bg-paper: #fdfbf7;
+  --green-axiom: #00ff00; /* CANONICAL GREEN (ACCESSIBILITY) */
+  --paper-shadow: 0 14px 44px rgba(0,0,0,0.16);
+  --meta-color: #666666;
+  --border-color: #e0e0e0;
+
+  /* [20260221] Step 4: CSS custom properties para marginalia Tufte-style. */
+  --marginalia-width: 35%;
+  --marginalia-offset: -45%;
+  --marginalia-padding: 0 0 0 0.8rem;
+
+  /* [SPRINT E] Sinalização didática: dois canais visuais distintos */
+  --term-audio:    #c0392b;  /* vermelhão  — tem voz gravada do Prof Lal */
+  --term-glossary: #c47c00;  /* âmbar     — só glossário, sem áudio     */
+  --term-accent: var(--term-glossary); /* compat. legado */
+  --link-color: #2b5fac; /* Azul Puredhamma */
+}
+
+/* ---------- BODY ---------- */
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.85;
+  background: #e9e9e9;
+  color: var(--fg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- THEMES ---------- */
+body[data-theme="dark"] {
+  --green-axiom: #66ff66;
+  --bg-paper: #121418;
+  --fg: #e6e6e6;
+  --meta-color: #888888;
+  --link-color: #6ea0e6;
+  --border-color: #333333;
+  --term-audio:    #ff6b4a;  /* laranja-fogo — alto contraste dark */
+  --term-glossary: #ffd54f;  /* ouro suave   — alto contraste dark */
+  background: #0c0e12;
+}
+body[data-theme="colirio"] {
+  --bg-paper: #f4fff7;
+  --fg: #123d2a;
+  --meta-color: #5d8aa8;
+  --border-color: #b2dfdb;
+  --term-audio:    #b71c1c;  /* vermelho profundo sobre verde-água */
+  --term-glossary: #b8860b;  /* ouro escuro  sobre verde-água    */
+  background: #e0f2f1;
+}
+body[data-theme="sunset"] {
+  --bg-paper: #fff4ee;
+  --fg: #4a1c0f;
+  --meta-color: #9c8c74;
+  --border-color: #554433;
+  --term-audio:    #ff6b4a;  /* laranja-fogo sobre fundo escuro */
+  --term-glossary: #ffd54f;  /* ouro suave   sobre fundo escuro */
+  background: #2c241b;
+}
+body[data-theme="sunrise"] {
+  --bg-paper: #fdfcf7;
+  --fg: #2b2b2b;
+  --green-axiom: #00aa00;
+  --meta-color: #555555;
+  --border-color: #cccccc;
+  --term-audio:    #c0392b;  /* vermelhão clássico sobre pergaminho */
+  --term-glossary: #c47c00;  /* âmbar médio  sobre pergaminho      */
+  background: #fcfcfc;
+}
+
+/* ---------- FLOATING UTILITIES (THEME & PRINT) ---------- */
+.floating-utilities {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 9999;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.utility-pill {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(16px);
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+body[data-theme="dark"] .utility-pill, body[data-theme="sunset"] .utility-pill {
+  background: rgba(20,20,20,0.65);
+  border-color: rgba(255,255,255,0.1);
+}
+.utility-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.theme-controls { display: flex; gap: 0.3rem; }
+.print-trigger { cursor: pointer; font-size: 1.15rem; background: none; opacity: 0.85; padding: 0.2rem 0.4rem; }
+
+/* YouTube Print Marker (Hidden on Screen) */
+.print-video-marker { display: none; }
+.theme-btn {
+  border: none;
+  background: #dcdcdc;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.32rem 0.5rem;
+  border-radius: 50%;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.theme-btn:hover { background: var(--green-axiom); color: black; transform: scale(1.05); }
+
+/* ---------- SHOWCASE MANUAL (UNIFIED) ---------- */
+.manual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: -4.1rem -3.7rem 4rem -3.7rem; /* Cover main padding */
+    border-bottom: 2px solid var(--gold, #b8975a);
+    background: var(--parchment, #faf7f0);
+    color: #1a1a1a;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    overflow: hidden;
+}
+
+.manual-column {
+    padding: 2.5rem 2rem;
+}
+
+.manual-column:first-child {
+    border-right: 1px solid rgba(184,151,90,0.25);
+}
+
+.lang-tag {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--gold, #b8975a);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.manual-column h2 {
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(184,151,90,0.2);
+}
+
+.manual-feature-item {
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+
+.manual-feature-title {
+    font-weight: bold;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.manual-feature-desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .manual-grid { grid-template-columns: 1fr; margin: -4rem -3.6rem 2rem -3.6rem; }
+    .manual-column:first-child { border-right: none; border-bottom: 1px solid rgba(184,151,90,0.25); }
+}
+
+body[data-theme="dark"] .manual-grid {
+    background: #1a1d23;
+    color: #e6e6e6;
+    border-color: #333;
+}
+body[data-theme="dark"] .manual-column h2 { color: #e6e6e6; border-color: #333; }
+
+/* ---------- MAIN (KINDLE PAPER) ---------- */
+main {
+  max-width: 840px;
+  margin: 5.2rem auto 6.5rem;
+  padding: 4rem 3.6rem;
+  background: var(--bg-paper);
+  border-radius: 16px;
+  box-shadow: var(--paper-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+/* ---------- THRESHOLD ---------- */
+.threshold-header {
+  padding-bottom: 4rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(0,0,0,0.045);
+}
+.visual-anchor { opacity: 0.8; margin-bottom: 2.2rem; color: var(--green-axiom); }
+
+/* ---------- HEADERS ---------- */
+h1, h2, h3, h4, h5 { font-family: Georgia, serif; color: var(--green-axiom); font-weight: normal; }
+
+/* SPRINT M */
+header h1 { margin-bottom: 1.8rem; }
+.toc-en, .toc-pt { margin-top: 0.5rem; }
+h1 { text-shadow: 0 1px 3px rgba(0, 100, 0, 0.15); }
+body[data-theme="dark"] h1 { text-shadow: 0 1px 6px rgba(100, 255, 100, 0.2); }
+
+/* ── SPRINT G: h5 = Section Box Colasável ─────────────────────────────────── */
+/* ── SPRINT K: color hardcoded to readable dark green (was var(--green-axiom) = #00ff00, illegible on light bg) */
+h5 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a6b1a;
+  background: rgba(0, 128, 0, 0.08);
+  border-left: 3px solid #2d8a2d;
+  border-radius: 0 8px 8px 0;
+  padding: 0.65rem 1rem;
+  margin: 2.2rem 0 0.4rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+  hyphens: manual;
+  text-align: left; /* SPRINT M */
+}
+h5:hover { background: rgba(0, 128, 0, 0.14); }
+
+/* SPRINT N: h5 por tema — contraste WCAG AA */
+body[data-theme="dark"] h5 {
+  color: #66ff66;
+  background: rgba(100, 255, 100, 0.07);
+  border-left-color: #66ff66;
+}
+body[data-theme="dark"] h5:hover { background: rgba(100,255,100,0.13); }
+
+body[data-theme="colirio"] h5 {
+  color: #0d6b3e;
+  background: rgba(0, 128, 80, 0.08);
+  border-left-color: #1a9e5c;
+}
+body[data-theme="colirio"] h5:hover { background: rgba(0,128,80,0.14); }
+
+body[data-theme="sunset"] h5 {
+  color: #d4a024;
+  background: rgba(212, 160, 36, 0.1);
+  border-left-color: #d4a024;
+}
+body[data-theme="sunset"] h5:hover { background: rgba(212,160,36,0.16); }
+
+body[data-theme="sunrise"] h5 {
+  color: #1b7a1b;
+  background: rgba(0, 140, 0, 0.07);
+  border-left-color: #1b7a1b;
+}
+body[data-theme="sunrise"] h5:hover { background: rgba(0,140,0,0.12); }
+
+/* SPRINT K: collapse double-margin between h5 box and first paragraph */
+h5 + .section-content > *:first-child {
+  margin-top: 0.35rem; /* SPRINT M */
+}
+h5::after {
+  content: "▼";
+  font-size: 0.75rem;
+  opacity: 0.6;
+  transition: transform 0.25s ease;
+  margin-left: 0.8rem;
+  flex-shrink: 0;
+}
+h5.collapsed::after { transform: rotate(-90deg); }
+
+.section-content {
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  max-height: 9999px;
+  opacity: 1;
+}
+.section-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* ---------- LINKS ---------- */
+a { color: var(--link-color); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; }
+a:hover { color: var(--green-axiom); text-decoration: underline; }
+
+/* ---------- DIDACTIC EMPHASIS (PURE DHAMMA) ---------- */
+/* .term-highlight e .term-highlight.has-audio definidos no SPRINT E abaixo ↓ */
+
+/* ---------- LANGUAGE SYSTEM (CANONICAL UI) ---------- */
+.lang-switch-container {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.lang-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.lang-label {
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    border-radius: 99px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-paper);
+    color: var(--fg);
+}
+
+.lang-label:hover {
+    border-color: var(--green-axiom);
+    opacity: 1;
+}
+
+#lang-en:checked ~ header .lang-switch-container label[for="lang-en"],
+#lang-pt:checked ~ header .lang-switch-container label[for="lang-pt"] {
+    background: rgba(0, 204, 0, 0.1);
+    border-color: var(--green-axiom);
+    color: var(--green-axiom);
+    opacity: 1;
+    font-weight: bold;
+}
+
+/* Visibility Logic */
+.content-en, .content-pt, .title-en, .title-pt,
+.current-crumb-en, .current-crumb-pt, .toc-en, .toc-pt,
+.meta-toggle-label-en, .meta-toggle-label-pt { display: none; }
+
+#lang-en:checked ~ header .title-en,
+#lang-en:checked ~ .post-container .content-en,
+#lang-en:checked ~ .post-container .breadcrumbs .current-crumb-en,
+#lang-en:checked ~ .post-container .toc-en,
+#lang-en:checked ~ .post-container .meta-toggle-label-en,
+#lang-en:checked ~ .post-container .content-en .meta-toggle-label-en { display: inline; }
+#lang-en:checked ~ .post-container .content-en { display: block; }
+#lang-en:checked ~ .post-container .toc-en { display: block; }
+#lang-en:checked ~ .post-container .breadcrumbs .current-crumb-en { display: inline-block; }
+
+#lang-pt:checked ~ header .title-pt,
+#lang-pt:checked ~ .post-container .content-pt,
+#lang-pt:checked ~ .post-container .breadcrumbs .current-crumb-pt,
+#lang-pt:checked ~ .post-container .toc-pt,
+#lang-pt:checked ~ .post-container .meta-toggle-label-pt,
+#lang-pt:checked ~ .post-container .content-en .meta-toggle-label-pt { display: inline; }
+#lang-pt:checked ~ .post-container .content-pt { display: block; }
+#lang-pt:checked ~ .post-container .toc-pt { display: block; }
+#lang-pt:checked ~ .post-container .breadcrumbs .current-crumb-pt { display: inline-block; }
+
+/* ---------- ACCORDION (CANONICAL) ---------- */
+.library-section h2 {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.library-section h2:hover { color: var(--green-axiom); opacity: 0.8; }
+
+.library-section h2::before {
+  content: '▶';
+  font-size: 0.7rem;
+  transition: transform 0.25s ease;
+  color: var(--green-axiom);
+}
+
+.library-section h2.active::before { transform: rotate(90deg); }
+
+.post-list {
+  margin-left: 1.6rem;
+  list-style: none;
+  padding-left: 0;
+  display: none; /* HIDDEN BY DEFAULT */
+}
+
+.library-section h2.active + .post-list {
+  display: block; /* SHOWN WHEN ACTIVE */
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- NAVIGATION (SPRINT 1) ---------- */
+.breadcrumbs { font-size: 0.85rem; color: var(--meta-color); margin-bottom: 2rem; }
+.breadcrumbs ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: center; }
+.breadcrumbs li { display: inline-flex; align-items: center; }
+.breadcrumbs li:not(:last-child)::after { content: "›"; margin: 0 0.5rem; color: var(--border-color); }
+.breadcrumbs a { color: var(--meta-color); }
+.breadcrumbs a:hover { color: var(--green-axiom); }
+
+.position-indicator {
+    font-size: 0.85rem;
+    color: var(--meta-color);
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border-color);
+    display: inline-block;
+}
+
+.pathways { display: flex; justify-content: space-between; gap: 1rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+.pathway-link { flex: 1; display: flex; flex-direction: column; padding: 1.2rem; border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; background: var(--bg-paper); transition: all 0.2s ease; max-width: 48%; }
+.pathway-link:hover { border-color: var(--green-axiom); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.pathway-link.next { text-align: right; align-items: flex-end; }
+.pathway-link.prev { text-align: left; align-items: flex-start; }
+.pathway-label { font-size: 0.75rem; text-transform: uppercase; color: var(--meta-color); margin-bottom: 0.5rem; }
+.pathway-title { font-size: 1rem; font-weight: 600; color: var(--green-axiom); }
+.pathway-placeholder { flex: 1; }
+
+/* ---------- DIGESTIBILITY (SPRINT 3) ---------- */
+.digestibility-suggestion { margin-top: 3rem; padding: 1.5rem; background-color: rgba(0,0,0,0.03); border-left: 4px solid var(--meta-color); border-radius: 4px; font-size: 0.95rem; color: var(--meta-color); }
+
+/* ---------- FUTURE HOOKS (SPRINT 4) ---------- */
+#reading-progress-hook, #ai-assistant-hook { display: none; width: 100%; }
+
+/* ---------- CONTEMPLATIVE INTELLIGENCE (SPRINT 5) ---------- */
+/* Breathing Space */
+article h2 { margin-top: 4.5rem; margin-bottom: 1.5rem; }
+article h3 { margin-top: 3.5rem; margin-bottom: 1rem; }
+article ul, article ol { margin-bottom: 2rem; }
+article li { margin-bottom: 0.6rem; }
+article img { margin-top: 2rem; margin-bottom: 2rem; }
+
+/* Silent Pause */
+.silent-pause-block { margin: 4rem auto; text-align: center; opacity: 0.6; user-select: none; }
+.pause-separator { display: block; font-size: 1.2rem; color: var(--meta-color); margin-bottom: 0.5rem; letter-spacing: 0.5em; }
+.pause-text { font-size: 0.9rem; font-style: italic; color: var(--meta-color); max-width: 400px; margin: 0 auto; }
+
+/* ---------- TRANSMISSION LAYER (SPRINT 6) ---------- */
+/* SPRINT J: Context Pill */
+.context-pill {
+  font-family: Georgia, serif;
+  font-size: 0.75rem;
+  color: var(--meta-color);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.context-sep { opacity: 0.35; }
+.context-pdpn {
+  font-family: monospace;
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+.context-link { color: var(--meta-color); border-bottom: 1px dotted var(--meta-color); }
+.context-link:hover { color: var(--green-axiom); border-bottom: 1px solid var(--green-axiom); }
+
+/* Transmission Map */
+.nav-divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 3rem 0 2rem;
+  opacity: 0.4;
+}
+.transmission-map {
+    font-size: 0.85rem;
+    color: var(--meta-color);
+    margin-bottom: 2.5rem;
+    border-left: 2px solid var(--border-color);
+    padding-left: 1rem;
+    line-height: 1.5;
+}
+.map-item { margin-bottom: 0.3rem; }
+.map-label { font-style: italic; margin-right: 0.5rem; opacity: 0.7; }
+.transmission-map a { color: var(--meta-color); border-bottom: none; }
+.transmission-map a:hover { color: var(--green-axiom); text-decoration: underline; }
+
+/* Abbr Tooltips */
+abbr[title] { text-decoration: underline dotted; cursor: pointer; text-decoration-color: var(--meta-color); }
+
+/* ---------- MARGINALIA (SPRINT 8 — MEMORY LAYER) ---------- */
+.term-trigger {
+  border-bottom: 1px dotted var(--green-axiom);
+  cursor: pointer;
+}
+
+.marginalia-definition {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--meta-color);
+  background: rgba(0,0,0,0.02);
+  border-left: 2px solid var(--green-axiom);
+  padding: 0.5rem 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  .marginalia-definition {
+    float: right;
+    clear: right;
+    width: var(--marginalia-width);
+    margin-right: var(--marginalia-offset);
+    margin-top: 0;
+    background: transparent;
+    padding: var(--marginalia-padding);
+  }
+
+  main {
+    overflow: visible;
+  }
+}
+
+@media print {
+  .term-trigger {
+    border-bottom: none;
+    font-weight: bold;
+  }
+
+  .marginalia-definition {
+    float: none;
+    width: auto;
+    margin-right: 0;
+    border-left: 1px solid black;
+    font-size: 0.8em;
+    color: black;
+    page-break-inside: avoid;
+  }
+}
+
+/* ---------- DIDACTIC EMPHASIS (PURE DHAMMA) ----------
+   Canal 1 — Glossário sem áudio  → âmbar + dotted + cursor default
+   Canal 2 — Termos COM áudio     → vermelho + dashed + cursor pointer
+   -------------------------------------------------------- */
+.term-highlight {
+  color: var(--term-glossary);
+  font-style: italic;
+  font-weight: bold;
+  cursor: default;  /* não é clicável */
+  border-bottom: 1px dotted var(--term-glossary);
+  transition: opacity 0.2s ease;
+}
+
+/* [SPRINT E] Canal de áudio — o JS adiciona .has-audio quando MP3 disponível */
+.term-highlight.has-audio {
+  color: var(--term-audio);
+  border-bottom: 2px dashed var(--term-audio);
+  cursor: pointer;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.term-highlight.has-audio:hover {
+  opacity: 0.75;
+  letter-spacing: 0.01em; /* leve pulso no hover */
+}
+
+/* ---------- SEARCH UI (SPRINT 9) ---------- */
+#search-form {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+#search-input {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  font-family: inherit;
+  background: var(--bg-paper);
+  color: var(--fg);
+}
+
+#search-results {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-paper);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+#search-results ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#search-results li {
+  margin: 0.5rem 0;
+  border-bottom: 1px dotted var(--border-color);
+  padding-bottom: 0.25rem;
+}
+
+#search-results li:last-child {
+  border-bottom: none;
+}
+
+#search-results a {
+  display: block;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+#search-results a:hover {
+  color: var(--green-axiom);
+}
+
+/* ---------- FOOTER ---------- */
+footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: center; }
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes pulse-leaf {
+  0% { transform: scale(1); filter: drop-shadow(0 0 5px var(--green-axiom)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--green-axiom)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--green-axiom)); }
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  main { margin: 2rem 1rem; padding: 2rem 1.5rem; }
+  /* .env-toolbar removed: dead code — class doesn't exist (Sprint K audit) */
+  .threshold-header { padding-bottom: 4rem; }
+  .pathways { flex-direction: column; }
+  .pathway-link { max-width: 100%; text-align: center !important; align-items: center !important; }
+  .position-indicator { display: block; margin-left: 0; padding-left: 0; border-left: none; margin-top: 0.5rem; }
+}
+
+/* --- PRINT SETTINGS MODAL --- */
+#print-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-paper);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  box-shadow: var(--paper-shadow);
+  z-index: 10000;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+}
+#print-modal.active { display: block; }
+#print-modal h3 { margin-top: 0; }
+#print-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+}
+#print-modal-overlay.active { display: block; }
+.print-group { margin-bottom: 1.2rem; }
+.print-group label { display: block; font-weight: bold; margin-bottom: 0.5rem; font-size: 0.9rem; }
+.print-group select { width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); background: var(--bg); color: var(--fg); font-family: inherit; }
+.print-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem; }
+.print-btn { padding: 0.5rem 1rem; cursor: pointer; border: 1px solid var(--border-color); border-radius: 4px; background: transparent; color: var(--fg); }
+.print-btn.primary { background: var(--fg); color: var(--bg); border: none; font-weight: bold; }
+
+/* ---------- PRINT & PRESERVATION (SPRINT 7) ---------- */
+@page {
+  /* Minimal physical page margin to allow our custom CSS padding to control the space */
+  margin: 1cm;
+}
+
+/* Forçar A4 em todos os PDFs e impressões */
+@page {
+  size: A4;
+  margin: 1.5cm 1.8cm;
+}
+
+@media print {
+  /* Hide Navigation & UI */
+  .floating-utilities, .lang-switch-container, .breadcrumbs, 
+  .mini-toc, .pathways, .post-nav, footer, 
+  #reading-progress-hook, #ai-assistant-hook,
+  .digestibility-suggestion, .silent-pause-block,
+  #search-form, #search-results, #print-modal, #print-modal-overlay, #labz-banner,
+  iframe, .youtube-wrapper, .video-container {
+    display: none !important;
+  }
+
+  /* YouTube Print Marker */
+  .print-video-marker {
+    display: block !important;
+    text-align: center;
+    border: 1px dashed #666;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9rem;
+    color: #333;
+    page-break-inside: avoid;
+  }
+
+  /* Force PT-BR ONLY on printing to save paper */
+  .title-en, .content-en, .toc-en { display: none !important; }
+  .title-pt, .content-pt { display: block !important; }
+
+  /* Reset Colors for Ink Saving and apply dynamic Padding */
+  body, main {
+    background: white !important;
+    color: var(--print-text-color, black) !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: var(--print-pad, 0) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    -webkit-print-color-adjust: var(--print-color-adjust, economy) !important;
+    print-color-adjust: var(--print-color-adjust, economy) !important;
+  }
+
+  /* Typography for Print with Dynamic Line Height */
+  body, article.content-block {
+    font-size: 11pt !important;
+    line-height: var(--print-line-height, 1.3) !important;
+    font-family: inherit;
+  }
+
+  /* SPRINT M */
+  h1, h2, h3, h4 {
+    color: #1a1a1a !important;
+    text-shadow: none !important;
+    page-break-after: avoid;
+    text-align: left !important;
+  }
+  
+  h5 {
+    background: none !important;
+    border-left: 2px solid #333 !important;
+    color: #1a1a1a !important;
+    font-weight: 600;
+    page-break-after: avoid;
+    text-align: left !important;
+  }
+
+  p { orphans: 3; widows: 3; }
+  li { page-break-inside: avoid; }
+  blockquote, .pali-quote { page-break-inside: avoid; }
+  
+  header, .threshold-header {
+    text-align: left !important; /* Override center alignment */
+  }
+
+  a {
+    color: var(--print-link-color, black) !important;
+    text-decoration: underline;
+    border: none !important;
+  }
+
+  /* Reveal URLs */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    font-family: monospace;
+  }
+
+  html.print-colors * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Layout */
+  article {
+    margin-bottom: 2cm;
+  }
+}
+
+/* =========================================================
+   STEP 1 — DARK THEME LEGIBILITY + BOOK-GRADE TYPOGRAPHY
+   [FF-009] 2026-03-09 · Aloka + Vayo · Sprint V5.5
+   Objetivo: leitura confortável para revisores (Kindle/paper style)
+   ========================================================= */
+
+/* 1. Dark canvas — body já definido em THEMES acima.
+      Reforçar shadow do paper frame no dark mode. */
+body[data-theme="dark"] main {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 12px 28px rgba(0, 0, 0, 0.55);
+  /* max-width removed to match canonical 840px */
+}
+
+
+/* SPRINT G+K: print — expandir tudo, remover interatividade, flatten para B&W */
+@media print {
+  h5 {
+    cursor: default;
+    background: none !important;
+    border-left: 2px solid #333 !important;
+    color: black !important;
+    font-weight: 600;
+  }
+  h5::after { display: none; }
+  .section-content.collapsed { max-height: none !important; opacity: 1 !important; }
+}
+
+/* 2. Tipografia de leitura longa (global — melhora todos os temas) */
+main {
+  font-size: 1.05rem;
+  line-height: 1.72;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  hyphens: auto;
+}
+
+/* 3. Espaçamento de parágrafos */
+main p {
+  margin: 1.15em 0;
+}
+
+/* 4. Títulos — respiro adequado */
+main h1,
+main h2,
+main h3 {
+  line-height: 1.3;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+/* 5. Mobile: paper frame colado nas bordas */
+@media (max-width: 760px) {
+  body[data-theme="dark"] main {
+    margin: 0;
+    border-radius: 0;
+    padding: 1.6rem 1.4rem;
+    max-width: 100%;
+  }
+}
+/* ── END FF-009 ── */
+
+/* =========================================================
+   FF-013 — SOUND AND VISION PASS
+   Bowie + Jobs: liquid scroll, text selection, page breath,
+   stardust theme, Labz button.
+   ========================================================= */
+
+/* 1. Liquid scroll */
+html { scroll-behavior: smooth; }
+
+/* 2. Text selection — temática */
+::selection {
+  background: var(--green-axiom);
+  color: black;
+}
+
+/* 3. Page breath — main entra suavemente */
+@keyframes fadeInSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+main { animation: fadeInSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Respeitar prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  main { animation: none; }
+}
+
+/* 4. Labz button hover */
+#labz-btn:hover {
+  color: var(--green-axiom) !important;
+  border-color: var(--green-axiom) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.15);
+}
+#labz-btn.labz-active {
+  background: rgba(0, 255, 0, 0.08) !important;
+  color: var(--green-axiom) !important;
+  border-color: var(--green-axiom) !important;
+}
+
+/* 5. STARDUST THEME — terminal overworld
+   Ativa via data-theme="stardust" (toggle do botão Labz)
+   Herda o sistema de temas existente — sem !important em cascata */
+body[data-theme="stardust"] {
+  --bg:          #0a0a0c;
+  --bg-paper:    #0d0f12;
+  --fg:          #00e676;
+  --green-axiom: #00ff41;
+  --meta-color:  #4a9e6a;
+  --border-color: rgba(0, 255, 65, 0.18);
+  background: #0a0a0c;
+  font-family: ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+body[data-theme="stardust"] main {
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 65, 0.12),
+    0 0 40px rgba(0, 255, 65, 0.04);
+}
+
+body[data-theme="stardust"] h1,
+body[data-theme="stardust"] h2,
+body[data-theme="stardust"] h3 {
+  color: #00ff41;
+  letter-spacing: 0.04em;
+}
+
+body[data-theme="stardust"] a {
+  color: #00e676;
+  text-decoration-color: rgba(0, 230, 118, 0.35);
+}
+body[data-theme="stardust"] a:hover {
+  color: #00ff41;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+}
+
+/* Grid no stardust — visor de controle */
+body[data-theme="stardust"] .dual-index {
+  border: 1px solid rgba(0, 255, 65, 0.25);
+  background: rgba(0, 255, 65, 0.02);
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.06);
+}
+body[data-theme="stardust"] .index-cell {
+  border-bottom-color: rgba(0, 255, 65, 0.1);
+}
+body[data-theme="stardust"] .index-row:hover .index-cell {
+  background: rgba(0, 255, 65, 0.06);
+}
+body[data-theme="stardust"] .index-cell.pdpn {
+  color: #00ff41;
+  opacity: 0.8;
+}
+body[data-theme="stardust"] .pt-complete   { color: #00e676; }
+body[data-theme="stardust"] .pt-title-only { color: #ffd54f; }
+body[data-theme="stardust"] .pt-missing    { color: #455a64; }
+
+/* Selection no stardust */
+body[data-theme="stardust"] ::selection {
+  background: #00ff41;
+  color: #000;
+}
+
+/* Labz banner no stardust */
+body[data-theme="stardust"] #labz-banner {
+  background: rgba(0, 255, 65, 0.07);
+  border-color: rgba(0, 255, 65, 0.3);
+  color: #00e676;
+}
+
+/* 6. Labz banner (aparece quando Labz está ativo) */
+#labz-banner {
+  /* FF-013 polish: slide-in instead of display toggle — avoids CLS */
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+  margin: 0 0 1.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--meta-color);
+  background: rgba(0, 255, 0, 0.03);
+  letter-spacing: 0.04em;
+}
+#labz-banner.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* ── END FF-013 ── */
+
+/* =========================================================
+   FF-014 — READING ENGINE
+   Progress bar · Scroll memory · Section highlight
+   ========================================================= */
+
+/* 1. Reading Progress Bar — fixed top, 3px green line */
+#reading-progress {
+  position:   fixed;
+  top:        0;
+  left:       0;
+  height:     3px;
+  width:      0%;
+  background: var(--green-axiom);
+  z-index:    9999;
+  transition: width .1s linear;
+  pointer-events: none;
+}
+
+/* Stardust variant */
+body[data-theme="stardust"] #reading-progress {
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+/* 2. Active Section Highlight
+   NOTE: template uses .library-section, not .section-container —
+   adapting Aloka's spec to real DOM. */
+.library-section.active {
+  outline:        2px solid var(--green-axiom);
+  outline-offset: 4px;
+  border-radius:  4px;
+}
+
+/* ── END FF-014 ── */
+
+/* =========================================================
+   FF-016 — CSL METADATA TATTOO
+   Metadados canônicos do CSL: invisíveis por padrão,
+   visíveis no Stardust Mode como terminal de proveniência.
+   ========================================================= */
+
+/* Oculto em tabelas puras antes do toggle wrap (fallback) */
+.csl-tattoo.meta-toggle-wrap {
+  display: block;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px dotted var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Visível apenas no Stardust (Labz mode) para tabelas velhas */
+body[data-theme="stardust"] .csl-tattoo:not(.meta-toggle-wrap) {
+  display:     block;
+  font-family: ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  font-size:   0.68rem;
+  color:       var(--green-axiom);
+  opacity:     0.55;
+  padding:     0.7rem 1rem;
+  margin:      0 0 2rem;
+  border:      1px dashed rgba(0, 255, 65, 0.25);
+  border-radius: 4px;
+  background:  rgba(0, 255, 65, 0.03);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  animation:   pulse-tattoo 3s ease-in-out infinite;
+}
+
+body[data-theme="stardust"] .csl-tattoo table {
+  border-collapse: collapse;
+  width: auto;
+}
+
+body[data-theme="stardust"] .csl-tattoo td {
+  padding: 1px 0;
+  border: none;
+}
+
+@keyframes pulse-tattoo {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.65; }
+}
+
+/* ── END FF-016 ── */
+ 
+ /* =========================================================
+    FF-018 — RESPONSIVE VIDEO LAYER (YOUTUBE FIX)
+    [FF-018] 2026-04-14 · AXIS-NIDDHI V3.1 Showcase
+    ========================================================= */
+ 
+ .video-container {
+   position: relative;
+   width: 100%;
+   padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+   height: 0;
+   margin: 3rem 0;
+   border-radius: 12px;
+   overflow: hidden;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+   background: #000;
+   border: 1px solid rgba(0, 255, 0, 0.1);
+ }
+ 
+ .video-container iframe {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   border: 0;
+ }
+ 
+ /* Stardust variant for video */
+ body[data-theme="stardust"] .video-container {
+   box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
+   border-color: rgba(0, 255, 65, 0.3);
+ }
+
+/* =========================================================
+   SPRINT D — SECTION GRID
+   Grade superior para overview do corpus na home
+   ========================================================= */
+
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 3.5rem;
+}
+
+@media (max-width: 900px) {
+    .section-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .section-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+}
+
+.section-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.2rem 0.8rem;
+    background: var(--bg-paper);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--fg);
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.section-card:hover {
+    border-color: var(--green-axiom);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,255,0,0.08);
+}
+
+.section-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    opacity: 0.95;
+    transition: transform 0.2s ease;
+}
+
+.section-card:hover .section-card-icon {
+    transform: scale(1.1);
+}
+
+.section-card-code {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--meta-color);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+}
+
+.section-card-title {
+    font-size: 0.9rem;
+    font-family: Georgia, serif;
+    font-weight: 500;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--fg);
+}
+.meta-table-wrap {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.meta-toggle-wrap.open .meta-table-wrap {
+  max-height: 400px;
+  opacity: 1;
+}
+.meta-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  color: var(--meta-color);
+  cursor: pointer;
+  padding: 0.2rem 0;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.meta-toggle-btn:hover { opacity: 1; }
+
+/* [SPRINT L] BUG 3 — TOC reveal button padronizado como pill */
+.toc-reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 99px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.82rem;
+  font-family: Georgia, serif;
+  color: var(--meta-color);
+  cursor: pointer;
+  margin: 0.8rem 0;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.toc-reveal-btn:hover {
+  border-color: var(--green-axiom);
+  color: var(--green-axiom);
+}

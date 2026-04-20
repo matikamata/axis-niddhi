@@ -1,0 +1,358 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sotapanna Stage Of Nibbana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 68 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.II.001</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sotapanna Stage Of Nibbana</h1>
+    
+    <h1 class="title-pt">Estágio Sotāpanna de Nibbāna</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.II.001</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>1</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.II.001"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0463"
+             data-level="intermediate"
+             data-reading-time="1"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.II.001</td></tr><tr><td>Fin-dex</td><td>0463</td></tr><tr><td>Slug</td><td>sotapanna-stage-of-nibbana</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Sotapanna Stage Of Nibbana</td></tr></table></div></div><p class="entry-title" style="text-align: justify;">The first stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> -- the<em><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage --  is also called the Stream Enterer in English and <em>Sōvān</em><span> in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>.</span></p>
+<p> </p>
+<p><span style="color: #3366ff;"><span style="color: #000000;"><strong>November 17, 2023:</strong></span> </span></p>
+<p><span style="color: #3366ff;"><strong>New section,</strong></span> "<a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">Sotapanna Stage via Understanding Perception (Saññā)</a>."</p>
+<p> </p>
+<p><strong><span>Previous <span class="pali-term term-highlight" data-term="posts">Posts</span>:</span></strong></p>
+<p><a href="http://localhost/beng_feb2026/sakkaya-di%e1%b9%ad%e1%b9%adhi-seeing-the-unfruitful-nature-of-the-world/" rel="noopener" target="_blank">Sakkāya Diṭṭhi – “Seeing the Unfruitful Nature of the World”</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.003/index.html" rel="noopener noreferrer" target="_blank">The Sotāpanna Stage</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Why a Sotāpanna is Better off than any King, Emperor, or a Billionaire</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.005/index.html" rel="noopener noreferrer" target="_blank">Myths about the Sotāpanna Stage</a></p>
+<p class="entry-title"><a href="../../pages/PS.AA.007/index.html" rel="noopener noreferrer" target="_blank">Anulōma Patilōma Paṭicca Samuppāda – Key to Sōtapanna Stage</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.006/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugami and a Sotāpanna</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Sōtapanna Anugāmi – No More Births in the Apāyā</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Four Conditions for Attaining Sotāpanna Magga/Phala</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – The Four Qualities of a Sotāpanna</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.010/index.html" rel="noopener noreferrer" target="_blank">Sammā Diṭṭhi – Realization, Not Memorization</a></p>
+<p class="entry-title"><a href="../../pages/TL.KK.001/index.html" rel="noopener noreferrer" target="_blank">Assāda, Ādīnava, Nissarana</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.011/index.html" rel="noopener noreferrer" target="_blank">How Does One Know whether the Sotāpanna Stage is Reached?</a></p>
+<p class="entry-title"><a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta - How Does a Sotāpanna Avoids Apayagami Citta</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.012/index.html" rel="noopener noreferrer" target="_blank">What is the only Akusala Removed by a Sotāpanna?</a></p>
+<p class="entry-title"><a href="../../pages/TL.LL.001/index.html" rel="noopener noreferrer" target="_blank">Uadayavaya Nana </a></p>
+<p class="entry-title"><a href="../../pages/LD.GG.009/index.html" rel="noopener noreferrer" target="_blank">Micca Diṭṭhi, Gandhabba, and Sotāpanna Stage</a> - (in the "<a href="../../pages/LD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Mental Body – Gandhabba</a>"</p>
+<p class="entry-title">section).</p>
+<p class="entry-title"><a href="../../pages/BM.AA.014/index.html" rel="noopener noreferrer" target="_blank">12. Key Factors to be Considered when “Meditating” for the Sotāpanna Stage</a>  (in the Meditation section).</p>
+<p class="entry-title"><strong><span>Also, see the following <span class="pali-term term-highlight" data-term="posts">posts</span> in the <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> section for more details </span><span style="color: #0000ff;"><span>(these could be helpful even if you have not studied <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>)</span></span>:</strong></p>
+<p class="entry-title"><a href="../../pages/AB.GG.002/index.html" rel="noopener noreferrer" target="_blank">Why do People Enjoy Immoral Deeds? - Diṭṭhi is Key</a></p>
+<p class="entry-title"><a href="../../pages/AB.GG.003/index.html" rel="noopener noreferrer" target="_blank">Key to Sotāpanna Stage – Diṭṭhi and Vicikicca</a></p>
+<p> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.II.001"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0463"
+             data-level="intermediate"
+             data-reading-time="1"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.II.001
+Language:     pt-BR
+Generated-At: 2026-03-10T23:19:54Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p class="entry-title" style="text-align: justify;">O primeiro estágio do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> — o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> — também é chamado de Entrante na Corrente em inglês e <em>Sōvān</em> em Cingalês.</p>
+<p> </p>
+<p><span style="color: #3366ff;"><span style="color: #000000;"><strong>17 de novembro de 2023:</strong></span> </span></p>
+<p><span style="color: #3366ff;"><strong>Nova seção,</strong></span> “<a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">Estágio Sotapanna através da compreensão da percepção (Saññā)</a>”.</p>
+<p> </p>
+<p><strong>Ensaios anteriores:</strong></p>
+<p><a href="http://localhost/beng_feb2026/sakkaya-di%e1%b9%ad%e1%b9%adhi-seeing-the-unfruitful-nature-of-the-world/" rel="noopener" target="_blank">Sakkāya Diṭṭhi — “Vendo a natureza infrutífera do mundo”</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.003/index.html" rel="noopener noreferrer" target="_blank">O Estágio Sotāpanna</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Por que um Sotāpanna é melhor do que qualquer rei, imperador ou bilionário</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.005/index.html" rel="noopener noreferrer" target="_blank">Mitos sobre o Estágio Sotāpanna</a></p>
+<p class="entry-title"><a href="../../pages/PS.AA.007/index.html" rel="noopener noreferrer" target="_blank">Anulōma Patilōma Paṭicca Samuppāda – Chave para o estágio Sotāpanna</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.006/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugami e um Sotāpanna</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugāmi – Sem mais nascimentos no Apāyā</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Quatro condições para alcançar Sotāpanna Magga/Phala</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – As Quatro Qualidades de um Sotāpanna</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.010/index.html" rel="noopener noreferrer" target="_blank">Sammā Diṭṭhi – Realização, Não Memorização</a></p>
+<p class="entry-title"><a href="../../pages/TL.KK.001/index.html" rel="noopener noreferrer" target="_blank">Assāda, Ādīnava, Nissarana</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.011/index.html" rel="noopener noreferrer" target="_blank">Como saber se o estágio de Sotāpanna foi alcançado?</a></p>
+<p class="entry-title"><a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta – Como um Sotāpanna evita Apayagami Citta</a></p>
+<p class="entry-title"><a href="../../pages/TL.JJ.012/index.html" rel="noopener noreferrer" target="_blank">Qual é o único Akusala removido por um Sotāpanna?</a></p>
+<p class="entry-title"><a href="../../pages/TL.LL.001/index.html" rel="noopener noreferrer" target="_blank">Uadayavaya Nana </a></p>
+<p class="entry-title"><a href="../../pages/LD.GG.009/index.html" rel="noopener noreferrer" target="_blank">Micca Diṭṭhi, Gandhabba e estágio Sotāpanna</a> - (na seção "<a href="../../pages/LD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Corpo Mental – Gandhabba</a>"</p>
+<p class="entry-title">).</p>
+<p class="entry-title"><a href="../../pages/BM.AA.014/index.html" rel="noopener noreferrer" target="_blank">12. Fatores-chave a serem considerados ao “meditar” para o estágio Sotāpanna</a>  (na seção Meditação).</p>
+<p class="entry-title"><strong><span>Além disso, veja os seguintes ensaios na seção <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> para mais detalhes </span><span style="color: #0000ff;"><span>(eles podem ser úteis mesmo que você não tenha estudado <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>)</span></span>:</strong></p>
+<p class="entry-title"><a href="../../pages/AB.GG.002/index.html" rel="noopener noreferrer" target="_blank">Por que as pessoas gostam de atos imorais? - Diṭṭhi é a chave</a></p>
+<p class="entry-title"><a href="../../pages/AB.GG.003/index.html" rel="noopener noreferrer" target="_blank">Chave para o estágio Sotāpanna – Diṭṭhi e Vicikicca</a></p>
+<p> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.HH.011/index.html">Difference Between Giving Up Valuables And Losing Interest In Worthless</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.II.002/index.html">Sotapanna Stage Via Understanding Perception Sanna</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.HH.011/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Difference Between Giving Up Valuables And Losing Interest In Worthless</span>
+        
+        <span class="pathway-title title-pt">Diferença entre abrir mão de objetos de valor e perder o interesse em objetos sem valor</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.II.002/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Sotapanna Stage Via Understanding Perception Sanna</span>
+        
+        <span class="pathway-title title-pt">Estágio Sotāpanna por meio da compreensão da percepção Sanna</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

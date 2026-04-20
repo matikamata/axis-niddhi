@@ -1,0 +1,516 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Jhana Stages Of Nibbana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 50 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.II.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Jhana Stages Of Nibbana</h1>
+    
+    <h1 class="title-pt">Estágios de Jhāna de Nibbāna</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.II.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.II.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0059"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.II.003</td></tr><tr><td>Fin-dex</td><td>0059</td></tr><tr><td>Slug</td><td>jhana-stages-of-nibbana</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Jhana Stages Of Nibbana</td></tr></table></div></div><p><strong>March 24, 2017; revised July 11, 2021; <span style="color: #3366ff;">April 19, 2024 </span></strong></p>
+<p style="text-align: justify;">1. There are many misconceptions about the relationship between <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span> </span></em>(the four stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>). Some view that <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is necessary to attain<em><span> <span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>, and others believe that being able to get into <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> means one has attained <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>The first assumption is wrong, and the second is true if one has attained an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em>(<strong>which can be defined</strong> as the removal of <em>kama raga</em>, not merely suppressing it.) Thus, one with an "<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>" would be at least an <em>Anāgāmi</em> who has cultivated <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li>We can resolve these issues by looking into what <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> mean.</li>
+</ul>
+<p style="text-align: justify;">2.<span style="color: #3366ff;"><strong> One attains <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> (various stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>) by permanently removing greed, hate, and ignorance (about the nature of this world or <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>)</strong>:</span> "<em>rāgakkhayo dosakkhayo mohakkhayo—idaṁ vuccati nibbānan'ti</em>.".</p>
+<ul style="text-align: justify;">
+<li>This can also be stated as "one needs to remove seven <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>" or, equivalently, "10 <em>saṁyojana</em>" to attain<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. At the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage, one removes two<em><span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> and three <em>saṁyojana</em>; see "<a href="../../pages/TS.AA.011/index.html" rel="noopener noreferrer" target="_blank">Conditions for the Four Stages of Nibbāna</a>."</li>
+<li>The most commonly used evaluation is that a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> has removed the three <em>saṁyojana</em> of <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span>, <span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></em>, and <em><span>silabbata <span class="pali-term term-highlight" data-term="parāmāsa">parāmāsa</span></span></em>.</li>
+<li>Therefore, a critical first step for attaining <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> is to be exposed to the correct interpretations of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>; see "<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta – Wrong Interpretations</a>."</li>
+<li>The second step is, of course, to grasp the <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span> </span></em>(and<em><span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>)<strong><em><span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em></strong></span> to some extent; see, "<a href="http://localhost/beng_feb2026/living-dhamma/what-is-sanna-perception/" rel="noopener noreferrer" target="_blank">What is Sanna (Perception)?</a>".</li>
+</ul>
+<p style="text-align: justify;">3. <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (sometimes written as "<em>dyāna</em>") can provide blissful bodily and mental sensations.</span> These arise due to the "cleansing of the physical body and the nervous system" induced by "defilement-free" thoughts; see "<a href="../../pages/LD.FF.004/index.html" rel="noopener noreferrer" target="_blank">Jhānic Experience in Detail – Sāmañ­ña­phala Sutta (DN 2)</a>".</p>
+<ul>
+<li style="text-align: justify;"><strong><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> are mental states corresponding to the <em>rupāvacara</em> and <em>arupāvacara</em> realms; they still belong to "this world" of 31 realms.</strong> Just like the human realm is "more peaceful in general" than the animal realm, <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states are   "more peaceful in general" than the human realm.</li>
+<li style="text-align: justify;"><span style="color: #0000ff;">We all have been born in most of the 31 realms (except for the realms reserved for the <em>Anāgāmis</em>) uncountable times and thus had attained those <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states uncountable times in previous lives.</span></li>
+<li style="text-align: justify;">Even this second phenomenon of <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is completely outside the realm of modern science. Scientists cannot explain <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> phenomena, but soon, they will not be able to ignore these as "hallucinations" because more and more people are attaining <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">4. two main factors come into play in cultivating <em>jhānā</em>.</p>
+<ul>
+<li style="text-align: justify;">Some people have cultivated <em>jhānā</em> in their recent previous lives and are able to get into <em>anāriya</em> <em>jhānā</em><span> very quickly. For a few, it comes without any effort, just lying on the bed (by the way, this can be any person who lives a moral life, whether exposed to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> or not).</span></li>
+<li style="text-align: justify;">The second factor involves the "cleansing of the physical body," as discussed below. <strong>This means the actual physical body with its nervous system, </strong>in addition to cleansing the mind.</li>
+</ul>
+<p style="text-align: justify;"><span>5. My late Noble teacher, Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span>, used the following simile to explain this "cleansing process" and describe the main difference between a</span><em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">I hope you have at least heard about -- preferably seen -- an old oil lantern with a glass enclosure where the wick is soaked in oil or gasoline that comes up through the wick from a built-in reservoir.</li>
+<li style="text-align: justify;">If gasoline is contaminated, the glass enclosure gets dirty quickly. In the same way, our defiled thoughts lead to a "contamination effect" in our physical bodies.</li>
+<li style="text-align: justify;">Many body ailments, including bodily pains and even some diseases, COULD BE reduced by cleansing one's mind. Of course, those initially arise due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>, and this process may not overcome the stronger ones; see, "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank">What is Kamma? – Does Kamma determine Everything?</a>".</li>
+</ul>
+<p style="text-align: justify;">6. Our thoughts can be compared to the burning wick and the physical body of the glass enclosure in the above simile. When the thoughts become defiled, the body will be "contaminated," giving rise to discomforts and even diseases. We will discuss the causes below.</p>
+<ul style="text-align: justify;">
+<li>The lamp's glass enclosure needs to be removed and cleaned in order for it to shine bright again, i.e., to make the "body of the lamp" clean again.</li>
+<li><span style="color: #0000ff;">In contrast, there is a built-in mechanism for our bodies to be cleansed.</span></li>
+<li>This built-in mechanism is our <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>, </span></em>or our thoughts. The primary mechanism is that <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in our thoughts (<em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>)<em> </em>produces good or bad energy fields called <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. These are <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> below the <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> stage (very fine), analogous to electromagnetic waves in physics.</li>
+<li>Immoral thoughts associated with <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em> lead to the contamination of the body, and good thoughts generate <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> that can clean up such contamination.</li>
+<li><span>If you need more information on these terms, the "Search box" at the top right can be used to find more relevant <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify;">7. This <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (an energy field) can and does affect our physical body. This is why people who are depressed or have high levels of anger or greed are more likely to be subjected to ailments and diseases, and people with joyful mindsets have relatively healthy bodies.</p>
+<ul style="text-align: justify;">
+<li>This effect can be enhanced via <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> that arises due to "moral living." The more one stays away from the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>, the happier one becomes and starts feeling "<em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>" in the body. It may not be fast, but it happens over time.</li>
+<li>Comprehending <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em><span> can enhance it much more. The difference here is that one will then stay away from <span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span>,</span><strong> mainly because one would have realized the fruitlessness and danger of seeking sensual pleasures by committing <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span>.</span></em></strong></li>
+</ul>
+<p style="text-align: justify;">8. I have discussed -- starting with basics -- how our thoughts can affect our well-being in the "<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a>" section. Understanding those basic concepts is crucial in order to understand deeper concepts and to do <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> effectively, as discussed later in that section.</p>
+<ul style="text-align: justify;">
+<li><span>When defiled thoughts are suppressed at least for a short time (during a desana or while reading <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>), one's mind becomes joyful, and one can get </span><em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> for a short time (<em><span>tadaṅga <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em>).</li>
+<li>If one spends more and more time doing such activities, the length of this calm mindset (<em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>) can be lengthened, even up to weeks (<em><span>vikkhambhana <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em>). Three types of <em><span><span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em> are discussed in "<a href="../../pages/LD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Suffering in This Life – Role of Mental Impurities</a>."</li>
+<li>That may not be <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> yet, but it is possible to get into <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> by increasing one's efforts through either <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> meditation.</li>
+<li>As we mentioned above, it is easier for some people to cultivate a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> because they have cultivated <em>jhānās</em> in recent previous births.</li>
+</ul>
+<p style="text-align: justify;">9. The power of a <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is increased when one is in <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> and is even more when one gets to a<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>. The "body cleansing effect" is enhanced, and one starts feeling joy in the face<em><span> and <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> in the body.</p>
+<ul style="text-align: justify;">
+<li>This can be compared to the wick in the oil lamp generating a "high-power laser light" that automatically cleans the dirty glass enclosure.</li>
+<li>That bright "<em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>," which are also called "<em>kirana</em>" (or electromagnetic waves in physics), can burn those long-accumulated "bad deposits" in our bodies and also "straighten out" the nervous system.</li>
+<li><span style="color: #0000ff;">This is the first confirmation of the effect of the mind on the body for someone starting on the Path. One can actually convince oneself that the body CAN BE affected by one's thoughts.</span></li>
+</ul>
+<p style="text-align: justify;">10. All this can be done by SUPPRESSING <em>pañcanīvaraṇa</em> for a long time; see "<a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank">Key to Calming the Mind – The Five Hindrances</a>".</p>
+<ul style="text-align: justify;">
+<li><span>Even before the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ancient </span><em>yogis</em> were able to get to<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> by SUPPRESSING defiled thoughts or <em><span>pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">nīvaraṇa</span></span></em>. They did this mainly by staying away from sensual objects (usually in a forest or an isolated place).</li>
+<li>They were able to cultivate powerful <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> and even travel through the air. </li>
+<li>As long as one's mind can be kept away from greedy and hateful thoughts, such states of <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> can be maintained for a long time (<em><span>vikkhambhana <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em>).</li>
+<li>This is related to the fact that how people can go to even <em>anāriya</em> meditation retreats (breath meditation) and attain a sense of peace for many days at a stretch. However, it slowly fades when they return and get back into the regular lifestyle.</li>
+</ul>
+<p style="text-align: justify;">11. The problem is that those effects are only temporary with <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> without <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>. They have not removed the root cause of getting attached to greed and hate. <span style="color: #0000ff;">They remain hidden deep down as <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span>/saṁyojana</span></em>.</span></p>
+<ul style="text-align: justify;">
+<li>This is discussed in detail in "<a href="../../pages/BD.II.004/index.html" rel="noopener noreferrer" target="_blank">Power of the Human Mind – Anariya or Mundane Jhāna</a>."</li>
+<li>Those who cultivate<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> are reborn in <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em><span> realms, which belong to the 31 realms. Thus, cultivating <span class="pali-term term-highlight" data-term="jhana">jhana</span> and being reborn in a </span><em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm does not help attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: "<a href="../../pages/LD.EE.003/index.html" rel="noopener noreferrer" target="_blank">Sīla, Samādhi, Pannā to Pannā, Sīla, Samādhi</a>."</li>
+</ul>
+<p style="text-align: justify;">12. Now, we are getting closer to seeing the difference between <em>anāriya</em> and <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span> </span></em>(as defined in #1).</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;">The main difference between them is that an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is permanent since they are attained via REMOVING and not just SUPPRESSING the <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em> <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span>/saṁyojana</span></em>.</span></li>
+<li>Once removed via wisdom (<em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em>) when attaining the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, some <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span>/saṁyojana</span></em> are permanently removed from one's mind (<em><span>uccheda <span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em>).</li>
+<li>After that, no matter how strong an attractive/hateful sensory input comes in, defiled thoughts (of <em>apāyagāmi </em>strength) CANNOT arise in a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em>; see "<a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta – How a Sotapanna Avoids Apayagami Citta</a><span>" and other relevant <span class="pali-term term-highlight" data-term="posts">posts</span> in the "</span><a href="../../pages/TL.II.001/index.html" rel="noopener noreferrer" target="_blank">Sotapanna Stage of Nibbāna</a>."</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;">13. The remaining key to the puzzle is that it is possible to attain<em><span> <span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> just by getting into <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> and not necessarily to <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</span></p>
+<ul style="text-align: justify;">
+<li>There are many types of people based on their <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (personalities) and capabilities: <em><span>saddha, <span class="pali-term term-highlight" data-term="viriya">viriya</span>, <span class="pali-term term-highlight" data-term="samādhi">samādhi</span>, <span class="pali-term term-highlight" data-term="sati">sati</span>, <span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em>. The <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> are separated into five <em>Nikāyā</em> based on that so that each individual can study appropriate <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> for him/her, see "<a href="../../pages/SI.AA.003/index.html" rel="noopener noreferrer" target="_blank">Nikāya in the Sutta Piṭaka</a>."</li>
+<li>Without getting into details, people with predominantly<em><span> <span class="pali-term term-highlight" data-term="paññā">paññā</span> <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em> can attain <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> without going through <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li>Others can go through <em>jhānā</em> to attain <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>. This is not clear-cut, but to get an idea.</li>
+</ul>
+<p style="text-align: justify;"><span>14. <span class="pali-term term-highlight" data-term="the bottom line">The bottom line</span> is that </span><em>jhānā</em> can be pretty helpful in getting to <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>. <strong>Furthermore, one may attain both within a reasonably short time.</strong> But <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> (at least the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage) comes before<span style="color: #0000ff;"><em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em></span> are attained.</p>
+<ul style="text-align: justify;">
+<li>The reason is that <em>uccheda pahānā</em> mentioned in #12, which is necessary for the <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, cannot occur unless one comprehends the <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> and attains the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage.</li>
+<li>One typically attains <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> by recalling the (stage of)  <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> that one has seen and the "cooling down" that one has thus experienced; see "<a href="../../pages/BD.II.005/index.html" rel="noopener noreferrer" target="_blank">Power of the Human Mind – Ariya Jhanas</a>."</li>
+</ul>
+<p style="text-align: justify;">15. For people with high levels of <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em>, even a brief state of <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em>, called <em>tadaṅga pahānā</em> (see #8 above), is enough to attain the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. A famous example is Bahiya Daruchiriya, who attained the <em>Arahantship</em> upon hearing just a single verse.</p>
+<ul style="text-align: justify;">
+<li>Then there are accounts of many people who attained the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage via <em><span>vikkhambhana <span class="pali-term term-highlight" data-term="pahāna">pahāna</span> </span></em>(see #8 and #10 above), mainly while listening to a <em>desana</em><span> by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>For example, Alavaka yaksa (not a<em><span> <span class="pali-term term-highlight" data-term="niraya">niraya</span> yaksa</span></em> but a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span> yaksa</span></em><span>) threatened the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> just before sitting down to listen to a </span><em>desana.</em> He attained the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage during the <em>desana</em><span>. Angulimala chased the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> with the intention of killing him but attained the </span><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage immediately afterward.</li>
+<li>More information on the three kinds of <em><span><span class="pali-term term-highlight" data-term="pahāna">pahāna</span></span></em> can be found in "<a href="../../pages/LD.AA.006/index.html" rel="noopener noreferrer" target="_blank">What Are Kilesa (Mental Impurities)? – Connection to Cetasika</a>".</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;">16. Therefore, there can be people with <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> without any<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</span></p>
+<ul>
+<li style="text-align: justify;">If there are people with <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> without <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>, they cannot experience the "<em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span> <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>" in the body. Even though they do not generate "bad thoughts" to further contaminate their bodies, they have not cleansed the old contaminants. <em><span><span class="pali-term term-highlight" data-term="jhānic">Jhānic</span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (that can run continuously for long times, compared to just seven<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in a normal <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>) are like laser beams that can clean contaminants in the body even in an <em><span>anāriya <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>; see #4 of "<a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vithi – Processing of Sense Inputs</a>."</li>
+<li style="text-align: justify;">In the simile of #5 above, this is like a wick not emitting any more smoke, but the glass enclosure is not yet cleaned.</li>
+<li style="text-align: justify;">Of course, it would be easier for a person with <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> to attain <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>. </span></em>However, there could be <em>Ariyas</em> below the <em>Anāgāmi</em> stage with <em><span>anāriya <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>; they will be born in the corresponding <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm and will attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> from there.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;">17. Finally, from the above discussion, it appears that the only way to confirm the attainment of the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage is to see whether one has removed the three <em>saṁyojana</em> (<em>sanyojana</em>) of <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span>, <span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></em>, and <em><span>silabbata <span class="pali-term term-highlight" data-term="parāmāsa">parāmāsa</span></span></em>; see, "<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/sakkaya-ditthi-personality-me-view/" rel="noopener noreferrer" target="_blank">Sakkaya Diṭṭhi is Personality (Me) View?</a>".</span></p>
+<ul>
+<li><span style="color: #0000ff;">And that cannot be determined by anyone else but oneself.</span></li>
+</ul>
+<p><strong>18</strong><span style="color: #0000ff;"><strong>. April 28, 2018</strong></span>:  I found a <em>desana</em> by Waharaka <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> where he presents clear evidence that <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is not necessary to attain <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>:</p>
+<p></p>
+<ul>
+<li style="text-align: justify;">The main point <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> makes is that we know that there are <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> Sotāpannas</span></em> born in the human realm. But if a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> was REQUIRED to attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, then that person WOULD NOT be born in the human realm, but in a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm corresponding to that<em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+</ul>
+<p>More information with references to <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> at: "<a href="../../pages/LD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Samādhi, Jhāna (Dhyāna), Magga Phala</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.II.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0059"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.II.003
+Language:     pt-BR
+Generated-At: 2026-04-18T04:01:49Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>24 de março de 2017; revisado em 11 de julho de 2021; <span style="color: #3366ff;">19 de abril de 2024 </span></strong></p>
+<p style="text-align: justify;">1. Existem muitos equívocos sobre a relação entre <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span> </span></em>(os quatro estágios de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>). Alguns consideram que <em><span>o <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> é necessário para alcançar<em><span> o <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>, enquanto outros acreditam que ser capaz de entrar em <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> significa que se alcançou <em><span>o <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>A primeira suposição está errada, e a segunda é verdadeira se a pessoa tiver alcançado um <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> </span></em>(<strong>que pode ser definido</strong> como a remoção do <em>kama raga</em>, não apenas sua supressão). Assim, alguém com um “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>” seria, no mínimo, um <em>Anāgāmi</em> que cultivou <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</li>
+<li>Podemos resolver essas questões examinando o que significam <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">2.<span style="color: #3366ff;"><strong> Alcança-se <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> (vários estágios de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>) removendo permanentemente a ganância, o ódio e a ignorância (sobre a natureza deste mundo ou <em>Tilakkhaṇa</em>)</strong>:</span> “<em>rāgakkhayo dosakkhayo mohakkhayo—idaṁ vuccati Nibbānan'ti</em>.”</p>
+<ul style="text-align: justify;">
+<li>Isso também pode ser expresso como “é preciso remover sete <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>” ou, de forma equivalente, “10 <em>saṁyojana</em>” para alcançar<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. No estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, remove-se dois<em><span> <span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> e três <em>saṁyojana</em>; veja “<a href="../../pages/TS.AA.011/index.html" rel="noopener noreferrer" target="_blank">Condições para os Quatro Estágios de Nibbāna</a>”.</li>
+<li>A avaliação mais comumente usada é que um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> removeu os três <em>saṁyojana</em> de <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span>, <span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="parāmāsa">Parāmāsa</span></span></em>.</li>
+<li>Portanto, um primeiro passo fundamental para alcançar <em><span>o <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> é estar exposto às interpretações corretas de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>; consulte “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā – Interpretações Erradas</a>”.</li>
+<li>O segundo passo é, naturalmente, compreender a <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span> </span></em><strong><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em></strong> (e<em><span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e<em> Anattā</em>)</span> até certo ponto; veja “<a href="http://localhost/beng_feb2026/living-dhamma/what-is-sanna-perception/" rel="noopener noreferrer" target="_blank">O que é Sanna (Percepção)?</a>”.</li>
+</ul>
+<p style="text-align: justify;">3. <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (às vezes escrito como “<em>dyāna</em>”) pode proporcionar sensações corporais e mentais de bem-aventurança.</span> Estas surgem devido à “purificação do corpo físico e do sistema nervoso” induzida por pensamentos “livres de impurezas”; veja “<a href="../../pages/LD.FF.004/index.html" rel="noopener noreferrer" target="_blank">Experiência Jhānica em Detalhe – Sāmaññaphala Sutta (DN 2)</a>”.</p>
+<ul>
+<li style="text-align: justify;"><strong><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> são estados mentais correspondentes aos reinos <em>rupāvacara</em> e <em>arupāvacara</em>; eles ainda pertencem a “este mundo” dos 31 reinos.</strong> Assim como o reino humano é “mais pacífico em geral” do que o reino animal, os estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> são “mais pacíficos em geral” do que o reino humano.</li>
+<li style="text-align: justify;"><span style="color: #0000ff;">Todos nós já nascemos na maioria dos 31 reinos (exceto nos reinos reservados aos <em>Anāgāmis</em>) inúmeras vezes e, assim, alcançamos esses estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> inúmeras vezes em vidas anteriores.</span></li>
+<li style="text-align: justify;">Mesmo este segundo fenômeno do <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> está completamente fora do âmbito da ciência moderna. Os cientistas não conseguem explicar os fenômenos <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, mas em breve não poderão mais ignorá-los como “alucinações”, pois cada vez mais pessoas estão alcançando <em><span>o <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">4. Dois fatores principais entram em jogo no cultivo <em>do jhānā</em>.</p>
+<ul>
+<li style="text-align: justify;">Algumas pessoas cultivaram <em>jhānā</em> em suas vidas passadas recentes e são capazes de entrar em <em>anāriya</em> <em>jhānā</em><span> muito rapidamente. Para algumas, isso ocorre sem qualquer esforço, simplesmente deitadas na cama (aliás, isso pode acontecer com qualquer pessoa que leve uma vida moral, tenha ela sido exposta ao <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> ou não).</span></li>
+<li style="text-align: justify;">O segundo fator envolve a “purificação do corpo físico”, conforme discutido abaixo. <strong>Isso significa o corpo físico real com seu sistema nervoso, </strong>além da purificação da mente.</li>
+</ul>
+<p style="text-align: justify;"><span>5. Meu falecido Nobre professor, Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span>, usou a seguinte comparação para explicar esse “processo de purificação” e descrever a principal diferença entre um</span><em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> e <em><span>um <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">Espero que você pelo menos já tenha ouvido falar — de preferência, visto — uma lanterna a óleo antiga com um invólucro de vidro, onde o pavio é embebido em óleo ou gasolina que sobe pelo pavio a partir de um reservatório embutido.</li>
+<li style="text-align: justify;">Se a gasolina estiver contaminada, o invólucro de vidro fica sujo rapidamente. Da mesma forma, nossos pensamentos impuros levam a um “efeito de contaminação” em nossos corpos físicos.</li>
+<li style="text-align: justify;">Muitas afecções corporais, incluindo dores físicas e até mesmo algumas doenças, PODERIAM ser reduzidas pela purificação da mente. É claro que essas afecções surgem inicialmente devido ao <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>, e esse processo pode não superar as mais fortes; veja “<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank">O que é Kamma? – O Kamma determina tudo?</a>”.</li>
+</ul>
+<p style="text-align: justify;">6. Nossos pensamentos podem ser comparados ao pavio aceso e ao corpo físico do invólucro de vidro na comparação acima. Quando os pensamentos se tornam impuros, o corpo fica “contaminado”, dando origem a desconfortos e até mesmo doenças. Discutiremos as causas a seguir.</p>
+<ul style="text-align: justify;">
+<li>O invólucro de vidro da lâmpada precisa ser removido e limpo para que ela volte a brilhar intensamente, ou seja, para tornar o “corpo da lâmpada” limpo novamente.</li>
+<li><span style="color: #0000ff;">Em contrapartida, existe um mecanismo interno para que nossos corpos sejam purificados.</span></li>
+<li>Esse mecanismo embutido é o nosso <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, </span></em>ou seja, nossos pensamentos. O mecanismo principal é que <em><span>o <span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> em nossos pensamentos (<em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>)<em> </em>produz campos de energia bons ou ruins chamados <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. Estes são <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> abaixo do estágio <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> (muito finos), análogos às ondas eletromagnéticas na física.</li>
+<li>Pensamentos imorais associados ao <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em> levam à contaminação do corpo, e bons pensamentos geram <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> que podem limpar tal contaminação.</li>
+<li>Se você precisar de mais informações sobre esses termos, a “caixa de pesquisa” no canto superior direito pode ser usada para encontrar ensaios mais relevantes.</li>
+</ul>
+<p style="text-align: justify;">7. Este <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> (um campo de energia) pode afetar e de fato afeta nosso corpo físico. É por isso que pessoas que estão deprimidas ou apresentam altos níveis de raiva ou ganância são mais propensas a sofrer de doenças e aflições, enquanto pessoas com mentalidades alegres têm corpos relativamente saudáveis.</p>
+<ul style="text-align: justify;">
+<li>Esse efeito pode ser intensificado por meio do <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> que surge devido à “vida moral”. Quanto mais a pessoa se mantém afastada do <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>, mais feliz ela se torna e começa a sentir “<em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>” no corpo. Pode não ser rápido, mas isso acontece com o tempo.</li>
+<li>Compreender <em>o Tilakkhaṇa</em><span> pode intensificá-lo muito mais. A diferença aqui é que a pessoa passará a se manter afastada dos <span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span>,</span><strong> principalmente porque terá percebido a futilidade e o perigo de buscar prazeres sensuais ao cometer <em><span>os <span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span>.</span></em></strong></li>
+</ul>
+<p style="text-align: justify;">8. Discuti — começando pelo básico — como nossos pensamentos podem afetar nosso bem-estar na seção “<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a>”. Compreender esses conceitos básicos é crucial para entender conceitos mais profundos e para praticar <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> de forma eficaz, conforme discutido mais adiante nessa seção.</p>
+<ul style="text-align: justify;">
+<li><span>Quando pensamentos impuros são suprimidos pelo menos por um curto período (durante um desana ou enquanto se lê o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>), a mente fica alegre, e é possível alcançar </span><em><span><span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em> por um curto período (<em><span>tadaṅga <span class="pali-term term-highlight" data-term="pahāna">Pahāna</span></span></em>).</li>
+<li>Se a pessoa dedicar cada vez mais tempo a tais atividades, a duração desse estado mental calmo (<em><span><span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em>) pode ser prolongada, chegando até a semanas (<em><span>vikkhambhana <span class="pali-term term-highlight" data-term="pahāna">Pahāna</span></span></em>). Três tipos de <em><span><span class="pali-term term-highlight" data-term="pahāna">Pahāna</span></span></em> são discutidos em “<a href="../../pages/LD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Sofrimento nesta vida – O papel das impurezas mentais</a>”.</li>
+<li>Isso pode não ser <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> ainda, mas é possível entrar em <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> aumentando os esforços por meio da meditação <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em>.</li>
+<li>Como mencionamos acima, é mais fácil para algumas pessoas cultivarem um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> porque elas cultivaram <em>Jhānās</em> em vidas anteriores recentes.</li>
+</ul>
+<p style="text-align: justify;">9. O poder de um <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> aumenta quando se está em <em><span><span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em> e é ainda maior quando se alcança um<em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. O “efeito de purificação do corpo” é intensificado, e a pessoa começa a sentir alegria no rosto<em><span> e <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> no corpo.</p>
+<ul style="text-align: justify;">
+<li>Isso pode ser comparado ao pavio da lamparina a óleo gerando uma “luz laser de alta potência” que limpa automaticamente o invólucro de vidro sujo.</li>
+<li>Esse brilhante “<em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>”, também chamado de “<em>kirana</em>” (ou ondas eletromagnéticas na física), pode queimar esses “depósitos ruins” acumulados há muito tempo em nossos corpos e também “endireitar” o sistema nervoso.</li>
+<li><span style="color: #0000ff;">Essa é a primeira confirmação do efeito da mente sobre o corpo para alguém que está iniciando o Caminho. É possível realmente se convencer de que o corpo PODE SER afetado pelos próprios pensamentos.</span></li>
+</ul>
+<p style="text-align: justify;">10. Tudo isso pode ser feito SUPRIMINDO <em>os pañcanīvaraṇa</em> por um longo tempo; veja “<a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank">A Chave para Acalmar a Mente – Os Cinco Estorvos</a>”.</p>
+<ul style="text-align: justify;">
+<li><span>Mesmo antes do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, </span><em>os</em> antigos <em>iogues</em> eram capazes de alcançar o <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> SUPRIMINDO pensamentos impuros ou <em><span>pañca <span class="pali-term term-highlight" data-term="nīvaraṇa">Nīvaraṇa</span></span></em>. Eles faziam isso principalmente mantendo-se afastados de objetos sensuais (geralmente em uma floresta ou em um local isolado).</li>
+<li>Eles eram capazes de cultivar <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em> poderosos e até mesmo viajar pelo ar. </li>
+<li>Desde que a mente possa ser mantida longe de pensamentos de ganância e ódio, tais estados de <em><span><span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> podem ser mantidos por um longo tempo (<em><span>vikkhambhana <span class="pali-term term-highlight" data-term="pahāna">Pahāna</span></span></em>).</li>
+<li>Isso está relacionado ao fato de que as pessoas podem ir até mesmo a retiros de meditação <em>anāriya</em> (meditação da respiração) e alcançar uma sensação de paz por muitos dias seguidos. No entanto, ela desaparece lentamente quando retornam e voltam ao estilo de vida normal.</li>
+</ul>
+<p style="text-align: justify;">11. O problema é que esses efeitos são apenas temporários com <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> sem <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>. Eles não removeram a causa raiz do apego à ganância e ao ódio. <span style="color: #0000ff;">Elas permanecem ocultas no fundo como <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span>/saṁyojana</span></em>.</span></p>
+<ul style="text-align: justify;">
+<li>Isso é discutido em detalhes em “<a href="../../pages/BD.II.004/index.html" rel="noopener noreferrer" target="_blank">O Poder da Mente Humana – Anariya ou Jhāna Mundano</a>”.</li>
+<li>Aqueles que cultivam<em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> renascem nos reinos <em>de</em> <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em><span>, que pertencem aos 31 reinos. Assim, cultivar <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> e renascer em um reino </span><em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> não ajuda a alcançar <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: “<a href="../../pages/LD.EE.003/index.html" rel="noopener noreferrer" target="_blank">Sīla, Samādhi, Pannā para Pannā, Sīla, Samādhi</a>”.</li>
+</ul>
+<p style="text-align: justify;">12. Agora, estamos nos aproximando de ver a diferença entre <em>anāriya</em> e <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> </span></em>(conforme definido no nº 1).</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;">A principal diferença entre eles é que um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> é permanente, uma vez que é alcançado por meio da REMOÇÃO e não apenas da SUPRESSÃO do <em><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></em> <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span>/Saṁyojana</span></em>.</span></li>
+<li>Uma vez removidos por meio da <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em> ao atingir o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> do</span></em> <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, alguns <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span>/saṁyojana</span></em> são permanentemente removidos da mente (<em><span><span class="pali-term term-highlight" data-term="pahāna">Pahāna</span></span></em>).</li>
+<li>Depois disso, não importa quão forte seja um estímulo sensorial atraente/repugnante que chegue, pensamentos impuros (da força <em>de</em> <em>apāyagāmi</em>) NÃO PODEM surgir em um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>; veja “<a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta – Como um Sotāpanna Evita Apayagami Citta</a>” e outros ensaios relevantes no “<a href="../../pages/TL.II.001/index.html" rel="noopener noreferrer" target="_blank">Estágio Sotāpanna do Nibbāna</a>”.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;">13. A chave restante para o quebra-cabeça é que é possível atingir<em><span> <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> apenas entrando em <em><span><span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em> e não necessariamente em <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</span></p>
+<ul style="text-align: justify;">
+<li>Existem muitos tipos de pessoas com base em suas <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> (personalidades) e capacidades: <em><span>uma <span class="pali-term term-highlight" data-term="saddhā">Saddhā</span>, <span class="pali-term term-highlight" data-term="viriya">Viriya</span>, <span class="pali-term term-highlight" data-term="samādhi">Samādhi</span>, <span class="pali-term term-highlight" data-term="sati">Sati</span>, <span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em>. As <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> são separadas em cinco <em>Nikāyā</em> com base nisso, para que cada indivíduo possa estudar <em><span>a <span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> apropriada para si; veja “<a href="../../pages/SI.AA.003/index.html" rel="noopener noreferrer" target="_blank">Nikāya no Sutta Piṭaka</a>”.</li>
+<li>Sem entrar em detalhes, pessoas com predominância de<em><span> <span class="pali-term term-highlight" data-term="paññā">Paññā</span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> podem atingir <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> sem passar por <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</li>
+<li>Outros podem passar pelo <em>jhānā</em> para alcançar <em><span>o <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>. Isso não é totalmente claro, mas dá uma ideia.</li>
+</ul>
+<p style="text-align: justify;">14. A conclusão é que <em><span>o <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> pode ser bastante útil para alcançar o <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>. <strong>Além disso, é possível atingir ambos em um tempo razoavelmente curto.</strong> Mas <em><span>o <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> (pelo menos o estágio <em>de Sótapanna</em>) vem antes de se atingir <span style="color: #0000ff;"><em><span>o <span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em></span>.</p>
+<ul style="text-align: justify;">
+<li>A razão é que <em>o uccheda pahānā</em> mencionado no nº 12, que é necessário para o <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, não pode ocorrer a menos que se compreenda o <em>Tilakkhaṇa</em> e se alcance o estágio <em>de Sótapanna</em>.</li>
+<li>Normalmente, alcança-se <em><span>o <span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> ao recordar o (estágio de) <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> que se viu e o “arrefecimento” que se experimentou assim; veja “<a href="../../pages/BD.II.005/index.html" rel="noopener noreferrer" target="_blank">O Poder da Mente Humana – Ariya Jhanas</a>”.</li>
+</ul>
+<p style="text-align: justify;">15. Para pessoas com altos níveis de <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em>, mesmo um breve estado de <em><span><span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em>, chamado <em>tadaṅga pahānā</em> (ver nº 8 acima), é suficiente para atingir o estágio <em>de</em> <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Um exemplo famoso é Bahiya Daruchiriya, que atingiu o <em>Arahantship</em> ao ouvir apenas um único versículo.</p>
+<ul style="text-align: justify;">
+<li>Há também relatos de muitas pessoas que alcançaram o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> por meio do <em><span>vikkhambhana <span class="pali-term term-highlight" data-term="pahāna">Pahāna</span> </span></em>(ver #8 e #10 acima), principalmente enquanto ouviam um <em>desana</em><span> do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>Por exemplo, Alavaka yaksa (não um<em><span> <span class="pali-term term-highlight" data-term="niraya">Niraya</span> yaksa,</span></em> mas um <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span> yaksa</span></em><span>) ameaçou o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pouco antes de se sentar para ouvir um </span><em>desana.</em> Ele alcançou o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> durante o <em>desana</em><span>. Angulimala perseguiu o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> com a intenção de matá-lo, mas alcançou o estágio </span><em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> imediatamente depois.</li>
+<li>Mais informações sobre os três tipos de <em><span><span class="pali-term term-highlight" data-term="pahāna">Pahāna</span></span></em> podem ser encontradas em “<a href="../../pages/LD.AA.006/index.html" rel="noopener noreferrer" target="_blank">O que são Kilesa (impurezas mentais)? – Conexão com Cetasika</a>”.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;">16. Portanto, pode haver pessoas com <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> sem qualquer<em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</span></p>
+<ul>
+<li style="text-align: justify;">Se há pessoas com <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> sem <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>, elas não podem experimentar o <em><span>“<span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> </span></em>Suk<em>ha</em>” no corpo. Mesmo que não gerem “pensamentos ruins” para contaminar ainda mais seus corpos, elas não purificaram os contaminantes antigos. <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (que podem ocorrer continuamente por longos períodos, em comparação com apenas sete<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> em um <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> normal) são como feixes de laser que podem limpar contaminantes no corpo mesmo em um <em><span>anāriya <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>; veja o nº 4 de “<a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vithi – Processamento de Entradas Sensoriais</a>”.</li>
+<li style="text-align: justify;">Na comparação do nº 5 acima, isso é como um pavio que não emite mais fumaça, mas o recipiente de vidro ainda não foi limpo.</li>
+<li style="text-align: justify;">É claro que seria mais fácil para uma pessoa com <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> atingir <em><span>o <span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span>. </span></em>No entanto, poderia haver <em>Ariyas</em> abaixo do estágio <em>Anāgāmi</em> com <em><span>anāriya <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>; eles nascerão no reino <em>de</em> <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> correspondente e alcançarão <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> a partir de lá.</li>
+</ul>
+<p style="text-align: justify;"><span style="color: #0000ff;">17. Finalmente, a partir da discussão acima, parece que a única maneira de confirmar a obtenção do estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> é verificar se a pessoa removeu os três <em>saṁyojana</em> (<em>sanyojana</em>) de <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span>, <span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="parāmāsa">Parāmāsa</span></span></em>; veja “<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/sakkaya-ditthi-personality-me-view/" rel="noopener noreferrer" target="_blank">Sakkaya Diṭṭhi é a Visão da Personalidade (Eu)?</a>”.</span></p>
+<ul>
+<li><span style="color: #0000ff;">E isso não pode ser determinado por ninguém além de si mesmo.</span></li>
+</ul>
+<p><strong>18</strong><span style="color: #0000ff;"><strong>. 28 de abril de 2018</strong></span>: Encontrei um <em>desana</em> de Waharaka <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> onde ele apresenta evidências claras de que <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> não é necessário para alcançar <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>:</p>
+<p></p>
+<ul>
+<li style="text-align: justify;">O ponto principal que <em><span>o <span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> destaca é que sabemos que existem <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> Sotāpannas</span></em> nascidos no reino humano. Mas se um <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> fosse NECESSÁRIO para atingir o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, então essa pessoa NÃO NASCERIA no reino humano, mas em um reino <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> correspondente a esse<em><span> <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</li>
+</ul>
+<p>Mais informações com referências aos <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> em: “<a href="../../pages/LD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Samādhi, Jhāna (Dhyāna), Magga Phala</a>.”</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.II.002/index.html">Power Of The Human Mind</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.II.004/index.html">Power Of The Human Mind The Anariya Or Mundane Jhanas</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.II.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Power Of The Human Mind</span>
+        
+        <span class="pathway-title title-pt">O Poder da Mente Humana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.II.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Power Of The Human Mind The Anariya Or Mundane Jhanas</span>
+        
+        <span class="pathway-title title-pt">O Poder da Mente Humana: Os Jhānas Anariya ou Mundanos</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

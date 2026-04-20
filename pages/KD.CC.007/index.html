@@ -1,0 +1,457 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anatta Is A Characteristic Of The World Not About A Self | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 13 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.CC.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anatta Is A Characteristic Of The World Not About A Self</h1>
+    
+    <h1 class="title-pt">Anattā é uma característica do mundo, não diz respeito a um eu</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.CC.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.CC.007"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0079"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.CC.007</td></tr><tr><td>Fin-dex</td><td>0079</td></tr><tr><td>Slug</td><td>anatta-is-a-characteristic-of-the-world-not-about-a-self</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Anatta Is A Characteristic Of The World Not About A Self</td></tr></table></div></div><p><strong>September 13, 2021; <span style="color: #3366ff;">revised June 4, 2023</span></strong></p>
+<p style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="anatta">Anatta</span></span></em> is a characteristic of this world, not about a "self." <strong>The translation of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> as "no-self" is a serious error.</strong> Instead, it is <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span></span></em> that deals with the issue of whether anything in this world can be/should be considered to be "mine."</p>
+<h5 style="text-align: justify;">The Sense of a “Me” Is There Even Though There is no “Soul”</h5>
+<p style="text-align: justify;">1. <span style="color: #993366;"><strong>It is difficult to decide whether the word “self” means just a “sense of me” or a “soul.”</strong></span></p>
+<ul style="text-align: justify;">
+<li>That is why it is best to avoid the term “self” in discussing “<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>/<em>anattā.</em>”</li>
+<li><span style="color: #3366ff;"><strong><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> denied a “soul” in Abrahamic religions or an "</span><em>ātman</em>" as in Hinduism. But he taught that the sense of a “me” is real and WILL BE THERE until one attains <em>Arahanthood</em>.</strong></span></li>
+<li><strong>To avoid confusion, let us not use the word “self.”</strong> <span style="color: #ff0000;"><span style="color: #993366;"><strong>We will use "me" for the "temporary self" and "soul" for the "everlasting self." </strong></span><span style="color: #000000;"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> accepted the use of a temporary "me" but denied the existence of a permanent "soul/</span><em>ātman</em>."</span></span></li>
+<li>Now we all understand that “me” is DIFFERENT from a “soul.” <strong><span>If someone thinks that the “self” is the same as the “soul,” then the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> denied the existence of such a “self.”</span></strong></li>
+<li>I hope this point is crystal clear. Otherwise, we can get into many arguments wasting precious time.</li>
+</ul>
+<h5 style="text-align: justify;"><span>Even the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Used the Word "Me"</span></h5>
+<p style="text-align: justify;">2. As long as one lives in this world, it will be impossible not to use the words "me" and "I."</p>
+<ul style="text-align: justify;">
+<li><span>Even the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> freely used the words "me" and "I" daily and even referred to previous births. He has given accounts of "his" previous lives. Such usage is not possible to avoid.</span></li>
+<li>Furthermore, even a living <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>, for example, would have its own habits. Of course, they would not have any habits even remotely related to <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, or <span class="pali-term term-highlight" data-term="moha">moha</span>. </span></em></li>
+<li>For example, Ven. Moggalana was a bit strict. One time he dragged a <em><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></em> out of a gathering. Ven. Pilindavaccha addressed others with words like "<em>vasala</em>" ("one of low birth"), which was not due to anger but because of the way he was used to speaking. As long as one lives in this world, there are unique characteristics regarding physical appearance and how one speaks and thinks.</li>
+<li><strong><span>This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejected both extreme views:</span></strong><br/>
+(i) It is not correct to say that someone does not exist since, obviously, a person is living and doing things in their own way.<br/>
+(ii) <span style="color: #000000;">It is also incorrect to associate a "permanent soul" with any person.</span> A "living being" exists due to causes and conditions (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>) and will cease to be reborn in this suffering-filled world when <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> is removed.</li>
+<li><span style="color: #ff0000;"><span style="color: #993366;"><strong>However, the concept of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is not about a temporary or permanent "self." </strong></span><span style="color: #000000;">It is a characteristic of anything in this world (</span></span><span style="color: #000000;"><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, </span></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></span></em></span></span></span>.)</span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">Anatta</span></span></em> - Three Characteristics</h5>
+<p style="text-align: justify;"><span>3. In recent <span class="pali-term term-highlight" data-term="posts">posts</span>, I cited many </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> references that clearly state <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> mean three CHARACTERISTICS of this world. See, "<a href="../../pages/KD.CC.001/index.html" rel="noopener" target="_blank">Tilakkhana – Introduction</a>."</p>
+<ul style="text-align: justify;">
+<li>Furthermore, those three characteristics are related to each other via "<em><span class="segment" id="sn22.15:1.3"><span class="root"><span class="text"><strong>Yad aniccaṁ taṁ dukkhaṁ</strong>; </span></span></span><span class="segment" id="sn22.15:1.4"><span class="root"><span class="text"><strong>yaṁ dukkhaṁ tad anattā." </strong></span></span></span></em></li>
+<li>The above verse says that anything that belongs to this world (<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, </span></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></span></em></span></span></span>) is ALL of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature and thus has <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> nature; whatever is of <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> nature has <span style="color: #3366ff;"><strong><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature</strong>.</span></li>
+<li>If one attaches to things of an <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature, one will be subjected to <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>. Because of that, ALL worldly things are not fruitful (<em>anattā.</em>)</li>
+<li>It should be quite clear that <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>/</span></em><em>anattā</em> is NOT about a "self" or "me."</li>
+</ul>
+<p style="text-align: justify;">4. That is succinctly stated in the verse, "<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>Rūpaṁ </strong></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>(<em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></span></em><span class="segment" id="ps3.1:36.5">)</span></strong></span></span></span><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong> atītānāgatapaccuppannaṁ</strong><strong><span>aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span> dukkhaṁ bhayaṭṭhena </span><span style="color: #3366ff;">anattā asārakaṭṭhenāti. </span></strong></span></span></span></em><span class="segment"><span class="root"><span class="text">See "</span></span></span><span class="segment" id="ps3.1:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/ps3.1/pli/ms" rel="noopener" target="_blank">3.1. Mahāpaññākathā</a>."</span></span></span></p>
+<p style="text-align: justify;"><strong>Translation:</strong> “<strong>Any <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> <span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">( or <em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></span></em><span class="segment" id="ps3.1:36.5">)</span></span></span></span><span class="segment" id="ps3.1:36.1"> </span>that ever existed will exist in the future, or that is being experienced now</strong> has the following three characteristics: Any such <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> is of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature because one’s hopes for enjoying <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> will only lead to one’s demise (“<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span>aniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>.”</span></span></span></span></em>) It will eventually lead to sufferings that one should be afraid of (“<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">dukkhaṁ bhayaṭṭhena.”</span></span></span></em>) <strong>Therefore, such cravings<span style="color: #3366ff;"><span> are unfruitful and will make one helpless in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process</span></span></strong><span style="color: #3366ff;"> (“</span><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span style="color: #3366ff;">anattā asārakaṭṭhenāti</span>.”</strong></span></span></span></em>)</p>
+<ul style="text-align: justify;">
+<li><span>We discussed that in a recent <span class="pali-term term-highlight" data-term="post">post</span>: "</span><a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Noble Truths, Paṭicca Samuppāda, Tilakkhana</a>."</li>
+</ul>
+<p style="text-align: justify;">5. From the above verse, it is pretty clear that <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is a characteristic of not only our physical body but ANY <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> existing now, ever existed, or will exist in the future! That means <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is a characteristic of the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> aggregate (<em>rupakkhandha</em>.)</p>
+<ul style="text-align: justify;">
+<li><strong><span>Furthermore, as explained in that <span class="pali-term term-highlight" data-term="post">post</span>, the </span><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> characteristic applies to all five aggregates.</strong> As we have discussed, the five aggregates encompass “the whole world.”</li>
+<li><span style="color: #3366ff;"><strong>Thus, anything in this world has the <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> characteristic!</strong></span></li>
+<li><span style="color: #993366;"><strong>How can these translators say "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" means "no-self"? </strong></span></li>
+<li>It is alarming to see the efforts in Sri Lanka to ban any interpretation of "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" other than  "no-self." See "<a href="http://localhost/beng_feb2026/forums/topic/proposed-tipitaka-conservation-bill-in-sri-lanka/" rel="noopener" target="_blank">Proposed Tipiṭaka Conservation Bill in Sri Lanka</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Simple Examples</h5>
+<p style="text-align: justify;">6. Little children take immense satisfaction and joy in building sandcastles. They spend hours building them and enjoy looking at the finished product.</p>
+<ul style="text-align: justify;">
+<li>However, their joy turns to sadness if a strong wave or a running dog destroys that sandcastle. They may even go home happily but would be sad to see their sandcastle destroyed when they return the next day.</li>
+<li>This is why adults don’t build sandcastles. As that same child grows, understanding slowly occurs that “building sandcastles is a waste of time” even though a “pleasurable activity.”</li>
+<li>Yet, fully grown and intelligent adults do the same all their lives. They work tirelessly in hopes of a better life. But only at the moment of death do they realize that all those efforts have gone to waste. Furthermore, if they had cultivated an “immoral mindset” by engaging in immoral thoughts and activities, they are not only going to be disappointed but could be subjected to much suffering in future lives.</li>
+<li>A sandcastle is of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature. Getting attached to it will inevitably lead to disappointment (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>). Thus engaging in that activity is unfruitful and non-beneficial to anyone (<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.)</li>
+</ul>
+<p style="text-align: justify;">7. However, <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature means unfruitful (as in the above example) and dangerous.</p>
+<ul style="text-align: justify;">
+<li>Alcoholics consume alcohol because it gives them pleasure. But he has not comprehended that heavy drinking can lead to sickness and even death.</li>
+<li>Therefore, heavy consumption of alcohol is of an <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature. It will lead to <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> (suffering). Therefore, that activity is of an <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature.</li>
+</ul>
+<h5 style="text-align: justify;">The Same Principle Applies to All Sense-Pleasing Activities</h5>
+<p style="text-align: justify;">8. It is hard to believe at first, but craving sensory pleasures is not unlike craving alcohol!</p>
+<ul style="text-align: justify;">
+<li><span>The truth of the above statement can be seen only within the long-term <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.  This is why it is difficult for many people to understand the deeper aspects of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> about suffering. In particular immoral activities seeking short-term pleasures WILL lead to much suffering in future rebirths.</span></li>
+<li>We discussed the example of #6 above in "<a href="../../pages/KD.CC.006/index.html" rel="noopener" target="_blank">How Does Anicca Nature Lead to Dukkha?</a>"  As explained there, <strong>all five aggregates (<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span>, <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, saṅ­khāra, vinnana</span></em>) are of an <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature. <span style="color: #3366ff;">Therefore, per #3 above, all five aggregates are of the <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature too! </span></strong></li>
+<li>That is specifically stated in the "<a href="https://suttacentral.net/sn22.17/pli/ms" rel="noopener" target="_blank"><em><span>Yadanattā <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.17)</a>": “<span style="color: #993366;"><strong><em><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, anattā..<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> anattā ..<span class="pali-term term-highlight" data-term="saññā">saññā</span> anattā …<span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> anattā …viññāṇaṁ anattā</span></em></strong>."</span></li>
+<li>That is why NONE of the things in this world (<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, </span></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></span></em><span class="segment" id="ps3.1:36.5">) can be considered beneficial.</span></span></span></span></li>
+</ul>
+<p style="text-align: justify;">9. Here, it is essential to realize that we accumulate<em><span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> (more correctly,<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies) not only by our actions but also with speech and even thoughts (via <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span>, vaci</span></em>, and <em><span><span class="pali-term term-highlight" data-term="mano">mano</span> saṅ­khāra</span></em>.) See "<a href="../../pages/KD.BB.006/index.html" rel="noopener" target="_blank">Saṅkhāra – What It Really Means</a>"</p>
+<ul style="text-align: justify;">
+<li>Furthermore, such <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> accumulation can be based on recalling past events or thinking about future events.</li>
+<li>And all those involved not only <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> but associated <span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>. </span></span></em><span class="segment" id="ps3.1:36.5">For example, one may recall a good time with friends in the past. That means he would recall who was present and what types of activities he enjoyed, and associated mental aspects.</span></span></span></span></li>
+<li><span>That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> always referred to aggregates. For example, as we discussed, </span><em>rupakkhandha</em> includes our mental impressions of physical <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> ever arose in our minds. Similarly for <span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanākkhandha">vedanākkhandha</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññākkhandha">saññākkhandha</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārakkhandha">saṅkhārakkhandha</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇakkhandha">viññāṇakkhandha</span>.  </span></span></em></span></span></span></li>
+<li>Therefore, in #8 above, “<span style="color: #ff0000;"><strong><em><span style="color: #993366;"><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, anattā"</span></span> </em></strong><span style="color: #000000;">means any <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> experienced in the past, experiencing now, or expected to experience in the future are ALL of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature. </span></span></li>
+</ul>
+<h5 style="text-align: justify;">Summary</h5>
+<p style="text-align: justify;">10. The concept of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is not about personality, a self, or a "me."</p>
+<ul>
+<li style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>,</span></em> <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span> </span></em>are characteristics of anything in our mental world.  Of course, <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature applies to anything in the external world too!</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.CC.007"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0079"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.CC.007
+Language:     pt-BR
+Generated-At: 2026-04-18T04:03:30Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>13 de setembro de 2021; <span style="color: #3366ff;">revisado em 4 de junho de 2023</span></strong></p>
+<p style="text-align: justify;"><em>Anattā</em> é uma característica deste mundo, não diz respeito a um “eu”. <strong>A tradução de <em>Anattā</em> como “não-eu” é um grave erro.</strong> Em vez disso, é <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span></span></em> que trata da questão de se alguma coisa neste mundo pode/deve ser considerada como “minha”.</p>
+<h5 style="text-align: justify;">A sensação de um “eu” existe mesmo que não haja “alma”</h5>
+<p style="text-align: justify;">1. <span style="color: #993366;"><strong>É difícil decidir se a palavra “eu” significa apenas uma “sensação de eu” ou uma “alma”.</strong></span></p>
+<ul style="text-align: justify;">
+<li>É por isso que é melhor evitar o termo “eu” ao discutir “An<em><span><span class="pali-term term-highlight" data-term="attā">attā</span>”.</span></em></li>
+<li><span style="color: #3366ff;"><strong><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> negou a existência de uma “alma” nas religiões abraâmicas ou de um “</span><em>ātman</em>”, como no hinduísmo. Mas ele ensinou que a sensação de um “eu” é real e ESTARÁ PRESENTE até que se alcance <em><span>a condição de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</strong></span></li>
+<li><strong>Para evitar confusão, não vamos usar a palavra “eu”.</strong> <span style="color: #ff0000;"><span style="color: #993366;"><strong>Usaremos “eu” para o “eu temporário” e “alma” para o “eu eterno”. </strong></span><span style="color: #000000;"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> aceitou o uso de um “eu” temporário, mas negou a existência de uma “alma/</span><em>ātman</em>” permanente.</span></span></li>
+<li>Agora todos nós entendemos que “eu” é DIFERENTE de uma “alma”. <strong><span>Se alguém pensa que o “eu” é o mesmo que a “alma”, então o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> negou a existência de tal “eu”.</span></strong></li>
+<li>Espero que este ponto esteja bem claro. Caso contrário, podemos entrar em muitas discussões, desperdiçando um tempo precioso.</li>
+</ul>
+<h5 style="text-align: justify;"><span>Até mesmo o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> usou a palavra “eu”</span></h5>
+<p style="text-align: justify;">2. Enquanto se vive neste mundo, será impossível não usar as palavras “eu” e “mim”.</p>
+<ul style="text-align: justify;">
+<li><span>Até mesmo o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> usava livremente as palavras “eu” e “mim” diariamente e até se referia a vidas anteriores. Ele relatou “suas” vidas passadas. Não é possível evitar tal uso.</span></li>
+<li>Além disso, mesmo um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> vivo, por exemplo, teria seus próprios hábitos. É claro que eles não teriam nenhum hábito nem remotamente relacionado a <em><span><span class="pali-term term-highlight" data-term="lobha">Lobha</span>, <span class="pali-term term-highlight" data-term="dosa">Dosa</span> ou <span class="pali-term term-highlight" data-term="moha">Moha</span>. </span></em></li>
+<li>Por exemplo, o Venerável Moggalana era um pouco rigoroso. Certa vez, ele arrastou um <em><span><span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span></em> para fora de uma reunião. O Venerável Pilindavaccha dirigia-se aos outros com palavras como “<em>vasala</em>” (“de baixa origem”), o que não se devia à raiva, mas à maneira como ele estava acostumado a falar. Enquanto se vive neste mundo, existem características únicas no que diz respeito à aparência física e à maneira como se fala e pensa.</li>
+<li><strong><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejeitou ambas as visões extremas:</span></strong>
+<br/>
+(i) Não é correto dizer que alguém não existe, já que, obviamente, uma pessoa está viva e agindo à sua maneira.<br/>
+
+(ii) <span style="color: #000000;">Também é incorreto associar uma “alma permanente” a qualquer pessoa.</span>
+Um “ser vivo” existe devido a causas e condições (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>
+) e deixará de renascer neste mundo cheio de sofrimento quando <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>
+for removida.</li>
+<li><span style="color: #ff0000;"><span style="color: #993366;"><strong>No entanto, o conceito de <em>Anattā</em> não se refere a um “eu” temporário ou permanente.</strong></span><span style="color: #000000;"> É uma característica de tudo neste mundo (</span></span><span style="color: #000000;"><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, </span></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></span></em></span></span></span>).</span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> – Três Características</h5>
+<p style="text-align: justify;">3. Em ensaios recentes, citei muitas referências <em><span>do <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> que afirmam claramente que <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em> significam três CARACTERÍSTICAS deste mundo. Veja “<a href="../../pages/KD.CC.001/index.html" rel="noopener" target="_blank">Tilakkhaṇa – Introdução</a>”.</p>
+<ul style="text-align: justify;">
+<li>Além disso, essas três características estão relacionadas entre si por meio de <em><span class="segment" id="sn22.15:1.3"><span class="root"><span class="text"><strong>“Yad aniccaṁ taṁ dukkhaṁ</strong>; </span></span></span><span class="segment" id="sn22.15:1.4"><span class="root"><span class="text"><strong>yaṁ dukkhaṁ tad anattā.” </strong></span></span></span></em></li>
+<li>O versículo acima diz que tudo o que pertence a este mundo (<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, </span></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></span></em></span></span></span>) é TOTALMENTE de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e, portanto, tem natureza <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>; tudo o que é de natureza <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> tem <span style="color: #3366ff;"><strong>natureza <em>Anattā</em></strong>.</span></li>
+<li>Se alguém se apega a coisas de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, estará sujeito a <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>. Por causa disso, TODAS as coisas mundanas são infrutíferas (<em>anattā</em>)<em>.</em></li>
+<li>Deve ficar bem claro que <em>Anattā</em> NÃO se refere a um “eu” ou a “mim”.</li>
+</ul>
+<p style="text-align: justify;">4. Isso é sucintamente afirmado no verso: <em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>“Rūpaṁ </strong></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong>(<em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></span></em><span class="segment" id="ps3.1:36.5">)</span></strong></span></span></span><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span> atītānāgatapaccuppannaṁaniccaṁ <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span> dukkhaṁ bhayaṭṭhena </span></strong><strong><span style="color: #3366ff;">anattā asārakaṭṭhenāti. </span></strong></span></span></span></em><span class="segment"><span class="root"><span class="text">Veja “</span></span></span><span class="segment" id="ps3.1:0.3"><span class="root"><span class="text"><a href="https://suttacentral.net/ps3.1/pli/ms" rel="noopener" target="_blank">3.1. Mahāpaññākathā</a>”.</span></span></span></p>
+<p style="text-align: justify;"><strong>Tradução:</strong> “<strong>Qualquer <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> <span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">(ou <em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></span></em><span class="segment" id="ps3.1:36.5">)</span></span></span></span><span class="segment" id="ps3.1:36.1"> </span>que já existiu, existirá no futuro ou que está sendo experimentada agora</strong> possui as seguintes três características: Qualquer <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> desse tipo é de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>,</span></em> pois as esperanças de desfrutar <em><span>da <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> levarão apenas à própria ruína (<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span>“<span class="pali-term term-highlight" data-term="anicca">Anicca</span> <span class="pali-term term-highlight" data-term="khayaṭṭhena">khayaṭṭhena</span>.”</span></span></span></span></em>) Isso acabará por levar a sofrimentos dos quais se deve temer (<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text">“dukkhaṁ bhayaṭṭhena.”</span></span></span></em>) <strong>Portanto, tais desejos<span style="color: #3366ff;"> são infrutíferos e tornarão a pessoa impotente no processo de Renascimento </span></strong><span style="color: #3366ff;">(</span><em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><strong><span style="color: #3366ff;">“anattā asārakaṭṭhenāti</span>.”</strong></span></span></span></em>)</p>
+<ul style="text-align: justify;">
+<li>Discutimos isso em um ensaio recente: “<a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Nobres Verdades, Paṭicca Samuppāda, Tilakkhaṇa</a>.”</li>
+</ul>
+<p style="text-align: justify;">5. A partir do versículo acima, fica bastante claro que <em>Anattā</em> é uma característica não apenas do nosso corpo físico, mas de QUALQUER <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> que exista agora, que já existiu ou que existirá no futuro! Isso significa que <em>Anattā</em> é uma característica do agregado de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> (<em>rupakkhandha</em>).</p>
+<ul style="text-align: justify;">
+<li><strong>Além disso, conforme explicado naquele ensaio, a característica <em>Anattā</em> se aplica a todos os cinco agregados.</strong> Como discutimos, os cinco agregados abrangem “o mundo inteiro”.</li>
+<li><span style="color: #3366ff;"><strong>Assim, qualquer coisa neste mundo possui a característica <em>Anattā</em>!</strong></span></li>
+<li><span style="color: #993366;"><strong>Como esses tradutores podem dizer que “<em>Anattā</em>” significa “não-eu”? </strong></span></li>
+<li>É alarmante ver os esforços no Sri Lanka para proibir qualquer interpretação de “<em>Anattā</em>” que não seja “não-eu”. Veja “<a href="http://localhost/beng_feb2026/forums/topic/proposed-tipitaka-conservation-bill-in-sri-lanka/" rel="noopener" target="_blank">Projeto de Lei de Conservação do Tipiṭaka no Sri Lanka</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Exemplos simples</h5>
+<p style="text-align: justify;">6. As crianças pequenas sentem imensa satisfação e alegria ao construir castelos de areia. Elas passam horas construindo-os e se divertem observando o produto final.</p>
+<ul style="text-align: justify;">
+<li>No entanto, sua alegria se transforma em tristeza se uma onda forte ou um cachorro correndo destruir esse castelo de areia. Elas podem até ir para casa felizes, mas ficariam tristes ao ver seu castelo de areia destruído quando voltassem no dia seguinte.</li>
+<li>É por isso que os adultos não constroem castelos de areia. À medida que essa mesma criança cresce, surge lentamente a compreensão de que “construir castelos de areia é uma perda de tempo”, mesmo que seja uma “atividade prazerosa”.</li>
+<li>No entanto, adultos maduros e inteligentes fazem o mesmo durante toda a vida. Trabalham incansavelmente na esperança de uma vida melhor. Mas somente no momento da morte percebem que todos esses esforços foram em vão. Além disso, se cultivaram uma “mentalidade imoral” ao se envolverem em pensamentos e atividades imorais, não apenas ficarão desapontados, mas poderão estar sujeitos a muito sofrimento em vidas futuras.</li>
+<li>Um castelo de areia é de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>. Apegar-se a ele inevitavelmente levará à decepção (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>). Portanto, dedicar-se a essa atividade é infrutífero e não traz benefício a ninguém (<em>Anattā</em>).</li>
+</ul>
+<p style="text-align: justify;">7. No entanto, a natureza <em>Anattā</em> significa infrutífera (como no exemplo acima) e perigosa.</p>
+<ul style="text-align: justify;">
+<li>Os alcoólatras consomem álcool porque isso lhes dá prazer. Mas eles não compreenderam que o consumo excessivo de álcool pode levar à doença e até mesmo à morte.</li>
+<li>Portanto, o consumo excessivo de álcool é de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>. Isso levará ao <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> (sofrimento). Portanto, essa atividade é de natureza <em>Anattā</em>.</li>
+</ul>
+<h5 style="text-align: justify;">O mesmo princípio se aplica a todas as atividades que agradam aos sentidos</h5>
+<p style="text-align: justify;">8. É difícil de acreditar à primeira vista, mas o desejo por prazeres sensoriais não é diferente do desejo por álcool!</p>
+<ul style="text-align: justify;">
+<li><span>A verdade da afirmação acima só pode ser percebida no contexto do processo de renascimento a longo prazo. É por isso que é difícil para muitas pessoas compreenderem os aspectos mais profundos do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> sobre o sofrimento. Em particular, atividades imorais que buscam prazeres de curto prazo IRÃO levar a muito sofrimento em renascimentos futuros.</span></li>
+<li>Discutimos o exemplo do nº 6 acima em “<a href="../../pages/KD.CC.006/index.html" rel="noopener" target="_blank">Como a natureza anicca leva ao Dukkha?</a>”. Conforme explicado ali, <strong>todos os cinco agregados (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, vinnana</span></em>) são de natureza <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>. <span style="color: #3366ff;">Portanto, conforme o nº 3 acima, todos os cinco agregados são também de natureza <em>Anattā</em>! </span></strong></li>
+<li>Isso é explicitamente afirmado no “<a href="https://suttacentral.net/sn22.17/pli/ms" rel="noopener" target="_blank"><em><span>Yadanattā <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.17)</a>”: “<span style="color: #993366;"><strong><em><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, anattā... <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> anattā... <span class="pali-term term-highlight" data-term="saññā">Saññā</span> anattā... <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> anattā... viññāṇaṁ anattā</span></em></strong>.”</span></li>
+<li>É por isso que NENHUMA das coisas neste mundo (<em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, </span></span></span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></span></em><span class="segment" id="ps3.1:36.5">) pode ser considerada benéfica.</span></span></span></span></li>
+</ul>
+<p style="text-align: justify;">9. Aqui, é essencial compreender que acumulamos<em><span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> (mais corretamente, energias <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) não apenas por meio de nossas ações, mas também com a fala e até mesmo com os pensamentos (por meio de <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span>, vaci</span></em> e <em><span><span class="pali-term term-highlight" data-term="mano">Mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>). Veja “<a href="../../pages/KD.BB.006/index.html" rel="noopener" target="_blank">Saṅkhāra – O que realmente significa</a>”</p>
+<ul style="text-align: justify;">
+<li>Além disso, tal acumulação <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> pode basear-se na lembrança de eventos passados ou no pensamento sobre eventos futuros.</li>
+<li>E tudo isso envolve não apenas <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em><span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.4">,</span></em></span></span></span><span> mas também <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> e <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> associados. Por exemplo, alguém pode relembrar um momento agradável com amigos no passado. Isso significa que ele relembraria quem estava presente e que tipos de atividades desfrutou, além dos aspectos mentais associados.</span></li>
+<li><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> sempre se referia aos agregados. Por exemplo, como discutimos, </span><em>o rupakkhandha</em> inclui nossas impressões mentais da <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> física que já surgiu em nossas mentes. Da mesma forma para <span class="segment" id="ps3.1:36.1"><span class="root"><span class="text"><em><span class="segment" id="ps3.1:36.2"><span><span class="pali-term term-highlight" data-term="vedanākkhandha">Vedanākkhandha</span>, </span></span><span class="segment" id="ps3.1:36.3"><span><span class="pali-term term-highlight" data-term="saññākkhandha">Saññākkhandha</span>, </span></span><span class="segment" id="ps3.1:36.4"><span><span class="pali-term term-highlight" data-term="saṅkhārakkhandha">Saṅkhārakkhandha</span>, </span></span><span class="segment" id="ps3.1:36.5"><span><span class="pali-term term-highlight" data-term="viññāṇakkhandha">Viññāṇakkhandha</span>.  </span></span></em></span></span></span></li>
+<li>Portanto, no nº 8 acima, “<span style="color: #ff0000;"><strong><em><span style="color: #993366;"><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, Anattā”</span></span> </em></strong><span style="color: #000000;">significa que qualquer <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> vivenciada no passado, vivenciada agora ou que se espera vivenciar no futuro é TODA de natureza <em>Anattā</em>. </span></span></li>
+</ul>
+<h5 style="text-align: justify;">Resumo</h5>
+<p style="text-align: justify;">10. O conceito de <em>Anattā</em> não se refere à personalidade, a um eu ou a um “eu”.</p>
+<ul>
+<li style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>,</span></em> <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā </span></em>são características de qualquer coisa em nosso mundo mental. É claro que a natureza <em>Anattā</em> se aplica a qualquer coisa no mundo externo também!</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.CC.006/index.html">How Does Anicca Nature Lead To Dukkha</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.CC.008/index.html">Anatta In Anattalakkhana Sutta Part 1</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.CC.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">How Does Anicca Nature Lead To Dukkha</span>
+        
+        <span class="pathway-title title-pt">Como a natureza impermanente (Anicca) leva ao Dukkha?</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.CC.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Anatta In Anattalakkhana Sutta Part 1</span>
+        
+        <span class="pathway-title title-pt">Anattā no Sutta Anattalakkhana, Parte 1</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

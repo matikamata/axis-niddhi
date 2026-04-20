@@ -1,0 +1,394 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>If Everything Is Anicca Should We Just Give Up Everything | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 36 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.012</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">If Everything Is Anicca Should We Just Give Up Everything</h1>
+    
+    <h1 class="title-pt">Se tudo é Anicca, devemos simplesmente desistir de tudo?</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.012</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.012"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0109"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.012</td></tr><tr><td>Fin-dex</td><td>0109</td></tr><tr><td>Slug</td><td>if-everything-is-anicca-should-we-just-give-up-everything</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>If Everything Is Anicca Should We Just Give Up Everything</td></tr></table></div></div><strong>Revised February 11, 2020; <span style="color: #0000ff">June 27, 2022</span></strong>
+<h5>Introduction</h5>
+<p style="text-align: justify">1. <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> means “we cannot maintain anything to our satisfaction in the LONG RUN”. The time scale of existence is an important factor when we contemplate the significance and implications of this fundamental characteristic of nature.</p>
+<ul>
+<li style="text-align: justify">So, the question is, "if nothing can be maintained to our satisfaction, what is the point in spending so much time in learning, getting a decent job, making plans for businesses, etc.?".</li>
+<li style="text-align: justify">We do need to pursue those short-term goals while keeping the "bigger picture" in mind.  The "big picture" is the non-existence of a future birth without suffering. Since investigating that "big picture" takes time, we need to make sure we have the means to live a comfortable life that leaves time for such contemplation/investigations.</li>
+</ul>
+<h5>Short-Term Goals Are Necessary to Comprehend the "Big Picture"</h5>
+<p style="text-align: justify">2. During life, we do see many instances where we can attain certain things (pass exams, get jobs, initiate successful businesses, have a comfortable life, etc) and be happy about such achievements. Of course, there are many times we encounter unexpected things too (coming down with health problems, traffic accidents, floods, hurricanes, loss of jobs, etc).</p>
+<ul style="text-align: justify">
+<li>That is the nature of existence as a human. It is a mixed bag, at least until we get to old age; then it becomes increasingly difficult to maintain things (especially our bodies) to our satisfaction, and of course, at death, we have to leave everything behind whether we like it or not.</li>
+<li>In the realms above the human, in fact, life is even more predictable and enjoyable, that is of course until death comes calling.</li>
+<li>But the real problems are encountered in the four realms below the human realm. It is increasingly difficult to “maintain things to one’s satisfaction” in lower realms. Animals are truly helpless, especially the vast majority that live in the wild. There are no “old animals” in the wild; they either get sick and die or even worse: they get eaten up as soon as they slow down a bit.</li>
+<li>There is no happiness at all in the lowest realm, the <i><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></i> (“<i>ni</i>”+”<i>ra</i>” means without ANY happiness).</li>
+</ul>
+<h5>The "Big Picture"</h5>
+<p style="text-align: justify">3. Thus the main reason why “we cannot maintain things to our satisfaction in the LONG RUN” is that all beings spend most of their lives in the lower four realms; see, “<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank" title="How the Buddha Described the Chance of Rebirth in the Human Realm">How the Buddha Described the Chance of Rebirth in the Human Realm</a>”.</p>
+<ul>
+<li><span>It may take time to convince oneself that this "big picture" about the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process is correct. See, "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a>."</li>
+<li>When one truly understands that, one will see the dangers of living an immoral life first. Then one will start getting rid of wrong views. Only then one would be able to "see" the bigger picture clearly. It is a step-by-step process. See, "<a href="../../pages/LD.EE.002/index.html" rel="noopener noreferrer" target="_blank">Is It Necessary for a Buddhist to Eliminate Sensual Desires?</a>"</li>
+<li>Then one will see that one's own actions decide one's future rebirths. See, "<a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origin of Life</a>."</li>
+<li>The above is a very brief summary. It will require a real effort to go through them and the references therein.</li>
+</ul>
+<h5>Some Implications of the "Big Picture"</h5>
+<p style="text-align: justify">4. Then we can examine the question in terms of this “big picture” while keeping in mind the need to attend to "short-term goals."</p>
+<ul>
+<li style="text-align: justify">If we do give up everything, we will probably die a miserable death (because we will be poor, unhealthy, etc because we would not be able to even support ourselves), and be born most likely in a lower realm. That it will make the situation much worse.</li>
+<li>We do need to contemplate this situation. If one thinks through this line of thoughts, one can see that one is really helpless in this cycle of rebirths, which is the third characteristic of existence, <i><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i><span>. Until a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comes to this world and shows humans this "big picture", AND shows how to get out of it, no one is able to escape this trap.</span></li>
+<li>The only solution is to at least attain the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i> stage of <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></i>in this life. We MAY have some <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy left for one or more human lives (see, “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava and Jāti – States of Existence and Births Therein</a><span>”), but this COULD BE the last for a long while, which could be billions of years. Even if we get another human birth, we do not know under what circumstances; it could be somewhere <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is not readily accessible.</span></li>
+</ul>
+<p style="text-align: justify">5. There is another point that we need to consider when tackling this issue. We have become indebted to numerous beings in this journey of rebirths, and thus we have debts to pay back. Having all these debts is a hindrance to attaining any stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; see, “<a href="../../pages/TL.GG.007/index.html" rel="noopener noreferrer" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Debt, and Meditation</a>”.</p>
+<h5>Short-Term Actions</h5>
+<p style="text-align: justify">6. Therefore, instead of abandoning our families (to whom we owe the most), we need to do our utmost to make sure they are well-off. We also need to make sure that we do not become dependent on society (and thus accumulate more debt). Even in this life, we depend on others for so many things: we are indebted to our teachers, and friends, as well to many unknown people who contribute to providing us with essentials to sustain life; we all are interconnected and have responsibilities for each other. We have “to do our part” to live in a society.</p>
+<ul style="text-align: justify">
+<li><span>Therefore, part of the solution is to first prepare oneself (or one’s children if one is a parent) with a good education so that supporting oneself (and a family) is possible. Furthermore, a good education helps with understanding <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> too. And if one can make a lot of money (by honest means) then one can do many meritorious deeds too, thereby helping oneself spiritually as well.</span></li>
+<li>In any case, giving up everything and hiding in a forest will not solve the problem of existence. But there are some who have a <i>sansaric</i> tendency to abandon the “householder life”. What I am saying here is for the majority of people, not for everyone: Of course, we need to sustain the <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> who spend all their time for the benefit of others as well as themselves.</li>
+</ul>
+<h5>Coping With Both "Long-Term" and 'Short-Term" Concerns</h5>
+<p style="text-align: justify">7. Therefore, what needs to be done is to understand the true nature of existence and realize that the ONLY solution is to try the best to attain at least the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Then one becomes free of rebirths in the lower four realms forever. This is THE solution to the problem.</p>
+<p style="text-align: justify">In order to do that we need to,</p>
+<ol style="text-align: justify">
+<li style="text-align: justify">Fulfill our obligations to our families, friends, and society in general,</li>
+<li style="text-align: justify"><span>Make our best effort to learn <span class="pali-term term-highlight" data-term="pure dhamma">pure Dhamma</span> and attain the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ol>
+<p style="text-align: justify">When one does this, one will become happy, not depressed, about the outlook. One has understood the problem and knows what to do about it. And when one starts working on it, one's confidence will grow because one can feel the difference in oneself. One will become even more determined AND energetic, not just to save oneself, but also to help out the others.</p>
+<p style="text-align: justify">Next, "<a href="../../pages/KD.FF.009/index.html" rel="noopener" target="_blank">Anicca – The Incessant Distress (“Pīḷana”)</a>", ..........</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.FF.012"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0109"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.FF.012
+Language:     pt-BR
+Generated-At: 2026-04-18T04:05:41Z
+Engine:       DeepL API (Glossary V5)
+-->
+<strong>Revisado em 11 de fevereiro de 2020; <span style="color: #0000ff">27 de junho de 2022</span></strong>
+<h5>Introdução</h5>
+<p style="text-align: justify">1. <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> significa “não podemos manter nada a nosso contento a LONGO PRAZO”. A escala temporal da existência é um fator importante quando contemplamos o significado e as implicações dessa característica fundamental da natureza.</p>
+<ul>
+<li style="text-align: justify">Portanto, a questão é: “se nada pode ser mantido a nosso contento, qual é o sentido de dedicar tanto tempo a estudar, conseguir um emprego decente, fazer planos de negócios etc.?”.</li>
+<li style="text-align: justify">Precisamos perseguir essas metas de curto prazo, tendo em mente o “quadro geral”. O “quadro geral” é a inexistência de um renascimento futuro sem sofrimento. Como investigar esse “quadro geral” leva tempo, precisamos garantir que tenhamos os meios para viver uma vida confortável que nos deixe tempo para tal contemplação/investigação.</li>
+</ul>
+<h5>Metas de curto prazo são necessárias para compreender o “quadro geral”</h5>
+<p style="text-align: justify">2. Durante a vida, vemos muitos casos em que podemos alcançar certas coisas (passar em exames, conseguir empregos, iniciar negócios de sucesso, ter uma vida confortável, etc.) e nos alegrar com tais conquistas. É claro que também há muitas vezes em que nos deparamos com coisas inesperadas (problemas de saúde, acidentes de trânsito, enchentes, furacões, perda de empregos, etc.).</p>
+<ul style="text-align: justify">
+<li>Essa é a natureza da existência humana. É uma mistura de coisas boas e ruins, pelo menos até chegarmos à velhice; então, torna-se cada vez mais difícil manter as coisas (especialmente nossos corpos) de forma satisfatória e, é claro, na morte, temos que deixar tudo para trás, quer queiramos quer não.</li>
+<li>Nos reinos acima do humano, na verdade, a vida é ainda mais previsível e agradável, isto é, é claro, até que a morte chegue.</li>
+<li>Mas os verdadeiros problemas são encontrados nos quatro reinos abaixo do reino humano. É cada vez mais difícil “manter as coisas a nosso gosto” nos reinos inferiores. Os animais são verdadeiramente indefesos, especialmente a grande maioria que vive na natureza. Não há “animais idosos” na natureza; ou eles adoecem e morrem, ou pior ainda: são devorados assim que ficam um pouco mais lentos.</li>
+<li>Não há felicidade alguma no reino mais baixo, o <i><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></i> (“<i>ni</i>” + “<i>ra</i>” significa sem NENHUMA felicidade).</li>
+</ul>
+<h5>O “quadro geral”</h5>
+<p style="text-align: justify">3. Assim, a principal razão pela qual “não podemos manter as coisas a nosso gosto a LONGO PRAZO” é que todos os seres passam a maior parte de suas vidas nos quatro reinos inferiores; veja “<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank" title="How the Buddha Described the Chance of Rebirth in the Human Realm">Como o Buddha descreveu a chance de Renascimento no reino humano</a>”.</p>
+<ul>
+<li>Pode levar tempo para se convencer de que esse “quadro geral” sobre o processo de Renascimento está correto. Veja “<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências para o Renascimento</a>”.</li>
+<li>Quando alguém compreende isso verdadeiramente, perceberá primeiro os perigos de levar uma vida imoral. Então, começará a se livrar das visões erradas. Só então será capaz de “ver” o panorama geral com clareza. É um processo passo a passo. Veja “<a href="../../pages/LD.EE.002/index.html" rel="noopener noreferrer" target="_blank">É necessário que um Buddhista elimine os desejos sensuais?</a>”.</li>
+<li>Então, perceberá que são as próprias ações que determinam os renascimentos futuros. Veja “<a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origem da Vida</a>”.</li>
+<li>O texto acima é um resumo muito breve. Será necessário um esforço real para examiná-lo e as referências nele contidas.</li>
+</ul>
+<h5>Algumas implicações do “quadro geral”</h5>
+<p style="text-align: justify">4. Então, podemos examinar a questão em termos desse “quadro geral”, tendo em mente a necessidade de nos dedicarmos às “metas de curto prazo”.</p>
+<ul>
+<li style="text-align: justify">Se realmente desistirmos de tudo, provavelmente teremos uma morte miserável (porque seremos pobres, doentes, etc., já que não seríamos capazes nem mesmo de nos sustentar) e, muito provavelmente, renasceremos em um reino inferior. Isso tornará a situação muito pior.</li>
+<li>Precisamos refletir sobre essa situação. Se alguém seguir essa linha de pensamento, poderá perceber que está realmente indefeso neste ciclo de renascimentos, que é a terceira característica da existência, <i>Anattā</i><span>. Até que um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> venha a este mundo e mostre aos humanos esse “quadro geral”, E mostre como sair dele, ninguém é capaz de escapar dessa armadilha.</span></li>
+<li>A única solução é, pelo menos, atingir o estágio de <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i> do <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></i>nesta vida. Podemos ter alguma energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> restante para uma ou mais vidas humanas (ver “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank" title="Bhava and Jati – States of Existence and Births Therein">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a><span>”), mas esta PODE SER a última por um longo tempo, que pode ser de bilhões de anos. Mesmo que tenhamos outro nascimento humano, não sabemos em que circunstâncias; poderia ser em algum lugar onde o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> não seja facilmente acessível.</span></li>
+</ul>
+<p style="text-align: justify">5. Há outro ponto que precisamos considerar ao abordar essa questão. Ficamos em dívida com inúmeros seres nessa jornada de renascimentos e, portanto, temos dívidas a saldar. Ter todas essas dívidas é um obstáculo para alcançar qualquer estágio de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; veja “<a href="../../pages/TL.GG.007/index.html" rel="noopener noreferrer" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Dívida e Meditação</a>”.</p>
+<h5>Ações de Curto Prazo</h5>
+<p style="text-align: justify">6. Portanto, em vez de abandonarmos nossas famílias (a quem mais devemos), precisamos fazer o possível para garantir que elas estejam bem. Também precisamos garantir que não nos tornemos dependentes da sociedade (e, assim, acumulemos mais dívidas). Mesmo nesta vida, dependemos dos outros para tantas coisas: estamos em dívida com nossos professores e amigos, bem como com muitas pessoas desconhecidas que contribuem para nos fornecer o essencial para sustentar a vida; todos nós estamos interligados e temos responsabilidades uns para com os outros. Temos que “fazer nossa parte” para viver em sociedade.</p>
+<ul style="text-align: justify">
+<li><span>Portanto, parte da solução é primeiro preparar a si mesmo (ou aos filhos, se for pai ou mãe) com uma boa educação, para que seja possível sustentar a si mesmo (e à família). Além disso, uma boa educação também ajuda na compreensão do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>. E se alguém puder ganhar muito dinheiro (por meios honestos), então poderá realizar muitas ações meritórias também, ajudando-se assim espiritualmente.</span></li>
+<li>De qualquer forma, abrir mão de tudo e se esconder na floresta não resolverá o problema da existência. Mas há alguns que têm uma tendência <i>samsárica</i> de abandonar a “vida de chefe de família”. O que estou dizendo aqui é para a maioria das pessoas, não para todos: é claro que precisamos sustentar os <em><span><span class="pali-term term-highlight" data-term="bhikkhū">Bhikkhū</span></span></em> que dedicam todo o seu tempo para o benefício dos outros, bem como de si mesmos.</li>
+</ul>
+<h5>Lidando com as preocupações de “longo prazo” e de “curto prazo”</h5>
+<p style="text-align: justify">7. Portanto, o que precisa ser feito é compreender a verdadeira natureza da existência e perceber que a ÚNICA solução é tentar ao máximo atingir pelo menos o estágio <em>Sótapanna</em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Assim, a pessoa se liberta para sempre dos renascimentos nos quatro reinos inferiores. Essa é A solução para o problema.</p>
+<p style="text-align: justify">Para fazer isso, precisamos:</p>
+<ol style="text-align: justify">
+<li style="text-align: justify">Cumprir nossas obrigações para com nossas famílias, amigos e a sociedade em geral,</li>
+<li style="text-align: justify"><span>Envidar nossos melhores esforços para aprender o <span class="pali-term term-highlight" data-term="pure dhamma">Pure Dhamma</span> e atingir o estágio </span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ol>
+<p style="text-align: justify">Quando se faz isso, fica-se feliz, e não deprimido, com a perspectiva. Compreendeu-se o problema e sabe-se o que fazer a respeito. E quando se começa a trabalhar nisso, a confiança cresce porque se sente a diferença em si mesmo. Fica-se ainda mais determinado E enérgico, não apenas para salvar a si mesmo, mas também para ajudar os outros.</p>
+<p style="text-align: justify">A seguir, “<a href="../../pages/KD.FF.009/index.html" rel="noopener" target="_blank">Anicca – O Sofrimento Incessante (‘Pīḷana’)</a>”, ..........</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.FF.011/index.html">How To Cultivate The Anicca Sanna Ii</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.013/index.html">Anatta Systematic Analysis</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.FF.011/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">How To Cultivate The Anicca Sanna Ii</span>
+        
+        <span class="pathway-title title-pt">Como cultivar o Anicca Sanna II</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.013/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Anatta Systematic Analysis</span>
+        
+        <span class="pathway-title title-pt">Anatta Systematic Analysis</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

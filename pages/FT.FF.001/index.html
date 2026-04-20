@@ -1,0 +1,344 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Pali Glossary With Pronunciation | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">FootNotes</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 7 / 16</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">FT.FF.001</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Pali Glossary With Pronunciation</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>FT.FF.001</td></tr>
+          <tr><td><strong>Section</strong></td><td>FootNotes</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>4</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="FT.FF.001"
+             data-section="FootNotes"
+             data-section-code="FT"
+             data-findex="0953"
+             data-level="intermediate"
+             data-reading-time="4"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>FT.FF.001</td></tr><tr><td>Fin-dex</td><td>0953</td></tr><tr><td>Slug</td><td>pali-glossary-with-pronunciation</td></tr><tr><td>Section</td><td>FT</td></tr><tr><td>Title EN</td><td>Pali Glossary With Pronunciation</td></tr></table></div></div><p><strong>November 6, 2023:</strong> Added #8 with two free mdx dictionary.</p>
+<p><strong>February 20, 2020:</strong> Updated #5 URL Link for Windows and Mobile iPhone/iPad. Added at #5 and #7 – Plain Dictionary for Mobile Android. (by Seng Kiat Ng)</p>
+<p style="text-align: justify;"><strong>August 12, 2016</strong><span>: Mr. Seng Kiat Ng added the new words in the two new <span class="pali-term term-highlight" data-term="posts">posts</span> "</span><a href="../../pages/TS.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (A-K)</a>" and "<a href="../../pages/TS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (L-Z)</a>" to the pop-up dictionary, so that there are now a <span style="color: #3366ff;"><span>total of 416 <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words.</span></span> Please download the two new files in #3 below and delete the old files, if you have already installed the GoldenDict dictionary.</p>
+<ul>
+<li style="text-align: justify;">Installation instructions are given below for those who have not installed the pop-up GoldenDict dictionary but would like to do so.</li>
+</ul>
+<p><strong>January 7, 2016</strong></p>
+<p style="text-align: justify;"><span>Mr. Seng Kiat Ng wrote this <span class="pali-term term-highlight" data-term="post">post</span>. Much merits to him and his family for this meritorious work. This is a very useful feature that can be used with any other site as well (by downloading other dictionaries; see below).</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Please remember that once you download the files as he instructed, <span style="color: #3366ff;"><span>you will be able to highlight a <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word (178 words as of today) in any of the <span class="pali-term term-highlight" data-term="posts">posts</span> at the site and a popup screen will display the English meaning. You also be able to hear the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> pronunciation if clicked on the audio button.</span></span></li>
+</ul>
+<p style="text-align: justify;"><span>1. We will be using the GoldenDict online dictionary platform. First, one needs to install it on one's computer and then download the two <span class="pali-term term-highlight" data-term="puredhamma">Puredhamma</span> <span class="pali-term term-highlight" data-term="pāli">Pāli</span> dictionary files to a folder on one's computer.</span></p>
+<ul>
+<li style="text-align: justify;">Other online or downloadable (free) dictionaries can be used as described below.</li>
+</ul>
+<p style="text-align: justify;">2. Go to <a href="http://goldendict.org/download.php" rel="noopener noreferrer" target="_blank">http://goldendict.org/download.php</a> and choose the version suitable for you. I chose the first option to download the Windows version.</p>
+<ul style="text-align: justify;">
+<li>Download the .exe file and double-click to run it and install it.</li>
+<li>Mine was installed in the C:\Program Files (X86)\GoldenDict directory. There should a "GoldenDict.exe" file there.  This is the "clickable icon" that will open the application. It does not automatically create this "clickable icon" on the desktop, so right click on that and make a copy on the desktop for convenience.</li>
+<li>Now the GoldenDict application can be opened by double-clicking that link on the desktop.</li>
+</ul>
+<p style="text-align: justify;"><span>3. Next, download the two files (one text, one audio) for the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> dictionary to a folder in your computer (it could be the same "GoldenDict" folder above).</span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-size: 12pt;"><a href="http://localhost/beng_feb2026lify.app/media/Pure-Dhamma-Pali-English-Glossary-[399-words]-25Feb2020.mdx" rel="noopener" target="_blank">Pure-Dhamma-Pali-English-Glossary-[399-words]-25Feb2020.mdx</a>  <span style="color: black;"><b>(Text) </b></span><span style="color: #993366;"><b>Updated 25Feb2020</b></span></span></li>
+<li style="text-align: justify;"><span style="font-size: 12pt;"><a href="http://localhost/beng_feb2026lify.app/media/Pure-Dhamma-Pali-English-Glossary-[399-words]-25Feb2020.mdd" rel="noopener" target="_blank">Pure-Dhamma-Pali-English-Glossary-[399-words]-25Feb2020.mdd</a>  <span style="color: black;"><b>(Audio)</b></span> <span style="color: #993366;"><b>Updated 25Feb2020</b></span></span></li>
+</ul>
+<p>You may want to close any other screens (other than the one with the "Download" button) that pop up with advertisements. Wait until the "Download" button becomes "clickable."</p>
+<p style="text-align: justify;">4. Now open the GoldenDict as instructed in #2 above.</p>
+<ul style="text-align: justify;">
+<li>Go to "Edit" and choose "Dictionaries" and then choose the <strong>folder</strong><span> you put the above two <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Glossary files.</span></li>
+<li>Now, right next to the "search button" on GoldenDict, there is the "scan popup" option selection button indicated by a "pen-like" symbol. Click on it to enable scan popups.</li>
+<li><span>Now, open any page on <span class="pali-term term-highlight" data-term="puredhamma">Puredhamma</span>. net and select a <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word. </span><strong>If you are running Windows Explorer</strong><span>, just placing the cursor on the word will make the dictionary popup (if that word is one of the 178 words that are so far in the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> dictionary).  Try "<span class="pali-term term-highlight" data-term="anicca">anicca</span>" in a <span class="pali-term term-highlight" data-term="post">post</span> to test because that word is there.</span></li>
+<li><strong>If you have Google Chrome, </strong>you need to select the word (highlight) and hit CTRL+C+C (hold CTRL button and hit C twice) for it to pop up.</li>
+<li><span style="color: #0000ff;">There is a "speaker" symbol there in the popup, and you can click on it to play back the audio file (pronunciation).</span></li>
+<li><span style="color: #0000ff;">In order for the popup dictionary to work, GoldenDict must be opened at the same time.</span></li>
+</ul>
+<p style="text-align: justify;">5. Here is a complete list of options to download the GoldenDict platform<span style="font-size: 12pt;">:<br/>
+</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-size: 12pt;">Windows                   <a href="https://github.com/goldendict/goldendict/wiki/Early-Access-Builds-for-Windows" rel="noopener noreferrer" target="_blank"><strong>GoldenDict Early Access Builds for Windows - Download (installer)</strong></a></span></li>
+<li><span style="font-size: 12pt;">Mac OS X                 <a href="https://github.com/goldendict/goldendict/wiki/Early-Access-Builds-for-Mac-OS-X" rel="noopener noreferrer" target="_blank"><b>GoldenDict Early Access Builds for Mac OS X</b></a></span></li>
+<li><span style="font-size: 12pt;">Linux                         <a href="http://downloads.sourceforge.net/goldendict/enruen-content-1.1.tar.bz2" rel="noopener noreferrer" target="_blank"><b> GoldenDict Eng-Rus-En v1.1</b></a></span></li>
+</ul>
+<p><strong>      Other Dictionary Tool:</strong></p>
+<ul style="text-align: justify;">
+<li><span style="font-size: 12pt;">Mobile Android           </span><span style="font-size: 12pt;"><a href="http://down.ssdlsoft.com/bluedict/bluedict.apk" rel="noopener" target="_blank"><b>BlueDict</b></a><strong>  </strong></span> <span style="font-size: 12pt;"><strong><span style="color: #ff0000;"><del>Plain Dictionary</del></span>   </strong></span><strong><span style="font-size: 12pt;">See #7 below.</span></strong></li>
+<li><span style="font-size: 12pt;">Mobile iPhone/iPad   <b>  </b><a href="https://www.mdict.cn/wp/"><strong>MDict (Windows, Android, IOS, Tools, Dictionary files)</strong></a></span></li>
+</ul>
+<p style="text-align: justify;">6. You can use the GoldenDict platform to access other online or downloadable dictionaries (to be used either with this site or any other site). Some can be chosen at the "Edit" menu. Go to "Edit" and choose "Dictionaries," and on the second row of that screen, there are some online dictionaries you can choose from.</p>
+<ul style="text-align: justify;">
+<li> More information at the <a href="http://goldendict.org/" rel="noopener noreferrer" target="_blank">GoldenDict.org</a> site.</li>
+<li><span style="color: #0000ff;">If you have two or more dictionaries loaded, then the popup will display translations provided by all of them (if that word is in them).</span></li>
+</ul>
+<p style="text-align: justify;">7. Other than GoldenDict, the following two platforms also could be used.</p>
+<ul>
+<li style="list-style-type: none;">
+<ul>
+<li><span style="color: #ff0000;"><strong><del>Plain Dictionary</del> <span style="color: #ff0000;">(</span>Android – Free, unlimited Dictionary with no advertisement) <span style="color: #000000;">Send me a <span style="text-decoration: underline;"><span style="color: #0000ff; text-decoration: underline;"><a href="mailto:puredhamma1122@gmail.com" rel="noopener noreferrer" style="color: #0000ff; text-decoration: underline;" target="_blank">email</a></span></span> if you need the Plain Dictionary (Android) application.</span><br/>
+</strong></span></li>
+<li><a href="http://down.ssdlsoft.com/bluedict/bluedict.apk" rel="noopener" target="_blank"><span style="font-size: medium;">BlueDict</span></a> <span style="color: red; font-size: medium;"><b>(Android – Free; limited to 10 Dictionaries and with advertisement) </b></span></li>
+<li><a href="http://www.mdict.cn/wp/" rel="noopener noreferrer" target="_blank"><span style="font-size: medium;">MDict</span></a> <span style="color: red; font-size: medium;"><b>(Windows/IPhone/Ipad/Windows Mobile/Android – Free with no limitation on number of Dictionary)</b></span></li>
+</ul>
+</li>
+</ul>
+<p style="text-align: justify;">8. Other <strong>mdx dictionary</strong><span> besides Pure-<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>-<span class="pali-term term-highlight" data-term="pali">Pali</span>-English-Glossary as in #3 above. Take note that the below dictionary </span><strong>has text only</strong>, no pronunciation for the word.</p>
+<ul>
+<li><a href="http://localhost/beng_feb2026lify.app/media/Concise%20Pali English Dictionary - Buddhadatta (10483).mdx">Concise Pali English Dictionary - Buddhadatta (10483).mdx</a>  By Venerable AP Buddhadatta Mahāthera with 10483 words.</li>
+<li><a href="http://localhost/beng_feb2026lify.app/media/PTS%20– Pali-English Dictionary [16219] 28May2020.mdx">PTS – Pali-English Dictionary [16219] 28May2020.mdx</a><span>  By PTS – <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Text Society with 16219 words.</span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/FT.EE.001/index.html">Niramisa Sukha In A Chart</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/FT.GG.001/index.html">New Revised Posts</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/FT.EE.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Niramisa Sukha In A Chart</span>
+        
+        <span class="pathway-title title-pt">Niramisa Sukha In A Chart</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/FT.GG.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">New Revised Posts</span>
+        
+        <span class="pathway-title title-pt">New Revised Posts</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-FT">
+        ↑ Back to FootNotes
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Vinnana What It Really Means | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 99 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.JJ.007</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Vinnana What It Really Means</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.JJ.007</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.JJ.007"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0186"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.JJ.007</td></tr><tr><td>Fin-dex</td><td>0186</td></tr><tr><td>Slug</td><td>vinnana-what-it-really-means</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Vinnana What It Really Means</td></tr></table></div></div><p style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> is more than being aware (i.e., consciousness). Even <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> arises with attachment to "distorted sa<em>ññā</em>." Then, if the attachment in the initial <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> is strong, it grows into a <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>,</span></em> creating new potent <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy. It is necessary to understand this two-step attachment process to cultivate <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span>.</span></em></p>
+<p style="text-align: justify;"><strong>May 26, 2017; <span style="color: #3366ff;">rewritten April 26, 2025</span></strong></p>
+<h5 style="text-align: justify;"><img alt="" class="alignnone size-large wp-image-54097" height="600" src="http://localhost/beng_feb2026/wp-content/uploads/Expansion-of-Vinnana-800x600.jpg" width="800"/></h5>
+<p style="text-align: justify;"><strong>Download/Print:</strong> "<a href="https://drive.google.com/uc" rel="noopener" target="_blank">Expansion of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em></a>"</p>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>Arises With a Sensory Input</h5>
+<p style="text-align: justify;">1. In deep sleep, our mind is in a "holding state" called "<em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state." The mind is there but not active, so we are unaware of any sensory inputs. </p>
+<ul style="text-align: justify;">
+<li>Suppose a person wakes up to the sound of an alarm. That is the start of a "<em><span><span class="pali-term term-highlight" data-term="sota viññāṇa">sota viññāṇa</span></span></em>." It is only a sound that wakes up the mind from its "holding state." It comes in as just a sound, but based on it, he immediately starts thinking about any important events scheduled for today, and then gets ready to go to work.</li>
+<li>Thus, the mind starts with a single sensory experience. But it "expands" rapidly into further thoughts about it and branches into other related areas. </li>
+<li><span style="color: #3366ff;"><strong>That is how a narrow initial experience (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>) expands and becomes an aggregate or a bundle, called <em><span><span class="pali-term term-highlight" data-term="viññāṇakkhandha">viññāṇakkhandha</span></span></em>. </strong></span></li>
+<li>During that "expansion," the mind may generate <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy if it keeps attaching to that initial <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> and enters the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage; see the chart above.</li>
+<li>Not everything we see daily leads to the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage. Furthermore, even though not strong <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies are created in the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage, the mind gets automatically defiled upon entering the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage. We will discuss that below.</li>
+</ul>
+<p style="text-align: justify;">2. When a new sensory input comes in, the mind initiates a "new <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" with a "snapshot" of it.</p>
+<ul style="text-align: justify;">
+<li>Suppose a teenager, X, sees a beautiful woman. It would be a "new <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>." It starts with a snapshot of a woman's figure coming to mind. The chart above shows the critical steps involved.</li>
+<li>The process starts at the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" stage for anyone born in the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, including <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>. The difference between an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> and an average human (<em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em>) is the following: While the mind of a <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em> automatically gets to the "<em><span>bahiddha <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>," an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>'s mind remains in the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" stage.</li>
+<li>Once getting into "<em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>" with the <em><span>bahiddha <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>, the mind of a <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em> will keep attaching at least to the "<em><span>ajjhatta <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" stage. If the sensory input is strong (i.e., <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> is strong), the incremental attachment continues to the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage. In <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, this transition happens at the "<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>" step.</li>
+<li>Also see "<a href="../../pages/DS.DD.006/index.html" rel="noopener" target="_blank">A Sensory Input Triggers (Distorted) Saññā and Pañcupādānakkhandha</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>Can be Moral or Immoral </h5>
+<p style="text-align: justify;">3. The mind keeps attaching the <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>, which is said to grow because it keeps looking into ways of extending the "pleasure" experienced with the sensory input, in our example of a young boy (X) enjoying the sight of a beautiful woman.</p>
+<ul style="text-align: justify;">
+<li>Up to the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage, the "growth of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" is relatively small, as indicated by the slight slope in the growth of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> in the above chart. <b>The downward slope is used to indicate an "immoral <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" ("<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> with <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> raga</span></em>" in the case of X) that could lead to immoral thoughts, speech, and actions (<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span>, vaci, <span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> in the chart).</b></li>
+<li><span>If the sensory input (say the sight of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> statue) leads to good moral thoughts (and possibly moral deeds), a "moral </span><em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" would result, and <b>two upward lines would indicate that (not shown in the above chart)</b><span>; both types are shown in many other <span class="pali-term term-highlight" data-term="posts">posts</span> including "</span><a href="../../pages/NP.BB.003/index.html" rel="noopener" target="_blank">Sotapanna Stage from Kāma Loka</a>." Even such "moral <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" moves a mind away from <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; <span style="color: #993366;"><strong>all <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>, starting with attachment to "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>," takes a mind away from <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </strong><span style="color: #000000;">See "<a href="../../pages/PS.BB.009/index.html" rel="noopener" target="_blank">Six Root Causes – Loka Samudaya (Arising of Suffering) and Loka Nirodhaya (Nibbāna)</a></span></span><span style="color: #993366;"><span style="color: #000000;">."</span></span></li>
+<li><span style="color: #3366ff;"><strong>To move toward <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, one must overcome the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em>" </strong></span>We will address that briefly below. It is discussed in detail in “<a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">Sotapanna Stage via Understanding Perception (Saññā)</a>” and in even more detail in the “<a href="../../pages/DS.DD.001/index.html" rel="noopener noreferrer" target="_blank">Worldview of the Buddha</a>” section. <strong><span>One needs to set aside a day or two to review these <span class="pali-term term-highlight" data-term="posts">posts</span>; </span><span style="color: #993366;"><span>just reading a <span class="pali-term term-highlight" data-term="post">post</span> or two while eating lunch will not be enough. </span></span></strong></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> Do Not Generate <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em></h5>
+<p style="text-align: justify;">4. As shown in the above chart, the mind of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will not move to the "<em><span>bahiddha <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" inside "<em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>." Their minds will remain in the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" state as shown in the above chart.</p>
+<ul style="text-align: justify;">
+<li><strong><span style="color: #993366;">An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> would not generate <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> </span></em>at any time.</span></strong> The word <span style="color: #3366ff;"><strong>"<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" means "absence of <em>ñāṇa</em>"</strong></span> or "absence of wisdom about the true nature of the world." Specifically, it refers to the absence of knowledge about how the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" triggers the accumulation of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>; once one comprehends that, one becomes a "<em>sandiṭṭhiko</em>" or a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em>. <strong>However, "<em>san</em> generation" completely stops only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage</strong>; see "<a href="http://localhost/beng_feb2026/sandi%e1%b9%ad%e1%b9%adhiko-what-does-it-mean/" rel="noopener" target="_blank">Sandiṭṭhiko – What Does It Mean?</a>"</li>
+<li>If an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> does not generate <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>, how would they experience the sensory inputs? The seeing (or eye consciousness) by an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is expressed as “<em>diṭṭhe diṭṭhamattaṁ bhavissati</em>" or "seeing without the arising of any defilements (even though the sight has embedded distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>)." For example, an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> would also see a beautiful woman as such (just as X in #2, #3 above); however, since an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> fully comprehends that "the beauty of the woman" is a false/distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> generated by the mind, their minds would not attach to that sight.</li>
+<li><span style="color: #3366ff;"><strong><span>This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> advised Bāhiya to train to be like an </span><em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>:</strong></span> “<em>diṭṭhe diṭṭhamattaṁ bhavissati, sute sutamattaṁ bhavissati, mute mutamattaṁ bhavissati, viññāte viññātamattaṁ bhavissatī’ti.” </em>Miraculously, wise <span style="color: #3366ff;"><span style="color: #000000;">Bāhiya understood it within minutes. That was not an accident or a fluke. T</span></span>he “<a href="https://suttacentral.net/ud1.10/en/sujato" rel="noopener" target="_blank"><em><span>Bāhiya <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (Ud 1.10)</a>” is discussed in "<a href="http://localhost/beng_feb2026/di%e1%b9%ad%e1%b9%adhe-di%e1%b9%ad%e1%b9%adhamatta%e1%b9%81-bhavissati-connection-to-sanna/" rel="noopener" target="_blank">‘Diṭṭhe Diṭṭhamattaṁ Bhavissati’ – Connection to Saññā</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Two Types of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>Arise Due to "Distorted<i> Sa</i><i>ññā</i><i></i>"</h5>
+<p style="text-align: justify;">5. The two types of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (as <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>) are not categorized as such in the <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em>. However, it is easier for us to understand how the mind works by treating how <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> develops from the <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> stage to the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> stage (which occurs only if the mind attaches to the <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> strongly enough to get to the "<em><span><span class="pali-term term-highlight" data-term="taṇhā paccayā upādāna">taṇhā paccayā upādāna</span></span></em>" step in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>). Many <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> discuss the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" and "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stages, which correspond to the <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>As we discussed in "<a href="../../pages/DP.AA.005/index.html" rel="noopener" target="_blank">Free Will in Buddhism – Connection to Sankhāra</a>," we don't have control over the <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (in the <em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> stage), but we do have control over the potent <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> accumulation with <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> in the <em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> stage. </li>
+<li><span>In the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="http://localhost/beng_feb2026/is-cakkhu-vinna%e1%b9%87a-free-of-defilements/" rel="noopener" target="_blank">Is Cakkhu Viññāṇa Free of Defilements?</a>" we discussed why even the <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> is defiled. Even before we realize it, our minds attach to the "distorted sa<em>ññā</em>" if unbroken <em>saṁyojan</em><em>ās</em> exist. One has to understand that to become a "<em>sandiṭṭhiko"</em>; see "<a href="http://localhost/beng_feb2026/sandi%e1%b9%ad%e1%b9%adhiko-what-does-it-mean/" rel="noopener" target="_blank">Sandiṭṭhiko – What Does It Mean</a>?" </li>
+<li>This is why <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> would not experience even the <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>! They are conscious and experience sensory inputs like <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span>. </span></em>Still, their minds will not attach to the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" because they have broken all ten <em>saṁyojana</em><span> that bind one to the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+<li>If one or more of the ten <em>saṁyojana</em> remain intact, a mind automatically attaches to that “distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” without conscious thinking. See #9 of "<a href="../../pages/KD.JJ.004/index.html" rel="noopener" target="_blank">Saññā – What It Really Means</a>" and "<a href="../../pages/DS.DD.006/index.html" rel="noopener" target="_blank">A Sensory Input Triggers (Distorted) Saññā and Pañcupādānakkhandha.</a>" </li>
+</ul>
+<h5 style="text-align: justify;">Growth/Expansion of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>into Eleven Types</h5>
+<p style="text-align: justify;">6. Even though the mind starts with a single <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> (say, X seeing a beautiful woman, in #2 above), it "runs off" in many directions if the sensory input is attractive enough.</p>
+<ul style="text-align: justify;">
+<li>In the example of X, his mind would first recall similar sights he had experienced before; if that woman is known to him, he would unconsciously recall some past experiences with her. Thus, <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> expands to include "past experiences." If he plans to get to know her, <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> would include such future plans. Thus, the <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> will immediately expand (even in the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage).</li>
+<li><strong><span style="color: #3366ff;">In fact, <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> includes 11 types:</span></strong> "<em>yaṁ kiñci viññāṇaṁ atītānāgatapaccuppannaṁ ajjhattaṁ vā bahiddhā vā, oḷārikaṁ vā sukhumaṁ vā hīnaṁ vā paṇītaṁ vā yaṁ dūre santike vā</em>,.." See "<a href="https://suttacentral.net/sn24.96/en/sujato" rel="noopener" target="_blank"><em><span>Adukkhamasukhī <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 24.96)</a>." The English translation has many errors, starting with translation of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> as "cosnciousness."</li>
+<li>In the above verse, <em>atītānāgatapaccuppannaṁ </em>refers to the past (<em>atīta</em>), future (<em>anāgata</em>), and current (<em>paccuppanna</em>) components of the growing <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>.</li>
+<li>Note that the <em>ajjhatta</em> and <em><span>bahiddha <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> we discussed above are two components of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> in the above verse (<em>ajjhattaṁ vā bahiddhā vā.</em>) We will discuss all 11 types included in "<em><span><span class="pali-term term-highlight" data-term="viññāṇakkhandha">viññāṇakkhandha</span>,</span></em>" which is simply referred to as "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" in many <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em>, including the above <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>.</li>
+<li><span style="color: #3366ff;"><strong>This is why "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" is much more complex than mere "consciousness."</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Growth of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>Accelerates in the "<em><span>Nava <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>" Stage</h5>
+<p style="text-align: justify;">7. Once a mind strongly attaches to a sensory event (like in the example of X above), we become conscious about thinking, speaking, and taking actions about it. In the example of X, he will start consciously planning how to build a relationship with the woman. That is when the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage begins, as indicated in the above chart.</p>
+<ul style="text-align: justify;">
+<li>The transition to the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage starts with the rising of <strong><em>kāmacchanda</em></strong> (<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="chanda">chanda</span></span></em> or "<strong>desire for <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em></strong>") in the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage.</li>
+<li>The next step of "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> </span><strong>pariḷāha</strong></em>" means one's mind becomes agitated and asks to "take action" immediately. A <strong>sense of urgency</strong> arises to take action.</li>
+<li>Then, one would start the <strong>investigating</strong> (<strong><em>pariyesana</em></strong>) stage. In the case of X, he may start asking others who the woman is and make plans to see her again as soon as possible. </li>
+<li>All those "expand the <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (which include expectations)" in the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage, as shown in the chart by the larger slope in the growth of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>. It culminates with more thoughts (planning), including speech and physical actions. That is indicated by <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span>, vaci</span></em>, and <em><span><span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> in the chart.</li>
+<li>Thus, the initial <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (which started as just a "seeing event") expands to become a <em><span><span class="pali-term term-highlight" data-term="viññāṇakkhandha">viññāṇakkhandha</span></span></em> or a "heap of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>."</li>
+</ul>
+<h5 style="text-align: justify;">Stopping<i><span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></i>Requires Bypassing "Distorted<i> Sa</i><i>ññā</i><i></i>"</h5>
+<p style="text-align: justify;">8. It should be apparent from the above discussion that one must bypass the “distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” to avoid "automatic transition" to (<em>bahiddha</em>) <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>. </p>
+<ul style="text-align: justify;">
+<li>A <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> --</span></em> <span style="color: #3366ff;"><strong>for the first time ever <span style="color: #000000;">--</span></strong></span> overcomes the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” <strong><span style="color: #3366ff;">while contemplating <span style="color: #000000;">the</span></span> <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature of the world.</strong> </li>
+<li>When one starts comprehending the origin of the “distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em><span>” (i.e., the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview), one's mind begins to be released from the “distorted </span><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" gradually<em>.</em></li>
+<li>As a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em>, one's mind begins to try to overcome the “distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” and to move into the "<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> Bhumi</span></em>." This is indicated in the chart below.</li>
+</ul>
+<p style="text-align: justify;"><img alt="" class="alignnone size-large wp-image-54105" height="600" src="http://localhost/beng_feb2026/wp-content/uploads/Satipatthana-Basic-Idea-800x600.jpg" width="800"/></p>
+<p style="text-align: justify;"><strong>Download/Print:</strong> "<a href="https://drive.google.com/uc" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> - Basic Idea</a>"</p>
+<h5 style="text-align: justify;">First Experience of <em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> Bhumi</span></em>) Without “Distorted <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>“</h5>
+<p style="text-align: justify;">9. A <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em> experiences the “distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>-free” <em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span></span></em> (in <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> Bhumi</span></em>) for the first time when attaining the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. At the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> <span class="pali-term term-highlight" data-term="phala">phala</span></span></em> moment, the mind overcomes the “distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” associated with the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span> </span></em>(or the “distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>” associated with the <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span> </span></em>if in a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>) and moves to the <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> Bhumi.</span></em></p>
+<ul>
+<li style="text-align: justify;">A <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> can “get back to” the <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> Bhumi </span></em>by cultivating <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>. </span></em></li>
+<li style="text-align: justify;">If a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> starts cultivating <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>,</span></em> he can return to the <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> Bhumi</span></em> without too much effort (but it is not trivial). With practice, they can get there and stay there to engage in <em><span><span class="pali-term term-highlight" data-term="vipassanā">Vipassanā</span></span></em> to attain higher <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</li>
+<li style="text-align: justify;">See "<a href="../../pages/DS.DD.009/index.html" rel="noopener" target="_blank">Loka and Nibbāna (Aloka) – Complete Overview</a>" for more details.</li>
+<li style="text-align: justify;"><span>I have discussed this critical step in several <span class="pali-term term-highlight" data-term="posts">posts</span>, including "</span><a href="../../pages/DS.DD.004/index.html" rel="noopener" target="_blank">Sensory Inputs Initiate “Creation of the World” or “Loka Samudaya”</a>," "<a href="../../pages/DS.DD.006/index.html" rel="noopener" target="_blank">A Sensory Input Triggers (Distorted) Saññā and Pañcupādānakkhandha</a>," and "<a href="http://localhost/beng_feb2026/kama-sanna-how-to-bypass-to-cultivate-satipa%e1%b9%ad%e1%b9%adhana/" rel="noopener" target="_blank">Kāma Saññā – How to Bypass to Cultivate Satipaṭṭhāna</a>." Reading them is a good idea when there is enough time to contemplate.</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.BB.006/index.html">Sankhara What It Really Means</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.JJ.008/index.html">Kamma Vinnana Link Between Mind And Matter</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.BB.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Sankhara What It Really Means</span>
+        
+        <span class="pathway-title title-pt">Sankhara What It Really Means</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.JJ.008/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Kamma Vinnana Link Between Mind And Matter</span>
+        
+        <span class="pathway-title title-pt">Kamma Vinnana Link Between Mind And Matter</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

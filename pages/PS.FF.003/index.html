@@ -1,0 +1,453 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>What Reincarnates Concept Of A Lifestream | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 9 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.FF.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">What Reincarnates Concept Of A Lifestream</h1>
+    
+    <h1 class="title-pt">O que é reencarnação Conceito de fluxo de vida</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.FF.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.FF.003"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0415"
+             data-level="advanced"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.FF.003</td></tr><tr><td>Fin-dex</td><td>0415</td></tr><tr><td>Slug</td><td>what-reincarnates-concept-of-a-lifestream</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>What Reincarnates Concept Of A Lifestream</td></tr></table></div></div><p style="text-align: justify"><strong>Revised August 3, 2016; re-written February 8, 2021; <span style="color: #0000ff">revised August 7, 2022</span></strong></p>
+<h5><span><span class="pali-term term-highlight" data-term="reincarnation">Reincarnation</span> Versus <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span></span></h5>
+<p style="text-align: justify"><span>1. <span class="pali-term term-highlight" data-term="reincarnation">Reincarnation</span> is a Hindu concept where the “</span><em>ātma</em>” (“<em>ātman</em>”) or the soul remains the same but takes a different form. The <em>Rigveda</em> compares it to a person discarding an old suit and wearing a new outfit. See "<a href="../../pages/PS.FF.002/index.html" rel="noopener" target="_blank">Sakkāya Diṭṭhi – Wrong View of “Me” and “Mine</a>.”</p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span style="color: #0000ff"><strong><span>In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, it is a <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> since there is no soul to reincarnate.</span></strong> </span>We have accumulated many “<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds” <em><span>(<span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></em>), which contain various “habits” and "character qualities" (called "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>”) In our long journey through <em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span>. </span></em>Those lead to different types of rebirths; see, "<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>."</li>
+<li style="text-align: justify">At the end of this human existence, the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy of the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed for the present life is exhausted. At that moment, a new life starts with a new potent <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed. The selection of a new seed itself is a complicated process and depends on the potency of the available <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds, but it happens within a thought moment.</li>
+<li><span>Let us first summarize <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s description of sentient life. The following facts are indisputable.</span></li>
+</ul>
+<h5 style="text-align: justify">No Discernible Beginning to <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span> </span></em><span>(<span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Process)</span></h5>
+<p style="text-align: justify"><span>2. During the night of attaining the Buddhahood, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> looked back at his <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. He was able to scan eons in mere moments, but no matter how far back he looked, he could not see a "beginning." He has given many similes (analogies) to indicate the "unimaginable length of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process."</span></p>
+<ul style="text-align: justify">
+<li>For example, <a href="https://suttacentral.net/sn15.3/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Assu <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 15.3)</a> states: "<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em><span>, this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process has no discernible (</span><em>na pannāyati</em>) beginning. Beings whose minds are covered by ignorance and <strong>are</strong> <strong><span>bound to this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process with bonds of craving.</span></strong>“</li>
+<li>Birth as a human is very rare among all those rebirths, as stated, for example, in the  <span class="var" id="note334"><a href="https://suttacentral.net/sn20.2/pli/ms" rel="noopener noreferrer" target="_blank">Nakha­sikha Sutta (SN 20.2)</a>. "<em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span>,</span></em><span> sentient beings reborn as humans are few as this bit of sand on my fingernail. But those not reborn as humans are many as the sand on this great Earth. Therefore, you should strive diligently and without delay to end this suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.”</span></span></li>
+<li>Further details in "<a href="../../pages/TL.GG.004/index.html" rel="noopener" target="_blank">How the Buddha Described the Chance of Rebirth in the Human Realm</a>."</li>
+</ul>
+<h5 style="text-align: justify">The Concept of a Lifestream</h5>
+<p style="text-align: justify">3. <span style="color: #0000ff"><strong><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> used the term "</span><em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em><span>" to describe a living being going through that <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></strong></span> In the <a href="https://suttacentral.net/sn23.2/pli/ms" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 23.2)</a><span>, Ven. Rādha asked the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: "..they speak of this thing called a ‘sentient being.’ How is a sentient being defined?”</span></p>
+<ul style="text-align: justify">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> answered: "Rādha, when there is liking (</span><em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span></span></em>), strong liking (<em> rāgo</em>), reveling (<em>nandī</em>), and the tendency to attach (<em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>), then a <span style="color: #0000ff"><strong>‘sentient being with cravings’ (<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>)</strong></span> is spoken of." <span style="color: #ff0000"><strong><span>Note that the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word '</span><em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>' means "to attach."</strong></span></li>
+<li><span>In other words, as long as a ‘sentient being’ highly values things in this world, it will be reborn in this world. It could be reborn, a human, an animal, a <span class="pali-term term-highlight" data-term="deva">Deva</span>, etc., at various times. Thus, associating any such existence with an "unchanging entity" (such as a soul) is impossible. When born a human, a </span><em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> behaves like a human, and when born an animal, it acts like an animal, etc.</li>
+<li>I use the English word to describe "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>" as a "lifestream." <strong>The term "sentient being" is more suitable to refer to a "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>." On the other hand, "a lifestream" refers to the process that a <em><span><span class="pali-term term-highlight" data-term="satta">satta</span> </span></em>goes through in <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span>.</span></em></strong></li>
+<li><span>A given lifestream can take various forms in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span><span style="color: #0000ff"><strong>There is no "core" or 'soul" or '<em><span><span class="pali-term term-highlight" data-term="atman">atman</span></span></em>" to talk about! </strong></span><span style="color: #ff0000"><strong>On the other hand, as long as that fact is not understood, there is a <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em><span> in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span></strong></span></li>
+</ul>
+<h5 style="text-align: justify">A <em>Bodhisatta</em> is a Special <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em></h5>
+<p style="text-align: justify"><span>4. <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama, like any other <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, made a heroic effort to become a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> through many eons. When he made enough progress, he was declared a "</span><em>Bodhisatta</em><span>" by <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Deepankara many eons ago.</span></p>
+<ul style="text-align: justify">
+<li>A <em>Bodhisatta</em> is a special<em><span> <span class="pali-term term-highlight" data-term="satta">satta</span></span></em><span> destined to become a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. "</span><em>Bodhi</em>" means "towards liberation/release." When a <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> has fulfilled enough <em>paramitā</em><span> to become a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, he is declared a "</span><em>Bodhisatta</em>" by existing Buddhas. See, "<a href="http://localhost/beng_feb2026/myths-or-realities/paramita-and-niyata-vivarana-myths-or-realities/" rel="noopener" target="_blank">Pāramitā and Niyata Vivarana – Myths or Realities?</a>."</li>
+<li>Even after becoming a <em>Bodhisatta</em>, it is possible to be born in the animal realm (but NOT in the other three realms in the <em>apāyās</em>.)</li>
+<li><span>Therefore, a sentient being is born in any given <span class="pali-term term-highlight" data-term="bhava">bhava</span> ONLY according to causes and effects. That is described in </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em>which starts with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" and ends in “<em><strong><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></strong><span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="jāti">jāti</span>” </span></em>and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="marana">marana</span>, soka-paridēva-<span class="pali-term term-highlight" data-term="dukkha">dukkha</span>-dōmanassupāyasā</span></strong> sambhavan’ti. </em></li>
+<li>There is no reference to a "special/particular being" in that whole process. Future existences <em><span>(<span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) and births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) within that existence only depend on past <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) done with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>!</li>
+</ul>
+<h5 style="text-align: justify">Transcending the "<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> State" to Attain <em><span><span class="pali-term term-highlight" data-term="puggala">Puggala</span></span></em> Stages</h5>
+<p style="text-align: justify">5. All other living beings (<em><span><span class="pali-term term-highlight" data-term="sattā">sattā</span></span></em>) overcome the "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em><span> state" by learning how to do that from a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> or a true disciple of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>.)</p>
+<ul>
+<li>Note that "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>" is pronounced, "saththa." See "<a href="../../pages/HB.AA.008/index.html" rel="noopener" target="_blank">Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1</a>."</li>
+<li>There are eight such <em>Ariyās</em> (Noble Persons) as described in the "<a href="https://suttacentral.net/an8.59/pli/ms" rel="noopener" target="_blank">Paṭhamapuggala Sutta (AN 8.59)</a>," for example.</li>
+<li>They are: "<em><span>Sotāpanno, sotāpattiphalasacchikiriyāya paṭipanno (<span class="pali-term term-highlight" data-term="sotāpanna">sotāpanna</span> anugāmi), sakadāgāmī, sakadāgāmiphalasacchikiriyāya paṭipanno (<span class="pali-term term-highlight" data-term="sakadāgāmi">sakadāgāmi</span> anugāmi), anāgāmī, anāgāmiphalasacchikiriyāya paṭipanno (anāgāmī anugāmi), arahā, arahattāya paṭipanno (<span class="pali-term term-highlight" data-term="arahant">arahant</span> anugāmi)</span></em>."</li>
+<li>Another special <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> overcomes the "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> state" with his efforts. That is a <em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. A </span><strong><em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong> has not fulfilled ALL the <em>paramitās</em> to become a <strong class="highlight"><em>Sammāsambuddha</em> </strong><span>like <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama. Therefore, a </span><em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span> cannot explain <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> like a </span><em>Sammāsambuddha</em>. Not that many <em>sattās</em> can attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> during a <em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<h5 style="text-align: justify">All <em>Sattās</em><span> Are Trapped in the <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Process</span></h5>
+<p style="text-align: justify">6. Therefore, until the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em><span> stage is attained, all sentient beings are trapped in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></p>
+<ul style="text-align: justify">
+<li>They all have not overcome the "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> state" and thus could be born in the <em>apāyās</em> in the future.</li>
+<li>The lifestream of a <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em><span> in ANY of those 31 realms will flow ceaselessly until the fruitlessness AND danger in remaining in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process are comprehended.</span></li>
+<li><span>The danger is that most births in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process are in the lowest four realms (</span><em>apāyās</em>.) The reason for that is in the verse that describes a "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>" in #3 above: "<strong>Rādha, when there is liking (<em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span></span></em>), strong liking (<em> rāgo</em>), reveling (<em>nandī</em>), and the <span style="color: #0000ff">tendency to attach (<em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>)</span>, then a ‘sentient being’ is spoken of</strong>."</li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> referred to a sentient being ("</span><em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>") as one with attachment to "worldly pleasures."</li>
+</ul>
+<h5 style="text-align: justify">Rest of the <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em></h5>
+<p style="text-align: justify">7. After explaining to Ven. Rādha the meaning of a "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em><span>," <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained to him why those sentient beings are trapped in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process filled with unimaginable suffering.</span></p>
+<p style="text-align: justify"><span>Here is the English translation at <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central (my revisions are in bold):</span></p>
+<p style="text-align: justify">"Suppose some boys or girls were playing with sandcastles. As long as they’re not rid of greed, desire, fondness, thirst, passion, and craving for those sandcastles, they cherish them, fancy them, treasure them, and treat them as their own. But when <span style="color: #0000ff"><strong>they grow up,</strong></span> they get rid of greed, desire, fondness, thirst, passion, and craving for those <span style="color: #0000ff"><strong>useless</strong></span> sandcastles. Then they scatter, destroy, and demolish them with their hands and feet, making them unplayable.</p>
+<p style="text-align: justify">In the same way, you should scatter, destroy, and demolish<span style="color: #0000ff"><strong> the desire for mind-pleasing things in this world</strong></span> and reject them. And you should practice for the ending of craving. You should scatter, destroy, and demolish <span style="color: #0000ff"><strong>the desire for</strong></span> feeling … perception …<span style="color: #0000ff"><em><strong> saṅkhāre</strong></em></span> … <span style="color: #0000ff"><em><strong><span><span class="pali-term term-highlight" data-term="viññāṇaṃ">Viññāṇaṃ</span></span></strong></em></span>, making them unplayable. <span style="color: #0000ff"><strong><em>Taṇhākkhayo hi, rādha, nibbānan” ti </em>(Rādha, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is the elimination of t<em>aṇhā</em>)</strong></span>.”</p>
+<h5 style="text-align: justify">Overcoming the Desire to Build Sandcastles</h5>
+<p style="text-align: justify"><span>8. Thus, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> compared the behavior of any living being in the "</span><em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> state" to children enjoying building sandcastles on a beach. Due to their ignorance (<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>), they don't realize the futility of building sandcastles for enjoyment.</p>
+<ul>
+<li style="text-align: justify"><span>In the same way, until one hears and comprehends the actual teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (Four Noble Truths/</span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>), one would not "see" the futility AND dangers in enjoying sense pleasures in this world. Children building sand castles only waste their time. On the other hand, <em>sattās</em> enjoying sensory pleasures pave the way to rebirths in the <em>apāyās</em> without realizing it.</li>
+<li style="text-align: justify">When one starts "seeing" the true nature of this world, one removes <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em> and becomes a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em>. That "vision" is fully established when one also removes any doubts (<em>vicikiccā</em>) and also sees that rituals (<em><span>silabbata <span class="pali-term term-highlight" data-term="parāmāsa">parāmāsa</span></span></em><span>) will not get one released from the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. One is at the </span><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage at that point.</li>
+<li style="text-align: justify">However, that is only the beginning of the Noble Eightfold Path. Only the <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> (wrong vision) has been removed yet. With that "new vision" (<em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>), one needs to follow the other seven steps and get to<em><span> <span class="pali-term term-highlight" data-term="sammā samādhi">Sammā Samādhi</span></span></em> to remove <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> at the <em>Anāgāmi</em> stage and the<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. See, "<a href="../../pages/KD.JJ.006/index.html" rel="noopener" target="_blank">Vipallāsa (Diṭṭhi, Saññā, Citta) Affect Sankhāra</a>."</li>
+</ul>
+<h5><em>Puthujjano</em> Is a <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> in the Human Realm</h5>
+<p style="text-align: justify">9. Finally, a human in the "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> state" (i.e., who has not comprehended the Four Noble Truths) is a "<em>puthujjano</em>." Thus, a <em><strong>puthujjano</strong> </em>(normally translated as "<strong>uninformed ordinary person</strong>" in many translations) is a human with <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">In the "<a href="https://suttacentral.net/mn44/pli/ms" rel="noopener" target="_blank">Cūḷavedalla Sutta (MN 44),</a>" Ven. Dhammadinnā is asked: "how does <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span> </span></em>(identity view) come about?"</li>
+<li style="text-align: justify">She replied:  “.. <strong>uninformed ordinary persons</strong> who have not been exposed to the teaching of the Noble persons have one of the following views. <strong>One group has the wrong vision of</strong> <strong><em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> (material form) in 4 ways</strong>: to regard <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> as “mine,” or “I” as <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>, or <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> to be “in me,” or “I” to be “in<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>.” <strong>Then there is the other group who regard one or more of the mental factors </strong><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>(feeling) … <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> (perception) … <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>  (ways of thinking) … <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em><span> (consciousness) as “mine,” or “I” as those, or them to be “in me,” or “I’ to be “in them.” (We discussed this in #1 of the previous <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/PS.FF.002/index.html" rel="noopener" target="_blank">Sakkāya Diṭṭhi – Wrong View of “Me” and “Mine</a>.”)</li>
+<li style="text-align: justify">Thus, any living being (human, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span>, <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>, as well as any other living being) who has not comprehended the "world vision" of how suffering arises is a "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>." A <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> in the human realm is a <em>puthujjano.</em></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="PS.FF.003"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0415"
+             data-level="advanced"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        PS.FF.003
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p style="text-align: justify"><strong>Revisado em 3 de agosto de 2016; reescrito em 8 de fevereiro de 2021; <span style="color: #0000ff">revisado em 7 de agosto de 2022</span></strong></p>
+<h5>Renascimento versus Renascimento</h5>
+<p style="text-align: justify">1. Renascimento é um conceito hindu em que o “<em>ātma</em>” (“<em>ātman</em>”) ou a alma permanece a mesma, mas assume uma forma diferente. O <em>Rigveda</em> compara isso a uma pessoa que descarta um terno velho e veste uma roupa nova. Veja “<a href="../../pages/PS.FF.002/index.html">Sakkāya Diṭṭhi – Visão errada do “eu” e do “meu</a>”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span style="color: #0000ff"><strong><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, é um renascimento, pois não há alma para reencarnar.</span></strong> </span>Acumulamos muitas “sementes <em>de</em> <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>” <em><span>(<span class="pali-term term-highlight" data-term="kamma bīja">Kamma Bīja</span></span></em>), que contêm vários “hábitos” e “qualidades de caráter” (chamadas “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>”) em nossa longa jornada pelo <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span>. </span></em>Isso leva a diferentes tipos de renascimentos; veja “<a href="../../pages/KD.DD.003/index.html" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>”.</li>
+<li style="text-align: justify">No final desta existência humana, a energia <em>cármica</em> da semente <em>cármica</em> da vida presente se esgota. Nesse momento, uma nova vida começa com uma nova semente <em>cármica</em> potente. A seleção de uma nova semente em si é um processo complicado e depende da potência das sementes <em>cármicas</em> disponíveis, mas acontece em um momento de pensamento.</li>
+<li><span>Vamos primeiro resumir a descrição de <span class="pali-term term-highlight" data-term="buddha">Buddha</span> sobre a vida senciente. Os fatos a seguir são indiscutíveis.</span></li>
+</ul>
+<h5 style="text-align: justify">Nenhum início discernível para <em><span>o <span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span> </span></em>(processo de renascimento)</h5>
+<p style="text-align: justify"><span>2. Durante a noite em que alcançou a iluminação, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> relembrou seu processo de renascimento. Ele foi capaz de examinar eras em meros instantes, mas não importa o quão longe ele olhasse, não conseguia ver um “início”. Ele deu muitas comparações (analogias) para indicar a “duração inimaginável do processo de renascimento”.</span></p>
+<ul style="text-align: justify">
+<li>Por exemplo, <a href="https://suttacentral.net/sn15.3/pli/ms"><em><span>Assu <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 15.3)</a> afirma: “<em>Bhikkhūs</em>, este processo de renascimento não tem um início discernível (<em>na pannāyati</em>). Os seres cujas mentes estão cobertas pela ignorância e <strong>estão</strong> <strong>presos a este processo de renascimento com laços de desejo”.</strong></li>
+<li>O nascimento como humano é muito raro entre todos esses renascimentos, como afirmado, por exemplo, no <span class="var" id="note334"><a href="https://suttacentral.net/sn20.2/pli/ms">Nakha­sikha Sutta (SN 20.2)</a>. “<em>Bhikkhūs,</em> os seres sencientes que renascem como humanos são tão poucos quanto este grão de areia na minha unha. Mas aqueles que não renascem como humanos são tantos quanto a areia nesta grande Terra. Portanto, vocês devem se esforçar diligentemente e sem demora para acabar com esse sofrimento no processo de Renascimento.”</span></li>
+<li>Mais detalhes em “<a href="../../pages/TL.GG.004/index.html">Como o Buddha descreveu a chance de Renascimento no reino humano</a>”.</li>
+</ul>
+<h5 style="text-align: justify">O conceito de um fluxo de vida</h5>
+<p style="text-align: justify">3. <span style="color: #0000ff"><strong><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> usou o termo “</span><em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>” para descrever um ser vivo passando por esse processo de Renascimento.</strong></span> No <a href="https://suttacentral.net/sn23.2/pli/ms"><em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 23.2)</a><span>, o Venerável Rādha perguntou ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: “... eles falam dessa coisa chamada ‘ser senciente’. Como se define um ser senciente?”</span></p>
+<ul style="text-align: justify">
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> respondeu: “Rādha, quando há gosto (</span><em><span><span class="pali-term term-highlight" data-term="chanda">Chanda</span></span></em>), gosto forte (<em>rāgo</em>), deleite (<em>nandī</em>) e tendência ao apego (<em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>), então se fala de um <span style="color: #0000ff"><strong>‘ser senciente com desejos’ (<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>)</strong></span>.” <span style="color: #ff0000"><strong><span>Observe que a palavra <span class="pali-term term-highlight" data-term="pālī">Pālī</span> “S</span><em>atta</em>” significa “apegar-se”.</strong></span></li>
+<li><span>Em outras palavras, enquanto um ‘ser senciente’ valorizar muito as coisas deste mundo, ele renascerá neste mundo. Ele pode renascer como humano, animal, <span class="pali-term term-highlight" data-term="deva">Deva</span>, etc., em vários momentos. Assim, associar qualquer existência desse tipo a uma “entidade imutável” (como uma alma) é impossível. Quando nasce como humano, um </span><em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> se comporta como humano, e quando nasce como animal, age como animal, etc.</li>
+<li>Eu uso a palavra em inglês para descrever “<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>” como um “fluxo de vida”. <strong>O termo “ser senciente” é mais adequado para se referir a um “<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>”. Por outro lado, “um fluxo de vida” se refere ao processo pelo qual um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> </span></em>passa no <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span>.</span></em></strong></li>
+<li>Um determinado fluxo de vida pode assumir várias formas no processo de renascimento. <span style="color: #0000ff"><strong>Não há “núcleo”, “alma” ou “At<em>man</em>” para se falar! </strong></span><span style="color: #ff0000"><strong>Por outro lado, enquanto esse fato não for compreendido, há um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> no processo de renascimento. </strong></span></li>
+</ul>
+<h5 style="text-align: justify">Um <em>Bodhisatta</em> é um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> Especial</h5>
+<p style="text-align: justify"><span>4. <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama, como qualquer outro <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, fez um esforço heróico para se tornar um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ao longo de muitos éons. Quando ele fez progressos suficientes, foi declarado um “</span><em>Bodhisatta</em><span>” por <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Deepankara há muitos éons.</span></p>
+<ul style="text-align: justify">
+<li>Um <em>Bodhisatta</em> é um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em><span> especial destinado a se tornar um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. “</span><em>Bodhi</em>” significa “em direção à libertação/libertação”. Quando um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> cumpre <em>paramitā</em><span> suficiente para se tornar um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, ele é declarado um “</span><em>Bodhisatta</em>” pelos Buddhas existentes. Veja “<a href="http://localhost/brasileirinho/myths-or-realities/paramita-and-niyata-vivarana-myths-or-realities/">Pāramitā e Niyata Vivarana – Mitos ou Realidades?</a>”.</li>
+<li>Mesmo depois de se tornar um <em>Bodhisatta</em>, é possível nascer no reino animal (mas NÃO nos outros três reinos nos <em>apāyās</em>).</li>
+<li><span>Portanto, um ser senciente nasce em qualquer <span class="pali-term term-highlight" data-term="bhava">Bhava</span> SOMENTE de acordo com causas e efeitos. Isso é descrito em </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em>que começa com <em><span>“<span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>” e termina em “<em><strong><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></strong><span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="jāti">Jāti</span>” </span></em>e <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="jarā">Jarā</span>, <span class="pali-term term-highlight" data-term="maraṇa">Maraṇa</span>, Soka-Paridēva-<span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>-Dōmanassupāyasā</span></strong> Sambhavan’ti. </em></li>
+<li>Não há nenhuma referência a um “ser especial/particular” em todo esse processo. As existências futuras <em><span>(<span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) e os nascimentos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) dentro dessa existência dependem apenas do <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) passado feito com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>!</li>
+</ul>
+<h5 style="text-align: justify">Transcendendo o “Estado <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>” para Alcançar os Estágios <em><span><span class="pali-term term-highlight" data-term="puggala">Puggala</span></span></em></h5>
+<p style="text-align: justify">5. Todos os outros seres vivos (<em><span><span class="pali-term term-highlight" data-term="sattā">sattā</span></span></em><span>) superam o “estado <span class="pali-term term-highlight" data-term="satta">Satta</span>” aprendendo como fazer isso com um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ou um verdadeiro discípulo de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>).</p>
+<ul>
+<li>Observe que “<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>” é pronunciado “saththa”. Veja “<a href="http://localhost/brasileirinho/historical-background/Tipiṭaka-english-convention-part-1/">Convenção Tipiṭaka em inglês adotada pelos primeiros estudiosos europeus – Parte 1</a>”.</li>
+<li>Existem oito <em>Ariyās</em> (Pessoas Nobres) como descrito no <a href="https://suttacentral.net/an8.59/pli/ms">“Paṭhamapuggala Sutta (AN 8.59)</a>”, por exemplo.</li>
+<li>Elas são: “<em><span>Sotāpanno, sotāpattiphalasacchikiriyāya paṭipanno (<span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> anugāmi), Sakadāgāmī, sakadāgāmiphalasacchikiriyāya paṭipanno (<span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> anugāmi), anāgāmī, anāgāmiphalasacchikiriyāya paṭipanno (anāgāmī anugāmi), arahā, arahattāya paṭipanno (<span class="pali-term term-highlight" data-term="arahant">Arahant</span> anugāmi)</span></em>.”</li>
+<li>Outro <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> especial supera o “estado <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>” com seus esforços. Esse é um <em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Um </span><strong><em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong> não cumpriu TODAS as <em>paramitās</em> para se tornar um <strong class="highlight"><em>Sammāsambuddha</em> </strong><span>como <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Gotama. Portanto, um </span><em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span> não pode explicar o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> como um </span><em>Sammāsambuddha</em>. Não são muitos <em>os sattās</em> que podem alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> durante um <em>Pacceka</em><span> <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<h5 style="text-align: justify">Todos <em>os sattās</em> estão presos no processo de Renascimento</h5>
+<p style="text-align: justify">6. Portanto, até que o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> seja alcançado, todos os seres sencientes estão presos no processo de Renascimento.</p>
+<ul style="text-align: justify">
+<li>Todos eles ainda não superaram o “estado <em>de</em><span> <span class="pali-term term-highlight" data-term="satta">Satta</span>” e, portanto, podem renascer nos </span><em>apāyās</em> no futuro.</li>
+<li>A corrente de vida de um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> em QUALQUER um desses 31 reinos fluirá incessantemente até que a futilidade E o perigo de permanecer no processo de Renascimento sejam compreendidos.</li>
+<li>O perigo é que a maioria dos nascimentos no processo de Renascimento ocorre nos quatro reinos mais baixos (<em>apāyās</em>). A razão para isso está no versículo que descreve um “<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>” no nº 3 acima: “<strong>Rādha, quando há gosto (<em><span><span class="pali-term term-highlight" data-term="chanda">Chanda</span></span></em>), gosto forte (<em>rāgo</em>), deleite (<em>nandī</em>) e <span style="color: #0000ff">tendência ao apego (<em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>)</span>, então se fala de um ‘ser senciente’</strong>”.</li>
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> se referiu a um ser senciente (“</span><em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>”) como alguém com apego aos “prazeres mundanos”.</li>
+</ul>
+<h5 style="text-align: justify">Resto do <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em></h5>
+<p style="text-align: justify">7. Depois de explicar ao Venerável Rādha o significado de um “<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em><span>”, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explicou a ele por que esses seres sencientes estão presos no processo de Renascimento repleto de sofrimento inimaginável.</span></p>
+<p style="text-align: justify"><span>Aqui está a tradução em português no <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central (minhas revisões estão em negrito):</span></p>
+<p style="text-align: justify">“Suponha que alguns meninos ou meninas estivessem brincando com castelos de areia. Enquanto não se livrarem da ganância, do desejo, do apego, da sede, da paixão e da ânsia por esses castelos de areia, eles os apreciam, os admiram, os valorizam e os tratam como se fossem seus. Mas quando <span style="color: #0000ff"><strong>crescem,</strong></span> livram-se da ganância, do desejo, do apego, da sede, da paixão e do anseio por esses castelos de areia <span style="color: #0000ff"><strong>inúteis</strong></span>. Então, espalham, destroem e demolem-nos com as mãos e os pés, tornando-os inutilizáveis.</p>
+<p style="text-align: justify">Da mesma forma, você deve espalhar, destruir e demolir<span style="color: #0000ff"><strong> o desejo pelas coisas que agradam a mente neste mundo</strong></span> e rejeitá-las. E você deve praticar para acabar com o anseio. Você deve espalhar, destruir e demolir <span style="color: #0000ff"><strong>o desejo de</strong></span> sentir... percepção...<span style="color: #0000ff"><em><strong> saṅkhāre</strong></em></span>... <span style="color: #0000ff"><em><strong><span><span class="pali-term term-highlight" data-term="viññāṇaṃ">viññāṇaṃ</span></span></strong></em></span>, tornando-os inutilizáveis. <span style="color: #0000ff"><strong><em>Taṇhākkhayo hi, rādha, nibbānan” ti </em>(Rādha, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é a eliminação de <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em></strong></span>.<span style="color: #0000ff"><strong>)</strong></span></p>
+<h5 style="text-align: justify">Superando o desejo de construir castelos de areia</h5>
+<p style="text-align: justify"><span>8. Assim, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comparou o comportamento de qualquer ser vivo no “estado <span class="pali-term term-highlight" data-term="satta">Satta</span>” a crianças que gostam de construir castelos de areia na praia. Devido à sua ignorância (</span><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>), elas não percebem a futilidade de construir castelos de areia para se divertir.</p>
+<ul>
+<li style="text-align: justify"><span>Da mesma forma, até que se ouça e compreenda os ensinamentos reais do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (Quatro Nobres Verdades/</span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em>Tilakkhaṇa</em>), não se “verá” a futilidade E os perigos de desfrutar dos prazeres sensoriais neste mundo. As crianças que constroem castelos de areia apenas perdem seu tempo. Por outro lado, <em>os sattās</em> que desfrutam dos prazeres sensoriais pavimentam o caminho para renascimentos nos <em>apāyās</em> sem perceber.</li>
+<li style="text-align: justify">Quando se começa a “ver” a verdadeira natureza deste mundo, remove-se <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span></span></em> e torna-se um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em>. Essa “visão” está totalmente estabelecida quando se remove também quaisquer dúvidas (<em>vicikiccā</em>) e se vê que os rituais (<em><span>silabbata <span class="pali-term term-highlight" data-term="parāmāsa">Parāmāsa</span></span></em>) não libertam ninguém do processo de Renascimento. Nesse ponto, está-se no estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</li>
+<li style="text-align: justify">No entanto, isso é apenas o começo do Nobre Caminho Óctuplo. Apenas o <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em> (visão errada) foi removido até agora. Com essa “nova visão” (<em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>), é preciso seguir os outros sete passos e chegar ao<em><span> <span class="pali-term term-highlight" data-term="sammā samādhi">Sammā Samādhi</span></span></em> para remover <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em> no estágio <em>Anāgāmi</em> e <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em> no estágio <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Veja “<a href="../../pages/KD.JJ.006/index.html">Vipallāsa (Diṭṭhi, Saññā, Citta) Afeta Sankhāra</a>”.</li>
+</ul>
+<h5><em>Puthujjano</em> é um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> no reino humano</h5>
+<p style="text-align: justify">9. Finalmente, um humano no “estado <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>” (ou seja, que não compreendeu as Quatro Nobres Verdades) é um “<em>puthujjano</em>”. Assim, um <em><strong>puthujjano</strong> </em>(normalmente traduzido como “<strong>pessoa comum desinformada</strong>” em muitas traduções) é um humano com <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">No <a href="https://suttacentral.net/mn44/pli/ms">“Cūḷavedalla Sutta (MN 44)</a>”<a href="https://suttacentral.net/mn44/pli/ms">,</a> perguntam à Ven. Dhammadinnā: “como surge <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">Sakkāya Diṭṭhi</span> </span></em>(visão da identidade)?”</li>
+<li style="text-align: justify">Ela respondeu: “... <strong>pessoas comuns desinformadas</strong> que não foram expostas aos ensinamentos das pessoas nobres têm uma das seguintes visões. <strong>Um grupo tem uma visão errada de</strong> <strong><em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> (forma material) de quatro maneiras</strong>: considerar <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> como “meu” ou “eu” como <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>, ou <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> como “em mim” ou “eu” como “em<em><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>”. <strong>Depois, há outro grupo que considera um ou mais dos fatores mentais</strong> <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>(sensação) ... <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> (percepção) ... <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (formas de pensar) ... <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> (consciência) como “meu” ou “eu” como esses, ou eles como “em mim” ou “eu” como “neles”. (Discutimos isso no nº 1 do ensaio anterior, <a href="../../pages/PS.FF.002/index.html">“Sakkāya Diṭṭhi – Visão errada do ‘eu’ e do ‘meu’</a>”.)</li>
+<li style="text-align: justify">Assim, qualquer ser vivo (humano, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span>, <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>, bem como qualquer outro ser vivo) que não tenha compreendido a “visão do mundo” de como o sofrimento surge é um “<em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em>”. Um <em><span><span class="pali-term term-highlight" data-term="satta">Satta</span></span></em> no reino humano é um <em>puthujjano.</em></li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.GG.002/index.html">Distortion Of Pali Keywords In Paticca Samuppada</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.AA.007/index.html">Patiloma Paticca Samuppada</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.GG.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Distortion Of Pali Keywords In Paticca Samuppada</span>
+        
+        <span class="pathway-title title-pt">Distortion Of Pali Keywords In Paticca Samuppada</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.AA.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Patiloma Paticca Samuppada</span>
+        
+        <span class="pathway-title title-pt">Patiloma Paticca Samuppada</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

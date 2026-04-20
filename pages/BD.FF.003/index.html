@@ -1,0 +1,530 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Antarabhava Discussion In Kathavatthu | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 29 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.FF.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Antarabhava Discussion In Kathavatthu</h1>
+    
+    <h1 class="title-pt">Discussão sobre Antarabhava em Kathavatthu</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.FF.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.FF.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0037"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.FF.003</td></tr><tr><td>Fin-dex</td><td>0037</td></tr><tr><td>Slug</td><td>antarabhava-discussion-in-kathavatthu</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Antarabhava Discussion In Kathavatthu</td></tr></table></div></div><p><strong>December 16, 2020; revised December 17, 2020; <span style="color: #0000ff;">July 16, 2022</span></strong></p>
+<h5><em> Antarābhava</em><span> Was Discussed at the Third <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council</span></h5>
+<p style="text-align: justify;">1. The concept of an <em>antarābhava</em><span> was discussed and rejected at the Third <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council. It is documented in the </span><em>Kathāvatthu </em>section of the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>.</p>
+<ul style="text-align: justify;">
+<li>Many current <em>Thervadins</em> say that the concept of an <em>antarābhava</em> is associated with <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>. They say that since <em>antarābhava</em> was rejected at that Council, the concept of a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> was rejected.</li>
+<li>However, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span> was not even mentioned in that discussion at the Third <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council. I will fully translate and discuss the relevant sections of </span><em>Kathāvatthu </em><span>in this <span class="pali-term term-highlight" data-term="post">post</span> to put this issue to rest.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Antarābhava</em> Discussion in <em>Kathāvatthu</em></h5>
+<p style="text-align: justify;">2. Many "heretical views" were discussed and emphatically rejected by a group of <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em><span> at the Third <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council held in India at the time of Emperor Asoka. Ven. Moggaliputta Tissa recorded those discussions in the </span><em>Kathāvatthu </em>section of the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka.</span></em></p>
+<ul style="text-align: justify;">
+<li>The relevant section is "<span class="word lookup_element"><a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā</a>," and an incomplete English translation is "</span><a href="https://suttacentral.net/kv8.2/en/aung-rhysdavids" rel="noopener noreferrer" target="_blank">Of an Intermediate State</a>."</li>
+<li><span class="word lookup_element"><span>For those who understand the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> Language, a complete <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> translation is in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Jayanthi </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. See pp. 340-355 of "<a href="http://localhost/beng_feb2026/wp-content/uploads/48.OTAP_KathaVatthu_Prakarana_2-Sinhala.pdf" rel="noopener noreferrer" target="_blank">48.OTAP_KathaVatthu_Prakarana_2-Sinhala</a>."</span></li>
+<li><span>Here, we will translate some key verses, first providing the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> text and then a translation (with details as necessary.) Hopefully, anyone will understand what was rejected and not rejected (or even discussed.)</span></li>
+</ul>
+<h5 style="text-align: justify;">Is <em>Antarābhava</em> Within the Three Major Existences?</h5>
+<p style="text-align: justify;"><span>3. At the beginning of the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> text, we can see that the wrong view about an "</span><em>antarābhava</em>" or an "intermediate state" was the following.</p>
+<ul style="text-align: justify;">
+<li><em>Theravadins</em> ask: "<em><span class="word lookup_element">Atthi</span> <span class="word lookup_element">antarābhavoti?</span> </em>or "Is there an intermediate state?"</li>
+<li>The other side (heretics) says "<em><span class="word lookup_element">Āmantā" </span></em><span class="word lookup_element">or </span><span class="word lookup_element">"Yes."</span></li>
+<li><em>Theravadins</em> ask: "<em><span class="word lookup_element">Kāmabhavoti?" </span></em><span class="word lookup_element">or "Is it in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>?" and the answer is "<em>Na hevaṃ vattabbe" </em>or "That is not so."</span></li>
+<li>Similarly, the heretics say that this "intermediate state" in not in the <span class="word lookup_element"><em>r<span class="word lookup_element" id="lookup_target29">ūpa</span></em></span><span class="word lookup_element"><em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>or the <em>ar<span class="word lookup_element" id="lookup_target29">ūpa</span><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>.</span></em></span></li>
+</ul>
+<p style="text-align: justify;">However, all existences in this world MUST BE within one of those three major existences: <span class="word lookup_element"><em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>, </span></em></span><span class="word lookup_element"><em>r<span class="word lookup_element" id="lookup_target29">ūpa</span></em></span><span class="word lookup_element"><em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em> or <em>ar<span class="word lookup_element" id="lookup_target29">ūpa</span><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>. </span></em>Then each of those sub-divides into minor categories. For example, human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> are in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>. </span></em></span></p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><strong>But the heretics say that the "intermediate state" is not in any of the existences.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Is <em>Antarābhava</em> In Between the Three Major Existences?</h5>
+<p style="text-align: justify;">4. <em>Theravadins</em> ask: "<em><span class="word lookup_element">Kāmabhavassa</span> <span class="word lookup_element">ca</span> <span class="word lookup_element">rūpabhavassa</span> <span class="word lookup_element">ca</span> <strong><span class="word lookup_element">antare</span></strong> <span class="word lookup_element">atthi</span> </em><span class="word lookup_element"><em>antarābhavoti</em>?" or "Does this intermediate state exist <strong>in</strong> <strong>between</strong> <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>and<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>"?</span></em></span></p>
+<ul style="text-align: justify;">
+<li>Heretics: No.</li>
+<li>Then the <em>Theravadins</em> declare, "<em>Hañci kāmabhavassa ca rūpabhavassa ca antare natthi antarābhavo, no ca vata re vattabbe—“atthi antarābhavo” ti</em>" OR "If you affirm that there is no <span class="word lookup_element">intermediate state between <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>and<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em></span> then you cannot maintain your proposition."</li>
+<li>In the same way, the heretics admit that there is no <span class="word lookup_element">intermediate state between <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em><em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>and<em><span> arupa <span class="pali-term term-highlight" data-term="bhava">bhava</span>, </span></em>and the <em>Theravadins</em> point out that the heretics' position is untenable.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Antarābhava</em> In Terms of <em><span>Yoni,  <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>, <em class="text-italics">viññāṇaṭṭhiti, sattāvāsa</em></h5>
+<p style="text-align: justify;">5. All living beings in this world belong to those three major types of <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em><span>. <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained all possible existences in this world in many other ways.</span></p>
+<ul style="text-align: justify;">
+<li>All living beings can be categorized according to four types of <em>yoni</em> (modes of birth), <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (according to five major types of <em><span><span class="pali-term term-highlight" data-term="samsaric">samsaric</span></span></em> habits), seven types of <em class="text-italics">viññāṇaṭṭhiti </em>(stations of consciousness), and  nine types of abodes (<em class="text-italics">sattāvāsa.</em>)</li>
+<li>The first two categories are discussed in the "<a href="https://suttacentral.net/mn12/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Mahāsīhanāda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 12)</a>." The seven types of <em class="text-italics">viññāṇaṭṭhiti </em>discussed in the "<a href="https://suttacentral.net/an7.44/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Sattaviññāṇaṭṭhi <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 7.44)</a>" and the nine types of <em class="text-italics">sattāvāsa </em>in the "<a href="https://suttacentral.net/an9.24/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Sattāvāsa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 9.24)</a>."</li>
+<li>So, <em>Theravadins</em> ask: "<em><span>Pañcamī sā yoni, chaṭṭhamī sā <span class="pali-term term-highlight" data-term="gati">gati</span>, aṭṭhamī sā viññāṇaṭṭhiti, dasamo so sattāvāsoti</span></em>?" OR "Are there five types of <em>yoni</em> or six types of <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> or eight types of <em class="text-italics">viññāṇaṭṭhiti </em>or ten types of <em class="text-italics">sattāvāsa</em>?"</li>
+<li><span style="color: #0000ff;"><strong>Heretics admit that this <em>antarābhava </em>cannot be found under any of those categories.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Does <em>Antarābhava </em>Fall Under Other Possible Categories?</h5>
+<p style="text-align: justify;">6. There are many other ways of categorization discussed in that section, "<span class="word lookup_element"><a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā.</a><span>" However, the English translation there at <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central is not complete.</span></span></p>
+<ul style="text-align: justify;">
+<li><span class="word lookup_element"><span>For those who understand the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> Language, a complete <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> translation is in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Jayanthi </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span> </span></em>per #2 above.</span></li>
+<li>The point is that <em>antarābhava </em>cannot be found under ANY possible category that a living being can be put into.</li>
+<li><span>This <span class="pali-term term-highlight" data-term="post">post</span> would be very long if I translated the whole section. However, let us look at one more important category.</span></li>
+</ul>
+<h5 style="text-align: justify;">Does a Being in <em>Antarābhava </em>Have <em>Pancakkhandha</em> (Five Aggregates)?</h5>
+<p style="text-align: justify;">7. <em>Theravadins</em> ask: "<em>kāmabhave/r<span class="word lookup_element">ū</span>pabhave/ar<span class="word lookup_element">ū</span><span>pabhave atthi rūpaṃ <span class="pali-term term-highlight" data-term="vedanā">vedanā</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> viññāṇanti?</span></em>" OR "Do the five aggregates exist in <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>, r</span><span class="word lookup_element">ū</span><span>pa <span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>and in<em> ar<span class="word lookup_element">ū</span><span>pa <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>?"</p>
+<ul>
+<li>Heretics: "<em>Āmantā</em>" OR "Yes." As they agreed, the five aggregates are associated with a living being in ANY <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+<li><em>Theravadins</em> ask: "<em><span>Antarābhave atthi rūpaṃ <span class="pali-term term-highlight" data-term="vedanā">vedanā</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> viññāṇanti? </span></em>OR "Do the five aggregates exist in <em>antarābhava</em>?"</li>
+<li>Heretics: "<em>Na hevaṃ vattabbe</em>.." OR "That cannot be said."</li>
+<li style="text-align: justify;"><strong><span style="color: #0000ff;">Here, the heretics admit that a being in <em>antarābhava </em>cannot be described in terms of the five aggregates!</span></strong></li>
+</ul>
+<h5 style="text-align: justify;">No Basis for the Claim of an <em>Antarābhava</em></h5>
+<p style="text-align: justify;">8. Therefore, it was shown without any doubt that the concept of an <em>antarābhava </em><span>does not fit into the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul style="text-align: justify;">
+<li>However, there was absolutely no connection made to the concept of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</li>
+<li><span>Anyone can read the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> text in "</span><span class="word lookup_element"><a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā</a>" and see that the word <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is not even mentioned.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Antarābhava </em>Concept of Those Heretics Is Not The Same as <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">9. If the term <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> did not even come up in the discussion on <em><span class="word lookup_element">antarābhava </span></em><span class="word lookup_element"><span>at the Third <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council,</span></span> why do SOME present-day <em>Theravadins</em> say that the concept of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> was rejected at that Council? The simple answer is that they may not have even read the text in the "<span class="word lookup_element"><a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā</a>" section of the </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>!</p>
+<ul style="text-align: justify;">
+<li>I have heard many <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> just repeat what they heard from someone else, that the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state is a <em>Mahāyāna</em> concept, and it refers to an "intermediate state" or "<em>antarābhava." </em>They don't even try to verify that by looking up the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>.</li>
+<li><strong>They may misunderstand that a human "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" starts with a human's birth (as a baby from a mother's womb) and that it ends when that physical body dies.</strong></li>
+<li>That is an extreme wrong view!</li>
+<li>Let us consider the following evidence against that false belief.</li>
+</ul>
+<h5 style="text-align: justify;">Do "Human <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>" <span class="word">Last</span> <span class="word"><span class="changedDisabled">O</span>nly</span> <span class="word">100</span> <span class="word"><span class="changedDisabled">Y</span>ears</span> <span class="word">and</span> "Fly <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" <span class="word">Last</span> <span class="word"><span class="changedDisabled">O</span>nly</span> <span class="word"><span class="changedDisabled">S</span>everal</span> <span class="word"><span class="changedDisabled">D</span>ays</span>?</h5>
+<p style="text-align: justify;">10. We know that a "dense body" of a human lasts for about 100 years, and a housefly lives only for several days. <span style="color: #0000ff;"><strong>But that time is only a small fraction of the lifetime of the corresponding <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>! </strong><span style="color: #000000;">Whether a human or a housefly, it will be in that existence or <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (as a human or a fly) for many thousands of years.</span></span></p>
+<ul style="text-align: justify;">
+<li><span>As we know, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has emphasized strongly that it is VERY DIFFICULT to get a human existence (</span><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.) See "<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank">How the Buddha Described the Chance of Rebirth in the Human Realm</a>."</li>
+<li><span>On the other hand, many worldwide <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts show that children were born with human bodies only several years previously! See "</span><a href="../../pages/BD.FF.002/index.html" rel="noopener noreferrer" target="_blank">Antarābhava – No Connection to Gandhabba</a>."</li>
+<li>Those previous births were within the same human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. It was the same human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> that led to both those human births.</li>
+</ul>
+<p style="text-align: justify;">11. When the dense physical body of a human dies, that is not necessarily the end of the "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>." Unless the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy of that human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is exhausted, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> will stay alive. It will be pulled into another suitable womb at a later time. In between adjacent "births with human bodies," human existence continues in the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #993366;"><strong>That <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state is NOT an "<em>antarābhava</em>." It is IN "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>."</strong></span> A human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span> is human and has five aggregates. A subtle <span class="pali-term term-highlight" data-term="rupa">rupa</span> (invisible to us) is associated with that </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> with a <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (seat of the mind) and five <em><span>pasāda <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>. It can think. It cannot touch, smell, or taste but can see and hear. See "<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Ghost 1990 Movie – Good Depiction of Gandhabba Concept</a>."</li>
+</ul>
+<p style="text-align: justify;">Similarly, when a fly dies, it will stay in that existence as a "fly <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" and get into an egg to form another fly. That process will occur uncountable times for a fly before that "fly existence" ends!</p>
+<ul style="text-align: justify;">
+<li>When a fly dies, it will stay as a "fly <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" until it is pulled into an egg to start making another "dense fly body."</li>
+</ul>
+<h5 style="text-align: justify;">Human (or Animal) <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> (Existence) Can Last Thousands of Years</h5>
+<p style="text-align: justify;">12. The four types of <em>yoni</em> (modes of births) mentioned in #5 above are the following: <em>Aṇḍajā </em>(egg born),<em> jalābujā </em>(womb born),<em> saṃsedajā </em>(typically translated as "moisture born" but has a better explanation), and <em>opapātikā </em>(instantaneous birth).</p>
+<ul style="text-align: justify;">
+<li>However, when a transition from one <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> to another (say, from human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> to an animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) takes place<span style="color: #ff0000;"><span style="color: #000000;">,</span><strong><span style="color: #993366;"> only an <em>opapātikā</em> birth occurs where a NEW mental body (<em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) is generated by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</span> </strong></span></li>
+<li>In many realms -- including all 20 <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms -- that <em><span><span class="pali-term term-highlight" data-term="opapātika">opapātika</span> </span></em>birth spans the whole <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. They are born one time with a subtle (invisible to us) "mental body" (with a trace of matter), and that is all they have.</li>
+<li>However, in the human and animal realms, that "mental body" will get into a womb or an egg (in animals), leading to the birth of a physical body. Those are conventionally called births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) within those two<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. That <strong>"mental body" in the human or animal realms</strong> is given a special name of <em>gandhabb</em>a.</li>
+<li>Those womb-based and egg-based births are two types of "births" mentioned above: <em>aṇḍajā </em>and<em> jalābujā, </em>respectively. In some instances, the chemical composition needed to make the "seed" (for example, an animal's egg) forms in natural processes, and that is the fourth type, i.e., <em>saṃsedajā </em>birth.</li>
+</ul>
+<p style="text-align: justify;">13. As mentioned above, <em>Brahmas</em> and <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> do not go through the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state. They are born instantaneously (<em><span><span class="pali-term term-highlight" data-term="opapātika">opapātika</span></span></em> birth) and live for very long times (their whole life in that state.) <em>Brahmas</em>' subtle "bodies" are similar to humans' or animals' mental bodies (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state). See "<a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Body Types in 31 Realms – Importance of Manomaya Kaya</a>."</p>
+<ul style="text-align: justify;">
+<li>It is mainly in the human and animal realms that a subtle <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>is born instantaneously, followed by the arising of dense physical bodies with one of the other three possibilities.</li>
+<li>We have discussed the birth of a human baby in "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>." Many such "births with physical bodies" can take place within a single human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+<li>Now let us briefly discuss a few associated issues/conventions/terminology.</li>
+</ul>
+<h5 style="text-align: justify;">Sometimes <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> State Referred to as <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em></h5>
+<p style="text-align: justify;">14. The "descend" of that <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> to a womb is discussed in several <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>, including "<span class="word" id="lookup_target2"><a href="https://suttacentral.net/mn93/pli/ms" rel="noopener noreferrer" target="_blank">Assalāyana Sutta (MN 93)</a>" where the term "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" is specifically used: "<em>Jānāma mayaṃ, bho—yathā gabbhassa avakkanti hoti. Idha mātāpitaro ca sannipatitā honti, mātā ca utunī hoti, <strong>gandhabbo</strong><span> ca paccupaṭṭhito hoti; <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> tiṇṇaṃ sannipātā gabbhassa avakkanti hotī’ti."</span></em></span></p>
+<p style="text-align: justify;"><strong>Translated:</strong> "We do know that, sir. An embryo is conceived when these three things come together—copulation of the mother and father, the mother is in the fertile part of her menstrual cycle, and the presence of a <strong><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em></strong>." This is explained in detail in "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>."</p>
+<ul style="text-align: justify;">
+<li>But in some other <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span>,</span></em> Such as "<a href="https://suttacentral.net/dn15/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Mahānidāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 15)</a>," the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is also referred to as <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> in some cases. That is because that <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> is created by the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy associated with a <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>. </span></em></li>
+<li>For details, see "<a href="../../pages/LD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Gandhabba State – Evidence from Tipiṭaka</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Other Use of the Name "<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>"</h5>
+<p style="text-align: justify;">15. There is a class of <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> called "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>"; see "<span class="word"><a href="https://suttacentral.net/sn31.1/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Suddhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 31.1)</a>" and the following many <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> in SN 31 (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> Vagga</span></em>.) There are numerous types of <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> (in lower <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> realms) who intake (<em>abba</em>) <strong>odors of various plants and flowers</strong> (<em>gandha</em>), and thus that name. "</span><span class="word" id="lookup_target0"><a href="https://suttacentral.net/dn20/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Mahāsamaya <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 20)</a>" identifies Dhataraṭṭha, King of the East is identified as "Chief of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> <span class="pali-term term-highlight" data-term="devas">Devas</span></span></em>."</span></p>
+<ul>
+<li style="text-align: justify;">There is also a group of <em>petas</em> with the name "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>." <strong>They inhale "foul odors."</strong></li>
+<li style="text-align: justify;">To add to that, human <em>gandhabbas</em> are sometimes referred to as "<em>tirokuḍḍa</em>" or "<em>tirokuṭṭa</em>" because they can go through walls.  See "<a href="https://suttacentral.net/kp7/pli/ms" rel="noopener noreferrer" target="_blank">Tirokuṭṭa Sutta (Kp7)</a>."</li>
+<li style="text-align: justify;">Understanding the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> requires checking for inter-consistencies and understanding underlying concepts and terminology usage.</li>
+<li style="text-align: justify;">The word "<strong>right</strong>" can mean two different things: "turn <strong>right</strong>" and "you are <strong>right</strong>." Similarly, the word "<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" must be understood in a particular situation.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.FF.003"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0037"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.FF.003
+Language:     pt-BR
+Generated-At: 2026-04-17T21:33:27Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>16 de dezembro de 2020; revisado em 17 de dezembro de 2020; <span style="color: #0000ff;">16 de julho de 2022</span></strong></p>
+<h5><em> Antarābhava</em> foi discutido no Terceiro Concílio Buddhista</h5>
+<p style="text-align: justify;">1. O conceito de <em>antarābhava</em> foi discutido e rejeitado no Terceiro Concílio Buddhista. Isso está documentado na seção <em>Kathāvatthu</em> do <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>.</p>
+<ul style="text-align: justify;">
+<li>Muitos <em>theravadins</em> atuais afirmam que o conceito de <em>antarābhava</em> está associado ao <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>. Eles dizem que, como <em>o antarābhava</em> foi rejeitado naquele Concílio, o conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> também foi rejeitado.</li>
+<li>No entanto, <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> nem sequer foi mencionado naquela discussão no Terceiro Concílio Buddhista. Traduzirei integralmente e discutirei as seções relevantes do <em>Kathāvatthu </em>neste ensaio para esclarecer essa questão.</li>
+</ul>
+<h5 style="text-align: justify;">Discussão sobre <em>Antarābhava</em> no <em>Kathāvatthu</em></h5>
+<p style="text-align: justify;">2. Muitas “visões heréticas” foram discutidas e enfaticamente rejeitadas por um grupo de <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> no Terceiro Concílio Buddhista, realizado na Índia na época do Imperador Asoka. O Venerável Moggaliputta Tissa registrou essas discussões na seção <em>Kathāvatthu</em> do <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka.</span></em></p>
+<ul style="text-align: justify;">
+<li>A seção relevante é <span class="word lookup_element">“<a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā</a>”, e uma tradução incompleta para o inglês é “</span><a href="https://suttacentral.net/kv8.2/en/aung-rhysdavids" rel="noopener noreferrer" target="_blank">Of an Intermediate State</a>” (<a href="https://suttacentral.net/kv8.2/en/aung-rhysdavids" rel="noopener noreferrer" target="_blank">Sobre um Estado</a> Intermediário).</li>
+<li><span class="word lookup_element"><span>Para aqueles que entendem a língua cingalês, uma tradução completa em cingalês está no <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Jayanthi </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. Veja as pp. 340-355 de “<a href="http://localhost/beng_feb2026/wp-content/uploads/48.OTAP_KathaVatthu_Prakarana_2-Sinhala.pdf" rel="noopener noreferrer" target="_blank">48.OTAP_KathaVatthu_Prakarana_2-Sinhala</a>”.</span></li>
+<li><span>Aqui, traduziremos alguns versos-chave, apresentando primeiro o texto em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e, em seguida, a tradução (com detalhes, conforme necessário). Esperamos que todos compreendam o que foi rejeitado e o que não foi rejeitado (ou mesmo discutido).</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>O Antarābhava</em> está dentro das Três Existências Principais?</h5>
+<p style="text-align: justify;"><span>3. No início do texto <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, podemos ver que a visão errada sobre um “</span><em>antarābhava</em>” ou um “estado intermediário” era a seguinte.</p>
+<ul style="text-align: justify;">
+<li><em>Os theravadins</em> perguntam: “<em><span class="word lookup_element">Atthi</span> <span class="word lookup_element">antarābhavoti?</span></em>” ou “Existe um estado intermediário?”</li>
+<li>O outro lado (os hereges) diz “<em><span class="word lookup_element">Āmantā” </span></em><span class="word lookup_element">ou “Sim”.</span></li>
+<li><em>Os theravadins</em> perguntam: “<em><span class="word lookup_element">Kāmabhavoti?” </span></em><span class="word lookup_element">ou “Está no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>?” e a resposta é “<em>Na hevaṃ vattabbe” </em>ou “Não é assim.”</span></li>
+<li>Da mesma forma, os hereges dizem que esse “estado intermediário” não está no <span class="word lookup_element"><em><span class="word lookup_element" id="lookup_target29">R</span><span>ūpa <span class="pali-term term-highlight" data-term="bhava">Bhava</span> </span></em></span><span class="word lookup_element">nem no <em><span class="word lookup_element" id="lookup_target29"><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span></span></span><span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>.</span></em></span></li>
+</ul>
+<p style="text-align: justify;">No entanto, todas as existências neste mundo DEVEM ESTAR dentro de uma dessas três existências principais: <span class="word lookup_element"><em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>, </span></em></span><span class="word lookup_element"><em><span class="word lookup_element" id="lookup_target29">R</span><span>ūpa <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em></span><span class="word lookup_element"> ou <em><span class="word lookup_element" id="lookup_target29"><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span></span></span><span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>.</span></em> Cada uma delas, por sua vez, se subdivide em categorias menores. Por exemplo, <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano e <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> animal estão no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>. </span></em></span></p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><strong>Mas os hereges afirmam que o “estado intermediário” não se encontra em nenhuma dessas existências.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><em>O Antarābhava</em> está entre as três principais formas de existência?</h5>
+<p style="text-align: justify;">4. <em>Os theravadins</em> perguntam: “<em><span class="word lookup_element">Kāmabhavassa</span> <span class="word lookup_element">ca</span> <span class="word lookup_element">rūpabhavassa</span> <span class="word lookup_element">ca</span> <strong><span class="word lookup_element">antare</span></strong> <span class="word lookup_element">atthi</span> </em><span class="word lookup_element"><em>antarābhavoti</em>?” ou “Esse estado intermediário existe <strong>entre</strong> <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span> </span></em>e<em><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>?”</span></em></span></p>
+<ul style="text-align: justify;">
+<li>Hereges: Não.</li>
+<li>Então, os <em>theravadins</em> declaram: “<em><span>Hañci <span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span> ca <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span> ca antare natthi antarābhavo, no ca vata re vattabbe—“atthi antarābhavo” ti</span></em>” OU “Se você afirma que não há <span class="word lookup_element">estado intermediário entre <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span> </span></em>e<em><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>,</span></em></span> então você não pode sustentar sua proposição.”</li>
+<li>Da mesma forma, os hereges admitem que não há <span class="word lookup_element">estado intermediário entre <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span> </span></em>e<em><span> arupa <span class="pali-term term-highlight" data-term="bhava">Bhava</span>, </span></em>e os <em>theravadins</em> apontam que a posição dos hereges é insustentável.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Antarābhava</em> em termos de <em><span>Yoni, <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>, <em class="text-italics">viññāṇaṭṭhiti, sattāvāsa</em></h5>
+<p style="text-align: justify;">5. Todos os seres vivos neste mundo pertencem a esses três tipos principais de <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em><span>. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explicou todas as existências possíveis neste mundo de muitas outras maneiras.</span></p>
+<ul style="text-align: justify;">
+<li>Todos os seres vivos podem ser categorizados de acordo com quatro tipos de <em>yoni</em> (modos de nascimento), <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> (de acordo com cinco tipos principais de hábitos <em><span>de <span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em>), sete tipos de <em class="text-italics">viññāṇaṭṭhiti </em>(estações da consciência) e nove tipos de moradas (<em class="text-italics">sattāvāsa</em>)<em class="text-italics">.</em></li>
+<li>As duas primeiras categorias são discutidas no “<a href="https://suttacentral.net/mn12/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Mahāsīhanāda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 12)</a>”. Os sete tipos de <em class="text-italics">viññāṇaṭṭhiti </em>são discutidos no “<a href="https://suttacentral.net/an7.44/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Sattaviññāṇaṭṭhi <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 7.44)</a>” e os nove tipos de <em class="text-italics">sattāvāsa </em>no “<a href="https://suttacentral.net/an9.24/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Sattāvāsa <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 9.24)</a>”.</li>
+<li>Assim, <em>os theravadins</em> perguntam: “<em><span>O quinto é yoni, o sexto é <span class="pali-term term-highlight" data-term="gati">Gati</span>, o oitavo é viññāṇaṭṭhiti, e o décimo é sattāvāsa</span></em>?” OU “Existem cinco tipos de <em>yoni</em>, seis tipos de <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>, oito tipos de <em class="text-italics">viññāṇaṭṭhiti </em>ou dez tipos de <em class="text-italics">sattāvāsa</em>?”</li>
+<li><span style="color: #0000ff;"><strong>Os hereges admitem que este <em>antarābhava </em>não pode ser encontrado em nenhuma dessas categorias.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><em>O Antarābhava</em> se enquadra em outras categorias possíveis?</h5>
+<p style="text-align: justify;">6. Há muitas outras formas de categorização discutidas nessa seção, “<span class="word lookup_element"><a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā”.</a><span> No entanto, a tradução para o inglês disponível no <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central não está completa.</span></span></p>
+<ul style="text-align: justify;">
+<li><span class="word lookup_element"><span>Para aqueles que entendem a língua cingalês, uma tradução completa em cingalês está no <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Jayanthi </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>,</span></em> conforme o nº 2 acima.</span></li>
+<li>A questão é que <em>antarābhava </em>não pode ser encontrado em NENHUMA categoria possível na qual um ser vivo possa ser colocado.</li>
+<li>Este ensaio ficaria muito longo se eu traduzisse a seção inteira. No entanto, vamos examinar mais uma categoria importante.</li>
+</ul>
+<h5 style="text-align: justify;">Um ser em <em>Antarābhava </em>possui <em>Pancakkhandha</em> (Cinco Agregados)?</h5>
+<p style="text-align: justify;">7. <em>Os theravadins</em> perguntam: “<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>, R</span><span class="word lookup_element">ū</span><span>pa <span class="pali-term term-highlight" data-term="bhava">Bhava</span> </span></em>e <em>Ar<span class="word lookup_element">ū</span><span>pa <span class="pali-term term-highlight" data-term="bhava">Bhava</span>: existem</span></em> os cinco agregados<em>?</em>”</p>
+<ul>
+<li>Heréticos: “<em>Āmantā</em>” OU “Sim.” Conforme concordaram, os cinco agregados estão associados a um ser vivo em QUALQUER <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>.</li>
+<li><em>Os Theravadins</em> perguntam: <em><span>“Existem forma, <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span> e consciência no antarābhava?</span></em>” OU “Os cinco agregados existem no <em>antarābhava</em>?”</li>
+<li>Hereges: “<em>Na hevaṃ vattabbe</em>...” OU “Isso não pode ser afirmado.”</li>
+<li style="text-align: justify;"><strong><span style="color: #0000ff;">Aqui, os hereges admitem que um ser em <em>antarābhava </em>não pode ser descrito em termos dos cinco agregados!</span></strong></li>
+</ul>
+<h5 style="text-align: justify;">Nenhuma base para a alegação de um <em>Antarābhava</em></h5>
+<p style="text-align: justify;">8. Portanto, ficou demonstrado, sem qualquer dúvida, que o conceito de <em>antarābhava </em><span>não se encaixa no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul style="text-align: justify;">
+<li>No entanto, não foi feita absolutamente nenhuma conexão com o conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</li>
+<li><span>Qualquer pessoa pode ler o texto em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> em “</span><span class="word lookup_element"><a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā</a>” e ver que a palavra <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> nem sequer é mencionada.</span></li>
+</ul>
+<h5 style="text-align: justify;">O conceito de <em>Antarābhava</em> desses hereges não é o mesmo que <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">9. Se o termo <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> nem sequer surgiu na discussão sobre <em><span class="word lookup_element">antarābhava </span></em><span class="word lookup_element">no Terceiro Concílio Buddhista,</span> por que ALGUNS <em>theravadins</em> atuais dizem que o conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> foi rejeitado naquele Concílio? A resposta simples é que eles talvez nem tenham lido o texto na <span class="word lookup_element">seção</span> “<span class="word lookup_element"><a href="https://suttacentral.net/kv8.2/pli/ms" rel="noopener noreferrer" target="_blank">Antarābhavakathā</a>” do </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>!</p>
+<ul style="text-align: justify;">
+<li>Já ouvi muitos <em><span><span class="pali-term term-highlight" data-term="bhikkhū">Bhikkhū</span></span></em> simplesmente repetirem o que ouviram de outra pessoa, de que o estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é um conceito <em>Mahāyāna</em> e se refere a um “estado intermediário” ou “<em>antarābhava”.</em> Eles nem sequer tentam verificar isso consultando o <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>.</li>
+<li><strong>Eles podem interpretar erroneamente que um “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>” humano começa com o nascimento de um ser humano (como um bebê do ventre da mãe) e que termina quando esse corpo físico morre.</strong></li>
+<li>Essa é uma visão extremamente errada!</li>
+<li>Vamos considerar as seguintes evidências contra essa crença falsa.</li>
+</ul>
+<h5 style="text-align: justify;">O “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano” <span class="word">dura</span> <span class="word">apenas</span> <span class="word">100</span> <span class="word">anos</span> <span class="word">e</span> <em>o</em> “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> da mosca” <span class="word">dura</span> <span class="word">apenas</span> <span class="word">alguns</span> <span class="word">dias</span>?</h5>
+<p style="text-align: justify;">10. Sabemos que o “corpo denso” de um ser humano dura cerca de 100 anos, e que uma mosca doméstica vive apenas alguns dias. <span style="color: #0000ff;"><strong>Mas esse tempo é apenas uma pequena fração da vida do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> correspondente! </strong><span style="color: #000000;">Seja um ser humano ou uma mosca doméstica, ele permanecerá nessa existência ou <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> (como ser humano ou como mosca) por muitos milhares de anos.</span></span></p>
+<ul style="text-align: justify;">
+<li><span>Como sabemos, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> enfatizou fortemente que é MUITO DIFÍCIL obter uma existência humana (</span><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>). Veja “<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank">Como o Buddha descreveu a chance de Renascimento no reino humano</a>”.</li>
+<li>Por outro lado, muitos relatos de renascimento em todo o mundo mostram que crianças nasceram com corpos humanos apenas alguns anos antes! Veja “<a href="../../pages/BD.FF.002/index.html" rel="noopener noreferrer" target="_blank">Antarābhava – Sem conexão com o Gandhabba</a>”.</li>
+<li>Esses nascimentos anteriores ocorreram dentro do mesmo <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano. Foi o mesmo <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> humano que conduziu a ambos os nascimentos humanos.</li>
+</ul>
+<p style="text-align: justify;">11. Quando o corpo físico denso de um ser humano morre, isso não é necessariamente o fim do “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano”. A menos que a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> desse <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> humano se esgote, <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> permanecerá vivo. Ele será atraído para outro útero adequado posteriormente. Entre “nascimentos com corpos humanos” adjacentes, a existência humana continua no estado de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #993366;"><strong>Esse estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> NÃO é um “<em>antarābhava</em>”. Ele está DENTRO do “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano”.</strong></span> Um <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span> humano é humano e possui cinco agregados. Um <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> sutil (invisível para nós) está associado a esse </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> com um <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span></span></em> (sede da mente) e cinco <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda Rūpa</span></span></em>. Ele pode pensar. Não pode tocar, cheirar ou saborear, mas pode ver e ouvir. Veja “<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Filme Ghost de 1990 – Boa representação do conceito de Gandhabba</a>”.</li>
+</ul>
+<p style="text-align: justify;">Da mesma forma, quando uma mosca morre, ela permanecerá nessa existência como um “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> de mosca” e entrará em um ovo para formar outra mosca. Esse processo ocorrerá inúmeras vezes para uma mosca antes que essa “existência de mosca” termine!</p>
+<ul style="text-align: justify;">
+<li>Quando uma mosca morre, ela permanecerá como um “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> de mosca” até ser atraída para dentro de um ovo para começar a formar outro “corpo denso de mosca”.</li>
+</ul>
+<h5 style="text-align: justify;">A existência (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) humana (ou animal) pode durar milhares de anos</h5>
+<p style="text-align: justify;">12. Os quatro tipos de <em>yoni</em> (modos de nascimento) mencionados no nº 5 acima são os seguintes: <em>Aṇḍajā </em>(nascido de ovo),<em> jalābujā </em>(nascido do útero),<em> saṃsedajā </em>(normalmente traduzido como “nascido da umidade”, mas tem uma explicação melhor) e <em>opapātikā </em>(nascimento instantâneo).</p>
+<ul style="text-align: justify;">
+<li>No entanto, quando ocorre uma transição de um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> para outro (digamos, do <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano para um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> animal)<span style="color: #ff0000;"><span style="color: #000000;">,</span><strong><span style="color: #993366;"> apenas um nascimento <em>opapātikā</em> ocorre</span></strong><span style="color: #000000;">, </span><strong><span style="color: #993366;">no qual um NOVO corpo mental (<em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>) é gerado pela energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</span> </strong></span></li>
+<li>Em muitos reinos — incluindo todos os 20 reinos <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> — esse nascimento <em><span><span class="pali-term term-highlight" data-term="opapātika">Opapātika</span></span></em> abrange todo o <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>. Eles nascem uma única vez com um “corpo mental” sutil (invisível para nós) (com um traço de matéria), e isso é tudo o que possuem.</li>
+<li>No entanto, nos reinos humano e animal, esse “corpo mental” entra em um útero ou em um ovo (nos animais), levando ao nascimento de um corpo físico. Esses são convencionalmente chamados de nascimentos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) dentro desses dois<em> Bhavas</em>. Esse <strong>“corpo mental” nos reinos humano ou animal</strong> recebe um nome especial: <em>Gandhabb</em>a.</li>
+<li>Esses nascimentos baseados no útero e no ovo são os dois tipos de “nascimentos” mencionados acima: <em>aṇḍajā </em>e<em> jalābujā, </em>respectivamente. Em alguns casos, a composição química necessária para formar a “semente” (por exemplo, o óvulo de um animal) se forma em processos naturais, e esse é o quarto tipo, ou seja, o nascimento <em>saṃsedajā</em>.</li>
+</ul>
+<p style="text-align: justify;">13. Conforme mencionado acima, <em><span>os <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> e <em>os Devās</em> não passam pelo estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>. Eles nascem instantaneamente (nascimento <em><span><span class="pali-term term-highlight" data-term="opapātika">Opapātika</span></span></em>) e vivem por muito tempo (toda a sua vida nesse estado). Os “corpos” sutis <em><span>dos <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> são semelhantes aos corpos mentais dos humanos ou dos animais (estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>). Veja “<a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Tipos de corpos nos 31 reinos – Importância do Manomaya Kaya</a>”.</p>
+<ul style="text-align: justify;">
+<li>É principalmente nos reinos humano e animal que um <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> sutil nasce instantaneamente, seguido pelo surgimento de corpos físicos densos com uma das outras três possibilidades.</li>
+<li>Discutimos o nascimento de um bebê humano em “<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Explicações Buddhistas sobre concepção, aborto e contracepção</a>”. Muitos desses “nascimentos com corpos físicos” podem ocorrer dentro de um único <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano.</li>
+<li>Agora, vamos discutir brevemente algumas questões/convenções/terminologia associadas.</li>
+</ul>
+<h5 style="text-align: justify;">Às vezes, o estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é referido como <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em></h5>
+<p style="text-align: justify;">14. A “descida” desse <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> para um útero é discutida em várias <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>, incluindo <span class="word" id="lookup_target2"><a href="https://suttacentral.net/mn93/pli/ms" rel="noopener noreferrer" target="_blank">o “Assalāyana Sutta (MN 93)</a>”, onde o termo “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>” é especificamente utilizado: “<em>Jānāma mayaṃ, bho—yathā gabbhassa avakkanti hoti. Idha mātāpitaro ca sannipatitā honti, mātā ca utunī hoti, <strong>gandhabbo</strong><span> ca paccupaṭṭhito hoti; <span class="pali-term term-highlight" data-term="evaṃ">evaṃ</span> tiṇṇaṃ sannipātā gabbhassa avakkanti hotī’ti.”</span></em></span></p>
+<p style="text-align: justify;"><strong>Traduzido:</strong> “Nós sabemos disso, senhor. Um embrião é concebido quando essas três coisas se unem — a cópula da mãe e do pai, a mãe estar na fase fértil de seu ciclo menstrual e a presença de um <strong><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></strong>.” Isso é explicado em detalhes em “<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Explicações Buddhistas sobre concepção, aborto e contracepção</a>”.</p>
+<ul style="text-align: justify;">
+<li>Mas em alguns outros <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span>,</span></em> como o <a href="https://suttacentral.net/dn15/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>“Mahānidāna <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (DN 15)</a>”, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> também é referido como <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> em alguns casos. Isso ocorre porque o <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> é criado pela energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> associada a um <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span>. </span></em></li>
+<li>Para mais detalhes, consulte “<a href="http://localhost/beng_feb2026/living-dhamma/mental-body-gandhabba/gandhabba-state-Tipiṭaka-evidence/" rel="noopener noreferrer" target="_blank">Estado de Gandhabba – Evidências do Tipiṭaka</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Outro uso do nome “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>”</h5>
+<p style="text-align: justify;">15. Existe uma classe de <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> chamada “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>”; consulte “<span class="word"><a href="https://suttacentral.net/sn31.1/pli/ms" rel="noopener noreferrer" target="_blank"><em><span>Suddhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 31.1)</a>” e os muitos <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> a seguir em SN 31 (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> Vagga</span></em>). Existem inúmeros tipos de <em>Devās</em> (nos reinos <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> inferiores) que inalam (<em>abba</em>) <strong>odores de várias plantas e flores</strong> (<em>gandha</em>), daí o nome. </span><span class="word" id="lookup_target0">O</span> <span class="word"><span>“Mahāsamaya <span class="pali-term term-highlight" data-term="sutta">Sutta</span> (DN 20)” identifica Dhataraṭṭha, Rei do Oriente, como “Chefe dos Devās <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>”.</span></span></p>
+<ul>
+<li style="text-align: justify;">Há também um grupo de <em>petas</em> com o nome “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>”. <strong>Eles inalam “odores fétidos”.</strong></li>
+<li style="text-align: justify;">Além disso, <em>os Gandhabbas</em> humanos são às vezes chamados de “<em>tirokuḍḍa</em>” ou “<em>tirokuṭṭa</em>” porque podem atravessar paredes. Veja “<a href="https://suttacentral.net/kp7/pli/ms" rel="noopener noreferrer" target="_blank">Tirokuṭṭa Sutta (Kp7)</a>”.</li>
+<li style="text-align: justify;">Compreender o <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> requer verificar as consistências internas e entender os conceitos subjacentes e o uso da terminologia.</li>
+<li style="text-align: justify;">A palavra “<strong>certo</strong>” pode significar duas coisas diferentes: “virar <strong>à direita</strong>” e “você está <strong>certo</strong>”. Da mesma forma, a palavra “<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>” deve ser entendida em uma situação específica.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.FF.002/index.html">Antarabhava No Connection To Gandhabba</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.FF.004/index.html">Interpretation Of The Tipitaka Gandhabba Example</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.FF.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Antarabhava No Connection To Gandhabba</span>
+        
+        <span class="pathway-title title-pt">Antarabhava não tem relação com Gandhabba</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.FF.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Interpretation Of The Tipitaka Gandhabba Example</span>
+        
+        <span class="pathway-title title-pt">Interpretação do exemplo de Gandhabba no Tipiṭaka</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

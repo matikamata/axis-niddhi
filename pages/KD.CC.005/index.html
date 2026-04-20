@@ -1,0 +1,437 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Attachment To Things With Dukkha Lakkhana Leads To Dukkha | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 11 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.CC.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Attachment To Things With Dukkha Lakkhana Leads To Dukkha</h1>
+    
+    <h1 class="title-pt">O apego às coisas que apresentam o Lakkhaṇa de Dukkha leva ao Dukkha</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.CC.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.CC.005"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0077"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.CC.005</td></tr><tr><td>Fin-dex</td><td>0077</td></tr><tr><td>Slug</td><td>attachment-to-things-with-dukkha-lakkhana-leads-to-dukkha</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Attachment To Things With Dukkha Lakkhana Leads To Dukkha</td></tr></table></div></div><p><strong>August 23, 2021; <span style="color: #3366ff;">revised December 13, 2022</span></strong></p>
+<p style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> </span></em>usually means suffering. That is <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em></strong></span>. But things that appear to bring happiness have the "<strong><em><span style="color: #0000ff;"><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></span>.</em></strong><span>" The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explained that in the First Noble Truth, </span><span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em></strong></span> (the Truth about suffering.)</p>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> (Truth About Suffering)</h5>
+<p style="text-align: justify;">1. We encounter the word "<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>" in different contexts:</p>
+<p style="text-align: justify;">(i) <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha vedanā</span></span></em></strong></span> (is a feeling that can range from unpleasantness to painful feelings such as being burned or cut by a knife.<br/>
+(ii) <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em></strong></span> is a characteristic of suffering) in <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> and NOT <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em>.<br/>
+(iii) <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em></strong></span> (First Noble Truth), which is again not <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em> but to point out that <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> is inherent in this world, i.e., suffering CANNOT be avoided (in the long run) if one attaches to things in this world. Since we tend to attach to "mind-pleasing things," <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> says that "suffering is hidden in those "mind-pleasing things." This is not easy to understand unless one spends time understanding it (by reading, contemplating, etc.).<br/>
+(iv) <em><span style="color: #0000ff;"><strong>Dukkhakkhandha</strong></span> </em>(which includes all types of suffering that can result from acting with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> </span></em>due to the ignorance of <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span>.</span></em>  <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em> describes how that happens. The <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> sequence ends with the statement, <em>“Evametassa kevalassa <strong>dukkhakkhandhassa</strong> samudayō hōti” </em>or "that is how the <strong>whole mass of suffering</strong> arises." As we know, "<em><span><span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em>" means "aggregate."</p>
+<h5 style="text-align: justify;">Different Types of <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha vedanā</span></span></em></h5>
+<p style="text-align: justify;">2. <span style="color: #0000ff;"><strong><em>Vedana</em> is what one feels</strong></span>: happy/pleasant, sad/unpleasant, or neutral feelings (<em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>,</span></em> or <em><span>adukkhamasukha <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><strong><em><span> <span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha vedanā</span></span></em></strong></span> can be of several different types. Some are felt by the physical body (like injuries or sicknesses.) Some others are mind-made (like depression), and these are “<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span> jā vēdanā</span></em>“ ("<em>vēdanā </em>generated by "<em>saṅ</em>"). As we know, "<em>saṅ</em>" means "greed, anger, ignorance." An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> feels the first kind but not the second. See, "<a href="../../pages/KD.DD.002/index.html" rel="noopener" target="_blank">What is “San”? Meaning of Sansāra (or Saṃsāra)</a>."</li>
+<li>That second category can arise due to our personal biases. For example, unpleasant feelings may arise when we see someone we dislike (say, person X.) But X could be a friend of a third person (Y), and pleasant feelings may arise in Y upon seeing X. Therefore, such "mind-made feelings" depend on the situation. If we ever become friendly with X, then when we see X, pleasant feelings may arise in us too.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> (characteristic of suffering) in <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em></h5>
+<p style="text-align: justify;">3. <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span> </span></em>is not a feeling.</strong></span> It is an intrinsic characteristic or quality "hidden" in worldly things. It is a bit difficult to understand at first.</p>
+<ul style="text-align: justify;">
+<li>Let us look at a couple of simple examples to get an idea.<br/>
+- Glass has the "characteristic of breaking," i.e., it can break if dropped on a hard surface. But until it breaks, a glass only has the "characteristic of breaking."<br/>
+- A drink with a bit of poison has the "characteristic of inducing sickness or even death." But one will only be subjected to sickness/death if one drinks it.</li>
+<li>In the same way, worldly things (especially those mind-pleasing things") have the "characteristic of suffering." But one will be subjected to such suffering only if one attaches to them. Let us take a simple example. Suppose we hear that person X has died. We will become sad and suffer only if X is someone close to us, say a parent. If we don't even know who X is, we will not suffer hearing that X has died. The stronger the attachment to X, the stronger the distress/sadness (<em><span>domanassa <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>) we feel.</li>
+<li>Everything in this world has <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span>, </span></em>as we have discussed. There are two aspects to this:<br/>
+(i) We are born with a body that has <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em>. We have to live with whatever <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> that comes with it, for example, getting injured or sick),<br/>
+(ii) people (friends, relatives, etc.) and things (houses, cars, etc.) have <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em> too. We can limit that suffering by having attachments to fewer people and things. <strong>However, losing attachment comes naturally with understanding and should not be forced.</strong> One MUST pay attention to one's responsibilities too. We will discuss this later.</li>
+<li>We discussed the <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="lakkhana">lakkhana</span></span></em><span> in the previous <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/KD.CC.004/index.html" rel="noopener" target="_blank">Dukkha in Tilakkhana Is a Characteristic – Not Dukkha Vedanā</a><span>." We will go into details in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> (First Noble Truth)</h5>
+<p style="text-align: justify;">4. <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> (First Noble Truth)</strong></span><span> points out unimaginable suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> can happen among 31 realms (including the human and animal realms.) We can see the suffering of animals and also humans. But the suffering is much harsher in the other three lower realms.</span></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span> </span></em><span>also explains that the root cause of suffering is greed for (or attachment to) worldly pleasures. There is suffering hidden in sensory pleasures. Only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can discover that hidden suffering and can explain how such suffering takes place via </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em>  In simple terms, that can be stated as follows:<br/>
+<span style="color: #993366;"><strong>We tend to do immoral deeds to acquire such pleasures, and their consequences will bear fruit mostly at later times, in many cases, in future lives.</strong></span></li>
+<li><span>Only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> with a highly cleansed mind can figure out hidden dangers (suffering) in sensory pleasures. Like a fish can not see the hidden suffering in a bait, we cannot see the suffering hidden in sensory pleasures unless explained by a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;">Physical Suffering and Death - Hard to Understand?</h5>
+<p style="text-align: justify;">5. Some people seem to pretend they don't understand suffering. Others seem to think they are not going to die. To quote from a discussion forum: " Birth and death are only a view of self." Are these people hallucinating? This kind of thing happens when people "bury their heads in the sand," i.e., trying to avoid a particular situation by pretending it <span class="hvr">does</span> <span class="hvr">not</span> <span class="hvr">exist.</span></p>
+<ul style="text-align: justify;">
+<li>Suffering is real. Try pinching yourself. Does not that hurt? Imagine the suffering when someone dies of a bullet wound or a knife attack.</li>
+<li>Even though animal videos like the following are viral and are made for entertainment, they provide vivid examples of unimaginable suffering experienced by animals in the wild. They are not killed and eaten; <strong>they are eaten while still alive.</strong> Imagine being subjected to that kind of suffering!</li>
+</ul>
+<p style="text-align: justify;"> </p>
+<ul style="text-align: justify;">
+<li>All those animals had been humans in the past. Furthermore, most people living today will be born in the animal realm in the future.</li>
+<li>Even though we cannot see the unimaginable suffering in the other three lower realms, we can at least see the harsh suffering in the animal realm. Of course, there is suffering in the human realm, but animals in the wild undergo much more suffering.</li>
+<li>There are no "old animals" in the wild; as soon as they start slowing down, they are eaten by bigger animals.</li>
+</ul>
+<h5 style="text-align: justify;">Discovery of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> Sequence</h5>
+<p style="text-align: justify;">6. The above video explains what <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em> (specifically, bodily suffering) is.</p>
+<ul style="text-align: justify;">
+<li>But such <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em> do not arise without causes. If the past lives of such an animal are traced back, it would be possible to see a corresponding "bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" committed, which resulted in such a bad outcome.</li>
+<li><span>That is how the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> figured out the steps in </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. Immoral actions (based on <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>) are done with <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and lead to future existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) and births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>). He figured that out by tracing back previous lives. That discovery happened during the night of his Enlightenment. Let us briefly discuss that.</li>
+<li> He first attained the “<em>pubbe nivāsānussati ñāna” </em>to look back at previous human births. Here, “<em>pubbe</em>” means “previous,” “<em>nivasa</em>” means “house,” and “<em>anussati</em>” means “recall,” i.e., the knowledge to recall successive residences of a given <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>. In a given human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> could have many different “houses,” i.e., physical bodies. Thus with this <em>ñāna</em>, one could look at human births in the past, in multiple human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>going back to very long times.</li>
+</ul>
+<p style="text-align: justify;">7. The second <em>ñāna</em>, <em>cutupapāda ñāna,</em><span> extended <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s capability to see all previous rebirths in any realm for any living being. Here </span><em>cutupapāda </em>(<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em> means the end of a <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em> and <em>upapāda</em> means birth) refers to all types of rebirths in various realms (<em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em>, animal, <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em>, etc.) in the past.</p>
+<ul style="text-align: justify;">
+<li>That allowed him to see how different types of<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> lead to corresponding existences (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) and births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) within them, i.e., how "<strong><em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em></strong>" lead to "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" and "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" ending with "<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="jarā">jarā</span>, <span class="pali-term term-highlight" data-term="marana">marana</span>, soka-paridēva-<span class="pali-term term-highlight" data-term="dukkha">dukkha</span>-dōmanassupāyasā</span></strong> sambhavan’ti”</em></li>
+<li>With that knowledge, he attained the third and final "<em>āsavakkhaya ñāna.”</em> That clarifies how cravings ("<em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span>," an</span></em>other word for attachment) lead to future rebirths. <span style="color: #ff0000;"><strong><span style="color: #993366;">We generate <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> with<em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> because of <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span>/<span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em>.</span> </strong></span></li>
+<li>It is the <em>āsavakkhaya ñāna</em> that led to the Buddhahood; see “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Removal of Āsavā</a>” and "<a href="../../pages/LD.GG.004/index.html" rel="noopener" target="_blank">Antarābhava and Gandhabba</a>" for further details.</li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> described that process in various </span><em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>; for example, AN 8.11, MN 4, MN 85, and MN36. The "<a href="https://suttacentral.net/an8.11/en/sujato" rel="noopener" target="_blank"><em><span>Verañja <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 8.11)</a><span>" is a short one. The English translation at <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central is in that link. </span></li>
+</ul>
+<h5 style="text-align: justify;"><span>The essence of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> - Suffering Is Hidden in Sensory Pleasures</span></h5>
+<p style="text-align: justify;">8. Average humans are astonished to hear that the root cause of suffering is attachment to all those mind-pleasing things they value so much.</p>
+<ul>
+<li style="text-align: justify;">It is hard to "see" this because there is a time lag between causes and their results (effects). While some <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> bring their <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> during the same life, most <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> materialize later in life or even in future births.</li>
+<li style="text-align: justify;"><span>However, suppose one spends time and carefully examines the teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Then one can "see" the truth of that statement: 'there is unimaginable suffering hidden in sensory pleasures." That is a bit easier to see for immoral actions based on such attachments (e.g., killing, stealing, taking bribes, etc.)</span></li>
+<li style="text-align: justify;"><span>It is much harder to grasp this profound <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> for those engaging in such immoral deeds (and those who do not believe in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process). Furthermore, if one has done such "bad </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" in the past, one can overcome their <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>. We know that Angulimala killed almost 1000 people and still was able to attain <em>Arahanthood</em><span> within weeks of meeting the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. See "</span><a href="../../pages/TL.EE.010/index.html" rel="noopener" target="_blank">Account of Angulimāla – Many Insights to Buddha Dhamma</a>."</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.CC.005"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0077"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.CC.005
+Language:     pt-BR
+Generated-At: 2026-04-18T04:03:19Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>23 de agosto de 2021; <span style="color: #3366ff;">revisado em 13 de dezembro de 2022</span></strong></p>
+<p style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> </span></em>geralmente significa sofrimento. Isso é <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em></strong></span>. Mas as coisas que parecem trazer felicidade têm o “<strong><em><span style="color: #0000ff;"><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> Lakkhaṇa</span></span>”.</em></strong><span> O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> explicou isso na Primeira Nobre Verdade, </span><span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em></strong></span> (a Verdade sobre o sofrimento).</p>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> (Verdade sobre o Sofrimento)</h5>
+<p style="text-align: justify;">1. Encontramos a palavra “<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>” em diferentes contextos:</p>
+<p style="text-align: justify;">(i) <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em></strong></span> (é uma sensação que pode variar de desagrado a sentimentos dolorosos, como ser queimado ou cortado por uma faca.<br/>
+(ii) <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Lakkhaṇa</span></em></strong></span> é uma característica do sofrimento) em <em>Tilakkhaṇa</em> e NÃO <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em>.<br/>
+(iii) <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em></strong></span> (Primeira Nobre Verdade), que novamente não é <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em>, mas serve para apontar que <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Lakkhaṇa</span></em> é inerente a este mundo, ou seja, o sofrimento NÃO PODE ser evitado (a longo prazo) se alguém se apegar às coisas deste mundo. Como tendemos a nos apegar a “coisas que agradam à mente”, <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> diz que “o sofrimento está oculto nessas ‘coisas que agradam à mente’”. Isso não é fácil de compreender, a menos que se dedique tempo para entendê-lo (por meio da leitura, da contemplação, etc.).<br/>
+(iv) <em><span style="color: #0000ff;"><strong>Dukkhakkhandha</strong></span> </em>(que inclui todos os tipos de sofrimento que podem resultar de agir com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> </span></em>devido à ignorância de <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span>.</span></em> <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> descreve como isso acontece. A sequência de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> termina com a afirmação: <em>“Evametassa kevalassa <strong>dukkhakkhandhassa</strong> samudayō hōti” </em>ou “é assim que surge <strong>toda</strong> a <strong>massa de sofrimento</strong>”. Como sabemos, “<em><span><span class="pali-term term-highlight" data-term="khandha">khandha</span></span></em>” significa “agregado”.</p>
+<h5 style="text-align: justify;">Diferentes tipos de <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em></h5>
+<p style="text-align: justify;">2. <span style="color: #0000ff;"><strong><em><span>Uma <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> é o que se sente</strong></span>: sentimentos felizes/agradáveis, tristes/desagradáveis ou neutros (<em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> ou <em><span>Adukkha <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><strong><em><span> <span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em></strong></span> pode ser de vários tipos diferentes. Alguns são sentidos pelo corpo físico (como lesões ou doenças). Outros são criados pela mente (como a depressão), e estes são “S<em>amphassa jā </em>Vedan<em>ā</em>” (“<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>gerada por “<em>saṅ</em>”). Como sabemos, “<em>saṅ</em>” significa “ganância, raiva, ignorância”. Um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> sente o primeiro tipo, mas não o segundo. Veja “<a href="../../pages/KD.DD.002/index.html" rel="noopener" target="_blank">O que é ‘San’? Significado de Sansāra (ou Saṃsāra)</a>”.</li>
+<li>Essa segunda categoria pode surgir devido aos nossos preconceitos pessoais. Por exemplo, sentimentos desagradáveis podem surgir quando vemos alguém de quem não gostamos (digamos, a pessoa X). Mas X pode ser amigo de uma terceira pessoa (Y), e sentimentos agradáveis podem surgir em Y ao ver X. Portanto, tais “sentimentos criados pela mente” dependem da situação. Se algum dia nos tornarmos amigos de X, então, quando virmos X, sentimentos agradáveis também poderão surgir em nós.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Lakkhaṇa</span></em> (característica do sofrimento) em <em>Tilakkhaṇa</em></h5>
+<p style="text-align: justify;">3. <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Lakkhaṇa</span></em> não é um sentimento.</strong></span> É uma característica ou qualidade intrínseca “oculta” nas coisas mundanas. É um pouco difícil de entender à primeira vista.</p>
+<ul style="text-align: justify;">
+<li>
+Vejamos alguns exemplos simples para ter uma ideia<br/>
+.— O vidro tem a “característica de quebrar”, ou seja, pode quebrar se cair sobre uma superfície dura. Mas, até quebrar, o vidro tem apenas a “característica de quebrar”.<br/>
+— Uma bebida com um pouco de veneno tem a “característica de causar doença ou até mesmo a morte”. Mas só se estará sujeito à doença/morte se a beber.</li>
+<li>Da mesma forma, as coisas mundanas (especialmente aquelas que “agradam à mente”) têm a “característica do sofrimento”. Mas só se estará sujeito a tal sofrimento se se apegar a elas. Vamos dar um exemplo simples. Suponhamos que ouvimos que a pessoa X faleceu. Ficaremos tristes e sofreremos apenas se X for alguém próximo a nós, digamos, um dos pais. Se nem sequer soubermos quem é X, não sofreremos ao ouvir que X faleceu. Quanto mais forte for o apego a X, mais forte será a angústia/tristeza (<em><span>domanassa <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>) que sentimos.</li>
+<li>Tudo neste mundo possui <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Lakkhaṇa, </span></em>como já discutimos. Há dois aspectos nisso:<br/>
+(i) Nascemos com um corpo que possui <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> Lakkhaṇa</span></em>. Temos que conviver com qualquer <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> que venha com ele (por exemplo, ferimentos ou doenças),<br/>
+(ii) as pessoas (amigos, parentes, etc.) e as coisas (casas, carros, etc.) também têm <em><span>Lakkhaṇa de <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>. Podemos limitar esse sofrimento ao ter apegos a menos pessoas e coisas. <strong>No entanto, perder o apego vem naturalmente com a compreensão e não deve ser forçado.</strong> É preciso prestar atenção às próprias responsabilidades também. Discutiremos isso mais tarde.</li>
+<li>Discutimos o <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> lakkhaṇa</span></em> no ensaio anterior, “<a href="../../pages/KD.CC.004/index.html" rel="noopener" target="_blank">Dukkha em Tilakkhaṇa é uma Característica – Não Dukkha Vedanā</a>”. Entraremos em detalhes nos próximos ensaios.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> (Primeira Nobre Verdade)</h5>
+<p style="text-align: justify;">4. <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> (Primeira Nobre Verdade)</strong></span> aponta para um sofrimento inimaginável no processo de renascimento. O renascimento pode ocorrer em 31 reinos (incluindo os reinos humano e animal). Podemos ver o sofrimento dos animais e também dos humanos. Mas o sofrimento é muito mais severo nos outros três reinos inferiores.</p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em><span>
+também explica que a causa fundamental do sofrimento é a ganância por (ou apego a) prazeres mundanos. Há sofrimento oculto nos prazeres sensoriais. Somente um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pode descobrir esse sofrimento oculto e explicar como tal sofrimento ocorre por meio do </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em>
+Em termos simples, isso pode ser expresso da seguinte forma:<br/>
+<span style="color: #993366;"><strong>tendemos a cometer atos imorais para obter tais prazeres, e suas consequências geralmente se manifestarão mais tarde, em muitos casos, em vidas futuras.</strong></span></li>
+<li><span>Somente um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> com uma mente altamente purificada pode perceber os perigos ocultos (sofrimento) nos prazeres sensoriais. Assim como um peixe não consegue ver o sofrimento oculto em uma isca, não conseguimos ver o sofrimento oculto nos prazeres sensoriais a menos que seja explicado por um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<h5 style="text-align: justify;">Sofrimento físico e morte — difíceis de compreender?</h5>
+<p style="text-align: justify;">5. Algumas pessoas parecem fingir que não entendem o sofrimento. Outras parecem pensar que não vão morrer. Para citar um fórum de discussão: “Nascimento e morte são apenas uma visão do eu.” Essas pessoas estão alucinando? Esse tipo de coisa acontece quando as pessoas “enterram a cabeça na areia”, ou seja, tentam evitar uma situação específica fingindo que ela <span class="hvr">não</span> <span class="hvr">existe.</span></p>
+<ul style="text-align: justify;">
+<li><span>O sofrimento é real. Tente beliscar a si mesmo. Isso não dói? Imagine o sofrimento quando alguém morre de um ferimento à <span class="pali-term term-highlight" data-term="bala">bala</span> ou de um ataque com faca.</span></li>
+<li>Embora vídeos de animais como os a seguir sejam virais e tenham sido feitos para entretenimento, eles fornecem exemplos vívidos do sofrimento inimaginável vivenciado por animais na natureza. Eles não são mortos e comidos; <strong>são devorados enquanto ainda estão vivos.</strong> Imagine ser submetido a esse tipo de sofrimento!</li>
+</ul>
+<p style="text-align: justify;"> </p>
+<ul style="text-align: justify;">
+<li>Todos esses animais já foram humanos no passado. Além disso, a maioria das pessoas que vivem hoje nascerá no reino animal no futuro.</li>
+<li>Embora não possamos ver o sofrimento inimaginável nos outros três reinos inferiores, podemos pelo menos ver o sofrimento severo no reino animal. É claro que há sofrimento no reino humano, mas os animais na natureza passam por muito mais sofrimento.</li>
+<li>Não existem “animais idosos” na natureza; assim que começam a ficar mais lentos, são devorados por animais maiores.</li>
+</ul>
+<h5 style="text-align: justify;">Descoberta da Sequência <em><span>de <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify;">6. O vídeo acima explica o que é <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em> (especificamente, o sofrimento físico).</p>
+<ul style="text-align: justify;">
+<li>Mas tal <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em> não surge sem causas. Se as vidas passadas de tal animal fossem rastreadas, seria possível ver um <em><span>“<span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruim” correspondente cometido, o que resultou em tal desfecho ruim.</li>
+<li><span>Foi assim que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descobriu as etapas do </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. Ações imorais (baseadas em <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>) são realizadas com <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e levam à existência futura (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) e aos nascimentos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>). Ele descobriu isso ao traçar as vidas anteriores. Essa descoberta aconteceu durante a noite de sua Iluminação. Vamos discutir isso brevemente.</li>
+<li> Primeiramente, ele alcançou o “<em>pubbe nivāsānussati ñāna” </em>para olhar para trás, para os nascimentos humanos anteriores. Aqui, “<em>pubbe</em>” significa “anterior”, “<em>nivasa</em>” significa “casa” e “<em>anussati</em>” significa “recordar”, ou seja, o conhecimento para recordar as residências sucessivas de um determinado <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>. Em um determinado <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano, um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> poderia ter muitas “casas” diferentes, ou seja, corpos físicos. Assim, com esse <em>ñāna</em>, era possível contemplar os nascimentos humanos no passado, em múltiplos <em>Bhavas</em> humanos que remontavam a tempos muito longínquos.</li>
+</ul>
+<p style="text-align: justify;">7. O segundo <em>ñāna</em>, <em>cutupapāda ñāna,</em><span> ampliou a capacidade do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> de ver todos os renascimentos anteriores em qualquer reino para qualquer ser vivo. Aqui</span><em>, cutupapāda </em>(<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em> significa o fim de um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span>,</span></em> e <em>upapāda</em> significa nascimento) refere-se a todos os tipos de renascimentos em vários reinos (<em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em>, animal, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, etc.) no passado.</p>
+<ul style="text-align: justify;">
+<li>Isso permitiu-lhe ver como diferentes tipos de<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> conduzem às existências (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) e nascimentos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) correspondentes dentro deles, ou seja, como <strong><em><span>“<span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> </span></em></strong><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>” conduz a “Bh</span><em>ava</em><span>” e “<span class="pali-term term-highlight" data-term="jāti">Jāti</span>”, terminando com </span><em><span>“<span class="pali-term term-highlight" data-term="jāti">Jāti</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="jarā">Jarā</span></span></strong></em>”<em><strong><span>, <span class="pali-term term-highlight" data-term="maraṇa">Maraṇa</span>, soka-paridēva-<span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>-dōmanassupāyasā</span></strong> sambhavan’ti”</em></li>
+<li>Com esse conhecimento, ele alcançou o terceiro e último “<em>āsavakkhaya ñāna”.</em> Isso esclarece como os desejos (“<em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span>”,</span></em> outra palavra para apego) levam a renascimentos futuros. <span style="color: #ff0000;"><strong><span style="color: #993366;">Geramos <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> com<em><span> a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> por causa da <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span>/<span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em>.</span> </strong></span></li>
+<li>Foi o <em>āsavakkhaya ñāna</em> que levou à iluminação; consulte “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">O Caminho para Nibbāna – Remoção dos Āsavā</a>” e “<a href="../../pages/LD.GG.004/index.html" rel="noopener" target="_blank">Antarābhava e Gandhabba</a>” para mais detalhes.</li>
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descreveu esse processo em vários </span><em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>; por exemplo, AN 8.11, MN 4, MN 85 e MN 36. O “<a href="https://suttacentral.net/an8.11/en/sujato" rel="noopener" target="_blank"><em><span>Verañja <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 8.11)</a><span>” é um texto curto. A tradução para o inglês no <span class="pali-term term-highlight" data-term="sutta">Sutta</span> Central está nesse link. </span></li>
+</ul>
+<h5 style="text-align: justify;"><span>A essência do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> – O sofrimento está oculto nos prazeres sensoriais</span></h5>
+<p style="text-align: justify;">8. As pessoas comuns ficam surpresas ao ouvir que a causa fundamental do sofrimento é o apego a todas aquelas coisas que agradam à mente e que elas valorizam tanto.</p>
+<ul>
+<li style="text-align: justify;">É difícil “perceber” isso porque há um intervalo de tempo entre as causas e seus resultados (efeitos). Enquanto alguns <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> trazem seu <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> durante a mesma vida, a maioria <em><span>dos <span class="pali-term term-highlight" data-term="kamma vipāka">kamma Vipāka</span></span></em> se materializa mais tarde na vida ou mesmo em nascimentos futuros.</li>
+<li style="text-align: justify;"><span>No entanto, suponha que alguém dedique tempo e examine cuidadosamente os ensinamentos do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Então, é possível “ver” a verdade dessa afirmação: “há um sofrimento inimaginável oculto nos prazeres sensoriais”. Isso é um pouco mais fácil de perceber no caso de ações imorais baseadas nesses apegos (por exemplo, matar, roubar, aceitar subornos, etc.).</span></li>
+<li style="text-align: justify;"><span>É muito mais difícil compreender esse <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> profundo para aqueles que se envolvem em tais atos imorais (e para aqueles que não acreditam no processo de Renascimento). Além disso, se alguém cometeu tal “</span><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruim” no passado, pode superar seu <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>. Sabemos que Angulimala matou quase 1.000 pessoas e ainda assim foi capaz de atingir <em>a Arahantia</em><span> poucas semanas após encontrar o <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Veja “</span><a href="../../pages/TL.EE.010/index.html" rel="noopener" target="_blank">Relato de Angulimala – Muitas percepções sobre o Buddha Dhamma</a>”.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.CC.004/index.html">Dukkha In Tilakkhana Is A Characteristic Not Dukkha Vedana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.CC.006/index.html">How Does Anicca Nature Lead To Dukkha</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.CC.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Dukkha In Tilakkhana Is A Characteristic Not Dukkha Vedana</span>
+        
+        <span class="pathway-title title-pt">O Dukkha em Tilakkhaṇa é uma característica, não a Vedanā de Dukkha</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.CC.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">How Does Anicca Nature Lead To Dukkha</span>
+        
+        <span class="pathway-title title-pt">Como a natureza impermanente (Anicca) leva ao Dukkha?</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

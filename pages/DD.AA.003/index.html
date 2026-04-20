@@ -1,0 +1,318 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Appamado Amata Padam | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Dhammapada</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 4 / 8</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">DD.AA.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Appamado Amata Padam</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>DD.AA.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Dhammapada</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>4</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="DD.AA.003"
+             data-section="Dhammapada"
+             data-section-code="DD"
+             data-findex="0833"
+             data-level="intermediate"
+             data-reading-time="4"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>DD.AA.003</td></tr><tr><td>Fin-dex</td><td>0833</td></tr><tr><td>Slug</td><td>appamado-amata-padam</td></tr><tr><td>Section</td><td>DD</td></tr><tr><td>Title EN</td><td>Appamado Amata Padam</td></tr></table></div></div><p><strong>Revised February 13, 2019; May 21, 2020</strong></p>
+<p style="text-align: center;"><i>Appamādō</i><sup><i> </i></sup><i><span><span class="pali-term term-highlight" data-term="amata">amata</span> padam</span></i><sup><i><br/>
+</i></sup><i>pamādō maccunō padam</i><sup><i><br/>
+</i></sup><i>appamattā na meeyanthi</i><sup><i><br/>
+</i></sup><i>ye pamattā yathā matā.</i></p>
+<p style="text-align: center;"><span style="color: #0000ff;"><strong>(Dhammapada Verse 21, <em><span>Samavati <span class="pali-term term-highlight" data-term="vatthu">Vatthu</span></span></em>)</strong></span></p>
+<ul>
+<li style="text-align: left;"><em>Appam<i>ā</i>da </em>is "doing without delay," and <em>pam<i>ā</i>da</em> is being delayed.</li>
+<li style="text-align: left;"><em>Mata</em> (pronounced "matha") is death, and <em><span><span class="pali-term term-highlight" data-term="amata">amata</span></span></em> is deathless, another word for <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>. Maccun</span><i>ō</i> </em>(pronounced "machchun<i>ō</i>") is also dead, and so is <em>meeyanthi</em>.</li>
+<li style="text-align: left;"><em>Pada</em><span> means "word" (most of these words are also <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> words).</span></li>
+<li style="text-align: left;"><em>Appamatt<i>ā</i></em> is not delayed, <em>pamatt<i>ā</i></em> is one who is delayed.</li>
+<li style="text-align: left;"><em>Yathā</em> is "true status".</li>
+</ul>
+<p style="text-align: left;"><strong>Now we can extract the MEANING of the verse as:</strong></p>
+<p style="text-align: center;"><span style="color: #0000ff;">Hastening is a "deathless word" </span></p>
+<p style="text-align: center;"><span style="color: #0000ff;">Delay is a "death sentence"</span></p>
+<p style="text-align: center;"><span style="color: #0000ff;">One who makes haste attains the deathless status</span></p>
+<p style="text-align: center;"><span style="color: #0000ff;">One who is negligent is already dead</span></p>
+<p style="text-align: justify;">1. Thus someone who is delayed in seeking <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> (either due to not knowing <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> or just procrastinating in following the Path) is like a dead person even while living. He/she will be facing innumerable deaths in the future.</span></p>
+<ul>
+<li style="text-align: justify;">But someone who strives and attains <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> has already reached the "deathless state." Because after attaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, all future deaths are stopped: No more future rebirths and thus no more deaths.</li>
+<li>One actually attains the "deathless state" when one becomes one of the 8 Noble Persons (<em><span>attha purisa <span class="pali-term term-highlight" data-term="puggala">puggala</span></span></em>). This is because once one becomes an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> (Nobel Person), one will never lose it, and will never be born in an<em><span> <span class="pali-term term-highlight" data-term="apāya">apāya</span></span></em>. Thus, one can be said to be "born" as an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> when one becomes a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi; </span></em>see, "<a href="../../pages/TL.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Sōtapanna Anugāmi – No More Births in the Apāyā</a>".</li>
+</ul>
+<p style="text-align: justify;">2. There are two reasons for the urgency:</p>
+<ol style="text-align: justify; list-style-type: lower-alpha;">
+<li>The time of death is unpredictable. Even a young, healthy person may die via an accident or other unforeseeable cause.</li>
+<li><span>As we get old, our brains start to degrade, and thus, our minds will not be able to grasp the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></li>
+</ol>
+<p style="text-align: justify;">3. Many Buddhists that I know say they want to “enjoy life while young” and then start focusing on <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> at old age long after retirement. But one may not reach old age, and even if one did, the mind may not be able to grasp the deep message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<ul>
+<li style="text-align: justify;">Most people come to the conclusion of postponing practice because they think attaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (or the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage) is a mere act of following some rituals that can be done at any time. This would be a big mistake. The <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage is reached via comprehending the true nature of this world, <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, and that needs a sharp mind and a lot of contemplation.</li>
+</ul>
+<p style="text-align: justify;"><span>4. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was once traveling with some</span><em><span> <span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span>,</span></em><span> and they saw an old beggar couple. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> told the </span><em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> that the man’s name was Mahādana (meaning rich), and he was indeed a wealthy person, and the woman was his wife; they both were of “<em>tihétuka</em> birth,” i.e., they were born due to a very potent good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (done with all three good roots of non-greed, non-hate, and wisdom) from a previous life.</p>
+<ul>
+<li style="text-align: justify;"><span>Thus, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said if they started on the Path when they were very young, the man could have become an </span><em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> and the woman an <em>Anāgāmi</em>; if they started when they were young (20’s), they could have become <em>Anāgāmi</em>/<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>, and if they started on the Path in the middle age they could have attained <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>/<span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stages. Instead, they lived lavish lives, wasted their wealth, and became beggars. Now, they were too old to comprehend anything.</li>
+<li style="text-align: justify;">It is unfortunate to see many people today postponing the practice to their “old age.” It is a good idea to start early and at least keep a slow pace.</li>
+<li style="text-align: justify;">There are four factors that contribute to the capability of attaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: <em>āyu</em> (age), <em>vaṇṇa</em> (lively), <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> (comfort), <em><span><span class="pali-term term-highlight" data-term="bala">bala</span></span></em> (ability). These are due to past <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span>. </span></em>See #13 of  "<a href="../../pages/TL.HH.005/index.html" rel="noopener noreferrer" target="_blank">Kanha (Dark) and Sukka (Bright) Kamma and Kammakkhaya</a>."</li>
+<li style="text-align: justify;">Some people may have sufficient <em>vaṇṇa</em> and <em><span><span class="pali-term term-highlight" data-term="bala">bala</span></span></em> even at a very old age. Thus, a normal person cannot look at a given old person and say, "This person seems too old to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>." Only a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can determine whether a person is too old to grasp the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>. Yet, in general, as one becomes older, the brain gets weaker.</span></li>
+</ul>
+<p>The following links to recitals no longer work. I will try to find replacements:</p>
+<p>[sc_embed_player fileurl="http://localhost/beng_feb2026lify.app/media/appamado.wav"]<br/>
+[easy_media_download url="http://localhost/beng_feb2026lify.app/media/appamado.wav" text="Download" width="90" target="_blank"]</p>
+<p>Next, "<a href="../../pages/DD.AA.004/index.html" rel="noopener noreferrer" target="_blank">Najajja Vasalo Hoti..</a>", .......</p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/DD.AA.002/index.html">Sabba Papassa Akaranam</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/DD.AA.004/index.html">Na Jacca Vasalo Hoti</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/DD.AA.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Sabba Papassa Akaranam</span>
+        
+        <span class="pathway-title title-pt">Sabba Papassa Akaranam</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/DD.AA.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Na Jacca Vasalo Hoti</span>
+        
+        <span class="pathway-title title-pt">Na Jacca Vasalo Hoti</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-DD">
+        ↑ Back to Dhammapada
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Spark Exercise And Brain By John Ratey | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Dhamma and Philosophy</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 11 / 12</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">DP.BB.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Spark Exercise And Brain By John Ratey</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>DP.BB.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Dhamma and Philosophy</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>3</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="DP.BB.005"
+             data-section="Dhamma and Philosophy"
+             data-section-code="DP"
+             data-findex="0712"
+             data-level="intermediate"
+             data-reading-time="3"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>DP.BB.005</td></tr><tr><td>Fin-dex</td><td>0712</td></tr><tr><td>Slug</td><td>spark-exercise-and-brain-by-john-ratey</td></tr><tr><td>Section</td><td>DP</td></tr><tr><td>Title EN</td><td>Spark Exercise And Brain By John Ratey</td></tr></table></div></div><p><strong><span>Early <span class="pali-term term-highlight" data-term="post">post</span> of 2014; revised August 28, 2019</span></strong></p>
+<p style="text-align: justify">1. There is a good book, “Spark: The Revolutionary New Science of Exercise and the Brain" by John J. Ratey (2013). It discusses new findings on the effects of regular exercise on the brain as well as the body. (Most of the books I review are likely to be available at public libraries).</p>
+<p style="text-align: justify">2. The book discusses how exercise can keep the brain working at higher efficiency and lower stress and anxiety. Also, regular exercise can rid of addictions, and even Attention Deficit Hyperactivity Disorder, ADHD. It also talks about women’s hormonal changes and aging too.</p>
+<p style="text-align: justify">3. The key is to engage in a moderate exercise program up to 6 days a week. And to ratchet it up to high-intensity once-in-a-while, even for a minute at a time. For example, if you jog, try to run fast for 30 seconds to 1 min once-in-awhile. That is called “interval running.”</p>
+<ul style="text-align: justify">
+<li>The maximum heart rate for a person is 220-AGE.</li>
+<li>low-intensity exercise: 55%-65% of max rate</li>
+<li>moderate: 65%-75%</li>
+<li>high intensity: 75%-90%</li>
+</ul>
+<p style="text-align: justify">4. There are “wristwatch type” heart rate monitors available. But you basically “know” when you are at low intensity (walking), moderate (jogging/slow running), and high (dashing to catch a bus or running a 100-meter race).</p>
+<ul style="text-align: justify">
+<li>Should not do high intensity unless you have been active for a while.</li>
+<li>In the anaerobic range (high intensity), the brain releases human growth hormones (HGH). <strong>That is a natural way to “get high.”</strong></li>
+<li>Even low-intensity workouts release many other beneficial chemicals. But in high-intensity workouts, they all get a boost. All these are good for the sustenance/growth of neurons so that your memory can be improved.</li>
+<li>But should not do high-intensity regularly unless one is in great shape.</li>
+<li>He also mentions yoga as an enjoyable activity. Any exercise, i.e., just walking, is better than none.</li>
+<li>He discusses how children in a school district in PA are avoiding obesity and health problems and getting good grades because the schools have good exercise programs.</li>
+<li>I find that the best time to meditate is after a good workout and a shower. The body and the mind are refreshed and alert.</li>
+</ul>
+<p style="text-align: justify">5. We are born with a body and a mind that are results of specific <i><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></i> in the past. But we are not bound by either; we can improve both. That does not mean we should try to "beautify" the body; we should make it healthy. The physical body is a "temporary shell" that will be with us for about 100 years, and if we do not take care of it, that will lead to much discomfort.</p>
+<ul>
+<li style="text-align: justify">We can make conditions conducive to get “good <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i> seeds” and to prevent “bad <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i> seeds” from bearing fruits; see, “<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Annantara and Samanantara Paccaya">Annantara and Samanantara Paccaya</a><span>.” Do not be discouraged by those <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words. The <span class="pali-term term-highlight" data-term="post">post</span> is easy to understand.</span></li>
+</ul>
+<p style="text-align: justify">6. Exercise and meditate! That is key to a long healthy life as well for “cooling down” in the sense of getting some long-lasting peace-of-mind or attaining one of the four stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">As we get old, it is imperative to keep both body and mind in good condition. It is hard to concentrate, let alone meditate, with an aching body or a defiled mind.</li>
+<li style="text-align: justify">Walking a mile or two a day can keep one reasonably healthy. For the mind, solving word puzzles or reading a book is better than watching television.</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/DP.BB.004/index.html">The Language Of God By Francis Collins</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/DP.BB.006/index.html">The Life Of The Buddha By Bhikkhu Nanamoli</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/DP.BB.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">The Language Of God By Francis Collins</span>
+        
+        <span class="pathway-title title-pt">The Language Of God By Francis Collins</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/DP.BB.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">The Life Of The Buddha By Bhikkhu Nanamoli</span>
+        
+        <span class="pathway-title title-pt">The Life Of The Buddha By Bhikkhu Nanamoli</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-DP">
+        ↑ Back to Dhamma and Philosophy
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

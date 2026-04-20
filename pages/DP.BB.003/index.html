@@ -1,0 +1,340 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Waking Up By Sam Harris | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Dhamma and Philosophy</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 9 / 12</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">DP.BB.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Waking Up By Sam Harris</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>DP.BB.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Dhamma and Philosophy</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="DP.BB.003"
+             data-section="Dhamma and Philosophy"
+             data-section-code="DP"
+             data-findex="0710"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>DP.BB.003</td></tr><tr><td>Fin-dex</td><td>0710</td></tr><tr><td>Slug</td><td>waking-up-by-sam-harris</td></tr><tr><td>Section</td><td>DP</td></tr><tr><td>Title EN</td><td>Waking Up By Sam Harris</td></tr></table></div></div><p><strong>Revised August 28, 2022; <span style="color: #3366ff">January 31, 2023</span></strong></p>
+<p class="a-size-medium s-inline s-access-title a-text-normal"><strong>Sam Harris, "Waking Up: A Guide to Spirituality Without Religion" (2014).</strong></p>
+<p style="text-align: justify">1. I am quite encouraged by the fact that many people are beginning to see through something contrary to basic human instincts: That it is possible to find a different and more permanent form of happiness that is not related to material things.</p>
+<ul style="text-align: justify">
+<li>Right at the start of the book, when he talks about his first “meditation retreat” at the age of 16 under harsh conditions in the wilderness, the author says he was puzzled by the positive reaction of the older people in the group, “.<em>..How could someone’s happiness increase when all the material sources of pleasure and distraction had been removed?</em>” (p.2).</li>
+<li>But now, with many years of experience in meditation and studies on human nature as a neuroscientist, he can understand it: “<em>..Unlike many atheists, I have spent much of my life seeking experiences of the kind that gave ride to world’s religions. Despite the painful results of my first few days alone in the mountains of Colorado, I later studied with a wide range of monks, lamas, yogis, and other contemplatives, some of whom had lived for decades in seclusion doing nothing but meditating. In the process, I spent two years on silent retreat myself (in increments of one week to three months), practicing various techniques of meditation for twelve to eighteen hours a day</em>” (pp. 13-14).</li>
+</ul>
+<p style="text-align: justify">2. Harris, like many others, has found that something about human life cannot be explained away just in terms of the workings of the material world. But he cannot pinpoint the source of that “something extra.”</p>
+<ul style="text-align: justify">
+<li>As Harris explains, modern science has obliterated the concept of a “divine influence” as has been put forth by various religions. So I was interested to see his conclusion on the “source of this extra something.”</li>
+</ul>
+<p style="text-align: justify">3. On p.8, he makes a very valid statement: “<em>Spirituality must be distinguished from religion - because of people of every faith, and of none, have had the same sorts of spiritual experiences....Nothing that a Christian, a Muslim, and a Hindu can experience - self-transcending love, ecstasy, bliss, inner light - constitutes evidence in support of their traditional beliefs, because their beliefs are logically incompatible with one another.<b> A deeper principle must be at work</b></em>”. (my highlighting).</p>
+<ul style="text-align: justify">
+<li>This is precisely what I have been trying to emphasize on this website.</li>
+<li>In the very following paragraph, he says what he found that more profound principle to be: “<em>That principle is the subject of this book: The feeling that we call “I” is an illusion</em><span>” (p. 9). This is probably the “no-self” theory that is erroneously presented as <span class="pali-term term-highlight" data-term="buddha">Buddha</span>’s concept of “</span><i><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>”; see "<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anatta - Wrong Interpretations</a>."</li>
+<li><span>However, on that same page, he also summarizes most of my conclusions about religions in general, including “<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>,” as it is practiced by most in both </span><em>Theravada</em> and <em>Mahāyāna</em> sects.</li>
+</ul>
+<p style="text-align: justify">4. I will quote the relevant sentences from pp. 9-10: “<em>I am often asked what will replace religion. The answer, I believe, is nothing and everything. Nothing need replace its ludicrous and divisive doctrines….But what about love, compassion, moral goodness, and self-transcendence? Many people will imagine that religion is the true repository of their virtues. To change this we must talk about the full range of human experience in a way that is as free as the best science already is</em>”.</p>
+<ul style="text-align: justify">
+<li><span>And through the rest of the book, he goes through that process. I agree with most, except that while "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" may be a religion, <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is certainly not (if religion is defined as providing salvation via following set rituals or having blind faith in an entity or a supreme being).</span></li>
+</ul>
+<p style="text-align: justify"><span>5. The key to Mr. Harris's not understanding <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> becomes apparent on p. 28: “</span><em><span>We can also grant that Eastern wisdom has not produced societies or political institutions that are any better than their Western counterparts. In fact, one could argue that India has survived as the world’s largest democracy only because of institutions that were built under British rule. Nor has the East led the world in scientific discovery. Nevertheless, there is something to the notion of uniquely Eastern wisdom, and most of it has been concentrated in or derived from the tradition of <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span></span></em>”.</p>
+<ul style="text-align: justify">
+<li><span>The problem is that Mr. Harris has not been exposed to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, the “non-religious” original teachings.</span></li>
+<li><span style="color: #3366ff"><strong><span>The focus of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, as delivered by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, was not on enhancing mundane life and on building a better society.</span></strong> </span>It was focused on the fact that it is a “waste of time” to try to build large cities, develop technology, and in general, to spend too much time on “making things better for this life” because this life is only a brief stop-over in a much longer journey.</li>
+</ul>
+<p style="text-align: justify"><span>6. If one understood the primary message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, one would see that this life is too short to be “wasted” on such things. This is due to three critical foundational aspects of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>:</span></p>
+<ul style="text-align: justify">
+<li>Even though wrought with some suffering, human life is the best in all of the 31 realms of this world for attaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. It takes an effort to understand the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s broader worldview; see "</span><a href="../../pages/DS.BB.001/index.html" rel="noopener" target="_blank">Origin of Life</a>" and “<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>.”</li>
+<li><span>In the process of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, we spend only a tiny amount of time in this life of about 100 years; see "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank" title="Evidence for Rebirth">Evidence for Rebirth</a>."</li>
+<li>And immersing in mundane sense pleasures becomes only a hindrance to attaining the “true and permanent happiness” of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; see “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha</a>” and “<a href="../../pages/BD.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Niramisa Sukha">Niramisa Sukha?</a>”.</li>
+<li>Of course, the <em>Mahāyāna</em><span> version of “<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>,” or even the </span><em>Theravada</em><span> version, has veered away from this crucial message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<p style="text-align: justify">7. <span style="color: #3366ff"><strong>Yet, I must hasten to point out two additional points:</strong></span></p>
+<ul style="text-align: justify">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that not everyone could comprehend this key message. Thus, he did provide advice for those who did not wish to pursue <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> and asked for advice on how to live a moral and fulfilling family life while enjoying sensual pleasures. In Chapter IV of <span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span> Bodhi’s popular book, "</span><em><span>In the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s Words</span></em>" (2005), such advice from different <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> has been extracted into one place; this book also has other categories separated like good rebirths, mind, etc.</li>
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> never tried to change or influence the political systems that were in place, even though he praised the democratic system that was in place in the tiny autonomous region of V</span><em>ajji</em>, which was a republic similar to the one we have now in the United States. Other than openly criticizing the caste system, he stayed away from politics.</li>
+</ul>
+<p style="text-align: justify"><span>8. I am impressed that Mr. Harris has been able to catch at least a glimmer of the uniqueness in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> even though he has not been exposed to the correct teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: “</span><em><span><span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> in particular possesses a literature on the nature of the mind that has no peer in Western religion or Western science. Some of these teachings are cluttered with metaphysical assumptions that should provoke our doubts, but many aren’t. And when engaged as a set of hypotheses by which to investigate the mind and deepen one’s ethical life, <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> can be an entirely rational enterprise</span></em>” (p. 29).</p>
+<ul>
+<li style="text-align: justify"><span>The author is highly impressed with the <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> “</span><em>vipassana</em>” meditation. However, what he describes in just breath meditation or "<em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> meditation”; see “<a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" target="_blank" title="Bhävanä (Meditation)">Bhavana (Meditation)</a>.”</li>
+</ul>
+<p style="text-align: justify">9. And he has the concept of Enlightenment (<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>) all wrong (this says a lot about the <em>Mahāyāna</em><span> “<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>” that he has been exposed to): “.</span><em>..the state of “full enlightenment” - is generally described as “omniscient.” Just what this means is open to a fair bit of caviling. But however narrowly defined, the claim is absurd</em>” (p. 43).</p>
+<ul style="text-align: justify">
+<li>To understand the concept of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>, one must understand the worldview of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> as described in the <span class="pali-term term-highlight" data-term="posts">posts</span> mentioned above. Then, one needs to read other <span class="pali-term term-highlight" data-term="posts">posts</span> on this site describing </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (search with the keyword <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> at the box on the top right on Keyword Search).</li>
+</ul>
+<p style="text-align: justify"><span>10. Interestingly, there is no mention of purifying the mind of defilements, which is key to true <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> meditation; see "</span><a href="../../pages/BD.AA.004/index.html" rel="noopener noreferrer" target="_blank" title="The Importance of Purifying the Mind">The Importance of Purifying the Mind</a>."</p>
+<ul style="text-align: justify">
+<li><span>I do not blame the author, of course, but it is sad to see how far “<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>” has veered off from the original message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>It is these three root causes of greed, hate, and ignorance (and the counterparts of non-greed, non-hate, and wisdom) that clarify the basis of morality that he has puzzled over in two other books, "<em>The Moral Landscape</em>" (2011) and "<em>Free Will</em>" (2012).</li>
+<li>As Mr. Harris correctly points out in "<em>The Moral Landscape</em>," '<em>there is no such thing as Christian or Muslim morality." </em><span>There is no "<span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> morality" either. Morality is universal and comes out naturally based on benevolence, compassion, and wisdom having precedence over greed, hate, and ignorance; see "</span><a href="../../pages/TL.FF.002/index.html" rel="noopener noreferrer" target="_blank" title="Origin of Morality (and Immorality) in Buddhism">Origin of Morality (and Immorality) in Buddhism</a>."</li>
+</ul>
+<p style="text-align: justify">11. Chapter 2 is on consciousness. The author has a good introduction, and his thinking about consciousness may be expressed here: “<em>I am sympathetic with those who, like the philosopher Colin McGinn and the psychologist Steven Pinker, have suggested that perhaps the emergence of consciousness is simply incomprehensible in human terms</em>” (p. 57).</p>
+<ul>
+<li style="text-align: justify"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has fully explained consciousness.</span><span style="color: #3366ff"><strong> Consciousness is NOT an emergent property; it is a fundamental entity.</strong> </span><span>I have several introductory <span class="pali-term term-highlight" data-term="posts">posts</span> on consciousness on the site; see "</span><a href="../../pages/DS.JJ.002/index.html" rel="noopener noreferrer" target="_blank" title="What is Consciousness?">What is Consciousness?</a><span>" and follow-up <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li style="text-align: justify"><span>I hope those who are interested will read the comprehensive description of the mind provided by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> in the </span><em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em><span> section of this site, which may not be ready for a comprehensive analysis for several more months. But there are a few introductory <span class="pali-term term-highlight" data-term="posts">posts</span> there.</span></li>
+</ul>
+<p style="text-align: justify"><span>12. The rest of the book is about the author’s experience of trying different meditation types. It is too bad that he was not exposed to real <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> meditation. On the other hand, even in countries where </span><em>Theravada</em><span> <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> is practiced, breath meditation is widely taught.</span></p>
+<ul style="text-align: justify">
+<li><span>Overall, I am impressed that even with the minimum exposure Mr. Harris had to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, he has been able to see that “there is something hidden there.”  I am glad to say that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> did teach a much deeper doctrine, and I am sure he and many others in the West will be enthusiastic about finding the actual message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>The author knows that as an atheist, he was treading into unknown territory in talking about spiritual experiences: “<em>.......many of my fellow atheists consider all talk of spirituality to be a sign of mental illness, conscious imposture, or self-deception. This is a problem, because millions of people have had experiences for which spiritual and mystical seem the only terms available</em>” (p.11).</li>
+<li><span>However, once one understands the correct message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, one can see that there is nothing in his doctrine that goes against the beliefs and convictions of most atheists; <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> describes Nature's laws at a fundamental level.</span></li>
+<li><span>The only difference between science and <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is that science assumes that mental phenomena can be derived from material phenomena. In <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, the mind is at the forefront; see "</span><a href="../../pages/DP.AA.002/index.html" rel="noopener noreferrer" target="_blank" title="Philosophy of the Mind">Philosophy of the Mind</a>."</li>
+</ul>
+<p style="text-align: justify"><span>13. I encourage those interested to read the book because the author has not only contemplated the subjects of morality, questions on existence, world religions, etc. but has also tried to experience different meditation techniques. I only wish he had been exposed to the true teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> so that he could perhaps make more assertive statements about the value of the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> in addition to finding much more benefits for himself.</span></p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/DP.BB.002/index.html">Why Does The World Exist</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/DP.BB.004/index.html">The Language Of God By Francis Collins</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/DP.BB.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Why Does The World Exist</span>
+        
+        <span class="pathway-title title-pt">Why Does The World Exist</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/DP.BB.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">The Language Of God By Francis Collins</span>
+        
+        <span class="pathway-title title-pt">The Language Of God By Francis Collins</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-DP">
+        ↑ Back to Dhamma and Philosophy
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

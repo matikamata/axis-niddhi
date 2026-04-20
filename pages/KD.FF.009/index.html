@@ -1,0 +1,482 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Incesssant Distress Pilana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 33 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.009</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Incesssant Distress Pilana</h1>
+    
+    <h1 class="title-pt">Angústia incessante, Pilana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.009</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.009"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0106"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.009</td></tr><tr><td>Fin-dex</td><td>0106</td></tr><tr><td>Slug</td><td>incesssant-distress-pilana</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Incesssant Distress Pilana</td></tr></table></div></div><p><strong>Revised July 14, 2018; June 15, 2019; re-written with the new title June 1, 2020;<span style="color: #3366ff;"> revised July 3, 2022</span></strong></p>
+<h5>Key Verse in The <em><span>Girimānanda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em></h5>
+<p style="text-align: justify;">1. In the "<a href="https://suttacentral.net/an10.60/en/sujato" rel="noopener" target="_blank"><em><span>Girimananda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 10.60)</a><span>", the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated key features of the </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature of "all <em>saṅ­khā­ra"</em>: "<em>Katamā cānanda, sabba­saṅ­khā­resu <strong>anicchāsaññā</strong><span>? Idhānanda, <span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span> </span><span style="color: #000000;"><strong>sabba­saṅ­khā­resu</strong></span> <span style="color: #3366ff;"><strong>aṭṭīyati</strong></span><span style="color: #008000;"> <strong>harāyati</strong></span> <span style="color: #993366;"><strong>jigucchati</strong></span><span>. <span class="pali-term term-highlight" data-term="ayaṃ">Ayaṃ</span> vuccatānanda, sabba­saṅ­khā­resu anicchāsaññā"</span></em>.</p>
+<p style="text-align: justify;"><strong>Translated:</strong> "Ānanda, what is the <strong><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em></strong>associated with <strong>all <em>­saṅ­khā­ra</em></strong>? One is <span style="color: #3366ff;"><strong style="color: #3366ff;">subjected to stress</strong>; one</span><span style="color: #008000;"><strong> should be ashamed of engaging in such useless activity</strong></span>, and <span style="color: #993366;"><strong>liking <em>saṅ­khā­ra </em>is like embracing urine and feces</strong></span>. That is the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>associated with all <em>­saṅ­khā­ra"</em>.</p>
+<ul style="text-align: justify;">
+<li>We will briefly discuss the "<em>aṭṭīyati"</em> nature. "<em>Atti"</em><span> means "bones" (ඇට in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>). A dog thinks that a bone is precious. It spends hours and hours chewing it and becomes tired in the end. Sometimes, the bone would scrape the gum, and the dog would taste its own blood, thinking it tasted the bone.</span></li>
+<li>Of course, <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature at this deep level can be grasped only by those with higher <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</li>
+<li>We only get tired and stressed out (<em>pīḷana</em>) by generating all types of ­<em>saṅ­khā­ra</em>. However, we do not realize that while making that effort. That is why <strong>"<em><span>saṅ­khā­ra <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>" </span></em></strong>remains hidden.</li>
+<li>We engage in <em><span><span class="pali-term term-highlight" data-term="mano">mano</span>, vaci,</span></em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> ­saṅ­khā­ra</span></em>; see "<a href="../../pages/KD.BB.006/index.html" rel="noopener noreferrer" target="_blank">Saṅkhāra – What It Really Means</a>."</li>
+</ul>
+<h5 style="text-align: justify;">The Mental Suffering (<em>Pīḷana</em>)</h5>
+<p style="text-align: justify;">2.<span style="color: #0000ff;"><span style="color: #3366ff;"> Most people think that the first Noble Truth on suffering (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em>) is the physical suffering itself, i.e., they associate it with <em>dukha</em><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, </span></em>which is part of the <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span> <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em><span>. However, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "This </span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> is unlike anything the world has ever seen</span>." <span style="color: #3366ff;"><strong>The real truth about suffering is the following. It is the suffering hidden in what everyone perceives to be happiness.</strong></span> <span style="color: #3366ff;">That needs to be seen with the <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em> (wisdom) <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>.</span></span></p>
+<ul style="text-align: justify;">
+<li><strong>Thus, "seeing <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> with wisdom" means "seeing the suffering hidden in sensory pleasures."</strong></li>
+<li style="text-align: justify;"><span>It is difficult to understand the first Noble Truth about suffering for someone feeling too much suffering. When someone is hurting from an ailment or their mind is too weak in old age, it is impossible to contemplate the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s profound message, as we will see below.</span></li>
+</ul>
+<p style="text-align: justify;">3.<em><span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> (<strong>pronounced "sachcha"</strong>) is the Truth of Suffering; <em><span><span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> is the truth.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">"<em>Pīḷana"</em><span> (pronounced as "peelana") is the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word for distress or hardship. That is part of the suffering we undergo, even without realizing it.</span></li>
+<li style="text-align: justify;">"<em>Peleema"</em><span> (පෙලීම) is the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> word for distress or hardship, where the first part, "pe" rhymes like "pen."</span></li>
+<li><span>The spelling of <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words is according to an adopted convention different from "standard English." See "</span><a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English" Convention Adopted by Early European Scholars – Part 1</a>" and "<a href="../../pages/HB.AA.009/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English" Convention Adopted by Early European Scholars – Part 2</a>."</li>
+</ul>
+<p style="text-align: justify;">That is the kind of meditation (contemplation) one needs to do initially, even before starting on the <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> Anāpānasati <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em><span>. I cannot emphasize enough the importance of understanding the real message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> first.</span></p>
+<h5 style="text-align: justify;">Incessant Distress/Depression (<em>Pīḷana</em>)</h5>
+<p style="text-align: justify;">4. Even though we do not realize it, we are stressed out ALL THE TIME. Constant work is necessary to keep our physical body in good condition. Anyone who has had temporary relief from this constant<strong> distress (<em>pīḷana</em>)</strong> via a good meditation program (even the mundane "breath meditation") knows this; it is called <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>. It is even more apparent if one can have a<em><span> <span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> experience. Only when one gets into a <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> state that one realizes that one has been under incessant stress all life.</p>
+<ul style="text-align: justify;">
+<li>We do not realize this because this is the "baseline" for existence (our "comfort zone"); this is what we have done over innumerable rebirths.</li>
+<li>To get some relief from this constant distress, we strive to bring about periods of happiness. We keep thinking of ways to get a better house, car, or zillions of other "things" that are supposed to provide us joy. Thus, we ALWAYS stress to adjust this "baseline comfort zone." We move to a bigger house, buy new furniture, work harder to get a better job, etc.</li>
+<li>Furthermore, when we go below the current "comfort level," we need to do work (<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) to remedy that. For example, when we get hungry, we may have to prepare a meal or walk/drive to a restaurant to get a snack.</li>
+<li>Or, we may be sitting at home, satisfied after a meal, but then all of a sudden, we again go "below the comfort level" for no apparent reason; we just become "bored" sitting at home and think about going to a movie. So, we get in the car and drive to a movie theater.</li>
+<li>I am sure you can think about zillion such things we do all day.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> - </span></em>Doubling the Suffering</span></h5>
+<p style="text-align: justify;">5. We have to endure injuries and various sicknesses because of our physical bodies. That physical body had origins in the past <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. Then, based on such physical ailments, we also suffer mentally.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #0000ff;"><span style="color: #000000;">Such "distresses" belong to one type of <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span>. </span></em>That is <span style="color: #3366ff;">"</span></span><b><span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>."</span> <span style="color: #000000;">Thus, on top of physical suffering, we double that suffering by such "mental suffering. </span></b><span style="color: #000000;">That mental suffering is part of "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-ja-vēdanā</span></em>." See "</span></span></span><a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank">Vēdanā (Feelings) Arise in Two Ways</a>."</li>
+<li>In addition to direct ailments, other forms of suffering are associated with the physical body. We get hungry, thirsty, lonely, bored, etc. Thus, we need to attend to our physical bodies' needs continually. It is like taking care of an invalid. These are all part of "<span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>."</span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em></span></h5>
+<p style="text-align: justify;">6. Our senses continually ask for <strong>enjoyment.</strong> We want to see beautiful things, hear pleasurable sounds, smell sweet fragrances, and taste sumptuous foods. The body wants luxurious touches, and the mind likes to think about pleasant thoughts.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Then we have to do things (via <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) to satisfy these "urges." <span style="color: #0000ff;"><b><span style="color: #000000;">That is</span> <span style="color: #3366ff;">"<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>"</span> <span style="color: #000000;">mentioned in #1 above.</span></b></span></li>
+<li>In addition to doing work, going to a restaurant, traveling to a cinema, etc., we also need to do a job to make money for all those activities. Constant work (<em>saṅkhār<span style="color: #0000ff;"><span style="color: #000000;">ā</span></span></em>) is required to keep us afloat.</li>
+<li>Most times, we get one urge on top of another: we may want to eat and drink, we may want to watch a movie, but we also may want company (gather friends).</li>
+<li><b>We do not realize this suffering because our minds are focused on THE RESULT, the pleasure we MIGHT have after doing all that work. </b><span style="color: #0000ff;"><span style="color: #000000;">That "made-up mental pleasure" is another part of "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-ja-vēdanā"</span></em> mentioned above.</span></span></li>
+<li>You may be thinking, "What is he talking about? Isn't this what life is supposed to be?". Exactly! <span style="color: #3366ff;"><strong>We do not realize this because this is our "baseline" of existence.</strong></span> We have done this over and overextending to beginning-less time, and we PERCEIVE this to be "normal."</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> </span></em>and </span><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> </span></em></span><span style="color: #000000;">Go Together</span></h5>
+<p style="text-align: justify;">7. What we perceive as happiness comes from the relief we get when the distress level decreases due to our efforts. We suppress "imbalances" or "take actions to bring it to balance." We get relief from that. But the same imbalance keeps returning, and we will have to go over the same "balancing act" again! Let us consider an example.</p>
+<ul style="text-align: justify;">
+<li>We naturally get hungry and thirsty, two main "<em>pīlana"</em> that we cannot avoid as long as we have this physical body.</li>
+<li>However, when we eat and drink, that leads to a sense of happiness. But we never think this "happiness" arose due to inevitable distress.</li>
+<li>If we cannot find water when we get thirsty, that will lead to real suffering. At that point, a glass of water will taste heavenly. However, after drinking a glass or two, we will not be able to enjoy drinking more water.</li>
+<li>That "happiness" actually arose when getting rid of the <em>pīḷana</em> due to thirst.</li>
+<li>The problem is that hunger/thirst keeps coming back!</li>
+</ul>
+<p style="text-align: justify;">8. The reality is that no matter what we do to please the senses, those delightful moments are limited. They do not arise without "<em>pīḷana"</em> or inherent distress associated with the body. Even if we can maintain that sensory fulfillment for a long time, we become tired after a while. Then the mind asks for a different kind of experience. Let us look at some examples.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">We are thrilled to be in an air-conditioned room in a warm climate. But we would not like to be in an air-conditioned room in the middle of winter in Alaska, where we would like the place to be warmed up. "Happiness" is not associated with cold or hot air. We will feel happy when we remove "<em>pīḷana"</em> or the discomfort/distress for the body by cooling or warming the environment.</li>
+<li style="text-align: justify;">We can be lying in the most comfortable bed, but sooner or later, we start shifting and rolling, trying to find a better posture, and eventually cannot stay in bed anymore.</li>
+<li style="text-align: justify;">The most beautiful scenery can be watched only for so long and would get boring.  The joy of sex is gone once satisfied, and that urge will not arise until at a later time again.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span>Viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em></span></h5>
+<p style="text-align: justify;"><span style="color: #0000ff;"><span style="color: #000000;">9. </span><b><span style="color: #3366ff;">Then there is a third type of suffering called "<em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>." </span></em></span></b></span>That is also associated with the body due to "unexpected changes" and eventual death. That is called "<em>viparināma"</em> <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>For example, an accident can cause injury. We may come down with a major illness like cancer anytime.</li>
+<li>Death cannot be avoided in ANY realm and is "built-in" suffering. That WILL NOT be stopped until <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>.</li>
+<li><strong>All three types of suffering are associated with <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature. Because of the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature, <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> arises inevitably. That is why we are helpless (<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>) in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process! </span></strong></li>
+<li>Thus, <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>, and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> are interrelated. See, "<a href="../../pages/KD.FF.001/index.html" rel="noopener" target="_blank">Anicca, Dukkha, Anatta</a>."</li>
+</ul>
+<h5 style="text-align: justify;">The Three Types of Suffering</h5>
+<p style="text-align: justify;">10. In summary, out of the three types of suffering, we notice (and worry about) only the <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">One may not even notice the other two types of suffering (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>). They are masked by our perceived "happiness." Especially those of us who are born with a reasonable level of wealth can overcome both easily.</li>
+<li>If we don't get enough to eat before starving, it becomes "suffering." Furthermore, we don't need to go hunting and kill an animal to eat; we can go to a restaurant and have a nice meal.</li>
+<li>Therefore, those two types of suffering are hidden from us. But we know that many people feel such suffering.</li>
+</ul>
+<p style="text-align: justify;"><strong>11. The worse part is that in the lowest four realms, beings become truly helpless (<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.) <b>There is little one can do (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) to make amends for the incessant <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> in those realms.</b> </strong></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">For example, a wild animal has few choices when hungry. It may go hungry for days with much suffering.</li>
+<li style="text-align: justify;">In the wild, you do not see any old, sick animals. When they become weak, they are eaten by bigger, stronger animals. That is the true meaning of <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>. </span></em>There is absolute helplessness, especially in those lower realms.</li>
+</ul>
+<h5 style="text-align: justify;">Suffering Is Present in All Realms</h5>
+<p style="text-align: justify;">12. There is nowhere in the 31 realms where <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> is absent. The three types of <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> are present in the 31 realms in varying degrees:</p>
+<ul style="text-align: justify;">
+<li>In the lowest realm, the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> is predominant; there is only suffering and no way to get relief by doing<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. Even in the animal realm, there is relatively little <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>;</span></em> mainly, physical suffering manifests there, as pointed out above.</li>
+<li>In the higher realms (above the human realm), there is very little <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> because those are "good births" that originated due to meritorious <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. In these higher realms, the <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> ends their life there. Also, any <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> has not overcome suffering in the lowest four realms in the future unless they have attained <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>.</li>
+<li>It is in the human realm that all three types of <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> are present at significant levels. The <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> is highest in the human realm compared to all the realms.</li>
+</ul>
+<p style="text-align: justify;">13. What we discussed is the First Noble Truth, <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span>.</span></em> There is hidden <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span>,</span></em> even in bouts of apparent happiness. There is no place within the 31 realms where <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> can be overcome. See "<a href="../../pages/SI.CC.003/index.html" rel="noopener" target="_blank">Essence of Buddhism – In the First Sutta</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.FF.009"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0106"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.FF.009
+Language:     pt-BR
+Generated-At: 2026-04-18T04:05:25Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>Revisado em 14 de julho de 2018; 15 de junho de 2019; reescrito com o novo título em 1º de junho de 2020;<span style="color: #3366ff;"> revisado em 3 de julho de 2022</span></strong></p>
+<h5>Versículo-chave no <em><span>Girimānanda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em></h5>
+<p style="text-align: justify;">1. No “<a href="https://suttacentral.net/an10.60/en/sujato" rel="noopener" target="_blank"><em><span>Girimananda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 10.60)</a><span>”, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> expôs as características-chave da natureza </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> de “todos os <em>saṅ­khā­ra</em>”: “<em>Katamā cānanda, sabba­saṅ­khā­resu <strong>anicchāsaññā</strong><span>? Idhānanda, <span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span><span style="color: #000000;"><strong>, em todos os saṅ­khā­ras</strong></span> <span style="color: #993366;"><strong>há </strong></span><span style="color: #3366ff;"><strong>surgimento, </strong></span><span style="color: #008000;"><strong>desaparecimento</strong></span> <span style="color: #993366;"><strong>e transição</strong></span><span>. <span class="pali-term term-highlight" data-term="ayaṃ">Ayaṃ</span> vuccatānanda, em todos os saṅ­khā­ras há a percepção de <span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>”.</p>
+<p style="text-align: justify;"><strong>Traduzido:</strong> “Ānanda, o que é a <strong><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> </span></em></strong>associada a <strong>todos <em>os saṅkhāras</em></strong>? A pessoa está <span style="color: #3366ff;"><strong style="color: #3366ff;">sujeita ao sofrimento</strong>; </span><span style="color: #008000;"><strong>deve sentir vergonha de se envolver em tal atividade inútil</strong></span>, e <span style="color: #993366;"><strong>gostar de <em>saṅ­khā­ra </em>é como abraçar urina e fezes</strong></span>. Essa é a <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> </span></em>associada a todos <em>os ­saṅ­khā­ra</em>”.</p>
+<ul style="text-align: justify;">
+<li>Discutiremos brevemente a natureza “<em>aṭṭīyati</em>”. “<em>Atti”</em> significa “ossos” (ඇට em Cingalês). Um cão pensa que um osso é precioso. Ele passa horas e horas mastigando-o e acaba ficando cansado. Às vezes, o osso raspa a gengiva, e o cão sente o gosto do próprio sangue, pensando que é o sabor do osso.</li>
+<li>É claro que a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, nesse nível profundo, só pode ser compreendida por aqueles com <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> mais elevado.</li>
+<li>Nós apenas ficamos cansados e estressados (<em>pīḷana</em>) ao gerar todos os tipos de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. No entanto, não percebemos isso enquanto fazemos esse esforço. É por isso que <strong><em>o</em> “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>” </span></em></strong>permanece oculto.</li>
+<li>Nós nos envolvemos em <em><span><span class="pali-term term-highlight" data-term="mano">Mano</span>, vaci</span></em> e <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>; veja “<a href="../../pages/KD.BB.006/index.html" rel="noopener noreferrer" target="_blank">Saṅkhāra – O que realmente significa</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">O Sofrimento Mental (<em>Pīḷana</em>)</h5>
+<p style="text-align: justify;">2.<span style="color: #0000ff;"><span style="color: #3366ff;"> A maioria das pessoas pensa que a Primeira Nobre Verdade sobre o sofrimento (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em>) é o próprio sofrimento físico, ou seja, elas a associam a <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span>, </span></em>que faz parte do <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span> <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em><span>. No entanto, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “Este </span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> é diferente de tudo o que o mundo já viu</span>.” <span style="color: #3366ff;"><strong>A verdadeira verdade sobre o sofrimento é a seguinte. É o sofrimento oculto naquilo que todos percebem como felicidade.</strong></span> <span style="color: #3366ff;">Isso precisa ser visto com a <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span> <span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em> (sabedoria).</span></span></p>
+<ul style="text-align: justify;">
+<li><strong>Assim, “ver <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> com sabedoria” significa “ver o sofrimento oculto nos prazeres sensoriais”.</strong></li>
+<li style="text-align: justify;"><span>É difícil compreender a Primeira Nobre Verdade sobre o sofrimento para alguém que está sentindo muito sofrimento. Quando alguém está sofrendo com uma doença ou sua mente está muito fraca devido à velhice, é impossível contemplar a profunda mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, como veremos a seguir.</span></li>
+</ul>
+<p style="text-align: justify;">3.<em><span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">sacca</span></span></em> (<strong>pronuncia-se “sachcha”</strong>) é a Verdade do Sofrimento; <em><span><span class="pali-term term-highlight" data-term="sacca">Sacca</span></span></em> é a verdade.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><em>“Pīḷana”</em><span> (pronuncia-se “peelana”) é a palavra em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> para angústia ou dificuldade. Isso faz parte do sofrimento pelo qual passamos, mesmo sem percebermos.</span></li>
+<li style="text-align: justify;">“<em>Peleema”</em> (පෙලීම) é a palavra em Cingalês para angústia ou dificuldade, em que a primeira parte, “pe”, rima como “pen”.</li>
+<li><span>A grafia das palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> segue uma convenção adotada, diferente do “inglês padrão”. Veja “</span><a href="http://localhost/beng_feb2026/historical-background/Tipiṭaka-english-convention-part-1/" rel="noopener noreferrer" target="_blank">Convenção do ‘Tipiṭaka English’ adotada pelos primeiros estudiosos europeus – Parte 1</a>” e “<a href="http://localhost/beng_feb2026/historical-background/Tipiṭaka-english-convention-part-2/" rel="noopener noreferrer" target="_blank">Convenção do ‘Tipiṭaka English’ adotada pelos primeiros estudiosos europeus – Parte 2</a>”.</li>
+</ul>
+<p style="text-align: justify;">Esse é o tipo de meditação (contemplação) que se deve praticar inicialmente, mesmo antes de iniciar a <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> Anāpānasati <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em><span>. Não consigo enfatizar o suficiente a importância de compreender primeiro a verdadeira mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<h5 style="text-align: justify;">Angústia/Depressão Incessantes (<em>Pīḷana</em>)</h5>
+<p style="text-align: justify;">4. Mesmo que não percebamos, estamos estressados O TEMPO TODO. É necessário um trabalho constante para manter nosso corpo físico em boas condições. Qualquer pessoa que já tenha obtido alívio temporário dessa <strong>angústia</strong> constante <strong>(<em>pīḷana</em>)</strong> por meio de um bom programa de meditação (mesmo a mundana “meditação da respiração”) sabe disso; isso é chamado de <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>. É ainda mais evidente se a pessoa tiver uma experiência <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>. Somente quando se entra em um estado <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> é que se percebe que se esteve sob estresse incessante durante toda a vida.</p>
+<ul style="text-align: justify;">
+<li>Não percebemos isso porque essa é a “linha de base” da existência (nossa “zona de conforto”); é o que temos feito ao longo de inúmeros Renascimentos.</li>
+<li>Para obter algum alívio dessa angústia constante, nos esforçamos para criar períodos de felicidade. Ficamos pensando em maneiras de conseguir uma casa melhor, um carro ou zilhões de outras “coisas” que supostamente nos proporcionariam alegria. Assim, SEMPRE nos esforçamos para ajustar essa “zona de conforto de referência”. Mudamos para uma casa maior, compramos móveis novos, trabalhamos mais para conseguir um emprego melhor, etc.</li>
+<li>Além disso, quando ficamos abaixo do “nível de conforto” atual, precisamos fazer um esforço (<em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) para remediar isso. Por exemplo, quando ficamos com fome, talvez tenhamos que preparar uma refeição ou caminhar/dirigir até um restaurante para comer algo.</li>
+<li>Ou, podemos estar sentados em casa, satisfeitos após uma refeição, mas então, de repente, voltamos a ficar “abaixo do nível de conforto” sem motivo aparente; simplesmente ficamos “entediados” sentados em casa e pensamos em ir ao cinema. Então, entramos no carro e dirigimos até um cinema.</li>
+<li>Tenho certeza de que você consegue pensar em um zilhão de coisas assim que fazemos o dia todo.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> – </span></em>Duplicando o Sofrimento</span></h5>
+<p style="text-align: justify;">5. Temos que suportar lesões e várias doenças por causa de nossos corpos físicos. Esse corpo físico teve origem no <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> passado. Então, com base nessas doenças físicas, também sofremos mentalmente.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #0000ff;"><span style="color: #000000;">Essas “angústias” pertencem a um tipo de <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>. </span></em>Esse é <span style="color: #3366ff;">o “</span></span><b><span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>”.</span> <span style="color: #000000;">Assim, além do sofrimento físico, duplicamos esse sofrimento com esse “sofrimento mental”. </span></b><span style="color: #000000;">Esse sofrimento mental faz parte do “<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-ja-vēdanā</span></em>”. Veja “</span></span></span><a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank">Vēdanā (Sentimentos) Surgem de Duas Maneiras</a>”.</li>
+<li>Além das doenças diretas, outras formas de sofrimento estão associadas ao corpo físico. Sentimos fome, sede, solidão, tédio, etc. Assim, precisamos atender às necessidades de nossos corpos físicos continuamente. É como cuidar de um inválido. Tudo isso faz parte do “<span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>”.</span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em></span></h5>
+<p style="text-align: justify;">6. Nossos sentidos pedem continuamente por <strong>prazer.</strong> Queremos ver coisas bonitas, ouvir sons agradáveis, sentir fragrâncias doces e saborear comidas suntuosas. O corpo quer toques luxuosos, e a mente gosta de ter pensamentos agradáveis.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Então, temos que fazer coisas (por meio de <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) para satisfazer esses “impulsos”. <span style="color: #0000ff;"><b><span style="color: #000000;">Isso é</span> <span style="color: #3366ff;">o “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>”</span> <span style="color: #000000;">mencionado no item 1 acima.</span></b></span></li>
+<li>Além de trabalhar, ir a um restaurante, ir ao cinema etc., também precisamos trabalhar para ganhar dinheiro para todas essas atividades. É necessário trabalho constante (<em>saṅkhār<span style="color: #0000ff;"><span style="color: #000000;">ā</span></span></em>) para nos mantermos à tona.</li>
+<li>Na maioria das vezes, temos um desejo sobreposto a outro: podemos querer comer e beber, podemos querer assistir a um filme, mas também podemos querer companhia (reunir amigos).</li>
+<li><b>Não percebemos esse sofrimento porque nossas mentes estão focadas NO RESULTADO, no prazer que PODERÍAMOS ter depois de fazer todo esse trabalho. </b><span style="color: #0000ff;"><span style="color: #000000;">Esse “prazer mental inventado” é outra parte do <em><span>“<span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-ja-vēdanā”</span></em> mencionado acima.</span></span></li>
+<li>Você pode estar pensando: “Do que ele está falando? Não é assim que a vida deve ser?”. Exatamente! <span style="color: #3366ff;"><strong>Não percebemos isso porque essa é a nossa “linha de base” da existência.</strong></span> Fazemos isso repetidamente, desde tempos imemoriais, e PERCEBEMOS isso como “normal”.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> </span></em>e </span><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> </span></em></span><span style="color: #000000;">Andam Juntos</span></h5>
+<p style="text-align: justify;">7. O que percebemos como felicidade vem do alívio que sentimos quando o nível de angústia diminui devido aos nossos esforços. Suprimimos “desequilíbrios” ou “tomamos medidas para restabelecer o equilíbrio”. Sentimos alívio com isso. Mas o mesmo desequilíbrio continua voltando, e teremos que passar pelo mesmo “ato de equilíbrio” novamente! Vamos considerar um exemplo.</p>
+<ul style="text-align: justify;">
+<li>Naturalmente, ficamos com fome e sede, dois dos principais “<em>pīlana”</em> que não podemos evitar enquanto tivermos este corpo físico.</li>
+<li>No entanto, quando comemos e bebemos, isso leva a uma sensação de felicidade. Mas nunca pensamos que essa “felicidade” surgiu devido a um sofrimento inevitável.</li>
+<li>Se não conseguirmos encontrar água quando ficamos com sede, isso levará a um sofrimento real. Nesse momento, um copo de água terá um sabor divino. No entanto, depois de beber um ou dois copos, não seremos capazes de desfrutar de beber mais água.</li>
+<li>Essa “felicidade” surgiu, na verdade, ao nos livrarmos do <em>pīḷana</em> causado pela sede.</li>
+<li>O problema é que a fome/sede continua voltando!</li>
+</ul>
+<p style="text-align: justify;">8. A realidade é que, não importa o que façamos para agradar os sentidos, esses momentos deliciosos são limitados. Eles não surgem sem “<em>pīḷana”</em> ou sofrimento inerente associado ao corpo. Mesmo que possamos manter essa satisfação sensorial por muito tempo, ficamos cansados depois de um tempo. Então a mente pede um tipo diferente de experiência. Vejamos alguns exemplos.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Ficamos entusiasmados por estar em uma sala com ar-condicionado em um clima quente. Mas não gostaríamos de estar em uma sala com ar-condicionado no meio do inverno no Alasca, onde gostaríamos que o local fosse aquecido. A “felicidade” não está associada ao ar frio ou quente. Nos sentiremos felizes quando removemos <em>o</em> “<em>pīḷana”</em> ou o desconforto/sofrimento para o corpo, resfriando ou aquecendo o ambiente.</li>
+<li style="text-align: justify;">Podemos estar deitados na cama mais confortável, mas, mais cedo ou mais tarde, começamos a nos mexer e a rolar, tentando encontrar uma postura melhor, e, eventualmente, não conseguimos mais ficar na cama.</li>
+<li style="text-align: justify;">A paisagem mais bela só pode ser admirada por um certo tempo e acaba se tornando entediante. A alegria do sexo desaparece assim que a satisfação é alcançada, e esse desejo não surgirá novamente até mais tarde.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #000000;"><em><span>Viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em></span></h5>
+<p style="text-align: justify;"><span style="color: #0000ff;"><span style="color: #000000;">9. </span><b><span style="color: #3366ff;"><span>Depois, há um terceiro tipo de <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> chamado “</span><em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>”.</span></em></span></b></span> Esse também está associado ao corpo devido a “mudanças inesperadas” e à morte eventual. Isso é chamado de “<em>viparināma”</em> <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Por exemplo, um acidente pode causar ferimentos. Podemos contrair uma doença grave como o câncer a qualquer momento.</li>
+<li>A morte não pode ser evitada em NENHUM reino e é um sofrimento “inerente”. Isso NÃO SERÁ interrompido até <em><span>o <span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>.</li>
+<li><strong>Todos os três tipos de sofrimento estão associados à natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>. Devido à natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, <em><span>o <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> surge inevitavelmente. É por isso que somos impotentes (<em>Anattā</em>) no processo de Renascimento! </strong></li>
+<li>Assim, <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e<em> Anattā</em> estão inter-relacionados. Veja “<a href="../../pages/KD.FF.001/index.html" rel="noopener" target="_blank">Anicca, Dukkha, Anattā</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Os Três Tipos de Sofrimento</h5>
+<p style="text-align: justify;">10. Em resumo, dos três tipos de sofrimento, percebemos (e nos preocupamos com) apenas o <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Pode-se nem mesmo perceber os outros dois tipos de sofrimento (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>). Eles são mascarados pela nossa percepção de “felicidade”. Especialmente aqueles de nós que nascemos com um nível razoável de riqueza podem superar ambos facilmente.</li>
+<li>Se não conseguirmos comer o suficiente antes de morrer de fome, isso se torna “sofrimento”. Além disso, não precisamos sair para caçar e matar um animal para comer; podemos ir a um restaurante e desfrutar de uma boa refeição.</li>
+<li>Portanto, esses dois tipos de sofrimento ficam ocultos de nós. Mas sabemos que muitas pessoas sentem esse sofrimento.</li>
+</ul>
+<p style="text-align: justify;"><strong>11. O pior é que, nos quatro reinos inferiores, os seres tornam-se verdadeiramente indefesos (<em>Anattā</em>). <b>Há pouco que se possa fazer (<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) para remediar o <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> incessante nesses reinos.</b> </strong></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Por exemplo, um animal selvagem tem poucas opções quando está com fome. Ele pode passar dias sem comer, sofrendo muito.</li>
+<li style="text-align: justify;">Na natureza, você não vê animais velhos ou doentes. Quando ficam fracos, são devorados por animais maiores e mais fortes. Esse é o verdadeiro significado de <em>Anattā. </em>Há um desamparo absoluto, especialmente nesses reinos inferiores.</li>
+</ul>
+<h5 style="text-align: justify;">O sofrimento está presente em todos os reinos</h5>
+<p style="text-align: justify;">12. Não há nenhum lugar nos 31 reinos onde <em><span>o <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> esteja ausente. Os três tipos de <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> estão presentes nos 31 reinos em graus variados:</p>
+<ul style="text-align: justify;">
+<li>No reino mais baixo, o <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em>, predomina <em><span>o <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>; há apenas sofrimento e nenhuma maneira de obter alívio por meio de<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>. Mesmo no reino animal, há relativamente pouco <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>;</span></em> principalmente, o sofrimento físico se manifesta ali, como apontado acima.</li>
+<li>Nos reinos superiores (acima do reino humano), há muito pouco <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>,</span></em> pois esses são “bons nascimentos” originados por <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> Meritório. Nesses reinos superiores, o <em><span>viparināma <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> encerra a vida deles ali. Além disso, nenhum <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> superou o sofrimento nos quatro reinos inferiores no futuro, a menos que tenha alcançado <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em>.</li>
+<li>É no reino humano que todos os três tipos de <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> estão presentes em níveis significativos. O <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> é o mais elevado no reino humano em comparação com todos os reinos.</li>
+</ul>
+<p style="text-align: justify;">13. O que discutimos é a Primeira Nobre Verdade, <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="sacca">Sacca</span>.</span></em> Há <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> oculto<em>,</em> mesmo em momentos de aparente felicidade. Não há lugar nos 31 reinos onde <em><span>o <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> possa ser superado. Veja “<a href="../../pages/SI.CC.003/index.html" rel="noopener" target="_blank">Essência do Buddhismo – No Primeiro Sutta</a>”.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.FF.008/index.html">Anicca Worthlessness Of Worldly Things</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.010/index.html">How To Cultivate The Anicca Sanna</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.FF.008/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anicca Worthlessness Of Worldly Things</span>
+        
+        <span class="pathway-title title-pt">Anicca: A futilidade das coisas mundanas</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.010/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">How To Cultivate The Anicca Sanna</span>
+        
+        <span class="pathway-title title-pt">Como cultivar o Anicca Sanna</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

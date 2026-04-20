@@ -1,0 +1,425 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sankhara Life Is A Bundle Of Sankhara | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 19 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.DD.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sankhara Life Is A Bundle Of Sankhara</h1>
+    
+    <h1 class="title-pt">A vida é um conjunto de Saṅkhāra</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.DD.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>7</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.DD.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0085"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.DD.004</td></tr><tr><td>Fin-dex</td><td>0085</td></tr><tr><td>Slug</td><td>sankhara-life-is-a-bundle-of-sankhara</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Sankhara Life Is A Bundle Of Sankhara</td></tr></table></div></div><strong>Revised November 26, 2017</strong>
+<p style="text-align: justify"><span>In the previous introductory <span class="pali-term term-highlight" data-term="post">post</span>, “</span><a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank" title="What is “San”? Meaning of Sansara (or Samsara)">What is “San”?</a>”, we introduced the term “<i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i><span>”, and in the next <span class="pali-term term-highlight" data-term="post">post</span> </span><i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i><span> was discussed in somewhat technical terms.  Since it is such an important term, in this <span class="pali-term term-highlight" data-term="post">post</span> I will discuss it in a bit more detail.</span></p>
+<p style="text-align: justify"><span>1. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is based on the fact that all “</span><i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>” are done in vain: “<i><span>sabbē <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="aniccā">aniccā</span></span></i>”.</p>
+<ul style="text-align: justify">
+<li><span>As we saw in the previous <span class="pali-term term-highlight" data-term="post">post</span>, </span><i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> (“<i>san</i>” + “<i>kāra</i><span>” or actions; සන් + කාර in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) are anything (thought, speech, bodily actions) done while living in “this world” of 31 realms. This includes breathing, walking, or thinking about the chores for the day.</span></li>
+<li>All <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></i>arise in the mind. We cannot utter a word or lift a finger without generating <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></i>in the mind. It happens very fast, so it feels like we just speak or do things; see, "<a href="../../pages/KD.BB.006/index.html" rel="noopener" target="_blank">Sankhāra – What It Really Means</a>" and "<a href="http://localhost/beng_feb2026/key-dhamma-concepts/difference-between-dhamma-and-sankhara/" rel="noopener" target="_blank">Difference Between Dhammā and Sankhāra</a>".</li>
+</ul>
+<p style="text-align: justify">2. So, all <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> involve thinking (some could be manifested as speech or bodily actions), but some actions like breathing happens without CONSCIOUS thinking. Those are just <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that do not have <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> consequences.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff">However, <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> become <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> when they involve conscious thinking with<em> lōbha, dōsa, mōha </em>(or<em> alōbha, adōsa, amōha</em>) coming to play roles. Those <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> have bad (or good)  <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> consequences.</span></li>
+<li>Thus even an <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></i>keeps<i> </i>doing <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></i>until death. But an<i><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i> does not do <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i>, a “stronger version” of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that will lead to accumulating mental energy (<i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i>) for future repercussions (<i><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></i>) until that <i><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></i> energy is exhausted.</li>
+<li>In order for a <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> to become an <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i>, one of the six root causes (greed, hate, ignorance, generosity, kindness, wisdom) need to be involved.</li>
+</ul>
+<p style="text-align: justify">3. If the “bad roots” of greed, hate, and ignorance are involved, then those thoughts, speech, actions will create <i><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></i><span> (or energy seeds) that either lead to bad outcomes during a life or to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the lowest four realms (</span><em>apāyā</em>). These are <i>apunnābhisaṅkhāra  </i>(“<i><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span></span></i>” + “<i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i>” where “<i><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span></span></i>” means non-meritorious).</p>
+<ul style="text-align: justify">
+<li>On the other hand, <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span> </span></i><span>done with the “good roots” of generosity, kindness, wisdom either lead to good outcomes during a life or to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the realms at or above the human realm. These are </span><i>punnābhisaṅkhāra </i>(“<i><span><span class="pali-term term-highlight" data-term="puñña">puñña</span></span></i>” + “<i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i>” where “<i><span><span class="pali-term term-highlight" data-term="puñña">puñña</span></span></i>” means meritorious).</li>
+<li>If no roots are involved, they are just <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and their <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds are duds; there is no energy in them. Basically one can say, <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> (that are not <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i>) do not generate <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i> seeds.</li>
+</ul>
+<p style="text-align: justify">4. Let us take some examples. When we see someone is walking with a knife in hand, we cannot come to a conclusion about what kind of <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> is that person is generating.</p>
+<ul style="text-align: justify">
+<li>He may be just taking the knife from one place to another, in which case, it is just <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>.</li>
+<li>If he is planning to stab someone, then he is generating<i> apunnābhisaṅkhāra</i>.</li>
+<li>If he is planning to rescue an animal who got entangled in a trap, then he is generating <i>punnābhisaṅkhāra</i>.</li>
+<li>In any type of speech or bodily action, what really matters is the INTENTION behind the speech or action.</li>
+</ul>
+<p style="text-align: justify">5. In another example, we may see two people have built and donated two hospitals for the poor. Even though both seem to be “good actions”, we cannot say both had <i>punnābhisaṅkhāra</i>. One could have had an ulterior motive of getting elected in an upcoming election, rather than thoughts of loving kindness for poor people. In that case, he would be generating mostly <i>apunnābhisaṅkhāra</i>, even though there may be some <i>punnābhisaṅkhāra</i> involved too.</p>
+<ul style="text-align: justify">
+<li>This is why sorting out <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i><span> is impossible for anyone but a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Some of our actions could involve both kinds of </span><i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i>. For example, if we see a bird digging up a worm and chase the bird away, we would have done both kinds of <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i>: Saving the life of the worm is a <i>punnābhisaṅkhāra</i>, but we also did an <i>apunnābhisaṅkhāra</i> because we denied the bird of its meal. Both types of <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i> can bear fruits (<i><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></i>) in the future.</li>
+</ul>
+<p style="text-align: justify">6. There is this famous “trolley problem” in ethics, where one could save five people from death by sacrificing the life of a single person; see, <a href="https://en.wikipedia.org/wiki/Trolley_problem" rel="noopener" target="_blank">https://en.wikipedia.org/wiki/Trolley_problem</a></p>
+This "thought experiment" has been debated for many years. We can make the following observations based on Buddha Dhamma:
+<ul style="text-align: justify">
+<li>If one decides to take action (i.e., save five by sacrificing one), then one will acquire “good <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i>” for saving the five lives, and “bad <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i>” for killing the other person. Both types can bear fruits in the future.</li>
+<li>But it goes even deeper. What if the person that we sacrificed was an <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></i>or at least a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i>, and the other five were normal people or even criminals? Then we would have acquired much more bad <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i> than good <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i>.</li>
+</ul>
+<p style="text-align: justify">7. When someone is talking or doing some bodily action, we can at least try to guess what kind of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> are involved. But if a person is just sitting down quietly, he/she could be generating any kind of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> ranging from just thinking about whether or not to go out for a walk (just <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) to planning a murder (worst kind of <i>apunnābhisaṅkhāra</i>).</p>
+<ul>
+<li style="text-align: justify">We generate more <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> via thinking than via speech or actions.</li>
+<li style="text-align: justify">When we have disagreement with other people, we normally do not hit the person or even refrain from saying anything. But depending on the purity of our minds, we may be generating a little to unimaginable amounts of <i>apunnābhisaṅkhāra.</i> This is a key factors that most people tend to disregard.</li>
+<li style="text-align: justify">If someone's outward actions/speech seem to be "disciplined", we automatically assume that he/she is a good person; and the person may be trying to fool himself/herself by displaying that outward appearance. But if the mind is impure, there could be a lot of hateful/greedy  thoughts in that mind. Whether or not any verbal or bodily actions are committed, those thoughts still accumulate<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds.</li>
+</ul>
+<p style="text-align: justify">8. Therefore, it is utterly useless to judge other people. Each person has true awareness AND control only over one's own thoughts, speech, actions, which are ultimately based on the intentions.</p>
+<ul style="text-align: justify">
+<li><strong>But we know exactly what our own intentions are.</strong> And that is what really matters. We may be able to fool a court of law by hiring a good lawyer, but we will have to reap the results of what we sow in the future at some point.</li>
+</ul>
+<p style="text-align: justify">9. This is the basis of <i><span><span class="pali-term term-highlight" data-term="ānāpāna">ānāpāna</span></span></i> meditation, to be aware of the types of <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> involved in a given action; see, "<a href="../../pages/BM.AA.007/index.html" rel="noopener noreferrer" target="_blank" title="7. What is Änapäna?">What is Anapana?</a>".  If someone asks us to join in fishing trip, we need to think what kind of <i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i> will be associated with killing fish for our pleasure; this is the basic form of “<i><span><span class="pali-term term-highlight" data-term="kāyānupassanā">kāyānupassanā</span></span></i>”. Contemplate on any bodily action one is about to do and abstain from doing it if it involves <i>apunnābhisaṅkhāra </i>(in this case taking the lives of several fish for our pleasure).</p>
+<ul style="text-align: justify">
+<li>Bodily actions are easier to prevent, because they take time and we have time to contemplate.</li>
+<li>Speech is a bit more tricky, because speech comes out faster than carrying out bodily action. Still one can stop oneself even after uttering a few sentences.</li>
+<li>Thoughts are the hardest, and that is why “<i><span><span class="pali-term term-highlight" data-term="cittānupassanā">cittānupassanā</span></span></i>” comes after one has practiced “<i><span><span class="pali-term term-highlight" data-term="kāyānupassanā">kāyānupassanā</span></span></i>”.</li>
+</ul>
+<p style="text-align: justify">10. If one wants to start doing <em><span><span class="pali-term term-highlight" data-term="ānāpāna">ānāpāna</span></span></em> meditation, one should first control one’s bodily actions, and the more one does it, the easier it becomes. And then it also becomes easier to control one speech. When both actions and speech are brought under control, one’s thoughts will be easier to control too.</p>
+<ul style="text-align: justify">
+<li>Furthermore, willfully engaging in <i>punnābhisaṅkhāra</i> also helps to keep <i>apunnābhisaṅkhāra</i> at bay. By concentrating on meritorious deeds, one’s mind is automatically turned away from thinking about unmeritorious deeds.</li>
+<li><span>This is why real <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> meditation is much more than just formal sitting meditation. </span><span style="color: #0000ff"> The key is to purify the mind, and avoid defiling the mind at anytime.</span> <strong>One could be doing the breath meditation for a lifetime, but may not get anywhere in purifying the mind.</strong></li>
+<li>This is explained in detail and how to start practice in the "<a href="../../pages/LD.AA.000/index.html" rel="noopener" target="_blank">Living Dhamma</a><span>" section. One does not even need to believe in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the beginning.</span></li>
+</ul>
+<p style="text-align: justify">11. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is attained not by abstaining from both <i>punnābhisaṅkhāra</i> and <i>apunnābhisaṅkhāra</i> as some suggest. On the way to <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>, one needs to do <i>punnābhisaṅkhāra</i><span> AND also engage in learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> so that one could comprehend the true nature of all types of </span><i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>, i.e., that all <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> are<i><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>. This leads to the purification of the mind.</p>
+<ul>
+<li style="text-align: justify">Ultimately, just by doing  <i>punnābhisaṅkhāra </i>is not enough to purify the mind. However, one MUST start there before being able to comprehend <i><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>; see, "<a href="../../pages/LD.AA.000/index.html" rel="noopener" target="_blank">Living Dhamma</a>".</li>
+</ul>
+<p style="text-align: justify">Next, "<a href="http://localhost/beng_feb2026/key-dhamma-concepts/difference-between-dhamma-and-sankhara/" rel="noopener" target="_blank">Difference Between Dhammā and Sankhāra</a>",...</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.DD.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0085"
+             data-level="intermediate"
+             data-reading-time="7"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.DD.004
+Language:     pt-BR
+Generated-At: 2026-04-18T04:03:58Z
+Engine:       DeepL API (Glossary V5)
+-->
+<strong>Revisado em 26 de novembro de 2017</strong>
+<p style="text-align: justify">Na postagem introdutória anterior, “<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank" title="What is “San”? Meaning of Sansara (or Samsara)">O que é ‘San’?</a>”, apresentamos o termo “<i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i>”, e no ensaio seguinte <i><span>o <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i> foi discutido em termos um tanto técnicos.  Como se trata de um termo tão importante, neste ensaio irei discuti-lo com um pouco mais de detalhes.</p>
+<p style="text-align: justify"><span>1. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> baseia-se no fato de que todos os “</span><i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i>” são em vão: “<i><span>sabbē <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="aniccā">aniccā</span></span></i>”.</p>
+<ul style="text-align: justify">
+<li>Como vimos no ensaio anterior, <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i> (“<i>san</i>” + “<i>kāra</i>” ou ações; සන් + කාර em cingalês) são quaisquer coisas (pensamentos, palavras, ações corporais) realizadas enquanto se vive neste “mundo” dos 31 reinos. Isso inclui respirar, caminhar ou pensar nas tarefas do dia.</li>
+<li>Todos <i><span>os <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> </span></i>surgem na mente. Não podemos proferir uma palavra ou mover um dedo sem gerar <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> </span></i>na mente. Isso acontece muito rápido, por isso parece que simplesmente falamos ou fazemos as coisas; veja “<a href="../../pages/KD.BB.006/index.html" rel="noopener" target="_blank">Saṅkhāra – O que realmente significa</a>” e “<a href="http://localhost/beng_feb2026/key-dhamma-concepts/difference-between-dhamma-and-sankhara/" rel="noopener" target="_blank">Diferença entre Dhammā e Saṅkhāra</a>”.</li>
+</ul>
+<p style="text-align: justify">2. Portanto, todos <em><span>os <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> envolvem pensamento (alguns podem se manifestar como fala ou ações corporais), mas algumas ações, como respirar, ocorrem sem pensamento CONSCIENTE. Esses são apenas <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> que não têm consequências <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff">No entanto, <em><span>os <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> tornam-se <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> quando envolvem pensamento consciente com<em> lōbha, dōsa, mōha </em>(ou<em> alōbha, adōsa, amōha</em>) desempenhando papéis. Esses <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> têm consequências <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruins (ou boas).</span></li>
+<li>Assim, mesmo um <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></i>continua<i> </i>praticando <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> </span></i>até a morte. Mas um<i><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i> não pratica <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></i>, uma “versão mais forte” de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> que levará ao acúmulo de energia mental (<i><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i>) para repercussões futuras (<i><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></i>) até que essa energia <i>kármica</i> se esgote.</li>
+<li>Para que um <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i> se torne um <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></i>, uma das seis causas fundamentais (ganância, ódio, ignorância, generosidade, bondade, sabedoria) precisa estar envolvida.</li>
+</ul>
+<p style="text-align: justify">3. Se as “raízes ruins” da ganância, do ódio e da ignorância estiverem envolvidas, então esses pensamentos, palavras e ações criarão <i><span><span class="pali-term term-highlight" data-term="kamma bīja">Kamma Bīja</span></span></i> (ou sementes de energia) que conduzem a resultados ruins durante uma vida ou ao Renascimento nos quatro reinos inferiores (<em>apāyā</em>). Esses são <i>os apunnābhisaṅkhāra </i>(“Apu<i>ñña</i>” + “Abh<i>isaṅkhāra</i>”, onde “Apu<i>ñña</i>” significa não meritório).</p>
+<ul style="text-align: justify">
+<li>Por outro lado, <i><span>os <span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span> </span></i>realizados com as “raízes boas” da generosidade, bondade e sabedoria levam a bons resultados durante a vida ou ao Renascimento nos reinos iguais ou superiores ao reino humano. Estes são <i>punnābhisaṅkhāra </i>(“Pu<i>ñña</i>” + “Abh<i>isaṅkhāra</i>”, onde “Pu<i>ñña</i>” significa meritório).</li>
+<li>Se nenhuma raiz estiver envolvida, são apenas <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>, e suas sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> são inúteis; não há energia nelas. Basicamente, pode-se dizer que <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i> (que não são <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></i>) não geram sementes <i><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i>.</li>
+</ul>
+<p style="text-align: justify">4. Vejamos alguns exemplos. Quando vemos alguém caminhando com uma faca na mão, não podemos chegar a uma conclusão sobre que tipo de <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i> essa pessoa está gerando.</p>
+<ul style="text-align: justify">
+<li>Ele pode estar apenas levando a faca de um lugar para outro; nesse caso, trata-se apenas de <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i>.</li>
+<li>Se ele estiver planejando esfaquear alguém, então está gerando<i> apunnābhisaṅkhāra</i>.</li>
+<li>Se ele estiver planejando resgatar um animal que ficou preso em uma armadilha, então ele está gerando <i>punnābhisaṅkhāra</i>.</li>
+<li>Em qualquer tipo de fala ou ação corporal, o que realmente importa é a INTENÇÃO por trás da fala ou da ação.</li>
+</ul>
+<p style="text-align: justify">5. Em outro exemplo, podemos ver duas pessoas que construíram e doaram dois hospitais para os pobres. Embora ambas pareçam ser “boas ações”, não podemos dizer que ambas tiveram <i>punnābhisaṅkhāra</i>. Uma delas poderia ter tido um motivo oculto de ser eleita em uma eleição futura, em vez de pensamentos de bondade amorosa para com os pobres. Nesse caso, ela estaria gerando principalmente <i>apunnābhisaṅkhāra</i>, mesmo que houvesse algum <i>punnābhisaṅkhāra</i> envolvido também.</p>
+<ul style="text-align: justify">
+<li>É por isso que distinguir o <i><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i><span> é impossível para qualquer pessoa, exceto para um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Algumas de nossas ações podem envolver ambos os tipos de </span><i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></i>. Por exemplo, se virmos um pássaro desenterrando um verme e o afugentarmos, teremos praticado ambos os tipos de <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></i>: salvar a vida do verme é um <i>punnābhisaṅkhāra</i>, mas também praticamos um <i>apunnābhisaṅkhāra</i> porque privamos o pássaro de sua refeição. Ambos os tipos de <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></i> podem gerar frutos (<i><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></i>) no futuro.</li>
+</ul>
+<p style="text-align: justify">6. Existe o famoso “problema do bonde” na ética, em que se poderia salvar cinco pessoas da morte sacrificando a vida de uma única pessoa; veja: <a href="https://en.wikipedia.org/wiki/Trolley_problem" rel="noopener" target="_blank">https://en.wikipedia.org/wiki/Trolley_problem</a></p>Este “experimento mental” vem sendo debatido há muitos anos. Podemos fazer as seguintes observações com base no Buddha Dhamma:
+<ul style="text-align: justify">
+<li>Se alguém decidir agir (ou seja, salvar cinco sacrificando um), então adquirirá “bom <i><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i>” por salvar as cinco vidas e “mau <i><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i>” por matar a outra pessoa. Ambos os tipos podem produzir frutos no futuro.</li>
+<li>Mas isso vai ainda mais fundo. E se a pessoa que sacrificamos fosse um <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></i>ou, pelo menos, um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i>, e as outras cinco fossem pessoas comuns ou até mesmo criminosos? Então, teríamos adquirido muito mais <i><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i> ruim do que <i><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i> bom.</li>
+</ul>
+<p style="text-align: justify">7. Quando alguém está falando ou realizando alguma ação corporal, podemos pelo menos tentar adivinhar que tipo de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> está envolvido. Mas se uma pessoa estiver apenas sentada em silêncio, ela pode estar gerando qualquer tipo de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>, desde simplesmente pensar se deve ou não sair para dar uma caminhada (apenas <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) até planejar um assassinato (o pior tipo de <i>apunnābhisaṅkhāra</i>).</p>
+<ul>
+<li style="text-align: justify">Geramos mais <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> através do pensamento do que através da fala ou das ações.</li>
+<li style="text-align: justify">Quando temos divergências com outras pessoas, normalmente não batemos na pessoa nem mesmo nos abstemos de dizer qualquer coisa. Mas, dependendo da pureza de nossas mentes, podemos estar gerando desde pequenas até quantidades inimagináveis de <i>apunnābhisaṅkhāra.</i> Esse é um fator-chave que a maioria das pessoas tende a desconsiderar.</li>
+<li style="text-align: justify">Se as ações/palavras externas de alguém parecem ser “disciplinadas”, automaticamente presumimos que ele/ela é uma boa pessoa; e a pessoa pode estar tentando enganar a si mesma ao exibir essa aparência externa. Mas se a mente é impura, pode haver muitos pensamentos de ódio/ganância nessa mente. Independentemente de quaisquer ações verbais ou corporais serem cometidas, esses pensamentos ainda acumulam sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">8. Portanto, é totalmente inútil julgar outras pessoas. Cada pessoa tem verdadeira consciência E controle apenas sobre seus próprios pensamentos, palavras e ações, que, em última análise, se baseiam nas intenções.</p>
+<ul style="text-align: justify">
+<li><strong>Mas sabemos exatamente quais são nossas próprias intenções.</strong> E é isso que realmente importa. Podemos ser capazes de enganar um tribunal contratando um bom advogado, mas teremos que colher os resultados do que semeamos no futuro, em algum momento.</li>
+</ul>
+<p style="text-align: justify">9. Essa é a base da meditação <i><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></i>: estar ciente dos tipos de <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i> envolvidos em uma determinada ação; veja “<a href="../../pages/BM.AA.007/index.html" rel="noopener noreferrer" target="_blank" title="7. What is Änapäna?">O que é Ānāpāna?</a>”.  Se alguém nos convidar para uma pescaria, precisamos refletir sobre que tipo de <i><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></i> estará associado a matar peixes para nosso prazer; essa é a forma básica de <i><span><span class="pali-term term-highlight" data-term="kāyānupassanā">Kāyānupassanā</span></span></i>. Contemple qualquer ação corporal que esteja prestes a realizar e abstenha-se de fazê-la se envolver <i>apunnābhisaṅkhāra </i>(neste caso, tirar a vida de vários peixes para nosso prazer).</p>
+<ul style="text-align: justify">
+<li>As ações corporais são mais fáceis de evitar, porque levam tempo e temos tempo para contemplar.</li>
+<li>A fala é um pouco mais complicada, pois as palavras saem mais rápido do que a execução de uma ação corporal. Ainda assim, é possível se conter mesmo depois de proferir algumas frases.</li>
+<li>Os pensamentos são os mais difíceis, e é por isso que “<i><span><span class="pali-term term-highlight" data-term="cittānupassanā">Cittānupassanā</span></span></i>” vem depois de se ter praticado “K<i>āyānupassanā</i>”.</li>
+</ul>
+<p style="text-align: justify">10. Se alguém quiser começar a praticar a meditação <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em>, deve primeiro controlar suas ações corporais, e quanto mais o fizer, mais fácil se tornará. E então também se torna mais fácil controlar a fala. Quando tanto as ações quanto a fala estiverem sob controle, os pensamentos também serão mais fáceis de controlar.</p>
+<ul style="text-align: justify">
+<li>Além disso, dedicar-se voluntariamente a <i>punnābhisaṅkhāra</i> também ajuda a manter <i>apunnābhisaṅkhāra</i> afastado. Ao concentrar-se em ações meritórias, a mente se afasta automaticamente de pensar em ações não meritórias.</li>
+<li>É por isso que a verdadeira meditação Buddhista é muito mais do que apenas a meditação formal sentada. <span style="color: #0000ff">A chave é purificar a mente e evitar contaminá-la a qualquer momento.</span> <strong>Pode-se praticar a meditação da respiração por toda a vida, mas talvez não se chegue a lugar algum na purificação da mente.</strong></li>
+<li>Isso é explicado em detalhes, juntamente com como iniciar a prática, na seção “<a href="../../pages/LD.AA.000/index.html" rel="noopener" target="_blank">Living Dhamma</a>”. Não é necessário, sequer, acreditar no Renascimento no início.</li>
+</ul>
+<p style="text-align: justify">11. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> não é alcançado pela abstinência tanto de <i>punnābhisaṅkhāra</i> quanto de <i>apunnābhisaṅkhāra,</i> como alguns sugerem. No caminho para <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>, é preciso praticar <i>punnābhisaṅkhāra</i><span> E também se dedicar ao estudo do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, para que se possa compreender a verdadeira natureza de todos os tipos de </span><i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i>, ou seja, que todos <i><span>os <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i> são<i><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></i>. Isso leva à purificação da mente.</p>
+<ul>
+<li style="text-align: justify">Em última análise, apenas praticar <i>punnābhisaṅkhāra</i> não é suficiente para purificar a mente. No entanto, é preciso começar por aí antes de ser capaz de compreender<i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></i>; veja “<a href="../../pages/LD.AA.000/index.html" rel="noopener" target="_blank">Living Dhamma</a>”.</li>
+</ul>
+<p style="text-align: justify">A seguir, “<a href="http://localhost/beng_feb2026/key-dhamma-concepts/difference-between-dhamma-and-sankhara/" rel="noopener" target="_blank">Diferença entre Dhammā e Sankhāra</a>”,...</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.DD.003/index.html">Sankhara Kamma Kamma Vipaka</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.DD.005/index.html">Kamma Are Done With Abhisae1B985Khara Types Of Abhisae1B985Khara</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.DD.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Sankhara Kamma Kamma Vipaka</span>
+        
+        <span class="pathway-title title-pt">Saṅkhāra, Kamma, Kamma Vipaka</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.DD.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Kamma Are Done With Abhisae1B985Khara Types Of Abhisae1B985Khara</span>
+        
+        <span class="pathway-title title-pt">Kamma já terminou o Abhisae1B985Khara Tipos de Abhisae1B985Khara</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

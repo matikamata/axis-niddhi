@@ -1,0 +1,392 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sanna What It Really Means | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 95 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.JJ.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sanna What It Really Means</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.JJ.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.JJ.004"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0182"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.JJ.004</td></tr><tr><td>Fin-dex</td><td>0182</td></tr><tr><td>Slug</td><td>sanna-what-it-really-means</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Sanna What It Really Means</td></tr></table></div></div><p style="text-align: justify;"><em>S</em><em>aññā</em><span> is a critical concept in <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings. Most of our feelings (</span><em>vedan<span style="font-weight: 400;">ā</span></em>) are due to <span style="font-weight: 400;"><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>. </span></em>In many cases, it is hard to distinguish between <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>and <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>. </span></em></span></p>
+<p style="text-align: justify;"><strong>December 31, 2017; <span style="color: #3366ff;">rewritten April 11, 2025</span></strong></p>
+<h5 style="text-align: justify;"><em>S</em><span style="font-weight: 400;"><em>aññā</em> - No equivalent Word in English</span></h5>
+<p style="text-align: justify;">1. <em>S</em><span style="font-weight: 400;"><em>aññā</em> is usually translated to English as "perception" and sometimes as "recognition"; it is both and more! <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> has simple and deeper meanings. </span></p>
+<ul style="text-align: justify;">
+<li>A better translation is "incorrect or distorted perception." It does not represent the actual reality of anything in this world. Based on that "distorted perception," average humans (<em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em>) make wrong decisions. The deeper analyses in "<a href="../../pages/TL.II.007/index.html" rel="noopener" target="_blank">Mūlapariyāya Sutta – The Root of All Things</a><span>" and other advanced <span class="pali-term term-highlight" data-term="posts">posts</span> require a good understanding of what the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word </span><span style="font-weight: 400;"><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>means;<strong> it cannot be translated into English in a single word.</strong></span></li>
+<li><span style="color: #3366ff;"><strong><span>We will start with some basic ideas in this <span class="pali-term term-highlight" data-term="post">post</span>.</span></strong></span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em><span> is pronounced "sangnā" and gives an encoded meaning in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> and <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> with that pronunciation:</span></li>
+</ul>
+<p><audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/sanna.mp3" type="audio/mpeg"/></audio></p>
+<ul style="text-align: justify;">
+<li>It means "sign" or, even closer, "the embedded message." That latter expresses it well since it is how one "instantaneously gets the idea of what is meant by an external signal."</li>
+</ul>
+<h5 style="text-align: justify;"><em>S</em><span style="font-weight: 400;"><em>aññā</em> - Basic Idea</span></h5>
+<p style="text-align: justify;">2. <span style="font-weight: 400;">When we understand what is meant by <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>, we can clarify many things, including how humans can communicate with beings in other realms via <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>.</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-weight: 400;"><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> is the "universal language." To give an analogy: if a sign reads, "winding road ahead," only those who know English can understand what that sign says. </span></li>
+<li><span style="font-weight: 400;">But those universal signs—showing a picture of a winding road—provide the "<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" that the road ahead will be curvy.</span></li>
+</ul>
+<p style="text-align: justify;"><a href="http://localhost/beng_feb2026/new-revised-posts/pure-dhamma-reflections-on-2016/curvy-road-500x500/" rel="attachment wp-att-10515"><img alt="" class="alignnone size-medium wp-image-10515" height="300" src="http://localhost/beng_feb2026/wp-content/uploads/Curvy-Road-500x500-300x300.jpg" width="300"/></a><a href="http://localhost/beng_feb2026/new-revised-posts/pure-dhamma-reflections-on-2016/stop-sign/" rel="attachment wp-att-10514"><img alt="" class="alignnone size-medium wp-image-10514" height="300" src="http://localhost/beng_feb2026/wp-content/uploads/Stop-Sign-300x300-1.jpg" width="300"/></a></p>
+<ul style="text-align: justify;">
+<li><span style="font-weight: 400;">A second example (on the right above) shows a sign with a hand. That conveys the "<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" to stop.</span></li>
+</ul>
+<p style="text-align: justify;">3. <span style="font-weight: 400;">At a fundamental level, <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> means "recognition" of an object, person, or concept, i.e., <span style="color: #0000ff;">getting "full comprehension" of what it is AND what it means.</span> </span></p>
+<ul style="text-align: justify;">
+<li><span style="font-weight: 400;">Whether one says "fire" in English, "<em>ginna</em><span>" in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, or "</span><em>feu</em>" in French, that will convey the "<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>of a fire." Of course, a person MUST know to associate any of those words with "fire." That is the s<em>aññā</em> that comes to one's mind when one hears either the word "fire," "<em>ginna</em>," or "<em>feu</em>." </span></li>
+<li><span style="font-weight: 400;">Those words do not mean anything to someone who does not speak those three languages. However, with the following picture, anyone will have the idea that it is about a fire or a flame:</span></li>
+</ul>
+<p style="text-align: justify;"><img alt="" class="size-medium wp-image-10521 alignnone" height="173" src="http://localhost/beng_feb2026/wp-content/uploads/Flame-300x173.jpg" width="300"/></p>
+<ul style="text-align: justify;">
+<li>As a child raised in an English-speaking household, one is taught that the word "fire" represents it. After that training, one will immediately get the "<span style="font-weight: 400;">s<em>aññā </em>or a mental image resembling the above picture" upon hearing the word "fire." </span></li>
+<li><span style="font-weight: 400;"><span style="color: #3366ff;"><strong>Thus, associating a specific perception with a word requires "preconditioning." </strong><span style="color: #000000;">One must have prior experience involving it.</span></span></span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 10pt;">"Gods Must Be Crazy" Movie</span></h5>
+<p style="text-align: justify;">4. The 1980 comedy movie "The Gods Must Be Crazy" provides a good example of how <span style="font-weight: 400;">s<em>aññā </em>of a worldly object is established in mind via familiarity and experience ("preconditioning.")</span></p>
+<ul style="text-align: justify;">
+<li>The movie stars Xi, a hunter-gatherer of the Kalahari Desert whose tribe discovers a glass Coca-Cola bottle dropped from an airplane. </li>
+<li>Since the tribe is fully isolated from the modern world, they have no idea about Coke or even glass bottles. Thus, they were utterly confused when they saw the glass bottle. They initially thought it was a gift from the Gods. </li>
+<li>The following clip, <span style="color: #993366;"><strong>up to 1 minute</strong></span>, is enough to get the idea. The rest is related to other aspects of the movie storyline. </li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0OwxUj1h2pg?si=IiXj-KE9ftQP9iOA" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong>One must have prior experience with an object to identify it, i.e., to establish s<em>aññā </em>about it!</strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><em>S</em><span style="font-weight: 400;"><em>aññā</em> Is More Than Recognition</span></h5>
+<p style="text-align: justify;">5. <span style="font-weight: 400;">Therefore, <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> is the "full picture/clarification that comes to mind instantaneously." </span></p>
+<ul style="text-align: justify;">
+<li><span style="font-weight: 400;">In a more complex example, parents can teach a child (Y) that a particular person (X) is bad and not to talk to him (that is "preconditioning"). Whenever the child Y sees X, it instantly perceives him as a "bad person" and will try to avoid him. </span></li>
+<li>However, X's child (Z) most likely perceives X as a "loving father." </li>
+<li>Therefore, two people will have very different perceptions (<span style="font-weight: 400;">s<em>aññā</em></span>) of person X. <span style="color: #993366;"><strong>Recognition/perception is relative!</strong></span></li>
+<li>Also, see "<a href="../../pages/AB.BB.004/index.html" rel="noopener noreferrer" target="_blank">The Amazing Mind – Critical Role of Nāmagotta (Memories)</a>" to understand how fast this perception/recognition happens. </li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 10pt;">Based on <em>S</em><em>aññā</em>,<em> Vedan</em><em>ā </em>Arise</span></h5>
+<p style="text-align: justify;"><span style="font-weight: 400;">6. In the above example, the sight of X leads to agitation/displeasure in the mind of child Y; in contrast, the sight of X leads to joy/pleasure in the mind of Z, X's child.</span></p>
+<ul style="text-align: justify;">
+<li><span style="font-weight: 400;">As a baby grows up, it learns to associate words and pictures with each object, person, and concept it experiences. This requires many parts of the brain to develop, <span style="color: #3366ff;"><strong>so it takes a newborn several years to become fully functional in the world.</strong></span></span></li>
+<li>This is why babies take time to develop <span style="font-weight: 400;">s<em>aññā </em>about things: "<a href="../../pages/TL.II.011/index.html" rel="noopener" target="_blank">Distorted Saññā Arises in Every Adult but Not in a Newborn</a>."</span></li>
+</ul>
+<p style="text-align: justify;">7. In #5 and #6, we discussed <span style="font-weight: 400;">the next level of<em><span> <span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></em>which is more than just recognition. For example, when two people hear the name of a person X, they will have the picture of that person (or "s<em>aññā</em>") coming to their mind automatically. They would also recall specific qualities they had attached to that person through interactions with X. One may say. "It is my Dad. I love him so much". Another would say, "Oh, he is a crook." </span></p>
+<ul style="text-align: justify;">
+<li><span style="font-weight: 400;">Then, based on that s<em>aññā</em>, each will generate different feelings (<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>) about X that can lead to attachment via like or dislike. That automatically creates good or bad conscious thoughts (<em><span><span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>). If one keeps thinking about X, one will consciously generate more thoughts about X and may even speak out (<em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>)</span></em>. If the feelings get strong,<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> may arise ( leading to bodily actions). </span></li>
+<li>Therefore, based on the same thought object, different people can get different <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>and thus may respond differently.</li>
+<li><em>Vedana</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> are interrelated. (Distorted) <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> built into our bodies gives rise to (mind-made) <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>; both occur in <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>, but their minds do not attach to such <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>. See #6 of "<a href="http://localhost/beng_feb2026/ta%E1%B9%87ha-result-of-sanna-giving-rise-to-mind-made-vedana/" rel="noopener" target="_blank">Taṇhā – Result of Saññā Giving Rise to Mind-Made Vedanā</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 10pt;">"Distorted" Means "Not Correct" </span></h5>
+<p style="text-align: justify;">8. I must emphasize that the word "distorted" DOES NOT mean "defiled" (with <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></em>). The world is such that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" arises in anyone born in this world, including <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>"Distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" arises automatically upon receiving a sensory input. For example, "sweetness of honey" is a distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> also taste honey as sweet. This is called "<em><span><strong>rasa </strong></span>paṭisaṁvedī</em>" in a "tasting event."</li>
+<li>Within a split second, that "taste of honey" makes a <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em>'s mind attach to it. This is the next step, called "<em><span><strong>rasa <span style="color: #3366ff;"><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></span></strong></span><span> paṭisaṁvedī." This second step does not occur in <span class="pali-term term-highlight" data-term="arahant">Arahant</span>'s mind. </span></em>See #9 in "<a href="http://localhost/beng_feb2026/sandi%e1%b9%ad%e1%b9%adhiko-what-does-it-mean/" rel="noopener" target="_blank">Sandiṭṭhiko – What Does It Mean?</a>." </li>
+<li>At the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> stage</span></em>, one becomes a "<em>sandiṭṭhiko</em>" ("who knows how a mind becomes contaminated/defiled") <span style="color: #3366ff;"><strong>by understanding this key idea:</strong></span> A mind can stop this automatic attachment via "<em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em>" ("<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>" for humans) by cleansing the mind. The "mind-cleansing" involves comprehension of the contamination process!</li>
+<li>See "<a href="http://localhost/beng_feb2026/sandi%e1%b9%ad%e1%b9%adhiko-what-does-it-mean/" rel="noopener" target="_blank">Sandiṭṭhiko – What Does It Mean?</a>." </li>
+</ul>
+<p style="text-align: justify;"><span>9. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught that anyone born into this world would have "built-in wrong </span><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>." Our physical and mental bodies both have such "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>." See “<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/fooled-by-distorted-sanna-sanjanati-origin-of-attachment-ta%e1%b9%87ha/" rel="noopener" target="_blank">Fooled by Distorted Saññā (Sañjānāti) – Origin of Attachment (Taṇhā)</a>.”</p>
+<ul style="text-align: justify;">
+<li>However, there is no attachment yet in that instant of getting the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>." <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>, who have understood the origin of that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" are not fooled by it; their minds do not attach to it. </li>
+<li>On the other hand, the main reason a <em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em> engages in immoral activities is that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>." If one or more of the ten <em>saṁyojana</em> remain intact, a mind could attach to that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" without conscious thinking.</li>
+<li>When all ten <em>saṁyojana </em>are removed at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage, that cleansed mind will never again attach to a pleasant or unpleasant <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> brought in by the "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 10pt;">Types of </span><span style="font-size: 10pt;"><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> </span></em></span><span style="font-size: 10pt;"> Present in <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="rupa">Rupa</span></span></em>, and <em><span>Arupa <span class="pali-term term-highlight" data-term="loka">Loka</span></span></em></span></h5>
+<p style="text-align: justify;">10. We can gain some insights into <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> by comparing the types of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> present in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> (where the lowest eleven realms are located), with only one kind of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>present in any of the four realms in <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Our feelings arise based on sight, sound, taste, smell, or physical touch. In addition, memories of past experiences with them can trigger feelings (good or bad). We live in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> and have all six sense faculties (eyes, ears, tongue, nose, physical body, mind).</li>
+<li>In contrast, <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span> <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> have only the mind; they do not have a solid physical body and, thus, cannot see, hear, taste, smell, or touch; in other words, they don't generate <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> associated with sight, sound, taste, smell, or physical touch.</li>
+</ul>
+<p style="text-align: justify;">11. Even though we say <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span> <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> can recall memories, they cannot recall memories (say, from past lives) associated with sights, sounds, tastes, smells, or physical touches<span style="color: #3366ff;"><strong> because they don't have <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> about such sensory inputs.</strong></span></p>
+<ul style="text-align: justify;">
+<li>The four realms of <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> are located well above the Earth's surface. They don't have a physical environment with sights, sounds, etc.</li>
+<li>Even if an <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span> <span class="pali-term term-highlight" data-term="brahma">Brahma</span> </span></em>visits the human world, they would not have any recognition/perception of sights, sounds, etc.</li>
+<li><em><span>Arupa <span class="pali-term term-highlight" data-term="loka">loka</span> <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span> </span></em>have only one type of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>. </span></em>For example, those in the <em>Ākāsānancāyatana</em> realm have their minds mainly focused on "infinite space."</li>
+<li>When human <em>yogis</em> enter the first <em>arupa samapatti</em>, their minds are also focused on "infinite space" (just like <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span> <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em>) and nothing else. While in that <em>samapatti</em>, a human <em>yogi</em> cannot experience sights, sounds, tastes, smells, or physical touches, i.e., <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>of such sense inputs do not register in their minds.</li>
+</ul>
+<p style="text-align: justify;">12. The 16 realms in <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> experience sights and sounds but not taste, smell, or physical touch.</p>
+<ul style="text-align: justify;">
+<li>Thus, they experience more types of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> than the four realms in <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> but less than in <em><span>kama <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>. </li>
+<li>Even though they experience sights and sounds, those do not trigger <em><span>kama <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> in <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span> Brahmas</span></em> since they have no perception of taste, smell, and touch (including sex.)</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 10pt;"><em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> <span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> Lead to the Worst Attachments</span></h5>
+<p style="text-align: justify;">13. For humans and <em>Devās</em> (in "<em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>"), the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" is responsible for many immoral thoughts, words, and actions that can bring potent <em>vipaka</em>. In contrast, "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" and "<em><span>arupa <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" in <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> and<em><span> arupa <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> realms do not lead to future rebirths; see #10 and #11 in "<a href="../../pages/DS.DD.009/index.html" rel="noopener" target="_blank">Loka and Nibbāna (Aloka) – Complete Overview</a>."</p>
+<ul style="text-align: justify;">
+<li><span>Those are deeper aspects pointed out in the series of <span class="pali-term term-highlight" data-term="posts">posts</span> in the “</span><a href="../../pages/DS.DD.001/index.html" rel="noopener noreferrer" target="_blank">Worldview of the Buddha</a>” section.</li>
+<li><span>To understand such <span class="pali-term term-highlight" data-term="posts">posts</span>, one must first realize that our perceptions of the external world are incorrect, i.e., all average humans have "distorted/wrong </span><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>." See "<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/fooled-by-distorted-sanna-sanjanati-origin-of-attachment-ta%e1%b9%87ha/" rel="noopener" target="_blank">Fooled by Distorted Saññā (Sañjānāti) – Origin of Attachment (Taṇhā)</a>."</li>
+</ul>
+<p style="text-align: justify;">14. The availability of all six senses in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> leads to the availability of six types of major "<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> categories" and, thus, many avenues for "mind corruption" as stated in the "<a href="https://suttacentral.net/sn27.6/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 27.6).</a>" </p>
+<ul style="text-align: justify;">
+<li>Within those six major categories, there are numerous types of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em></li>
+<li>All these types of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> lead to "mind corruption" and trigger <em>Paticca Samuppada</em> cycles, which lead to direct (within this life) and indirect suffering (in future lives); see "<a href="https://suttacentral.net/sn26.6/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 26.6)</a><a href="https://suttacentral.net/sn27.6/en/sujato" rel="noopener" target="_blank">.</a>"</li>
+<li>Out of those six categories, the five types of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> (for sights, sounds, tastes, smells, or physical touches) associated with beings with (relatively) dense physical bodies in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> are bundled together as "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>." </li>
+<li>Such "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" leads to two other types of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> associated with only the <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>, i.e., <em><span>byāpāda <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> (which triggers aversion/anger) and <em><span>vihiṁsā <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> (which triggers thoughts of hurting others). See "<a href="https://suttacentral.net/an6.110/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.110)</a><a href="https://suttacentral.net/sn27.6/en/sujato" rel="noopener" target="_blank">.</a>"</li>
+<li>Thus, "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" is responsible for most <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em> that generate <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em><span> energies to power future existences, i.e., to extend the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 10pt;"><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> Is a Critical Concept</span></h5>
+<p style="text-align: justify;">15. Understanding the concept of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> is necessary to get onto AND progress on the Noble Path.</p>
+<ul style="text-align: justify;">
+<li><span>I recommend reading the following <span class="pali-term term-highlight" data-term="posts">posts</span>, which discuss various aspects of </span><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>. </span></em><span>Please feel free to ask questions in the forum by referring to the specific <span class="pali-term term-highlight" data-term="post">post</span> and bullet numbers. They are roughly in increasing difficulty.</span></li>
+<li><span>Try to capture the basic concept by focusing on <span class="pali-term term-highlight" data-term="posts">posts</span> that seem easier at first.</span></li>
+</ul>
+<p style="text-align: justify;"><a href="../../pages/IS.BB.002/index.html" rel="noopener" target="_blank">Cognition Modes – Sañjānāti, Vijānāti, Pajānāti, Abhijānāti</a>, <a href="../../pages/IS.BB.009/index.html" rel="noopener" target="_blank">Saññā Vipallāsa – Distorted Perception</a>, <a href="../../pages/IS.BB.010/index.html" rel="noopener" target="_blank">Saññā – All Our Thoughts Arise With “Distorted Saññā</a>,” <a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/fooled-by-distorted-sanna-sanjanati-origin-of-attachment-ta%e1%b9%87ha/" rel="noopener" target="_blank">Fooled by Distorted Saññā (Sañjānāti) – Origin of Attachment (Taṇhā)</a>, <a href="../../pages/TL.II.011/index.html" rel="noopener" target="_blank">Distorted Saññā Arises in Every Adult but Not in a Newborn</a>, <a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/sanna-nidana-hi-papanca-sa%e1%b9%85kha-immoral-thoughts-based-on-distorted-sanna/" rel="noopener" target="_blank">Saññā Nidānā hi Papañca Saṅkhā – Immoral Thoughts Based on “Distorted Saññā</a>,” <a href="http://localhost/beng_feb2026/buddha-dhamma-advanced/aramma%e1%b9%87a-sensory-input-initiates-critical-processes/" rel="noopener" target="_blank">Ārammaṇa (Sensory Input) Initiates Critical Processes</a>, <a href="../../pages/BM.CC.004/index.html" rel="noopener" target="_blank">Saññā Gives Rise to Most of the Vedanā We Experience</a>, <a href="../../pages/DS.DD.006/index.html" rel="noopener" target="_blank">A Sensory Input Triggers (Distorted) Saññā and Pañcupādānakkhandha</a>, <a href="http://localhost/beng_feb2026/kama-sanna-how-to-bypass-to-cultivate-satipa%e1%b9%ad%e1%b9%adhana/" rel="noopener" target="_blank">Kāma Saññā – How to Bypass to Cultivate Satipaṭṭhāna.</a>  </p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.JJ.003/index.html">Does Bodily Pain Arise Only Due To Kamma Vipaka</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.JJ.005/index.html">Future Suffering Why It Arises</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.JJ.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Does Bodily Pain Arise Only Due To Kamma Vipaka</span>
+        
+        <span class="pathway-title title-pt">Does Bodily Pain Arise Only Due To Kamma Vipaka</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.JJ.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Future Suffering Why It Arises</span>
+        
+        <span class="pathway-title title-pt">Future Suffering Why It Arises</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

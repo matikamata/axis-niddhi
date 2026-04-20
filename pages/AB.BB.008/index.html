@@ -1,0 +1,422 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Citta Vithi Processing Sense Inputs | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Abhidhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 16 / 37</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">AB.BB.008</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Citta Vithi Processing Sense Inputs</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>AB.BB.008</td></tr>
+          <tr><td><strong>Section</strong></td><td>Abhidhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>14</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="AB.BB.008"
+             data-section="Abhidhamma"
+             data-section-code="AB"
+             data-findex="0768"
+             data-level="advanced"
+             data-reading-time="14"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>AB.BB.008</td></tr><tr><td>Fin-dex</td><td>0768</td></tr><tr><td>Slug</td><td>citta-vithi-processing-sense-inputs</td></tr><tr><td>Section</td><td>AB</td></tr><tr><td>Title EN</td><td>Citta Vithi Processing Sense Inputs</td></tr></table></div></div><p><strong>Revised April 26, 2018; rewritten January 28, 2023;<span style="color: #0000ff;"><span style="color: #3366ff;"> revised April 25, 2024 (#13 to end)</span></span></strong></p>
+<h5>Introduction</h5>
+<p style="text-align: justify;">1. Thoughts (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) do not arise as individual <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>; see "<a href="../../pages/AB.BB.002/index.html" rel="noopener" target="_blank">Essential Abhidhamma – The Basics</a>." They appear in the mind due to sensory inputs via the six senses. Those are <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span>, sōta, ghāna, jivhā</span></em>, and <em><span><span class="pali-term term-highlight" data-term="kāya indriya">kāya indriya</span>,</span></em> corresponding respectively to the eye, ear, nose, tongue, and body, and <em><span><span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span></span></em> (located in the brain; see "<a href="../../pages/AB.DD.006/index.html" rel="noopener noreferrer" target="_blank">Brain – Interface between Mind and Body</a>").</p>
+<ul style="text-align: justify;">
+<li>Sensory input through any of the five physical senses received and analyzed by the mind in a "<em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em>" (series of <em>cittā</em>) with 17 <em>cittā</em>.) Those are <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>.</span></em> <em>Pañcadvāra</em> ("<em>pañca</em>" + "<em><span><span class="pali-term term-highlight" data-term="dvāra">dvāra</span></span></em>" where "<em>pañca</em>" is five and "<em><span><span class="pali-term term-highlight" data-term="dvāra">dvāra</span></span></em><span>" is a door) means five (physical) doors. See the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/AB.CC.002/index.html" rel="noopener noreferrer" target="_blank">What is Mind? How do we Experience the Outside World?</a>",</li>
+<li><em>Vīthi</em> is pronounced, "veethi." It means "road" since, like a road, the flow is continuous. And <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> pronounced "chiththā."</li>
+<li><span>That is because the convention for spelling <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words differs from "standard English." See "</span><a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English" Convention Adopted by Early European Scholars – Part 1</a>" and <a href="../../pages/HB.AA.009/index.html" rel="noopener noreferrer" target="_blank">"Tipiṭaka English" Convention Adopted by Early European Scholars – Part 2</a>."</li>
+<li>While <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>always have 17 <em>cittās</em>, <em><span>manōdvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> typically have 10-12 <em>cittā</em> in them.</li>
+</ul>
+<h5><em><span>Pañcadvāra <span class="pali-term term-highlight" data-term="citta">Citta</span> Vithi</span></em></h5>
+<p style="text-align: justify;">The sequence of <em>cittā</em> in a  <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> is as follows:<br/>
+[table id=8 /]</p>
+<p style="text-align: justify;">2. When the mind is not dealing with a <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>or a <em><span>manōdvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>, </span></em>it is in a "dormant state" called the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span>.</span></em> <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">Bhavaṅga</span></span></em> ("<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" + "<em>aṅga</em>" where "<em>aṅga</em>" means "part of") thus represents the particular "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" of the living being, in this case, a "<em><span>human <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>." The conventional English term is "life continuum," but we will use <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>For a discussion on <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span>,</span></em> see "<a href="../../pages/AB.BB.006/index.html" rel="noopener noreferrer" target="_blank">State of Mind in the Absence of Citta Vīthi – Bhavaṅga</a>" and "<a href="../../pages/AB.BB.007/index.html" rel="noopener" target="_blank">Bhava and Bhavaṅga – Simply Explained!</a>"</li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state is conventionally represented by the following series <strong>as if they are  a series of <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em></strong>:</li>
+</ul>
+<p style="text-align: justify;">..B B B B B B B B .............</p>
+<p style="text-align: justify;">However, <strong><em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> <span class="pali-term term-highlight" data-term="citta">citta</span> </span></em></strong>can arise only within a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>.</p>
+<ul style="text-align: justify;">
+<li>When the mind is in the<strong><em><span> <span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state</strong>, we do not "feel" anything. Like an eye cannot see itself, the mind in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state cannot "see itself." That is the "dormant state" in-between sense inputs. When one is in deep sleep or unconscious, the mind is entirely in the<em><span> <span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state.</li>
+<li>The mind is generally in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> </span></em>state. It comes off the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> </span></em>state when an object of interest comes through one of the five physical senses (<em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span>, sōta, ghāna, jivhā</span></em>, or<em><span> <span class="pali-term term-highlight" data-term="kāya indriya">kāya indriya</span>.</span></em>) A "<em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>" coming to the "<em><span><span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span></span></em>" can do that too.</li>
+<li>As we will see later, the mind is in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> (B) state most of the time, even if the mind feels very active.  Even while watching a movie, the mind is mainly in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state (in between various types of<em> manōdvāra</em> and <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>.</span></em>) Yet, our brains are stressed to the limit since they need to analyze the movie's sights and sounds at a rapid pace. See "<a href="../../pages/IS.CC.005/index.html" rel="noopener noreferrer" target="_blank">Vision Is a Series of "Snapshots" – Movie Analogy</a>."</li>
+</ul>
+<p style="text-align: justify;">3. We can represent the <span style="color: #0000ff;"><em>pañcadvāra</em> </span><em><span style="color: #0000ff;"><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></span> </em>in the above Table as follows:</p>
+<p style="text-align: justify;">B B B B B "<span style="color: #0000ff;">AB BC BU PD CV Sam San V J J J J J J J T T</span>" B<sub>T</sub> B<sub>T </sub>B<sub>T</sub> B<sub>T</sub>.....</p>
+<p style="text-align: justify;">Note that this is the strongest<em><span> <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em>. <em>There</em> are many variations WITHIN this <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>; some</span></em> do not have T  or even J <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. Different types of <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em><span> are discussed in detail in "A Comprehensive Manual of <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>" by <span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span> Bodhi (2000).</span></p>
+<ul style="text-align: justify;">
+<li>In the above case, the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> temporarily changes to B<sub>T </sub>due to the strong sensory input. See "<a href="../../pages/AB.BB.006/index.html" rel="noopener noreferrer" target="_blank">State of Mind in the Absence of Citta Vīthi – Bhavaṅga</a>."</li>
+<li>In the above example, we took a "<em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> viññāna</span></em>" event, i.e., what happens when a picture comes to the mind via the "<em><span>eye <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>" and the mind investigates that picture.</li>
+<li>First, the "mind comes off the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state, and that takes three thought moments: AB (<em><span>atita <span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em>), BC (<em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> calana</span></em>), and BU (<em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> upaccheda</span></em>). Here "<em>atita</em>" (or "<em>atheetha</em>") means "past," "<em>calana</em>" (pronounced "<em>chalana</em>") means "move" or "vibrate," and "<em>upaccheda</em>" (or "<em>upachchéda</em>") means “stop” or "break away."</li>
+<li>Then the mind looks at the "five physical senses or <em>pañcadvāra</em> (PD)" and determines through which of the five sense inputs it is coming, and then picks the relevant door, which in the present case, we assumed to be<em><span> <span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> viññāna</span></em> (CV).</li>
+<li>Then it investigates what that "picture" is with the <em>sampaṭicchana</em> <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>and decides what type (like, dislike, etc.) with the <em>santirana</em> <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>.</span></em>  Based on those, the <em>votthapana</em> (V) <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>determines what actions to take.</li>
+</ul>
+<p>4. According to <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> niyama</span></em> (or Law of<em> Cittās</em>), a  <em><span>pañcadvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>always has 17 <em>cittās</em>.  For an object of "high interest," <em><span>atimahantārammana <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>arise with <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittās</span></em>. For example, in the case of a visual object, that visible object must be of high interest, and the light conditions for seeing it are good. </p>
+<ul style="text-align: justify;">
+<li>In such cases of "high interest," all-important seven <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> arise based on that determination made with the <em><span>votthapana <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (V).  Potent <em>kammas </em>are done with <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>: "<a href="../../pages/AB.BB.009/index.html" rel="noopener" target="_blank">Javana of a Citta – The Root of Mental Power</a>."</li>
+</ul>
+<p style="text-align: justify;">5. In the last two<em> Tadārammana</em> (T) <em>cittā</em>, the mind takes in the "flavor" or the "essence" of the sense object. Then it falls back to the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state at the termination of the <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>. </span></em>Only the very strong (<em>atimahāntārammana</em>) <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> have them, and such strong impressions are "retained in one's memory" for some time (i.e., one will not forget immediately.)</p>
+<ul style="text-align: justify;">
+<li>Until one loses that "temporary memory," it becomes one's "temporary<em><span> <span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em>." For example, when one hears about the death of a parent, one will become sad, and that "sad state of mind" will be there for days.</li>
+<li>For a discussion on that, see "<a href="../../pages/AB.BB.006/index.html" rel="noopener noreferrer" target="_blank">State of Mind in the Absence of Citta Vīthi – Bhavaṅga</a>" and "<a href="../../pages/AB.BB.007/index.html" rel="noopener" target="_blank">Bhava and Bhavaṅga – Simply Explained!</a>"</li>
+<li>Of course, ALL happenings get recorded as <em>nāmagotta</em>. Even unimportant events get recorded. The ability to recall events depends on one's capabilities. Sometimes, such limited capabilities become possible due to "<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="iddhi">iddhi</span></span></em>" for even average humans. See "<a href="../../pages/TL.DD.005/index.html" rel="noopener noreferrer" target="_blank">Recent Evidence for Unbroken Memory Records (HSAM)</a>."</li>
+</ul>
+<h5 style="text-align: justify;">The Simile of Tasting a Mango</h5>
+<p style="text-align: justify;">6. A <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>is the procedure by which the mind experiences an external object (sight, sound, taste, etc.). The following analogy is In some commentaries to the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>.</span></em></p>
+<ul>
+<li style="text-align: justify;">Suppose a weary traveler is asleep at the foot of a mango tree. This state of being asleep is analogous to the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state. Now a ripe mango drops to the ground near the traveler. This event resembles a visible object of great intensity coming to the "eye door."</li>
+<li style="text-align: justify;">The mango falling awakens the traveler and causes him to raise his head. This event is similar to the appearance of the visible object at the eye door, causing the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> to vibrate twice and become arrested; now, he is not asleep anymore.</li>
+<li style="text-align: justify;">The traveler opens his eyes and looks around to inquire about the disturbance. That is similar to the <em>pañcadvāravajjana</em> (PD) <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> adverting the mind towards the sense object.</li>
+</ul>
+<p style="text-align: justify;">7. The traveler sees the fallen mango. That is analogous to the eye-consciousness of seeing the object (CV). Now the man picks up the mango, which is similar to the <em>sampaṭicchana</em> (Sam) <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> receiving the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> viññāna</span></em>. <strong>By the way, <em>Sampaṭicchana</em> comes from "<em>san" </em>+ "<em><span><span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span></span></em>"; you can contemplate on this to get the basic idea; see, "<a href="../../pages/KD.DD.002/index.html">What is "San"? Meaning of Sansāra (or Saṃsāra)</a>?".</strong></p>
+<ul style="text-align: justify;">
+<li>Then the man inspects the mango to see whether it is suitable for eating. That is similar to the <em>santirana</em> <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>("<em>san</em>" + "<em>tirana</em>" or "<em>theerana</em>," where "<em>theerana</em>" means "decide on whether the sense object is good or bad") investigating the sense object.</li>
+<li>Then the man decides that the mango is good and edible. That is similar to the <em>votthapana</em> ("<em>vottha</em>" + "<em>pana</em><span>" meaning "deciding on what to do" or in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, "පණ දෙනවා" or "energize"). </span><em>votthapana</em> is pronounced, "voththapana." If it were a rotten mango, one would throw it away.</li>
+<li><span>If one understands <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>, it is easier to understand <span class="pali-term term-highlight" data-term="pāli">Pāli</span>. As I have mentioned, the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language is close to <span class="pali-term term-highlight" data-term="pāli">Pāli</span> and not <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span>.</span></li>
+</ul>
+<p style="text-align: justify;">8. The man bites the mango seven times, eating and enjoying the taste. That is similar to seven <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> enjoying the taste of the sense object. These are the "actions corresponding to the decision made with the <em><span>votthapana <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>"; if the mango tastes bad, the mind will generate appropriate <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> to throw the mango. We will discuss such complex processes later.</p>
+<ul style="text-align: justify;">
+<li>Then the man gathers the remnants of the fruit and the juice sticking to his teeth with his tongue and swallows twice. That is similar to the two <em>tadārammana</em> (T) <em>cittā</em> following the <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā.</span></em></li>
+<li>Task completed, the man falls back to sleep. That is similar to the resumption of the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state.</li>
+</ul>
+<h5>Three <em>Manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">Citta Vīthi</span> </span></em>will follow Each <em>Pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">Citta Vīthi</span></span></em></h5>
+<p style="text-align: justify;">9. <strong>According to the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, three <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>will follow each <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em></strong><em><strong>.</strong></em> The <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> in those three <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> become increasingly intense, and it is the <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> of the last <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> that instructs the brain to get the body to act (and initiate speech).</p>
+<ul style="text-align: justify;">
+<li><span>We will discuss this in detail in future <span class="pali-term term-highlight" data-term="posts">posts</span>. But it takes three more</span><em> manōdvāra <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em></em>to complete the sequence of a thought process initiated by a <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>.</span></em> When one gets "absorbed" (for example, keeps looking at an attractive picture), one may be generating numerous such "one plus three processes," with the mind falling back to the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state repeatedly in between.</li>
+<li>It will be easier to visualize this process by understanding what happens when we look at an object, for example, in scientific terms; see "<a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">Citta and Cetasika – How Viññāṇa (Consciousness) Arises</a><span>" (especially starting with #4 of that <span class="pali-term term-highlight" data-term="post">post</span>).</span></li>
+</ul>
+<p style="text-align: justify;">Now let us look at a typical <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>. </span></em></p>
+<h5><em><span>Manōdvāra <span class="pali-term term-highlight" data-term="citta">Citta</span> Vithi</span></em></h5>
+<p style="text-align: justify;">[table id=9 /]</p>
+<p style="text-align: justify;">10. We can represent the<span style="background-color: #ffffff;"> <span style="color: #993366;"><em>manōdvāra</em></span></span><span style="color: #993366;"> </span><em><span style="color: #993366;"><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></span> </em>in the above Table as follows:</p>
+<p style="text-align: justify;">B B B B B "<span style="color: #993366;">BC BU MD J J J J J J J T T</span>" B B B B B.....</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Here it takes only two thought moments to be released from the "<em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state": BC (<em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> calana</span></em>) and BU (<em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span> upaccheda</span></em>).</li>
+<li style="text-align: justify;">The mind already knows the <em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em> (thought object).</li>
+<li>The <em>manōdvāra citt</em>a (MD) is the same as the <em><span>votthapana <span class="pali-term term-highlight" data-term="citta">citta</span>, </span></em>where the decision is made.</li>
+<li style="text-align: justify;">Then seven <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> arise, and then the <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> ends with the two<em> Tadārammana</em> (T) <em>cittā.</em></li>
+<li style="text-align: justify;">Like in the case of a <span style="color: #000000;"><em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>, we also</span></em> considered an object with high intensity as an example. We will discuss the variations when handling signals of lower intensities as the need arises. However, this discussion is sufficient to understand how the two types of <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> function in cognitive processes.</span></li>
+</ul>
+<p style="text-align: justify;">11. Now, we can write the complete sequence of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> for a sensory event initiated by a <span style="color: #0000ff;"><em>pañcadvāra</em> </span><em><span style="color: #0000ff;"><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></span> as:</em></p>
+<p style="text-align: justify;">B B B B B "<span style="color: #0000ff;">AB BC BU PD CV Sam San V J J J J J J J T T <span style="color: #993366;">MD J J J J J J J T T MD J J J J J J J T T MD J J J J J J J T T </span></span>" B B B B B.....</p>
+<ul style="text-align: justify;">
+<li>As mentioned above, three <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>will run following the initial <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em><em>. </em>The object is recognized only after the four <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>.</span></em> But that happens within a billionth of a second.</li>
+</ul>
+<p style="text-align: justify;">12. Conversely, <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>can arise by themselves.</p>
+<ul style="text-align: justify;">
+<li>Furthermore, even though the length of a <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> usually is</span></em> 12 <em>cittā</em> for ordinary people, a single <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>can have many<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> cittā</span></em> while in a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+<li><strong>In a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em></strong>, such long <em>manōdvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>are interrupted by <em>pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>arising in between. That is why one could hear external sounds while in a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="citta vīthi">Citta Vīthi</span></span></em> Generating <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> Cittās</span></em></h5>
+<p style="text-align: justify;">B B B "<span style="color: #993366;">BC BU MD P U A G Jh</span>" B B B</p>
+<p style="text-align: justify;">B B B "<span style="color: #993366;">BC BU MD U A G Jh</span>" B B B</p>
+<p style="text-align: justify;">13. The first above is the <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> for an average person. The second is for one with "higher wisdom."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">See above for explanations on B, BC, BU, MD, P, U, A, and G. </li>
+<li>Then, it goes through a <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> (Jh) <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. The number of <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> cittās</span></em> "Jh" cittās in a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> will increase with practice; see below.</li>
+<li><span style="color: #993366;"><strong>Here, <em>Gotrabu</em> (G, change of lineage) means the lineage has changed from "<em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>" to "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span></span></em>." </strong></span>That is why they are <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> cittās.</span></em> </li>
+<li><span style="color: #993366;"><span style="color: #000000;">Attainment of <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> is a "<em><strong><span><span class="pali-term term-highlight" data-term="puññābhisaṅkhāra">puññābhisaṅkhāra</span></span></strong>" </em>or an "<strong><em>āneñjābhisaṅkhāra" </em></strong> </span><span style="color: #000000;">depending on whether it is a <em><strong>rupavacara</strong> or<strong><span> arupavacara <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></strong></em>. Either of them results via <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, which starts with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.”</span></em></span></span></li>
+<li style="text-align: justify;">Therefore, while this attainment will lead to a birth in a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realm, those <em>yogis</em> will ALWAYS return to the human realm; after that, future rebirths in the <em>apayas</em> are still possible. See "<a href="../../pages/PS.GG.008/index.html" rel="noopener" target="_blank">Rebirths Take Place According to Abhisaṅkhāra</a>."</li>
+</ul>
+<p>14. In most cases, a <em>yogi</em> may not notice that a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> has gone through the mind. At the end of the "<em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>," the mind falls back to the "regular <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>" of <em><span>kama <span class="pali-term term-highlight" data-term="loka">loka</span></span></em> (discussed in #2 through #12 above.)</p>
+<ul>
+<li>A<em> yogi</em> may not even notice the flow of a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> initially.</li>
+<li>At the end of a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi, </span></em>the mind falls back to the "regular <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>" of <em><span>kama <span class="pali-term term-highlight" data-term="loka">loka</span>.</span></em></li>
+<li>With continued practice, the number of <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> cittās </span></em>can increase. For example, the following <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span> vithi </span></em>has many <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> cittās.</span></em></li>
+</ul>
+<p>B B B "<span style="color: #993366;">BC BU MD P U A G Jh Jh Jh Jh Jh Jh Jh Jh</span>" B B B</p>
+<ul>
+<li>That is when a <em>yogi</em> can start cultivating <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> samāpatti.</span></em></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> Cittās </span></em>Arise Continuously In a <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> Samāpatti </span></em></h5>
+<p style="text-align: justify;">15. While in a <strong><em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> samāpatti</span></em>,</strong> <em><span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> can keep arising for long times, as long as one had determined at the start:</p>
+<p style="text-align: justify;">B B B B B "<span style="color: #993366;">BC BU MD Jh Jh Jh Jh Jh Jh Jh Jh Jh Jh Jh ...........</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Thus, one becomes unaware of what happens in the outside world during that time. There is no way to get back to the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state or for a<em> pañcadvāra</em> <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>or another<em> manōdvāra <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em></em>to arise. Before getting into the <em>samāpatti</em>, one decides how long to stay in the <em>samāpatti</em>.</li>
+<li style="text-align: justify;">People who can get into <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> samāpatti </span></em>can display the real power of<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span>.</span></em></li>
+<li style="text-align: justify;"><strong>A crude analogy</strong>: Suppose one is trying to light an oil lamp (oil-soaked wick) with the light of a matchstick. If one is not holding the lighted matchstick steady and the light moves in and out of the vicinity of the wick, it will not light. But if one can hold the light steady, it will light up quickly. Here, the mind is "locked on" that <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>!</li>
+<li style="text-align: justify;">The following is another analogy for those who are familiar with lasers. One can drill holes in a metal plate using a laser beam. But the metal spot will not heat up and evaporate unless the laser beam is held steady at that spot. Being in a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> samāpatti</span></em> is like keeping a laser beam steady on one spot for a long time.</li>
+<li>A <em>yogi</em> is said to be <strong>"able to get into a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>"</strong> <span style="color: #993366;"><strong>only if that<em> yogi</em> can get into <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> samāpatti.</span></em></strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="citta vīthi">Citta Vīthi</span></span></em> for Attainment of <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em></h5>
+<p style="text-align: justify;">B B B "<span style="color: #993366;">BC BU MD P U A G Pa Fr Fr</span>" B B B</p>
+<p style="text-align: justify;">B B B "<span style="color: #993366;">BC BU MD U A G Pa Fr Fr Fr</span>" B B B</p>
+<p style="text-align: justify;">16. The first is the <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span> <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> for an average person; the second is for one with "higher wisdom."</p>
+<ul style="text-align: justify;">
+<li>B, BC, BU, and MD are, as discussed above.</li>
+<li>Then, it goes through the <em>Parikamma</em> (P), <em>Upacāra</em> (U), <em>Anuloma</em> (A), <em>Gotrabu</em> (G), Path (<em><span><span class="pali-term term-highlight" data-term="magga">magga</span></span></em>) (Pa), and Fruit (<em><span><span class="pali-term term-highlight" data-term="phala">phala</span></span></em>) (Fr).</li>
+<li><strong>As you can see, there is no connection to <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em>.</strong> In particular, the <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span> <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> does not go through a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. Also, the <em>Gotrabu</em> (change of lineage) <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> for <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> is COMPLETELY DIFFERENT than that of a <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em>.</li>
+<li>The change<span style="color: #0000ff;"><strong> <span style="color: #3366ff;">of lineage here is to become an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> or a Noble Person.</span></strong></span></li>
+<li>The change to an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> happens even before the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="phala">phala</span></span></em> moment, at the <em>Gotrabu</em> (G) moment. <em>Gotra </em>means "lineage," and <em>Gotrabu </em>is the change of lineage. <span style="color: #3366ff;"><strong>Thus, one would become a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi </span></em>with the <em><span>Gotrabu <span class="pali-term term-highlight" data-term="citta">citta</span>.</span></em></strong></span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/AB.BB.006/index.html">State Of Mind In Absence Of Citta Vithi</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/AB.BB.009/index.html">Javana Of A Citta The Root Of Mental Power</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/AB.BB.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">State Of Mind In Absence Of Citta Vithi</span>
+        
+        <span class="pathway-title title-pt">State Of Mind In Absence Of Citta Vithi</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/AB.BB.009/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Javana Of A Citta The Root Of Mental Power</span>
+        
+        <span class="pathway-title title-pt">Javana Of A Citta The Root Of Mental Power</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-AB">
+        ↑ Back to Abhidhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

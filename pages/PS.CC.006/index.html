@@ -1,0 +1,370 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Vinnana Paccaya Namarupa | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 27 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.CC.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Vinnana Paccaya Namarupa</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.CC.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.CC.006"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0565"
+             data-level="advanced"
+             data-reading-time="8"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.CC.006</td></tr><tr><td>Fin-dex</td><td>0565</td></tr><tr><td>Slug</td><td>vinnana-paccaya-namarupa</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>Vinnana Paccaya Namarupa</td></tr></table></div></div><strong>Revised May 19, 2019; May 13, 2021; May 19, 2021; <span style="color: #0000ff">September 9, 2022</span></strong>
+<h5><span style="font-size: 14pt">Introduction</span></h5>
+<p style="text-align: justify">1.<em><span> <span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></em> can have different but related meanings in different contexts. <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span> </span></em>in the standard <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span></span></em> <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> is different from the “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>” involved in <em><span>idappaccayā <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>,</span></em> which takes place moment-to-moment.</p>
+<ul style="text-align: justify">
+<li>Idappaccayā means “what happens at this moment depending on the conditions at this moment.” Thus, it describes “events in real-time” that bring <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> in real-time, in addition to<em><span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> in the future. See "<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank"><em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span></span></em></a>
+<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank"><i><span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>."</span></i></a></li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="upapatti">upapatti</span></span></em> <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> process describes how <em>viññāna</em> energies created up to and within this life lead to future births (i.e., <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> in future lives via future births). Here “<em>uppatti</em>” means “birth.” See, “<a href="../../pages/PS.HH.004/index.html" rel="noopener noreferrer" target="_blank">Uppatti Paṭicca Samuppāda.</a>”</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span> </span></em>in <em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em></h5>
+<p style="text-align: justify">2. Let us first discuss <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> involved in <em><span><span class="pali-term term-highlight" data-term="idappaccayātā">idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, i.e., how a <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> can arise in the current life based on one’s <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> (ignorance) and <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (thoughts, speech, and actions).</p>
+<ul style="text-align: justify">
+<li><em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em> is not restricted to “births as a human, a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em>, an animal.” Many different <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> (births) arise during the current life itself; see "<a href="https://suttacentral.net/sn35.33-42/pli/ms" rel="noopener noreferrer" target="_blank">Jātidham­mā­di­ Sutta­ Dasaka (SN 35.33)</a>".</li>
+<li>We will discuss two examples below, which explain how a “thief” and a “drunkard” are “born” during the current life itself.</li>
+</ul>
+<h5 style="text-align: justify"><span style="font-size: 10pt"><i><span>"Viññāna <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span>"</span></i> During a Lifetime</span></h5>
+<p style="text-align: justify">3. “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></em>” involved in <em><span><span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> mainly refer to those “visual images” created by the person when making an “expectation” (<em>viññāna</em>) to achieve/maintain a certain goal.</p>
+<ul style="text-align: justify">
+<li>Here, “<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em>” refers to whatever the “name” given to the subject involved in the <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> process, and “<em>rūpās</em>” are the associated objects themselves. <span style="color: #0000ff"><strong>Thus, the corresponding “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>” are the mental images of the subjects in question</strong>.</span></li>
+</ul>
+<p style="text-align: justify">4. Let us take an example. When a thief plans to steal something (say a watch from a store), the process starts with the step “<em><span><span class="pali-term term-highlight" data-term="salāyatana">salāyatana</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="phasso">phasso</span>;</span></em>” see, "<a href="../../pages/PS.CC.005/index.html" rel="noopener" target="_blank">Generating Kammic Energy in the 'Upādāna Paccayā Bhava' Step</a>." That corresponds to him seeing the watch on display and realizing that he could take it without anyone seeing it.</p>
+<ul style="text-align: justify">
+<li>That is when he starts acting with avijja initiating a PS cycle at “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>”; he starts thinking about the plan because of his ignorance of the consequences.</li>
+<li>Here “<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></em>” or the name is “watch,” and “<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>” is the watch itself.<strong> But “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>” is the mental image of that watch: That is formed in HIS MIND. </strong>In addition, various other types of <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>related to the plan will go through his mind.</li>
+<li>For example, he may also make visuals of how he will be doing the stealing: “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>” are the visuals he has in his mind to get the job done.</li>
+<li>He starts doing <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> first: thinking to himself about how to go about stealing the watch. This is “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna,</span></em>” and that gives rise to <em>viññāna </em>for stealing the watch.</li>
+</ul>
+<p style="text-align: justify">5. The more he thinks and makes plans (i.e., makes more and more <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>in his mind, that future expectation for stealing that object (i.e., the <em>viññāna </em>for it) will get stronger.</p>
+<ul style="text-align: justify">
+<li>Here the <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> process runs backward, “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>.” This is called an “<em>aññamañña </em><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>”.</span></em></li>
+<li><span>These forward and backward steps may run back and forth while he is planning the robbery, and the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that both </span><em>viññāna</em> and <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> get stronger due to this feedback. <strong>They depend on each other and feed on each other.</strong></li>
+<li>The more he thinks about it, the stronger those <em>viññāna </em>and <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span>.</span></em></li>
+<li>Ven. Sariputta provided a simile for this inter-dependence between <em>viññāna</em> and <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span>,</span></em> saying it is like two bundles of hay leaning against each other and supporting each other without any other support.</li>
+</ul>
+<h5 style="text-align: justify">A Second Example</h5>
+<p style="text-align: justify">6. Let us take another case of a teenager whose peers influence him to drink alcohol. Because of his ignorance about the consequences, he engages in such activities and also in planning activities: “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.”</p>
+<ul style="text-align: justify">
+<li>Here <em><span><span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span></span></em> includes not only drinking activities but also planning. Therefore, all three types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> are involved: <em>manō, vaci,</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em></li>
+<li>While he is participating in drinking, he is doing <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em><span>; he will constantly be talking about having such parties, and those are vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>; it is also in the subconscious, and many times a day, they come back to his mind as </span><em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. All these are included in “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>.”</li>
+</ul>
+<p style="text-align: justify">7. Most people do not realize it, but that process of “thinking and talking to oneself” (<em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) can make a big impact on the formation of <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em> and the cultivation of <em>viññāna</em>. Many people spend hours and hours doing that, assuming it does not contribute to “<em>viññāna</em> (or <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) formation”; see, "<a href="../../pages/KD.BB.007/index.html" rel="noopener noreferrer" target="_blank">Correct Meaning of Vacī Sankhāra</a>."</p>
+<ul style="text-align: justify">
+<li>In the above example, even when he is not drinking, such <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> comes to the mind automatically, and he starts consciously thinking about drinking activities: he visualizes pictures of “party scenes,” including friends, bottles of his favorite drink, any food that goes with it, etc.</li>
+<li>That conscious thinking is also <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and those also strengthen the <em>viññāna</em> via “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>.”</li>
+<li>Now those mental pictures that arise during that process are <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> </span></em>that arise due to “<em><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>.” Therefore, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> steps do not just flow in one way. They can run forward and backward.</li>
+</ul>
+<p style="text-align: justify">8. If the teenager keeps his bad habit of drinking, he gets trapped in that <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> </span></em>(state of mind of a drunkard), the more "drunken <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span>" </span></em><span>will result, i.e., more frequently he will be drunk. When one gets excessively drunk, one tends to behave like an animal without any sense of decency. The long-term consequences could be <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> as an animal.</span></p>
+<ul style="text-align: justify">
+<li>Suppose that "viññāna of a drunkard" stays strong to the time of death (the<em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment at the end of his human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>). In that case, it could lead to a new <em><span><span class="pali-term term-highlight" data-term="uppatti bhava">uppatti bhava</span></span></em> via the <em><span>uppatti <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> process mentioned in #1 above. We will discuss this second type of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></em></li>
+<li>The important point is that such a <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> <em>viññāna </em><span>is likely to give rise to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the animal realm, as mentioned above.</span></li>
+</ul>
+<p style="text-align: justify">9. In both these examples, it is clear that those reverse steps also occur: “<em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna “</span></em>can happen, and does happen, together with “<em><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>.” The more one visualizes related <em><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></em>, the stronger that <em>viññāna </em>gets.</p>
+<ul style="text-align: justify">
+<li>As we saw above, this happens in other steps too (for example, “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>” and “<em><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>”), and such is referred to as an “<em>aññamañña</em> <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> step.” Here “<em>aññamañña</em>” means “inter-dependent.”</li>
+<li>This is especially true also for the “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></em>.” The stronger the <em>viññāna</em> gets, one is more likely to engage in the same kind of acts, i.e., <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, </span></em>i.e., “<em><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.” They feed on each other. This often happens in habit formation; see, "<a href="../../pages/BM.BB.001/index.html" rel="noopener noreferrer" target="_blank">9. Key to Ānāpānasati – How to Change Habits and Character (Gati)</a>".</li>
+</ul>
+<h5 style="text-align: justify"><span style="font-size: 12pt"><i><span>Viññāna <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">Nāmarūpa</span></span></i> at <i><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span> </span></i>(in <em><span><span class="pali-term term-highlight" data-term="upapatti">Upapatti</span></span></em> PS)</span></h5>
+<p style="text-align: justify">10. At the end of existence (<i><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>), a given lifestream jumps from one kind of existence to another. The easiest to visualize is in the case of a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> to a <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> transition. The "<em>n</em><i>āma" </i>part changes from a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> to a <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span>,</span></em> and the "<em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em><span>" part changes from 2 pasada <span class="pali-term term-highlight" data-term="rupa">rupa</span> for the </span><em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> to 5 for the <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>That transition happens in the latter part of the last <i><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></i> of the life of <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>.<strong><span style="color: #0000ff"> At that <em><span><span class="pali-term term-highlight" data-term="cuti-patisandhi">cuti-patisandhi</span></span></em> moment, the "<em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> n</span><i>āma</i><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>" dies, and a "<em><span><span class="pali-term term-highlight" data-term="deva">Deva</span> n</span><i>āma</i><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>" is created by <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy.</span></strong><span> This is discussed in a bit more detail in the <span class="pali-term term-highlight" data-term="post">post</span> “</span><a href="../../pages/AB.DD.008/index.html">Cuti-Paṭisandhi – An Abhidhamma Description</a>.”</li>
+</ul>
+<p style="text-align: justify">11. For humans (and animals,) the situation is a bit more complex because the first type of "human <em>n<i>āma</i><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>" created is a human/animal <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>In the cases of a human or an animal, the second type of <em>nāmarupa</em> forms when that <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> merges with a zygote in a womb. That <em>nāmarupa </em>is the basis for the physical human body. So, it depends on the particular case at hand.</li>
+<li>Let us consider the case of a human dying and born into a deer. A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is involved in both lives.</li>
+</ul>
+<h5 style="text-align: justify">Example of a Human to Deer Transition</h5>
+<p style="text-align: justify">12. In general, as soon as the<i> viññāna</i> for the next existence was determined at the last <i><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></i> by the step “<i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i><i><span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></i>,” the next step of “<i><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span>”</span></i> gives rise to the <i><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></i> for the next life.</p>
+<ul style="text-align: justify">
+<li>When human life ends, that "human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" will die, and at that <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-</span><i><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></i></em> moment, a "deer <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" will arise.</li>
+<li>Thus here, “<i><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></i>” includes the basic level of<i> viññāna</i> for the new deer's existence, which is much different from the “<i><span><span class="pali-term term-highlight" data-term="nāma">nāma</span></span></i>” of a human. The “<i><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></i>” is that of a deer and not of a human. Thus “<i><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></i>” makes a huge transition at the end of the “<i><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>” from human to a deer.</li>
+<li>Of course, now that "deer <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>" needs to be pulled into the womb of a female deer (i.e., doe) to be born a deer.</li>
+</ul>
+<p style="text-align: justify">13. I have discussed previously how a "deer <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>"</span></em> could be reborn many times as a deer until the <i><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></i> energy of the “deer<i><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>” is exhausted; see, “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>."</p>
+<ul style="text-align: justify">
+<li>In such instances, at the death of the deer, a “deer <i><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></i>” emerges from the dead body and waits for a suitable womb for the “deer mother” to become available. Here the new “<i><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></i>” may be somewhat different, but still that of a deer, so any change would be minor.</li>
+<li>Therefore, the “<i><span>viññāna <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></i>” gives rise to a new set of “<i><span><span class="pali-term term-highlight" data-term="nāmarūpa">nāmarūpa</span></span></i>” only at the <i><span><span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></i> to a new existence.</li>
+</ul>
+<p style="text-align: justify"><i>Viññāna </i><span>is a key concept in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. We can analyze it at various levels, and a deeper analysis is at "</span><a href="http://localhost/beng_feb2026/living-dhamma/nama-rupa-to-namarupa/vinnana-aggregate/" rel="noopener noreferrer" target="_blank">Viññāna Aggregate</a>."</p>
+<p style="text-align: justify">Next, "<a href="../../pages/PS.CC.007/index.html" rel="noopener noreferrer" target="_blank" title="Namarupa paccayā Salayatana">Nāmarūpa paccayā Salayatana</a>", .........</p>
+<p style="text-align: justify"></p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.CC.005/index.html">Generating Kammic Energy In The Upadana Paccaya Bhava Step</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.CC.007/index.html">Namarupa Paccaya Salayatana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.CC.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Generating Kammic Energy In The Upadana Paccaya Bhava Step</span>
+        
+        <span class="pathway-title title-pt">Generating Kammic Energy In The Upadana Paccaya Bhava Step</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.CC.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Namarupa Paccaya Salayatana</span>
+        
+        <span class="pathway-title title-pt">Namarupa Paccaya Salayatana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

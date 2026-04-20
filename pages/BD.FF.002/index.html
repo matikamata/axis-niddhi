@@ -1,0 +1,454 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Antarabhava No Connection To Gandhabba | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 28 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.FF.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Antarabhava No Connection To Gandhabba</h1>
+    
+    <h1 class="title-pt">Antarabhava não tem relação com Gandhabba</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.FF.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.FF.002"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0036"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.FF.002</td></tr><tr><td>Fin-dex</td><td>0036</td></tr><tr><td>Slug</td><td>antarabhava-no-connection-to-gandhabba</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Antarabhava No Connection To Gandhabba</td></tr></table></div></div><p><strong>December 11, 2020; revised December 12, 2020 (#7 revised and #8 added)</strong></p>
+<h5><em> Antarābhava</em> - Need to Understand the Terminology</h5>
+<p style="text-align: justify;"> 1. <em>Antarābhava</em><span> is not a concept in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. </span><em>Antarābhava</em> ("<em>antara</em>" + "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>") means "in-between <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>." There are no such "gaps" between the two existences (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.) It was a heretical view that existed even before the formal emergence of <em>Mahāyāna</em>.</p>
+<ul style="text-align: justify;">
+<li>Some current <em>Theravadins</em> have the misconception that the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state (mental body or <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) is the same as <em>antarābhava, </em>and thus needs to be rejected.</li>
+<li>However, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state encompasses the whole of the "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em>" within which there are many rebirths with physical human bodies.</li>
+<li><span>I will use two <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts </span><strong>to clarify the terminology</strong> and <strong>this hugely misunderstood issue.</strong></li>
+</ul>
+<h5 style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Account of Jeffrey Keene</span></h5>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aQHp9bGVDB8?si=nICPG9XC7i92HVF4" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;">2.  General John Gordon died in the Civil War. He was reborn as Jeffrey Keene in recent years.</p>
+<ul style="text-align: justify;">
+<li>They are two "human bodies" that resulted from the same <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (mental body or <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>). <strong class="text-strong">Those two births (as General Gordon and Jeffrey Keene) are within the same "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>."</strong></li>
+<li>When General Gordon died, the mental body (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) came out of that dead body. Then, that <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> was in the "<em>paraloka</em>" waiting for a suitable womb.</li>
+<li>Many years later, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> was pulled into Jeffrey Keene's mother's womb, which is how he was born (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) with that physical body.</li>
+<li>Therefore, General Gordon and Jeffrey Keene are in the same "lifestream." They belong to the "same human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>."</li>
+<li><span>This clearly explains the position of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> about <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. Jeffrey Keene is NOT the same as General Gordon. However, Jeffrey Keene's life is irrevocably connected to General Gordon's. Therefore, it is also NOT correct to say there is no connection between them.</span></li>
+<li>It is the same HUMAN mental body (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) that was reborn (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) with physical human bodies twice (as General Gordon and Jeffrey Kean).</li>
+</ul>
+<p style="text-align: justify;">3. A few more observations may be helpful.</p>
+<ul style="text-align: justify;">
+<li>Even though the physical bodies of General Gordon and Jeffrey Keene were remarkably close, that does not happen all the time. Parents' physical features (their DNA) also contribute to the physical features of any child.</li>
+<li>There is a significant time gap between those two lives. It is possible that there could have been more births with physical bodies in between.</li>
+<li>The time gap between successive lives can vary hugely. In some cases, there may be only days or months, but more typically, there are gaps of several years.</li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> does not have the choice of "selecting a womb." When a zygote is created in the womb of a woman following sexual intercourse, a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> matching the parents' general <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> is pulled into the womb. See "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="rebirth">Rebirth</span> Account of James Leininger</span></h5>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Uk7biSOzr1k?si=kW3crGqOpPv2-gkf" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p>4. The relevant points are noted below.</p>
+<p style="text-align: justify;"><strong>@ beginning</strong>: The narrator asks: "Could we come back as someone else"?</p>
+<ul style="text-align: justify;">
+<li>It is not "someone else" that comes back or is reborn. It is the same lifestream with a different appearance (physically.) Those successive births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) are within the same human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. In other words, it is the same "lifestream." See, "<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">What Reincarnates? – Concept of a Lifestream</a>."</li>
+</ul>
+<p style="text-align: justify;"><strong>@ 0.3 minutes</strong>: James Houston, Jr. was shot down over the Pacific Ocean on March 3, 1945. James Leininger was born some 60 years later and started talking about "getting shot by the Japanese."</p>
+<p style="text-align: justify;"><strong>@ 3:20 minutes</strong>: The narrator says, "Dead can be reborn."</p>
+<ul style="text-align: justify;">
+<li>That is not the right way to describe the situation. It is the same lifestream that is reborn with a different physical body!</li>
+</ul>
+<p style="text-align: justify;"><strong>@ 4 minutes</strong>: Usually, a child's memories of a previous life fade away around 7-8 years.</p>
+<p style="text-align: justify;"><strong>@ 5 minutes</strong>: James Leininger's account of getting shot.</p>
+<p style="text-align: justify;"><strong>@ 7:30 minutes</strong>: James Leininger provided the name of a friend from his previous life, Jack Larson, and correctly said that his plane took off from the ship "Natoma." This is STRONG evidence.</p>
+<p style="text-align: justify;"><strong>@ 8:20 minutes</strong>: He describes himself as James 3 because, in his previous life, he was James Houston, Jr (i.e., James 2).</p>
+<p style="text-align: justify;"><strong>@ 10:40 minutes</strong>: The dad, Bruce Leininger, says that he thinks his son returned because "he had something to finish."</p>
+<ul style="text-align: justify;">
+<li>No. We all come back. We can come back in human form and also in other forms corresponding to any of the 31 realms.</li>
+</ul>
+<p style="text-align: justify;"><strong>@ 10:55 minutes</strong>: Comments of Anne Barron, sister of James Houston, Jr.</p>
+<p style="text-align: justify;"><strong>@ 11:30 minutes</strong><span>: Comments of Prof. Kurtz, who does not believe in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, says the account of James Leininger (a two-year-old) is made up. It is, of course, up to each person to make that decision. There are many more <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts and other types of evidence, such as Near-Death Experiences and Out-of-the Body Experiences; see "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a>."</p>
+<h5 style="text-align: justify;">Are Those Successive Births in Different <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>?</h5>
+<p style="text-align: justify;">5. The above two accounts allow us to clarify the concepts of human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and human <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Those questioning the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state must answer the following questions: <strong><span style="color: #0000ff;">"Are James Houston and James Leininger in two different <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>?</span>"</strong></li>
+<li>If they answer "yes," the following must be true: Between those two human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, that lifestream must have been in a different <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, such as animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+<li><span>However, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> clearly stated getting a human </span><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is extremely difficult. There could be millions or even billions of years between successive human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. See "<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank">How the Buddha Described the Chance of Rebirth in the Human Realm</a>."</li>
+<li>Therefore, it is clear that those two successive births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) are within the same human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. Further details at "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>."</li>
+</ul>
+<h5 style="text-align: justify;">The "<em>Antarābhava</em><span>" Issue Raised at the Third <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council Was a Different Issue</span></h5>
+<p style="text-align: justify;">6. The concept of an <em>antarābhava</em><span> was discussed and rejected at the Third <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council. It is documented in the </span><em>Kathāvatthu </em>section of the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>.</p>
+<ul style="text-align: justify;">
+<li>There was no discussion on <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span> regarding that issue. I will discuss that in detail in the next <span class="pali-term term-highlight" data-term="post">post</span>, "</span><em>Antarābhava</em> Discussion in <em>Kathāvatthu</em> – Not Relevant to <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>."</li>
+<li>Therefore, it is a critical error to identify the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state as an <em>antarābhava. </em>Rather, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state encompasses a whole human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Insights on "Self" and "No-Self" Issue</h5>
+<p style="text-align: justify;">7. This is also a good opportunity to get insights into the "Self" and "No-Self" Issues.</p>
+<ul>
+<li style="text-align: justify;">Is James Leininger the SAME as James Houston? Of course not. They lived very different lives and did not look the same either. Is Jeffrey Keene the same as General Gordon in #2 above? Even though there were some physical resemblances, they were very different and lived different lives. As we can see clearly, the physical bodies of those two individuals are entirely different. James Houston's physical body had disintegrated a long time ago. At some point in the future, that "lifestream" may be born a <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span>, <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>, animal, etc. No ESSENCE propagates from life to life, especially from <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>-to-<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. A <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is vastly different from a human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.  <span style="color: #993366;"><strong><span>That is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejected the idea of an unchanging "self" or "soul."</span></strong></span></li>
+<li style="text-align: justify;">However, there is obviously a STRONG CONNECTION between the two lives in each of those cases. There would be no James Leininger if there were no James Houston. James Leininger is a descendant of that same "lifestream." As we can see clearly, the physical bodies of those two individuals are entirely different. James Houston's physical body had disintegrated a long time ago. <strong>However, there is an UNBROKEN connection in the mental body.</strong> In fact, James Leininger must have inherited SOME of the mental characteristics-- such as <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> -- of James Houston (there would have been some changes in the intervening time.) <span style="color: #ff0000;"><strong><span style="color: #993366;"><span>Thus, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejected the idea of "no-self" as well.</span></span> <span style="color: #000000;">As long as the <em>saṃsāric</em> process exists, an unbroken (mental) lineage exists between any two stages within that lifestream.</span></strong></span></li>
+</ul>
+<h5>Nothing In This World is Worthwhile to be Taken as "Mine"</h5>
+<p style="text-align: justify;">8. The real issue is whether there is anything in this world that is worthwhile to be "<span style="color: #0000ff;"><strong>taken to be mine</strong></span>." <strong>Immoral actions with such vision/perception can create <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies leading to <span style="color: #0000ff;">"bad <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em>" such as animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</span></strong><span> That is what we need to be concerned with. That is what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated in his very first discourse, "</span><em>saṃkhittena <span style="color: #0000ff;"><strong><span>pañcu­pādā­nak­khan­dhā <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span></span></strong></span>" </em>OR "in brief, the <span style="color: #0000ff;"><strong>origin of suffering is the craving</strong></span> for the five aggregates of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, viññāna</span></em> (<em>pancupādānakkhandha</em>)."</p>
+<ul>
+<li style="text-align: justify;">Even though human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> is much longer than 100 years, living beings spend most of their time in other existences (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em><span>) with unimaginable suffering because of not seeing that "big picture" of the long <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process that spans not only human </span><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> but much worse <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+<li style="text-align: justify;">When the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> ends and a "bad<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" (for example, an animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) is grasped, that animal is NOT the preceding human. But it has a "cause and effect connection" to the previous human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. When in animal <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>, for example, that animal cannot even think about these issues; but it still has the perception of "me and mine." <strong><span style="color: #0000ff;">But that animal is totally helpless. That is <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature! </span>This is the outcome of having the wrong view of "‘This is mine, I am this, this is my self.’” </strong><span>That is the meaning of the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> verse,  "</span><em><span><span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> mama, esohamasmi, eso me <span class="pali-term term-highlight" data-term="attā">attā</span>’” ti.</span></em></li>
+<li style="text-align: justify;">That change of <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> happens at the<em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment, at the end of the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>. <strong>There could be many "deaths" of human bodies before that.</strong> For example, General Gordon and Jeffrey Keene in #2 above were just two births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) within a single human existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.) That is the difference between <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> in this context. See "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>."</li>
+<li>These are complex issues. The key is to get some traction, and then it will become easier.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.FF.002"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0036"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.FF.002
+Language:     pt-BR
+Generated-At: 2026-04-17T21:33:22Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>11 de dezembro de 2020; revisado em 12 de dezembro de 2020 (revisão do nº 7 e adição do nº 8)</strong></p>
+<h5><em> Antarābhava</em> — Necessidade de compreender a terminologia</h5>
+<p style="text-align: justify;"> 1. <em>Antarābhava</em><span> não é um conceito no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. </span><em>Antarābhava</em> (“<em>antara</em>” + “<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>”) significa “entre <em>bhavas</em>”. Não existem tais “lacunas” entre as duas existências (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>). Era uma visão herética que existia mesmo antes do surgimento formal do <em>Mahāyāna</em>.</p>
+<ul style="text-align: justify;">
+<li>Alguns <em>theravadins</em> atuais têm a concepção errônea de que o estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (corpo mental ou <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>) é o mesmo que <em>antarābhava</em> e<em>,</em> portanto<em>,</em> precisa ser rejeitado.</li>
+<li>No entanto, o estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> abrange a totalidade do “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano”<em>,</em> dentro do qual há muitos renascimentos com corpos físicos humanos.</li>
+<li>Usarei dois relatos de renascimento <strong>para esclarecer a terminologia</strong> e <strong>essa questão extremamente mal compreendida.</strong></li>
+</ul>
+<h5 style="text-align: justify;">Relato de renascimento de Jeffrey Keene</h5>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aQHp9bGVDB8?si=nICPG9XC7i92HVF4" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p style="text-align: justify;">2.  O general John Gordon morreu na Guerra Civil. Ele renasceu como Jeffrey Keene nos últimos anos.</p>
+<ul style="text-align: justify;">
+<li>São dois “corpos humanos” que resultaram do mesmo <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (corpo mental ou <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>). <strong class="text-strong">Esses dois nascimentos (como General Gordon e Jeffrey Keene) estão dentro do mesmo “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano”.</strong></li>
+<li>Quando o General Gordon morreu, o corpo mental (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>) saiu daquele corpo morto. Em seguida, esse <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> ficou no “<em>paraloka</em>” à espera de um útero adequado.</li>
+<li>Muitos anos depois, <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> foi atraído para o útero da mãe de Jeffrey Keene, e foi assim que ele nasceu (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) com aquele corpo físico.</li>
+<li>Portanto, o General Gordon e Jeffrey Keene estão no mesmo “fluxo de vida”. Eles pertencem ao “mesmo <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano”.</li>
+<li><span>Isso explica claramente a posição do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> sobre o Renascimento. Jeffrey Keene NÃO é o mesmo que o General Gordon. No entanto, a vida de Jeffrey Keene está irrevogavelmente ligada à do General Gordon. Portanto, também NÃO é correto dizer que não há conexão entre eles.</span></li>
+<li>É o mesmo corpo mental HUMANO (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>) que renasceu (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) com corpos físicos humanos duas vezes (como o General Gordon e Jeffrey Keane).</li>
+</ul>
+<p style="text-align: justify;">3. Algumas observações adicionais podem ser úteis.</p>
+<ul style="text-align: justify;">
+<li>Embora os corpos físicos do General Gordon e de Jeffrey Keene fossem notavelmente semelhantes, isso não acontece sempre. As características físicas dos pais (o seu ADN) também contribuem para as características físicas de qualquer filho.</li>
+<li>Há um intervalo de tempo significativo entre essas duas vidas. É possível que tenha havido mais nascimentos com corpos físicos nesse intervalo.</li>
+<li>O intervalo de tempo entre vidas sucessivas pode variar enormemente. Em alguns casos, pode haver apenas dias ou meses, mas, mais comumente, há intervalos de vários anos.</li>
+<li>O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não tem a opção de “escolher um útero”. Quando um zigoto é criado no útero de uma mulher após a relação sexual, um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> que corresponde à <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> geral dos pais é atraído para o útero. Veja “<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Explicações Buddhistas sobre concepção, aborto e contracepção</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Relato de Renascimento de James Leininger</h5>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Uk7biSOzr1k?si=kW3crGqOpPv2-gkf" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p>4. Os pontos relevantes estão indicados abaixo.</p>
+<p style="text-align: justify;"><strong>@ início</strong>: O narrador pergunta: “Será que podemos voltar como outra pessoa”?</p>
+<ul style="text-align: justify;">
+<li>Não é “outra pessoa” que volta ou renasce. É o mesmo fluxo de vida com uma aparência diferente (fisicamente). Esses nascimentos sucessivos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) estão dentro do mesmo <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano. Em outras palavras, é o mesmo “fluxo de vida”. Veja “<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">O que renasce? – Conceito de um fluxo de vida</a>”.</li>
+</ul>
+<p style="text-align: justify;"><strong>@ 0,3 minutos</strong>: James Houston Jr. foi abatido sobre o Oceano Pacífico em 3 de março de 1945. James Leininger nasceu cerca de 60 anos depois e começou a falar sobre “ter sido baleado pelos japoneses”.</p>
+<p style="text-align: justify;"><strong>@ 3:20 minutos</strong>: O narrador diz: “Os mortos podem renascer”.</p>
+<ul style="text-align: justify;">
+<li>Essa não é a maneira correta de descrever a situação. É o mesmo fluxo de vida que renasce com um corpo físico diferente!</li>
+</ul>
+<p style="text-align: justify;"><strong>@ 4 minutos</strong>: Normalmente, as memórias de uma criança sobre uma vida anterior desaparecem por volta dos 7-8 anos.</p>
+<p style="text-align: justify;"><strong>@ 5 minutos</strong>: O relato de James Leininger sobre ter sido baleado.</p>
+<p style="text-align: justify;"><strong>@ 7:30 minutos</strong>: James Leininger forneceu o nome de um amigo de sua vida anterior, Jack Larson, e disse corretamente que seu avião decolou do navio “Natoma”. Esta é uma evidência FORTE.</p>
+<p style="text-align: justify;"><strong>@ 8:20 minutos</strong>: Ele se descreve como James 3 porque, em sua vida anterior, ele era James Houston Jr. (ou seja, James 2).</p>
+<p style="text-align: justify;"><strong>@ 10:40 minutos</strong>: O pai, Bruce Leininger, diz que acha que seu filho voltou porque “ele tinha algo para terminar”.</p>
+<ul style="text-align: justify;">
+<li>Não. Todos nós voltamos. Podemos voltar na forma humana e também em outras formas correspondentes a qualquer um dos 31 reinos.</li>
+</ul>
+<p style="text-align: justify;"><strong>@ 10:55 minutos</strong>: Comentários de Anne Barron, irmã de James Houston Jr.</p>
+<p style="text-align: justify;"><strong>@ 11:30 minutos</strong>: Comentários do Prof. Kurtz, que não acredita no Renascimento, diz que o relato de James Leininger (uma criança de dois anos) é inventado. É claro que cabe a cada pessoa tomar essa decisão. Existem muitos outros relatos de Renascimento e outros tipos de evidências, como Experiências de Quase Morte e Experiências Fora do Corpo; veja “<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências do Renascimento</a>”.</p>
+<h5 style="text-align: justify;">Esses nascimentos sucessivos ocorrem em diferentes <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>?</h5>
+<p style="text-align: justify;">5. Os dois relatos acima nos permitem esclarecer os conceitos de <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano e <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em> humano.</p>
+<ul style="text-align: justify;">
+<li>Aqueles que questionam o estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> devem responder às seguintes perguntas: <strong><span style="color: #0000ff;">“James Houston e James Leininger estão em dois <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> diferentes?</span>”</strong></li>
+<li>Se responderem “sim”, o seguinte deve ser verdade: entre esses dois <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humanos, essa corrente de vida deve ter estado em um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> diferente, como <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> animal ou <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span> <span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>.</li>
+<li><span>No entanto, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou claramente que obter um </span><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano é extremamente difícil. Podem existir milhões ou até bilhões de anos entre <em>Bhavas</em> humanos sucessivos. Veja “<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank">Como o Buddha descreveu a chance de Renascimento no reino humano</a>”.</li>
+<li>Portanto, fica claro que esses dois nascimentos sucessivos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) estão dentro do mesmo <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano. Mais detalhes em “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">A questão do “<em>Antarābhava</em>” levantada no Terceiro Concílio Buddhista era uma questão diferente</h5>
+<p style="text-align: justify;">6. O conceito de <em>antarābhava</em> foi discutido e rejeitado no Terceiro Concílio Buddhista. Isso está documentado na seção <em>Kathāvatthu</em> do <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>.</p>
+<ul style="text-align: justify;">
+<li>Não houve discussão sobre <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> em relação a essa questão. Discutirei isso em detalhes no próximo ensaio, “Discussão sobre <em>Antarābhava</em> em <em>Kathāvatthu</em> – Não Relevante para <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>”.</li>
+<li>Portanto, é um erro grave identificar o estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> como um <em>antarābhava. </em>Em vez disso, o estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> abrange um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano completo.</li>
+</ul>
+<h5 style="text-align: justify;">Reflexões sobre a questão do “Eu” e do “Não-Eu”</h5>
+<p style="text-align: justify;">7. Esta também é uma boa oportunidade para obter insights sobre as questões do “Eu” e do “Não-Eu”.</p>
+<ul>
+<li style="text-align: justify;">James Leininger é o MESMO que James Houston? Claro que não. Eles viveram vidas muito diferentes e também não tinham a mesma aparência. Jeffrey Keene é o mesmo que o General Gordon no nº 2 acima? Embora houvesse algumas semelhanças físicas, eles eram muito diferentes e viveram vidas diferentes. Como podemos ver claramente, os corpos físicos desses dois indivíduos são totalmente diferentes. O corpo físico de James Houston se desintegrou há muito tempo. Em algum momento no futuro, esse “fluxo de vida” pode renascer como um <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span>, um <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>, um animal, etc. Nenhuma ESSÊNCIA se propaga de vida em vida, especialmente de <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> para <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>. Um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span> de <span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> é muito diferente de um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano ou animal. <span style="color: #993366;"><strong><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejeitou a ideia de um “eu” ou “alma” imutável.</span></strong></span></li>
+<li style="text-align: justify;">No entanto, há obviamente uma FORTE CONEXÃO entre as duas vidas em cada um desses casos. Não haveria James Leininger se não houvesse James Houston. James Leininger é um descendente desse mesmo “fluxo de vida”. Como podemos ver claramente, os corpos físicos desses dois indivíduos são inteiramente diferentes. O corpo físico de James Houston se desintegrou há muito tempo. <strong>No entanto, existe uma conexão ININTERRUPTA no corpo mental.</strong> Na verdade, James Leininger deve ter herdado ALGUMAS das características mentais — tais como <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> — de James Houston (teria havido algumas mudanças no intervalo de tempo). <span style="color: #ff0000;"><strong><span style="color: #993366;"><span>Assim, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejeitou também a ideia do “não-eu”.</span></span> <span style="color: #000000;">Enquanto o processo <em>samsárico</em> existir, existe uma linhagem (mental) ininterrupta entre quaisquer dois estágios dentro desse fluxo de vida.</span></strong></span></li>
+</ul>
+<h5>Nada neste mundo vale a pena ser considerado “meu”</h5>
+<p style="text-align: justify;">8. A verdadeira questão é se há algo neste mundo que valha a pena ser “<span style="color: #0000ff;"><strong>considerado como meu</strong></span>”. <strong>Ações imorais com tal visão/percepção podem criar energias <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que levam a <span style="color: #0000ff;">“<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> ruim”<em>,</em> como <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> animal.</span></strong><span> É com isso que precisamos nos preocupar. Foi isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou em seu primeiro discurso: “</span><em>saṃkhittena <span style="color: #0000ff;"><strong><span>pañcu­pādā­nak­khan­dhā <span class="pali-term term-highlight" data-term="dukkhā">dukkhā</span></span></strong></span>” </em>OU “em resumo, a <span style="color: #0000ff;"><strong>origem do sofrimento é o desejo</strong></span> pelos cinco agregados de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>, viññāna</span></em> (<em>pancupādānakkhandha</em>).”</p>
+<ul>
+<li style="text-align: justify;">Embora <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano seja muito mais longo do que 100 anos, os seres vivos passam a maior parte do tempo em outras existências (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) com sofrimento inimaginável por não enxergarem esse “quadro geral” do longo processo de Renascimento que abrange não apenas <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano, mas <em>Bhavas</em> muito piores.</li>
+<li style="text-align: justify;">Quando o <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano termina e um “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> ruim” (por exemplo, um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> animal) é alcançado, esse animal NÃO é o humano anterior. Mas ele tem uma “conexão de causa e efeito” com o <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano anterior. Quando no <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> animal, por exemplo, esse animal não consegue sequer pensar nessas questões; mas ainda tem a percepção de “eu e o que é meu”. <strong><span style="color: #0000ff;">Mas esse animal está totalmente indefeso. Essa é a natureza <em>Anattā</em>! </span>Esse é o resultado de ter a visão errada de “‘Isto é meu, eu sou isto, isto é o meu eu’”. </strong><span>Esse é o significado do verso em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>: “</span><em><span><span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> mama, esohamasmi, eso me Anattā” ti.</span></em></li>
+<li style="text-align: justify;">Essa mudança de <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> ocorre no momento<em> </em>do <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>, no final do <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano. <strong>Pode haver muitas “mortes” de corpos humanos antes disso.</strong> Por exemplo, o General Gordon e Jeffrey Keene no nº 2 acima foram apenas dois nascimentos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) dentro de uma única existência humana (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>). Essa é a diferença entre <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em> neste contexto. Veja “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>”.</li>
+<li>Essas são questões complexas. O segredo é ganhar um pouco de tração, e então tudo ficará mais fácil.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.FF.001/index.html">Antarabhava And Gandhabba</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.FF.003/index.html">Antarabhava Discussion In Kathavatthu</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.FF.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Antarabhava And Gandhabba</span>
+        
+        <span class="pathway-title title-pt">Antarabhava e Gandhabba</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.FF.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Antarabhava Discussion In Kathavatthu</span>
+        
+        <span class="pathway-title title-pt">Discussão sobre Antarabhava em Kathavatthu</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

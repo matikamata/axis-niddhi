@@ -1,0 +1,401 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Dhamma Different Meanings Depending On The Context | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 39 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.EE.008</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Dhamma Different Meanings Depending On The Context</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.EE.008</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.EE.008"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0583"
+             data-level="advanced"
+             data-reading-time="10"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.EE.008</td></tr><tr><td>Fin-dex</td><td>0583</td></tr><tr><td>Slug</td><td>dhamma-different-meanings-depending-on-the-context</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>Dhamma Different Meanings Depending On The Context</td></tr></table></div></div><p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> means teaching, and <em>anudhamma</em> means associated concepts. Even though <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em><span> could mean any teaching, it is commonly used to indicate <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings or "<span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>."</span></p>
+<p style="text-align: justify"><strong>November 16, 2021; <span style="color: #3366ff">rewritten December 23, 2022</span></strong></p>
+<h5 style="text-align: justify">Introduction</h5>
+<p style="text-align: justify"><span>1. In the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/PS.EE.007/index.html" rel="noopener" target="_blank">Yoniso Manasikāra and Paṭicca Samuppāda</a>," we discussed the four requirements for someone to attain the <i><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></i> stage.  There we discussed the first three requirements. The fourth is <em><strong><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span>­nu­dhammap­paṭi­patti. </span></strong></em><span>It means "to follow <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> and associated concepts."</span></p>
+<ul style="text-align: justify">
+<li><span>The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word </span><em><strong><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span>­nu­dhammap­paṭi­patti </span></strong></em>is the combination of three words: <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span>, anudhamma</span></em>, and <em>paṭi­patti. </em><span>Note that when two <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words are combined and have "a"'s at the joint, those two "a"s become a long "a." Thus, the combination of </span><em>dhamm<strong>a a</strong>nudhamma </em>leads to "<em>dhamm<strong>ā</strong><span>­nu­<span class="pali-term term-highlight" data-term="dhamma">dhamma</span>."</span></em></li>
+<li>Therefore, we need to discuss the words "<em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>" and "<em>anudhamma</em>." As we will see, "<em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>" can have different meanings based on the context.</li>
+<li>We have many examples in English where the same word gives different meanings based on the context. For example, the term "right" conveys unrelated things in "turn right" and "you are right."</li>
+<li><span>That is why it is dangerous to translate <span class="pali-term term-highlight" data-term="pāli">Pāli</span> texts word-by-word, as commonly done these days. I have pointed out such issues with specific examples. See "</span><a href="../../pages/PS.GG.002/index.html" rel="noopener" target="_blank">Distortion of Pāli Keywords in Paṭicca Samuppāda</a>."</li>
+</ul>
+<h5 style="text-align: justify"><span>Different Types of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></h5>
+<p style="text-align: justify"><span>2. Some people say, "I am learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>," by which they mean, "I am learning <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>" or "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>."</span></p>
+<ul style="text-align: justify">
+<li><span>But <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> is the generic word applicable to any teaching or principle or a "path one follows."</span></li>
+<li>If we need to be specific, "<em>sath</em><span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" (pronounced "</span><em>saddhamma</em>") to indicate "good" ("<em>sath</em><span>") <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>. The opposite of that is "</span><em>adhamma</em>."</li>
+<li><span>Any teaching other than <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> teaches one how to "succeed in this world," i.e., how to make money and live a happy life. Other "religious teachings" may teach how to be born in </span><em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms. <strong>They are "<em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>."</strong></li>
+<li><span>But <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> teaches that it is impossible to remove future suffering via any of those ways. No matter how successful one can become, that success will end in death. The same holds for births in any heavenly realm. Any birth in this world ends in death.</span></li>
+<li><span>Thus, <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is </span><span style="color: #3366ff"><strong><em>saddhamma</em></strong></span><span>, and all other <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> in this world are </span><span style="color: #993366"><strong><em>adhamma</em></strong></span>. Of course, there are different levels of <em>adhamma</em>, as we will see below (#11.)</li>
+</ul>
+<p style="text-align: justify"><span>3. We can take an analogy to clarify. The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> generic word for "odor" is "</span><em>gandha</em>." The words "<em>sugandha</em>" and "<em>dugandha</em>" must be used to indicate a pleasant or foul odor. </p>
+<ul style="text-align: justify">
+<li>However, it is common to use the word "<em>gandha</em>" to mean "<em>dugandha</em><span>" (the exact words are used in the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language too.)</span></li>
+<li>Even in English, we say "it smells" to indicate a "bad odor." However, "smell" means "odor." To indicate a foul odor, we should say, "it smells bad," just like when we say, "it smells good" to indicate a pleasing odor.</li>
+<li>Thus, one must be aware of these common usages. <span style="color: #3366ff"><strong><span>In many cases, <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is referred to as "<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>."</span></strong></span></li>
+</ul>
+<h5 style="text-align: justify"><em>Dhammo have rakkhati <strong class="highlight">dhammacāriṁ</strong></em></h5>
+<p style="text-align: justify">4. The verse, "<em>Dhammo have <strong>rakkhati</strong> dhammacāriṁ</em><span>" means "<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> will </span><strong>guide and protect</strong><span> those who follow <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.”</span></p>
+<ul style="text-align: justify">
+<li><span>The result of following a <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is to be free of future rebirths with suffering. Thus, the goal is to be free of even a trace of suffering.</span></li>
+<li>If one follows <em>adhamma</em>, one will end up in an <em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span> </span></em>sooner or later. That is explained in <span class="segment" id="mn28:38.8"><span class="root"><span class="text"><i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></i> </span></span></span></li>
+</ul>
+<h5 style="text-align: justify"><em>Adhamma </em>and <em>Saddhamma</em></h5>
+<p style="text-align: justify">5. "<a href="https://suttacentral.net/an10.182/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 10.182)</a>" succinctly describes <span style="color: #993366"><strong><em>adhamma</em></strong></span> and <span style="color: #3366ff"><strong><em>saddhamma</em></strong></span> (note that the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> uses "<strong><em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em></strong>" to denote "<span style="color: #3366ff"><strong><em>saddhamma</em></strong></span>.")</p>
+<ul style="text-align: justify">
+<li><span style="color: #993366"><strong><em>Adhamma</em> are the <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>:</strong></span> <em>Pāṇātipātā</em>, <em><span>adinnādāna, kāmesumicchācāra, <span class="pali-term term-highlight" data-term="musāvāda">musāvāda</span>, </span><span class="var">pisunā vācā</span><span>, parusā vācā, <span class="pali-term term-highlight" data-term="samphappalāpa">samphappalāpa</span>, <span class="pali-term term-highlight" data-term="abhijjhā">abhijjhā</span>, <span class="pali-term term-highlight" data-term="vyāpāda">vyāpāda</span>, <span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span>. </span></em>They are: “killing, stealing, sexual misconduct, lying, slandering, harsh talk, empty talk, greed, hate, and wrong views.” </li>
+<li>The same <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> defines <span style="color: #3366ff"><strong><em>saddhamma</em></strong></span> as the <strong><span style="color: #3366ff">avoidance of <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>.</span></strong><span style="color: #3366ff"> </span></li>
+<li>There are subtle issues to discuss. But the above <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> provides the basic idea.</li>
+</ul>
+<h5 style="text-align: justify"><em>Anariyadhamma </em>and <em>Ariyadhamma</em></h5>
+<p style="text-align: justify">6. Sometimes, the words "<span style="color: #993366"><strong><em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em></strong></span>" and "<span style="color: #3366ff"><strong><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em></strong></span>" are used in place of <em>adhamma</em> and <em>saddhamma</em>. </p>
+<ul style="text-align: justify">
+<li>See, for example, "<a href="https://suttacentral.net/an10.179/en/sujato" rel="noopener" target="_blank"><em><span>Ariyadhamma <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 10.179)</a>." </li>
+<li>As we can see, they are defined based on <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span>,</span></em> the same way as <em>adhamma</em> and <em>saddhamma</em>.</li>
+<li>Many other religions do not strictly teach avoiding killing animals. Furthermore, all other religions have several of the ten types of wrong views (<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>.) Thus, only <span style="color: #3366ff"><strong><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span></span></strong></span> is strictly <span style="color: #3366ff"><strong><em>saddhamma</em></strong></span> or <span style="color: #3366ff"><strong><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em></strong></span>."</li>
+<li>These and related concepts are described in many <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>, some of which are discussed in "<a href="../../pages/SI.DD.002/index.html" rel="noopener" target="_blank">Dasa Akusala/Dasa Kusala – Basis of Buddha Dhamma</a>." </li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="asappurisa">Asappurisa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="sappurisa">Sappurisa</span></span></em></h5>
+<p style="text-align: justify">7. Those who follow <span style="color: #3366ff"><strong><em>saddhamma</em></strong></span> or <span style="color: #3366ff"><strong><em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em></strong></span> are "<em><span><span class="pali-term term-highlight" data-term="sappurisa">sappurisa</span></span></em>" ("<em>sath</em>" + "<em>purisa</em>.") They are the eight types of Noble Persons (<em>Ariyas</em>) who are at or above the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em> stage. </p>
+<ul style="text-align: justify">
+<li>That is evident in the "<a href="https://suttacentral.net/an10.192/en/sujato" rel="noopener" target="_blank"><em><span>Sappurisadhamma <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 10.192)</a>." Another synonym for <em>adhamma</em> is introduced in that <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, "<span style="color: #993366"><strong><em>asappurisadhamma</em></strong></span>," indicating that an <em><span><span class="pali-term term-highlight" data-term="asappurisa">asappurisa</span></span></em> engages in <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>. The opposite, "<span style="color: #3366ff"><strong><em>sappurisadhamma</em></strong></span>," is the same as "<span style="color: #3366ff"><strong><em>saddhamma</em></strong></span>."</li>
+<li>As we know, one of the four conditions to attain the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage is to <strong>associate with a <em><span><span class="pali-term term-highlight" data-term="sappurisa">sappurisa</span></span></em></strong> or "<em><strong>Sap­purisa</strong>­<strong>saṃ­sevo</strong>." </em>See #3 of "<a href="../../pages/TL.JJ.008/index.html" rel="noopener" target="_blank">Four Conditions for Attaining Sōtapanna Magga/Phala."</a></li>
+<li><span style="color: #3366ff"><strong>Thus, it is clear that a "<em><span><span class="pali-term term-highlight" data-term="sappurisa">sappurisa</span></span></em>" is a Noble Person (<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>), not merely a "good person"</strong> </span>as translated in "<a href="https://suttacentral.net/an10.192/en/sujato" rel="noopener" target="_blank"><em><span>Sappurisadhamma <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 10.192)</a>."</li>
+</ul>
+<h5 style="text-align: justify">Why Are "Moral People" Not Included in "<em><span><span class="pali-term term-highlight" data-term="sappurisa">Sappurisa</span></span></em>"?</h5>
+<p style="text-align: justify">8. We tend to think that most people are moral. But then there are cases where a person entirely accepted as a "moral person" commits a highly-immoral deed such as rape or taking a large bribe. </p>
+<ul style="text-align: justify">
+<li>Any person who has not attained at least the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> Anugāmi</span></em> stage can be tempted to engage in an immoral deed. Anyone with <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em> can be triggered to commit an <em>apāyagāmi</em><span> deed (an action that can lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in an </span><em><span><span class="pali-term term-highlight" data-term="apāya">apāya</span></span></em>)!</li>
+<li>This can be explained easily with an analysis of a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em>. A <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> runs based on an <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em>. If the <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> is strong enough, the "decision to engage" is made at the <em><span>vottapana <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> and carried out with the subsequent <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> citttās</span></em>. Suppose the person has not overcome the first three <em>saṁyojana</em> (including <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em>). If the <em><span><span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> is strong enough, the "decision to engage" is made within a split second, even without conscious decision-making. </li>
+<li>I have explained the basic process in "<a href="../../pages/PS.HH.003/index.html" rel="noopener" target="_blank">Avyākata Paṭicca Samuppāda for Vipāka Viññāṇa</a>." I plan to write more about that in the future.</li>
+</ul>
+<h5 style="text-align: justify"><i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></span></span></span></i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span>Is <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>!</span></span></span></span></h5>
+<p style="text-align: justify">9. The "<span class="segment" id="mn28:0.2"><span class="root"><span class="text"><a href="https://suttacentral.net/mn28/pli/ms" rel="noopener" target="_blank"><em><span>Mahāhatthipadopama <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 28)</a>" ends with the </span></span></span>statement, "<i>Yō Paṭiccasamuppādam passati, so<span style="color: #0000ff"><strong><span style="color: #3366ff"> Dhammam</span> </strong></span>passati<span class="segment" id="mn28:38.7"><span class="root"><span class="text">; </span></span></span><span class="segment" id="mn28:38.8"><span class="root"><span class="text">yo Dhammaṁ passati so paṭiccasamuppādaṁ passatī”ti.</span></span></span>" </i>That means, "One who sees <i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">paṭicca samuppāda</span></span></span></span></span></i> sees the<span style="color: #3366ff"><strong><span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></strong></span><span>; one who sees the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> sees </span><i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">paṭicca samuppāda</span></span></span></span></span></i>." <span style="color: #3366ff"><strong><span>To understand <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, one needs to know how future suffering arises via the </span><i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">paṭicca samuppāda</span> </span></span></span></span></i><span class="segment" id="mn28:38.8"><span class="root"><span class="text">process.</span></span></span></strong></span></p>
+<ul style="text-align: justify">
+<li><span>In the above verse, "<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" refers to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> or "</span><em>saddhamma</em>."</li>
+<li><span style="color: #3366ff"><strong>In other words, <i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></span></span></span></i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span>is the same as <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. It describes the Four Noble Truths.</span></span></span></span></strong></span></li>
+<li>See, for example, "<a href="https://suttacentral.net/an3.61/en/sujato" rel="noopener" target="_blank"><em><span>Titthāyatana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 3.61)</a>."</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> </span></em>and <em>Anudhamma</em> </h5>
+<p style="text-align: justify">10. <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em><span> is the "principle/main <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>," and </span><em>anudhamma</em><span> refers to "minor/related <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>."</span></p>
+<ul style="text-align: justify">
+<li><span style="color: #000000"><i><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></span></span></span></i></span><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><span style="color: #ff6600"><span style="color: #000000"><span>is the <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. </span></span><span style="color: #000000">See #9 above.</span></span></span></span></span></li>
+<li>All other related teachings/concepts, <span style="color: #3366ff"><strong>like <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>,</span></em> are <em>anudhamma. </em></strong></span></li>
+<li>There are four <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>, starting with the<em> “<a href="https://suttacentral.net/sn22.39/en/sujato" rel="noopener" target="_blank">Anudhamma Sutta</a></em><a href="https://suttacentral.net/sn22.39/en/sujato" rel="noopener" target="_blank"> (SN 22.39)</a>” that describe various “<em>anudhamma</em>” like <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify"><span>All Other <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Are </span><em><span><span class="pali-term term-highlight" data-term="lokiya">Lokiya</span></span></em><span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></h5>
+<p style="text-align: justify">11. Regarding <strong><em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> </span></em></strong>that sustains worldly entities, <strong><em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em></strong> leads to rebirths in the four lowest realms (<em>apāyās</em>.) These are also called "<em><span>pāpa <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>." These are listed in the "<a href="https://suttacentral.net/an10.171/en/sujato" rel="noopener" target="_blank"><em><span>Paṭhamaadhamma <span class="pali-term term-highlight" data-term="sutta">Sutta</span> </span></em>(AN 10.171)</a>" as "killing living creatures, stealing, and sexual misconduct; speech that is false, divisive, harsh, or nonsensical; greed, ill will, and wrong view."</p>
+<ul style="text-align: justify">
+<li>The same <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> lists the <span style="color: #3366ff"><strong>avoidance of the above ten types</strong></span> as <strong><span style="color: #3366ff"><em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em></span></strong>, i.e., "<span style="color: #3366ff"><strong>good <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em></strong></span>." </li>
+<li>Thus we can see that teachings in other religions have many "good <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>" but also have "<em>adhamma</em>," especially in terms of wrong views (e.g., the view of an eternal self/soul/<em>ā</em><em>tman</em>.)</li>
+</ul>
+<p style="text-align: justify">12. Then what are the "<em>anudhamma</em>" in those cases of "<em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>"? There are three <em>anudhamma</em> associated with each (<em>a</em>)<em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>. </p>
+<ul style="text-align: justify">
+<li style="text-align: justify">For example, killing living beings is an <em>adhamma</em>. Helping others in killings, encouraging others to kill, and praising killings by others are the <em>anudhamma </em>associated with that <em>adhamma</em>. While personally making a killing is the worst, helping others to kill, encouraging others to kill, and praising killings by others also count as evil deeds and will have dire <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> consequences.</li>
+<li>Avoiding killing living beings is a (good) <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>. Not helping others in killings, not encouraging others to kill, and not praising killings by others are <em>anudhamma</em> and also count as "good deeds." </li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="lokiya">Lokiya</span></span></em><span> <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span></span></h5>
+<p style="text-align: justify"><span>13. Another way to categorize <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> is as "</span><em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span></span></em><span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span>" and <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul style="text-align: justify">
+<li>"<em><span><span class="pali-term term-highlight" data-term="lokiya">Lokiya</span></span></em>" means "belonging to this world of 31 realms. <em>Dhamm<span class="segment" id="mn28:38.8"><span class="root"><span class="text">ā</span></span></span></em> (with a long "a") that "bear things in this world" arise via <span class="segment"><span class="segment"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula</span></em> <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>. </span></i>See "</span></span></span></span><a href="http://localhost/beng_feb2026/key-dhamma-concepts/nama-rupa-to-namarupa/rupa-aggregate/what-are-rupa-dhamma-are-rupa-too/" rel="noopener" target="_blank">What are Rūpa? – Dhammā are Rūpa too!</a>" <span style="color: #008000"><strong class="text-strong">We will discuss <em class="text-italics"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span> (with a long “a”) and the difference between <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and </span><em class="text-italics"><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span> in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></strong></span></li>
+<li><span class="segment" id="mn28:38.8"><span class="root"><span class="text">As we know, that process starts with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>" </span></em>and leads to "<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></strong></em>" and "<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span></span></em>." That is how anything in this world is born (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>.)</span></span></span></li>
+<li><span class="segment" id="mn28:38.8"><span class="root"><span class="text">To be precise, <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula</span></em> <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></i></span></span></span>explains how existences and rebirths arise due to the accumulation of "<em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span>.</span></em>" Some <em><span><span class="pali-term term-highlight" data-term="lokiya">lokiya</span> <span class="pali-term term-highlight" data-term="dhammas">dhammas</span></span></em> lead to rebirths in the "good realms;" teachings of other religions belong to this category. </li>
+<li><strong><span class="segment" id="mn28:38.8"><span class="root"><span class="text">However, they also fall under the <em><span><span class="pali-term term-highlight" data-term="akusala">Akusala</span>-Mula</span></em></span></span></span> </strong><span class="segment"><span class="segment"><span class="root"><span class="text"><i><strong><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></strong>,</i> starting with "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>,"</span></em> i.e., actions based on <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> or ignorance of the Four Noble Truths. See "</span></span></span></span><a href="../../pages/KD.BB.006/index.html" rel="noopener" target="_blank">Saṅkhāra – What It Really Means</a>."</li>
+</ul>
+<p style="text-align: justify">14. On the other hand, the <span class="segment" id="mn28:38.8"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span>-Mula</span></em> <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></i>process starts with "<em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>-mula <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>" </span></em>and leads to "<em><span><span class="pali-term term-highlight" data-term="adhimokkha">adhimokkha</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span><strong><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></strong></em>" and "<em><span><span class="pali-term term-highlight" data-term="bhava paccayā jāti">bhava paccayā jāti</span></span></em>." But here, only "<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span> <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>" can arise, i.e., only the eight types of Noble Persons are "born." Of course, these "births" happen during a lifetime. For example, an average human can become a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span>.</span></em></span></span></span></p>
+<ul style="text-align: justify">
+<li><strong><span class="segment" id="mn28:38.8"><span class="root"><span class="text">C</span></span></span>omprehension of both versions</strong> of <span class="segment" id="mn28:38.8"><span class="root"><span class="text"><i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></i></span></span></span> will lead to stopping future rebirths <span style="color: #ff6600">(<strong><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> uddha = </span></em><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong>)</span> and attaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. Thus, <span style="color: #ff6600"><strong><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span></span></strong></span> means "<span style="color: #ff6600"><strong><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></strong></span> that leads to <span style="color: #ff6600"><strong><em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> uddha</span></em></strong></span> or stopping rebirths." That is the "<em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span> <span class="pali-term term-highlight" data-term="dhamma">dhamma</span>,</span></em><span>" or the deeper version of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></li>
+</ul>
+<h5 style="text-align: justify"><em>Arahanthood</em> Is Not Annihilation</h5>
+<p style="text-align: justify">15. Some people are terrified of "losing their existence" with <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. They ask, "Will I be annihilated/eradicated?" That question is asked with the wrong view of an "everlasting soul/<em>ā</em><em>tman</em>."</p>
+<ul style="text-align: justify">
+<li>Only a person with <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em> with raise that question. When one removes <em><span><span class="pali-term term-highlight" data-term="sakkāya diṭṭhi">sakkāya diṭṭhi</span></span></em><span>, one knows there is no "me" or "I" traversing the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Rebirths are according to existing causes and conditions.</span></li>
+<li><strong>In any case, why worry if there is indeed an everlasting "I" or "me"?</strong> If that is the case, there should be no fear of losing something permanent.</li>
+<li>There is nothing everlasting to be annihilated or eradicated! <em>Anuloma</em> PS leads to existences, and <em>Paṭiloma</em> PS leads to the stopping of that process; see "<a href="../../pages/PS.AA.007/index.html" rel="noopener" target="_blank">Paṭilōma Paṭicca Samuppāda – Key to Nibbāna</a>." Also, see "<a href="../../pages/SI.AA.012/index.html" rel="noopener" target="_blank">Yamaka Sutta (SN 22.85) – Arahanthood Is Not Annihilation but End of Suffering</a>."</li>
+</ul>
+<p style="text-align: justify">16. However, the description in #15 DOES NOT say we do not exist. <span style="color: #993366"><strong>It is wrong to translate "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>" as "no-self."</strong></span> We do exist as long as we have ignorance (<span class="segment"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em></span></span></span><span>) and experience much more suffering than brief spans of happiness in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span></p>
+<ul>
+<li style="text-align: justify"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pointed out that we commit immoral deeds and are born in suffering-filled realms BECAUSE of the </span><strong>wrong view and wrong perception</strong> of an everlasting soul/<em>ātman</em>. <span class="segment"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> </span></em>(ignorance of Noble Truths/<span class="segment" id="mn28:38.8"><i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>/<span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></i>) is the cause of both.)</span></span></span></span></li>
+<li style="text-align: justify">One gets rid of that wrong view (<em><span><span class="pali-term term-highlight" data-term="sakkāya">sakkāya</span> </span></em><em>diṭṭhi</em>) at the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em> stage. But the perception (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>) of an everlasting soul/<em>ātman </em>goes away at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. Suffering stops entirely at the <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em> (passing away) of the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. See "<a href="../../pages/KD.JJ.006/index.html" rel="noopener" target="_blank">Vipallāsa (Diṭṭhi, Saññā, Citta) Affect Saṅkhāra</a>."</li>
+<li style="text-align: justify">As I emphasized in #15, one should not worry about "being annihilated" if their view of an everlasting soul/<em>ātman </em><span>is correct. But the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> proved with </span><span class="segment" id="mn28:38.8"><span class="root"><span class="text"><i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></i>that such an everlasting entity does not exist. S</span></span></span>ee "<a href="../../pages/PS.AA.007/index.html" rel="noopener" target="_blank">Paṭilōma Paṭicca Samuppāda – Key to Nibbāna</a>."</li>
+<li><span>Reading and understanding all the <span class="pali-term term-highlight" data-term="posts">posts</span> linked above is essential if one has the desire and drive to comprehend <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.EE.007/index.html">Yoniso Manasikara And Paticca Samuppada</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.EE.009/index.html">Dhammanudhamma Patipatti Connection To Paticca Samuppada Tilakkhana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.EE.007/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Yoniso Manasikara And Paticca Samuppada</span>
+        
+        <span class="pathway-title title-pt">Yoniso Manasikara And Paticca Samuppada</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.EE.009/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Dhammanudhamma Patipatti Connection To Paticca Samuppada Tilakkhana</span>
+        
+        <span class="pathway-title title-pt">Dhammanudhamma Patipatti Connection To Paticca Samuppada Tilakkhana</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

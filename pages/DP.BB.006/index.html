@@ -1,0 +1,342 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>The Life Of The Buddha By Bhikkhu Nanamoli | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Dhamma and Philosophy</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 12 / 12</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">DP.BB.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">The Life Of The Buddha By Bhikkhu Nanamoli</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>DP.BB.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Dhamma and Philosophy</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="DP.BB.006"
+             data-section="Dhamma and Philosophy"
+             data-section-code="DP"
+             data-findex="0713"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>DP.BB.006</td></tr><tr><td>Fin-dex</td><td>0713</td></tr><tr><td>Slug</td><td>the-life-of-the-buddha-by-bhikkhu-nanamoli</td></tr><tr><td>Section</td><td>DP</td></tr><tr><td>Title EN</td><td>The Life Of The Buddha By Bhikkhu Nanamoli</td></tr></table></div></div><p><strong>October 13, 2018; revised November 15, 2020</strong></p>
+<h5><span>“The Life of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>” Is a Good Resouce</span></h5>
+<p style="text-align: justify"><span>1. “The Life of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>” by <span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span> Nānamoli is good to read and even to keep as a reference (page numbers quoted are for the 2001 First BPS <span class="pali-term term-highlight" data-term="pariyatti">Pariyatti</span> edition). It is a good book for two reasons:</span></p>
+<ul style="text-align: justify">
+<li><span>A chronological record of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s life (after the Buddhahood),</span></li>
+<li>Detailed accounts of events that are not in the<em><span> <span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> (taken from the <em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span> Piṭaka</span></em>).</li>
+</ul>
+<h5>Need to Consult All Three <em>pitaka</em></h5>
+<p style="text-align: justify"><span>2. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that if there is any doubt or a concept that is not clear, one should check with </span><em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>. These basically refer to the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> (three baskets) of <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span> Piṭaka, <span class="pali-term term-highlight" data-term="vinaya">Vinaya</span> Piṭaka</span></em>, and <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em>.</p>
+<ul style="text-align: justify">
+<li>Most people refer to the <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span> Piṭaka</span></em> and forget about the other two. <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span> Piṭaka</span></em> is a bit hard to understand, and without a firm grasp of basics, it is harder.</li>
+<li>Most people think that the <em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span> Piṭaka</span></em> is just for the <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> and <em>bhikkhunis</em>. But there are sections in the <em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span> Piṭaka</span></em> that have details that are not in the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>. Furthermore, those sections in the <em><span><span class="pali-term term-highlight" data-term="vinaya">Vinaya</span> Piṭaka</span></em> are easy to understand, as we see below.</li>
+</ul>
+<h5>An Example</h5>
+<p style="text-align: justify">3. I will provide the following as an example of what is in this book that is not available in any <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>. It describes how the five ascetics attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage over several days with the delivery of the <em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>.</p>
+<p style="text-align: justify"><strong>Here is a direct quote from p. 45 of the book </strong><span>(starting from the point where the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> had just finished the first delivery of the </span><em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>):</p>
+<p style="text-align: justify">"Then <em>Aññata Koṇḍañña</em>, who had seen and reached and found and penetrated the <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em>, whose uncertainties were left behind, whose doubts had vanished, who had gained perfect confidence and became independent of others in the Teacher's Dispensation (<strong>My Comment</strong>: i.e., became a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>), said to the Blessed One: “Blessed One, I wish to go forth under the Blessed One and to receive the full admission?”</p>
+<p style="text-align: justify">“Come, <em><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span>,</span></em>” the Blessed One said, “The <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> is well proclaimed. Live the holy life for the complete ending of suffering.” And that was his full admission.</p>
+<p style="text-align: justify">Then the Blessed One taught and instructed the rest of the <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> with a talk on the <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em>. As he did so, there arose in the venerable Vappa and the venerable Bhaddiya, the spotless, immaculate vision of the <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> (<strong>My Comment</strong>: i.e., became <em>Sotāpannas</em><span>). All that is subjected to arising is subjected to <span class="pali-term term-highlight" data-term="cessation">cessation</span>. They, too, asked for and received the full admission.</span></p>
+<p style="text-align: justify">These, having seen <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>, attained <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em>, knowing <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> … having attained without another’s help to full confidence in the teacher’s instruction, spoke thus to the Blessed One: “May we, Blessed One, receive the going forth in the Blessed One’s presence, may we receive ordination?”</p>
+<p style="text-align: justify">Then living on the food they brought to him, the Blessed One taught and instructed the rest of the <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> with a talk on the <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em>. All six lived on the food brought back by the three of them. Then there arose in the venerable Mahānāma and the venerable Assaji the spotless, immaculate vision of the <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> (<strong>My Comment</strong>: i.e., became <em>Sotāpannas</em>), and they too asked for and received the full admission".</p>
+<h5>Important Deductions</h5>
+<p style="text-align: justify">4. We can learn several important facts from the above account.</p>
+<ul style="text-align: justify">
+<li>Only Ven. Koṇḍañña attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage in the first round in the first night of the delivery of the<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>. It actually took several days for all five ascetics to attain the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage.</li>
+<li><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span> actually did not just recite the </span><em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> as it appears in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>. That recital would have been finished within 15 minutes!</li>
+<li>So, we can see that what is in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span> </span></em>are HIGHLY CONDENSED summaries of those discourses and possibly many discussions.</li>
+</ul>
+<h5>Many <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> Provide Only Concise Summaries</h5>
+<p style="text-align: justify">5. What we see as the <em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em><span> today is a highly condensed version of the material that was taught by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> over several days, as is clear from #3 above.</span></p>
+<ul style="text-align: justify">
+<li><span>It appears that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> himself summarized the material in each </span><em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> in a short, concise way to a limited number of verses that were suitable for oral transmission (easy to remember). <strong>A <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> is supposed to be explained in detail;</strong> see, "<a href="../../pages/SI.AA.001/index.html" rel="noopener noreferrer" target="_blank">Sutta – Introduction</a>."</li>
+<li>We must remember that all the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> were transmitted down several generations over about 500 years before it was written down. It was not even remotely possible to include all that was discussed over those several days!</li>
+</ul>
+<h5>Word-by-Word Translation is a Terrible Practice</h5>
+<p style="text-align: justify">6. What happens these days is that even highly condensed <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> are translated word-by-word into English. This is a terrible practice. It is no different from just reciting a <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>!</p>
+<ul style="text-align: justify">
+<li>One can finish reading a <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> in 15 minutes, and ONE would not understand any of the deep concepts embedded in the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>.</li>
+<li><strong>Then how could one understand the <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> by just reading a word-by-word translation of a <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>?</strong></li>
+</ul>
+<p style="text-align: justify">7. In fact, this could be why many people believe that one can attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> by just reciting a <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> or a set of verses. This practice is sometimes called "<em>mantra</em> chanting." But there is no basis for that belief.</p>
+<ul style="text-align: justify">
+<li><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> can be attained ONLY by cleansing one's mind.</li>
+<li>The MENTAL stress arises ONLY due to <em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></em> in one's mind.</li>
+<li>As one cleanses one's mind, the mental stress will decrease. This decrease is gradual in the beginning. It will have significant drops at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></em> stage and then more drops at <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi</span></em> stages.</li>
+<li>An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> does not have any mental stress. He/she may have physical suffering, but that also will end at death. No more physical or mental suffering!</li>
+</ul>
+<h5>There is Value in Chanting <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em></h5>
+<p style="text-align: justify">8. Of course, there is a value in even chanting a <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>. They have been formulated in a format to "calm down the mind," even if one did not understand the meaning; see, "<a href="../../pages/BC.AA.000/index.html" rel="noopener noreferrer" target="_blank">Buddhist Chanting</a>."</p>
+<ul style="text-align: justify">
+<li>It would be much better if one understood the basic message of the<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>.</li>
+<li>One could get to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage ONLY BY fully understanding the concepts discussed in a major <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> like the <em><span>Dhammacakkappavattana <span class="pali-term term-highlight" data-term="sutta">Sutta</span>.</span></em></li>
+</ul>
+<h5>But Some verses Need Detailed Explanations</h5>
+<p style="text-align: justify">9. A related key point is that upon attaining the <em>Buddhahood</em><span>, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> wondered whether the humans will ever be able to understand the deep </span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> he had just uncovered.</p>
+<ul style="text-align: justify">
+<li><span>This is stated on p. 37 of this book. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was really doubtful whether humans will comprehend his </span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> Sahampati</span></em><span> made an invitation to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, saying that many beings in the world can understand <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. He would know because he had become an </span><em>Anāgāmi</em><span> by listening to <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> by a previous <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>So, the point is that if one thinks one can make progress on the Path by just chanting <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> or even learning the word-by-word translations, one would be very much mistaken.</li>
+<li><strong>In some cases, it can take a book to really do justice in explaining a single verse in some of the deep <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>!</strong></li>
+<li> However, some long <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, especially in the <em>Digha Nikāya</em>, can be translated word-by-word for the most part, since there may not be any deep concepts discussed there.</li>
+</ul>
+<h5>Other Good Aspects of the Book</h5>
+<p style="text-align: justify">10. Another good aspect of the book is that it provides the background for delivering some major <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> or verses.</p>
+<ul style="text-align: justify">
+<li><span>For example, there is a detailed account (pp. 55-60) of how the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> had to perform even a few miracles to convince Uruvela Kassapa, his two brothers, and 1000 of their followers before they agreed to listen to the </span><em><span>Aditta Pariyaya <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> or the Fire Sermon.</li>
+<li><span>So, we can see that it was not easy in those early days for the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> to convince some of the ascetics who had their own beliefs of what </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> was about.</li>
+</ul>
+<p style="text-align: justify">11. The subsequent chapters provide a good chronological account of what happened until the <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>. One can get a sense of which major <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> were delivered at around what time.</p>
+<ul style="text-align: justify">
+<li>There are accounts on the two chief disciples, and short accounts of other important personalities such as Anāthapiṇḍika, Angulimāla, Visākha, etc. Chapter 7 describes the formation of the order of <em>bhikkhunis</em>.</li>
+<li>Several encounters with the <em><span><span class="pali-term term-highlight" data-term="māra">Māra</span> Devaputta</span></em> are scattered throughout the book.</li>
+<li><span>One paragraph on p. 109 is on how the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> visited the </span><em><span>Tāvatimsa <span class="pali-term term-highlight" data-term="deva">deva</span> </span></em>realm and delivered <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>. A summary was conveyed to Ven. Sariputta expanded it with the help of his students to the form that we have today.</li>
+<li>There is a chapter on Devadatta, which describes events that are not found in <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span>, how</span></em> he attained (<em>anāriya</em>) <em>jhānās</em> and<em><span> <span class="pali-term term-highlight" data-term="iddhi">iddhi</span></span></em> (super-normal powers) powers, how he appeared on the lap of Prince Ajatasattu as a baby using his <em><span><span class="pali-term term-highlight" data-term="iddhi">iddhi</span></span></em> powers.</li>
+<li><span>It provides a good account of Devadatta's efforts to take the life of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> and how he lost all those super-normal powers and </span><em>jhānās</em> at the end.</li>
+</ul>
+<p style="text-align: justify">12. There is a relatively long chapter on "The Doctrine," including the Four Noble Truths and the Noble Eightfold Path.</p>
+<ul>
+<li style="text-align: justify"><span>Then, there is another relatively long chapter on the final year of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s life, including </span><em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>.</li>
+<li style="text-align: justify"><span>The final chapter is on the First <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> Council (</span><em>Sangāyanā</em>) that took place 3 months after the <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em><span> of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/DP.BB.005/index.html">Spark Exercise And Brain By John Ratey</a>
+    </div>
+    
+    
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/DP.BB.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Spark Exercise And Brain By John Ratey</span>
+        
+        <span class="pathway-title title-pt">Spark Exercise And Brain By John Ratey</span>
+        
+    </a>
+    
+
+    <span class="pathway-placeholder"></span>
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-DP">
+        ↑ Back to Dhamma and Philosophy
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

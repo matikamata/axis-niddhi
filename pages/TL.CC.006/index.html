@@ -1,0 +1,397 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>How To Taste Nibbana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 1 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.CC.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">How To Taste Nibbana</h1>
+    
+    <h1 class="title-pt">Como Sentir o Gosto de Nibbana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.CC.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.CC.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0093"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.CC.006</td></tr><tr><td>Fin-dex</td><td>0093</td></tr><tr><td>Slug</td><td>how-to-taste-nibbana</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>How To Taste Nibbana</td></tr></table></div></div><p>// </p>
+<p><strong>Revised November 24, 2018; April 26, 2020; <span style="color: #0000ff">November 11, 2022</span></strong></p>
+<p style="text-align: justify">1. Elsewhere on the site, I have described <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> in a deeper sense. But we can look at the early stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> in a simple way.</p>
+<ul style="text-align: justify">
+<li><span>In the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language (spoken in Sri Lanka), </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is also called “<em>nivana</em>” or “<em>niveema</em>” (නිවීම). This means “cooling down.” As one moves towards <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>,</span></em> one feels cooling down, a sense of well-being.</li>
+</ul>
+<p style="text-align: justify">2. Do you remember the last time when you got really mad? How did that feel? You get hot. Whole-body becomes hot and agitated. Blood pressure goes up, and the face becomes dark because the blood becomes dark. By the way, this is clear evidence that the mind can affect the body.</p>
+<ul>
+<li style="text-align: justify">This "burning up" is called "<em>tāpa</em><span>" in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> (තාප in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) and is due to greed, hate, and ignorance. "</span><em>Ātāpi</em>" means the opposite, "cooling down via getting rid of those defilements." This is what is meant by "<em>ātāpi sampajānō</em>" in the <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">sutta</span>;</span></em> see, "<a href="../../pages/SI.BB.001/index.html" rel="noopener noreferrer" target="_blank">Mahā Satipaṭṭhāna Sutta</a>."</li>
+<li style="text-align: justify">When someone can get to the "<em>ātāpi sampajānō</em>" state, one feels calm and "cooled down"; see "<a href="../../pages/SI.BB.005/index.html" rel="noopener noreferrer" target="_blank">Kāyānupassanā – The Section on Habits (Sampajānapabba)</a>."</li>
+</ul>
+<p style="text-align: justify">3. Do you remember how you felt when you made someone happy, either via a good deed or word? You cooled down; it felt good. Didn’t you feel the opposite when you got mad?</p>
+<ul>
+<li style="text-align: justify">When one acts with greed, “heating up” still happens, may be to a lesser extent than when one is angry. As a kid, I felt heated and uncomfortable when I was stealing something.</li>
+<li>The same is true when one acts with ignorance too. One is unsure whether that is the right thing to do; the mind goes back and forth: is this right or wrong? should I do it or not? This is called "<em><span><span class="pali-term term-highlight" data-term="vicikicchā">vicikicchā</span></span></em><span>" in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>. Because one does not know, one is not certain, one becomes anxious, and the body gets heated up.</span></li>
+</ul>
+<p style="text-align: justify">4. Thus, when one gives up acting with hate, greed, or ignorance, one becomes less agitated, at ease, and with a sense of peacefulness. This is an early sense of what <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is.</p>
+<ul>
+<li style="text-align: justify">When one can see the benefits of cooling down, one will avoid actions done with hate, greed, and ignorance. And one will be looking forward to actions of goodwill, generosity, and mindfulness.</li>
+<li>Avoiding greed, hate, and ignorance is the same as avoiding <em><span><span class="pali-term term-highlight" data-term="dasa akusala">dasa akusala</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">5. Also, note the state of thoughts (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) in the two opposing situations. When one acts with the defilements, thoughts run wildly; they come fast and are energetic. The “<em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em>” (impulsive power) of thought is high when acting with a defilement.</p>
+<ul>
+<li style="text-align: justify">On the other hand, thoughts run more smoothly, and the<em><span> <span class="pali-term term-highlight" data-term="javana">javana</span></span></em> (impulsive power) of a given thought is calm when acting benevolently, with kindness, with generosity, and with mindfulness; they are powerful too, but only in making one calm. Thus one can experience a taste of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> or “cooling down” even at the very early stages of the Path.</li>
+</ul>
+<p style="text-align: justify">6. One could get TEMPORARY cooling down by not letting thoughts run wildly. The easiest to do is to keep the mind on a single focus. This can be done by focusing the mind on a religious symbol or the breath. Thus this "temporary relief" is felt by people of any religion when they contemplate a religious symbol with faith or by doing "breath meditation" or mundane "<em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>" meditation.</p>
+<ul>
+<li style="text-align: justify">However, the only way to achieve permanent relief is to gradually REMOVE greed, hate, and ignorance by cleansing one's mind. This is done by "taking in" (<em>ā</em><em>na</em>) of good thoughts, speech, and actions and "getting rid of" (<em>pāna</em>) defiled thoughts, speech, and actions. <strong><span>This is the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s </span><em><span><span class="pali-term term-highlight" data-term="ānāpāna">ānāpāna</span></span></em> meditation that can lead to PERMANENT happiness. </strong>See "<a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">Is Ānāpānasati Breath Meditation?</a>" Deeper analyses at "<a href="../../pages/ER.FF.001/index.html" rel="noopener" target="_blank">Elephant in the Room 3 – Ānāpānasati</a>."</li>
+<li style="text-align: justify">When one does this correct "<em><span><span class="pali-term term-highlight" data-term="ānāpāna">ānāpāna</span></span></em>" consistently, one's bad habits ("<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>") will be gradually removed, and good habits ("<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>") will be cultivated.</li>
+<li style="text-align: justify">When one removes the defilements to a significant extent, this relief becomes permanent and will not reduce from that state even in future births. <strong>This first stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is called the<em><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage.</strong> A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> is guaranteed not to be reborn in the <em>apāyās</em> or the four lowest realms; he/she has removed all "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" suitable for beings in the <em>apāyās</em>. See "<a href="../../pages/KD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Gati to Bhava to Jāti – Ours to Control</a>."</li>
+</ul>
+<p style="text-align: justify">7. <strong>However, it is impossible to remove greed and hate just by sheer willpower</strong>, i.e., forcefully. For example, one cannot get rid of greed even by giving away one's wealth; if that is done without understanding, it could lead to remorse and hate.</p>
+<ul style="text-align: justify">
+<li><span>Instead, getting rid of greed and hate comes AUTOMATICALLY as one understands the worldview of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: that we cannot maintain anything to our satisfaction in the LONG RUN. This worldview is embedded in the Three Characteristics of "this world" or </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></em></li>
+<li>Not knowing the Three Characteristics is ignorance or <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>.</li>
+<li>Even before comprehending the Three Characteristics, one needs to reduce total ignorance (<em>mōha</em>) to the <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> level by getting rid of the ten types of <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>; see, "<a href="../../pages/LD.GG.009/index.html" rel="noopener noreferrer" target="_blank">Micchā Diṭṭhi, Gandhabba, and Sōtapanna Stage</a>."</li>
+</ul>
+<p style="text-align: justify">8. This is why <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>,</span></em> or "correct worldview," comes first in the Noble Eightfold Path. When one comprehends the true nature of "this world," one's mind will AUTOMATICALLY start rejecting thoughts, words, and actions through greed and hate.</p>
+<ul>
+<li style="text-align: justify">Then <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> (correct vision) will automatically lead to <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span></span></em> (fruitful thoughts), <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vācā</span></em> (fruitful speech), <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Kammanta</span></em> (fruitful actions), <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Ājiva</span></em> (livelihood), <em><span><span class="pali-term term-highlight" data-term="sammā vāyāma">Sammā Vāyāma</span></span></em> (efforts in those), <em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span></span></em> (moral mindset) and then will culminate in <em><span><span class="pali-term term-highlight" data-term="sammā samādhi">Sammā Samādhi</span></span></em> (peaceful state of mind). This <em><span><span class="pali-term term-highlight" data-term="sammā samādhi">Sammā Samādhi</span></span></em> is permanent for a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>.</li>
+<li style="text-align: justify">Thus it is clear that such a <em><span><span class="pali-term term-highlight" data-term="samādhi">samādhi</span></span></em> cannot be attained with breath meditation or any other way of "focusing attention" on one thought object.</li>
+<li style="text-align: justify"><span>Purification of the mind is the key, and that comes first through reading, listening, and comprehending the true and <span class="pali-term term-highlight" data-term="pure dhamma">pure Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify"><span>8. As one follows the Noble Eightfold Path of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, one can EXPERIENCE a sense of well-being called </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span>,</span></em> which is different from the sensory pleasures; see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a>".</p>
+<ul>
+<li style="text-align: justify"><span>If you did experience a sense of well-being just by reading this <span class="pali-term term-highlight" data-term="post">post</span>, that is a good start. That sense of well-being will only grow as the understanding gets more profound. I have gone through this process myself, which is what I am trying to convey to others.</span></li>
+</ul>
+<p style="text-align: justify">9. <strong>September 22, 2016</strong>: I have started a new section: "<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a><span>," where an experience-based process of practicing <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>) is discussed with English discourses (</span><em>dēsana</em>).<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> can be experienced at various levels, one needs to experience the earlier stages of <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> first.</p>
+<ul>
+<li style="text-align: justify">Next, "<a href="../../pages/TL.CC.008/index.html" rel="noopener noreferrer" target="_blank">Need to Experience Suffering in Order to Understand it?</a>"</li>
+<li>A deeper analysis of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> at  "</span></em><a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a><em>."</em></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.CC.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0093"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.CC.006
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p>// </p>
+<p><strong>Revisado em 24 de novembro de 2018; 26 de abril de 2020; <span style="color: #0000ff">11 de novembro de 2022</span></strong></p>
+<p style="text-align: justify">1. Em outra parte do site, descrevi <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> em um sentido mais profundo. Mas podemos olhar para os estágios iniciais de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> de uma maneira simples.</p>
+<ul style="text-align: justify">
+<li>Na língua cingalês (falada no Sri Lanka), <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> também é chamado de “<em>nivana</em>” ou “<em>niveema</em>” (නිවීම). Isso significa “esfriar”. À medida que nos aproximamos de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>,</span></em> sentimos um esfriamento, uma sensação de bem-estar.</li>
+</ul>
+<p style="text-align: justify">2. Você se lembra da última vez em que ficou realmente irritado? Como você se sentiu? Você fica quente. Todo o corpo fica quente e agitado. A pressão arterial sobe e o rosto fica escuro porque o sangue fica escuro. A propósito, essa é uma evidência clara de que a mente pode afetar o corpo.</p>
+<ul>
+<li style="text-align: justify">Esse “aquecimento” é chamado de “<em>tāpa</em><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> (තාප em Cingalês) e é causado pela ganância, pelo ódio e pela ignorância. “</span><em>Ātāpi</em>” significa o oposto, “esfriar-se livrando-se dessas impurezas”. É isso que significa “<em>ātāpi sampajānō</em>” no <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span>;</span></em> veja “<a href="../../pages/SI.BB.001/index.html">Mahā Satipaṭṭhāna Sutta</a>”.</li>
+<li style="text-align: justify">Quando alguém consegue atingir o estado “<em>ātāpi sampajānō</em>”, sente-se calmo e “acalmado”; veja “<a href="../../pages/SI.BB.005/index.html">Kāyānupassanā – A Seção sobre Hábitos (Sampajānapabba)</a>”.</li>
+</ul>
+<p style="text-align: justify">3. Você se lembra de como se sentiu quando fez alguém feliz, seja por meio de uma boa ação ou palavra? Você se acalmou; foi uma sensação boa. Você não sentiu o contrário quando ficou com raiva?</p>
+<ul>
+<li style="text-align: justify">Quando alguém age com ganância, ainda ocorre um “aquecimento”, talvez em menor grau do que quando se está com raiva. Quando criança, eu me sentia aquecido e desconfortável quando roubava algo.</li>
+<li>O mesmo acontece quando se age com ignorância. Não se tem certeza se isso é a coisa certa a fazer; a mente fica indecisa: isso é certo ou errado? Devo fazer isso ou não? Isso é chamado de “<em><span><span class="pali-term term-highlight" data-term="vicikicchā">Vicikicchā</span></span></em><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>. Como não se sabe, não se tem certeza, fica-se ansioso e o corpo fica aquecido.</span></li>
+</ul>
+<p style="text-align: justify">4. Assim, quando se desiste de agir com ódio, ganância ou ignorância, fica-se menos agitado, à vontade e com uma sensação de paz. Esta é uma primeira noção do que é <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">Quando se consegue ver os benefícios de se acalmar, evita-se ações feitas com ódio, ganância e ignorância. E passa-se a ansiar por ações de boa vontade, generosidade e atenção plena.</li>
+<li>Evitar a ganância, o ódio e a ignorância é o mesmo que evitar <em><span><span class="pali-term term-highlight" data-term="dasa akusala">Dasa Akusala</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">5. Observe também o estado dos pensamentos (<em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>) nas duas situações opostas. Quando se age com as impurezas, os pensamentos correm descontroladamente; eles vêm rapidamente e são energéticos. O “<em><span><span class="pali-term term-highlight" data-term="javana">Javana</span></span></em>” (poder impulsivo) do pensamento é alto quando se age com uma impureza.</p>
+<ul>
+<li style="text-align: justify">Por outro lado, os pensamentos fluem mais suavemente, e o<em><span> <span class="pali-term term-highlight" data-term="javana">Javana</span></span></em> (poder impulsivo) de um determinado pensamento é calmo quando se age com benevolência, bondade, generosidade e atenção plena; eles também são poderosos, mas apenas para acalmar a pessoa. Assim, é possível experimentar um gostinho do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> ou “resfriamento” mesmo nos estágios iniciais do Caminho.</li>
+</ul>
+<p style="text-align: justify">6. Pode-se obter um resfriamento TEMPORÁRIO ao não deixar os pensamentos fluírem descontroladamente. O mais fácil a fazer é manter a mente em um único foco. Isso pode ser feito concentrando a mente em um símbolo religioso ou na respiração. Assim, esse “alívio temporário” é sentido por pessoas de qualquer religião quando contemplam um símbolo religioso com fé ou ao fazer “meditação da respiração” ou meditação mundana <em><span>“<span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>”.</p>
+<ul>
+<li style="text-align: justify">No entanto, a única maneira de alcançar o alívio permanente é REMOVER gradualmente a ganância, o ódio e a ignorância, purificando a mente. Isso é feito “absorvendo” (<em>āna</em>) bons pensamentos, palavras e ações e “livrando-se” (<em>pāna</em>) de pensamentos, palavras e ações impuras. <strong>Essa é a meditação <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em><span> do <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong>, <strong>que pode levar à felicidade PERMANENTE. </strong>Veja “<a href="../../pages/BM.AA.008/index.html">Ānāpānasati é meditação da respiração?</a>” Análises mais profundas em “<a href="../../pages/ER.FF.001/index.html">Elefante na sala 3 – Ānāpānasati</a>”.</li>
+<li style="text-align: justify">Quando se pratica este “<em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em>” correto de forma consistente, as G<em>ati</em> ruins são gradualmente removidas e as boas <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> são cultivadas.</li>
+<li style="text-align: justify">Quando se remove as impurezas em uma extensão significativa, esse alívio se torna permanente e não diminuirá desse estado, mesmo em nascimentos futuros. <strong>Esse primeiro estágio do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é chamado de estágio<em><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</strong> Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> tem a garantia de não renascer nos <em>apāyās</em> ou nos quatro reinos mais baixos; ele/ela removeu todas as <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> adequadas para os seres nos <em>apāyās</em>. Veja “<a href="../../pages/KD.GG.004/index.html">Gati para Bhava para Jāti – Nosso para controlar</a>”.</li>
+</ul>
+<p style="text-align: justify">7. <strong>No entanto, é impossível remover a ganância e o ódio apenas com força de vontade</strong>, ou seja, à força. Por exemplo, não se pode livrar-se da ganância mesmo doando sua riqueza; se isso for feito sem compreensão, pode levar ao remorso e ao ódio.</p>
+<ul style="text-align: justify">
+<li><span>Em vez disso, livrar-se da ganância e do ódio ocorre AUTOMATICAMENTE à medida que se compreende a visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: que não podemos manter nada para nossa satisfação a LONGO PRAZO. Essa visão de mundo está incorporada nas Três Características deste “mundo” ou </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā.</span></em></li>
+<li>Não conhecer as Três Características é ignorância ou <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>.</li>
+<li>Mesmo antes de compreender as Três Características, é preciso reduzir a ignorância total (<em>mōha</em>) ao nível da <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>, livrando-se dos dez tipos de <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em>; veja “<a href="../../pages/LD.GG.009/index.html">Micchā Diṭṭhi, Gandhabba e o Estágio Sótapanna</a>”.</li>
+</ul>
+<p style="text-align: justify">8. É por isso que <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>,</span></em> ou “visão correta do mundo”, vem em primeiro lugar no Nobre Caminho Óctuplo. Quando se compreende a verdadeira natureza “deste mundo”, a mente começa AUTOMATICAMENTE a rejeitar pensamentos, palavras e ações motivados pela ganância e pelo ódio.</p>
+<ul>
+<li style="text-align: justify">Então<em><span>, <span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> (visão correta) levará automaticamente a <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span></span></em> (pensamentos frutíferos), <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vācā</span></em> (fala frutífera), <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Kammanta</span></em> (ações frutíferas), <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Ājiva</span></em> (meios de subsistência), <em><span><span class="pali-term term-highlight" data-term="sammā vāyāma">Sammā Vāyāma</span></span></em> (esforços nesses), <em><span><span class="pali-term term-highlight" data-term="sammā sati">Sammā Sati</span></span></em> (mentalidade moral) e então culminará em <em><span><span class="pali-term term-highlight" data-term="sammā samādhi">Sammā Samādhi</span></span></em> (estado mental pacífico). Este <em><span><span class="pali-term term-highlight" data-term="sammā samādhi">Sammā Samādhi</span></span></em> é permanente para um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>.</li>
+<li style="text-align: justify">Assim, fica claro que tal <em><span><span class="pali-term term-highlight" data-term="samādhi">Samādhi</span></span></em> não pode ser alcançado com meditação da respiração ou qualquer outra forma de “focar a atenção” em um único objeto de pensamento.</li>
+<li style="text-align: justify"><span>A purificação da mente é a chave, e isso vem primeiro através da leitura, da escuta e da compreensão do <span class="pali-term term-highlight" data-term="pure dhamma">Pure Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify"><span>8. Ao seguir o Nobre Caminho Óctuplo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, pode-se EXPERIMENTAR uma sensação de bem-estar chamada </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span>,</span></em> que é diferente dos prazeres sensoriais; veja “<a href="../../pages/TL.CC.005/index.html" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade - O que é Niramisa Sukha?</a>”.</p>
+<ul>
+<li style="text-align: justify">Se você experimentou uma sensação de bem-estar apenas lendo este ensaio, isso é um bom começo. Essa sensação de bem-estar só aumentará à medida que a compreensão se tornar mais profunda. Eu mesmo passei por esse processo, que é o que estou tentando transmitir aos outros.</li>
+</ul>
+<p style="text-align: justify">9. <strong>22 de setembro de 2016</strong>: Comecei uma nova seção: “<a href="../../pages/LD.AA.000/index.html">Vivendo o Dhamma</a><span>”, onde um processo baseado na experiência de praticar o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (Buddhismo) é discutido com discursos em inglês (</span><em>dēsana</em>).<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> pode ser experimentado em vários níveis, é preciso experimentar primeiro os estágios iniciais de <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">A seguir, <a href="../../pages/TL.CC.008/index.html">“É preciso experimentar o sofrimento para compreendê-lo?</a>”</li>
+<li>Uma análise mais profunda do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> em “</span></em><a href="../../pages/KD.EE.001/index.html">Nibbāna</a><em>”.</em></li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.II.009/index.html">Two Types Of Vedana Feelings</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    <span class="pathway-placeholder"></span>
+
+    
+    <a class="pathway-link next" href="../../pages/TL.II.009/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Two Types Of Vedana Feelings</span>
+        
+        <span class="pathway-title title-pt">Dois tipos de sentimentos de Vedanā</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Punna Kamma Dana Sila Bhavana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 32 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.EE.004</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Punna Kamma Dana Sila Bhavana</h1>
+    
+    <h1 class="title-pt">Punna Kamma Dana Sila Bhāvanā</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.EE.004</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.EE.004"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0423"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.EE.004</td></tr><tr><td>Fin-dex</td><td>0423</td></tr><tr><td>Slug</td><td>punna-kamma-dana-sila-bhavana</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Punna Kamma Dana Sila Bhavana</td></tr></table></div></div><p style="text-align: justify;"><strong>Revised March 24, 2016; August 27, 2022; <span style="color: #0000ff;"><span style="color: #3366ff;">March 7, 2024</span></span></strong></p>
+<p style="text-align: justify;">1. Here, we discuss the ten types of <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (doing meritorious deeds). These are in three groups: <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span>, <span class="pali-term term-highlight" data-term="sīla">sīla</span>, </span></em>and<em><span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em></span>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Those are essential for progress in one's mundane eightfold path.</li>
+<li>One must cultivate the mundane path and remove the ten types of <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> before being able to comprehend the <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> and start on the Noble Eightfold Path; see "<a href="../../pages/MS.BB.001/index.html" rel="noopener" target="_blank">Buddha Dhamma – In a Chart</a>."</li>
+</ul>
+<p style="text-align: justify;"><span>2. A previous <span class="pali-term term-highlight" data-term="post">post</span> discussed the differences between </span><em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span>/<span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span>/pāpa <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>: "<a href="../../pages/TL.EE.002/index.html" rel="noopener" target="_blank">Kilesa – Relationship to Akusala, Kusala, and Puñña Kamma</a>."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">For details on the ten types of <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span>,</span></em> see "<a href="../../pages/TL.EE.003/index.html" rel="noopener" style="color: #ea9629;" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Ten Immoral Actions (Dasa Akusala)</a>."</li>
+<li style="text-align: justify;"><span style="color: #0000ff;"><strong>The ten types of <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em> are just the avoidance of <em><span><span class="pali-term term-highlight" data-term="akusala kamma">akusala kamma</span></span></em>.</strong></span></li>
+</ul>
+<p style="text-align: justify;"><span>3. As discussed in the above two <span class="pali-term term-highlight" data-term="posts">posts</span>, </span><span style="color: #0000ff;"><em>k</em><em><span>usala <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> (getting rid of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, and <span class="pali-term term-highlight" data-term="moha">moha</span></span></em>) eventually leads to<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </span><strong>However, <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (meritorious actions) help set the background to attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>and are thus critically important. </strong></p>
+<ul style="text-align: justify;">
+<li>One needs to do both. However, the ability to do <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> is vastly improved when one starts comprehending <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>; see "<a href="../../pages/KD.FF.001/index.html" rel="noopener" target="_blank">Anicca, Dukkha, Anatta</a>."</li>
+<li><em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> kammās </span></em>lead to rebirths in "good realms." Furthermore, one will be born with long life, good health, comfort, and wealth (<strong>āyu<em><span>, vaṇṇa, <span class="pali-term term-highlight" data-term="sukha">sukha</span>, <span class="pali-term term-highlight" data-term="bala">bala</span></span></em></strong>) to be able to comprehend <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> and pursue<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>with ease. The following <em>Dhammapada</em> verse emphasizes that:<br/>
+"<em>Abhivādanasīlissa,</em><br/>
+<em>niccaṃ <span class="var" id="note72" title="vaddhāpacāyino (bj, pts1-2)">vuḍḍhāpacāyino</span>;</em><br/>
+<em><span>Cattāro <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> vaḍḍhanti,</span></em><br/>
+<strong><em><span>āyu vaṇṇo <span class="pali-term term-highlight" data-term="sukhaṃ">sukhaṃ</span> balaṃ</span></em></strong>."</li>
+<li><strong><em><span>Āyu, vaṇṇa, <span class="pali-term term-highlight" data-term="sukha">sukha</span>, </span></em></strong>and<strong><em><span> <span class="pali-term term-highlight" data-term="bala">bala</span> </span></em></strong>mean the <strong>length of life, health, happiness</strong>, and <strong>strength</strong>.</li>
+</ul>
+<p style="text-align: justify;">These ten meritorious actions (<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) are divided into three groups: <em>däna</em> (generosity), <em><span><span class="pali-term term-highlight" data-term="sīla">sīla</span></span></em> (moral behavior), and <em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> (meditation).</p>
+<h5><em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> - <em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span>, Sila, <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em></h5>
+<p>4. The ten types of <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span> are: </span></em></p>
+<ol>
+<li><strong><span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em> (giving)</span></strong></li>
+<li><strong><span style="color: #0000ff;">Transfer of merits to others (<em>pattidāna</em>)</span></strong></li>
+<li><strong><span style="color: #0000ff;">Rejoicing (accepting or participating) in other's merits (<em>pattānumodanā</em>) </span></strong></li>
+<li><span style="color: #000000;"><strong><em>Sila</em> (morality), i.e., observing 5, 8, or 10 precepts </strong></span></li>
+<li><span style="color: #000000;"><strong>Reverence to elders and holy persons (<em>apacayaṃa</em>) </strong></span></li>
+<li><span style="color: #000000;"><strong>Pay homage to religious places, take care of such places, etc. (<em>veyyāvacca</em>) </strong></span></li>
+<li><span style="color: #993366;"><strong>Meditation (<em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>) </strong></span></li>
+<li><span style="color: #993366;"><strong><span>Listening to <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> discourses (</span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> savana</span></em>) </strong></span></li>
+<li><span style="color: #993366;"><strong><span>Teaching <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> (</span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> desana</span></em>) </strong></span></li>
+<li><span style="color: #993366;"><strong>Correcting one's wrong views, especially on <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (<em>diṭṭhijukamma</em>)</strong></span></li>
+</ol>
+<ul>
+<li>The first three belong to the <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em> (Generosity) group</strong></span>, the following three belong to the <span style="color: #000000;"><strong><em>Sila</em> (Morality) group,</strong></span> and the last four to the <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span> </span></em> (meditation) group.</strong></span></li>
+<li>On the last one, see "<a href="../../pages/TL.EE.006/index.html" rel="noopener" target="_blank">What is Kamma? – Is Everything Determined by Kamma?</a>".</li>
+</ul>
+<p style="text-align: justify;">5. <strong>Therefore,<em><span> <span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em>,<em><span> <span class="pali-term term-highlight" data-term="sīla">sīla</span>, and <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> constitute the "base" of a moral person's life.</strong></p>
+<ul style="list-style-type: square; text-align: justify;">
+<li>"<em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em> group" helps one overcome one's greed (<em><span><span class="pali-term term-highlight" data-term="lobha">lobha</span></span></em>).</li>
+<li>"<em><span><span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></em> group" helps to remove hate (<em><span><span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>) from one's mind.</li>
+<li>"<em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> group" helps to remove ignorance (<em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em><span>) from the mind by learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and eliminating wrong views (</span><em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>).</li>
+</ul>
+<p style="text-align: justify;">6. Since <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> means removing greed, hate, and ignorance from one's mind, it is clear how these ten actions pave the way for <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. As one engages in these activities more and more, one can experience the "cooling down" or "<em>niveema</em>"; see "<a href="../../pages/TL.CC.006/index.html" rel="noopener" target="_blank" title="How to Taste Nibbāna">How to Taste Nibbāna</a>."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">In the<em><span> <span class="pali-term term-highlight" data-term="sīla">sīla</span></span></em> group of activities, one starts by observing the five precepts, i.e., abstaining from killing living beings intentionally, stealing, sexual misconduct, lying, and getting intoxicated. This last one usually involves intoxication with alcohol or drugs, but it also includes money, beauty, power, position, etc.</li>
+</ul>
+<p style="text-align: justify;"><span>7. It is always a good idea to <span class="pali-term term-highlight" data-term="keep in mind">keep in mind</span> why these are moral actions: Because they help purify one's mind:</span></p>
+<ul style="list-style-type: disc; text-align: justify;">
+<li style="text-align: justify;">To avoid breaking the five precepts, most people abstain from drinking but do not hesitate to show off their wealth, beauty, power, etc.; they are "drunk," too.</li>
+<li style="text-align: justify;">Others pay a lot of attention not to lying but do not hesitate to gossip, slander, or verbally abuse others.</li>
+<li style="text-align: justify;">Also, one should realize that human life has much more weight than animal life; see "<a href="../../pages/TL.EE.007/index.html" rel="noopener" target="_blank" title="How to Evaluate Weights of Different Kamma">How to Evaluate Weights of Different Kamma</a>."</li>
+<li style="text-align: justify;">Most of all, the tenth is the most potent one that most people neglect to consider. Establishing wrong views (<em><span>niyata <span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>) can lead to frequent immoral actions. Thus, one needs to understand this clearly; see "<a href="../../pages/TL.EE.003/index.html" rel="noopener" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Ten Immoral Actions (Dasa Akusala)</a>."</li>
+</ul>
+<p style="text-align: justify;"><span>8. This is why learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> is prominent in the </span><em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em><span> section. As one keeps learning more profound concepts of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, wrong views will gradually fade. It is not enough to say, "I will not have these views anymore," even though making such a determination is good. The mind needs to see evidence to get rid of the wrong views. When one starts on the Path, the feeling of the</span><em><span> nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> will make it easier to remove wrong views; see "<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a>".</p>
+<h5 style="text-align: justify;">The High Value of <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> Done with Understanding</h5>
+<p style="text-align: justify;">9. If one performs a wholesome deed with the knowledge of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and its effects and <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, then the wholesome roots will be associated with understanding. Then one's actions will be based on all three wholesome roots: non-greed, non-hate, and non-delusion. So, three-root (<em>tihétuka</em> or "<em>ti</em>" + "<em>hetu</em>") wholesome <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> is acquired.</p>
+<ul style="text-align: justify;">
+<li>On the other hand, performing a wholesome deed without knowing the laws of k<em>ammā</em> will dilute its effects on future outcomes (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>.)  Then, one's intention will not have wisdom or <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em> (true non-delusion) but only the two roots of non-greed and non-hate. So, two-root (<em>dvihétuka</em> = "<em>dvi</em>"+ "<em>hetu</em><span>") <span class="pali-term term-highlight" data-term="kamma">kamma</span> is acquired. These are less meritorious compared to the three-root (</span><em>tihetuka</em>) <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">10. A detailed discussion can be found in "<a href="../../pages/BM.DD.004/index.html" rel="noopener" target="_blank" title="A Simple Way to Enhance Merits (Kusala) and Avoid Demerits (Akusala)">A Simple Way to Enhance Merits (Kusala) and Avoid Demerits (Akusala)</a>." We will discuss these effects in detail in the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> section, too.</p>
+<ul>
+<li style="text-align: justify;"><span>However, it is essential to realize that the strength of the <span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span> for a given meritorious act will vary depending on the level of understanding. For example, just writing a check to charity will have some results. However, more substantial results will materialize if done with a good understanding of the laws of </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">11. To engage in this superior <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, one should consider the moral action in advance. After the deed, one should reflect on it and contemplate it. Furthermore, one can gain more merits by doing a <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> anumodana</span></em> or <em>pattidāna</em> (transfer of merits to others, #2 <em><span><span class="pali-term term-highlight" data-term="kusala kamma">kusala kamma</span></span></em> above) because this amounts to paying off <em>sansaric</em> debts; see "<a href="../../pages/TL.GG.007/index.html" rel="noopener" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Debt, and Meditation</a>."</p>
+<ul style="text-align: justify;">
+<li>On the other hand, if one feels lazy, reluctant, jealous, or stingy before a moral action such as giving charity and regrets doing the moral action afterward, then the moral volition of giving to charity will be surrounded by other unwholesome intentions (<em>cetana</em>). Consequently, its results will be weaker. The wholesome <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> acquired, in this case, is inferior.</li>
+</ul>
+<p style="text-align: justify;"><strong><span style="color: #3366ff;"><span>Thus, it is important to learn <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> to grasp such details and realize the full benefits of one's meritorious actions. It is interesting to see how all these details "fit into the big picture"</span></span>; see "<a href="../../pages/BD.AA.004/index.html" rel="noopener" target="_blank" title="The Importance of Purifying the Mind">The Importance of Purifying the Mind</a>."</strong></p>
+<p style="text-align: justify;">Next, "<a href="../../pages/TL.EE.005/index.html" rel="noopener" target="_blank">The Five Precepts – What the Buddha Meant by Them</a>"...</p>
+<p style="text-align: justify;"> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.EE.004"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0423"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+Derived Translation
+PD#PN: TL.EE.004
+Lang: pt-BR
+Date: 2026-02-24T02:05:40Z
+-->
+<!--
+Canonical CSL Artifact
+Derived from PureDhamma.net SRO
+PD#PN: TL.EE.004
+Extraction: 2026-02-23T21:10:02Z
+Integrity: PENDING_CALCULATION
+-->
+<p style="text-align: justify;"><strong>Revisado em 24 de março de 2016; 27 de agosto de 2022; <span style="color: #0000ff;"><span style="color: #3366ff;">7 de março de 2024</span></span></strong></p>
+<p style="text-align: justify;">1. Aqui, discutimos os dez tipos de <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (práticas meritórias). Elas estão divididas em três grupos: <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span>, <span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></em> e<em><span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em></span>.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Eles são essenciais para o progresso no caminho óctuplo mundano.</li>
+<li>É preciso cultivar o caminho mundano e remover os dez tipos de <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> antes de ser capaz de compreender o <em>Tilakkhaṇa</em> e iniciar o Nobre Caminho Óctuplo; consulte “<a href="../../pages/MS.BB.001/index.html" target="_blank">Buddha Dhamma – Em um gráfico</a>”.</li>
+</ul>
+<p style="text-align: justify;">2. Uma postagem anterior discutiu as diferenças entre <em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>: “<a href="../../pages/TL.EE.002/index.html" target="_blank">Kilesa – Relação com Akusala, Kusala e Puñña Kamma</a>”.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Para detalhes sobre os dez tipos de <em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span>,</span></em> consulte “<a href="../../pages/TL.EE.003/index.html" style="color: #ea9629;" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Dez Ações Imorais (Dasa Akusala)</a>.”</li>
+<li style="text-align: justify;"><span style="color: #0000ff;"><strong>Os dez tipos de <em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> são apenas a evitação de <em><span><span class="pali-term term-highlight" data-term="akusala kamma">Akusala Kamma</span></span></em>.</strong></span></li>
+</ul>
+<p style="text-align: justify;">3. Conforme discutido nos dois ensaios acima, <span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> (livrar-se de <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span>, <span class="pali-term term-highlight" data-term="dosa">Dosa</span> e <span class="pali-term term-highlight" data-term="moha">Moha</span></span></em>) eventualmente leva ao<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </span><strong>No entanto, <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (ações meritórias) ajudam a estabelecer o contexto para alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span> </span></em>e, portanto, são extremamente importantes. </strong></p>
+<ul style="text-align: justify;">
+<li>É preciso fazer ambos. No entanto, a capacidade de fazer <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em> melhora muito quando se começa a compreender <em>Tilakkhaṇa</em>; veja “<a href="../../pages/KD.FF.001/index.html" target="_blank">Anicca, Dukkha, Anattā</a>”.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span></span></em>
+levam ao renascimento em “reinos bons”. Além disso, a pessoa nascerá com vida longa, boa saúde, conforto e riqueza (<strong>āyu<em><span>, vaṇṇa, <span class="pali-term term-highlight" data-term="sukha">Sukha</span>, <span class="pali-term term-highlight" data-term="bala">Bala</span></span></em></strong>
+) para poder compreender <em>Tilakkhaṇa</em>
+e buscar<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>
+com facilidade. O seguinte versículo <em>do Dhammapada</em>
+enfatiza isso:<br/>
+“<em>Abhivādanasīlissa,</em><br/>
+<em>niccaṃ <span class="var" id="note72" title="vaddhāpacāyino (bj, pts1-2)">vuḍḍhāpacāyino</span>;</em><br/>
+<em><span>Cattāro <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> vaḍḍhanti,</span></em><br/>
+<strong><em><span>āyu vaṇṇo <span class="pali-term term-highlight" data-term="sukhaṃ">sukhaṃ</span> balaṃ</span></em></strong>
+”.</li>
+<li><strong><em><span>Āyu, vaṇṇa, <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em></strong> e<strong><em><span> <span class="pali-term term-highlight" data-term="bala">Bala</span> </span></em></strong>significam <strong>duração da vida, saúde, felicidade</strong> e <strong>força</strong>.</li>
+</ul>
+<p style="text-align: justify;">Essas dez ações meritórias (<em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) são divididas em três grupos: <em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em> (generosidade), <em><span><span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></em> (comportamento moral) e <em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> (meditação).</p>
+<h5><em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> - <em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span>, Sila, <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em></h5>
+<p>4. Os dez tipos de <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kammā">kammā</span> são: </span></em></p>
+<ol>
+<li><strong><span style="color: #0000ff;"><em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em> (doação)</span></strong></li>
+<li><strong><span style="color: #0000ff;">Transferência de méritos para outros (<em>pattidāna</em>)</span></strong></li>
+<li><strong><span style="color: #0000ff;">Regozijar-se (aceitar ou participar) dos méritos dos outros (<em>pattānumodanā</em>) </span></strong></li>
+<li><span style="color: #000000;"><strong><em>Sila</em> (moralidade), ou seja, observar 5, 8 ou 10 preceitos </strong></span></li>
+<li><span style="color: #000000;"><strong>Reverência aos mais velhos e às pessoas sagradas (<em>apacayaṃa</em>) </strong></span></li>
+<li><span style="color: #000000;"><strong>Prestar homenagem a locais religiosos, cuidar desses locais, etc. (<em>veyyāvacca</em>) </strong></span></li>
+<li><span style="color: #993366;"><strong>Meditação (<em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>) </strong></span></li>
+<li><span style="color: #993366;"><strong><span>Ouvir discursos do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> (</span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> savana</span></em>) </strong></span></li>
+<li><span style="color: #993366;"><strong><span>Ensinar o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> (</span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> desana</span></em>) </strong></span></li>
+<li><span style="color: #993366;"><strong>Corrigir as visões erradas, especialmente sobre <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (<em>diṭṭhijukamma</em>)</strong></span></li>
+</ol>
+<ul>
+<li>Os três primeiros pertencem ao <span style="color: #0000ff;"><strong>grupo</strong></span> <span style="color: #0000ff;"><strong><em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em> (Generosidade)</strong></span>, os três seguintes pertencem ao <span style="color: #000000;"><strong>grupo</strong></span> <span style="color: #000000;"><strong><em>Sila</em> (Moralidade)</strong></span> e os quatro últimos ao <span style="color: #993366;"><strong>grupo</strong></span> <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>(meditação).</strong></span></li>
+<li>Sobre o último, veja “<a href="../../pages/TL.EE.006/index.html" target="_blank">O que é Kamma? – Tudo é determinado pelo Kamma?</a>”.</li>
+</ul>
+<p style="text-align: justify;">5. <strong>Portanto,<em><span> <span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em>,<em><span> <span class="pali-term term-highlight" data-term="sīla">Sīla</span> e <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> constituem a “base” da vida de uma pessoa moral.</strong></p>
+<ul style="list-style-type: square; text-align: justify;">
+<li>O “grupo <em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em>” ajuda a superar a ganância (<em><span><span class="pali-term term-highlight" data-term="lobha">Lobha</span></span></em>).</li>
+<li>O “grupo <em><span><span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></em>” ajuda a remover o ódio (<em><span><span class="pali-term term-highlight" data-term="dosa">Dosa</span></span></em>) da mente.</li>
+<li>O “grupo <em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>” ajuda a remover a ignorância (<em><span><span class="pali-term term-highlight" data-term="moha">Moha</span></span></em><span>) da mente, aprendendo o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e eliminando visões erradas (</span><em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em>).</li>
+</ul>
+<p style="text-align: justify;">6. Como <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> significa remover a ganância, o ódio e a ignorância da mente, fica claro como essas dez ações preparam o caminho para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. À medida que a pessoa se envolve cada vez mais nessas atividades, ela pode experimentar o “resfriamento” ou “<em>niveema</em>”; veja “<a href="../../pages/TL.CC.006/index.html" target="_blank" title="How to Taste Nibbāna">Como saborear Nibbāna</a>”.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">No grupo de atividades <em><span><span class="pali-term term-highlight" data-term="sīla">Sīla</span></span></em>, começa-se observando os cinco preceitos, ou seja, abstendo-se de matar seres vivos intencionalmente, roubar, conduta sexual imprópria, mentir e intoxicar-se. Este último geralmente envolve intoxicação com álcool ou drogas, mas também inclui dinheiro, beleza, poder, posição, etc.</li>
+</ul>
+<p style="text-align: justify;">7. É sempre uma boa ideia ter em mente por que essas são ações morais: porque ajudam a purificar a mente:</p>
+<ul style="list-style-type: disc; text-align: justify;">
+<li style="text-align: justify;">Para evitar quebrar os cinco preceitos, a maioria das pessoas se abstém de beber, mas não hesita em exibir sua riqueza, beleza, poder, etc.; elas também estão “embriagadas”.</li>
+<li style="text-align: justify;">Outros prestam muita atenção para não mentir, mas não hesitam em fofocar, caluniar ou abusar verbalmente dos outros.</li>
+<li style="text-align: justify;">Além disso, deve-se perceber que a vida humana tem muito mais peso do que a vida animal; veja “<a href="../../pages/TL.EE.007/index.html" target="_blank" title="How to Evaluate Weights of Different Kamma">Como avaliar os pesos de diferentes Kamma</a>”.</li>
+<li style="text-align: justify;">Acima de tudo, o décimo é o mais potente, que a maioria das pessoas negligencia considerar. Estabelecer visões erradas (<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em>) pode levar a ações imorais frequentes. Portanto, é preciso entender isso claramente; veja “<a href="../../pages/TL.EE.003/index.html" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Dez Ações Imorais (Dasa Akusala)</a>”.</li>
+</ul>
+<p style="text-align: justify;"><span>8. É por isso que aprender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> é proeminente na seção </span><em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em><span>. À medida que se continua aprendendo conceitos mais profundos do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, as visões erradas desaparecem gradualmente. Não basta dizer: “Não terei mais essas visões”, embora seja bom tomar essa decisão. A mente precisa ver evidências para se livrar das visões erradas. Quando se inicia o Caminho, a sensação de </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> torna mais fácil remover as visões erradas; veja “<a href="../../pages/TL.CC.005/index.html" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade - O que é Niramisa Sukha?</a>”.</p>
+<h5 style="text-align: justify;">O alto valor do <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> feito com compreensão</h5>
+<p style="text-align: justify;">9. Se alguém realizar uma ação benéfica com o conhecimento do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e seus efeitos e <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>, então as raízes benéficas estarão associadas à compreensão. Assim, as ações dessa pessoa serão baseadas nas três raízes benéficas: não-ganância, não-ódio e não-ilusão. Assim, <em><span>o <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> benéfico de três raízes (<em>tihétuka</em> ou “<em>ti</em>” + “<em>hetu</em>”) é adquirido.</p>
+<ul style="text-align: justify;">
+<li>Por outro lado, realizar uma ação benéfica sem conhecer as leis do k<em>ammā</em> diluirá seus efeitos nos resultados futuros (<em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>).  Então, a intenção da pessoa não terá sabedoria ou <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em><span> (verdadeira não ilusão), mas apenas as duas raízes da não ganância e do não ódio. Assim, o <span class="pali-term term-highlight" data-term="kamma">Kamma</span> de duas raízes (</span><em>dvihétuka</em> = <em>“dvi</em>” + “<em>hetu</em>”) é adquirido. Estes são menos meritórios em comparação com o <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> de três raízes (<em>tihetuka</em>).</li>
+</ul>
+<p style="text-align: justify;">10. Uma discussão detalhada pode ser encontrada em “<a href="../../pages/BM.DD.004/index.html" target="_blank" title="A Simple Way to Enhance Merits (Kusala) and Avoid Demerits (Akusala)">Uma maneira simples de aumentar os méritos (Kusala) e evitar os deméritos (Akusala)</a>”. Discutiremos esses efeitos em detalhes na seção <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> também.</p>
+<ul>
+<li style="text-align: justify;"><span>No entanto, é essencial perceber que a força do <span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span> para um determinado ato meritório irá variar dependendo do nível de compreensão. Por exemplo, apenas preencher um cheque para caridade terá alguns resultados. No entanto, resultados mais substanciais se materializarão se isso for feito com uma boa compreensão das leis do </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">11. Para se envolver nesse <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> superior, deve-se considerar a ação moral com antecedência. Após a ação, deve-se refletir sobre ela e contemplá-la. Além disso, pode-se ganhar mais méritos fazendo um <em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> anumodana</span></em> ou <em>pattidāna</em> (transferência de méritos para outros, #2 <em><span><span class="pali-term term-highlight" data-term="kusala kamma">Kusala Kamma</span></span></em> acima), pois isso equivale a pagar dívidas <em>sansáricas</em>; veja “<a href="../../pages/TL.GG.007/index.html" target="_blank" title="Kamma, Debt, and Meditation">Kamma, Dívida e Meditação</a>”.</p>
+<ul style="text-align: justify;">
+<li>Por outro lado, se alguém se sentir preguiçoso, relutante, invejoso ou mesquinho antes de uma ação moral, como fazer caridade, e se arrepender de ter feito a ação moral depois, então a vontade moral de fazer caridade será cercada por outras intenções prejudiciais (<em><span>uma <span class="pali-term term-highlight" data-term="cetanā">Cetanā</span></span></em>). Consequentemente, seus resultados serão mais fracos. O <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> benéfico adquirido, neste caso, é inferior.</li>
+</ul>
+<p style="text-align: justify;"><strong><span style="color: #3366ff;"><span>Portanto, é importante aprender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> para compreender esses detalhes e perceber todos os benefícios das ações meritórias. É interessante ver como todos esses detalhes “se encaixam no quadro geral”</span></span>; veja “<a href="../../pages/BD.AA.004/index.html" target="_blank" title="The Importance of Purifying the Mind">A Importância de Purificar a Mente</a>”.</strong></p>
+<p style="text-align: justify;">A seguir, <a href="../../pages/TL.EE.005/index.html" target="_blank">“Os Cinco Preceitos – O que o Buddha quis dizer com eles</a>”...</p>
+<p style="text-align: justify;"> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.EE.003/index.html">Ten Immoral Actions Dasa Akusala</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.EE.005/index.html">The Five Precepts What The Buddha Meant By Them</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.EE.003/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Ten Immoral Actions Dasa Akusala</span>
+        
+        <span class="pathway-title title-pt">Dez ações imorais Dasa Akusala</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.EE.005/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">The Five Precepts What The Buddha Meant By Them</span>
+        
+        <span class="pathway-title title-pt">Os cinco preceitos: o que o Buddha quis dizer com eles</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Vipallasa Ditthi Sanna Citta | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 97 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.JJ.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Vipallasa Ditthi Sanna Citta</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.JJ.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.JJ.006"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0184"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.JJ.006</td></tr><tr><td>Fin-dex</td><td>0184</td></tr><tr><td>Slug</td><td>vipallasa-ditthi-sanna-citta</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Vipallasa Ditthi Sanna Citta</td></tr></table></div></div><p><strong>January 28, 2017; re-written October 15, 2019; revised June 23, 2022; <span style="color: #3366ff;">May 28, 2023 </span></strong></p>
+<p style="text-align: justify;">The word <em><span><span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span> </span></em>(used in plural) means "confusion." One gets confused because one has the wrong views (<em>diṭṭhi</em>). That leads to distorted perceptions (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>), which affect the way one thinks (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>). That is how we generate (<em>abhi</em>)<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>that leads to future suffering. This is just another way to analyze the origin of suffering.</p>
+<ul>
+<li style="text-align: justify;"><span>You may want to read the previous <span class="pali-term term-highlight" data-term="posts">posts</span> on </span><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>. </span></em>See "<a href="../../pages/KD.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Saññā – What It Really Means</a>" and "<a href="../../pages/KD.BB.006/index.html" rel="noopener noreferrer" target="_blank">Saṅkhāra – What It Really Means</a>."</li>
+<li><span>This <span class="pali-term term-highlight" data-term="post">post</span> is a rewrite of an old <span class="pali-term term-highlight" data-term="post">post</span>, "Diṭṭhi, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, and Sankhāra - How They Relate."</span></li>
+</ul>
+<h5>Wrong Views Come First</h5>
+<p style="text-align: justify;">1. One's perceptions (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>) are closely associated with one's views (<em>diṭṭhi</em>), and both of those affect how we think (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) and generate <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</p>
+<p style="text-align: justify;"><span style="color: #3366ff;">Most of our worldviews are shaped by the ideas from our families, friends, and religions we are born into. Those inputs play a significant role in our worldviews. In turn, they mold our perceptions and how we think—and thus generate <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</span></p>
+<ul style="text-align: justify;">
+<li>It is not possible to get rid of the wrong or distorted perceptions (<em><span>viparita <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>) without getting rid of the erroneous views (<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> or simply <em>diṭṭhi</em>).</li>
+<li>Some dominant world views must be removed before one can even hope to get an idea about <em><span><span class="pali-term term-highlight" data-term="anicca saññā">anicca saññā</span></span></em>. We will discuss some of these critical factors first.</li>
+</ul>
+<h5>Wrong Views on Heaven, Hell, and Human Realms</h5>
+<p style="text-align: justify;">2. Most people believe in eternal heaven after death. That perception is based on the worldview of three "major categories or realms." Those are hell, the human world, and heaven. This worldview and the corresponding perception of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> are passed down through generations in families that have been taught it via religious teachings.</p>
+<ul style="text-align: justify;">
+<li>That worldview also says that a Creator created the Earth. That Creator resides in the heavens, and those who live by those teachings will join the Creator. Those who disobey those teachings are supposed to be born in hell for eternity.</li>
+<li>Even though modern science rejects that cosmic worldview, most people still hold to it. The heavens comprise trillions of planetary systems, just like our Solar System.</li>
+<li>Astonishingly, even some prominent scientists are willing to disregard scientific facts. They believe (i.e., have the perception) that a Creator created the Earth and the whole universe. I am not sure where they think that Creator resides among those trillions of star systems.</li>
+</ul>
+<h5>Wrong Views About Animals</h5>
+<p style="text-align: justify;">3. Another example is killing animals for sport, which includes fishing. That is based on the view that animals are not sentient and were created by the Creator for human consumption. <span style="font-size: 1.125rem; letter-spacing: 0px;">That is such an ingrained </span><em style="font-size: 1.125rem; letter-spacing: 0px;">diṭṭhi</em><span style="font-size: 1.125rem; letter-spacing: 0px;"> that many people who live otherwise moral lives fail to see the suffering endured by these animals.</span></p>
+<ul style="text-align: justify;">
+<li>While fish cannot cry out, the severe pain felt by a wriggling fish caught on a hook is quite apparent. It feels pain in the mouth from the hook. It also suffers due to a lack of oxygen since it cannot breathe as we do.</li>
+<li>Higher animals are capable of showing their pain, among other emotions. Anyone who has a pet dog or cat knows they have emotions/feelings, as we do.</li>
+<li>But we tend to disregard such easy-to-see things because of our <em>diṭṭhis</em>. The underlying reason is the religious view that animals are here for our consumption.</li>
+</ul>
+<p><span style="color: #0000ff;"><span style="color: #3366ff;"><span style="color: #000000;">4. However, we all have had animal, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> births.</span></span><span style="color: #3366ff;"> Comprehension of this fact can help change one's perception of animals.</span></span></p>
+<ul style="text-align: justify;">
+<li><span>However, even in <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> countries, there are fishing villages where many have made a living from fishing for generations.</span></li>
+<li>Some may say that those people need to make a living to sustain their families. But that argument is no better than the argument that a drug addict needs to inhale another dose to get through the day: the long-term consequences are infinitely worse.</li>
+<li>It is customary for the older generations to teach their children or grandchildren how to fish or hunt animals for sport. That custom passes through generations.</li>
+<li><strong>Still, we cannot equate animal lives to human lives, as some animal rights activists believe.</strong><span> When one comprehends the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, one can avoid falling into either extreme.</span></li>
+</ul>
+<h5>Wrong Views Lead to Wrong Perceptions (<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>)</h5>
+<p style="text-align: justify;">5. The above are several prominent examples of major <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em>. One can remove distorted perceptions (<em><span>viparita <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>) by removing such wrong views (<em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em><span>). Learning the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> helps get rid of wrong views.</span></p>
+<ul>
+<li style="text-align: justify;">The key reason those diṭṭhis propagate through generations is the inability to "break through" such ingrained beliefs by contemplating facts.</li>
+</ul>
+<p style="text-align: justify;">6. Another wrong view (and hence the wrong perception) that we have is about the high value placed on our physical bodies' "beautification." This perception is predominant in Western countries but is growing in other countries.</p>
+<ul style="text-align: justify;">
+<li>People spend billions of dollars a year trying to make their physical bodies "more beautiful." They don't realize -- or don't even contemplate -- the following fact. No matter how much money one spends, one's body will not remain in peak condition for long.</li>
+<li>That wrong perception leads to an enhanced level of suffering in old age when one's body becomes frail and less appealing. That can lead to severe depression.</li>
+<li>For those who have comprehended the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature, old age is a fact of life. While the brain is working optimally, one should spend one's "peak years" not beautifying one's body but making progress on the Path. As the body begins to degrade with age, the brain deteriorates. So, one must exercise and eat healthily to keep the body and the brain in good condition for as long as possible.</li>
+<li>That happens to everyone, regardless of how powerful or wealthy they are. At President Trump's inauguration, this was quite obvious by looking at the ex-Presidents.</li>
+<li>Think of any famous, beautiful, or wealthy person who has grown old to convince you of the truth of this<em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</li>
+</ul>
+<h5>Characteristics of Anything (<em><span><span class="pali-term term-highlight" data-term="saṅkhata">Saṅkhata</span></span></em>) In This World</h5>
+<p style="text-align: justify;">7. Anything in this world -- living or inert -- has that <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature. A <em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em> is born (<em><span><span class="pali-term term-highlight" data-term="uppāda">uppāda</span></span></em>) and destroyed (<em>vaya</em>.) In between, it is in existence but is still subjected to unexpected change (<em>ṭhitassa aññathattaṁ</em>.) Those are the three stages of a <em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em>; see, for example, "<a href="https://suttacentral.net/sn22.37/en/sujato" rel="noopener" target="_blank"><em><span>Ānanda <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.37)</a>."</p>
+<ul style="text-align: justify;">
+<li>Some things in this world (<em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em>) last a short time: for example, a fly or a flower. Other things can last for tens of years: for example, a human or a car. Some things/beings live much longer: for example, a <em><span> <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> or a star system like our Solar System.</li>
+<li>But eventually, anything in this world -- a <em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em> -- decays and is destroyed at some point.</li>
+<li>Even though those things that reach the peak condition can provide/enjoy sensory pleasures, they do not last long.</li>
+<li>The overall effect or the net effect is suffering when one considers the rebirths in the 31 realms in the long term.</li>
+</ul>
+<h5>Four Types of <em><span><span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em> (Confusions) and Three Variations</h5>
+<p style="text-align: justify;"><span>8. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that there are four types of </span><em><span><span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>, or confusions, about the <span style="color: #3366ff;"><strong>wrongly perceived nature of the world as<em><span> nicca, <span class="pali-term term-highlight" data-term="sukha">sukha</span>, atta, and subha</span></em>.</strong></span> See, <a href="https://suttacentral.net/an4.49/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 4.49)</a>. We have discussed the first three in detail on this website. The <em>subha</em> (pleasurable) <em><span><span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> is mainly associated with the "<em>olārika</em> sensory pleasures" (taste, smell, and bodily contact) in the realm of <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>No matter how appealing those sensory pleasures or sense objects can be, they all make one get trapped in <em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>. That is why they are <em><span><span class="pali-term term-highlight" data-term="asubha">asubha</span></span></em>.</li>
+</ul>
+<p>9. Each <em><span><span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> has three variations (layers) of <em>diṭṭhi</em>, <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>. </span></em></p>
+<ul style="text-align: justify;">
+<li>Each confusion (<em><span><span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>) may be expressed via views, perceptions, and how we automatically think. They affect the <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> generation and especially <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>; </span></em>See, "<a href="../../pages/KD.BB.006/index.html" rel="noopener noreferrer" target="_blank">Sankhāra – What It Really Means</a>."</li>
+</ul>
+<h5>Confusion About a <i><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></i> Is the Key - They Lead to <em>Sankhāra</em></h5>
+<p style="text-align: justify;">10. Let us consider the <em><span>diṭṭhi, <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> about the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature as an example.</p>
+<ul style="text-align: justify;">
+<li>We have the<span style="color: #993366;"> wrong view that things in this world have a <em>nicca</em> nature</span>, i.e., that they can provide happiness. That is the <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> about the actual<em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature.</li>
+<li>Because of this wrong view, we develop the <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> about the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature of things: We tend to <span style="color: #993366;">perceive (<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>)</span> that worldly things can provide happiness.</li>
+<li>We tend to <span style="color: #993366;">think (<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) that things in this world can provide us with happiness due to</span> a wrong perception. Thus, we do (<em>abhi</em>)<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em><span> that prolong the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process for </span><em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>.</span></em> Even worse, they make one suffer mightily in the future rebirths through <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>.</span></em></li>
+<li>Therefore, we constantly generate <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (automatic thoughts about worldly sense objects), <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (conscious thoughts or speech), and act accordingly (<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>).</li>
+</ul>
+<h5><em>Sankhāra </em>Lead to Future Suffering</h5>
+<p style="text-align: justify;">11. All three types of such <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> lead to suffering in this life and in future rebirths. These are the <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that arise due to<em><span> <span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> (not realizing the true nature of this world): "<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span></em>(<em>abhi</em>)<em>sankhārā."</em></p>
+<p style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> eventually leads to <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> via <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em>.  Here,<em><span> <span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em> means both future rebirths and "births during this life;" see "<a href="../../pages/LD.DD.003/index.html" rel="noopener noreferrer" target="_blank">Suffering in This Life and Paṭicca Samuppāda</a>."</p>
+<ul style="text-align: justify;">
+<li><span>That is why it is essential first to learn <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and to realize that suffering in this life can arise from our conscious thoughts and actions. Not only that, but that suffering CAN BE stopped from arising.</span></li>
+<li>Once one comprehends this fact and lives accordingly, one can experience the <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> when one removes this type of suffering.</li>
+<li>Furthermore, this helps one build true faith (<em>saddha</em><span>) in the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. It will convince one of the truths about the much worse type of suffering in future rebirths.</span></li>
+<li>More details are in the first few subsections in the "<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a>" section.</li>
+</ul>
+<p style="text-align: justify;">12. At that stage, one may comprehend the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em><span> nature of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. The truth of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process is that nowhere in the 31 realms can one find happiness.</span></p>
+<ul style="text-align: justify;">
+<li>Moreover, one will "see" that unimaginable suffering exists in the lowest four realms (<em>apāyā</em>). That will help dispel the <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> about <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span>.</span></em> Instead of the wrong view that there is happiness in human, <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em><span>, or <span class="pali-term term-highlight" data-term="brahma">Brahma</span> realms, one will "see" that any pleasure to be had is only temporary. Furthermore, there is much more suffering inevitable if one stays in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></li>
+<li><span>One will also "see" that one is genuinely helpless if one stays in this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (</span><em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em>). Thus, one will get rid of <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> (that this world is of <em>atta</em> nature) and truly "see" the "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> nature."</li>
+<li>One will also "see" that -- in the long run -- things in this world are not <em>subha</em>, i.e., they are not beneficial or fruitful. Attachment to anything in this world will lead to suffering in the long run. Thus, a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> will have removed the <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> "distorted views" about <em>subha</em> nature as well.</li>
+<li>That is how one gets rid of <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span>. </span></em>That leads to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> via dissociating from the material world; see "<a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a>."</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> </span></em><em><span><span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span> </span></em></h5>
+<p style="text-align: justify;">13. <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> (pronounced "sangnā") comes from "<em>san</em>" + "<em>gnāna,"</em> which means "wisdom" about "<em>san."</em> But regular humans have only <em>viparita </em><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>: they do not see "<em>san</em>" as bad.</p>
+<ul style="text-align: justify;">
+<li>Removal of<em><span> <span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> requires getting rid of <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span>, </span></em>which in turn requires attaining <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span></span></em>. Then, one will perceive the benefits or the harm in each speech or action one is about to make.</li>
+<li>When one has the right vision and perceives things as they are, one will start thinking along those lines. Then one will begin removing<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Removal of <em><span><span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span></span></em></h5>
+<p style="text-align: justify;">14. For completion, we will end with the following technical details. All three types of<em><span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> regarding <em>nicca </em>and<em> atta</em> disappear at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. However, only the <em><span>diṭṭhi <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span> </span></em>about<em><span> <span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>and<em> subha </em>goes away (<strong>Note that the true nature is "<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="asubha">asubha</span></span></em>."</strong>) That is in the "<span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/ps1.8/pli/ms" rel="noopener" target="_blank"><em>Vipallāsakathā</em></a>" section in the "</span></span></span><em>Paṭisambhidāmagga</em>."</p>
+<ul style="text-align: justify;">
+<li>That is why even though a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> can "see" that things in this world can eventually lead to only suffering, he/she will still tend to enjoy sensory pleasures. That is due to the remaining <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>and<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> about <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em>subha. </em>However, those do not involve <em>apāyagāmi</em> deeds.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> about <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em>subha</em> is lessened at the <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> stage are entirely removed at the <em>Anāgami</em> stage. Even though an <em>Anāgami</em> has eliminated the desire for sense pleasures in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>, he/she will still tend to enjoy <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures.</li>
+<li style="text-align: justify;">All <em><span><span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> go away entirely only at the<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage. An<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> does not make <em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> that leads to heat (or <em>thāpa</em>) in the mind and makes one eligible to be born in the <em>apāyā</em>. He does not make <em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> that makes one eligible to be born in the "good realms" either. He makes only <em>kammically</em> neutral <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> or <em>kriya</em> to maintain life until <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em> or death.</li>
+</ul>
+<p style="text-align: justify;">15. Removal of <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span>,</span></em> respectively, at the <em>Anāgāmi</em> and <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stages can be understood as follows. <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em> regarding <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em>subha</em> arise due to "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span>.</span></em>"</p>
+<ul>
+<li style="text-align: justify;">Most <em>apāyagāmi</em> deeds are done with <em>kāmacchanda</em> <em><span><span class="pali-term term-highlight" data-term="nivarana">nivarana</span>,</span></em> "covering a mind," and it is removed at the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage. <em>Kāmacchanda </em>appears when "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>" -- craving for sensual pleasures -- optimizes and "makes one blind."</li>
+<li style="text-align: justify;">However, a <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> has "<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span>,</span></em>" meaning a <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> still craves sensual pleasures.</li>
+<li style="text-align: justify;">An <em>Anāgāmi</em> has removed "<em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span>,</span></em>" and thus, <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span> </span></em>for <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em>subha</em>.</li>
+<li style="text-align: justify;">It is only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage that even a trace of <em><span><span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span> </span></em>for<em><span> <span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em> is removed with the removal of all "<em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="vipallāsa">vipallāsa</span></span></em>." This is explained in "<a href="https://suttacentral.net/ne19/pli/ms" rel="noopener" target="_blank"><em>Samā­ro­pa­nahāra ­vibhaṅga</em></a>."</li>
+<li>The following chart provides a summary (many merits to Seng Kiat Ng for the chart and the above link):<img alt="" class="alignnone wp-image-36908 size-full" height="276" src="http://localhost/beng_feb2026/wp-content/uploads/Vipallasa-Chart-1.png" width="1566"/></li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.JJ.005/index.html">Future Suffering Why It Arises</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.BB.006/index.html">Sankhara What It Really Means</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.JJ.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Future Suffering Why It Arises</span>
+        
+        <span class="pathway-title title-pt">Future Suffering Why It Arises</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.BB.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Sankhara What It Really Means</span>
+        
+        <span class="pathway-title title-pt">Sankhara What It Really Means</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

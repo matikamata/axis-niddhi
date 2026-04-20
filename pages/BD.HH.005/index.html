@@ -1,0 +1,488 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Gandhabba Only In Human And Animal Realms | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 42 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.HH.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Gandhabba Only In Human And Animal Realms</h1>
+    
+    <h1 class="title-pt">Gandhabba apenas nos reinos humano e animal</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.HH.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>13</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.HH.005"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0050"
+             data-level="intermediate"
+             data-reading-time="13"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.HH.005</td></tr><tr><td>Fin-dex</td><td>0050</td></tr><tr><td>Slug</td><td>gandhabba-only-in-human-and-animal-realms</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Gandhabba Only In Human And Animal Realms</td></tr></table></div></div><p><strong>June 4, 2016; revised October 3, 2019; October 17, 2022;<span style="color: #3366ff;"> December 9, 2022 (figure in #3 revised)</span></strong></p>
+<h5>Difference Between <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> (Existence) and <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em> (Births)</h5>
+<p style="text-align: justify;"><span>1. Many <span class="pali-term term-highlight" data-term="posts">posts</span> on the critical concept of </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> are in this series. More are scattered throughout the site, especially in the "<a href="../../pages/AB.DD.001/index.html" rel="noopener" target="_blank">Gandhabba (Manomaya Kaya)</a><span>" section. These <span class="pali-term term-highlight" data-term="posts">posts</span> discuss how a living-being goes through rebirths without having an unchanging "soul." But they maintain (ever-changing) personal characteristics or </span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span> </span></em><span>(pronounced "<span class="pali-term term-highlight" data-term="gati">gati</span>") between two adjacent lives.</span></p>
+<ul style="text-align: justify;">
+<li><span>It all started with a <span class="pali-term term-highlight" data-term="post">post</span> on this basic concept at the start of this website: "</span><a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">What Reincarnates? – Concept of a Lifestream</a>".</li>
+<li><span>While it is good to get an idea of the nature of all living beings in the 31 realms, it is unnecessary to learn those in detail. I want to provide a complete and inter-consistent picture compatible with the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s original teachings in this section.</span></li>
+<li>However, the concept of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is essential to understand <strong>how we are reborn with physically different bodies  -- multiple times -- in a single human existence (human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>.</span></em></strong>) A human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> may last thousands of years; see "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>." Unlike <em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> (born just once,) we live and die to be reborn human multiple times before switching to another realm.</li>
+</ul>
+<h5>This World Has Thirty-One Realms of Existence</h5>
+<p style="text-align: justify;">2. We will first review two significant aspects of the 31 realms. Then we will discuss the concept of a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (which applies only to human and animal realms) in more detail.</p>
+<ul style="text-align: justify;">
+<li><strong><span style="color: #3366ff;">First is that the transition from one existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) to another is ALWAYS instantaneous;</span></strong> it happens at the<em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span> </span></em>moment ("<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em>" pronounced "chuthi"); see, "<a href="../../pages/TL.GG.012/index.html" rel="bookmark">Patisandhi Citta – How the Next Life is Determined According to Gati</a>" and "<a href="../../pages/AB.DD.008/index.html" rel="bookmark">Cuti-Patisandhi – An Abhidhamma Description</a>."</li>
+<li><strong><span style="color: #3366ff;"><span>The second aspect is that in the 20 higher-lying realms, those beings (<span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>) weigh less than a billionth of an atom in modern science!</span></span></strong></li>
+<li>All beings with dense bodies are in the 11 realms of the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka. </span></em>Even there, the six <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realms have less-dense bodies compared to humans.</li>
+</ul>
+<h5>Death of Physical Body Different From the  End of an Existence</h5>
+<p style="text-align: justify;">3. The following chart shows the major features of what happens at the<em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment. That is when a transition occurs from one <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (existence) to another, e.g., from being a human to a <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em>.</p>
+<p style="text-align: justify;"><img alt="" class="alignnone wp-image-41640" height="406" src="http://localhost/beng_feb2026/wp-content/uploads/Births-in-Different-Realms.jpg" width="650"/></p>
+<p style="text-align: justify;">Click to open the pdf file: <a href="https://drive.google.com/file/d/1dPEVReLHtvZI5NqBgB3yyfZkGXZ8IG-S/view" rel="noopener" target="_blank">Births in Different Realms</a></p>
+<ul style="text-align: justify;">
+<li>Without exception, at each such <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment, a new <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> is generated by the<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy fueling a new existence. That <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> ALWAYS has a <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span>.</span></em> That is the seat of the mind (the quality of which depends on the realm).</li>
+</ul>
+<h5>Types of "Bodies" In Different Realms</h5>
+<p style="text-align: justify;">4. Thus, it is essential to realize that the critical thing that happens at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment is the generation of the unbelievably small <strong><span style="color: #3366ff;"><em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>, </span></em>which contains the blueprint for the new existence.</span></strong> At that point, the mechanism of "birth" can be roughly divided into three categories, as shown in the chart.</p>
+<ul style="text-align: justify;">
+<li><span>The <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> in the </span><em>rupi</em> and <em>arupi</em> realms (top 20 realms) are instantaneously born with very little else other than several <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>-size "material elements." Their body features are discussed below. The main feature here is that they are spontaneously born in those realms and live long until death. Then another <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment takes that being to a new <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>.</li>
+<li>The only difference in the six <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> realms (in <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em><span>) compared to the <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> is that they do have well-defined physical bodies (</span><em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) like us. However, those bodies are much less dense, and we cannot see them even if they stand right before us.</li>
+<li>A <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> is born with the body equivalent of a 16-year-old, and their food is a drink called <em>amurtha.</em><span> <span class="pali-term term-highlight" data-term="devas">Devas</span> have all five sense faculties like us and are said to have the optimum sense pleasures available in</span><em><span> <span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>. They also live that one life until death and then switch to a new existence (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment.</li>
+<li>That completes the discussion on the green box to the right.</li>
+</ul>
+<p style="text-align: justify;">5. What happens in the green box to the left is a bit more complicated. That is because each realm in the <em>apāyā</em> (lowest four realms) is somewhat different. We will discuss the animal realm together with the human realm (middlebox) below. Let us first discuss briefly the lowest three realms indicated by the green box on the left.</p>
+<ul style="text-align: justify;">
+<li>The lowest is the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell), where beings are born with full dense bodies like ours instantaneously. They undergo ceaseless cutting, burning, and various other forms of torture. They die innumerable times, only to be reborn promptly. Only when the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for that existence is exhausted (usually after millions of years) that they encounter the next <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment.</li>
+<li>Beings in the preta (<em><span><span class="pali-term term-highlight" data-term="peta">peta</span></span></em>) realm also are born instantaneously and can have subtle or dense bodies. The distinguishing feature there is suffering due to hunger.</li>
+<li>Beings in the <em><span><span class="pali-term term-highlight" data-term="asura">asura</span></span></em> realm are beings with massive, very inactive bodies. They are also born instantaneously and live those miserable lives until the next <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span> </span></em>moment.</li>
+</ul>
+<h5><em>Kammaja Kaya</em> (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>) Can Last Thousands of Years With Many Human Rebirths</h5>
+<p style="text-align: justify;"><span>6. That brings us to the middle green box, representing the human and animal realms. A little bit more complicated process takes place here. Here also, a being with a subtle (energy) body is produced at the <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span> moment, just like in the</span><em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> lōka</span></em> realms. It is called a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>A <em>gandhabbā</em> has the basic <em><span>thrija <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> of a <em><span>rupi <span class="pali-term term-highlight" data-term="brahma">Brahma</span>:</span></em> <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>, cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>, and <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span>, </span></em>which we will discuss in detail below. Besides, a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> may acquire a very fine <em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (physical body) by inhaling the aroma. Thus a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is denser than a <em><span>rupi <span class="pali-term term-highlight" data-term="brahma">Brahma</span>.</span></em> It has a "body" more like a <em><span><span class="pali-term term-highlight" data-term="deva">deva</span> </span></em>in density.</li>
+<li>A<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> could be in that state for many years until a suitable womb becomes available. More precisely, the mother's mental state at that time must match the <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em> The evolution of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> in the womb is discussed in "<a href="../../pages/DS.BB.006/index.html" rel="bookmark noopener noreferrer" target="_blank">What does Buddha Dhamma (Buddhism) say about Birth Control?</a>".  Then it is born as a new baby, grows, and eventually, that physical body also dies. If more <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy is left for the<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>, </span></em>then the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> leaves that dead body and waits for another womb. That process continues until the <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> energy is exhausted, and then it goes through the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment to receive a new<em><span> <span class="pali-term term-highlight" data-term="bhava">bhava</span>;</span></em> see the chart above.</li>
+<li>In addition to going into a womb (in some animal species), <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> may enter an egg inside a female animal. At the death of an "egg-born" animal, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> comes out of the dead body and waits for another egg. It is the same procedure as above.</li>
+</ul>
+<h5>Physical Body is Just a Temporary Shelter</h5>
+<p style="text-align: justify;">7. One of the main benefits of learning about the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is helping remove the wrong view that "I am my physical body."</p>
+<ul style="text-align: justify;">
+<li>On the contrary, a physical body is a temporary shelter that the <i><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> uses</span></i> to experience the much-coveted "sense pleasures." In particular, smelling, eating, and touching (most of all, sex) require a dense human body. Unfortunately, the human body can last only about 100 years.  Even that body is in the "decay mode"  after about 50 years. Thus, those sensory pleasures start diminishing, and eventually, that body dies.</li>
+<li>Then the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> emerges from that dead body and waits for a suitable womb. If and when it gets into a womb, the new physical body is influenced by the new parents. Thus the new body can be very different from that in the previous birth. Even during this same "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>,</span></em><span>" our bodies may look very different from birth to birth (as confirmed by <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> stories).</span></li>
+<li><strong><span style="color: #3366ff;">Of course, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> does not stay the same either. The only things that can be called "personal" to that <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> are its <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>, which also evolve.</span></strong></li>
+<li>That is a brief explanation of the above chart.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> "Bodies" Have Only a Trace of Matter</h5>
+<p style="text-align: justify;">8. As mentioned in #4 above, most lifeforms in the 31 realms have unbelievably tiny physical bodies. <strong>They are more like "energy bodies."</strong> <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> in the 16 <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> lōka</span></em> realms and the four <em>arupa lōka</em> realms weigh<span style="color: #0000ff;"> less than a billionth of an atom!</span> They may be thought of more as energy packets.</p>
+<ul style="text-align: justify;">
+<li><span>In case it was unclear from previous <span class="pali-term term-highlight" data-term="posts">posts</span>, we recall that an </span><em><span>arupa lōka <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> has a <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> consisting of just a <em><span><span class="pali-term term-highlight" data-term="vatthu">vatthu</span> dasaka</span></em><em>.</em></li>
+<li><em><span><span class="pali-term term-highlight" data-term="rupa">Rupa</span> lōka <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> have <em><span><span class="pali-term term-highlight" data-term="vatthu">vatthu</span> dasaka</span></em> (seat of the mind) and two <em><span>pasada <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> for seeing and hearing. They also have <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> dasaka</span></em> and <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> dasaka</span></em>. Thus their<em><span> kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>has five <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>-size elements. A<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> lōka <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> also has a <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (thought stream) and a <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (very fine).</li>
+<li>Thus, any <em><span><span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> cannot be seen with the most sophisticated microscope we have today.</li>
+<li>More details in "<a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Body Types in 31 Realms – Importance of Manomaya Kaya</a>". A <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span>, </span></em>when referred to the human and animal realms, is the same as <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em></li>
+</ul>
+<h5><em><span>Kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>of a Human <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">9. Let us again summarize the make up of a <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>of a human <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>. It has a <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em> (consisting of a <em><span><span class="pali-term term-highlight" data-term="vatthu">vatthu</span> dasaka</span></em>), <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> dasaka, </span></em>and<em><span>  <span class="pali-term term-highlight" data-term="kāya">kāya</span> dasaka, </span></em>and four <em><span>pasada <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> dasaka</span></em>, <em>sota dasaka</em>, <em>gandha dasaka</em>, <em>jivaha dasaka</em>).</p>
+<ul style="text-align: justify;">
+<li>This <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>consists of 7 <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> in different <em>bramana</em> (spin) and <em>paribramana</em> (rotation) modes. That is how they become<em> dasaka </em>(units of ten or decads); see "<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Realms Associated with the Earth</a>".</li>
+<li>Six of these define the sense faculties of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>:  <em><span><span class="pali-term term-highlight" data-term="vatthu">vatthu</span> dasaka </span></em>is the mind, and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span>, </span></em><em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span></span></em>, <em>sota</em>, <em>gandha</em>, and <em>jivha dasaka</em>) are the "fine senses" that correspond to the body, eyes, ears, nose, and tongue in the physical body. <strong><span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> can interact with the external world directly via them when outside the physical body.</span></strong> It can smell and inhale aroma giving rise to a very fine and subtle material body. However, that body is not solid enough to physically touch anything or be able to eat.</li>
+<li>The seventh <em>dasaka</em> is <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> dasaka</span></em>, which -- together with the<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span> dasaka</span></em> -- defines what kind of a physical body it will start building once inside a womb. For example, <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> dasaka </span></em>determines sex.</li>
+</ul>
+<p style="text-align: justify;">10. The mind becomes active as soon as the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> forms at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment. The thought stream (<em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) starts, and the mind will be mainly in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em> state. Simultaneously, an <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> forms by the<em><span> <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> generated by both the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> and <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Thus immediately after the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>has three "bodies" or <em><span>thrija <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. However, the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> is all mental, and both the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> and utuja<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> are very fine. They are more like "energy bodies."</li>
+<li>Soon after this "initial formation," the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>can build a "subtle, misty" body (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) by inhaling aroma (from fruits, trees, etc.). Still, an average human cannot see it since it is not "dense enough." However, some people (especially those with <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers) can see "sufficiently solidified" <em>gandhabbā.</em></li>
+</ul>
+<h5>The desire for a Dense Human Body</h5>
+<p style="text-align: justify;">11. But this <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>is continuously under stress because it cannot enjoy the most coveted sense pleasures of those with dense human bodies, i.e., eating and sex. It can see people enjoying these sense pleasures and is very much frustrated not being able to acquire a "real physical body." Some can stay in this state for many years if a suitable womb is unavailable.</p>
+<ul style="text-align: justify;">
+<li>Sometimes, they may spend the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> and undergo another <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment without inheriting a human body. That is why one is indebted to one's parents, no matter how bad they may be.</li>
+</ul>
+<p style="text-align: justify;">12. The story of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> gets more interesting (and complicated) after it goes through the first birth as an average human, and that human body dies. The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em><span>that comes out of that dead body is, of course, different from the original <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>. Its kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> has changed due to whatever </span><em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em> that the humans cultivated. But the<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy for the human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> does not change; if it had 1000 years' worth of <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy at the <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment, that would deplete with time.</p>
+<ul style="text-align: justify;">
+<li>Of course, there is no <em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em><span> moment when a human dies with extra <span class="pali-term term-highlight" data-term="kammic">kammic</span> energy for the human <span class="pali-term term-highlight" data-term="bhava">bhava</span>. Death is the death of the physical body. The </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> comes out of that dead body and awaits a new womb; see the above chart. Thus all three components of the<em><span> thrija <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> continue after the "death of the human."</li>
+</ul>
+<h5>New Physical Body Incorporates Characteristics of New Parents Too</h5>
+<p style="text-align: justify;">13. Let us consider some important features of this <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> that comes out of that dead body after its birth as a human.</p>
+<ul style="text-align: justify;">
+<li>The <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em><span> still has a copy of the previous physical body. However, when it starts a new physical body in the new womb, it also takes some physical features from the new parents. Thus the new physical body is a trade-off between those three influences. For example, it may keep some distinguishing features (birthmarks or gunshot wounds), as we have encountered in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts. But it will acquire new features also from the new parents (skin color, size, etc.).</span></li>
+<li>The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> coming from the dead body is a "misty, fine version" of the person at death. They often come out with imprints of the clothes they wore at death and may look just like that (in a ghostly, misty form) until entering a new womb. My teacher <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> has seen <em>gandhabbā</em> of people who died hundreds of years ago "wearing" those old costumes. Of course, they are not actual physical clothes.</li>
+</ul>
+<p style="text-align: justify;">14. Since the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> also continues, their thought streams continue. So, if someone dies in an accident, he may not realize he is dead for a while. If he died from a gunshot instantly, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> comes out and will look at the dead body, trying to figure out what happened. He may wish to go home and finds himself instantly at home. And he will try to shout to others, but they don't hear. He may try to touch them, but he cannot. It takes seven days for a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> to comprehend what happened entirely and to resign to his/her new life.</p>
+<ul>
+<li style="text-align: justify;">That is also why children can recall their past life. But just like we start forgetting things from years ago, those children forget about their previous life when they grow older. Furthermore, it is harder to remember from a past life than this.</li>
+<li style="text-align: justify;"><span>Another point is that most such <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts are from people who died while young in accidents. Those </span><em>gandhabbās</em> who come out of the bodies of people dying in old age are not likely to remember that life. That is because they might have lost their memories even during that life.</li>
+</ul>
+<p>Next in the series, “<a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Body Types in 31 Realms – Importance of Manomaya Kaya</a>“, ...........</p>
+<p> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.HH.005"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0050"
+             data-level="intermediate"
+             data-reading-time="13"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.HH.005
+Language:     pt-BR
+Generated-At: 2026-04-17T21:34:33Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>4 de junho de 2016; revisado em 3 de outubro de 2019; 17 de outubro de 2022; <span style="color: #3366ff;">9 de dezembro de 2022 (figura no n.º 3 revisada)</span></strong></p>
+<h5>Diferença entre <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> (Existência) e <em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em> (Nascimentos)</h5>
+<p style="text-align: justify;">1. Muitos ensaios sobre o conceito fundamental de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> estão nesta série. Outros estão espalhados pelo site, especialmente na seção “<a href="../../pages/AB.DD.001/index.html" rel="noopener" target="_blank">Gandhabba (Manomaya Kaya)</a>”. Esses ensaios discutem como um ser vivo passa por renascimentos sem possuir uma “alma” imutável. Mas eles mantêm características pessoais (em constante mudança) ou <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span> </span></em><span>(pronuncia-se “<span class="pali-term term-highlight" data-term="gati">Gati</span>”) entre duas vidas adjacentes.</span></p>
+<ul style="text-align: justify;">
+<li>Tudo começou com um ensaio sobre esse conceito básico no início deste site: “<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank">O que ocorre no processo de Renascimento? – Conceito de um fluxo de vida</a>”.</li>
+<li><span>Embora seja bom ter uma ideia da natureza de todos os seres vivos nos 31 reinos, não é necessário aprendê-los em detalhes. Quero fornecer, nesta seção, um quadro completo e coerente, compatível com os ensinamentos originais do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+<li>No entanto, o conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é essencial para compreender <strong>como renascemos com corpos fisicamente diferentes — várias vezes — em uma única existência humana (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano</strong>)<strong><em>.</em></strong> Um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano pode durar milhares de anos; veja “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>”. Ao contrário <em>dos Devās</em> e <em><span>dos <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> (que nascem apenas uma vez), vivemos e morremos para renascer como humanos várias vezes antes de passar para outro reino.</li>
+</ul>
+<h5>Este Mundo Tem Trinta e Um Reinos de Existência</h5>
+<p style="text-align: justify;">2. Primeiro, revisaremos dois aspectos significativos dos 31 reinos. Em seguida, discutiremos o conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (que se aplica apenas aos reinos humano e animal) com mais detalhes.</p>
+<ul style="text-align: justify;">
+<li><strong><span style="color: #3366ff;">O primeiro é que a transição de uma existência (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) para outra é SEMPRE instantânea;</span></strong> ela ocorre no momento<em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> (“<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span></span></em>” pronunciado “chuthi”); veja “<a href="../../pages/TL.GG.012/index.html" rel="bookmark">Patisandhi Citta – Como a Próxima Vida é Determinada de Acordo com Gati</a>” e “<a href="../../pages/AB.DD.008/index.html" rel="bookmark">Cuti-Paṭisandhi – Uma Descrição do Abhidhamma</a>”.</li>
+<li><strong><span style="color: #3366ff;"><span>O segundo aspecto é que, nos 20 reinos superiores, esses seres (<span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>) pesam menos de um bilionésimo de um átomo na ciência moderna!</span></span></strong></li>
+<li>Todos os seres com corpos densos estão nos 11 reinos do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka. </span></em>Mesmo ali, os seis reinos <em><span>dos <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> têm corpos menos densos em comparação com os humanos.</li>
+</ul>
+<h5>A morte do corpo físico é diferente do fim de uma existência</h5>
+<p style="text-align: justify;">3. O gráfico a seguir mostra as principais características do que ocorre no momento<em> </em>do <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>. É quando ocorre a transição de um <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> (existência) para outro, por exemplo, de ser humano para <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>.</p>
+<p style="text-align: justify;"><img alt="" class="alignnone wp-image-41640" height="406" src="http://localhost/beng_feb2026/wp-content/uploads/Births-in-Different-Realms.jpg" width="650"/></p>
+<p style="text-align: justify;">Clique para abrir o arquivo PDF: <a href="https://drive.google.com/file/d/1dPEVReLHtvZI5NqBgB3yyfZkGXZ8IG-S/view" rel="noopener" target="_blank">Nascimentos em Diferentes Reinos</a></p>
+<ul style="text-align: justify;">
+<li>Sem exceção, em cada um desses momentos <em><span>de <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>, um novo <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> é gerado pela energia<em><span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> que alimenta uma nova existência. Esse <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> SEMPRE possui um <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span>.</span></em> Essa é a sede da mente (cuja qualidade depende do reino).</li>
+</ul>
+<h5>Tipos de “Corpos” em Diferentes Reinos</h5>
+<p style="text-align: justify;">4. Assim, é essencial compreender que o que ocorre de fundamental no momento <em><span>do <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> é a geração do <strong><span style="color: #3366ff;"><em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>,</span></em></span></strong> incrivelmente pequeno<strong><span style="color: #3366ff;"><em>, </em>que contém o projeto para a nova existência.</span></strong> Nesse ponto, o mecanismo do “nascimento” pode ser dividido, de forma geral, em três categorias, conforme mostrado no quadro.</p>
+<ul style="text-align: justify;">
+<li><span>Os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> nos reinos </span><em>rupi</em> e <em>arupi</em> (os 20 reinos superiores) nascem instantaneamente com muito pouco além de vários “elementos materiais” do tamanho de <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>. Suas características corporais são discutidas abaixo. A principal característica aqui é que eles nascem espontaneamente nesses reinos e vivem por muito tempo até a morte. Então, outro momento <em><span>de <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> leva esse ser a um novo <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>.</li>
+<li>A única diferença nos seis reinos <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> (no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em><span>) em comparação com os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> é que eles possuem corpos físicos bem definidos (</span><em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) como nós. No entanto, esses corpos são muito menos densos, e não podemos vê-los mesmo que estejam bem diante de nós.</li>
+<li>Um <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em> nasce com um corpo equivalente ao de um jovem de 16 anos, e sua alimentação consiste em uma bebida chamada <em>amurtha.</em><span> Os <span class="pali-term term-highlight" data-term="devā">Devā</span> possuem os cinco sentidos, assim como nós, e diz-se que desfrutam dos prazeres sensoriais mais elevados disponíveis no</span><em><span> <span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>. Eles também vivem essa única vida até a morte e, então, passam para uma nova existência (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) no momento do <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>.</li>
+<li>Isso conclui a discussão sobre a caixa verde à direita.</li>
+</ul>
+<p style="text-align: justify;">5. O que acontece na caixa verde à esquerda é um pouco mais complicado. Isso porque cada reino nos <em>apāyā</em> (os quatro reinos mais baixos) é um pouco diferente. Discutiremos o reino animal juntamente com o reino humano (caixa do meio) abaixo. Vamos primeiro discutir brevemente os três reinos mais baixos indicados pela caixa verde à esquerda.</p>
+<ul style="text-align: justify;">
+<li>O mais baixo é o <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno), onde os seres nascem instantaneamente com corpos densos completos, como os nossos. Eles passam por cortes incessantes, queimaduras e várias outras formas de tortura. Eles morrem inúmeras vezes, apenas para renascer imediatamente. Somente quando a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para essa existência se esgota (geralmente após milhões de anos) é que eles encontram o próximo momento <em><span>de <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>.</li>
+<li>Os seres no reino preta (<em><span><span class="pali-term term-highlight" data-term="peta">Peta</span></span></em>) também nascem instantaneamente e podem ter corpos sutis ou densos. A característica distintiva ali é o sofrimento devido à fome.</li>
+<li>Os seres no reino <em><span><span class="pali-term term-highlight" data-term="asura">asura</span></span></em> são seres com corpos enormes e muito inativos. Eles também nascem instantaneamente e vivem essas vidas miseráveis até o próximo momento <em><span>de <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>.</li>
+</ul>
+<h5><em>Kammaja Kaya</em> (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>) pode durar milhares de anos com muitos Renascimentos humanos</h5>
+<p style="text-align: justify;"><span>6. Isso nos leva à caixa verde do meio, representando os reinos humano e animal. Um processo um pouco mais complicado ocorre aqui. Aqui também, um ser com um corpo sutil (energético) é produzido no momento <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span>, assim como nos reinos</span><em><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka</span></em>. Ele é chamado de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Um <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> possui os três <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> básicos <em><span>(thrija <span class="pali-term term-highlight" data-term="kāya">Kāya</span>)</span></em> de um <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupi:</span></em> <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> e <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, </span></em>que discutiremos em detalhes a seguir. Além disso, um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode adquirir um <em><span>karaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> (corpo físico) muito fino ao inalar o aroma. Assim, um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é mais denso do que um <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> rupi.</span></em> Ele possui um “corpo” mais semelhante ao de um <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span> </span></em>em termos de densidade.</li>
+<li>Um<em><span> <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode permanecer nesse estado por muitos anos até que um útero adequado se torne disponível. Mais precisamente, o estado mental da mãe naquele momento deve corresponder à <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>.</span></em> A evolução do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> no útero é discutida em “<a href="../../pages/DS.BB.006/index.html" rel="bookmark noopener noreferrer" target="_blank">O que o Buddha Dhamma (Buddhismo) diz sobre o controle de natalidade?</a>”.  Então ele nasce como um novo bebê, cresce e, eventualmente, esse corpo físico também morre. Se ainda houver energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> restante para o<em><span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>,</span></em> o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> deixa esse corpo morto e aguarda outro útero. Esse processo continua até que a energia <em><span>do <span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> se esgote, e então ele passa pelo momento <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> para receber um novo<em><span> <span class="pali-term term-highlight" data-term="bhava">Bhava</span>;</span></em> veja o gráfico acima.</li>
+<li>Além de entrar em um útero (em algumas espécies animais), <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode entrar em um ovo dentro de um animal fêmea. Com a morte de um animal “nascido de ovo”, <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> sai do corpo morto e aguarda outro ovo. É o mesmo procedimento descrito acima.</li>
+</ul>
+<h5>O corpo físico é apenas um abrigo temporário</h5>
+<p style="text-align: justify;">7. Um dos principais benefícios de aprender sobre o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é ajudar a eliminar a visão errada de que “eu sou meu corpo físico”.</p>
+<ul style="text-align: justify;">
+<li>Pelo contrário, o corpo físico é um abrigo temporário que o <i><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> usa</span></i> para experimentar os tão cobiçados “prazeres sensoriais”. Em particular, cheirar, comer e tocar (acima de tudo, o sexo) requerem um corpo humano denso. Infelizmente, o corpo humano dura apenas cerca de 100 anos.  Mesmo esse corpo entra em “decadência” após cerca de 50 anos. Assim, esses prazeres sensoriais começam a diminuir e, eventualmente, o corpo morre.</li>
+<li>Então, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> emerge daquele corpo morto e aguarda um útero adequado. Se e quando ele entra em um útero, o novo corpo físico é influenciado pelos novos pais. Assim, o novo corpo pode ser muito diferente daquele do nascimento anterior. Mesmo durante este mesmo “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano”<em>,</em> nossos corpos podem parecer muito diferentes de um nascimento para outro (conforme confirmado pelas histórias de Renascimento).</li>
+<li><strong><span style="color: #3366ff;">É claro que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> também não permanece o mesmo. As únicas coisas que podem ser chamadas de “pessoais” para esse <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> são suas <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>, que também evoluem.</span></strong></li>
+<li>Essa é uma breve explicação do gráfico acima.</li>
+</ul>
+<h5>Os “Corpos” <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> Têm Apenas um Traço de Matéria</h5>
+<p style="text-align: justify;">8. Conforme mencionado no ponto 4 acima, a maioria das formas de vida nos 31 reinos possui corpos físicos incrivelmente minúsculos. <strong>Eles se assemelham mais a “corpos de energia”.</strong> <em><span>Os <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span></span></em> nos 16 reinos <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka</span></em> e nos quatro reinos <em>arupa lōka</em> pesam<span style="color: #0000ff;"> menos de um bilionésimo de um átomo!</span> Eles podem ser considerados mais como pacotes de energia.</p>
+<ul style="text-align: justify;">
+<li>Caso não tenha ficado claro nos ensaios anteriores, lembramos que um <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> arupa lōka</span></em> possui um <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> composto apenas por um <em><span><span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> dasaka.</span></em></li>
+<li><em><span>Os <span class="pali-term term-highlight" data-term="brahmās">Brahmās</span> do <span class="pali-term term-highlight" data-term="rupa">rupa</span> lōka</span></em> possuem <em><span>um <span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> dasaka</span></em> (sede da mente) e dois <em><span>pasada <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> para ver e ouvir. Eles também possuem <em><span>um <span class="pali-term term-highlight" data-term="kāya">Kāya</span> dasaka</span></em> e <em><span>um <span class="pali-term term-highlight" data-term="bhava">Bhava</span> dasaka</span></em>. Assim, seu<em><span> kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>possui cinco elementos do tamanho de <em><span>um <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>. Um <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> do<em><span> <span class="pali-term term-highlight" data-term="rupa">rupa</span> lōka</span></em> também possui um <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> (fluxo de pensamentos) e um <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> (muito fino).</li>
+<li>Assim, nenhum <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> pode ser visto com o microscópio mais sofisticado que temos hoje.</li>
+<li>Mais detalhes em “<a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Tipos de Corpo nos 31 Reinos – Importância do Manomaya Kāya</a>”. Um <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, </span></em>quando referido aos reinos humano e animal, é o mesmo que <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>.</span></em></li>
+</ul>
+<h5><em><span>Kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>de um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> Humano</h5>
+<p style="text-align: justify;">9. Vamos resumir novamente a composição de um <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>de um <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> humano. Ele possui um <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span></span></em> (consistindo em um <em><span><span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> dasaka</span></em>), <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span> dasaka</span></em> e<em><span> <span class="pali-term term-highlight" data-term="kāya">Kāya</span> dasaka, </span></em>e quatro <em><span>pasada <span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> dasaka</span></em>, <em>Sota dasaka</em>, <em>Gandha dasaka</em>, <em>Jivaha dasaka</em>).</p>
+<ul style="text-align: justify;">
+<li>Este <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>consiste em 7 <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> em diferentes modos <em>de bramana</em> (giro) e <em>paribramana</em> (rotação). É assim que eles se tornam<em> dasaka </em>(unidades de dez ou décadas); veja “<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Reinos Associados à Terra</a>”.</li>
+<li>Seis delas definem as faculdades sensoriais do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>: <em><span><span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> dasaka </span></em>é a mente, e <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span>, <span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span></span></em>, <em>sota</em>, <em>gandha</em> e <em>jivha dasaka</em> são os “sentidos sutis” que correspondem ao corpo, olhos, ouvidos, nariz e língua no corpo físico. <strong><span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode interagir diretamente com o mundo externo por meio deles quando está fora do corpo físico.</span></strong> Ele pode cheirar e inalar aromas, dando origem a um corpo material muito fino e sutil. No entanto, esse corpo não é sólido o suficiente para tocar fisicamente em nada ou ser capaz de comer.</li>
+<li>O sétimo <em>dasaka</em> é <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span> dasaka</span></em>, que — juntamente com o<em><span> <span class="pali-term term-highlight" data-term="kāya">Kāya</span> dasaka</span></em> — define que tipo de corpo físico ele começará a construir uma vez dentro do útero. Por exemplo, <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span> dasaka </span></em>determina o sexo.</li>
+</ul>
+<p style="text-align: justify;">10. A mente se torna ativa assim que o <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> se forma no momento do <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>. O fluxo de pensamentos (<em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>) se inicia, e a mente permanecerá principalmente no estado de <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">Bhavaṅga</span></span></em>. Simultaneamente, um <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> se forma a partir do<em><span> <span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> gerado tanto pelo <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> quanto pelo <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Assim, imediatamente após o momento <em><span>do <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>, <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> </span></em>possui três “corpos” ou <em><span>thrija <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. No entanto, o <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> é inteiramente mental, e tanto o <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> quanto o utuja<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> são muito sutis. Eles se assemelham mais a “corpos energéticos”.</li>
+<li>Logo após essa “formação inicial”, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> </span></em>pode construir um corpo “sutil e nebuloso” (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>) inalando aromas (de frutas, árvores, etc.). Ainda assim, um ser humano comum não consegue vê-lo, pois não é “denso o suficiente”. No entanto, algumas pessoas (especialmente aquelas com poderes <em><span>de <span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em>) podem ver <em>gandhabbā</em> “suficientemente solidificados<em>”.</em></li>
+</ul>
+<h5>O desejo por um corpo humano denso</h5>
+<p style="text-align: justify;">11. Mas esse <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> </span></em>está continuamente sob estresse porque não pode desfrutar dos prazeres sensoriais mais cobiçados por aqueles com corpos humanos densos, ou seja, comer e sexo. Ele pode ver as pessoas desfrutando desses prazeres sensoriais e fica muito frustrado por não conseguir adquirir um “corpo físico real”. Alguns podem permanecer nesse estado por muitos anos se um útero adequado não estiver disponível.</p>
+<ul style="text-align: justify;">
+<li>Às vezes, eles podem gastar a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> destinada ao <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano e passar por outro momento <em><span>de <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> sem herdar um corpo humano. É por isso que se tem uma dívida para com os pais, por piores que eles possam ser.</li>
+</ul>
+<p style="text-align: justify;">12. A história do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> fica mais interessante (e complicada) depois que ele passa pelo primeiro nascimento como um humano comum e esse corpo humano morre. O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> </span></em><span>que sai desse corpo morto é, naturalmente, diferente do <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> original. Seu kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> mudou devido a quaisquer </span><em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> que os humanos tenham cultivado. Mas a energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para o <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano não muda; se ele tivesse energia de <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> equivalente a 1.000 anos no momento do <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em>, ela se esgotaria com o tempo.</p>
+<ul style="text-align: justify;">
+<li>É claro que não há momento <em><span>de <span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em><span> quando um humano morre com energia <span class="pali-term term-highlight" data-term="kamma">Kamma</span> extra para o <span class="pali-term term-highlight" data-term="bhava">Bhava</span> humano. A morte é a morte do corpo físico. O </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> sai daquele corpo morto e aguarda um novo útero; veja o gráfico acima. Assim, todos os três componentes do<em><span> thrija <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> continuam após a “morte do humano”.</li>
+</ul>
+<h5>O novo corpo físico incorpora características dos novos pais também</h5>
+<p style="text-align: justify;">13. Vamos considerar algumas características importantes desse <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> que sai daquele corpo morto após seu nascimento como humano.</p>
+<ul style="text-align: justify;">
+<li>O <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em><span> ainda possui uma cópia do corpo físico anterior. No entanto, quando inicia um novo corpo físico no novo útero, ele também adquire algumas características físicas dos novos pais. Assim, o novo corpo físico é um equilíbrio entre essas três influências. Por exemplo, ele pode manter algumas características distintivas (marcas de nascença ou ferimentos de <span class="pali-term term-highlight" data-term="bala">bala</span>), como encontramos em relatos de Renascimento. Mas também adquirirá novas características dos novos pais (cor da pele, tamanho, etc.).</span></li>
+<li>O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> proveniente do corpo morto é uma “versão nebulosa e sutil” da pessoa no momento da morte. Eles frequentemente surgem com marcas das roupas que usavam no momento da morte e podem parecer exatamente assim (em uma forma fantasmagórica e nebulosa) até entrarem em um novo útero. Meu professor <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> já viu <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> de pessoas que morreram há centenas de anos “vestindo” essas roupas antigas. É claro que não se trata de roupas físicas reais.</li>
+</ul>
+<p style="text-align: justify;">14. Como o <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> também continua, seus fluxos de pensamento continuam. Assim, se alguém morre em um acidente, pode não perceber que está morto por um tempo. Se morreu instantaneamente de um tiro, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> sai e olha para o cadáver, tentando entender o que aconteceu. Ele pode desejar ir para casa e se encontrar instantaneamente em casa. E ele tentará gritar para os outros, mas eles não o ouvem. Ele pode tentar tocá-los, mas não consegue. Leva sete dias para um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> compreender totalmente o que aconteceu e se resignar à sua nova vida.</p>
+<ul>
+<li style="text-align: justify;">É também por isso que as crianças conseguem se lembrar de sua vida passada. Mas, assim como começamos a esquecer coisas de anos atrás, essas crianças esquecem sua vida anterior à medida que crescem. Além disso, é mais difícil lembrar-se de uma vida passada do que desta.</li>
+<li style="text-align: justify;">Outro ponto é que a maioria desses relatos de renascimento vem de pessoas que morreram jovens em acidentes. Os <em>gandhabbās</em> que saem dos corpos de pessoas que morrem na velhice provavelmente não se lembrarão dessa vida. Isso porque eles podem ter perdido suas memórias ainda durante essa vida.</li>
+</ul>
+<p>Próximo da série, <a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">“Tipos</a> de <a href="../../pages/AB.EE.002/index.html" rel="noopener noreferrer" target="_blank">Corpo nos 31 Reinos – Importância do Manomaya Kaya</a>”, ...........</p>
+<p> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.HH.004/index.html">31 Realms Associated With The Earth</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.HH.006/index.html">Gandhabba Sensing The World With And Without A Physical Body</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.HH.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">31 Realms Associated With The Earth</span>
+        
+        <span class="pathway-title title-pt">31 Reinos Associados à Terra</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.HH.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Gandhabba Sensing The World With And Without A Physical Body</span>
+        
+        <span class="pathway-title title-pt">Gandhabba: Percebendo o mundo com e sem um corpo físico</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

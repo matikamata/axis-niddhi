@@ -1,0 +1,528 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Gandhabba Sensing The World With And Without A Physical Body | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 43 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.HH.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Gandhabba Sensing The World With And Without A Physical Body</h1>
+    
+    <h1 class="title-pt">Gandhabba: Percebendo o mundo com e sem um corpo físico</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.HH.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>12</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.HH.006"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0052"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.HH.006</td></tr><tr><td>Fin-dex</td><td>0052</td></tr><tr><td>Slug</td><td>gandhabba-sensing-the-world-with-and-without-a-physical-body</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Gandhabba Sensing The World With And Without A Physical Body</td></tr></table></div></div><p><strong>June 10, 2016; revised January 24, 2020; <span style="color: #3366ff;">July 21, 2024</span></strong></p>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> Is The "Mental Body" of a Human</h5>
+<p style="text-align: justify;">1. Physical bodies are just temporary shelters for the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">In a single "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" or "existence as a human," a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> could be born with one to hundreds of different physical bodies; see "<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a>" and "<a href="../../pages/BD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Gandhabba – Only in Human and Animal Realms</a>."</li>
+<li>Such "human births" could be anywhere on Earth. However, they usually occur in a specific region based on one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span>. Most rebirths occur within a given country, as seen from <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> accounts. See "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a>."</li>
+<li style="text-align: justify;">In between two consecutive "physical lives," the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is in the nether world or "<em>para lōka</em>"; see "<a href="../../pages/AB.DD.003/index.html" rel="noopener noreferrer" target="_blank">Hidden World of the gandhabba: Netherworld (Para Lōka)</a>."</li>
+</ul>
+<h5>Racial and Cultural Differences Are Meaningless</h5>
+<p>2. Thus, all racial and cultural divisions people fight daily are meaningless; those identities change as the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> "switches physical bodies" from life to life. In principle, a Chinese may be born as a "black person" in Africa or as a "white person" in Europe in the next life. However, adjacent lives are generally in similar geographic locations because of the condition for matching "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span>."</span></em> Still, in the following "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" -- which may come after billions of years -- one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> could change drastically.</p>
+<ul>
+<li style="text-align: justify;"><span>As more and more people start grasping the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, most of the violence in the world could be reduced. Along that line, one who may be born into poverty in this life may be born wealthy in the next life (if enough merits accrued), and vice versa. All these struggles we go through are only for an insignificantly short time in the scale of </span><em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em> (cycle of rebirths) or compared to the duration of a single human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> (which could last many hundreds of years). Thus, it is wise to "invest in the long term."</li>
+</ul>
+<h5>Sensory Faculties Are in <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">3. The physical body shields the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>'s sensory system, while the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is inside the physical body. The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has all sensory faculties. But now those "external sensory signals" must come through the eyes, ears, nose, tongue, body, and <em><span><span class="pali-term term-highlight" data-term="mana indriya">mana indriya</span></span></em> in the brain; see below.</p>
+<ul style="text-align: justify;">
+<li>When outside a physical body (and waiting for a suitable womb), the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> cannot eat or physically touch tangible things because it does not have a "dense body." But it can see and hear. Furthermore, it uses a very sophisticated sensory system (not light or sound waves) to see and hear, which we will discuss briefly below.</li>
+</ul>
+<h5>Difference Between <em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em></h5>
+<p style="text-align: justify;"><span>4. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> analyzed the world in many different ways. Here, we present another such analysis since it can provide different insights into </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><strong><span style="color: #3366ff;">We have six sense faculties (<em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>) to sense six different types of "matter" (<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>) in our world.</span></strong> There is a subtle connection between our six sense faculties and the types of "matter" in our world. We will discuss this connection.</li>
+<li>By the way,<em><span> <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em> have different meanings. For example, eyes are <em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em> when we happen to see things. Still, they BECOME <em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em> when used for pleasure, i.e., deliberately looking at mind-pleasing things to enjoy them. Only an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> always uses his/her sense faculties as<i><span> <span class="pali-term term-highlight" data-term="indriya">indriya</span></span></i>.</li>
+<li>That is another way to define and analyze our world. Everything in our world belongs to the 12 <em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em>. Sometimes, they are called six <em><span>ajjhatta <span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em> (or internal <em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span> </span></em>or sense faculties) and six<em> bāhira <em><span><span class="pali-term term-highlight" data-term="āyatana">āyatana</span></span></em></em> (things in the external world that we sense).</li>
+</ul>
+<p style="text-align: justify;">5. These are listed in <em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em><span> in #6 of the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">What are Dhamma? - A Deeper Analysis</a>,". A simpler description in, "<a href="http://localhost/beng_feb2026/living-dhamma/rupa-aggregate/what-are-rupa-dhamma-are-rupa-too/" rel="noopener noreferrer" target="_blank">What are Rūpa? – Dhammā are Rūpa too!</a>"</p>
+<ul style="text-align: justify;">
+<li>We touch the densest material (<em>phottabba</em>) out there with our bodies (<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>).</li>
+<li>Next, less dense are tasted (<em>rasa</em>) with our tongues (<em>jivha</em>).</li>
+<li>We smell odors with even less dense minute particles (<em>gandha</em>) with our noses (<em>ghāna</em>).</li>
+<li>Hearing uses vibrations propagating through the air (<em>sadda</em>) with our ears (<em>sōta</em>).</li>
+<li>We see with the aid of photons propagating through space (<em>vanna</em>) with our eyes (<em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span></span></em>).</li>
+<li>Our consciousness arises via <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span> </span></em>in the<em> </em>mind plane with our minds (<em><span><span class="pali-term term-highlight" data-term="mano">mano</span></span></em>).</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> </span></em>Are "Stored Energy"</h5>
+<p style="text-align: justify;">6. The last type of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em>) is not solid matter but "packets of energy" stored in <em><span><span class="pali-term term-highlight" data-term="viññāṇa dhātu">viññāṇa dhātu</span></span></em>; see, "<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">What are Dhamma? - A Deeper Analysis</a>."</p>
+<ul style="text-align: justify;">
+<li>Thus, <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> do not occupy space (<em>ākāsa</em>) and are in the mind plane or the <em><span><span class="pali-term term-highlight" data-term="viññāṇa dhātu">viññāṇa dhātu</span></span></em>.</li>
+<li>All the other five types of<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> occupy space and are in the material world.</li>
+<li><strong><span style="color: #3366ff;">So <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> cannot be translated as "matter."</span></strong> See "<a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Our Two Worlds: Material and Mental</a><span>." That is why sometimes it is better to use the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words.</span></li>
+</ul>
+<h5>How Does a <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> "See" While Inside a Physical Body?</h5>
+<p style="text-align: justify;"><span>7. It is through a complicated process that a <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> sees, hears, etc., while being inside a physical body (</span><em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) like ours. I have explained the basics in "<a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">Citta and Cetasika – How viññāṇa (Consciousness) Arises</a>," "<a href="../../pages/AB.DD.002/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)- Introduction</a><span>," and many other <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #3366ff;"><strong>However, it is much easier to grasp how a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> sees and hears while outside the physical body.</strong></span>  </span>Even though most of us may not have had such "out-of-body experiences," it can happen, especially during heart operations; see "<a href="../../pages/AB.DD.007/index.html" rel="noopener noreferrer" target="_blank">Manomaya Kaya and Out-of-Body Experience (OBE)</a><span>." Some people have a natural ability to do that on their own, as discussed in that <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li>Thus, let us discuss how a stand-alone <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> sees and hears while being outside a physical body; <strong>this is simpler and provides us with some insights.</strong></li>
+</ul>
+<h5>The Sensory Faculties In <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">8. The real sense faculties created with<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy at the<em><span> <span class="pali-term term-highlight" data-term="cuti">cuti</span>-<span class="pali-term term-highlight" data-term="paṭisandhi">paṭisandhi</span></span></em> moment are in the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>. </span></em>The subtle body of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has three components, as we have discussed and will again discuss below. <span style="color: #0000ff;"><span style="color: #3366ff;"><strong>The sensory faculties are all in the </strong></span><em><span style="color: #3366ff;"><strong><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></strong></span></em><span style="color: #3366ff;"><strong>(same as <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>.)</strong></span></span></p>
+<ul style="text-align: justify;">
+<li>The <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>of the <em><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em></em>has seven essential elements called <em>dasaka</em>, meaning entities with ten items (decads). They are made of <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> (composed of eight "units,") as we have discussed; see "<a href="../../pages/AB.GG.004/index.html" rel="noopener noreferrer" target="_blank">The Origin of Matter – Suddhashtaka</a>." Different types of <em>dasaka</em> are formed just by incorporating one mode of spin (<em>bramana</em>) and one mode of rotation (<em>paribramana</em>); see "<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Realms Associated with the Earth</a>".</li>
+<li>One added component gives rise to <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> (pronounced "jeevitha roopa"); this is likely to come from the spin (<em>bramana</em>) mode, but I cannot be sure. This <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> is in all these other types of <em>dasaka </em>because that is what "maintains life." Thus, different types of <em>dasaka</em> (see below) arise due to different modes of rotation (<em>paribramana</em>).</li>
+</ul>
+<p style="text-align: justify;">9. Now, we can list the different types of 7 <em>dasaka</em> (or decads) in the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>of the <em><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>. </span></em></em></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> dasaka</span></em> (mind; also called <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> +  <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> + <em><span>hadaya <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em></li>
+<li><em>Kaya dasaka</em> (body plan): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> +  <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> +<em><span> <span class="pali-term term-highlight" data-term="kāya">kāya</span> pasāda</span></em><em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em></li>
+<li><em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> dasaka</span></em> (eye <em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> +  <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> +<em><span> <span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> pasāda</span></em><em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em></li>
+<li><em>Sota dasaka</em> (ear <em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> +  <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> +<em> sōta pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em></li>
+<li><em>Ghana dasaka</em> (nose <em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> +  <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> +<em> ghāna pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em></li>
+<li><em>Jivha dasaka</em> (tongue <em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> +  <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> +<em> jivha pasāda</em><em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em></li>
+<li><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span> dasaka</span></em> (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em> +  <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> +<em> itthi</em> <strong>or</strong> <em><span>purisa <span class="pali-term term-highlight" data-term="rūpa">rūpa</span> </span></em>(determines female/male nature of the body)</li>
+</ul>
+<p style="text-align: justify;">Again, it is to be noted that <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>, <em>itthi and</em> <em><span>purisa <span class="pali-term term-highlight" data-term="rūpa">rūpa</span>, </span></em>and the five<em><span> <span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span> </span></em>are not "physical matter" but modes of energy in spin and vibration of <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>That is analogous to different electron orbitals, giving rise to various types of molecules in chemistry.</li>
+</ul>
+<h5>Components of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> or "Mental Body"</h5>
+<p style="text-align: justify;">10. A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is born with those seven <em>dasaka</em> (i.e., <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>), and <strong><span style="color: #3366ff;">immediately, the mind starts generating <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (thoughts)</span></strong>, which are <em><span><span class="pali-term term-highlight" data-term="vipāka citta">vipāka citta</span></span></em> and, for the most part, in the <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">bhavaṅga</span></span></em>. Thus, now the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has a<em><span> cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>as well. <strong><span style="color: #3366ff;">Note that <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>is all MENTAL.</span></strong></p>
+<ul style="text-align: justify;">
+<li>Almost at the same time, both the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>and the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>start producing more <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span>,</span></em> giving rise to the <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>. This <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></em>is similar to the "aura" surrounding our bodies;<span style="color: #3366ff;"><strong> in fact, that aura is part of our own (i.e., <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>'s) <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>.</strong></span> Some people claim to be able to see "body aura"; those with <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers can see them. Also, see "<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Ghost 1990 Movie – Good Depiction of Gandhabba Concept</a>."</li>
+<li>Thus, the best way to visualize a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is to imagine a human with just the "body aura" (without the physical body). Since <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> consists of only a few <em>suddhāshtaka</em>, and the <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> is just thoughts, something like an "aura body" is all a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> has.</li>
+<li>Right now, this subtle body of my <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> overlaps my physical body. My <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is a blueprint for my physical body.</li>
+<li>While waiting for a physical body, this <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> can inhale scents from fruits, vegetables, etc., and acquire a subtle physical body (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) too.  Then, it expands to the grown size of a human. But of course, it is only an "energy body" that we cannot see.</li>
+<li><span style="color: #993366;"><strong>Thus, a human has four types of "bodies": <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>,  </span><em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>, utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span>, </span></em></em>and<em><em><span> karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em></em></strong></span></li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> Outside the Physical Body</h5>
+<p style="text-align: justify;">11. <span style="color: #3366ff;"><strong>A <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>,</span></em> outside the physical body, can see over vast distances, hear over large distances, and travel instantly to remote destinations.</strong></span> <strong>Sight does not need light, and sound does not require vibrations in the air.</strong> It is equivalent to seeing and hearing with <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> powers. That is how those with <em><span><span class="pali-term term-highlight" data-term="abhiññā">abhiññā</span></span></em> skills can see through walls and hear over vast distances; they have control over their <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> or the <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>However, since it has only a fine/subtle body (like air), it cannot taste food or touch solid things. The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> needs to be inside a dense human body to touch, taste, or smell. That is why it has to take possession of a zygote in a womb and build a physical body. See "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>" and "<a href="../../pages/DS.BB.007/index.html" rel="noopener noreferrer" target="_blank">Cloning and Gandhabba</a>."</li>
+</ul>
+<p style="text-align: justify;">12. When a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> builds a physical body (inside a womb), those seven <em>dasaka</em> -- each of which is the "size of a <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">suddhāṭṭhaka</span></span></em>" -- determine all critical functions. Furthermore, <em style="font-size: 1.125rem; letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;"> has the blueprint for that physical body.</span></p>
+<ul style="text-align: justify;">
+<li>The physical body (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>)<em> </em>of the human grows according to <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> dasaka </span></em>and <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span> dasaka </span></em>but also takes into account the physical qualities of mother and father (eye and skin color, as well as size, are good examples).</li>
+<li>When inside a physical body, the external signals that come to the physical body via eyes, ears, nose, tongue, and body touches, are converted in the brain into the form that can be sensed by the five<em><span> <span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em> (they are the five <em>dasaka</em> with corresponding <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">pasāda rūpa</span></span></em>). This somewhat complicated process is discussed in "<a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">Citta and Cetasika – How viññāṇa (Consciousness) Arises</a>," "<a href="../../pages/AB.DD.002/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)- Introduction</a>," among others.</li>
+</ul>
+<h5>Why Are Some Born With Deformed Body Parts?</h5>
+<p style="text-align: justify;">13. The blueprint in the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (or the <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> also has all the details of physical organs. The physical body (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) forms according to this blueprint. Some people are born without limbs because past <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span> is</span></em> taken into account by the <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Some are born with physical eyes but without the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> pasāda</span></em> in the<em><span> kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>, so they will never be able to see; they are the ones who are born blind. Similarly, some are born deaf, and sometimes both. That is because the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> in them does not have the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> pasāda and</span></em> <em>sōta pasāda</em>.</li>
+<li>However, in some cases, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> may have the <em><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> pasāda</span></em>, but during birth, the optical nerves in the brain may be damaged. In such cases, it may be possible to have vision restored.</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> Is The Blueprint For the Physical Body</h5>
+<p style="text-align: justify;">14. It is, in fact, the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>that controls the otherwise inert physical body. There is a carbon copy of all parts of the physical body (including the nervous system) in the fine <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>What mechanism is used by the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> to<em> </em>control the inert physical body? <span style="color: #993366;"><strong>The easiest way to visualize this is to consider the following.</strong></span> If we put some iron dust on a piece of paper and move a magnet below the paper, we can see that those dust particles move along as one moves the magnet. If we move the magnet in a circle, dust particles move along that circle. In the same way, when the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> moves its <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>, the physical body follows that motion.</li>
+<li>Thus, what the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> does is similar to what the magnet does in the above analogy. But it is a bit more complicated because moving heavy body parts needs much more energy. That is where the physical nervous system comes into play. In synchronization with the mind (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span></span></em>), the brain sends signals to muscles to move. The energy<span style="color: #0000ff;"> <span style="color: #3366ff;"><strong>to move those muscles comes from the food we eat.</strong></span></span></li>
+<li>Both the "magnetic nervous system" or the "ray system" of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> and the physical nervous system based on the brain are needed to move the physical body.</li>
+</ul>
+<h5>Two Nervous Systems</h5>
+<p style="text-align: justify;">15. Thus, there are two nervous systems in the body: One is the physical nervous system known to modern science. The other is the subtle nervous system (ray system) of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>When they go "out-of-sync," our physical bodies start aching. Even in a perfectly healthy human, it is not possible to maintain a given posture for too long.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma vipāka</span></span></em> can shift the nervous system (ray system) of the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> away from that of the physical body. The body's muscles need to move to the new equilibrium position, causing discomfort or pain.<em> </em></li>
+<li><span>We will discuss more critical consequences experienced during meditation in future <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<h5>Physical Body Comes With  a Price</h5>
+<p style="text-align: justify;">16. The physical body can also impart various other forms of suffering. It can develop diseases such as cancer in parts of the body; body parts can break or be injured.</p>
+<ul>
+<li>The effects we discussed above may be the reason humans (and animals) have this complicated mechanism involving repeated births in a single <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> using a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> and multiple physical bodies.</li>
+<li style="text-align: justify;">The <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> and even <em><span><span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> do not suffer physical ailments; their subtle bodies can last longer and need not be "regenerated" via this mechanism, i.e., just one physical body for the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span>.</span></em></li>
+<li style="text-align: justify;">Another important aspect is that our physical brain slows down the generation of <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> in a given time. The "signal processing" in the brain is much slower than the high-speed generation of<em> cittā</em> in the<em><span> <span class="pali-term term-highlight" data-term="hadaya vatthu">hadaya vatthu</span>; </span></em>see<em> "<a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">Citta and Cetasika – How viññāṇa (Consciousness) Arises</a>."</em></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.HH.006"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0052"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.HH.006
+Language:     pt-BR
+Generated-At: 2026-04-18T04:01:28Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>10 de junho de 2016; revisado em 24 de janeiro de 2020; <span style="color: #3366ff;">21 de julho de 2024</span></strong></p>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é o “corpo mental” de um ser humano</h5>
+<p style="text-align: justify;">1. Os corpos físicos são apenas abrigos temporários para o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">Em um único “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano” ou “existência como humano”, um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode nascer com um a centenas de corpos físicos diferentes; veja “<a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava e Jāti – Estados de Existência e Nascimentos Neles</a>” e “<a href="../../pages/BD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Gandhabba – Apenas nos Reinos Humano e Animal</a>”.</li>
+<li>Esses “nascimentos humanos” podem ocorrer em qualquer lugar da Terra. No entanto, geralmente ocorrem em uma região específica com base na <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> de cada um. A maioria dos renascimentos ocorre dentro de um determinado país, conforme visto nos relatos de renascimento. Veja “<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências do renascimento</a>”.</li>
+<li style="text-align: justify;">Entre duas “vidas físicas” consecutivas, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> está no mundo inferior ou “<em>para lōka</em>”; veja “<a href="../../pages/AB.DD.003/index.html" rel="noopener noreferrer" target="_blank">O Mundo Oculto do Gandhabba: Mundo Inferior (Para Lōka)</a>”.</li>
+</ul>
+<h5>As diferenças raciais e culturais são insignificantes</h5>
+<p>2. Assim, todas as divisões raciais e culturais pelas quais as pessoas lutam diariamente são insignificantes; essas identidades mudam à medida que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> “troca de corpo físico” de vida em vida. Em princípio, um chinês pode nascer como uma “pessoa negra” na África ou como uma “pessoa branca” na Europa na próxima vida. No entanto, vidas adjacentes geralmente ocorrem em locais geográficos semelhantes devido à condição de correspondência da “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span>”.</span></em> Ainda assim, no “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano” seguinte — que pode ocorrer após bilhões de anos — <em>a</em> <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> de alguém poderia mudar drasticamente.</p>
+<ul>
+<li style="text-align: justify;"><span>À medida que mais e mais pessoas começam a compreender o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, grande parte da violência no mundo poderia ser reduzida. Nessa linha, alguém que possa nascer na pobreza nesta vida pode nascer rico na próxima vida (se tiver acumulado méritos suficientes), e vice-versa. Todas essas lutas pelas quais passamos duram apenas um tempo insignificante na escala do </span><em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em> (ciclo de renascimentos) ou em comparação com a duração de um único <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano (que pode durar muitas centenas de anos). Portanto, é sensato “investir a longo prazo”.</li>
+</ul>
+<h5>As faculdades sensoriais estão no <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">3. O corpo físico protege o sistema sensorial do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>, enquanto o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> está dentro do corpo físico. O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> possui todas as faculdades sensoriais. Mas agora esses “sinais sensoriais externos” devem passar pelos olhos, ouvidos, nariz, língua, corpo e <em><span><span class="pali-term term-highlight" data-term="mana indriya">Mana Indriya</span></span></em> no cérebro; veja abaixo.</p>
+<ul style="text-align: justify;">
+<li>Quando fora de um corpo físico (e à espera de um útero adequado), o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não pode comer nem tocar fisicamente em coisas tangíveis, pois não possui um “corpo denso”. Mas pode ver e ouvir. Além disso, utiliza um sistema sensorial muito sofisticado (não ondas de luz ou som) para ver e ouvir, o que discutiremos brevemente abaixo.</li>
+</ul>
+<h5>Diferença entre <em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em></h5>
+<p style="text-align: justify;"><span>4. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> analisou o mundo de muitas maneiras diferentes. Aqui, apresentamos outra dessas análises, pois ela pode fornecer diferentes insights sobre </span><em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><strong><span style="color: #3366ff;">Temos seis faculdades sensoriais (<em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em>) para perceber seis tipos diferentes de “matéria” (<em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>) em nosso mundo.</span></strong> Existe uma conexão sutil entre nossas seis faculdades sensoriais e os tipos de “matéria” em nosso mundo. Discutiremos essa conexão.</li>
+<li>A propósito,<em><span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em> têm significados diferentes. Por exemplo, os olhos são <em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> quando vemos coisas. No entanto, eles SE TORNAM <em><span><span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em> quando usados para o prazer, ou seja, ao olhar deliberadamente para coisas que agradam à mente a fim de desfrutá-las. Somente um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> usa sempre suas faculdades sensoriais como<i><span> <span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></i>.</li>
+<li>Essa é outra maneira de definir e analisar nosso mundo. Tudo em nosso mundo pertence aos 12 <em><span><span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em>. Às vezes, eles são chamados de seis <em><span>ajjhatta <span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em> (ou <em><span><span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em> internos ou faculdades sensoriais) e seis<em> bāhira <em><span><span class="pali-term term-highlight" data-term="āyatana">Āyatana</span></span></em></em> (coisas no mundo externo que percebemos).</li>
+</ul>
+<p style="text-align: justify;">5. Estes estão listados em <em><span><span class="pali-term term-highlight" data-term="pālī">Pālī</span></span></em> no nº 6 do ensaio “<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">O que são Dhamma? – Uma Análise Mais Profunda</a>”. Uma descrição mais simples em “<a href="http://localhost/beng_feb2026/living-dhamma/rupa-aggregate/what-are-rupa-dhamma-are-rupa-too/" rel="noopener noreferrer" target="_blank">O que são Rūpa? – Dhammā também são Rūpa!</a>”.</p>
+<ul style="text-align: justify;">
+<li>Tocamos o material mais denso (<em>phottabba</em>) que existe com nossos corpos (<em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>).</li>
+<li>Em seguida, os menos densos são saboreados (<em>rasa</em>) com nossas línguas (<em>jivha</em>).</li>
+<li>Sentimos odores com partículas minúsculas ainda menos densas (<em>gandha</em>) com nossos narizes (<em>ghāna</em>).</li>
+<li>A audição utiliza vibrações que se propagam pelo ar (<em>sadda</em>) com nossos ouvidos (<em>sōta</em>).</li>
+<li>Vemos com a ajuda de fótons que se propagam pelo espaço (<em>vanna</em>) com nossos olhos (<em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span></span></em>).</li>
+<li>Nossa consciência surge por meio <em><span>dos <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> </span></em>no plano<em> </em>mental com nossas mentes (<em><span><span class="pali-term term-highlight" data-term="mano">Mano</span></span></em>).</li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> </span></em>são “energia armazenada”</h5>
+<p style="text-align: justify;">6. O último tipo de <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em>) não é matéria sólida, mas “pacotes de energia” armazenados no <em><span><span class="pali-term term-highlight" data-term="viññāṇa dhātu">Viññāṇa Dhātu</span></span></em>; veja “<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">O que são Dhamma? – Uma Análise Mais Profunda</a>”.</p>
+<ul style="text-align: justify;">
+<li>Assim, <em><span>os <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em> não ocupam espaço (<em>ākāsa</em>) e estão no plano mental ou no <em><span><span class="pali-term term-highlight" data-term="viññāṇa dhātu">Viññāṇa Dhātu</span></span></em>.</li>
+<li>Todos os outros cinco tipos de<em><span> <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> ocupam espaço e estão no mundo material.</li>
+<li><strong><span style="color: #3366ff;">Portanto, <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> não pode ser traduzido como “matéria”.</span></strong> Veja “<a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Nossos Dois Mundos: Material e Mental</a><span>”. É por isso que, às vezes, é melhor usar as palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>.</span></li>
+</ul>
+<h5>Como um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> “Vê” Enquanto Está Dentro de um Corpo Físico?</h5>
+<p style="text-align: justify;"><span>7. É por meio de um processo complexo que um <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> vê, ouve etc. enquanto está dentro de um corpo físico (</span><em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) como o nosso. Expliquei os fundamentos em <a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">“Citta e Cetasika – Como surge o Viññāṇa (Consciência)</a>”, “<a href="../../pages/AB.DD.002/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya) – Introdução</a>” e em muitos outros ensaios.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #0000ff;"><span style="color: #3366ff;"><strong>No entanto, é muito mais fácil compreender como um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> vê e ouve enquanto está fora do corpo físico.</strong></span> </span>Embora a maioria de nós possa não ter tido tais “experiências extracorpóreas”, isso pode acontecer, especialmente durante cirurgias cardíacas; veja “<a href="../../pages/AB.DD.007/index.html" rel="noopener noreferrer" target="_blank">Manomaya Kaya e Experiência Extracorpórea (OBE)</a>”. Algumas pessoas têm uma habilidade natural de fazer isso por conta própria, conforme discutido naquele ensaio.</li>
+<li>Assim, vamos discutir como um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> independente vê e ouve enquanto está fora do corpo físico; <strong>isso é mais simples e nos proporciona algumas percepções.</strong></li>
+</ul>
+<h5>As Faculdades Sensoriais no <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em></h5>
+<p style="text-align: justify;">8. As faculdades sensoriais reais criadas com energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> no momento<em> </em>do <em><span><span class="pali-term term-highlight" data-term="paṭisandhi">Paṭisandhi</span></span></em> estão no <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>. </span></em>O corpo sutil do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> tem três componentes, como já discutimos e discutiremos novamente abaixo. <span style="color: #0000ff;"><span style="color: #3366ff;"><strong>As faculdades sensoriais estão todas no </strong></span><em><span style="color: #3366ff;"><strong><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span> </span></strong></span></em><span style="color: #3366ff;"><strong>(o mesmo que <em><span>manomaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>).</strong></span></span></p>
+<ul style="text-align: justify;">
+<li>O <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>do <em><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> </span></em></em>possui sete elementos essenciais chamados <em>dasaka</em>, que significa entidades com dez itens (décadas). Eles são compostos de <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> (composto de oito “unidades”), conforme discutimos; veja “<a href="../../pages/AB.GG.004/index.html" rel="noopener noreferrer" target="_blank">A Origem da Matéria – Suddhashtaka</a>”. Diferentes tipos de <em>dasaka</em> são formados apenas pela incorporação de um modo de giro (<em>bramana</em>) e um modo de rotação (<em>paribramana</em>); veja “<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Reinos Associados à Terra</a>”.</li>
+<li>Um componente adicional dá origem ao <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> (pronuncia-se “jeevitha roopa”); é provável que isso venha do modo de giro (<em>bramana</em>), mas não tenho certeza. Esse <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> está presente em todos esses outros tipos de <em>dasaka </em>porque é ele que “mantém a vida”. Assim, diferentes tipos de <em>dasaka</em> (veja abaixo) surgem devido a diferentes modos de rotação (<em>paribramana</em>).</li>
+</ul>
+<p style="text-align: justify;">9. Agora, podemos listar os diferentes tipos de 7 <em>dasaka</em> (ou décadas) no <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>do <em><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>. </span></em></em></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="vatthu">Vatthu</span> dasaka</span></em> (mente; também chamado <em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> + <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> + <em><span>hadaya <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em></li>
+<li><em>Kaya dasaka</em> (plano corporal): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> + <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> + <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em></li>
+<li><em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> dasaka</span></em> (<em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> do olho): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> + <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> + <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em></li>
+<li><em><span><span class="pali-term term-highlight" data-term="sota indriya">Sota Indriya</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="indriya">indriya</span></span></em> do ouvido): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> + <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> + <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em></li>
+<li><em><span>Ghana <span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> (do nariz): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> + <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> + <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em></li>
+<li><em>Jivha dasaka</em> (<em><span><span class="pali-term term-highlight" data-term="indriya">Indriya</span></span></em> da língua): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> + <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> +<em><span> jivha <span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em></li>
+<li><em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span> dasaka</span></em> (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>): <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em> + <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> +<em> itthi</em> <strong>ou</strong> <em><span>purisa <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> </span></em>(determina a natureza feminina/masculina do corpo)</li>
+</ul>
+<p style="text-align: justify;">Mais uma vez, deve-se observar que <em><span>jivita <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>, <em>itthi e</em> <em><span>purisa <span class="pali-term term-highlight" data-term="rūpa">Rūpa</span>, </span></em>e os cinco<em><span> <span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em> não são “matéria física”, mas modos de energia no giro e na vibração do <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Isso é análogo aos diferentes orbitais de elétrons, que dão origem a vários tipos de moléculas na química.</li>
+</ul>
+<h5>Componentes do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> ou “Corpo Mental”</h5>
+<p style="text-align: justify;">10. Um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> nasce com esses sete <em>dasaka</em> (ou seja, <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>) e, <strong><span style="color: #3366ff;">imediatamente, a mente começa a gerar <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> (pensamentos)</span></strong>, que são <em><span><span class="pali-term term-highlight" data-term="vipāka citta">Vipāka Citta</span></span></em> e, em sua maior parte, no <em><span><span class="pali-term term-highlight" data-term="bhavaṅga">Bhavaṅga</span></span></em>. Assim, agora o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> também possui um<em><span> cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. <strong><span style="color: #3366ff;">Observe que <em><span>o cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>é inteiramente MENTAL.</span></strong></p>
+<ul style="text-align: justify;">
+<li>Quase ao mesmo tempo, tanto o <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>quanto o <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>começam a produzir mais <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span>,</span></em> dando origem ao <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>. Esse <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span> </span></em>é semelhante à “aura” que envolve nossos corpos;<span style="color: #3366ff;"><strong> na verdade, essa aura faz parte do nosso próprio (ou seja, do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>) <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>.</strong></span> Algumas pessoas afirmam ser capazes de ver a “aura corporal”; aqueles com poderes <em><span>de <span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em> podem vê-la. Veja também “<a href="../../pages/DS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Filme Ghost de 1990 – Boa representação do conceito de Gandhabba</a>”.</li>
+<li>Assim, a melhor maneira de visualizar um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é imaginar um ser humano com apenas a “aura corporal” (sem o corpo físico). Como <em><span>o kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> consiste em apenas alguns <em>suddhāshtaka</em>, e o <em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> é apenas pensamentos, algo como um “corpo de aura” é tudo o que um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> possui.</li>
+<li>Neste momento, esse corpo sutil do meu <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> se sobrepõe ao meu corpo físico. Meu <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é um modelo para o meu corpo físico.</li>
+<li>Enquanto aguarda um corpo físico, este <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode inalar aromas de frutas, vegetais, etc., e adquirir também um corpo físico sutil (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>).  Em seguida, ele se expande até atingir o tamanho de um ser humano adulto. Mas, é claro, trata-se apenas de um “corpo energético” que não podemos ver.</li>
+<li><span style="color: #993366;"><strong>Assim, um ser humano possui quatro tipos de “corpos”: <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, </span><em><span>cittaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>, utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em></em> e<em><em><span> karaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span>.</span></em></em></strong></span></li>
+</ul>
+<h5><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> fora do corpo físico</h5>
+<p style="text-align: justify;">11. <span style="color: #3366ff;"><strong>Um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>,</span></em> fora do corpo físico, pode ver a grandes distâncias, ouvir a grandes distâncias e viajar instantaneamente para destinos remotos.</strong></span> <strong>A visão não precisa de luz, e o som não requer vibrações no ar.</strong> É equivalente a ver e ouvir com os poderes <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em>. É assim que aqueles com habilidades <em><span><span class="pali-term term-highlight" data-term="abhiññā">Abhiññā</span></span></em> podem ver através de paredes e ouvir a grandes distâncias; eles têm controle sobre seu <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> ou o <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>No entanto, como possui apenas um corpo sutil (como o ar), não pode saborear alimentos nem tocar em objetos sólidos. O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> precisa estar dentro de um corpo humano denso para tocar, saborear ou cheirar. É por isso que ele precisa tomar posse de um zigoto no útero e construir um corpo físico. Veja “<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Explicações Buddhistas sobre concepção, aborto e contracepção</a>” e “<a href="../../pages/DS.BB.007/index.html" rel="noopener noreferrer" target="_blank">Clonagem e Gandhabba</a>”.</li>
+</ul>
+<p style="text-align: justify;">12. Quando um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> constrói um corpo físico (dentro de um útero), esses sete <em>dasaka</em> — cada um dos quais tem o “tamanho de um <em><span><span class="pali-term term-highlight" data-term="suddhāṭṭhaka">Suddhāṭṭhaka</span></span></em>” — determinam todas as funções essenciais. Além disso, <em style="font-size: 1.125rem; letter-spacing: 0px;"><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em><span style="font-size: 1.125rem; letter-spacing: 0px;"> possui o projeto desse corpo físico.</span></p>
+<ul style="text-align: justify;">
+<li>O corpo físico (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>)<em> </em>do ser humano cresce de acordo com <em><span>o <span class="pali-term term-highlight" data-term="kāya">Kāya</span> dasaka </span></em>e <em><span>o <span class="pali-term term-highlight" data-term="bhava">Bhava</span> dasaka,</span></em> mas também leva em conta as qualidades físicas da mãe e do pai (a cor dos olhos e da pele, bem como o tamanho, são bons exemplos).</li>
+<li>Quando dentro de um corpo físico, os sinais externos que chegam ao corpo físico por meio dos olhos, ouvidos, nariz, língua e toques corporais são convertidos no cérebro na forma que pode ser percebida pelos cinco<em><span> <span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em> (eles são os cinco <em>dasaka</em> com <em>os</em> <em><span><span class="pali-term term-highlight" data-term="pasāda rūpa">Pasāda Rūpa</span></span></em> correspondentes). Esse processo um tanto complicado é discutido em <a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">“Citta e Cetasika – Como surge o Viññāṇa (Consciência)</a>”, <a href="../../pages/AB.DD.002/index.html" rel="noopener noreferrer" target="_blank">“Gandhabba (Manomaya Kaya) – Introdução</a>”, entre outros.</li>
+</ul>
+<h5>Por que algumas pessoas nascem com partes do corpo deformadas?</h5>
+<p style="text-align: justify;">13. O projeto no <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> (ou <em><span>manōmaya <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> também contém todos os detalhes dos órgãos físicos. O corpo físico (<em><span>karaja <span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>) se forma de acordo com esse projeto. Algumas pessoas nascem sem membros porque <em>o</em> <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> passado <em>é</em> levado em consideração pelo <em><span>kammaja <span class="pali-term term-highlight" data-term="kāya">kāya</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li>Algumas nascem com olhos físicos, mas sem o <em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> pasāda</span></em> no<em><span> kammaja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>, de modo que nunca serão capazes de ver; são aquelas que nascem cegas. Da mesma forma, algumas nascem surdas e, às vezes, com ambas as deficiências. Isso ocorre porque o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> nelas não possui o <em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> pasāda e</span></em> o <em>sōta pasāda</em>.</li>
+<li>No entanto, em alguns casos, o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> pode ter o <em><span><span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span> pasāda</span></em>, mas durante o nascimento, os nervos ópticos no cérebro podem ser danificados. Nesses casos, pode ser possível restaurar a visão.</li>
+</ul>
+<h5><em><span>O <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é o projeto do corpo físico</h5>
+<p style="text-align: justify;">14. Na verdade, é o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> </span></em>que controla o corpo físico, que de outra forma seria inerte. Existe uma cópia exata de todas as partes do corpo físico (incluindo o sistema nervoso) no delicado <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Que mecanismo é usado pelo <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> para<em> </em>controlar o corpo físico inerte? <span style="color: #993366;"><strong>A maneira mais fácil de visualizar isso é considerar o seguinte.</strong></span> Se colocarmos um pouco de pó de ferro sobre um pedaço de papel e movemos um ímã por baixo do papel, podemos ver que essas partículas de pó se movem à medida que se move o ímã. Se movemos o ímã em círculo, as partículas de pó se movem ao longo desse círculo. Da mesma forma, quando o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> move seu <em><span>utuja <span class="pali-term term-highlight" data-term="kāya">Kāya</span></span></em>, o corpo físico segue esse movimento.</li>
+<li>Assim, o que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> faz é semelhante ao que o ímã faz na analogia acima. Mas é um pouco mais complicado, pois mover partes pesadas do corpo requer muito mais energia. É aí que o sistema nervoso físico entra em ação. Em sincronia com a mente (<em><span><span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span></span></em>), o cérebro envia sinais aos músculos para que se movam. A energia<span style="color: #0000ff;"> <span style="color: #3366ff;"><strong>para mover esses músculos vem dos alimentos que ingerimos.</strong></span></span></li>
+<li>Tanto o “sistema nervoso magnético” ou o “sistema de raios” do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> quanto o sistema nervoso físico baseado no cérebro são necessários para mover o corpo físico.</li>
+</ul>
+<h5>Dois Sistemas Nervosos</h5>
+<p style="text-align: justify;">15. Assim, existem dois sistemas nervosos no corpo: um é o sistema nervoso físico conhecido pela ciência moderna. O outro é o sistema nervoso sutil (sistema de raios) do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>Quando eles ficam “desincronizados”, nossos corpos físicos começam a doer. Mesmo em um ser humano perfeitamente saudável, não é possível manter uma determinada postura por muito tempo.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> pode deslocar o sistema nervoso (sistema de raios) do <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> para longe do sistema do corpo físico. Os músculos do corpo precisam se mover para a nova posição de equilíbrio, causando desconforto ou dor.<em> </em></li>
+<li>Discutiremos consequências mais críticas vividas durante a meditação em ensaios futuros.</li>
+</ul>
+<h5>O Corpo Físico Tem Seu Preço</h5>
+<p style="text-align: justify;">16. O corpo físico também pode causar várias outras formas de sofrimento. Ele pode desenvolver doenças como o câncer em partes do corpo; partes do corpo podem quebrar ou sofrer lesões.</p>
+<ul>
+<li>Os efeitos que discutimos acima podem ser a razão pela qual os seres humanos (e os animais) possuem esse mecanismo complicado que envolve nascimentos repetidos em um único <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span>,</span></em> utilizando um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> e múltiplos corpos físicos.</li>
+<li style="text-align: justify;">Os <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> e até mesmo <em><span>os <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> não sofrem de doenças físicas; seus corpos sutis podem durar mais tempo e não precisam ser “regenerados” por meio desse mecanismo, ou seja, apenas um corpo físico para o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span>.</span></em></li>
+<li style="text-align: justify;">Outro aspecto importante é que nosso cérebro físico retarda a geração de <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> em um determinado momento. O “processamento de sinais” no cérebro é muito mais lento do que a geração em alta velocidade de<em> cittā</em> no<em><span> <span class="pali-term term-highlight" data-term="hadaya vatthu">Hadaya Vatthu</span>; </span></em>veja<em> “<a href="../../pages/AB.BB.005/index.html" rel="noopener noreferrer" target="_blank">Citta e Cetasika – Como surge Viññāṇa (Consciência)</a>”.</em></li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.HH.005/index.html">Gandhabba Only In Human And Animal Realms</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.HH.007/index.html">Nibbana In The Big Picture</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.HH.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Gandhabba Only In Human And Animal Realms</span>
+        
+        <span class="pathway-title title-pt">Gandhabba apenas nos reinos humano e animal</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.HH.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Nibbana In The Big Picture</span>
+        
+        <span class="pathway-title title-pt">Nibbāna no panorama geral</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

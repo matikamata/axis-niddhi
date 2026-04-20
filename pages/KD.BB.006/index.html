@@ -1,0 +1,376 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sankhara What It Really Means | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 98 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.BB.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sankhara What It Really Means</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.BB.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.BB.006"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0185"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.BB.006</td></tr><tr><td>Fin-dex</td><td>0185</td></tr><tr><td>Slug</td><td>sankhara-what-it-really-means</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Sankhara What It Really Means</td></tr></table></div></div><p style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> are our response to sensory inputs. The initial response (in the <em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> stage) happens without us being aware and determined by the unbroken <em>saṁyojana </em>and <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> at that moment; these <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> belong to the <em>saṅkappa</em> category. The conscious response occurs in the <em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> stage, where <em>vaci</em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> plays a critical role. <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em> generation plays a role in both stages.</p>
+<p style="text-align: justify;"><strong>February 25, 2017; <span style="color: #3366ff;">rewritten April 19, 2025</span></strong></p>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> </span></em>Only Refers to Immoral Actions, Speech, and Thoughts</h5>
+<p style="text-align: justify;">1. The word <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>comes from “<em>san</em>” + “<em>khāra</em>” or <strong>actions that involve “<em>san</em>“ (<em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>, or <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>)</strong>; see “<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is “San”? Meaning of Sansāra (or Samsāra)</a>“. All <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> arise in the mind.</p>
+<ul style="text-align: justify;">
+<li>Attachment to sensory experiences is the root cause of generating thoughts with <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>, or <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>. Such thoughts also lead to immoral speech and actions, which bring their results (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>) in the future.</li>
+<li>Immoral thoughts could be <em><span><span class="pali-term term-highlight" data-term="mano">mano</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>or <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. <em><span>Vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> are the more potent and cause immoral speech and actions. </li>
+<li>By the way, "<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>", in most cases, <strong>does not refer to <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> accumulation via bodily actions; here, "<em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em>" does not refer to the physical body.</strong><span> I may have stated so in old <span class="pali-term term-highlight" data-term="posts">posts</span>, but I will explain this in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify;">2. Only <em><span><span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> arises automatically <em>when</em> a new sensory input occurs at the <span style="color: #993366;"><strong>"<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage</strong></span>. That happens without us being aware of it, and will be automatic if the corresponding <em>saṁyojana</em> are intact. <strong><span style="color: #993366;">Those <em><span><span class="pali-term term-highlight" data-term="mano">mano</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> have a special name, <em>saṅkappa</em>.</span></strong> For example, as long as <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> saṁyojana</span></em> is not broken, <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa</span></em> will arise automatically. That is stated by "<em>Saṅkappa rāgo purisassa kāmo</em>" in the "<a href="https://suttacentral.net/an6.63/en/sujato" rel="noopener" target="_blank"><em><span>Nibbedhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.63)</a>."</p>
+<ul style="text-align: justify;">
+<li>The automatic arising of <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> saṅkappa </span></em>cannot be avoided if the mind has not eliminated <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> saṁyojana</span></em>. <span style="color: #3366ff;"><strong>That is not possible with sheer willpower; one must comprehend that the "distorted <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" is the root cause for <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>.</strong></span> This is why ancient <em>yogis</em> like Alara Kalama and Uddaka Ramaputta could not eliminate <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></em>.</li>
+<li><span style="color: #3366ff;"><strong>If the sensory input is strong, the mind advances to the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage</strong></span>, where <span style="color: #3366ff;"><strong>conscious thinking with<em> vaci</em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> occurs.</strong></span> Those conscious thoughts lead to new <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> accumulation via the mind, speech, and bodily actions. Ancient <em>yogis</em> like Alara Kalama were able to suppress the <em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> stage by isolating themselves in deep jungles, but until the <em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> stage is stopped from arising, <em><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span> saṁyojana</span></em> will never be broken.</li>
+<li>For details, see "<a href="../../pages/TL.II.012/index.html" rel="noopener" target="_blank">Purāna and Nava Kamma – Sequence of Kamma Generation</a> ."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> Generate only "Pure <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>"</span></em></h5>
+<p style="text-align: justify;">3. Any living being without a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> is a<em><span> <span class="pali-term term-highlight" data-term="satta">satta</span> </span></em><span>(in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>, the singular is "</span><em><span><span class="pali-term term-highlight" data-term="satto">satto</span></span></em>"). As one attains higher <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em>, one's mind will move away from the "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em> state." An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> has fully overcome the "<em><span><span class="pali-term term-highlight" data-term="satta">satta</span> </span></em>state".</p>
+<ul style="text-align: justify;">
+<li>In the “<a href="https://suttacentral.net/sn23.2/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="satta">Satta</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 23.2)</a>”: “Rādha, when there is desire (<em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span></span></em>), <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, </span></em>and a perception of high value (<em>nandī</em>) of material form (<em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>), there is clinging (<em><strong><span><span class="pali-term term-highlight" data-term="satto">satto</span></span></strong></em>), strong clinging (<em><strong>visatto</strong></em>) for form, and<span> <strong>then an ignorant living-being (<em><span><span class="pali-term term-highlight" data-term="satto">satto</span></span></em>) is spoken of.</strong></span> Similarly, when there is desire (<em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span></span></em>), <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, </span></em>and a perception of high value (<em>nandī</em>) of <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span> … <span class="pali-term term-highlight" data-term="saññā">saññā</span> … <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> … <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>, then <span><strong>an ignorant living-being (<em><span><span class="pali-term term-highlight" data-term="satto">satto</span></span></em>)</strong></span> is spoken of.” </li>
+<li><span><strong>In other words, as long as there is <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em> for <em>pañcakkhandhā </em>(i.e., as long as there is <em>pañcupādānakkhandhā</em>), there is an “ignorant living being” or a “<em><span><span class="pali-term term-highlight" data-term="satta">satta</span>.</span></em>” </strong>That living being has not comprehended the “real nature of this world” or “<em><span><span class="pali-term term-highlight" data-term="yathābhūta">yathābhūta</span> ñāṇa</span></em>.”</span></li>
+<li>See "<a href="../../pages/KD.KK.002/index.html" rel="noopener" target="_blank">Five Aggregates and Tilakkhaṇa – Introduction</a>" for details.</li>
+</ul>
+<p style="text-align: justify;">4. However, since an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> also experiences sensory inputs with <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>, etc., it may appear that an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> also generates <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. </p>
+<ul style="text-align: justify;">
+<li>An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> experiences <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (devoid of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span></span></em>, but with "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>") in the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="dhātu">dhātu</span></span></em>" stage. </li>
+<li>However, the mind of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will not advance ot the "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> <span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>" where the mind attaches to that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" and <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> turn into <em><span><span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> with <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span>, <span class="pali-term term-highlight" data-term="moha">moha</span>. </span></em>See the chart and discussion in #6 (and #4) of "<a href="../../pages/TL.II.012/index.html" rel="noopener" target="_blank">Purāna and Nava Kamma – Sequence of Kamma Generation</a>."</li>
+<li>Such <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that arises in an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> are also called "<em>suddha </em>(pure/undefiled)<em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>": "<a href="https://suttacentral.net/sn5.10/en/sujato" rel="noopener" target="_blank"><em><span>Vajirā <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 5.10)</a>." This is a short and succinct <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>. The English translation is incorrect, especially for the verse, "<em><span class="verse-line"><span class="segment" id="sn5.10:4.3"><span class="root"><span class="text"><strong><span>Suddha <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></strong> puñjoyaṁ, </span></span></span></span></em><span class="verse-line"><span class="segment" id="sn5.10:4.4"><span class="root"><span class="text"><em>nayidha <strong>sattu</strong>palabbhati,</em>" which says, "(an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>) who generates <em><span class="segment" id="sn5.10:4.3"><span>suddha <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></span></em><span class="segment" id="sn5.10:4.3">is not a <em><span><span class="pali-term term-highlight" data-term="satta">satta</span></span></em>."</span></span></span></span></span></li>
+<li>Thus, all <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>generated in an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></em>are <em>kammically</em> neutral. All others can generate <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>with <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> consequences. <span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is concerned with only those with </span><em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> consequences.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> </span></em>Arise With <em>Sañcetanā</em> - Connection to <em><span><span class="pali-term term-highlight" data-term="kammic">Kammic</span></span></em> Energy</h5>
+<p style="text-align: justify;">5. In the "<a href="https://suttacentral.net/an6.63/en/sujato" rel="noopener" target="_blank"><em><span>Nibbedhika <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 6.61)</a><span>," the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> declared, "</span><em><span class="segment" id="an6.63:33.3"><span class="root"><span class="text"><strong>Cetanāhaṁ</strong><span>, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, </span><strong>kammaṁ</strong> vadāmi. </span></span></span><span class="segment" id="an6.63:33.4"><span class="root"><span class="text">Cetayitvā kammaṁ karoti—</span></span></span></em><span class="segment" id="an6.63:33.5"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="kāyena">kāyena</span> vācāya <span class="pali-term term-highlight" data-term="manasā">manasā</span></span></em>" OR "It is <strong>defiled intention</strong> that I call <strong><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em></strong>. After making a <strong>defiled intention,</strong> one engages in <strong><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> generation <span class="translation">with the body, speech, and mind.</span></strong></span></span></span></p>
+<ul style="text-align: justify;">
+<li>In almost all cases, "<em><span class="segment" id="an6.63:33.3"><span class="root"><span class="text"><strong><span><span class="pali-term term-highlight" data-term="cetanā">cetanā</span></span></strong></span></span></span></em><span class="segment" id="an6.63:33.3"><span class="root"><span class="text">" in the<em><span> <span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> refers to "<strong><em>sañcetanā</em></strong>" or "<span class="segment" id="an6.63:33.5"><strong>defiled intention</strong></span>."</span></span></span></li>
+<li>"<em><span class="segment" id="an6.63:33.3"><span class="root"><span class="text"><strong><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span>" </span></strong></span></span></span></em><span class="segment" id="an6.63:33.3"><span class="root"><span class="text">means "to construct a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>" with <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>. Certain <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>called <em><span><span class="pali-term term-highlight" data-term="sobhana cetasika">sobhana cetasika</span></span></em> (beautiful mental factors) lead to "moral/good" <em>cittas</em>. On the other hand, <em><span>asobhana <span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em> (<strong>non-beautiful mental factors</strong>) lead to "immoral/bad" <em>cittas</em>.</span></span></span></li>
+<li>See "<a href="../../pages/TS.AA.005/index.html" rel="noopener noreferrer" target="_blank" title="Cetasika (Mental Factors)">Cetasika (Mental Factors)</a>."</li>
+<li><span style="color: #3366ff;"><strong>Which type of <span class="segment" id="an6.63:33.3"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span> </span></em>are incorporated into a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> depends on one's unbroken <em>saṁyojana </em>and <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> at that moment.</span></span></span></strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Sañcetanā </em>Arise Due to "Distorted <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>" </h5>
+<p style="text-align: justify;">6. In the "<a href="https://suttacentral.net/sn22.56/en/sujato" rel="noopener" target="_blank"><em><span>Upādānaparipavatta <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.56)</a><span>", the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> equated </span><strong><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em></strong> to <span class="segment" id="an6.63:33.3"><span class="root"><span class="text"><strong><em>sañcetanā.</em></strong></span></span></span></p>
+<ul style="text-align: justify;">
+<li><span>There, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pointed out that </span><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> refers to the six types of "defiled intentions": <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> sañcetanā, sadda sañcetanā, gandha sañcetanā, rasa sañcetanā, phoṭṭhabba sañcetanā, <span class="pali-term term-highlight" data-term="dhamma">dhamma</span> sañcetanā.</span></em></li>
+<li><strong><span style="color: #993366;">That is consistent with the fact that <em>sañcetanā</em> (defiled intentions) arise due to "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em><span>", as we have discussed in many <span class="pali-term term-highlight" data-term="posts">posts</span></span></span></strong> (see, for example, "<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/fooled-by-distorted-sanna-sanjanati-origin-of-attachment-ta%e1%b9%87ha/" rel="noopener" target="_blank">Fooled by Distorted Saññā (Sañjānāti) – Origin of Attachment (Taṇhā)</a> .")</li>
+<li>Six types of "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" arise via the six types of sensory inputs, as stated in the "<a href="https://suttacentral.net/sn25.6/pli/ms" rel="noopener" target="_blank"><em><span>Rūpasaññā <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 25.6)</a>": <em><span class="segment" id="sn25.6:1.3"><span class="root"><span class="text"><span>sadda <span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span></span></span><span class="segment" id="sn25.6:1.4"><a class="sc" href="https://suttacentral.net/sn25.6/pli/ms" id="1.4" title="SuttaCentral segment number"></a><span class="root"><span class="text"><span>gandha <span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span></span></span><span class="segment" id="sn25.6:1.5"><span class="root"><span class="text"><span>rasa <span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span></span></span><span class="segment" id="sn25.6:1.6"><span class="root"><span class="text"><span>phoṭṭhabba <span class="pali-term term-highlight" data-term="saññā">saññā</span>, </span></span></span></span></em><span class="segment" id="sn25.6:1.7"><span class="root"><span class="text"><em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span> <span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>. That is why they are all "<em><span><span class="pali-term term-highlight" data-term="aniccā">aniccā</span> vipariṇāmī aññathābhāvī,</span></em><span>" which is explained in the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="http://localhost/beng_feb2026/is-there-a-self/anicca%e1%b9%81-vipari%e1%b9%87ami-annathabhavi-a-critical-verse/" rel="noopener" target="_blank">Aniccaṁ Vipariṇāmi Aññathābhāvi – A Critical Verse</a>."</span></span></span></li>
+<li>I have systematically addressed how this "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" is built into our bodies as well as to the external objects, and that is why even <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> experience it with all six types of sensory inputs; but since they have comprehended how it arises via <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, their minds are not fooled by it: “<a href="../../pages/DS.DD.001/index.html" rel="noopener noreferrer" target="_blank">Worldview of the Buddha</a>."</li>
+<li><span>It is critical to see all these "interconnections." It is a good idea to keep notes where one can add/revise such interconnections while reading new <span class="pali-term term-highlight" data-term="posts">posts</span>. The more "interconnections" one can see, the better one understands.</span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Sañcetanā </em>Lead to Three Types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em></h5>
+<p style="text-align: justify;">7. All our defiled thoughts (<em>citt<span class="segment" id="sn25.6:1.7"><span class="root"><span class="text">ās</span></span></span></em>) <strong>initially arise</strong> based on <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> that occur automatically and <strong>without us even noticing</strong>. The mind is like an automated machine ("<a href="../../pages/BM.CC.003/index.html" rel="noopener" target="_blank">Mind Operates Like a Machine According to Nature’s Laws</a>") in this initial stage called the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage. Here, "<em>purāna</em>" means "initial" and "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" means “base-level of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> generation.” </p>
+<ul style="text-align: justify;">
+<li>Such initial <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (which arise without us even noticing) that arise in the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage have a special name of <em>saṅkappa</em>.</li>
+<li>If they are strong enough, we generate more potent <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> consciously and willingly in the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage. This is where <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> cittās</span></em> that can generate potent <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies arise. This is where we consciously generate <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> via mind, speech, and body (i.e., generate <em><span><span class="pali-term term-highlight" data-term="mano">mano</span>, vaci</span></em>, and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>).</li>
+<li>See "<a href="../../pages/TL.II.012/index.html" rel="noopener" target="_blank">Purāna and Nava Kamma – Sequence of Kamma Generation</a>" for details. </li>
+<li>All types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that arise in either the"<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" or the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage are <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>. </span></em>Here, "<em>abhi</em>" does mean "strong" but "subtle and involving <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>, or <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>. They do not arise in an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. <strong>Let us briefly look into the definition of <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>.</span></em></strong></li>
+</ul>
+<p style="text-align: justify;">8. The "<a href="https://suttacentral.net/sn22.79/en/sujato" rel="noopener" target="_blank"><em><span>Khajjanīya <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 22.79)</a>" explain <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> in another (related) way. </p>
+<ul style="text-align: justify;">
+<li>"<em><span>Kiñca, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, saṅkhāre vadetha?</span></em>" means "<em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em>, why do we call them <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>?" (<strong>as in many cases, the English translation of "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" as "choices" is wrong</strong>; as we discussed above, in the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage, we don't have the ability to "choose.")</li>
+<li>The answer is: "<em><span>Saṅkhatamabhisaṅkharontīti kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="tasmā">tasmā</span> ‘<span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>’ti vuccati</span></em><span>." Most times, <span class="pali-term term-highlight" data-term="pali">Pali</span> words are lumped together. We can see the meaning once we separate words in "</span><em>saṅkhatamabhisaṅkharontīti</em>" as "<em>saṅkhatam abhisaṅkharontī ti</em>." As we know, a "<em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></em>" is a "prepared" by the mind and belongs to the world; an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> does not make any "<em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span>.</span></em>" </li>
+<li>Here, what is being "prepared" is a "defiled <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>." Initial "defiled <em>cittās</em>" arise in the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage. They are further defiled in the "<em><span>nava <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage. <span style="color: #3366ff;"><strong>In both cases, <em>abhisaṅkhara </em>generation (with <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, <span class="pali-term term-highlight" data-term="dosa">dosa</span></span></em>, or <em><span><span class="pali-term term-highlight" data-term="moha">moha</span></span></em>) is responsible, regardless of whether it happens automatically or consciously.</strong></span></li>
+<li>Note that "<em><span class="verse-line"><span class="segment" id="sn5.10:4.3"><span class="root"><span class="text"><strong><span>suddha <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>" </span></strong></span></span></span></span></em><span class="verse-line"><span class="segment" id="sn5.10:4.3"><span class="root"><span class="text">of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> (discussed in #4 above) <strong>is NOT <em>abhisaṅkhara.</em></strong></span></span></span></span></li>
+</ul>
+<h5 style="text-align: justify;"><em>Puññābhi, Apuññābhi, </em>and <em>Āneñjā­bhi­ Saṅ­khāra</em></h5>
+<p style="text-align: justify;">9. Everything in the world is a "<em><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span>,</span></em>" "prepared" by the mind. The initial stage of that preparation happens in the mind with the generation of <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy in the <em><span><span class="pali-term term-highlight" data-term="javana">javana</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. Then such <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies lead to rebirths in "good" and "bad" realms. <strong><span style="color: #993366;">That <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy creates not only the living beings, but also the environment that sustains them.</span></strong> <span style="color: #3366ff;"><strong><span>That is the deeper aspect of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings.</span></strong> </span>See "<a href="../../pages/DS.DD.001/index.html" rel="noopener noreferrer" target="_blank">Worldview of the Buddha</a>."</p>
+<ul style="text-align: justify;">
+<li>The types of <em>abhisaṅkhara </em>can be divided into three categories based on that basis.</li>
+<li>Those <em>abhisaṅkhara </em>that lead to rebirths in the four lowest realms (<em>apāyās</em>) are <em><strong><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span></span></strong> abhisaṅkhara. </em></li>
+<li>Those that lead to rebirths in the human, <em><span><span class="pali-term term-highlight" data-term="deva">Deva</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span> <span class="pali-term term-highlight" data-term="loka">loka</span> <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms are <em><strong><span><span class="pali-term term-highlight" data-term="puñña">puñña</span></span></strong> abhisaṅkhara. </em></li>
+<li>Then there is a third category that leads to rebirths in the four <em><span>arupa <span class="pali-term term-highlight" data-term="loka">loka</span> <span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms called <em><strong>āneñja</strong> a­bhi­saṅ­khāra </em>(<em>āneñjā­bhi­saṅ­khāra</em>).</li>
+<li>See "<a href="http://localhost/beng_feb2026/kamma-are-done-with-abhisa%e1%b9%85khara-types-of-abhisa%e1%b9%85khara/" rel="noopener" target="_blank">Kamma are Done with Abhisaṅkhāra – Types of Abhisaṅkhāra</a>" for details.</li>
+</ul>
+<h5 style="text-align: justify;">Why Do “Good <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>” Also Arise With <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em>?</h5>
+<p style="text-align: justify;">10. “<a href="https://suttacentral.net/vb6/pli/ms" rel="noopener" target="_blank"><em>Paṭiccasamuppāda Vibhaṅga</em></a>” explains the step “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>” as, “<em><span>Tattha katame <span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>? Puññābhisaṅkhāro, apuññābhisaṅkhāro, āneñjābhisaṅkhāro</span></em>.”</p>
+<p style="text-align: justify;"><strong>Translated:</strong> “What is meant by ‘<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhārā">saṅkhārā</span>?’ </span></em>It means <em><span><span class="pali-term term-highlight" data-term="puññābhisaṅkhāra">Puññābhisaṅkhāra</span>, apuññābhisaṅkhāra, āneñjābhisaṅkhāra</span></em>.”</p>
+<ul style="text-align: justify;">
+<li>So, how can <em><span><span class="pali-term term-highlight" data-term="puññābhisaṅkhāra">puññābhisaṅkhāra</span> </span></em>and<em> āneñjābhisaṅkhāra </em>arise due to <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em>, if they are “good <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>?”</li>
+<li>This CRITICAL point differentiates <strong>“living a moral life” from “working towards <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.”</strong></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> Is Ignorance About the Four Noble Truths!</h5>
+<p style="text-align: justify;">11. One can be engaged in “moral deeds” and cultivate <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em> without comprehending the Four Noble Truths/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li>That is why ANY living being living today has been born in the higher realms (as well as in suffering-filled lower realms) an uncountable number of times. </li>
+<li>Some of us are living in a good realm today, but we will not be released from future rebirths in the <em>apāyās</em> until we comprehend the Four Noble Truths/<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>/<em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.</li>
+<li>That is the CRITICAL point to understand.</li>
+</ul>
+<h5 style="text-align: justify;">The Way to Purify the Mind</h5>
+<p style="text-align: justify;">12. As we can see from the above discussion, the mind is not pure UNTIL the<strong> automatic generation of <em>saṅkappa</em> (initial <em><span><span class="pali-term term-highlight" data-term="mano">mano</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) is stopped from arising in the "<em><span>purāna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" stage.</strong> <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> and “defiled <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>” would have been removed from the mind when that is accomplished.</p>
+<ul style="text-align: justify;">
+<li>That is achieved by being mindful at all times and following the three critical steps in meditation: (1) stopping bad <em>vaci</em><em><span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>,</span></em> (2) cultivating good <em>vaci</em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>, </span></em>and — <span><strong>most importantly</strong></span> — (iii) comprehending <span>the Four Noble Truths/</span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>/</span><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em><span>.</span></li>
+<li>Comprehending the <span>Four Noble Truths/</span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>/</span><em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span> </span></em><span>makes one understand the dangers in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. With the understanding, one’s goal will change from “enjoying life” to “seeking </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.”</li>
+<li>For that to happen, one must “see” the hidden dangers in sensory pleasures. <span><strong>Then the “tendency to attach" will decrease. </strong></span></li>
+<li><span> <strong>That is why <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em><span> (comprehending <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s worldview) is the first step. </span></strong>The deeper aspects are discussed in "<a href="../../pages/DS.DD.001/index.html" rel="noopener noreferrer" target="_blank">Worldview of the Buddha</a>."</span></li>
+</ul>
+<p style="text-align: justify;">13. <span><strong>The following “wise words” summarize the foundation for “cleansing the mind”:</strong></span></p>
+<ul style="text-align: justify;">
+<li>Watch your conscious thoughts (<em>vaci </em><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) – they become words.</li>
+<li>Watch your words – they become immoral deeds/actions.</li>
+<li>Watch your actions – they become habits (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span>.</span></em>)</li>
+<li>Watch your habits – they become your character (stronger <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>.</span></em>)</li>
+<li>Watch your character – it becomes your destiny via strengthening <em>saṁyojana</em>.</li>
+</ul>
+<p style="text-align: justify;">Once controlling conscious thoughts (<em>vaci </em><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em><span>) is attained to some extent, it becomes easier to comprehend the deeper aspects of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings, attain </span><span><strong><em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>, </span></em></strong>and become a <strong><em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em></strong>.</span></p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.JJ.006/index.html">Vipallasa Ditthi Sanna Citta</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.JJ.007/index.html">Vinnana What It Really Means</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.JJ.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Vipallasa Ditthi Sanna Citta</span>
+        
+        <span class="pathway-title title-pt">Vipallasa Ditthi Sanna Citta</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.JJ.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Vinnana What It Really Means</span>
+        
+        <span class="pathway-title title-pt">Vinnana What It Really Means</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

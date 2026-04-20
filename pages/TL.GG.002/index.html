@@ -1,0 +1,412 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Samsaric Habits And Asawas | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 46 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.GG.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Samsaric Habits And Asawas</h1>
+    
+    <h1 class="title-pt">Hábitos de Saṃsāra e Asawas</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.GG.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>6</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.GG.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0441"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.GG.002</td></tr><tr><td>Fin-dex</td><td>0441</td></tr><tr><td>Slug</td><td>samsaric-habits-and-asawas</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Samsaric Habits And Asawas</td></tr></table></div></div><p style="text-align: justify;"><strong>Revised December 7, 2016; <span style="color: #3366ff;">November 17, 2023</span></strong></p>
+<p style="text-align: justify;">Our character (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), behavior, and cravings (<em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em>) sometimes have causes from past lives. It is easier to break bad habits when one understands the causes and consequences.</p>
+<ul>
+<li style="text-align: justify;">In the “Moral Living” section, we discussed how to get rid of bad habits, incorporate good habits, and thus achieve goals; see “<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits, Goals, and Character (Gati)">Habits, Goals, and Character (Gati)</a>.” We saw that one’s behavioral patterns or habits can form one’s character (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>). Here we will see that some of these habits are not formed in this life but may have origins in previous lives. In a way, these are only “discernible things” we carry from life to life; see, “<a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="What Reincarnates? – Concept of a Lifestream">What Reincarnates? - Concept of a Lifestream</a>”.</li>
+</ul>
+<p style="text-align: justify;">1. <b>Habits (“<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span>” in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> and <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>)</span></b> are acquired by repeated use. Habits can be neutral (one can make a habit of brushing teeth on the top left), good (exercising at a scheduled time), bad (smoking).</p>
+<ul>
+<li style="text-align: justify;">The more one can stick to a set habit, the more that habit becomes ingrained in the mind. Riding a bike or learning to drive is a habit to learn. Initially, it is hard, but once the habit is formed, it is done almost automatically; it becomes an ingrained "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>".</li>
+</ul>
+<p style="text-align: justify;">2. Bad habits can be stopped by consciously trying to disrupt the habit. Initially, this takes a lot of effort, so assessing the consequences and convincing the mind of the dangers of a bad habit is important at the very beginning.</p>
+<ul>
+<li style="text-align: justify;">Replacing a bad habit with a good (at least less harmful) habit is also important. Instead of smoking, one could chew on a chewing gum when one gets the urge.</li>
+</ul>
+<p style="text-align: justify;">3. Habits also help mold the character (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) of a person. We see very different character qualities among people: kind and malicious, calm and agitated, thoughtful and easily excitable, etc. It is easy to see that people with “bad character qualities” are those with one or more prominent bad habits.</p>
+<ul>
+<li style="text-align: justify;">But the good news is that no one is “inherently bad.” There are causes (reasons) for a person to have bad habits/character, and once those causes are removed, one becomes a person with good habits/character.</li>
+<li style="text-align: justify;"><span>The best example is Angulimala, who lived during the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> and killed close to a thousand people. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> was able to show him the consequences of his behavior, and he was able to attain the </span><em>Arahantship</em> within a few weeks!</li>
+</ul>
+<p style="text-align: justify;">5. It is not only humans that display such personal characteristics; animals have them, too. Some dogs are vicious, while others are adorable; some are more loyal than others, etc.</p>
+<ul>
+<li style="text-align: justify;">These are habits/character (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>)  that have been molded over multiple lives, but most character (<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) CHANGES happen only during a human life because the human mind is the most capable of CHANGING habits. Animals, for example, are more like robots (not wholly).</li>
+</ul>
+<p style="text-align: justify;"><span>6. Bad habits are formed via bad judgments arising from a defiled mind covered by the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span>. And bad habits lead to actions that further strengthen those same habits.</span></p>
+<ul>
+<li style="text-align: justify;">Once a certain bad "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" becomes established, it can even lead to birth with that "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>," i.e., will be destined for "<em>dugati</em><span>" (du + <span class="pali-term term-highlight" data-term="gati">gati</span>), which is another name for the </span><em>apāyā</em> (the four lowest realms). For example, someone who behaves and acts like an animal could well be reborn an animal.</li>
+<li style="text-align: justify;">The cycle needs to be broken to stop this self-feeding process. But as long as the hindrances are there, it is likely that sooner or later, new bad habits will be formed.</li>
+</ul>
+<p style="text-align: justify;">7. Those beings that are in the <em>apāyā</em> can be put into four major categories according to the proportions of greed and hate that are in their sansaric "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" (of course, ignorance is in all of them) :</p>
+<ul style="text-align: justify;">
+<li><em>Pretas</em><span> [<span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span>], </span><em>petas</em><span> [<span class="pali-term term-highlight" data-term="pāli">Pāli</span>], i.e., hungry ghosts, have "greedy" </span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.</li>
+<li>Those in the lowest realm, <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell), have <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> dominated by hate.</li>
+<li>Animals have "<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span>" with both greed and hate. Therefore, the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> (or <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) word for animals is "</span><em>thirisan</em>" (="thiri"+"san" or three defilements). Remember that ignorance is always there.</li>
+<li>Those in the <em><span><span class="pali-term term-highlight" data-term="asura">asura</span></span></em> ("<em>a</em>"+"<em><span><span class="pali-term term-highlight" data-term="sura">sura</span></span></em>," where "<em>a</em>" means "not" and "<em><span><span class="pali-term term-highlight" data-term="sura">sura</span></span></em>" means proficient or capable; thus, <em><span><span class="pali-term term-highlight" data-term="asura">asura</span></span></em> means those who depend on others and are lazy) realm have the habit of doing as most minor as possible and exploit others' hard work.</li>
+</ul>
+<p style="text-align: justify;"><span>8. Similarly, one who cultivates good habits is destined for a "good" <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> (</span><em>sugati</em><span> = su + <span class="pali-term term-highlight" data-term="gati">gati</span>), i.e., the human realm or above. For example, one who does not indulge in sense pleasures and cultivates compassion and loving kindness could be reborn in the <span class="pali-term term-highlight" data-term="brahma">Brahma</span> realms where there is relatively less suffering and mostly </span><em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures.</p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> (realms 6-11) are compassionate and do not have hateful thoughts. But they like to enjoy sensory pleasures.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (realms 12-31) do not have either greed or hate.</li>
+<li>Humans (realms 5) COULD have all three. However, the unique aspect of the human realm is the ability to purify one's own mind, REMOVE all three, and become an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> (attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>). This is done by following the Noble Eightfold Path and removing all "bad habits" one has.</li>
+</ul>
+<p style="text-align: justify;">Of course, <em><span><span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> both have ignorance and thus could be reborn in any realm when they die (unless they had attained the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage).</p>
+<p style="text-align: justify;">9. Once ingrained in the mind, habits can be carried over repeated rebirths, from life to life. One who is easily tempted by alcohol is likely to have had that habit in their previous lives.</p>
+<ul>
+<li style="text-align: justify;">One who forms that habit in this life (even if he did not have it before) is likely to carry it over to the next life. Similarly, one who cultivates generosity in this life is likely to have that habit in the next life as well.</li>
+</ul>
+<p style="text-align: justify;">10. If those bad habits keep building up life after life, they get fermented and solidified and thus will become deeply embedded in one’s psyche. We all carry deeply ingrained <em>sansaric</em> habits associated with one or more of defilements. <b>These are called mental fermentations or deeply embedded cravings (“<em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em><span>” in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> or <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>).</span></b></p>
+<ul>
+<li style="text-align: justify;">Some <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> lay hidden (sleeping), called "<em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>." With a strong enough "trigger," an ingrained<em><span> <span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> can be brought to the surface. <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> is the hardest to get rid of.</li>
+<li style="text-align: justify;"><strong>When one continually acts in ways to strengthen one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (character), that makes the corresponding <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em> even stronger.</strong></li>
+</ul>
+<p style="text-align: justify;">11. Thus, it is clear why breaking bad habits is critically important, not only for the benefit of this life but also for future lives.</p>
+<ul>
+<li style="text-align: justify;">Further details on <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> at "<a href="../../pages/BM.BB.001/index.html" rel="noopener" target="_blank">9. Key to Ānapānasati – How to Change Habits and Character (Gati)</a>."</li>
+<li style="text-align: justify;">For details on how <em>āsavās</em> can be removed, see "<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Removal of Āsavā</a>."</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.GG.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0441"
+             data-level="intermediate"
+             data-reading-time="6"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.GG.002
+Language:     pt-BR
+Generated-At: 2026-03-10T23:18:19Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;"><strong>Revisado em 7 de dezembro de 2016; <span style="color: #3366ff;">17 de novembro de 2023</span></strong></p>
+<p style="text-align: justify;">Nosso caráter (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>), comportamento e desejos (<em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em>) às vezes têm causas em vidas passadas. É mais fácil quebrar maus hábitos quando se compreende as causas e consequências.</p>
+<ul>
+<li style="text-align: justify;">Na seção “Vida Moral”, discutimos como se livrar de maus hábitos, incorporar bons hábitos e, assim, alcançar objetivos; veja “H<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits, Goals, and Character (Gati)">ábitos, Objetivos e Caráter (Gati)</a>”. Vimos que os padrões comportamentais ou hábitos de uma pessoa podem formar seu caráter (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>). Aqui, veremos que alguns desses hábitos não são formados nesta vida, mas podem ter origem em vidas anteriores. De certa forma, essas são apenas “coisas discerníveis” que carregamos de vida em vida; veja “O <a href="../../pages/PS.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="What Reincarnates? – Concept of a Lifestream">que ocorre no processo de Renascimento? - Conceito de um fluxo de vida</a>”.</li>
+</ul>
+<p style="text-align: justify;">1. <b>Os hábitos (“<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e Cingalês)</span></b> são adquiridos pelo uso repetido. Os hábitos podem ser neutros (pode-se criar o hábito de escovar os dentes no canto superior esquerdo), bons (fazer exercícios em um horário programado) ou ruins (fumar).</p>
+<ul>
+<li style="text-align: justify;">Quanto mais se consegue manter um hábito estabelecido, mais esse hábito se torna arraigado na mente. Andar de bicicleta ou aprender a dirigir é um hábito a ser aprendido. Inicialmente, é difícil, mas uma vez que o hábito é formado, ele é feito quase automaticamente; torna-se uma “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” arraigada.</li>
+</ul>
+<p style="text-align: justify;">2. Os maus hábitos podem ser interrompidos tentando conscientemente quebrar o hábito. Inicialmente, isso exige muito esforço, por isso é importante, logo no início, avaliar as consequências e convencer a mente dos perigos de um mau hábito.</p>
+<ul>
+<li style="text-align: justify;">Substituir um mau hábito por um bom (pelo menos menos prejudicial) também é importante. Em vez de fumar, pode-se mascar chiclete quando sentir vontade.</li>
+</ul>
+<p style="text-align: justify;">3. Os hábitos também ajudam a moldar o caráter (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>) de uma pessoa. Vemos qualidades de caráter muito diferentes entre as pessoas: gentis e maliciosas, calmas e agitadas, ponderadas e facilmente excitáveis, etc. É fácil ver que pessoas com “qualidades de caráter ruins” são aquelas com um ou mais hábitos ruins proeminentes.</p>
+<ul>
+<li style="text-align: justify;">Mas a boa notícia é que ninguém é “inerentemente mau”. Existem causas (razões) para uma pessoa ter maus hábitos/caráter, e uma vez que essas causas são removidas, a pessoa se torna alguém com bons hábitos/caráter.</li>
+<li style="text-align: justify;"><span>O melhor exemplo é Angulimala, que viveu durante a época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> e matou cerca de mil pessoas. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> foi capaz de mostrar a ele as consequências de seu comportamento, e ele conseguiu atingir o </span><em><span>estado de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> em poucas semanas!</li>
+</ul>
+<p style="text-align: justify;">5. Não são apenas os seres humanos que apresentam tais características pessoais; os animais também as têm. Alguns cães são ferozes, enquanto outros são adoráveis; alguns são mais leais do que outros, etc.</p>
+<ul>
+<li style="text-align: justify;">Esses são hábitos/caráter (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>) que foram moldados ao longo de várias vidas, mas a maioria das MUDANÇAS de caráter (<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>) acontece apenas durante a vida humana, porque a mente humana é a mais capaz de MUDAR hábitos. Os animais, por exemplo, são mais como robôs (não totalmente).</li>
+</ul>
+<p style="text-align: justify;">6. Os maus hábitos são formados por meio de julgamentos errados que surgem de uma mente contaminada, coberta pelos Cinco Estorvos. E os maus hábitos levam a ações que fortalecem ainda mais esses mesmos hábitos.</p>
+<ul>
+<li style="text-align: justify;">Uma vez que um certo “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” ruim se estabelece, ele pode até levar ao nascimento com esse “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>”, ou seja, estará destinado ao “<em>dugati</em><span>” (du + <span class="pali-term term-highlight" data-term="gati">Gati</span>), que é outro nome para o </span><em>apāyā</em> (os quatro reinos mais baixos). Por exemplo, alguém que se comporta e age como um animal pode muito bem renascer como um animal.</li>
+<li style="text-align: justify;">O ciclo precisa ser quebrado para interromper esse processo de autoalimentação. Mas, enquanto os obstáculos estiverem presentes, é provável que, mais cedo ou mais tarde, novos maus hábitos sejam formados.</li>
+</ul>
+<p style="text-align: justify;">7. Os seres que estão no <em>apāyā</em> podem ser divididos em quatro categorias principais, de acordo com as proporções de ganância e ódio que existem em sua “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” samsárica (é claro que a ignorância está presente em todos eles):</p>
+<ul style="text-align: justify;">
+<li><em>Pretas</em> [Sânscrito], <em>petas</em><span> [<span class="pali-term term-highlight" data-term="pālī">Pālī</span>], ou seja, fantasmas famintos, têm </span><em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> “gananciosa”.</li>
+<li>Aqueles no reino mais baixo, <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno), têm <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> dominada pelo ódio.</li>
+<li>Os animais têm “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em><span>” com ganância e ódio. Portanto, a palavra <span class="pali-term term-highlight" data-term="pālī">Pālī</span> (ou Cingalês) para animais é “</span><em>thirisan</em>” (=”thiri”+”san” ou três impurezas). Lembre-se de que a ignorância está sempre presente.</li>
+<li>Aqueles no reino <em><span><span class="pali-term term-highlight" data-term="asura">Asura</span></span></em> (“<em>a</em>” + “<em><span><span class="pali-term term-highlight" data-term="sura">Sura</span></span></em>”, onde “<em>a</em>” significa “não” e “<em><span><span class="pali-term term-highlight" data-term="sura">Sura</span></span></em>” significa proficiente ou capaz; assim, <em><span><span class="pali-term term-highlight" data-term="asura">Asura</span></span></em> significa aqueles que dependem dos outros e são preguiçosos) têm o hábito de fazer o mínimo possível e explorar o trabalho árduo dos outros.</li>
+</ul>
+<p style="text-align: justify;">8. Da mesma forma, aquele que cultiva bons hábitos está destinado a um renascimento “bom” (<em>sugati</em><span> = su + <span class="pali-term term-highlight" data-term="gati">gati</span>), ou seja, o reino humano ou acima. Por exemplo, aquele que não se entrega aos prazeres sensoriais e cultiva a compaixão e a bondade amorosa pode renascer nos reinos de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span>, onde há relativamente menos sofrimento e principalmente prazeres </span><em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><em><span>Os <span class="pali-term term-highlight" data-term="devā">Devā</span></span></em> (reinos 6-11) são compassivos e não têm pensamentos odiosos. Mas gostam de desfrutar dos prazeres sensoriais.</li>
+<li><em><span>Os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (reinos 12-31) não têm ganância nem ódio.</li>
+<li>Os humanos (reinos 5) PODEM ter os três. No entanto, o aspecto único do reino humano é a capacidade de purificar a própria mente, REMOVER os três e se tornar um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> (alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>). Isso é feito seguindo o Nobre Caminho Óctuplo e removendo todos os “maus hábitos” que se tem.</li>
+</ul>
+<p style="text-align: justify;">É claro que <em><span>os <span class="pali-term term-highlight" data-term="devas">Devas</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> têm ignorância e, portanto, podem renascer em qualquer reino quando morrem (a menos que tenham alcançado o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>).</p>
+<p style="text-align: justify;">9. Uma vez enraizados na mente, os hábitos podem ser transportados para renascimentos repetidos, de vida em vida. Alguém que é facilmente tentado pelo álcool provavelmente teve esse hábito em suas vidas anteriores.</p>
+<ul>
+<li style="text-align: justify;">Alguém que forma esse hábito nesta vida (mesmo que não o tivesse antes) provavelmente o levará para a próxima vida. Da mesma forma, alguém que cultiva a generosidade nesta vida provavelmente terá esse hábito na próxima vida também.</li>
+</ul>
+<p style="text-align: justify;">10. Se esses maus hábitos continuam se acumulando vida após vida, eles fermentam e se solidificam, tornando-se profundamente enraizados na psique da pessoa. Todos nós carregamos hábitos <em>samsáricos</em> profundamente arraigados associados a uma ou mais impurezas. <b>Eles são chamados de fermentações mentais ou desejos profundamente enraizados (“<em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> ou Cingalês).</span></b></p>
+<ul>
+<li style="text-align: justify;">Alguns <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> permanecem ocultos (adormecidos), chamados de “<em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>”. Com um “gatilho” forte o suficiente, um <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> arraigado pode vir à tona. <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> é o mais difícil de se livrar.</li>
+<li style="text-align: justify;"><strong>Quando alguém age continuamente de forma a fortalecer sua <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> (caráter), isso torna o <em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em> e o <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em> correspondentes ainda mais fortes.</strong></li>
+</ul>
+<p style="text-align: justify;">11. Assim, fica claro por que quebrar maus hábitos é extremamente importante, não apenas para o benefício desta vida, mas também para vidas futuras.</p>
+<ul>
+<li style="text-align: justify;">Mais detalhes sobre <em><span><span class="pali-term term-highlight" data-term="a gati">a Gati</span></span></em> em “<a href="../../pages/BM.BB.001/index.html" rel="noopener" target="_blank">9. Chave para Ānapānasati – Como mudar hábitos e caráter (Gati)</a>”.</li>
+<li style="text-align: justify;">Para detalhes sobre como <em>os āsavās</em> podem ser removidos, consulte “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">O Caminho para Nibbāna – Remoção de Āsavā</a>”.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.GG.001/index.html">Working Towards Good Rebirths</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.GG.003/index.html">Complexity Of Life</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.GG.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Working Towards Good Rebirths</span>
+        
+        <span class="pathway-title title-pt">Trabalhando em prol de bons renascimentos</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.GG.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Complexity Of Life</span>
+        
+        <span class="pathway-title title-pt">Complexidade da vida</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Citta Vedana Sanna Sankhara Vinnana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Living Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 5 / 52</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">LD.BB.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Citta Vedana Sanna Sankhara Vinnana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>LD.BB.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Living Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="LD.BB.003"
+             data-section="Living Dhamma"
+             data-section-code="LD"
+             data-findex="0200"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>LD.BB.003</td></tr><tr><td>Fin-dex</td><td>0200</td></tr><tr><td>Slug</td><td>citta-vedana-sanna-sankhara-vinnana</td></tr><tr><td>Section</td><td>LD</td></tr><tr><td>Title EN</td><td>Citta Vedana Sanna Sankhara Vinnana</td></tr></table></div></div><p><strong>December 25, 2018; revised August 23, 2019; April 9, 2020;<span style="color: #0000ff;"> July 8, 2022</span></strong></p>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;">Introduction</span></h5>
+<p style="text-align: justify;"><span>1. The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words </span><em><span><span class="pali-term term-highlight" data-term="citta">citta</span>, vēdanā, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and<em><span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> are mistranslated in most current literature as thought, feeling, perception,  mental formations, and consciousness, respectively.</p>
+<ul style="text-align: justify;">
+<li>The last four (<em><span>vēdanā, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em><span>) are critical concepts in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. They represent the four mental aggregates.</span></li>
+</ul>
+<p style="text-align: justify;">2. The word <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> </span></em>is generally translated as "mental formations." It does not convey the meaning at all.  <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>translated as just "consciousness," and that is simply wrong.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><em>Sankhāra</em> is associated with "emotions," so we need to make the connection to emotions. In particular, we get attached to some things and are repulsed by others. In both cases, we generate a wide variety of emotions that lead to three types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> in our minds.</li>
+<li>They are <em><span><span class="pali-term term-highlight" data-term="puññābhisaṅkhāra">puññābhisaṅkhāra</span> </span></em>(<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>,</span></em>) <em>apuññābhisaṅkhāra </em>(<em><span><span class="pali-term term-highlight" data-term="apuñña">apuñña</span> <span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span>,</span></em>) and <em>āneñjā­bhisaṅ­khāra </em>(<em>āneñja a­bhisaṅ­khāra.</em>) In simple terms, that means moral thoughts/deeds, immoral thoughts/deeds, and the cultivation of <em><span><span class="pali-term term-highlight" data-term="arūpāvacara">arūpāvacara</span> <span class="pali-term term-highlight" data-term="jhāna">jhāna</span>. </span></em>For details, see "<a href="../../pages/DS.FF.004/index.html" rel="noopener noreferrer" target="_blank">Kamma, Saṅkhāra, and Abhisaṅkhāra – What Is “Intention”?</a>"</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span> to English Translations – Conventional Meanings</span></span></h5>
+<p style="text-align: justify;"><span>3. The following are the descriptions or definitions I found online which seem to be closest to the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words.</span></p>
+<p style="text-align: justify;"><strong>Thought </strong>(for <strong><em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em></strong>): "an idea or opinion produced by thinking or occurring suddenly in mind."</p>
+<p style="text-align: justify;"><strong>Feelings </strong>(for <strong><em>vēdanā</em></strong>): Normally used together with emotion. For example, a "feeling of joy."</p>
+<p style="text-align: justify;"><strong>Perception </strong>(for <strong><em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em></strong>): recognition. For example, a flower is a "rose," and its color is "red."</p>
+<p style="text-align: justify;"><strong>Emotions</strong> (for <strong><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em></strong>): Some define emotions as: "joy-sadness, anger-compassion, greed-benevolence, etc., etc.".</p>
+<p style="text-align: justify;"><strong>Consciousness</strong> (for <strong><em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em></strong>): "the state of being awake and aware of one's surroundings." However, this will be true only for "<em><strong><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> </span></strong><strong><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>,"</span></strong></em><strong> </strong>as discussed in #14 below.</p>
+<p style="text-align: justify;">4. That is all modern psychology says, and there are many overlaps there too. There are no universally accepted definitions for those words yet.</p>
+<ul style="text-align: justify;">
+<li><span style="color: #3366ff;"><strong><span>On the other hand, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has provided detailed analyses of the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words </span><em><span><span class="pali-term term-highlight" data-term="citta">citta</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, vēdanā, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>,<em><span> and <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>.</strong></span></li>
+<li style="text-align: justify;"><em>Sankhāra </em>arises due to emotions. These emotions are called <em>cētasika,</em> typically translated as "mental factors."</li>
+<li>Therefore, <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, vēdanā, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>,<em><span> and <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> SEEM TO correspond to the English words thought, perception, feeling, actions based on emotions, and consciousness. But that can lead to many misinterpretations, as we will discuss below.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><span>We Need to Use <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Words Like C</span><em style="text-align: justify;"><span>itta, <span class="pali-term term-highlight" data-term="saññā">Saññā</span>, Vēdanā, <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em><span style="text-align: justify;">,</span><em style="text-align: justify;"><span> <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em></span></h5>
+<p style="text-align: justify;">5. <span style="color: #993366;"><strong><span>That is why it is almost impossible to translate those <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words into a single English word.</span></strong></span><span> The <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language uses the same words; there are no separate <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> words for most of the terms in the </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em>including <em><span>vēdanā, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and<em><span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>.</span></em></p>
+<ul style="text-align: justify;">
+<li><strong><span>It is much better to learn the meaning of each <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word and use that word itself.</span></strong></li>
+<li>I will briefly discuss some key features to get a basic idea. Other aspects discussed in: "<a href="../../pages/SI.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pāli Dictionaries – Are They Reliable?</a>".</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> and Thought – Not Even Close</span></h5>
+<p style="text-align: justify;">6. <em>Cittās</em> arise as a series; a single<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> never arises by itself.</p>
+<ul style="text-align: justify;">
+<li>In a sensing event that involves the five physical senses (eyes, ears, nose, tongue, body), a c<em>itta vīthi</em> (or a series of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) arises with 17 <em>cittā. </em>Note that <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is pronounced "chiththa" and <em>cittā</em> is the plural of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>.</span></em> See "<a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1</a>."</li>
+<li>In the case of <em>cittā </em>arising directly in mind, the basic <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> has 12-14 <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. But in some exceptional cases, there is no limit to the number<em><span> of <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> that can occur (like in <em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span> samāpatti</span></em>).</li>
+<li>There can be billions of<em><span> <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> running within "the blink of an eye," according to <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>. <strong><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that there is nothing in this universe faster than a </span><em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</strong></li>
+<li><span>After reading this <span class="pali-term term-highlight" data-term="post">post</span>, you may want to read the previous <span class="pali-term term-highlight" data-term="post">post</span>, “</span><a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">Amazingly Fast Time Evolution of a Thought (Citta)</a>.” That could make things more transparent.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em></span></h5>
+<p style="text-align: justify;">7. So you can see that what we call a "thought" is NOT a single<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>. <span style="color: #3366ff;"><strong>What we experience as a "thought" is the overall effect of a large number of <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em>.</strong></span></p>
+<ul style="text-align: justify;">
+<li>Each <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> arises with at least seven <em>cētasika</em> (mental factors). <em>Vēdanā</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> are two of those psychological factors. Once a "good <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>" occurs, many of those arise without changing to "bad <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>" in the middle. That is why a "given sensory experience" is just called a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, even though it may have billions of individual<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+<li>There are 52 mental factors (<em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>) that could arise in a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> ("thought"). Thus, a "thought" can be quite complex.</li>
+<li>If it is a "moral <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>,"</span></em> then it would have some combination of "good mental factors" such as compassion or "fear of wrongdoing" (<em><span><span class="pali-term term-highlight" data-term="hiri">hiri</span></span></em>). There are 25 of them, and only several arise at a given time.</li>
+<li>If it is an "immoral <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>,"</span></em> it would have "bad mental factors" such as greed and hate. There are 14 of them.</li>
+<li>Those good and bad mental factors (<em>cētasika</em>) never arise together. See "<a href="../../pages/TS.AA.005/index.html" rel="noopener" target="_blank">Cetasika (Mental Factors)</a>."</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><em>Vēdanā</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> – In Every <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em></span></h5>
+<p style="text-align: justify;">8. <em>Vēdanā</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> are two specialized types of <em>cētasika</em>. That is why they are treated separately from other <em>cētasika</em>.</p>
+<ul style="text-align: justify;">
+<li>Both of those arise with every <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+<li><em>Vēdanā </em>basically "feels" that a sense event is happening. There is a <strong><em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span> vēdanā</span></em>, <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> vēdanā</span></em>, or a neutral <em>vēdanā</em></strong> (more accurately, <strong><em>adukkhamasukha</em></strong> <strong><em>vēdanā </em></strong>or "without <em>dukha</em> or <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>") associated with EACH sensory event. Therefore, joy is not a<em> vēdanā</em>; see #2 above. There are only three types of <em>vēdanā</em>.</li>
+<li><span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> is responsible for recognizing the sense object based on one's prior experience with that object.</strong> </span>So, one perceives a rose and that it has the color red, for example.</li>
+<li>Those are, of course, fundamental descriptions.</li>
+</ul>
+<p style="text-align: justify;">9. There are 52 <em>cētasika,</em> including <em>vēdanā</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>. Out of the other 50 <em>cētasika, </em>some are included in “<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>“; which particular <em>cētasika</em> will be involved will depend on the specific situation. They define whether a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> is good or bad.</p>
+<ul style="text-align: justify;">
+<li>As we mentioned before, <em>vēdanā</em> and <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em> arise with all <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, good and bad.</li>
+<li>When one does an immoral deed, some of those "bad <em>cētasika</em>" (called <em>asōbhana cētasika</em>) arise with <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+<li>When one does a moral deed, some "good<em> cētasika</em>" (called <em>sōbhana cētasika</em>) arise.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><em>Sankhāra</em> Are Our Actions Done With Emotions</span></h5>
+<p style="text-align: justify;">10. <em>Cētasika</em> represents the English word "emotions."</p>
+<ul style="text-align: justify;">
+<li>When we experience those emotions, they are called "<em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em>" <span style="color: #3366ff;"><strong>They arise automatically, according to our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.</strong></span></li>
+<li>When we start thinking consciously about them, they become <i><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>; we also speak with <i><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>. Here, <em>vacī</em> pronounced "vachee."</li>
+<li>If we do bodily actions with such emotions, those are done with <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</li>
+<li>So, we can see that "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" are more than emotions. <strong><em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> is what we think and do with such sentiments. </strong></li>
+<li><strong><span style="color: #993366;">It is essential to realize that we have control over <i><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, </span>but <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> arise automatically based on our<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.</strong></li>
+</ul>
+<p style="text-align: justify;">11. To summarize what we have discussed so far:</p>
+<ul style="text-align: justify;">
+<li>What we experience (and call a thought) is the overall effect of millions of <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span>.</span></em></li>
+<li>Current scientific research says a human can only register sensory events lasting at least a hundredth of a second (about ten milliseconds). During that time, millions of <em><span><span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span></span></em> would have arisen.</li>
+<li>The sense object is recognized with the <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> cētasika</span></em>, and accordingly, a <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span>,</span></em> or neutral <em>vēdanā</em> arises.</li>
+<li>Based on that recognition (but simultaneously), a set of good or bad <em>cētasika</em> arise.</li>
+<li>Based on those good or bad sets of <em>cētasika</em>, the mind generates good and bad <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> with which we think, speak, and do things.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;">Emotions Arise Based on One’s <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> and the Sensory Input</span></h5>
+<p style="text-align: justify;">12. Thus, <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> arises automatically based on our <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>) and the particular sensory input. If one likes a specific sensory input (based on one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>), then one will start thinking about it.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">So, we consciously think and speak with <i><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> based on those emotions (<em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) that initially arise. If our emotions/feelings get high enough, we may take bodily actions based on <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>.</li>
+<li>All three types of <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> arise in mind.</li>
+</ul>
+<p style="text-align: justify;">13. I need to emphasize the fact that occurring of a set of good or bad <em>cētasika</em> DOES NOT happen arbitrarily. Nothing happens without a cause.</p>
+<ul style="text-align: justify;">
+<li>Two key factors determine what kind of<em> cētasika</em> arises for a given sense event:<span style="color: #0000ff;"><strong> (1) One's<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em><span> (pronounced "<span class="pali-term term-highlight" data-term="gathi">gathi</span>"), roughly meaning character/habits, and (2) the particular sensory object. </span></strong></span></li>
+<li><span style="color: #993366;"><strong><span><span class="pali-term term-highlight" data-term="pali">Pali</span> words are written differently than ordinary English words.</span></strong> </span>See <a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1</a>" and <a href="../../pages/HB.AA.009/index.html" rel="noopener noreferrer" target="_blank">“Tipiṭaka English” Convention Adopted by Early European Scholars – Part 2</a>."</li>
+<li><em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em><span> explained in many <span class="pali-term term-highlight" data-term="posts">posts</span>:  "</span><a href="../../pages/TL.BB.003/index.html" rel="noopener noreferrer" target="_blank">The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)</a>," "<a href="../../pages/DS.KK.007/index.html" rel="noopener noreferrer" target="_blank">How Habits are Formed and Broken – A Scientific View</a>," "<a href="../../pages/KD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Gati to Bhava to Jāti – Ours to Control</a>," are just a few.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> Is the Overall Experience – Plus Future Expectations</span></h5>
+<p style="text-align: justify;">14. Finally, <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> </span></em>represents one's overall sensory experience (including <em><span>vēdanā, <span class="pali-term term-highlight" data-term="saññā">saññā</span>, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>). That is only one type of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>: <span style="color: #0000ff;"><strong>"<span style="color: #3366ff;"><em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>."</span></em></span></strong></span></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> has something in addition to those. One may form a future expectation based on that sensory input. That type is <span style="color: #ff0000;"><strong>"<span style="color: #993366;"><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>."</span></em></span></strong></span></li>
+<li><strong><strong>If one gets attracted to a given sensory experience, one may keep thinking about it and initiate an expectation to enjoy it further. <span style="color: #993366;">"<span style="font-size: 12pt;"><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>" </span></em></span></span></strong></strong>is that expectation. <strong>That creates a <em><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></em> that can bring <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> in the future.</strong></li>
+<li>More information at: "<a href="../../pages/LD.BB.004/index.html" rel="noopener" target="_blank">Viññāṇa – Consciousness Together With Future Expectations</a>" and "<a href="../../pages/KD.JJ.007/index.html" rel="noopener" target="_blank">Viññāṇa – What It Really Means.</a>"</li>
+<li style="text-align: justify;">Thus, it is wrong to translate <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> as just consciousness (or awareness). Specifically, <span style="color: #ff0000;"><span style="color: #993366;"><strong>"<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>" </span></em></strong></span><span style="color: #000000;">is much more than just consciousness.</span></span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;">Expectations Are Only in <em><span>Manō <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> </span></h5>
+<p style="text-align: justify;">15. <em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> can be categorized in another way into six types.</p>
+<ul style="text-align: justify;">
+<li>We become aware of something in our physical world via <em><span><span class="pali-term term-highlight" data-term="cakkhu viññāṇa">cakkhu viññāṇa</span></span></em> (seeing), <em><span>sōta <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (hearing), <em><span><span class="pali-term term-highlight" data-term="ghāna viññāṇa">ghāna viññāṇa</span></span></em> (smelling), <em><span><span class="pali-term term-highlight" data-term="jivhā viññāṇa">jivhā viññāṇa</span></span></em> (tasting), and <em><span><span class="pali-term term-highlight" data-term="kāya viññāṇa">kāya viññāṇa</span></span></em> (touching).</li>
+<li>Then <em><span>manō <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> takes over and will decide to act on it -- and if needed -- to make "future expectations" or "plans." (three <em><span>manōdvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> </span></em>follow each <em><span>pancadvāra <span class="pali-term term-highlight" data-term="citta vīthi">citta vīthi</span> per</span></em> <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>.</span></em>)</li>
+<li><strong class="text-strong">Therefore, it is the <em><span>manō <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> that builds expectations for the future, i.e., <span style="color: #993366;"><strong>"<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>" </span></em></strong></span></strong><span style="color: #ff0000;"><span style="color: #000000;">are ALWAYS <strong class="text-strong"><em><span>manō <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>.</span></em></strong></span></span></li>
+<li>To emphasize: <em><span><span class="pali-term term-highlight" data-term="kamma bīja">Kamma bīja</span></span></em> that can bring future<em><span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> are generated only in <strong><em>manō</em></strong><strong class="text-strong"><em><span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>. </strong>The other five types of <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> only bring in the external sensory input, i.e., they are <span style="color: #3366ff;"><strong>"<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>."</span></em></strong></span></li>
+</ul>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;"><em><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> Feed on Each Other</span></h5>
+<p style="text-align: justify;">16. For example, <em><span><span class="pali-term term-highlight" data-term="cakkhu viññāṇa">cakkhu viññāṇa</span> </span></em>is like a camera taking a picture (but is still contaminated by <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.) It is<em><span> manō <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (in the <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> </span></em>mode</span>) that takes actions (generates <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) based on that sensory input.</p>
+<ul style="text-align: justify;">
+<li>If the sensory input is attractive, it will try to get "more of such sensory inputs," i.e., it will initiate a <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> </span></em></span><em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> to "achieve that expectation" via "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>."</span></em> For example, let us assume that person X sees a new car and "falls in love with it" and makes a <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> (an expectation, which is mental energy) for it.</li>
+<li>That <span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> </span></em></span><em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> to "buy that car Y" will be in the subconscious of X. It will be in his subconscious until either he buys the car or it turns out that there is absolutely no way for him to afford it.</li>
+</ul>
+<p style="text-align: justify;">17. Days later, he is driving to work and sees a similar car on the road (that is, of course, a <em><span><span class="pali-term term-highlight" data-term="cakkhu viññāṇa">cakkhu viññāṇa</span></span></em>).</p>
+<ul style="text-align: justify;">
+<li>Now that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> to "buy that car Y" will come back to his mind (triggered by that <em><span><span class="pali-term term-highlight" data-term="cakkhu viññāṇa">cakkhu viññāṇa</span></span></em>. Then, of course, his<em><span> manō <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> will take over, and his interest in the car will come to his mind.</li>
+<li>Then we will start generating <em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (conscious thoughts) about buying that car and how nice it would drive to work in it, etc.). That is the backward step of "<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>."</span></em> The <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> step "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em>" runs backward too; see, "<a href="../../pages/PS.JJ.004/index.html" rel="noopener noreferrer" target="_blank">Āsēvana and Aññamañña Paccayā</a>."</li>
+<li>That, in turn, will provide "more food" for that <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> via "<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span>."</span></em></li>
+<li>Therefore, <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> and (<span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em></span>)<em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> "feed on each other."</li>
+</ul>
+<p style="text-align: justify;">One should contemplate these ideas and apply them to other "real-life situations." That is real "insight meditation" or "<em><span><span class="pali-term term-highlight" data-term="vipassanā bhāvanā">vipassanā bhāvanā</span>." </span></em>It may take time to get used to the real meanings of these keywords.</p>
+<h5 style="text-align: justify;"><span style="font-size: 12pt;">Resources</span></h5>
+<p style="text-align: justify;">18. A reasonably good idea of the structure of <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> can be gained by reading <em><span><span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span></em> Bodhi's book, "<a href="https://download.pariyatti.org/free/_moIbLs95/Comprehensive%20Manual%20of%20Abhidhamma.pdf" rel="noopener noreferrer" target="_blank">A Comprehensive Manual of Abhidhamma</a>."</p>
+<ul>
+<li style="text-align: justify;">“<a href="http://localhost/beng_feb2026/wp-content/uploads/Abhidhamma-Mehn-Tin-Mon.pdf">Abhidhamma-Mehn Tin Mon</a>,“ by Dr. Mehm Tin Mon, is a good FREE publication.</li>
+<li style="text-align: justify;">But both of those authors also translate <em><span><span class="pali-term term-highlight" data-term="viññāṇa">viññāṇa</span></span></em> as consciousness. Furthermore, they have translated <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> also as consciousness. There are other translation problems too.</li>
+<li style="text-align: justify;">However, by reviewing those two resources, one can see how in-depth and detailed the mind processes are analyzed in <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>,</li>
+<li style="text-align: justify;">The "<a href="../../pages/AB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Abhidhamma</a>" section and the "<a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Tables and Summaries</a><span>" section provide more information. Other resource <span class="pali-term term-highlight" data-term="posts">posts</span> are "</span><a href="../../pages/TS.AA.001/index.html" rel="noopener" target="_blank">Pāli Glossary – (A-K)</a>" and "<a href="../../pages/TS.AA.002/index.html" rel="noopener" target="_blank">Pāli Glossary – (L-Z)</a>."</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/LD.BB.002/index.html">Four Noble Truths</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/LD.BB.004/index.html">Vinnana Expectations Consciousness</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/LD.BB.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Four Noble Truths</span>
+        
+        <span class="pathway-title title-pt">Four Noble Truths</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/LD.BB.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Vinnana Expectations Consciousness</span>
+        
+        <span class="pathway-title title-pt">Vinnana Expectations Consciousness</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-LD">
+        ↑ Back to Living Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

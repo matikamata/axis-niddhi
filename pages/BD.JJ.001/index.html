@@ -1,0 +1,509 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>The Four Stages In Attaining Nibbana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 57 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.JJ.001</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">The Four Stages In Attaining Nibbana</h1>
+    
+    <h1 class="title-pt">As quatro etapas para alcançar o Nibbāna</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.JJ.001</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.JJ.001"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0090"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.JJ.001</td></tr><tr><td>Fin-dex</td><td>0090</td></tr><tr><td>Slug</td><td>the-four-stages-in-attaining-nibbana</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>The Four Stages In Attaining Nibbana</td></tr></table></div></div>// 
+<p style="text-align: justify"><strong>Revised February 4, 2016; revised October 25, 2017; <span style="color: #0000ff">August 28, 2022</span></strong></p>
+<p style="text-align: justify">1. The 31 realms discussed in "<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Realms Associated with the Earth</a>" are divided into three main categories based on the sense faculties and the level of suffering:</p>
+<ul>
+<li style="text-align: justify">The lowest eleven realms belong to the “<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>,” where all five physical sense faculties are present; “<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span></span></em>” is indulging in the five senses.</li>
+<li style="text-align: justify">Beings in the next sixteen realms have only two physical senses: vision and hearing. They have less-dense bodies, and this subset of realms is called the <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōka</span></em>. In <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōka,</span></em> there are mainly <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> pleasures corresponding to the first four mundane <em>jhānā</em> that are attainable by humans. There is relatively less suffering in the <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōkā.</span></em></li>
+<li style="text-align: justify">The highest four realms correspond to the higher <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span></span></em> <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states (<em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> levels five through eight) that are also attainable in the human realm. Thus there is mainly <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> bliss in these realms and relatively less suffering. These realms are commonly known as <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōka</span></em> because those beings have only a trace of matter with no physical senses and only the mind.</li>
+</ul>
+<p style="text-align: justify">2. The lifetimes of the beings in the<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōka</span></em> are very long, and those in the<em><span> <span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōka</span></em> are even longer. The lifetime in the highest <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōkā</span></em> is so long (84,000 eons or <em><span><span class="pali-term term-highlight" data-term="mahā">mahā</span> kappā</span></em>) that it is beyond comprehension to us.</p>
+<ul>
+<li style="text-align: justify">The ancient <em>yōgis</em> mistakenly thought that such realms corresponded to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (or rather Siddharata Gōtama) attained the eighth </span><em><span><span class="pali-term term-highlight" data-term="jhāna">jhāna</span></span></em><span> months after leaving the palace as an ascetic. But he realized that it would only lead to <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in a <span class="pali-term term-highlight" data-term="brahma">Brahma</span> realm that still has a finite lifetime.</span></li>
+<li style="text-align: justify">Even though very long in the number of years, that lifetime is insignificant in the <em>samsāric</em> time scale (see, "<a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank" title="Saṃsāric Time Scale">Samsāric Time Scale, Buddhist Cosmology, and the Big Bang Theory</a>"), which is infinite (see, "<a href="../../pages/DS.KK.004/index.html" rel="noopener noreferrer" target="_blank" title="Infinity – How Big Is It?">Infinity - How Big Is It?</a>").</li>
+</ul>
+<p style="text-align: justify"><span>3. One in the human realm can experience the <span class="pali-term term-highlight" data-term="jhānic">jhānic</span> pleasure of both</span><em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span></span></em> <em>lōkā</em> by attaining such <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> states via <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em> meditation.</p>
+<ul>
+<li style="text-align: justify">Furthermore, it is possible to gain access to both <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōkā</span></em> and <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōkā</span></em> in the next birth by developing the corresponding <em>jhānā</em> and by being in a <em><span><span class="pali-term term-highlight" data-term="jhānic">jhānic</span></span></em> state at death. As I understand, this is the goal of most Hindu practices.</li>
+</ul>
+<p style="text-align: justify"><span>4. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> pointed out</span><span style="color: #0000ff"> that even the highest<em><span> <span class="pali-term term-highlight" data-term="jhānic">jhānic</span> </span></em>state is temporary (even though long)</span>, and once that<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span> </span></em>energy is exhausted, it is possible to be born in any of the 31 realms. <strong>Unless the being has attained at least the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> stage, it is guaranteed that <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in one of the lowest realms is inevitable at some point in the future.</span></strong></p>
+<ul>
+<li style="text-align: justify"><span>He said that many of the beings still in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (</span><em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em>), i.e., we all, are likely to have been born in the higher <em><span><span class="pali-term term-highlight" data-term="arūpa">arūpa</span> lōkā</span></em>, as well as the lowest realm (<em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em>) in the past. The <em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em> is that long.</li>
+</ul>
+<p style="text-align: justify">5. From this discussion, it is clear that the actual suffering is mostly in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōkā</span></em>. But the problem is that beings spend the most time in <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōkā</span></em> in their beginning-less journey in the <em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em>.</p>
+<ul>
+<li style="text-align: justify"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> gave a simile to describe this situation. We leave home only to go on short, or may be even extended, trips, but we always come back home. </span><strong><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that the four lowest realms (the </span><em>apāyā</em>) are the home base for most living beings.</strong></li>
+</ul>
+<h4 style="text-align: justify">Suffering in the <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> Lōka</span></em></h4>
+<p style="text-align: justify">6. Suffering in the<em><span> <span class="pali-term term-highlight" data-term="kāma">kāma</span> lōkā</span></em> ranges from unfathomable suffering in the lowest realm, the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell), to relatively little suffering and the highest sensory pleasures in the <em>dēva lōkā</em> (the highest six realms in the<em><span> <span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>).</p>
+<ul>
+<li style="text-align: justify">Just below the <em>dēva lōkā</em> is the human realm with both suffering and sense pleasures at about equal levels.</li>
+<li style="text-align: justify">Below the human realm, there is <em>preta</em> lōka (hungry ghosts), <em>asuras</em>, the animal realm, and the <em>nirayā</em>, and the level of suffering generally increases in that order.</li>
+</ul>
+<p style="text-align: justify">7. The lowest four levels in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em> are collectively called the <em>apāyā</em> (the undesirable realms). <strong>More than 99% of the beings are trapped in these four realms.</strong> The problem is that once born in any of those four realms, it is virtually impossible to get out.</p>
+<ul>
+<li style="text-align: justify">This is because these realms are such that one is forced to commit <em><span>apunnābhi <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> or evil actions (see, “<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank">Sankhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>”) by the very nature of that existence. For example, in the animal realm, most animals have to kill others for survival. In the <em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em>, virtually every thought is of hate because of the incessant suffering.</li>
+<li style="text-align: justify"><strong>Still, when we analyze <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, we can see that the <em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em> of the <em>cittā</em> are much less potent for animals. Thus</strong> the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> power of those actions is relatively small compared to the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> power of such actions by humans. This is an important point that I wish to discuss in the future.</li>
+</ul>
+<p style="text-align: justify">8. Just as it is likely that we have been born in the higher<em><span> <span class="pali-term term-highlight" data-term="rūpa">rūpa</span> lōkā</span></em> in the past, it is even more certain that we ALL have been in the <em>apāyā</em>. Luckily we do not remember those past lives.</p>
+<ul>
+<li style="text-align: justify">But beings in certain realms (particularly the <em>preta realm</em>) remember their past lives, increasing the level of suffering.</li>
+</ul>
+<h4 style="text-align: justify">Why We Need to Strive Now</h4>
+<p style="text-align: justify">9. From the above discussion, it is clear that most suffering is in the four lowest realms, below the human realm, which is the fifth realm. Essentially, there is relatively less suffering above the human realm, starting with the <em>dēva lōka,</em> which is the highest realm in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka.</span></em></p>
+<p style="text-align: justify">10. Even though the suffering is highest in the lower four realms, the beings there are helpless to do anything about the suffering. Their limited minds cannot grasp the causes that lead to suffering.</p>
+<ul>
+<li style="text-align: justify"><strong>Many people wrongly believe that one needs to feel suffering to understand it and to get an incentive to seek <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. But when one suffers (say, when one gets too old), it is NOT possible to contemplate the deep concepts of <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></strong></li>
+<li style="text-align: justify">The Noble truth on suffering needs to be seen with wisdom (<em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em>), not via feelings (<em>vēdana</em>), i.e., by understanding the complete worldview AND the Three Characteristics of this "wider world":<em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>;</span></em> see, "<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta</a>."</li>
+</ul>
+11. Beings in the realms above the human realm, the 26 realms starting with the <em>dēva</em> realms,  do not even feel much suffering. <strong>This is the other extreme; there is no incentive for them to be concerned about suffering.</strong>
+<ul>
+<li>But when they approach the end of their lives, they realize that and become distraught and fearful.</li>
+</ul>
+<p style="text-align: justify">12. Thus, it is only in the human realm that one is at least exposed to suffering, even if one may not be subjected to much suffering. Furthermore, the human mind is the best suited for grasping the true nature of “this world of 31 realms”, i.e., the Three Characteristics (see, “<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anatta</a>”).</p>
+<ul>
+<li style="text-align: justify"><strong><span>This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that a human should not miss this opportunity to attain </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong></li>
+</ul>
+<h4 style="text-align: justify">The Four Stages of Attaining <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></h4>
+<p style="text-align: justify">13. The first stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is attained by “seeing” (<strong>not just reading about, but grasping</strong>) the true nature of existence: <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">Thus one needs to first learn from someone (like from this website) the nature of existence with the 31 realms, the aimless wandering of a being through endless rebirths <em><span>(<span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em>), the reasons for the rebirths, etc.</li>
+<li style="text-align: justify"><span>Thus the key areas to understand are the Three Characteristics, the Four Noble Truths, and the Noble Eightfold Path. No one but a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is capable of finding these, and this is why it is important to have exposure to the <span class="pali-term term-highlight" data-term="pure dhamma">PURE DHAMMA</span>.</span></li>
+</ul>
+<p style="text-align: justify">14. At the first stage (<em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em><span> or Stream Enterer), one partially comprehends the validity of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>’s worldview. This is called attaining </span><em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> (elimination of defilements through clear vision/understanding) to a significant extent.</p>
+<ul>
+<li style="text-align: justify">He/she understands the “true nature” of existence: significance and the true meaning of the Three Characteristics of Existence (see "<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anatta</a>").</li>
+</ul>
+<p style="text-align: justify">15. The realization that it is not worthwhile or fruitful to stay in any of the 31 realms, in the long run, makes one morally conduct oneself. One’s mind decides it is not worthwhile or beneficial to do those actions that destine oneself to birth in the lower four realms.</p>
+<ul>
+<li style="text-align: justify">This realization leads to a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="phala citta">phala citta</span></span></em> (one thought-moment of realizing the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage). When that is achieved, one will never again be reborn in the lower four realms ("free of suffering in the <em>apāyā</em> forever.") That is explained in "<a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta - How a Sōtapanna Avoids apāyagami Citta</a>."</li>
+</ul>
+<p style="text-align: justify">16. At this stage, one has realized the First Noble Truth of suffering (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>), and one earnestly starts on the Noble Eightfold Path. He still has greed and hate left in him to some extent, but at the next stage (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>), he loses more of the strength of such greedy or hateful thoughts.</p>
+<ul>
+<li style="text-align: justify">A <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> is not fully released from the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em> since he/she will be born in the <em>dēva lōka</em> (but not in the human realm).</li>
+<li style="text-align: justify">In the <em>dēva lōka</em> (and in the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> realms above that where a <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>can be born subsequently), the bodies are not subjected to diseases. Thus a <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>is said to be "healthy forever."</li>
+</ul>
+<p style="text-align: justify">17. When the third stage of<em> Anāgāmi</em> (Non-Returner) is attained, one loses any desire to be born in the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></em>. Then greedy or hateful thoughts belonging to the <em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka </span></em>cannot arise.</p>
+<ul>
+<li style="text-align: justify">Thus, he/she will be born only once more in a higher <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> world reserved for the <em>Anāgāmis</em>.</li>
+</ul>
+<p style="text-align: justify">18. All through these three stages, <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> or ignorance gradually diminish. But it is completely removed only at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</p>
+<ul>
+<li style="text-align: justify">Once the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em><span> stage is reached, the mind becomes pure and is incapable of desiring anything “in this world of 31 realms”. Thus there is no more <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, and one attains the perfect happiness at the peak of </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">Also, see "<a href="../../pages/KD.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Nibbāna">Nibbāna</a>" and "<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Removal of Āsavā</a>."</p>
+<h4 style="text-align: justify">Why Living a Moral Life Would Not Prevent a Birth in the Four Lower Realms</h4>
+<p style="text-align: justify">19. We desperately cling to “things in this world” because we perceive that lasting happiness can be achieved. We crave sensory pleasures. As mentioned before, nothing or no one is holding us in this world of 31 realms. We cling to existence in these realms like an octopus grabbing its prey with all eight legs.</p>
+<p style="text-align: justify">20. Many Buddhists (who have not yet comprehended the <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature) like to stay in this world a bit more. They do not realize the level of happiness associated with the <em><span><span class="pali-term term-highlight" data-term="nibbānic">Nibbānic</span></span></em> bliss; see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is nirāmisa Sukha?</a>".</p>
+<ul>
+<li style="text-align: justify"><span>Some <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> monks even today give a popular blessing like the following. “May you be reborn in prosperous (</span><em>dēva</em> or human) realms and then attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.” Even they do not understand the permanent happiness associated with <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> or the possibility of much suffering in the next birth.</li>
+</ul>
+<p style="text-align: justify">21. The danger in such thinking is due to the following reason. We all have done good and bad deeds in our lives before and have acquired uncountable <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds, both good and bad. See, “<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Sankhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>”.</p>
+<ul>
+<li style="text-align: justify"><strong>At death, any of those seeds can bear fruit. </strong>If it is a good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed, one will get a good birth, but if it is a bad<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed, one will get a bad birth.</li>
+</ul>
+<p style="text-align: justify">22. Our future births are not necessarily determined by how we live this life because we have done many good and bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> in previous lives.</p>
+<ul>
+<li style="text-align: justify"><span style="text-align: justify"><span>This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that even if one lives a perfectly moral life, he cannot say that one will get a good <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> UNLESS one has attained at least the </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> has made ineffective all those bad<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds that could give birth in the lower four realms.</span></li>
+<li style="text-align: justify"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> also said that even if one lives immorally, that does not necessarily lead to a bad life in the next birth unless it is an </span><em>ā</em><em><span>nantariya <span class="pali-term term-highlight" data-term="kamma">kamma</span>.</span></em> (<em>Ā</em><em><span>nantariya <span class="pali-term term-highlight" data-term="kamma">kamma</span> </span></em>is an extremely bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>,</span></em> like killing one's parents.)</li>
+<li style="text-align: justify">However, those bad acts will bear fruit at some point in the future. It is just that there are many good seeds as well as bad seeds with any lifestream. See "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">What is Kamma? Is Everything Determined by Kamma?</a>".</li>
+<li style="text-align: justify">Thus the goal of this life should be to attain at least the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage of<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+A different analysis of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> can be found in "<a href="../../pages/TL.HH.011/index.html" rel="noopener noreferrer" target="_blank" title="Difference Between Giving Up Valuables and Losing Interest in Worthless">Difference Between Giving up Valuables and Losing Interest in Worthless</a>", .........
+<p style="text-align: justify">Next, "<a href="../../pages/BD.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Niramisa Sukha (Happiness Arising from Dissociating from the 31 realms)">Nirāmisa Sukha (Happiness Arising from Dissociating from the 31 realms)</a>", .......</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.JJ.001"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0090"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.JJ.001
+Language:     pt-BR
+Generated-At: 2026-04-18T04:04:19Z
+Engine:       DeepL API (Glossary V5)
+-->
+
+// 
+<p style="text-align: justify"><strong>Revisado em 4 de fevereiro de 2016; revisado em 25 de outubro de 2017; <span style="color: #0000ff">28 de agosto de 2022</span></strong></p>
+<p style="text-align: justify">1. Os 31 reinos discutidos em “<a href="../../pages/BD.HH.004/index.html" rel="noopener noreferrer" target="_blank">31 Reinos Associados à Terra</a>” são divididos em três categorias principais com base nas faculdades sensoriais e no nível de sofrimento:</p>
+<ul>
+<li style="text-align: justify">Os onze reinos mais baixos pertencem ao “<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>”, onde todas as cinco faculdades sensoriais físicas estão presentes; “<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span></span></em>” significa entregar-se aos cinco sentidos.</li>
+<li style="text-align: justify">Os seres nos dezesseis reinos seguintes possuem apenas dois sentidos físicos: visão e audição. Eles têm corpos menos densos, e esse subconjunto de reinos é chamado de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka</span></em>. No <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka,</span></em> há principalmente prazeres <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> correspondentes aos primeiros quatro <em>Jhānā</em> mundanos que são alcançáveis pelos humanos. Há relativamente menos sofrimento no <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka.</span></em></li>
+<li style="text-align: justify">Os quatro reinos mais elevados correspondem aos estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> <span class="pali-term term-highlight" data-term="arūpa">Arūpa</span></span></em> superiores (níveis <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> de cinco a oito) que também são alcançáveis no reino humano. Assim, há principalmente êxtase <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> nesses reinos e relativamente menos sofrimento. Esses reinos são comumente conhecidos como <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span> lōka</span></em> porque esses seres têm apenas um traço de matéria, sem sentidos físicos e apenas a mente.</li>
+</ul>
+<p style="text-align: justify">2. A duração da vida dos seres no <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōka</span></em> é muito longa, e a dos seres no<em><span> <span class="pali-term term-highlight" data-term="arūpa">Arūpa</span> lōka</span></em> é ainda mais longa. A duração da vida no <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span> lōkā</span></em> mais elevado é tão longa (84.000 eons ou <em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> kappā</span></em>) que está além da nossa compreensão.</p>
+<ul>
+<li style="text-align: justify">Os antigos <em>iogues</em> pensavam erroneamente que tais reinos correspondiam ao <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (ou melhor, Siddharata Gōtama) alcançou o oitavo </span><em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em><span> meses após deixar o palácio como asceta. Mas ele percebeu que isso apenas levaria ao Renascimento em um reino de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> que ainda tem uma vida finita.</span></li>
+<li style="text-align: justify">Embora seja muito longa em termos de anos, essa vida é insignificante na escala de tempo <em>samsárica</em> (ver “<a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank" title="Saṃsāric Time Scale">Escala de Tempo Samsárica, Cosmologia Buddhista e a Teoria do Big Bang</a>”), que é infinita (ver “<a href="../../pages/DS.KK.004/index.html" rel="noopener noreferrer" target="_blank" title="Infinity – How Big Is It?">Infinito – Quão Grande É?</a>”).</li>
+</ul>
+<p style="text-align: justify"><span>3. Alguém no reino humano pode experimentar o prazer <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span> tanto do </span><em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōkā</span></em> quanto do <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span></span></em> <em>lōkā</em> ao atingir tais estados <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> por meio da meditação <em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">Além disso, é possível obter acesso tanto ao <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōkā</span></em> quanto ao <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span> lōkā</span></em> no próximo nascimento, desenvolvendo o <em><span><span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> correspondente e encontrando-se em um estado <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> no momento da morte. Pelo que entendi, esse é o objetivo da maioria das práticas hindus.</li>
+</ul>
+<p style="text-align: justify"><span>4. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> apontou </span><span style="color: #0000ff">que mesmo o estado <em><span>de <span class="pali-term term-highlight" data-term="jhāna">Jhāna</span></span></em> mais elevado é temporário (embora longo)</span> e, uma vez que a energia <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> se esgote, é possível renascer em qualquer um dos 31 reinos. <strong>A menos que o ser tenha alcançado pelo menos o estágio <em>de Sótapanna</em>, é certo que o renascimento em um dos reinos mais baixos será inevitável em algum momento no futuro.</strong></p>
+<ul>
+<li style="text-align: justify">Ele disse que muitos dos seres ainda no processo de renascimento (<em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em>), ou seja, todos nós, provavelmente já renasceram no <em><span><span class="pali-term term-highlight" data-term="arūpa">Arūpa</span> lōkā</span></em> superior, bem como no reino mais baixo (<em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em>) no passado. O <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em> é assim tão longo.</li>
+</ul>
+<p style="text-align: justify">5. A partir dessa discussão, fica claro que o sofrimento real ocorre principalmente no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōkā</span></em>. Mas o problema é que os seres passam a maior parte do tempo no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōkā</span></em> em sua jornada sem início no <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em>.</p>
+<ul>
+<li style="text-align: justify"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> deu uma parábola para descrever essa situação. Saímos de casa apenas para fazer viagens curtas, ou talvez até prolongadas, mas sempre voltamos para casa. </span><strong><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que os quatro reinos mais baixos (os </span><em>apāyā</em>) são a base de origem para a maioria dos seres vivos.</strong></li>
+</ul>
+<h4 style="text-align: justify">O sofrimento no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> Lōka</span></em></h4>
+<p style="text-align: justify">6. O sofrimento no<em><span> <span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōkā</span></em> varia desde o sofrimento insondável no reino mais baixo, o <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno), até um sofrimento relativamente pequeno e os prazeres sensoriais mais elevados no <em>dēva lōkā</em> (os seis reinos mais elevados do<em><span> <span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōkā</span></em>).</p>
+<ul>
+<li style="text-align: justify">Logo abaixo do <em>dēva lōkā</em> está o reino humano, onde o sofrimento e os prazeres sensoriais se encontram em níveis praticamente iguais.</li>
+<li style="text-align: justify">Abaixo do reino humano, há <em>o preta</em> lōka (fantasmas famintos), <em>os Asuras</em>, o reino animal e o <em>nirayā</em>, e o nível de sofrimento geralmente aumenta nessa ordem.</li>
+</ul>
+<p style="text-align: justify">7. Os quatro níveis mais baixos do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em> são chamados coletivamente de <em>apāyā</em> (os reinos indesejáveis). <strong>Mais de 99% dos seres estão presos nesses quatro reinos.</strong> O problema é que, uma vez nascido em qualquer um desses quatro reinos, é praticamente impossível sair.</p>
+<ul>
+<li style="text-align: justify">Isso ocorre porque esses reinos são tais que a pessoa é forçada a cometer <em><span>apunnābhi <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>, ou ações malignas (ver “<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank">Sankhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>”), pela própria natureza dessa existência. Por exemplo, no reino animal, a maioria dos animais precisa matar outros para sobreviver. No <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em>, praticamente todo pensamento é de ódio devido ao sofrimento incessante.</li>
+<li style="text-align: justify"><strong>Ainda assim, quando analisamos <em><span>o <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, podemos ver que os <em><span><span class="pali-term term-highlight" data-term="javana">Javana</span></span></em> do <em>cittā</em> são muito menos potentes para os animais. Assim,</strong> o poder <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> dessas ações é relativamente pequeno em comparação com o poder <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> de tais ações realizadas por seres humanos. Este é um ponto importante que desejo discutir no futuro.</li>
+</ul>
+<p style="text-align: justify">8. Assim como é provável que tenhamos nascido nos <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span> lōkā</span></em> superiores no passado, é ainda mais certo que TODOS nós já estivemos nos <em>apāyā</em>. Felizmente, não nos lembramos dessas vidas passadas.</p>
+<ul>
+<li style="text-align: justify">Mas os seres em certos reinos (particularmente o <em>reino dos pretas</em>) se lembram de suas vidas passadas, o que aumenta o nível de sofrimento.</li>
+</ul>
+<h4 style="text-align: justify">Por que precisamos nos esforçar agora</h4>
+<p style="text-align: justify">9. A partir da discussão acima, fica claro que a maior parte do sofrimento está nos quatro reinos mais baixos, abaixo do reino humano, que é o quinto reino. Essencialmente, há relativamente menos sofrimento acima do reino humano, começando pelo <em>dēva lōka,</em> que é o reino mais elevado no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka.</span></em></p>
+<p style="text-align: justify">10. Embora o sofrimento seja maior nos quatro reinos inferiores, os seres que lá vivem são incapazes de fazer qualquer coisa a respeito do sofrimento. Suas mentes limitadas não conseguem compreender as causas que levam ao sofrimento.</p>
+<ul>
+<li style="text-align: justify"><strong>Muitas pessoas acreditam erroneamente que é preciso sentir sofrimento para compreendê-lo e obter um incentivo para buscar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. Mas quando se sofre (digamos, quando se envelhece demais), NÃO é possível contemplar os conceitos profundos do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></strong></li>
+<li style="text-align: justify">A Nobre Verdade sobre o sofrimento precisa ser vista com <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em>, não por meio de sensações (<em>vēdana</em>), ou seja, compreendendo a visão de mundo completa E as Três Características desse “mundo mais amplo”:<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā;</span></em> veja “<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā</a>”.</li>
+</ul>
+11. Os seres nos reinos acima do reino humano, os 26 reinos a partir dos reinos <em>dos</em>
+<em><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></em>
+, nem sequer sentem muito sofrimento. <strong>Esse é o outro extremo; não há incentivo para que se preocupem com o sofrimento.</strong>
+<ul>
+<li>Mas, quando se aproximam do fim de suas vidas, percebem isso e ficam angustiados e com medo.</li>
+</ul>
+<p style="text-align: justify">12. Assim, é somente no reino humano que se está, pelo menos, exposto ao sofrimento, mesmo que não se esteja sujeito a muito sofrimento. Além disso, a mente humana é a mais adequada para compreender a verdadeira natureza deste “mundo dos 31 reinos”, ou seja, as Três Características (ver “<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anattā</a>”).</p>
+<ul>
+<li style="text-align: justify"><strong><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que um ser humano não deve perder esta oportunidade de alcançar </span><em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong></li>
+</ul>
+<h4 style="text-align: justify">Os Quatro Estágios para Alcançar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em></h4>
+<p style="text-align: justify">13. O primeiro estágio de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é alcançado ao “ver” (<strong>não apenas ler sobre, mas compreender</strong>) a verdadeira natureza da existência: <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>.</p>
+<ul>
+<li style="text-align: justify">Assim, é preciso primeiro aprender com alguém (como neste site) a natureza da existência com os 31 reinos, a peregrinação sem rumo de um ser através de renascimentos infinitos <em><span>(<span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span></span></em>), as razões para os renascimentos, etc.</li>
+<li style="text-align: justify"><span>Portanto, as áreas-chave a serem compreendidas são as Três Características, as Quatro Nobres Verdades e o Nobre Caminho Óctuplo. Ninguém, a não ser um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, é capaz de descobrir isso, e é por isso que é importante ter contato com o <span class="pali-term term-highlight" data-term="pure dhamma">Pure Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify">14. No primeiro estágio (<em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em><span> ou Entrante na Corrente), compreende-se parcialmente a validade da visão de mundo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Isso é chamado de alcançar </span><em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> (eliminação das impurezas por meio de visão/compreensão clara) em uma extensão significativa.</p>
+<ul>
+<li style="text-align: justify">Ele/ela compreende a “verdadeira natureza” da existência: o significado e o verdadeiro sentido das Três Características da Existência (ver “<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta">Anicca, Dukkha, Anattā</a>”).</li>
+</ul>
+<p style="text-align: justify">15. A compreensão de que não vale a pena nem é proveitoso permanecer em qualquer um dos 31 reinos, a longo prazo, leva a pessoa a se comportar moralmente. A mente decide que não vale a pena nem é benéfico realizar aquelas ações que destinam a pessoa a renascer nos quatro reinos inferiores.</p>
+<ul>
+<li style="text-align: justify">Essa compreensão leva a um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="phala citta">Phala Citta</span></span></em> (um momento de pensamento em que se alcança o estágio <em>de</em> <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>). Quando isso é alcançado, a pessoa nunca mais renascerá nos quatro reinos inferiores (“livre do sofrimento nos <em>apāyā</em> para sempre”). Isso é explicado em “<a href="../../pages/TL.HH.010/index.html" rel="noopener noreferrer" target="_blank">Akusala Citta – Como um Sotāpanna evita o apāyagami Citta</a>”.</li>
+</ul>
+<p style="text-align: justify">16. Nesta fase, a pessoa realizou a Primeira Nobre Verdade do sofrimento (<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>) e inicia com sinceridade o Nobre Caminho Óctuplo. Ela ainda possui ganância e ódio em certa medida, mas na fase seguinte (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em>), perde mais da força desses pensamentos gananciosos ou odiosos.</p>
+<ul>
+<li style="text-align: justify">Um <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> não está totalmente liberto do <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka,</span></em> pois ele/ela renascerá no <em>dēva lōka</em> (mas não no reino humano).</li>
+<li style="text-align: justify">No <em>dēva lōka</em> (e nos reinos <em>de</em> <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> acima dele, onde um <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>pode nascer posteriormente), os corpos não estão sujeitos a doenças. Assim, diz-se que um <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span></em>é “saudável para sempre”.</li>
+</ul>
+<p style="text-align: justify">17. Quando o terceiro estágio de<em> Anāgāmi</em> (Não-Retornante) é alcançado, perde-se qualquer desejo de nascer no <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></em>. Então, pensamentos de ganância ou ódio pertencentes ao <em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka </span></em>não podem surgir.</p>
+<ul>
+<li style="text-align: justify">Assim, ele/ela renascerá apenas mais uma vez em um mundo <em><span>de <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> superior reservado aos <em>Anāgāmis</em>.</li>
+</ul>
+<p style="text-align: justify">18. Ao longo desses três estágios, <em><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span>,</span></em> ou ignorância, diminui gradualmente. Mas só é completamente removida no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">Uma vez alcançado o estágio <em><span>de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>, a mente se torna pura e é incapaz de desejar qualquer coisa “neste mundo dos 31 reinos”. Assim, não há mais Renascimento, e alcança-se a felicidade perfeita no ápice do <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">Veja também “<a href="../../pages/KD.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Nibbāna">Nibbāna</a>” e “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">O Caminho para Nibbāna – Remoção de Āsavā</a>”.</p>
+<h4 style="text-align: justify">Por que viver uma vida moral não impediria um nascimento nos Quatro Reinos Inferiores</h4>
+<p style="text-align: justify">19. Nós nos agarramos desesperadamente às “coisas deste mundo” porque percebemos que a felicidade duradoura pode ser alcançada. Ansiamos por prazeres sensoriais. Como mencionado anteriormente, nada nem ninguém nos retém neste mundo dos 31 reinos. Nós nos agarramos à existência nesses reinos como um polvo que agarra sua presa com todas as oito patas.</p>
+<p style="text-align: justify">20. Muitos Buddhistas (que ainda não compreenderam a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>) gostam de permanecer neste mundo um pouco mais. Eles não percebem o nível de felicidade associado à bem-aventurança <em><span>de <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; veja “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade – O que é nirāmisa Sukha?</a>”.</p>
+<ul>
+<li style="text-align: justify">Alguns monges Buddhistas, mesmo hoje, dão uma bênção popular como a seguinte: “Que você renasça em reinos prósperos (<em>dēva</em> ou humano) e então alcance <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.” Mesmo eles não compreendem a felicidade permanente associada ao <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> ou a possibilidade de muito sofrimento no próximo nascimento.</li>
+</ul>
+<p style="text-align: justify">21. O perigo desse tipo de pensamento se deve ao seguinte motivo. Todos nós já praticamos boas e más ações em nossas vidas anteriores e acumulamos incontáveis sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, tanto boas quanto más. Veja “<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Sankhāra, Kamma, Kamma Bīja, Kamma Vipaka</a>”.</p>
+<ul>
+<li style="text-align: justify"><strong>Na morte, qualquer uma dessas sementes pode dar fruto. </strong>Se for uma semente <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> boa, a pessoa terá um bom renascimento, mas se for uma semente <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruim, terá um renascimento ruim.</li>
+</ul>
+<p style="text-align: justify">22. Nossos renascimentos futuros não são necessariamente determinados pela forma como vivemos esta vida, pois já cometemos muitos <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> bons e maus em vidas anteriores.</p>
+<ul>
+<li style="text-align: justify"><span style="text-align: justify"><span>É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que, mesmo que alguém viva uma vida perfeitamente moral, não pode afirmar que terá um bom renascimento, A MENOS QUE tenha alcançado pelo menos o estágio </span><em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> tornou ineficazes todas aquelas sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruins que poderiam dar origem a renascimentos nos quatro reinos inferiores.</span></li>
+<li style="text-align: justify"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> também disse que, mesmo que alguém viva de forma imoral, isso não leva necessariamente a uma vida ruim no próximo renascimento, a menos que seja um </span><em><span>ānantariya <span class="pali-term term-highlight" data-term="kamma">Kamma</span>.</span></em> (<em><span>Ānantariya <span class="pali-term term-highlight" data-term="kamma">Kamma</span> </span></em>é um <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> extremamente ruim<em>,</em> como matar os próprios pais.)</li>
+<li style="text-align: justify">No entanto, esses atos ruins darão frutos em algum momento no futuro. A questão é que há muitas sementes boas, assim como sementes ruins, em qualquer fluxo de vida. Veja “<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">O que é Kamma? Tudo é determinado pelo Kamma?</a>”.</li>
+<li style="text-align: justify">Assim, o objetivo desta vida deve ser atingir pelo menos o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> do<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+Uma análise diferente do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> pode ser encontrada em <a href="../../pages/TL.HH.011/index.html" rel="noopener noreferrer" target="_blank" title="Difference Between Giving Up Valuables and Losing Interest in Worthless">“Diferença entre abrir mão de bens valiosos e perder o interesse pelo que não tem valor</a>”, .........
+<p style="text-align: justify">A seguir, “<a href="../../pages/BD.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Niramisa Sukha (Happiness Arising from Dissociating from the 31 realms)">Nirāmisa Sukha (Felicidade que surge da dissociação dos 31 reinos)</a>”, .......</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.AA.010/index.html">Vinaya The Nature Likes To Be In Equillibrium</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.JJ.002/index.html">What Are Rupa Relation To Nibbana</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.AA.010/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Vinaya The Nature Likes To Be In Equillibrium</span>
+        
+        <span class="pathway-title title-pt">Vinaya: A natureza gosta de estar em equilíbrio</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.JJ.002/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">What Are Rupa Relation To Nibbana</span>
+        
+        <span class="pathway-title title-pt">Qual é a relação entre a Rūpa e Nibbāna?</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

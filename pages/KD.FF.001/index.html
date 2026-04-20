@@ -1,0 +1,398 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anicca Dukkha Anatta 2 | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 25 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.001</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anicca Dukkha Anatta 2</h1>
+    
+    <h1 class="title-pt">Anicca, Dukkha, Anattā 2</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.001</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>1</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.001"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0097"
+             data-level="intermediate"
+             data-reading-time="1"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.001</td></tr><tr><td>Fin-dex</td><td>0097</td></tr><tr><td>Slug</td><td>anicca-dukkha-anatta-2</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Anicca Dukkha Anatta 2</td></tr></table></div></div><p class="entry-title"><a href="../../pages/KD.FF.002/index.html" rel="noopener" target="_blank">Anicca, Dukkha, Anatta – Distortion Timeline</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank"><strong><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">Anatta</span> – Wrong Interpretations</span></strong></a></p>
+<p class="entry-title"><a href="../../pages/HB.AA.018/index.html" rel="noopener" target="_blank">Misinterpretation of Anicca and Anatta by Early European Scholars</a></p>
+<p><a href="../../pages/KD.FF.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Transcription of a Discourse by Waharaka Thero</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.005/index.html" title="Anicca – True Meaning"><strong><span style="color: #0000ff;"><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span> – True Meaning</span></span></strong></a></p>
+<ul>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Inability to Keep What We Like</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Repeated Arising/Destruction</a></p>
+</li>
+<li><a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – Worthlessness of Worldly Things</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.009/index.html" rel="noopener" target="_blank">Anicca – The Incessant Distress (“Pīḷana”)</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.010/index.html" rel="noopener noreferrer" target="_blank">How to Cultivate Anicca Sanna</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.011/index.html" rel="noopener noreferrer" target="_blank">How to Cultivate the Anicca Sanna – II</a></p>
+</li>
+<li><a href="../../pages/KD.FF.012/index.html" rel="noopener noreferrer" target="_blank">If Everything is Anicca Should We Just give up Everything?</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.013/index.html" title="Anattā – A Systematic Analysis"><span style="color: #0000ff;"><strong>Anattā – A Systematic Analysis</strong></span></a></p>
+<ul>
+<li><a href="../../pages/KD.FF.014/index.html" rel="noopener noreferrer" target="_blank">Anattā in Anattalakkahana Sutta – No Soul or an Ātma</a></li>
+<li><a href="../../pages/KD.FF.015/index.html" rel="noopener noreferrer" target="_blank">Anatta – No Refuge in This World</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.016/index.html" rel="noopener noreferrer" target="_blank">Dasa Akusala and Anatta – The Critical Link</a></p>
+</li>
+<li><span style="color: #0000ff;"><a href="../../pages/KD.FF.017/index.html" rel="noopener noreferrer" style="color: #0000ff;" target="_blank">Anatta – the Opposite of Which Atta?</a></span></li>
+<li class="entry-title"><a href="../../pages/KD.FF.018/index.html" rel="noopener noreferrer" target="_blank">Anattā (Mundane Interpretation) – No “Unchanging Self”</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.019/index.html" rel="noopener noreferrer" target="_blank">Anatta and Dukkha – True Meanings</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.020/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta – According to Some Key Suttas</a></p>
+<p><span style="color: #0000ff;"><a href="../../pages/KD.FF.021/index.html" rel="noopener noreferrer" style="color: #0000ff;" target="_blank">Three Marks of Existence – English Discourses</a></span></p>
+<p class="entry-title"><span style="color: #0000ff;"><strong><a href="../../pages/KD.FF.022/index.html" title="Sotāpanna Stage and Tilakkhanṇ">Sotāpanna Stage and Tilakkhaṇa</a></strong></span></p>
+<ul>
+<li><a href="../../pages/KD.FF.023/index.html" rel="noopener noreferrer" target="_blank">Sakkāya Diṭṭhi and Tilakkhana</a></li>
+<li><a href="../../pages/KD.FF.024/index.html" rel="noopener noreferrer" target="_blank">Sakkaya Diṭṭhi – Getting Rid of Deeper Wrong Views</a></li>
+<li><a href="../../pages/KD.FF.025/index.html" rel="noopener noreferrer" target="_blank">Associations (Sēvana)- A Root Cause of Wrong Views</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.026/index.html" rel="noopener noreferrer" target="_blank">Why are Tilakkhana not Included in 37 Factors of Enlightenment?</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.027/index.html" rel="noopener noreferrer" target="_blank">Two Versions of 37 Factors of Enlightenment</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.028/index.html" rel="noopener noreferrer" target="_blank">Types of Bodies in 31 Realms – Connection to Jhāna</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.029/index.html" rel="noopener noreferrer" target="_blank">Finest Manōmaya Kaya of an Arūpāvacara Brahma</a></p>
+<p> </p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.FF.001"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0097"
+             data-level="intermediate"
+             data-reading-time="1"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.FF.001
+Language:     pt-BR
+Generated-At: 2026-04-18T04:04:45Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p class="entry-title"><a href="../../pages/KD.FF.002/index.html" rel="noopener" target="_blank">Anicca, Dukkha, Anattā – Cronologia das distorções</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank"><strong><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā – Interpretações errôneas</span></strong></a></p>
+<p class="entry-title"><a href="../../pages/HB.AA.018/index.html" rel="noopener" target="_blank">Interpretação errônea de Anicca e Anattā pelos primeiros estudiosos europeus</a></p>
+<p><a href="../../pages/KD.FF.004/index.html" rel="noopener noreferrer" target="_blank">O Caminho para Nibbāna – Transcrição de um discurso de Waharaka Thero</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.005/index.html" title="Anicca – True Meaning"><strong><span style="color: #0000ff;"><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span> – O verdadeiro significado</span></span></strong></a></p>
+<ul>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Incapacidade de Manter o que Gostamos</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Surgimento/destruição repetidos</a></p>
+</li>
+<li><a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – A futilidade das coisas mundanas</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.009/index.html" rel="noopener" target="_blank">Anicca – O sofrimento incessante (“Pīḷana”)</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.010/index.html" rel="noopener noreferrer" target="_blank">Como Cultivar Anicca Sanna</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.011/index.html" rel="noopener noreferrer" target="_blank">Como cultivar o Anicca Sanna – II</a></p>
+</li>
+<li><a href="../../pages/KD.FF.012/index.html" rel="noopener noreferrer" target="_blank">Se tudo é Anicca, devemos simplesmente desistir de tudo?</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.013/index.html" title="Anattā – A Systematic Analysis"><span style="color: #0000ff;"><strong>Anattā – Uma Análise Sistemática</strong></span></a></p>
+<ul>
+<li><a href="../../pages/KD.FF.014/index.html" rel="noopener noreferrer" target="_blank">Anattā no Anattalakkahana Sutta – Sem Alma ou um Ātma</a></li>
+<li><a href="../../pages/KD.FF.015/index.html" rel="noopener noreferrer" target="_blank">Anattā – Não há refúgio neste mundo</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.FF.016/index.html" rel="noopener noreferrer" target="_blank">Dasa Akusala e Anattā – O elo crítico</a></p>
+</li>
+<li><span style="color: #0000ff;"><a href="../../pages/KD.FF.017/index.html" rel="noopener noreferrer" style="color: #0000ff;" target="_blank">Anattā – O oposto de qual Atta?</a></span></li>
+<li class="entry-title"><a href="../../pages/KD.FF.018/index.html" rel="noopener noreferrer" target="_blank">Anattā (Interpretação Mundana) – Não há “Eu Imutável”</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.019/index.html" rel="noopener noreferrer" target="_blank">Anattā e Dukkha – Significados Verdadeiros</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.020/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā – De acordo com alguns Suttā fundamentais</a></p>
+<p><span style="color: #0000ff;"><a href="../../pages/KD.FF.021/index.html" rel="noopener noreferrer" style="color: #0000ff;" target="_blank">As Três Marcas da Existência – Discursos em Inglês</a></span></p>
+<p class="entry-title"><span style="color: #0000ff;"><strong><a href="../../pages/KD.FF.022/index.html" title="Sotāpanna Stage and Tilakkhanṇ">Estágio de Sotāpanna e Tilakkhaṇa</a></strong></span></p>
+<ul>
+<li><a href="../../pages/KD.FF.023/index.html" rel="noopener noreferrer" target="_blank">Sakkāya Diṭṭhi e Tilakkhaṇa</a></li>
+<li><a href="../../pages/KD.FF.024/index.html" rel="noopener noreferrer" target="_blank">Sakkaya Diṭṭhi – Livrando-se de visões erradas mais profundas</a></li>
+<li><a href="../../pages/KD.FF.025/index.html" rel="noopener noreferrer" target="_blank">Associações (Sēvana) – Uma causa fundamental das visões erradas</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.026/index.html" rel="noopener noreferrer" target="_blank">Por que os Tilakkhaṇa não estão incluídos nos 37 Fatores da Iluminação?</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.027/index.html" rel="noopener noreferrer" target="_blank">Duas versões dos 37 fatores da iluminação</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.028/index.html" rel="noopener noreferrer" target="_blank">Tipos de corpos nos 31 reinos – Conexão com o Jhāna</a></p>
+<p class="entry-title"><a href="../../pages/KD.FF.029/index.html" rel="noopener noreferrer" target="_blank">O Manōmaya Kaya mais refinado de um Brahmā Arūpāvacara</a></p>
+<p> </p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.EE.004/index.html">Nibbana Exists But Not In This World</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.002/index.html">Anicca Dukkha Anatta Distortion Timeline</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.EE.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Nibbana Exists But Not In This World</span>
+        
+        <span class="pathway-title title-pt">Nibbāna existe, mas não neste mundo</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.002/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Anicca Dukkha Anatta Distortion Timeline</span>
+        
+        <span class="pathway-title title-pt">Anicca, Dukkha, Anattā: Linha do tempo da distorção</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

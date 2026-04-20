@@ -1,0 +1,450 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>What Is Unique In Buddha Dhamma | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 23 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.DD.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">What Is Unique In Buddha Dhamma</h1>
+    
+    <h1 class="title-pt">O que há de único no Buddha Dhamma</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.DD.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.DD.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0412"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.DD.002</td></tr><tr><td>Fin-dex</td><td>0412</td></tr><tr><td>Slug</td><td>what-is-unique-in-buddha-dhamma</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>What Is Unique In Buddha Dhamma</td></tr></table></div></div><p style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>) is about much more than living a moral life. It is about eliminating future suffering without a trace.</span></p>
+<p style="text-align: justify;"><strong>Revised November 16, 2019; <span style="color: #000000;">February 1, 2023</span>;<span style="color: #3366ff;"> revised with new chart July 22, 2023</span></strong></p>
+<h5 style="text-align: justify;">All Religions Are the Same?</h5>
+<p style="text-align: justify;">1. When I hear the frequent statement, "All religions are the same; they teach you how to live a <strong>moral life</strong><span>," I cringe. That is because I think about all those unaware of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s unique message. In particular, this is the mindset of those who follow "</span><a href="https://en.wikipedia.org/wiki/Secular_Buddhism" rel="noopener" target="_blank">secular Buddhism</a>."</p>
+<ul style="text-align: justify;">
+<li>Most religions indeed teach how to live a moral life. And there is also evidence that atheists may be as moral as religious people are; see "<a href="http://localhost/beng_feb2026/wp-content/uploads/Morality-in-everyday-life-Science-2014-Hofmann.pdf" rel="noopener noreferrer" target="_blank">Morality in everyday life-Science-2014-Hofmann</a>".</li>
+<li><span>However, <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> goes beyond that. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said no matter how well we live this life, that will not help us in the long term in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span></li>
+<li><span>Any suffering one may experience in this life is nothing compared to the harsh suffering in some other realms in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. Understanding that constitutes the first (mundane) path. The second, Noble Path, is followed to stop that harsher suffering permanently. Thus, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> split the path to be followed into two paths.</span></li>
+</ul>
+<h5 style="text-align: justify;">Two Eightfold Paths</h5>
+<p style="text-align: justify;"><span>2. I have made a chart to illustrate the two types of Eightfold Paths explained by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>:</span></p>
+<p style="text-align: justify;"><img alt="" class="alignnone wp-image-45507 size-full" height="600" src="http://localhost/beng_feb2026/wp-content/uploads/A.-Buddha-Dhamma-In-a-Chart-1.jpg" width="960"/></p>
+<p style="text-align: justify;"><strong>Download/Print:</strong> "<a href="https://drive.google.com/uc" rel="noopener" target="_blank">A. Buddha Dhamma - In a Chart</a>." </p>
+<p style="text-align: justify;">3. In the "<a href="https://suttacentral.net/mn117/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> Cattārisaka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 117)</a><span>," the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> discussed that one must first complete the </span><strong>mundane eightfold path</strong>. That will remove the ten types of wrong views (<em><span><span class="pali-term term-highlight" data-term="micchā">micchā</span></span></em> <span style="color: #000000;"><em>diṭṭhi</em></span><span>) listed in #3 of the <span class="pali-term term-highlight" data-term="post">post</span> “</span><a href="../../pages/SI.AA.005/index.html" rel="noopener noreferrer" target="_blank">Maha Chattarisaka Sutta (Discourse on the Great Forty)</a>.</p>
+<ul style="text-align: justify;">
+<li>After that, one needs to comprehend the Four Noble Truths, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>) to some extent to start on the <strong>Noble Eightfold Path</strong>. See "<a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhana, Four Noble Truths</a>."</li>
+<li style="text-align: justify;">Thus, one starts on the <strong>Noble Eightfold Path</strong> starting with <em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span></span></em> (transcendental) <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span></span></em> of a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></em>(set of blue boxes in the chart). One has seen a "glimpse of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>," i.e., one KNOWS that permanent happiness is not possible anywhere in the 31 realms and that whatever effort one makes to achieve such happiness is like chasing a mirage.</li>
+</ul>
+<h5 style="text-align: justify;">First, the Mundane Path </h5>
+<p style="text-align: justify;">4. To reach a specific location, one must first find the path. When grasping a new concept, it is called "seeing with wisdom." Before being able to "see" what is meant by <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> (escape suffering in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process), one must first "see" or "be convinced" of specific essential criteria. For example, actions (</span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) have consequences (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em><span>), there is a <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process, etc. </span></p>
+<ul style="text-align: justify;">
+<li>Many Buddhists today believe they can make spiritual progress by following rituals. However, making progress on both paths requires "seeing with wisdom" (or "<em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> <span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span>.</span></em>") <span style="color: #3366ff;"><strong>Thus, each of the two paths starts with its version of <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span>.</span></em></strong></span></li>
+<li>The "mundane Eightfold Path" is depicted by the set of boxes in red, starting with "mundane <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span></span></em>." One would have that "mundane <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span></span></em>" when one removes doubts about the ten types of wrong views. See "<a href="../../pages/DS.II.004/index.html" rel="noopener" target="_blank">Dangers of Ten Types of Wrong Views and Four Possible Paths</a>."</li>
+<li>The next box depicts mundane versions of <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">sammā saṅkappa</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="sammā">sammā</span> vācā,</span></em> and<em><span> <span class="pali-term term-highlight" data-term="sammā">sammā</span> kammanta,</span></em>" meaning "think, speak, and act morally to avoid bad outcomes/seek good outcomes") and so on until "mundane <em><span><span class="pali-term term-highlight" data-term="sammā">sammā</span> samadhi</span></em>."</li>
+<li><span>Most of these steps (not all) are in other religions and conventional or secular "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>." They advocate living a moral life (i.e., engaging in "good deeds" or "good </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.") That means understanding actions (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) have consequences (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em><span>), the same as in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify;"><span>5. However, most other religions aim to gain a (permanent) heavenly life at death. While living a moral life can be conducive to getting a <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in a good realm, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> taught that it will not be a permanent existence. That is the main difference.</span></p>
+<ul style="text-align: justify;">
+<li><strong>We create causes and conditions to bring new rebirths via our defiled actions, speech, and thoughts with greed, anger, and ignorance of the true nature of the world; they are all <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.</strong> The point is that <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (more precisely, <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energies) lead to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> (results of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>.</span></em>) "Good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" lead to rebirths in "good realms," and "bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>" lead to rebirths in "bad realms." We keep moving among the two types of realms, and <span style="color: #3366ff;"><strong><span>that is the basis of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></strong></span><span> There is no end to it until we understand the deeper <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. </span><span style="color: #3366ff;"><strong> </strong></span></li>
+<li><span style="color: #993366;"><strong>Stated simply, we can stop <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> bringing their <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> by eliminating the conditions for such <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> to take place, i.e., <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> are not pre-determined; </strong><span style="color: #000000;">see "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank">What is Kamma? – Is Everything Determined by Kamma?</a>"</span> </span>One can begin to see the truth of that when one gets rid of the ten wrong views while on the mundane path. To comprehend that mechanism, one needs to understand <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, as discussed below.</li>
+</ul>
+<h5 style="text-align: justify;"><span>What Is a "Good <span class="pali-term term-highlight" data-term="rebirth">Rebirth</span>"?</span></h5>
+<p style="text-align: justify;"><span>6. The joys of heavenly lives are highlighted in the distorted versions of "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" that are mainstream today.  Sometimes one is encouraged to "enjoy such heavenly lives" before attaining </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><strong> </strong>A phrase used by some <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> in Sri Lanka goes as, "May you enjoy heavenly pleasures and then attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> at the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Maitreya (next <span class="pali-term term-highlight" data-term="buddha">Buddha</span>)." Why not attain </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> in this life? Who is going to give guarantees that one will be born human during the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Maitreya? </span></li>
+<li><span>They don't understand that anyone living today may not get an opportunity to be born human during the time of the next <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Not surprising because they don't understand the "</span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature" of any realm in this world.</li>
+<li><strong><span>That misconception in "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" arises because the rarity of a "good <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>" has not been comprehended;</span></strong> see "<a href="../../pages/TL.GG.004/index.html" rel="noopener noreferrer" target="_blank">How the Buddha Described the Chance of Rebirth in the Human Realm</a><span>." This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "No happiness can be found anywhere in the 31 realms" (the true meaning of </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>). I highly recommend "<a href="../../pages/KD.EE.004/index.html" rel="noopener" target="_blank">Nibbāna “Exists,” but Not in This World</a>."</li>
+</ul>
+<h5 style="text-align: justify;">The vision of the Noble Path - "No Permanent Good Existences"</h5>
+<p style="text-align: justify;">7. Even<strong><span> if a heavenly <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> is attained in the next life, a future <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the four lowest realms (</span><em>apāyā</em>) cannot be avoided without attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </strong></p>
+<ul style="text-align: justify;">
+<li><span style="color: #993366;"><strong>Until one comprehends <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></i>, one will always value "sensory pleasures."</strong> </span><span>That holds for atheists as well as for theists. The latter also believe that future happiness is in permanent heaven (most religions) OR temporary happiness in heavenly worlds (traditional "Buddhists"). The difference between a traditional "<span class="pali-term term-highlight" data-term="buddhist">Buddhist</span>" and a </span><em>Bhauddhayā</em> (or a Noble Person or an "<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>") is discussed in "<a href="../../pages/TL.DD.003/index.html" rel="noopener noreferrer" target="_blank">A Buddhist or a Bhauddhayā?</a>".</li>
+<li>One starts on the transcendental (<em><span><span class="pali-term term-highlight" data-term="lokuttara">lokuttara</span></span></em><span>) or the Noble Eightfold Path when one comprehends the dangers of the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process and BECOMES a </span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>. See "<a href="../../pages/PS.EE.001/index.html">Paṭicca Samuppāda, Tilakkhana, Four Noble Truths</a>."</li>
+<li>When one is starting to gain that understanding, one is called a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span></span></em> <em>anugāmi </em>or a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> A</span></em><em>nugāmi</em>; see "<a href="../../pages/TL.JJ.006/index.html" rel="noopener noreferrer" target="_blank">Sōtapanna Anugami and a Sōtapanna</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Two Types of "<em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>"</h5>
+<p style="text-align: justify;">8. Note the difference in the box next to "<em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">sammā diṭṭhi</span></span></em>" in the two cases. In the mundane path, "<em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">sammā saṅkappa</span>, <span class="pali-term term-highlight" data-term="sammā">sammā</span> vācā, <span class="pali-term term-highlight" data-term="sammā">sammā</span> kammanta</span></em>" are "moral thoughts, speech, and actions" intended to avoid bad outcomes and to seek good outcomes.</p>
+<ul style="text-align: justify;">
+<li>In the Noble path, "<em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">sammā saṅkappa</span>, <span class="pali-term term-highlight" data-term="sammā">sammā</span> vācā, <span class="pali-term term-highlight" data-term="sammā">sammā</span> kammanta</span></em><span>" are "thoughts, speech, and actions" intended to stop the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. </span><strong>One would not do immoral things because there is "no point" in doing such things.</strong> One knows that such things are unfruitful and dangerous in the long run because of their bad outcomes, i.e., they lead to "bad rebirths."</li>
+<li><span>And one becomes more compassionate towards all living beings (not just humans) because one can see that each living being suffers because of ignorance of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s key message.</span><span style="color: #993366;"><strong> Any living being in any realm (including the <em>apāyās</em><span>) had been born human many times in the "beginningless <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process."</span></strong></span></li>
+</ul>
+<h5 style="text-align: justify;">Mundane Eightfold Path</h5>
+<p style="text-align: justify;"><span>9. The above-described unique message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> went underground only 500 years after the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>; thus, only a relatively few have been able to make real progress toward </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> for two thousand years. What is conventionally practiced today is just this mundane Eightfold Path. This is what we call "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" today. See "</span><a href="../../pages/HB.AA.003/index.html" rel="noopener" target="_blank">Counterfeit Buddhism – Current Mainstream Buddhism</a>" and "<a href="../../pages/KD.FF.002/index.html" rel="noopener" target="_blank">Anicca, Dukkha, Anatta – Distortion Timeline</a>."</p>
+<ul style="text-align: justify;">
+<li><span>That superficial or "secular" <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> is not that different from what is advised by most other religions. Thus, it is easier for people to resonate with the mundane concepts in "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>."  </span><em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>,</span></em> for example, is considered the "correct vision" of "how to live a moral life."</li>
+<li>Of course, that is the first necessary step. That will help one to be able to experience the benefits of moral behavior (even in this life as a "<em>nir<i>ā</i><span>misa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>"; see "<a href="../../pages/TL.CC.006/index.html" rel="noopener noreferrer" target="_blank">How to Taste Nibbāna</a>") and then comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, and embark on the Noble Eightfold Path to stop even a trace of suffering in <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Noble Eightfold Path</h5>
+<p style="text-align: justify;">10. One has the ability to become a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></i> (the path to the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i><span> stage) anytime after getting to the "red boxes," i.e., while one is on the mundane Eightfold Path. Of course, one MUST learn the correct version of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> or </span><span style="color: #000000;"><i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></i></span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Anyone at or above the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></i> stage is a <i>Bhauddhayā</i>. See "<a href="../../pages/TL.DD.003/index.html" rel="noopener noreferrer" target="_blank">A Buddhist or a Bhauddhayā?</a>" Even though not in the <i><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></i>, sometimes the word "<i><span>Cūla <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i><span>" (pronounced "chūla <span class="pali-term term-highlight" data-term="sōtapanna">sōtapanna</span>") is also used to describe a </span><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></i>.</li>
+<li style="text-align: justify;"><span>The key is comprehending the "true nature of this world of 31 realms," <span class="pali-term term-highlight" data-term="buddha">Buddha</span> described. That says it is impossible to achieve/maintain anything that can be kept to one's satisfaction (</span><i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>.</span></i>) Thus one gets to suffer (<i><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></i><span>), and thus, one is truly helpless in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (</span><i><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i>). This realization is like lifting a heavy load that one has been carrying, the first taste of <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>.</li>
+<li style="text-align: justify;">This "change of mindset"  for a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> is PERMANENT, i.e., it will not change even in future rebirths. One has attained an "unbreakable"  level of confidence (<em>saddh<i>ā</i></em><span>) in the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and </span><em>Saṅgha</em>.</li>
+</ul>
+<h5 style="text-align: justify;">Material Phenomena Arise After Mental Phenomena</h5>
+<p style="text-align: justify;"><span>11. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> focuses on the mind, as stated in the first Dhammapada verse, "</span><a href="../../pages/DD.AA.001/index.html" rel="noopener" target="_blank">Manōpubbangamā Dhammā..</a><span>" Almost all fundamental concepts in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> involve "mental entities" and not "material entities." For example, when referring to a "</span><em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span>,</span></em>" it is about the "mental image" that arises in the mind; see "<a href="../../pages/KD.II.003/index.html" rel="noopener" target="_blank">Difference Between Physical Rūpa and Rūpakkhandha</a><span>." Thus when the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> states, "</span><em><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, aniccaṁ</span></em>," that refers to the "mental image of a <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> that arises in mind" (it is of "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> nature") and NOT merely to an external <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">Most people incorrectly interpret the verse “<em><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, aniccaṁ</span></em>” to mean an external <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> (like that of a person or a tree) is "impermanent." <span style="color: #3366ff;"><strong><span>It is the tendency to adopt such "mundane interpretations" that led to the distortion of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> only 500 years after the <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong></span>; see "<a href="../../pages/KD.FF.002/index.html" rel="noopener" target="_blank">Anicca, Dukkha, Anatta – Distortion Timeline</a>." </li>
+<li style="text-align: justify;">A person or a tree arises based on mental entities arising in the mind: "<a href="../../pages/DD.AA.001/index.html" rel="noopener" target="_blank">Manōpubbangamā Dhammā..</a>" <span style="color: #993366;"><strong>The mind creates "<em>dhamm<i>ā</i></em>" that gives rise to all material phenomena; </strong><span style="color: #000000;">also see "<a href="../../pages/PS.DD.003/index.html" rel="noopener" target="_blank">Dhamma and Dhammā - Different but Related</a>." </span></span><span>We will discuss that issue in detail (again, with a different approach) in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li style="text-align: justify;">When one becomes a <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span></span></em>, one breaks three of the ten <strong>"mental bonds" (<em>saṁyojana</em>)</strong><span> that bind one to the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. It is a permanent change of mindset.</span></li>
+<li style="text-align: justify;">A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> can follow the rest of the seven steps in the Noble Eightfold Path even without help from others. Thus one will attain the following three stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>) successively by following those steps.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.DD.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0412"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.DD.002
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p style="text-align: justify;"><span>O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (Buddhismo) é muito mais do que viver uma vida moral. Trata-se de eliminar o sofrimento futuro sem deixar vestígios.</span></p>
+<p style="text-align: justify;"><strong>Revisado em 16 de novembro de 2019; <span style="color: #000000;">1º de fevereiro de 2023</span>;<span style="color: #3366ff;"> revisado com novo gráfico em 22 de julho de 2023</span></strong></p>
+<h5 style="text-align: justify;">Todas as religiões são iguais?</h5>
+<p style="text-align: justify;">1. Quando ouço a afirmação frequente: “Todas as religiões são iguais; elas ensinam como viver uma <strong>vida moral</strong><span>”, sinto-me incomodado. Isso porque penso em todos aqueles que desconhecem a mensagem única do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Em particular, essa é a mentalidade daqueles que seguem </span><a href="https://en.wikipedia.org/wiki/Secular_Buddhism">o</a> “<a href="https://en.wikipedia.org/wiki/Secular_Buddhism">Buddhismo secular</a>”.</p>
+<ul style="text-align: justify;">
+<li>A maioria das religiões realmente ensina como viver uma vida moral. E também há evidências de que os ateus podem ser tão morais quanto as pessoas religiosas; veja “<a href="http://localhost/brasileirinho/wp-content/uploads/Morality-in-everyday-life-Science-2014-Hofmann.pdf">Moralidade na vida cotidiana – Ciência – 2014 – Hofmann</a>”.</li>
+<li><span>No entanto, o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> vai além disso. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que, por melhor que vivamos esta vida, isso não nos ajudará a longo prazo no processo de Renascimento. </span></li>
+<li><span>Qualquer sofrimento que se possa experimentar nesta vida não é nada comparado ao sofrimento severo em alguns outros reinos no processo de Renascimento. Compreender isso constitui o primeiro caminho (mundano). O segundo, o Nobre Caminho, é seguido para parar esse sofrimento mais severo permanentemente. Assim, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> dividiu o caminho a ser seguido em dois caminhos.</span></li>
+</ul>
+<h5 style="text-align: justify;">Dois Caminhos Óctuplos</h5>
+<p style="text-align: justify;"><span>2. Fiz um gráfico para ilustrar os dois tipos de Caminhos Óctuplos explicados pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span>:</span></p>
+<p style="text-align: justify;"><img alt="" class="alignnone wp-image-45507 size-full" height="600" src="http://localhost/brasileirinho/wp-content/uploads/A.-Buddha-Dhamma-In-a-Chart-1.jpg" width="960"/></p>
+<p style="text-align: justify;"><strong>Baixar/Imprimir:</strong> “<a href="https://drive.google.com/uc">A. Buddha Dhamma - Em um gráfico</a>”. </p>
+<p style="text-align: justify;">3. No “<a href="https://suttacentral.net/mn117/en/sujato"><em><span><span class="pali-term term-highlight" data-term="mahā">Mahā</span> Cattārisaka <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (MN 117)</a><span>”, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> discutiu que primeiro é preciso completar o </span><strong>caminho óctuplo mundano</strong>. Isso removerá os dez tipos de visões erradas (<em><span><span class="pali-term term-highlight" data-term="micchā">Micchā</span></span></em> <span style="color: #000000;"><em>Diṭṭhi</em></span>) listados no nº 3 do ensaio “<a href="../../pages/SI.AA.005/index.html">Mahā Chattarisaka Sutta (Discurso sobre os Grandes Quarenta)</a>”.</p>
+<ul style="text-align: justify;">
+<li>Depois disso, é preciso compreender as Quatro Nobres Verdades, <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> e <em>Tilakkhaṇa</em> (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>) até certo ponto para iniciar o <strong>Nobre Caminho Óctuplo</strong>. Veja “<a href="../../pages/PS.EE.001/index.html">Paṭicca Samuppāda, Tilakkhaṇa, Quatro Nobres Verdades</a>”.</li>
+<li style="text-align: justify;">Assim, inicia-se o <strong>Nobre Caminho Óctuplo</strong> começando com <em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span></span></em> (transcendental) <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> de um <em>Sótapanna </em>(conjunto de caixas azuis no gráfico). A pessoa teve um “vislumbre do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>”, ou seja, SABE que a felicidade permanente não é possível em nenhum dos 31 reinos e que qualquer esforço que se faça para alcançar tal felicidade é como perseguir uma miragem.</li>
+</ul>
+<h5 style="text-align: justify;">Primeiro, o Caminho Mundano </h5>
+<p style="text-align: justify;">4. Para chegar a um local específico, é preciso primeiro encontrar o caminho. Ao compreender um novo conceito, isso é chamado de “ver com sabedoria”. Antes de ser capaz de “ver” o que significa <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (escapar do sofrimento no processo de Renascimento), é preciso primeiro “ver” ou “estar convencido” de critérios essenciais específicos. Por exemplo, as ações (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) têm consequências (<em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>), existe um processo de Renascimento, etc. </p>
+<ul style="text-align: justify;">
+<li>Muitos Buddhistas hoje acreditam que podem progredir espiritualmente seguindo rituais. No entanto, progredir em ambos os caminhos requer “ver com sabedoria” (ou “<em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> <span class="pali-term term-highlight" data-term="cakkhu">Cakkhu</span></span></em>”)<em>.</em> <span style="color: #3366ff;"><strong>Assim, cada um dos dois caminhos começa com sua versão de <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>.</span></em></strong></span></li>
+<li>O “Caminho Óctuplo mundano” é representado pelo conjunto de caixas em vermelho, começando com <em><span>“<span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> mundano”. Alguém teria esse “<em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em> mundano” quando removesse as dúvidas sobre os dez tipos de visões erradas. Veja “<a href="../../pages/DS.II.004/index.html">Perigos dos Dez Tipos de Visões Erradas e Quatro Caminhos Possíveis</a>”.</li>
+<li>A caixa seguinte representa as versões mundanas de <em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span> Vācā</span></em> e<em><span> <span class="pali-term term-highlight" data-term="sammā">Sammā</span> Kammanta,</span></em> que significam “pensar, falar e agir moralmente para evitar resultados ruins/buscar resultados bons”) e assim por diante até <em><span>“<span class="pali-term term-highlight" data-term="sammā">Sammā</span> Samadhi</span></em> mundano”.</li>
+<li>A maioria dessas etapas (não todas) está presente em outras religiões e no “Buddhismo” convencional ou secular. Elas defendem uma vida moral (ou seja, praticar “boas ações” ou “bom <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>”). Isso significa compreender que as ações (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) têm consequências (<em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em><span>), da mesma forma que no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify;"><span>5. No entanto, a maioria das outras religiões tem como objetivo obter uma vida celestial (permanente) após a morte. Embora viver uma vida moral possa ser propício para obter um Renascimento em um bom reino, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ensinou que essa não será uma existência permanente. Essa é a principal diferença.</span></p>
+<ul style="text-align: justify;">
+<li><strong>Criamos causas e condições para trazer novos renascimentos por meio de nossas ações, palavras e pensamentos impuros, com ganância, raiva e ignorância da verdadeira natureza do mundo; tudo isso é <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</strong> A questão é que <em><span>o <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (mais precisamente, as energias <em>kármicas</em>) leva ao <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> (resultados do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>)<em>.</em> O “bom <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>” leva a renascimentos em “reinos bons”, e <em>o</em> “mau <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>” leva a renascimentos em “reinos maus”. Continuamos nos movendo entre os dois tipos de reinos, e <span style="color: #3366ff;"><strong>essa é a base do processo de renascimento.</strong></span><span> Não há fim para isso até que compreendamos o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> mais profundamente. </span><span style="color: #3366ff;"><strong> </strong></span></li>
+<li><span style="color: #993366;"><strong>Em termos simples, podemos impedir que <em><span>o <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> traga seu <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> eliminando as condições para que tal <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> ocorra, ou seja, <em><span>o <span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> não é predeterminado; </strong><span style="color: #000000;">veja “<a href="../../pages/TL.EE.006/index.html">O que é Kamma? – Tudo é determinado pelo Kamma?</a>”</span> </span>É possível começar a ver a verdade disso quando nos livramos das dez visões erradas enquanto estamos no caminho mundano. Para compreender esse mecanismo, é preciso entender <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>, conforme discutido abaixo.</li>
+</ul>
+<h5 style="text-align: justify;">O que é um “bom Renascimento”?</h5>
+<p style="text-align: justify;">6. As alegrias das vidas celestiais são destacadas nas versões distorcidas do “Buddhismo” que são predominantes hoje em dia. Às vezes, a pessoa é encorajada a “desfrutar dessas vidas celestiais” antes de atingir <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify;">
+<li><strong> </strong>Uma frase usada por alguns <em><span><span class="pali-term term-highlight" data-term="bhikkhū">Bhikkhū</span></span></em> no Sri Lanka é: “Que você desfrute dos prazeres celestiais e então alcance <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> na época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Maitreya (próximo <span class="pali-term term-highlight" data-term="buddha">Buddha</span>)”. Por que não alcançar </span><em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> nesta vida? Quem vai garantir que alguém nascerá humano durante a época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> Maitreya? </span></li>
+<li><span>Eles não compreendem que qualquer pessoa que vive hoje pode não ter a oportunidade de nascer humano durante o tempo do próximo <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Não é surpreendente, pois eles não compreendem a “natureza </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” de qualquer reino neste mundo.</li>
+<li><strong>Esse equívoco no “Buddhismo” surge porque a raridade de um “bom renascimento” não foi compreendida;</strong> veja “<a href="../../pages/TL.GG.004/index.html">Como o Buddha descreveu a chance de renascimento no reino humano</a><span>”. É por isso que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “Nenhuma felicidade pode ser encontrada em nenhum dos 31 reinos” (o verdadeiro significado de </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>). Recomendo vivamente “<a href="../../pages/KD.EE.004/index.html">Nibbāna ‘existe’, mas não neste mundo</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">A visão do Nobre Caminho - “Não Existem Existências Boas Permanentes”</h5>
+<p style="text-align: justify;">7. Mesmo<strong> que se alcance um renascimento celestial na próxima vida, um renascimento futuro nos quatro reinos mais baixos (<em>apāyā</em>) não pode ser evitado sem atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. </strong></p>
+<ul style="text-align: justify;">
+<li><span style="color: #993366;"><strong>Até que se compreenda <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></i>, sempre se valorizará os “prazeres sensoriais”.</strong></span> Isso vale tanto para ateus quanto para teístas. Estes últimos também acreditam que a felicidade futura está no céu permanente (a maioria das religiões) OU na felicidade temporária nos mundos celestiais (os “Buddhistas” tradicionais). A diferença entre um “Buddhista” tradicional e um <em>Bhauddhayā</em> (ou uma Pessoa Nobre ou um “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>”) é discutida em “<a href="../../pages/TL.DD.003/index.html">Um Buddhista ou um Bhauddhayā?</a>”.</li>
+<li>Começa-se no transcendental (<em><span><span class="pali-term term-highlight" data-term="lokuttara">Lokuttara</span></span></em>) ou no Nobre Caminho Óctuplo quando se compreende os perigos do processo de renascimento e se TORNA um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Veja “<a href="../../pages/PS.EE.001/index.html">Paṭicca Samuppāda, Tilakkhaṇa, Quatro Nobres Verdades</a>”.</li>
+<li>Quando se começa a adquirir essa compreensão, é-se chamado de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span></span></em> <em>anugāmi </em>ou <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em>; veja “<a href="../../pages/TL.JJ.006/index.html">Sotāpanna Anugami e um Sotāpanna</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Dois tipos de <em><span>“<span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>”</h5>
+<p style="text-align: justify;">8. Observe a diferença na caixa ao lado de <em><span>“<span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span></span></em>” nos dois casos. No caminho mundano, <em><span>“<span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span>, <span class="pali-term term-highlight" data-term="sammā">sammā</span> vācā, <span class="pali-term term-highlight" data-term="sammā">sammā</span> kammanta</span></em>” são “pensamentos, palavras e ações morais” destinados a evitar resultados ruins e buscar resultados bons.</p>
+<ul style="text-align: justify;">
+<li>No caminho nobre, “<em><span><span class="pali-term term-highlight" data-term="sammā saṅkappa">Sammā Saṅkappa</span>, <span class="pali-term term-highlight" data-term="sammā">sammā</span> vācā, <span class="pali-term term-highlight" data-term="sammā">sammā</span> kammanta</span></em>” são “pensamentos, palavras e ações” destinados a interromper o processo de Renascimento. <strong>A pessoa não faria coisas imorais porque “não há sentido” em fazer tais coisas.</strong> Sabe-se que tais coisas são infrutíferas e perigosas a longo prazo devido aos seus maus resultados, ou seja, elas levam a “maus renascimentos”.</li>
+<li><span>E torna-se mais compassivo para com todos os seres vivos (não apenas humanos), porque se percebe que cada ser vivo sofre devido à ignorância da mensagem fundamental do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span><span style="color: #993366;"><strong> Qualquer ser vivo em qualquer reino (incluindo os <em>apāyās</em>) já nasceu humano muitas vezes no “processo de renascimento sem início”.</strong></span></li>
+</ul>
+<h5 style="text-align: justify;">O Caminho Óctuplo Mundano</h5>
+<p style="text-align: justify;"><span>9. A mensagem única do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descrita acima foi ocultada apenas 500 anos após o <span class="pali-term term-highlight" data-term="buddha">Buddha</span>; assim, apenas um número relativamente pequeno de pessoas foi capaz de fazer progressos reais em direção </span><em><span>ao <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> por dois mil anos. O que é convencionalmente praticado hoje é apenas este Caminho Óctuplo mundano. É isso que chamamos de “Buddhismo” hoje. Veja “<a href="../../pages/HB.AA.003/index.html">Buddhismo Falsificado – Buddhismo Convencional Atual</a>” e “<a href="../../pages/KD.FF.002/index.html">Anicca, Dukkha, Anattā – Linha do Tempo da Distorção</a>”.</p>
+<ul style="text-align: justify;">
+<li>Esse Buddhismo superficial ou “secular” não é tão diferente do que é aconselhado pela maioria das outras religiões. Assim, é mais fácil para as pessoas se identificarem com os conceitos mundanos do “Buddhismo”. <em><span><span class="pali-term term-highlight" data-term="sammā diṭṭhi">Sammā Diṭṭhi</span>,</span></em> por exemplo, é considerado a “visão correta” de “como viver uma vida moral”.</li>
+<li>É claro que esse é o primeiro passo necessário. Isso ajudará a pessoa a ser capaz de experimentar os benefícios do comportamento moral (mesmo nesta vida como um <em><i>“</i>nir<i>ā</i><span>misa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>”; veja “<a href="../../pages/TL.CC.006/index.html">Como saborear o Nibbāna</a>”) e, então, compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em> e embarcar no Nobre Caminho Óctuplo para acabar com até mesmo um traço de sofrimento no <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify;">Nobre Caminho Óctuplo</h5>
+<p style="text-align: justify;">10. A pessoa tem a capacidade de se tornar um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i> (o caminho para o estágio <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i><span>) a qualquer momento depois de chegar às “caixas vermelhas”, ou seja, enquanto estiver no Caminho Óctuplo mundano. É claro que a pessoa DEVE aprender a versão correta do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> ou </span><span style="color: #000000;"><i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>.</span></i></span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Qualquer pessoa no estágio <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i> ou acima dele é um <i>Bhauddhayā</i>. Veja “<a href="../../pages/TL.DD.003/index.html">Um Buddhista ou um Bhauddhayā?</a>” Mesmo não estando no <i><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></i>, às vezes a palavra “<i>Cūla </i>Sotāp<i>anna</i><span>” (pronuncia-se “chūla <span class="pali-term term-highlight" data-term="sōtapanna">sōtapanna</span>”) também é usada para descrever um </span><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i>.</li>
+<li style="text-align: justify;"><span>A chave é compreender a “verdadeira natureza deste mundo de 31 reinos”, descrita por <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Isso significa que é impossível alcançar/manter qualquer coisa que possa ser mantida para a satisfação de alguém (</span><i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></i>)<i>.</i> Assim, a pessoa passa a sofrer (<i><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></i>) e, portanto, fica verdadeiramente impotente no processo de Renascimento (<i>Anattā</i>). Essa compreensão é como levantar um fardo pesado que se carregava, o primeiro gostinho do <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>.</li>
+<li style="text-align: justify;">Essa “mudança de mentalidade” para um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> é PERMANENTE, ou seja, não mudará mesmo em renascimentos futuros. A pessoa alcançou um nível “inquebrantável” de confiança (<em>Saddh<i>ā</i></em><span>) no <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, no <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e no </span><em>Saṅgha</em>.</li>
+</ul>
+<h5 style="text-align: justify;">Os fenômenos materiais surgem após os fenômenos mentais</h5>
+<p style="text-align: justify;"><span>11. O <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> concentra-se na mente, conforme declarado no primeiro versículo do Dhammapada, “</span><a href="../../pages/DD.AA.001/index.html">Manōpubbangamā Dhammā...</a><span>”. Quase todos os conceitos fundamentais do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> envolvem “entidades mentais” e não “entidades materiais”. Por exemplo, quando se refere a um “</span><em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>”<em>,</em> trata-se da “imagem mental” que surge na mente; veja “<a href="../../pages/KD.II.003/index.html">Diferença entre Rūpa físico e Rūpakkhandha</a><span>”. Assim, quando o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirma: “</span><em><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, aniccaṁ</span></em>”, isso se refere à “imagem mental de um <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> que surge na mente” (é de “natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>”) e NÃO apenas a um <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em> externo.</p>
+<ul>
+<li style="text-align: justify;">A maioria das pessoas interpreta incorretamente o versículo “<em><span>Rūpaṁ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, aniccaṁ</span></em>” como significando que um <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> externo (como o de uma pessoa ou uma árvore) é “impermanente”. <span style="color: #3366ff;"><strong><span>É a tendência de adotar tais “interpretações mundanas” que levou à distorção do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> apenas 500 anos após o <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></strong></span>; veja “<a href="../../pages/KD.FF.002/index.html">Anicca, Dukkha, Anattā – Linha do tempo da distorção</a>”. </li>
+<li style="text-align: justify;">Uma pessoa ou uma árvore surge com base em entidades mentais que surgem na mente: “<a href="../../pages/DD.AA.001/index.html">Manōpubbangamā Dhammā...</a>”. <span style="color: #993366;"><strong>A mente cria “<em>Dhamm<i>ā</i></em>” que dá origem a todos os fenômenos materiais; </strong><span style="color: #000000;">veja também “<a href="../../pages/PS.DD.003/index.html">Dhamma e Dhammā – Diferentes, mas relacionados</a>”. </span></span>Discutiremos essa questão em detalhes (novamente, com uma abordagem diferente) em ensaios futuros.</li>
+<li style="text-align: justify;">Quando alguém se torna um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, rompe três dos dez <strong>“laços mentais” (<em>saṁyojana</em>)</strong> que o prendem ao processo de Renascimento. É uma mudança permanente de mentalidade.</li>
+<li style="text-align: justify;">Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> pode seguir os restantes sete passos do Nobre Caminho Óctuplo, mesmo sem a ajuda de outros. Assim, alcançará os três estágios seguintes do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>) sucessivamente, seguindo esses passos.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.DD.001/index.html">Buddha Dhamma And Buddhism</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.DD.003/index.html">A Buddhist Or A Bhouddhaya</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.DD.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Buddha Dhamma And Buddhism</span>
+        
+        <span class="pathway-title title-pt">Buddha Dhamma e Buddhismo</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.DD.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">A Buddhist Or A Bhouddhaya</span>
+        
+        <span class="pathway-title title-pt">Um Buddhista ou um Bhouddhaya</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

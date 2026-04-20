@@ -1,0 +1,490 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sotapanna Anugami And Sotapanna | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 82 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.JJ.006</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sotapanna Anugami And Sotapanna</h1>
+    
+    <h1 class="title-pt">Sotāpanna Anugami e Sotāpanna</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.JJ.006</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>12</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.JJ.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0488"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.JJ.006</td></tr><tr><td>Fin-dex</td><td>0488</td></tr><tr><td>Slug</td><td>sotapanna-anugami-and-sotapanna</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Sotapanna Anugami And Sotapanna</td></tr></table></div></div><strong>Revised July 27, 2017; January 15, 2018; September 26, 2018; February 13, 2019; April 13, 2020; August 11, 2021; <span style="color: #0000ff">July 18, 2022 (#5 added)</span></strong>
+<p style="text-align: justify">Here we discuss the difference between a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> and one striving for the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. The latter is on the right path (a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></em>).</p>
+<h5 style="text-align: justify">Who Belongs to the <em>Saṅgha</em></h5>
+<p style="text-align: justify">1. The word <i>Saṅgha</i> nowadays refers to the <i><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></i>. Yet <em>Saṅgha</em> is “<i>san</i>” + “<i>gha</i>,” or those who have either gotten rid of or are on the way to getting rid of ”<i>san.</i>” By that definition, one does not have to be a <i><span><span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></i> to belong to the <i>Saṅgha</i>; see, "<a href="../../pages/KD.DD.002/index.html">What is "San"?</a>.</p>
+<p style="text-align: justify">In the salutation to the <i>Saṅgha</i>, they are referred to as “<i>aṭṭha purisa puggalā.</i>” See "<a href="../../pages/BC.AA.004/index.html" rel="noopener noreferrer" target="_blank">Supreme Qualities of Buddha, Dhamma, Saṅgha</a>." Here, “<i>aṭṭha</i>” is eight, “<i>purisa</i>” does not mean male but one with higher virtues and “<i><span><span class="pali-term term-highlight" data-term="puggala">puggala</span></span></i>” is a person.  Thus there are eight types of people belonging to the <i>Saṅgha</i>. Who are the eight?</p>
+<ul style="text-align: justify">
+<li>There are four who have started on the Noble Path/fulfilled the conditions for the four stages of <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>: <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span><em>Anugāmi</em><span>, <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span><em>Anugāmi</em><span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi </span><em>Anugāmi</em>, Anāgāmi,</i><i><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span><em><span>Anugāmi, and <span class="pali-term term-highlight" data-term="arahant">Arahant</span>. </span></em></i>Four are in the <i><em>Anugāmi</em></i> stages (working toward a given stage,) and the other four have reached their respective stage.</li>
+<li><b>A special </b><b><i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i></b><b> and </b><b><i><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></i></b><b> happens for Noble </b><b><i>kamm<em>ā</em></i></b> (efforts toward a given stage.)<b> Once "what needs to be done" is fulfilled, the </b><b><i><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></i></b><b><span> follows in the next <span class="pali-term term-highlight" data-term="citta">citta</span> within</span></b><b> a second.</b> Thus when one gets into the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span></span></i> <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, for example, one receives the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="phala">phala</span> </span></i>in the next<i><span> <span class="pali-term term-highlight" data-term="citta">citta</span>.</span></i> Thus one becomes a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i> in two consecutive thought moments.</li>
+<li>However, when one starts grasping the <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>), one becomes a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i><em> Anugāmi</em> (one on the way to attaining the <em>Sotapnna</em> stage). Thus one becomes free of the <em>apāyās</em>. In later commentaries, they are also called "<em>Chula Sotapnna</em>" or a "junior <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>."</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> Explanation</h5>
+<p style="text-align: justify">2. The <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> for a <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em><span> is discussed at the end of the <span class="pali-term term-highlight" data-term="post">post</span>, “</span><a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vithi – Processing of Sense Inputs</a>“:</p>
+<p style="text-align: justify">B B B “BC BU MD P U A G Pa Fr Fr” B B B</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">A <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i><em> Anugāmi </em>is getting closer to the “change of lineage” or G. The earlier stages of P, U, and A, may be reached gradually. Once that level of comprehension is complete, one makes that transition (G), completes the <em><span>lokottara <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, and immediately receives the <em><span><span class="pali-term term-highlight" data-term="phala">phala</span></span></em>.</li>
+<li style="text-align: justify">In a strict sense, it may be better to call one a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i><em><span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi </span></em>(one trying to get to the <em><span><span class="pali-term term-highlight" data-term="magga">magga</span></span></em> <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) rather than <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i><em> Anugāmi</em><em>.</em></li>
+<li style="text-align: justify">The eight Noble Persons (<em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em>) are listed in the "<a href="https://suttacentral.net/an8.59/pli/ms" rel="noopener noreferrer" target="_blank">Paṭha­ma Pugga­la­ Sutta (AN 8.59)</a>" and in "<a href="https://suttacentral.net/an9.9/pli/ms" rel="noopener noreferrer" target="_blank">Puggala Sutta (AN 9.9)</a>". In both <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></em> is "<em><span>sotā­patti­ <span class="pali-term term-highlight" data-term="phala">phala</span>­ sacchi­kiriyāya paṭipannō."</span></em> One on the way to becoming an <em>Anāgāmi</em> is "<em><span>anāgā­mi­ <span class="pali-term term-highlight" data-term="phala">phala</span>­ sacchi­kiriyāya paṭipannō,"</span></em> etc. In the second <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>, an average human is a "<em>puthujjanō."</em></li>
+</ul>
+<h5 style="text-align: justify">The Eight Noble Persons</h5>
+<p style="text-align: justify">3. Thus it is clear that “<i>aṭṭha purisa puggalā</i>” consists of the eight <i><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></i> (Noble Persons) listed in #1. They are <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi, <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> Anugāmi, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi Anugāmi, Anāgāmi, </span></i><i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span> Anugāmi, </span></i>and<i><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span>.</span></i></p>
+<ul style="text-align: justify">
+<li>A critical point to note is the change from being an "average human" (<em>puthuj­jana</em>) to the Noble Person (<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>) status. <span style="color: #0000ff"><strong>That transition happens at the "<em>gotrabu</em>" ("<em>gotra</em>" is the clan or lineage)</strong></span> <strong><span style="color: #0000ff">before the <em><span><span class="pali-term term-highlight" data-term="sotapanna">Sotapanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span>/<span class="pali-term term-highlight" data-term="phala">phala</span></span></em> transition</span></strong>. See the "<em><span><span class="pali-term term-highlight" data-term="citta vīthi">Citta Vīthi</span></span></em> for Attainment of <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span>" </span></em><span>section at the end of the <span class="pali-term term-highlight" data-term="post">post</span></span><em>, "</em><a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vithi – Processing of Sense Inputs</a>." Also, see "<a href="../../pages/TL.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Sōtapanna Anugāmi – No More Births in the Apāyās</a>."</li>
+<li style="text-align: justify">The types of <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> eliminated at each stage are discussed in "<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">The Way to Nibbāna – Removal of Āsavā</a>."</li>
+<li style="text-align: justify">How <em>lōbha, dōsa, mōha</em>, and also the ten fetters (<em>samyōjana</em>) are removed at each stage are discussed in "<a href="../../pages/SI.CC.006/index.html" rel="noopener noreferrer" target="_blank">Relinquishing Defilements via Three Rounds and Four Stages</a>."</li>
+<li>Both a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></i> and a<i><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></i>would have "<a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – The Four Qualities of a Sotāpanna</a>."</li>
+</ul>
+<h5 style="text-align: justify">The Stages of<em><span> <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em></h5>
+<p style="text-align: justify">4. A <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2"><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi/</span></i></span></span></span></span><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i> is someone who has seen<i><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>, not the full <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>, but a glimpse of it. One becomes a <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2"><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></i></span></span></span></span> when one removes <i><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></i> (ignorance) about the actual status of affairs in “this world of 31 realms”; see #5 below. With that understanding, their mind is purified to the extent that it will not allow them to do an immoral act that could lead to a birth in the four lower worlds (<i>apāyās</i>). Not only that, but one will also not “latch onto” a <i><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></i> resulting from such a robust immoral act in the past. Thus, an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> above <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2"><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></i></span></span></span></span> will never be born in an<i><span> <span class="pali-term term-highlight" data-term="apāya">apāya</span></span></i> again.</p>
+<p style="text-align: justify">The other three stages have similar “demarcation thresholds.”</p>
+<ul style="text-align: justify">
+<li>A <i><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></i> will never again be born in the human or lower four realms. They can still be born in the <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> worlds (i.e., in <i><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka.</span></i>) But those <i><span><span class="pali-term term-highlight" data-term="devas">devas</span></span></i> do not have “flesh and blood” bodies that lead to physical discomforts and diseases. In the <i><span><span class="pali-term term-highlight" data-term="deva">deva</span> lōka</span></i>, beings have subtle bodies that are not subject to old age and diseases.</li>
+<li>An <i>Anāgāmi</i> has overcome any desire to be born anywhere in the <i><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></i>, i.e., the 11 lowest realms. They have no <i><span><span class="pali-term term-highlight" data-term="kāma rāga">kāma rāga</span></span></i> (desire for sense pleasures) or <i><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></i> (hate).</li>
+<li>An <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i> has no desire to be born anywhere in the 31 realms and thus will never be reborn “in this world.” They have attained full <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>, full release.</li>
+</ul>
+<p style="text-align: justify">5. Subsection <span class="segment"><span class="root"><span class="text">1.1.55. <em>Āsavakkhayañāṇaniddesa </em>(toward the end of the "</span></span></span><span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/ps1.1/pli/ms" rel="noopener" target="_blank">1.1. <em>Ñāṇakathā</em></a>" section) of the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> Commentary "</span></span></span><em>Paṭisambhidāmagga</em>" describes three types of <span class="segment"><span class="root"><span class="text"><em>ñāṇa </em>attained on the way to the <em>Arahanthood</em>: "<em><span class="segment" id="ps1.1:512.1">Anaññātaññassāmītindriyaṁ kati ṭhānāni gacchati, aññindriyaṁ kati ṭhānāni gacchati, aññātāvindriyaṁ kati ṭhānāni gacchati? </span><strong><span class="segment" id="ps1.1:512.2">Anaññātaññassāmītindriyaṁ ekaṁ ṭhānaṁ gacchati—</span></strong><span class="segment" id="ps1.1:512.3"><strong>sotāpattimaggaṁ</strong>. </span><span class="segment" id="ps1.1:512.4">Aññindriyaṁ cha ṭhānāni gacchati—</span><span class="segment" id="ps1.1:512.5">sotāpattiphalaṁ, sakadāgāmimaggaṁ, sakadāgāmiphalaṁ, anāgāmimaggaṁ, anāgāmiphalaṁ, arahattamaggaṁ. </span><span class="segment" id="ps1.1:512.6">Aññātāvindriyaṁ ekaṁ ṭhānaṁ gacchati—</span></em><span class="segment" id="ps1.1:512.7"><em>arahattaphalaṁ</em>."</span></span></span></span></p>
+<ul style="text-align: justify">
+<li>It says the following. The first <span class="segment"><span class="root"><span class="text"><em>ñāṇa </em>is <em><strong><span class="segment" id="ps1.1:512.2">Anaññātaññassāmītindriya </span></strong></em><span class="segment" id="ps1.1:512.2">attained at the <i><strong><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></strong> </i>stage. The second one, <em><span class="segment" id="ps1.1:512.4">Aññindriya, is </span></em><span class="segment" id="ps1.1:512.4">attained and optimized at the intermediate six stages (<em><span class="segment" id="ps1.1:512.5">sotāpattiphala </span></em><span class="segment" id="ps1.1:512.5">through <em><span><span class="pali-term term-highlight" data-term="arahattamagga">arahattamagga</span>.</span></em>) The third one, <em><span class="segment" id="ps1.1:512.6">Aññātāvindriya, </span></em><span class="segment" id="ps1.1:512.6">is attained at the</span><em><span class="segment" id="ps1.1:512.6"><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span> <span class="pali-term term-highlight" data-term="phala">phala</span> </span></span></em><span class="segment" id="ps1.1:512.6">moment.</span></span></span></span></span></span></span></li>
+<li>Thus, something definitive occurs when one gets to the <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2"><i><strong><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></strong> </i>stage.</span></span></span></span></li>
+</ul>
+<h5 style="text-align: justify">It Is a Step-by-Step Process</h5>
+<p style="text-align: justify"><span>6. One must first hear the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s real message before one can fulfill the conditions to attain the </span><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> </span></i>stage. Thus, they need to go beyond the mundane eightfold path; see "<a href="../../pages/MS.BB.001/index.html">Buddha Dhamma - In a Chart</a>." <b></b></p>
+<ul style="text-align: justify">
+<li><b>In particular, a </b><b><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi </span></i></b><b>(or </b><b><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmika </span></i>or </b><b></b><b><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i>) </b><b>has heard about </b><b><i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i></b><b> (</b><b><i><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></i></b><b>), or the “true nature of this world with 31 realms.” Of course, those concepts must come from a Noble Person who has grasped the basic idea.</b></li>
+<li>That is why the association with a "<em>kalyāṇamitta</em>" or "<i><span><span class="pali-term term-highlight" data-term="kalyāṇa">kalyāṇa</span> mitra</span></i>" (basically a "Noble friend," i.e., an <i><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></i>) is a pre-condition for attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage; see, "<a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Four Conditions for Attaining Sōtapanna Magga/Phala</a>."</li>
+<li><span style="color: #0000ff">Once attaining the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi,</span></i> one becomes a Noble Person (one of the <em><span>aṭṭha purisa <span class="pali-term term-highlight" data-term="puggala">puggala</span></span></em>) and thus is free from the <em>apāyās</em>,</span> see "<a href="../../pages/TL.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Sōtapanna Anugāmi – No More Births in the Apāyās</a>."</li>
+</ul>
+<h5 style="text-align: justify">Difference Between <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i> and a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i></h5>
+<p style="text-align: justify">7. Let us take a simile to see this “demarcation” between <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i> and a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i>.</p>
+<ul style="text-align: justify">
+<li><span>Suppose that a precious treasure is known to be at the peak of a mountain. But it is not generally known where that mountain is. That is pretty much the status of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> today. Most people know that it is valuable but do not know the correct version among the many different versions put forth today.</span></li>
+<li><span>As the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said in his first sermon, “my <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> has not been known to the world before.”  Thus one needs a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> or a true disciple of <span class="pali-term term-highlight" data-term="buddha">Buddha</span> to show them what </span><i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i> is and how to get to the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i> stage. That is an essential and critical point.</li>
+<li>Suppose someone gets directions to the correct mountain with the treasure. Then they know which country to go to and which geographic location in that country the mountain is. <b>This person is like one on the path to becoming a </b><b><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span>, i.e., a <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span> Anugāmi.</span></i></b><span> They know exactly where to go and have a detailed map. And they have to get it from a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> or a true disciple of a <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. A true disciple has at least seen the mountain (a </span><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i>), if not been to the top (an <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i>).</li>
+<li>Now they make the journey to the country and region where the mountain is. On the way there, they can verify the landmarks given by the “friend” (<i><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></i>). Similarly, a <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span> Anugāmi</span></i> spends time contemplating the newly learned concepts of <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>, <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></i>, etc.</li>
+<li>Thus, with confidence, the person gets closer and closer to the mountain and starts seeing the mountain at some point. <b>At that point, the person has “crossed the boundary” to become a </b><b><i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></i></b><b>.</b> They have seen a glimpse of<i><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i> for the first time. Now they can complete the journey without any help, even if the physical map is lost (i.e., even in a future life).</li>
+</ul>
+<h5 style="text-align: justify">An Analogy</h5>
+<p style="text-align: justify"><span>8. Going back to the simile of the mountain with treasure, different versions of “<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>” identify the mountain as being in different geographic locations. So people travel long distances and much effort to reach various mountains. All these are in remote places, and the journey is hard.</span></p>
+<ul style="text-align: justify">
+<li><span>Many people are wasting their time and effort targeting the "wrong mountain.” So, how does one know which “mountain” or version to pick? That is why it takes effort to weed out the wrong/incompatible versions of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>; see, “</span><a href="../../pages/HB.AA.011/index.html">Why is it Critical to Find the Pure Buddha Dhamma?</a>”.</li>
+</ul>
+<h5 style="text-align: justify">Grasping the<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> (Unfruitful) Nature of This World</h5>
+<p style="text-align: justify">9. In technical terms, one gets to the <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span>/<span class="pali-term term-highlight" data-term="phala">phala</span></span></i> when one understands <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i> (the three characteristics of this world or <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>) to a minimum level, where one begins to realize that there is nothing in “this world” that can provide meaningful and unconditioned happiness.</p>
+<ul style="text-align: justify">
+<li>When one comprehends <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i> to the extent that one can “see” this concept, <b>one is said to have the “</b><b><i>anulōma ñāna.</i></b><b>”</b> Here, “<i>anu</i>” means “through the understanding of <i><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>,”</span></i> “<i>lo</i>” means “craving for worldly things,” and “<i>ma</i>” means “removal,” and thus “<i>anulōma</i>” means “removal of craving for worldly things to some extent via the comprehension of <i><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span>.”</span></i></li>
+<li>We came across "<i>anu</i>" also in "<i><span><span class="pali-term term-highlight" data-term="anupassanā">anupassanā</span></span></i>"; see, "<a href="../../pages/BM.AA.004/index.html">What do all these Different Meditation Techniques Mean?</a><span>". In a previous <span class="pali-term term-highlight" data-term="post">post</span>, I also discussed how “</span><i>lōbha</i>” comes from “<i>lo</i>” + “<i>bha</i>” or “immersed in craving for worldly things.”</li>
+<li>Thus it makes a huge difference if one incorrectly interprets <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></i> as “impermanence” and <i><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i> as “no-self”; see, “<a href="../../pages/KD.FF.003/index.html">Anicca, Dukkha, Anatta - Wrong Interpretations.”</a></li>
+</ul>
+<p style="text-align: justify">10. Suffering is prevalent in the lower four realms (<i>apāyās.</i>) We can see at least one of those, the animal realm. Let us discuss one way to contemplate <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></i> using an example from this life.</p>
+<ul style="text-align: justify">
+<li>When young, it seems like one can get anything one wants by working hard. But we all have seen how our parents, grandparents, or even famous people spent their old age suffering from various ailments and finally dying helplessly.</li>
+<li>They may have “accomplished” many things. But they spend their whole lives working hard to achieve those, and then they have to leave it all behind.</li>
+<li>One may have a beautiful body when young, but for how long? We can see how that old movie star ages now. Some of them commit suicide because it is depressing to remember the “good old days” when one had all the attention in the world, but now it all seems to be slipping away.</li>
+<li>That is <i><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></i> and <i><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>.</span></i> No matter how much we try, whatever we gain in this world lasts only a short time (in the<i> saṃsāric</i> time scale), and one becomes helpless in the long run. At some point, one realizes this and becomes distraught.</li>
+</ul>
+<h5 style="text-align: justify">One Creates One's Own Future Suffering</h5>
+<p style="text-align: justify">11. When one comprehends the true nature of this world, such sad thoughts do not arise. People who follow the Path and even those who have wisdom from previous lives (<i><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></i>) can realize that “all things in this world” are subjected to this arising/destruction process. Beings come to existence and die. But those existence are "created" by oneself. See "<a href="../../pages/DS.BB.010/index.html" rel="noopener noreferrer" target="_blank">Origin of Life – One Creates One’s Own Future Lives</a>."</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">That understanding itself leads to ease of mind. A stronger version of this "ease of mind" is the “<i>anulōma shānthi</i>” that one experiences when attaining the "<i>anulōma ñāna</i>”  (pronounced “anulōma gn<i>ā</i>na”).</li>
+<li>The key to attaining the  "<i>anulōma ñāna</i><span>” is to realize the fleeting nature of anything in this world. The next <span class="pali-term term-highlight" data-term="post">post</span> discusses this.</span></li>
+</ul>
+<h5 style="text-align: justify"><i style="text-align: justify">Anulōma Ñāna </i>and<i style="text-align: justify"> S<span style="text-align: justify"><em>ammatta Niy<i>ā</i>ma</em></span></i></h5>
+<p style="text-align: justify">12. With the "<i>anulōma ñāna,”</i> one realizes that <span style="font-size: 1.125rem;letter-spacing: 0px">permanently </span><span style="font-size: 1.125rem;letter-spacing: 0px">getting rid of suffering is impossible anywhere in the 31 realms. It can be achieved only by attaining </span><em style="font-size: 1.125rem;letter-spacing: 0px"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>. </span></em><span style="font-size: 1.125rem;letter-spacing: 0px">By this time, one has felt the </span><em style="font-size: 1.125rem;letter-spacing: 0px"><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span>,</span></em><span style="font-size: 1.125rem;letter-spacing: 0px"> and thus one needs to cultivate, "</span><em style="font-size: 1.125rem;letter-spacing: 0px"><span><span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> santaṃ <span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> paṇītaṃ</span></em><span style="font-size: 1.125rem;letter-spacing: 0px">..." the release one has felt and the value of </span><em style="font-size: 1.125rem;letter-spacing: 0px"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span style="font-size: 1.125rem;letter-spacing: 0px">. </span><span style="color: #0000ff">Then one truly embarks on the Noble Eightfold Path and is said to get to "<strong><em>sammatta niy<i>ā</i>ma"</em></strong> and to<em><span> <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="phala">phala</span></span></em>.</span></p>
+<ul style="text-align: justify">
+<li>Therefore, it is critical to realize BOTH the unfruitful nature of this world with <span style="text-align: justify"> "</span><span style="color: #0000ff"><strong><i style="text-align: justify">anulōma ñāna</i></strong></span><span style="text-align: justify"><span>” AND to realize the value and cooling down due to <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, i.e., </span><span style="color: #0000ff">"<strong><em>sammatta niy<i>ā</i>ma."</em></strong></span></span></li>
+<li><span>Further details in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/KD.CC.003/index.html" rel="noopener" target="_blank">Anuloma Khanti and Sammattaniyāma – Pre-requisites for a Sotapanna</a>."</li>
+</ul>
+<p style="text-align: justify">13. Thus, it is critical to understand that <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is "<em><span>nicca, <span class="pali-term term-highlight" data-term="sukha">sukha</span>, aṭṭha"</span></em> after realizing that this world is "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>."</span></em> A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> has understood both.</p>
+<ul>
+<li style="text-align: justify">Anything in this world (except <i>nama gotta</i>) is a <i><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></i>, i.e., <span style="color: #0000ff">it comes into being due to causes</span>, stays in existence for a time, and then inevitably is destroyed. The arising of a <i><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></i> is called “<i>udaya</i><span>” in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>, and the destruction is called “</span><i>vaya.</i>” thus, "<i>udayavaya ñāna</i>” is the knowledge about that process.</li>
+<li style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is the only <em>asankata.</em><span style="color: #0000ff"> Removal of all causes leads to </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li style="text-align: justify"><b>Many people have even attained </b><b><i>Arahanthood</i></b><b> without actually having heard about these terms like “</b><b><i>udayavaya</i></b><b>” or “</b><b><i>anulōma.”</i></b><b>  </b>Thus it is imperative to realize that just reading about these concepts does not get one anywhere. One needs to "see" the <i><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></i> or the unfruitfulness of craving for <i><span><span class="pali-term term-highlight" data-term="saṅkhata">saṅkhata</span></span></i> (through <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>) by true meditation or contemplation.</li>
+<li style="text-align: justify"><span>Thus a <span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> has the </span><i>udayavaya</i> (sometimes called <i><span><span class="pali-term term-highlight" data-term="udayabbaya">udayabbaya</span></span></i>)<i> ñāna; </i>see, "<a href="../../pages/TL.LL.001/index.html" rel="noopener noreferrer" target="_blank">Udayavaya Ñāna</a>."</li>
+</ul>
+Next, "<a href="../../pages/TL.JJ.008/index.html" rel="bookmark noopener noreferrer" target="_blank">Four Conditions for Attaining Sōtapanna Magga/Phala</a>", .........
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.JJ.006"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0488"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.JJ.006
+Language:     pt-BR
+Generated-At: 2026-03-10T23:21:03Z
+Engine:       DeepL API (Glossary V5)
+-->
+<strong>Revisado em 27 de julho de 2017; 15 de janeiro de 2018; 26 de setembro de 2018; 13 de fevereiro de 2019; 13 de abril de 2020; 11 de agosto de 2021; <span style="color: #0000ff">18 de julho de 2022 (adicionado o nº 5)</span></strong>
+<p style="text-align: justify">Aqui discutimos a diferença entre um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> e alguém que se esforça para alcançar o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Este último está no caminho certo (um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em>).</p>
+<h5 style="text-align: justify">Quem pertence ao <em>Saṅgha</em></h5>
+<p style="text-align: justify">1. A palavra <i>Saṅgha</i> hoje em dia se refere aos <i><span><span class="pali-term term-highlight" data-term="bhikkhū">Bhikkhū</span></span></i>. No entanto, <em>Saṅgha</em> é “<i>san</i>” + “<i>gha</i>”, ou aqueles que se livraram ou estão a caminho de se livrar do “<i>san”.</i> Por essa definição, não é preciso ser um <i><span><span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span></i> para pertencer ao <i>Saṅgha</i>; veja “<a href="../../pages/KD.DD.002/index.html">O que é “San”?</a>”.</p>
+<p style="text-align: justify">Na saudação ao <i>Saṅgha</i>, eles são referidos como “<i>aṭṭha purisa puggalā”.</i> Veja “<a href="../../pages/BC.AA.004/index.html" rel="noopener noreferrer" target="_blank">Qualidades supremas de Buddha, Dhamma, Saṅgha</a>”. Aqui, “<i>aṭṭha</i>” significa oito, “<i>purisa</i>” não significa homem, mas alguém com virtudes superiores, e “<i><span><span class="pali-term term-highlight" data-term="puggala">Puggala</span></span></i>” é uma pessoa. Assim, existem oito tipos de pessoas pertencentes ao <i>Saṅgha</i>. Quem são os oito?</p>
+<ul style="text-align: justify">
+<li>Existem quatro que iniciaram o Nobre Caminho/cumprir as condições para os quatro estágios do <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>: <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> </span><em>Anugāmi</em><span>, <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> </span><em>Anugāmi</em><span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi </span><em>Anugāmi</em><span>, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span> </span></i><i><em><span>Anugāmi e <span class="pali-term term-highlight" data-term="arahant">Arahant</span>. </span></em></i>Quatro estão nos estágios <i><em>Anugāmi</em></i> (trabalhando para alcançar um determinado estágio) e os outros quatro alcançaram seus respectivos estágios.</li>
+<li><b>Um</b> <b><i><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></i></b><b> e </b><b><i><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></i></b> <b>especiais acontecem para o Noble </b><b><i>kamm<em>ā</em></i></b> (esforços em direção a um determinado estágio). <b>Uma vez que “o que precisa ser feito” é cumprido, o </b><b><i><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></i></b><b><span> segue no próximo <span class="pali-term term-highlight" data-term="citta">Citta</span> em um segundo.</span></b> Assim, quando alguém entra no <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span></span></i> <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>, por exemplo, recebe o <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="phala">Phala</span> </span></i>no próximo<i><span> <span class="pali-term term-highlight" data-term="citta">Citta</span>.</span></i> Assim, torna-se um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i> em dois momentos consecutivos de pensamento.</li>
+<li>No entanto, quando se começa a compreender o <em>Tilakkhaṇa</em> (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>), torna-se um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i><em> Anugāmi</em> (alguém a caminho de atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>). Assim, torna-se livre dos <em>apāyās</em>. Em comentários posteriores, eles também são chamados de “<em><span>Chula <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>” ou “<em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> júnior”.</li>
+</ul>
+<h5 style="text-align: justify">Explicação <em><span>do <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em></h5>
+<p style="text-align: justify">2. O <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> vithi</span></em> para um <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> é discutido no final do ensaio, “<a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vithi – Processamento de Entradas Sensoriais</a>”:</p>
+<p style="text-align: justify">B B B “BC BU MD P U A G Pa Fr Fr” B B B</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i><em> Anugāmi </em>está se aproximando da “mudança de linhagem” ou G. Os estágios iniciais de P, U e A podem ser alcançados gradualmente. Uma vez que esse nível de compreensão é completado, faz-se essa transição (G), completa-se o <em><span>lokottara <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e recebe-se imediatamente o <em><span><span class="pali-term term-highlight" data-term="phala">Phala</span></span></em>.</li>
+<li style="text-align: justify">Em sentido estrito, talvez seja melhor chamar alguém de <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i><em><span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi </span></em>(aquele que tenta chegar ao <em><span><span class="pali-term term-highlight" data-term="magga">Magga</span></span></em> <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>) em vez de <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i><em> Anugāmi.</em></li>
+<li style="text-align: justify">As oito Pessoas Nobres (<em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em>) estão listadas no “<a href="https://suttacentral.net/an8.59/pli/ms" rel="noopener noreferrer" target="_blank">Paṭha­ma Pugga­la­ Sutta (AN 8.59)</a>” e no “<a href="https://suttacentral.net/an9.9/pli/ms" rel="noopener noreferrer" target="_blank">Puggala Sutta (AN 9.9)</a>”. Em ambos os <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> é <em><span>“<span class="pali-term term-highlight" data-term="sotāpatti">sotāpatti</span> <span class="pali-term term-highlight" data-term="phala">Phala</span> sacchikiriyāya paṭipannō”.</span></em> Aquele que está a caminho de se tornar um <em>Anāgāmi</em> é “<em><span>anāgāmi <span class="pali-term term-highlight" data-term="phala">Phala</span> sacchikiriyāya paṭipannō”,</span></em> etc. No segundo <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>, um ser humano comum é um “<em>puthujjanō”.</em></li>
+</ul>
+<h5 style="text-align: justify">As Oito Pessoas Nobres</h5>
+<p style="text-align: justify">3. Assim, fica claro que “<i>aṭṭha purisa puggalā</i>” consiste nas oito <i><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></i> (Pessoas Nobres) listadas no nº 1. Elas são <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi, <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span> Anugāmi, <span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span>, Anāgāmi Anugāmi, Anāgāmi, <span class="pali-term term-highlight" data-term="arahant">Arahant</span> Anugāmi</span></i> e<i><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span>.</span></i></p>
+<ul style="text-align: justify">
+<li>Um ponto crítico a ser observado é a mudança de ser um “ser humano comum” (<em><span><span class="pali-term term-highlight" data-term="puthujjana">puthujjana</span></span></em>) para o status de Pessoa Nobre (<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>). <span style="color: #0000ff"><strong>Essa transição acontece no “<em>gotrabu</em>” (“<em>gotra</em>” é o clã ou linhagem)</strong></span> <strong><span style="color: #0000ff">antes da transição <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span>/<span class="pali-term term-highlight" data-term="phala">Phala</span></span></em></span></strong>. Veja a seção “<em><span><span class="pali-term term-highlight" data-term="citta vīthi">Citta Vīthi</span></span></em> para a Conquista de <em><span><span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span>”</span></em> no final da postagem <em>“</em><a href="../../pages/AB.BB.008/index.html" rel="noopener noreferrer" target="_blank">Citta Vīthi – Processamento de Estímulos Sensoriais</a>”. Veja também “<a href="../../pages/TL.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugāmi – Sem Mais Nascimentos nos Apāyās</a>”.</li>
+<li style="text-align: justify">Os tipos de <em><span><span class="pali-term term-highlight" data-term="āsavā">Āsavā</span></span></em> eliminados em cada estágio são discutidos em “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank">O Caminho para Nibbāna – Remoção de Āsavā</a>”.</li>
+<li style="text-align: justify">Como <em>lōbha, dōsa, mōha</em> e também os dez grilhões (<em>samyōjana</em>) são removidos em cada estágio são discutidos em “<a href="../../pages/SI.CC.006/index.html" rel="noopener noreferrer" target="_blank">Abandonando as impurezas através de três rodadas e quatro estágios</a>”.</li>
+<li>Tanto um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i> quanto um<i><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> </span></i>teriam “<a href="../../pages/TL.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Sotapatti Anga – As Quatro Qualidades de um Sotāpanna</a>”.</li>
+</ul>
+<h5 style="text-align: justify">Os Estágios de<em><span> <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em></h5>
+<p style="text-align: justify">4. Um <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2"><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi/</span></i></span></span></span></span><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i> é alguém que viu<i><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i>, não o <i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i> completo, mas um vislumbre dele. Torna-se um <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2"><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i></span></span></span></span> quando se remove <i><span>a <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></i> (ignorância) sobre o estado real das coisas neste “mundo dos 31 reinos”; veja o nº 5 abaixo. Com essa compreensão, sua mente é purificada a ponto de não permitir que cometam um ato imoral que possa levar a um nascimento nos quatro mundos inferiores (<i>apāyās</i>). Não só isso, mas também não se “agarrará” a um <i><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></i> resultante de um ato imoral tão robusto no passado. Assim, um <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> acima de <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2"><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></i></span></span></span></span> nunca mais renascerá em um<i><span> <span class="pali-term term-highlight" data-term="apāya">Apāya</span></span></i>.</p>
+<p style="text-align: justify">Os outros três estágios têm “limites de demarcação” semelhantes.</p>
+<ul style="text-align: justify">
+<li>Um <i><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></i> nunca mais renascerá nos reinos humano ou nos quatro reinos inferiores. Eles ainda podem renascer nos mundos <em><span><span class="pali-term term-highlight" data-term="deva">deva</span></span></em> (ou seja, em <i><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> lōka</span></i>)<i>.</i> Mas esses <i><span><span class="pali-term term-highlight" data-term="devā">Devā</span></span></i> não têm corpos de “carne e osso” que levam a desconfortos físicos e doenças. No <i><span><span class="pali-term term-highlight" data-term="deva">deva</span> lōka</span></i>, os seres têm corpos sutis que não estão sujeitos à velhice e às doenças.</li>
+<li>Um <i>Anāgāmi</i> superou qualquer desejo de nascer em qualquer lugar do <i><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> lōka</span></i>, ou seja, nos 11 reinos mais baixos. Eles não têm <i><span><span class="pali-term term-highlight" data-term="kāma rāga">Kāma Rāga</span></span></i> (desejo por prazeres sensoriais) ou <i><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></i> (ódio).</li>
+<li>Um <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i> não tem desejo de nascer em nenhum dos 31 reinos e, portanto, nunca renascerá “neste mundo”. Eles alcançaram <i><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i> completo, a libertação total.</li>
+</ul>
+<p style="text-align: justify">5. A subseção <span class="segment"><span class="root"><span class="text">1.1.55. <em>Āsavakkhayañāṇaniddesa </em>(no final da seção </span></span></span><span class="segment"><span class="root"><span class="text"><a href="https://suttacentral.net/ps1.1/pli/ms" rel="noopener" target="_blank">“1.1. <em>Ñāṇakathā</em></a>”) do Comentário <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em></span></span></span> “<em>Paṭisambhidāmagga</em>” descreve três tipos de <span class="segment"><span class="root"><span class="text"><em>ñāṇa </em>alcançados no caminho para a <em>Arahanthood</em>: <em><span class="segment" id="ps1.1:512.1">“Anaññātaññassāmītindriyaṁ kati ṭhānāni gacchati, aññindriyaṁ kati ṭhānāni gacchati, aññātāvindriyaṁ kati ṭhānāni gacchati? </span><strong><span class="segment" id="ps1.1:512.2">Anaññātaññassāmītindriyaṁ ekaṁ ṭhānaṁ </span></strong><span class="segment" id="ps1.1:512.3"><strong>gacchati—sotāpattimaggaṁ</strong>. </span><span class="segment" id="ps1.1:512.4">Aññindriyaṁ cha ṭhānāni gacchati — </span><span class="segment" id="ps1.1:512.5">sotāpattiphalaṁ, sakadāgāmimaggaṁ, sakadāgāmiphalaṁ, anāgāmimaggaṁ, anāgāmiphalaṁ, arahattamaggaṁ. </span><span class="segment" id="ps1.1:512.6">Aññātāvindriyaṁ ekaṁ ṭhānaṁ gacchati</span></em><span class="segment" id="ps1.1:512.7"><em>—arahattaphalaṁ</em>.”</span></span></span></span></p>
+<ul style="text-align: justify">
+<li>Diz o seguinte. O primeiro <span class="segment"><span class="root"><span class="text"><em>ñāṇa </em>é <em><strong><span class="segment" id="ps1.1:512.2">Anaññātaññassāmītindriya </span></strong></em><span class="segment" id="ps1.1:512.2">alcançado no estágio <i><strong><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></strong></i>. O segundo, <em><span class="segment" id="ps1.1:512.4">Aññindriya, é </span></em><span class="segment" id="ps1.1:512.4">alcançado e otimizado nos seis estágios intermediários (<em><span class="segment" id="ps1.1:512.5">sotāpattiphala </span></em><span class="segment" id="ps1.1:512.5">até <em><span><span class="pali-term term-highlight" data-term="arahattamagga">Arahattamagga</span></span></em>)<em>.</em> O terceiro, <em><span class="segment" id="ps1.1:512.6">Aññātāvindriya, </span></em><span class="segment" id="ps1.1:512.6">é alcançado no momento</span><em><span class="segment" id="ps1.1:512.6"><span> do <span class="pali-term term-highlight" data-term="phala">Phala</span> do <span class="pali-term term-highlight" data-term="arahant">Arahant</span>.</span></span></em></span></span></span></span></span></span></li>
+<li>Assim, algo definitivo ocorre quando se chega ao <span class="segment"><span class="root"><span class="text"><span class="segment" id="ps1.1:512.2">estágio</span></span></span></span><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi.</span></li>
+</ul>
+<h5 style="text-align: justify">É um processo passo a passo</h5>
+<p style="text-align: justify"><span>6. É preciso primeiro ouvir a verdadeira mensagem do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> antes de poder cumprir as condições para atingir o estágio </span><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i>. Assim, é necessário ir além do caminho óctuplo mundano; veja “<a href="../../pages/MS.BB.001/index.html">Buddha Dhamma - Em um gráfico</a>”. <b></b></p>
+<ul style="text-align: justify">
+<li><b>Em particular, um </b><b><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi </span></i></b><b>(ou </b><b><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmika </span></i>ou </b><b></b><b><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i>) ouviu falar sobre </b><b><i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></i></b><b> (</b><b><i>Tilakkhaṇa</i></b><b>) ou a “verdadeira natureza deste mundo com 31 reinos”. É claro que esses conceitos devem vir de uma Pessoa Nobre que compreendeu a ideia básica.</b></li>
+<li>É por isso que a associação com um “<em>kalyāṇamitta</em>” ou “<i><span><span class="pali-term term-highlight" data-term="kalyāṇa">kalyāṇa</span> mitra</span></i>” (basicamente um “amigo Nobre”, ou seja, um <i><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></i>) é uma pré-condição para atingir o estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>; veja “<a href="../../pages/TL.JJ.008/index.html" rel="noopener noreferrer" target="_blank">Quatro Condições para Alcançar Sotāpanna Magga/Phala</a>”.</li>
+<li><span style="color: #0000ff">Uma vez alcançado o <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi,</span></i> a pessoa se torna uma Pessoa Nobre (uma das <em><span>aṭṭha purisa <span class="pali-term term-highlight" data-term="puggala">puggala</span></span></em>) e, assim, fica livre dos <em>apāyās</em>,</span> veja “<a href="../../pages/TL.JJ.007/index.html" rel="noopener noreferrer" target="_blank">Sotāpanna Anugāmi – Não há mais nascimentos nos Apāyās</a>”.</li>
+</ul>
+<h5 style="text-align: justify">Diferença entre <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i> e um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i></h5>
+<p style="text-align: justify">7. Vamos usar uma comparação para ver essa “demarcação” entre <i><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi</span></i> e um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i>.</p>
+<ul style="text-align: justify">
+<li><span>Suponha que um tesouro precioso seja conhecido por estar no pico de uma montanha. Mas não se sabe onde fica essa montanha. Esse é basicamente o status do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> hoje. A maioria das pessoas sabe que ele é valioso, mas não conhece a versão correta entre as muitas versões diferentes apresentadas hoje.</span></li>
+<li><span>Como o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse em seu primeiro sermão: “Meu <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> não era conhecido pelo mundo antes”. Portanto, é necessário um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ou um verdadeiro discípulo do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> para mostrar o que é </span><i><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i> e como chegar ao estágio <i>de Sótapanna</i>. Esse é um ponto essencial e crítico.</li>
+<li>Suponha que alguém receba instruções para chegar à montanha correta onde está o tesouro. Então, essa pessoa sabe para qual país ir e em que local geográfico desse país fica a montanha. <b>Essa pessoa é como alguém no caminho para se tornar um </b><b><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span>, ou seja, um <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span> Anugāmi.</span></i></b><span> Ela sabe exatamente para onde ir e tem um mapa detalhado. E ela precisa obter isso de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ou de um verdadeiro discípulo de um <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Um verdadeiro discípulo pelo menos já viu a montanha (um </span><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i>), se não chegou ao topo (um <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i>).</li>
+<li>Agora, ela faz a viagem para o país e a região onde a montanha está. No caminho, ela pode verificar os pontos de referência fornecidos pelo “amigo” (<i><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></i>). Da mesma forma, um <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">magga</span> Anugāmi</span></i> passa tempo contemplando os conceitos recém-aprendidos de <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā, <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></i>, etc.</li>
+<li>Assim, com confiança, a pessoa se aproxima cada vez mais da montanha e começa a vê-la em algum momento. <b>Nesse ponto, a pessoa “cruza a fronteira” para se tornar um </b><b><i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></i></b><b>.</b> Ela teve um vislumbre do<i><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></i> pela primeira vez. Agora ela pode completar a jornada sem qualquer ajuda, mesmo que o mapa físico se perca (ou seja, mesmo em uma vida futura).</li>
+</ul>
+<h5 style="text-align: justify">Uma analogia</h5>
+<p style="text-align: justify">8. Voltando à comparação da montanha com o tesouro, diferentes versões do “Buddhismo” identificam a montanha como estando em diferentes localizações geográficas. Assim, as pessoas viajam longas distâncias e fazem muito esforço para chegar a várias montanhas. Todas elas estão em lugares remotos, e a jornada é difícil.</p>
+<ul style="text-align: justify">
+<li><span>Muitas pessoas estão desperdiçando seu tempo e esforço visando a “montanha errada”. Então, como saber qual “montanha” ou versão escolher? É por isso que é preciso esforço para eliminar as versões erradas/incompatíveis do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>; veja “Por</span><a href="../../pages/HB.AA.011/index.html"> que é fundamental encontrar o Pure Dhamma do Buddha?</a>”.</li>
+</ul>
+<h5 style="text-align: justify">Compreender a natureza <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> (infructuosa) deste mundo</h5>
+<p style="text-align: justify">9. Em termos técnicos, chega-se ao <i><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="magga">Magga</span>/<span class="pali-term term-highlight" data-term="phala">Phala</span></span></i> quando se compreende <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></i> (as três características deste mundo ou <em>Tilakkhaṇa</em>) em um nível mínimo, onde se começa a perceber que não há nada neste “mundo” que possa proporcionar felicidade significativa e incondicional.</p>
+<ul style="text-align: justify">
+<li>Quando se compreende <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></i> a ponto de poder “ver” esse conceito, <b>diz-se que se tem o “</b><b><i>anulōma ñāna”.</i></b> Aqui, “<i>anu</i>” significa “através da compreensão de <i>Tilakkhaṇa”,</i> “<i>lo</i>” significa “desejo por coisas mundanas” e “<i>ma</i>” significa “remoção” e, portanto, “<i>anulōma</i>” significa “remoção do desejo por coisas mundanas até certo ponto através da compreensão de <i>Tilakkhaṇa”.</i></li>
+<li>Encontramos “<i>anu</i>” também em “<i><span><span class="pali-term term-highlight" data-term="anupassanā">Anupassanā</span></span></i>”; veja “<a href="../../pages/BM.AA.004/index.html">O que significam todas essas diferentes técnicas de meditação?</a>”. Em um ensaio anterior, também discuti como “<i>lōbha</i>” vem de “<i>lo</i>” + “<i>bha</i>” ou “imerso no desejo pelas coisas mundanas”.</li>
+<li>Portanto, faz uma enorme diferença se alguém interpreta incorretamente <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></i> como “impermanência” e <i>Anattā</i> como “não-eu”; veja “<a href="../../pages/KD.FF.003/index.html">Anicca, Dukkha, Anattā - Interpretações erradas”.</a></li>
+</ul>
+<p style="text-align: justify">10. O sofrimento é predominante nos quatro reinos inferiores (<i>apāyās</i>)<i>.</i> Podemos ver pelo menos um deles, o reino animal. Vamos discutir uma maneira de contemplar <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></i> usando um exemplo desta vida.</p>
+<ul style="text-align: justify">
+<li>Quando jovens, parece que podemos conseguir tudo o que queremos trabalhando duro. Mas todos nós já vimos como nossos pais, avós ou mesmo pessoas famosas passaram a velhice sofrendo de várias doenças e finalmente morrendo impotentes.</li>
+<li>Eles podem ter “realizado” muitas coisas. Mas passaram a vida inteira trabalhando duro para alcançá-las e, então, tiveram que deixar tudo para trás.</li>
+<li>Pode-se ter um corpo bonito quando jovem, mas por quanto tempo? Podemos ver como aquela velha estrela de cinema envelhece agora. Alguns deles cometem suicídio porque é deprimente lembrar dos “bons velhos tempos” em que tinham toda a atenção do mundo, mas agora tudo parece estar escapando.</li>
+<li>Isso é <i><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></i> e <i>Anattā.</i> Não importa o quanto tentemos, tudo o que ganhamos neste mundo dura apenas um curto período de tempo (na escala de tempo <i>saṃsāric</i>), e a longo prazo ficamos impotentes. Em algum momento, percebemos isso e ficamos perturbados.</li>
+</ul>
+<h5 style="text-align: justify">A pessoa cria seu próprio sofrimento futuro</h5>
+<p style="text-align: justify">11. Quando compreendemos a verdadeira natureza deste mundo, esses pensamentos tristes não surgem. As pessoas que seguem o Caminho e mesmo aquelas que têm sabedoria de vidas anteriores (<i><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></i>) podem perceber que “todas as coisas neste mundo” estão sujeitas a esse processo de surgimento/destruição. Os seres vêm à existência e morrem. Mas essas existências são “criadas” por nós mesmos. Veja “<a href="../../pages/DS.BB.010/index.html" rel="noopener noreferrer" target="_blank">Origem da Vida – A pessoa cria suas próprias vidas futuras</a>”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Essa compreensão em si leva à tranquilidade da mente. Uma versão mais forte dessa “tranquilidade da mente” é o “<i>anulōma shānthi</i>” que se experimenta ao atingir o <i>“anulōma ñāna</i>” (pronuncia-se “anulōma gn<i>ā</i>na”).</li>
+<li>A chave para alcançar o “<i>anulōma ñāna</i>” é perceber a natureza efêmera de tudo neste mundo. O próximo ensaio discute isso.</li>
+</ul>
+<h5 style="text-align: justify"><i style="text-align: justify">Anulōma Ñāna </i>e<i style="text-align: justify"> S<span style="text-align: justify"><em>ammatta Niy<i>ā</i>ma</em></span></i></h5>
+<p style="text-align: justify">12. Com o “<i>anulōma ñāna”,</i> percebe-se que <span style="font-size: 1.125rem;letter-spacing: 0px">é impossível livrar-se permanentemente do sofrimento em qualquer um dos 31 reinos. Isso só pode ser alcançado atingindo-se </span><em style="font-size: 1.125rem;letter-spacing: 0px"><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>. </span></em><span style="font-size: 1.125rem;letter-spacing: 0px">A essa altura, a pessoa já sentiu o </span><em style="font-size: 1.125rem;letter-spacing: 0px"><span>niramisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> <span style="font-size: 1.125rem;letter-spacing: 0px">e</span><em style="font-size: 1.125rem;letter-spacing: 0px">,</em> <span style="font-size: 1.125rem;letter-spacing: 0px">portanto, precisa cultivar “</span><em style="font-size: 1.125rem;letter-spacing: 0px"><span><span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> santaṃ <span class="pali-term term-highlight" data-term="etaṃ">etaṃ</span> paṇītaṃ</span></em><span style="font-size: 1.125rem;letter-spacing: 0px">...” a libertação que sentiu e o valor do </span><em style="font-size: 1.125rem;letter-spacing: 0px"><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span style="font-size: 1.125rem;letter-spacing: 0px">. </span><span style="color: #0000ff">Então, a pessoa realmente embarca no Nobre Caminho Óctuplo e diz-se que chega a <strong><em>“sammatta niy<i>ā</i>ma”</em></strong> e a<em><span> <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> <span class="pali-term term-highlight" data-term="phala">Phala</span></span></em>.</span></p>
+<ul style="text-align: justify">
+<li>Portanto, é fundamental perceber TANTO a natureza infrutífera deste mundo com <span style="text-align: justify">“</span><span style="color: #0000ff"><strong><i style="text-align: justify">anulōma ñāna</i></strong></span><span style="text-align: justify"><span>” COMO perceber o valor e o arrefecimento devido a <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, ou seja, </span><span style="color: #0000ff">“<strong><em>sammatta niy<i>ā</i>ma”.</em></strong></span></span></li>
+<li>Mais detalhes no ensaio “<a href="../../pages/KD.CC.003/index.html" rel="noopener" target="_blank">Anuloma Khanti e Sammattaniyāma – Pré-requisitos para um Sotāpanna</a>”.</li>
+</ul>
+<p style="text-align: justify">13. Assim, é fundamental compreender que <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é “<em><span>nicca, <span class="pali-term term-highlight" data-term="sukha">Sukha</span>, aṭṭha”</span></em> após perceber que este mundo é “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā”.</span></em> Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> compreendeu ambos.</p>
+<ul>
+<li style="text-align: justify">Tudo neste mundo (exceto <i>nama gotta</i>) é um <i><span><span class="pali-term term-highlight" data-term="saṅkhata">Saṅkhata</span></span></i>, ou seja, <span style="color: #0000ff">surge devido a causas</span>, permanece em existência por um tempo e, então, inevitavelmente é destruído. O surgimento de um <i><span><span class="pali-term term-highlight" data-term="saṅkhata">Saṅkhata</span></span></i> é chamado de “<i>udaya</i><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, e a destruição é chamada de “</span><i>vaya”.</i> Assim, “<i>udayavaya ñāna</i>” é o conhecimento sobre esse processo.</li>
+<li style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é o único <em>asankata.</em><span style="color: #0000ff"> A remoção de todas as causas leva ao </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+<li style="text-align: justify"><b>Muitas pessoas alcançaram </b><b><i>o Arahanthood</i></b><b> sem nunca ter ouvido falar de termos como “</b><b><i>udayavaya</i></b><b>” ou “</b><b><i>anulōma”.</i></b><b> </b>Portanto, é imperativo perceber que apenas ler sobre esses conceitos não leva a lugar nenhum. É preciso “ver” o <i>Tilakkhaṇa</i> ou a infrutuosidade do desejo por <i><span><span class="pali-term term-highlight" data-term="saṅkhata">Saṅkhata</span></span></i> (através de <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></i>) por meio da verdadeira meditação ou contemplação.</li>
+<li style="text-align: justify"><span>Assim, um <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> tem o </span><i>udayavaya</i> (às vezes chamado de <i><span><span class="pali-term term-highlight" data-term="udayabbaya">Udayabbaya</span></span></i>)<i> ñāna; </i>veja “<a href="../../pages/TL.LL.001/index.html" rel="noopener noreferrer" target="_blank">Udayavaya Ñāna</a>”.</li>
+</ul>A seguir, <a href="../../pages/TL.JJ.008/index.html" rel="bookmark noopener noreferrer" target="_blank">“Quatro condições para alcançar Sotāpanna Magga/Phala</a>
+”, .........
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.JJ.005/index.html">Myths About The Sotapanna Stage</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.JJ.007/index.html">Sotapanna Anugami No Births In The Apaya</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.JJ.005/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Myths About The Sotapanna Stage</span>
+        
+        <span class="pathway-title title-pt">Mitos sobre o estágio Sotāpanna</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.JJ.007/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Sotapanna Anugami No Births In The Apaya</span>
+        
+        <span class="pathway-title title-pt">Sotāpanna Anugami Nenhum nascimento no Apāya</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

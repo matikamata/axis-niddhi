@@ -1,0 +1,490 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Nibbana Difficult To Understand | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 22 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.EE.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Nibbana Difficult To Understand</h1>
+    
+    <h1 class="title-pt">Nibbāna é difícil de compreender</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.EE.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.EE.002"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0089"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.EE.002</td></tr><tr><td>Fin-dex</td><td>0089</td></tr><tr><td>Slug</td><td>nibbana-difficult-to-understand</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Nibbana Difficult To Understand</td></tr></table></div></div><p>Our distresses, and sufferings are due to our defiled minds. As one purifies one's mind, one starts experiencing <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<p style="text-align: justify;"><strong>Revised December 6, 2016; January 3, 2019; <span style="color: #3366ff;"><span style="color: #000000;">September 17, 2022;</span> August 4, 2023</span></strong></p>
+<p><span>I advise reading through any <span class="pali-term term-highlight" data-term="post">post</span> one time without clicking on the links first. Once you get the main idea, the links can clarify the other related key concepts.</span></p>
+<ul>
+<li style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> may not be easy to attain, but it is easy to figure out what it is. You don't need complex concepts like emptiness (<em>sunyātā</em>) and <em><span>Bōdhi <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> to describe or understand <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;"><span>1. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said we suffer because of the defilements we have in our minds: greed, hate, ignorance, and other mental qualities that arise from them. </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> has many synonyms, and "<em>Nivana</em>" ("cooling down") conveys the above idea better; <em>Nivana</em>, which is also called "<em>niveema</em><span>" (නිවීම) in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>,  conveys the same idea as </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">As one moves away from hate, greed, and ignorance, one can feel oneself "cooling down" INSIDE. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> ("<em>Nib</em>"+"<em>bāna</em>," where "<em>bāna</em>" means bonds) and thus <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> means to break free of bonds that make one bound to the 31 realms.</li>
+<li style="text-align: justify;">I like the word <em>Nivana </em>or <em>niveema</em> because it conveys the benefits of the Path as one experiences gradual "cooling down" until it becomes complete at <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank">Three Kinds of Happiness – What is Nirāmisa Sukha?</a>", "<a href="../../pages/TL.CC.006/index.html" rel="noopener noreferrer" target="_blank" title="How to Taste Nibbāna">How to Taste Nibbāna</a>," and "<a href="../../pages/TL.CC.007/index.html" rel="noopener noreferrer" target="_blank">Learning Buddha Dhamma Leads to Nirāmisa Sukha</a>."</li>
+</ul>
+<p style="text-align: justify;">2. To "cool down," we first need to know what is "burning" ("<em>tāpa</em><span>" in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>; pronounced "thāpa); our minds are constantly burning due to greed, hate, and ignorance, and we don't even realize this; see the "</span><a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a><span>" section and specifically the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/LD.AA.008/index.html" rel="noopener noreferrer" target="_blank">Satipaṭṭhāna Sutta – Relevance to Suffering in This Life</a>."</p>
+<ul>
+<li style="text-align: justify;">This "burning" is worse in the lowest four realms or the "<em>apāyā</em>." Thus one needs to understand the first Noble Truth about suffering, to realize the value of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. There are several <span class="pali-term term-highlight" data-term="posts">posts</span> at various levels on the real, deeper meaning of what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> meant by "suffering in this world of 31 realms".</span></li>
+<li style="text-align: justify;">Our sufferings are masked by the apparent sensory pleasures, which do not last. A <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> understands suffering better than an average person, and as one gets to the higher stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>,</span></em> one will be able to see the meaning of the First Noble Truth even more clearly.</li>
+</ul>
+<p style="text-align: justify;">3. The key point is that one CAN start feeling "<em>nivana</em>" RIGHT NOW.<em> Nivana</em> is experienced by giving up the ten defilements (see "<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Ten Immoral Actions (Dasa Akusala)</a>"). One does not have to get rid of all of them at once, which is not advised either. One should get rid of the BIGGEST ones that can be easily removed.</p>
+<ul style="text-align: justify;">
+<li>Killing, stealing, lying (and gossiping, slandering, verbally abusing), engaging in sexual misconduct, and being intoxicated (not just with alcohol or drugs, but also with wealth, power, etc.) are the first to be considered.</li>
+<li>Just abandon the relatively easy ones for a few weeks and experience the "<em>nivana</em>," the ease of mind, the "inner peace" that comes from that. That is the biggest incentive to continue on the Path.</li>
+</ul>
+<p style="text-align: justify;">4. One also needs to understand the relative <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> weights associated with dealing with animals and humans (and even among humans.) For example, it is very difficult to be born human; thus, even saying a hurtful thing to a human (especially to an <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> or a Noble One) could have a thousand-fold<em><span> <span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> weight compared to killing an animal; see, "<a href="../../pages/TL.EE.007/index.html" rel="noopener noreferrer" target="_blank" title="How to Evaluate Weights of Different Kamma">How to Evaluate Weights of Different Kamma</a>."</p>
+<ul style="text-align: justify;">
+<li>Another key concept is that one does NOT need to worry about the past<em><span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. The role of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> has been exaggerated; see, "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">What is Kamma? does Kamma determine Everything?</a>".  <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is not attained via the removal of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> but the removal of <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> or cravings; see “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" style="color: #ea9629;" target="_blank" title="The Way to Nibbāna – Removal of Āsavas">The Way to Nibbāna – Removal of Āsavā</a>. “</li>
+<li>The main thing is not to repeat the same mistakes. The more one stays away from the ten defilements, it automatically BECOMES easier. It is like pushing a stalled car: initially hard, but it becomes easier when it starts moving.</li>
+</ul>
+<p style="text-align: justify;">5.<strong> <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is NOT removing everything from the mind, just removing the defilements</strong>: <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is <em>rāgakkhaya</em> ( greed elimination), <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is <em>dōsakkhaya</em> (hate elimination), <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is <em>mōhakkhaya</em> (delusion elimination); those three are more synonyms for <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;"><strong>Thus one sees <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> with a thought </strong>(<em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>)<strong> that is devoid of <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> (greed), <em>dōsa</em> (hate), and <em>mōha</em> (delusion). </strong>This PURE MIND does not want to be burdened with a "material existence" anywhere in the 31 realms; see, "<a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank" title="What Are Rupa? (Relation to Nibbāna)">What are Rupa? Relation to Nibbāna</a>".</li>
+<li>By the way, <em><span><span class="pali-term term-highlight" data-term="citta">citta</span> </span></em>is pronounced "chiththa"; see "<a href="../../pages/HB.AA.008/index.html" rel="noopener noreferrer" target="_blank">Tipiṭaka English” Convention Adopted by Early European Scholars – Part 1</a>," "<a href="../../pages/TS.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (A-K)</a>" and "<a href="../../pages/TS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (L-Z)</a>."</li>
+</ul>
+<p style="text-align: justify;">6. The suffering is a direct result of having a "material aspect" associated with the mind: <span style="color: #0000ff;">that material body is subject to decay and death.</span> <strong>The mind gets associated with a body that it gets "attached" to with greed, hate, and ignorance. </strong> If you look at the 31 realms of "this world" (see "<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>"):</p>
+<ul style="text-align: justify;">
+<li>it is clear that suffering is there in the lowest five realms -- including the human realm -- where all three (greed, hate, ignorance) can be present; the bodies of beings in these realms are generally denser and subject to decay and diseases. Of course, there is unimaginable suffering in the lowest four realms.</li>
+<li>However, the human realm (#5) is unique because one COULD attain <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> as a human, even though they are also subject to bodily pains, decay, and diseases.</li>
+<li>In the <em>dēva lōkā</em> (realms 6-11), hate is not there, and suffering is less. And the bodies of <em>dēvas</em> are less dense and not subject to physical ailments (until death, of course).</li>
+<li>In the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span> lōkā</span></em> (realms 12-31), hate and greed are absent, and suffering is even less. They have very fine (less-dense) bodies and no physical ailments.</li>
+</ul>
+<p style="text-align: justify;">7. However, since ignorance is there in all 31 realms, a complete, absolute state of happiness is absent anywhere in the 31 realms. Even if one is born in a <em>dēva</em> or  <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span></span></em> world, one will eventually end up in the lowest four realms (unless one has attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> or a higher stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>).</p>
+<ul>
+<li>The suffering is, of course, unimaginably intense in the lower realms.</li>
+<li><span>This is the key message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: </span><strong><span style="color: #3366ff;">He said that suffering never ends as long as one returns to "this world of 31 realms" when one dies, i.e., unless one attains</span> <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>).</strong></li>
+<li>Suffering ends with <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>'s death; no more births in this world of 31 realms.</li>
+<li>However, one could get depressed thinking that <em>Arahanthood</em> is "annihilation,"; but that is not true. One just needs to follow the Path step-by-step; see "<a href="../../pages/LD.EE.002/index.html" rel="noopener noreferrer" target="_blank">Is It Necessary for a Buddhist to Eliminate Sensual Desires?</a>" and "<a href="../../pages/SI.AA.005/index.html" rel="noopener noreferrer" target="_blank">Mahā Cattārisaka Sutta (Discourse on the Great Forty)</a>."</li>
+</ul>
+<p style="text-align: justify;">8. Therefore, one could visualize a gradual decrease in suffering as one eliminates hate, greed, and ignorance in that order.</p>
+<ul>
+<li style="text-align: justify;">And one CAN experience this happiness called <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span> </span></em>in this human life itself, all the way up to<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; see "<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha</a>." That is the uniqueness of human birth.</li>
+</ul>
+<p style="text-align: justify;">9. When the mind "starts thinking" about a given thought object (<em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em>), say a visual object, it starts as "just seeing"; this is the <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> stage. But within a fraction of a second, the mind starts adding defilements (based on greed, hate, ignorance) if that object is "of interest."</p>
+<ul>
+<li style="text-align: justify;">It develops further thoughts defiled by greed, hate, and ignorance (possibly a combination) by going around and around that thought object and ends up in the "defiled thought" (<em>viññāna</em>) stage even before one realizes it; see "<a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">Amazingly Fast Time Evolution of a Thought (Citta)</a>."</li>
+<li style="text-align: justify;">This is also described in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>; see "<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda”">Paṭicca Samuppāda - "Pati + ichcha" + "Sama + uppada</a>," and the links below that. <em>Viññāna</em> is a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> that is <strong>defiled</strong> by <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> (greed), <em>dōsa</em> (hatred), and <em>mōha</em> (ignorance).</li>
+<li style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em><span>which is <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, is discussed in detail in the series "</span><a href="../../pages/PS.II.001/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda in Plain English</a>."</li>
+</ul>
+<p style="text-align: justify;">10. When <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, dōsa</span></em>, and <em>mōha</em> are removed from the mind, <em>cittā</em> (plural of <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) become <em>pabhassara</em> (bright); there are no more defilements there clouding the <em>cittā</em>.  <strong>At this stage, it is said that the pure <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> “sees <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>”; </strong>see "<a href="../../pages/AB.GG.006/index.html" rel="noopener noreferrer" target="_blank">Pabhassara Citta, Radiant Mind, and Bhavaṅga</a>."</p>
+<ul>
+<li style="text-align: justify;">After one attains<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> with one <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>,</span></em> the <em>cittās</em> fall back to the "normal state," and the person lives like an average human (but without doing anything with greed, hate, and ignorance) until the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy of the <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed that started the present life is exhausted.</li>
+<li style="text-align: justify;">At death (called <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>), the mind of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> does not grab (<em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>) another <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seed (even if there may be many <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em><span> seeds), and thus there is no further <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>. </span><span style="color: #0000ff;">The mind becomes free of a "body" that can be subjected to decay and death. That is <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, "</span></em>complete <em>Nivana</em>" or "complete cooling down."</span></li>
+</ul>
+<p style="text-align: justify;"><span>11. We are bound to this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process due to two causes: </span><em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>. The first version of <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> is <em>lōbha</em>, the intense greed, which could quickly turn to<em> dōsa</em> (strong hate) when someone else gets in the way. Thus those two causes of <em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> effectively become three:<em> lōbha, dōsa, and mōha</em>.</p>
+<ul>
+<li style="text-align: justify;">Even though <em>dōsa</em> arises due to <em>lōbha</em>,<em> dōsa</em> brings about the worst <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em><span>: <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em><span><span class="pali-term term-highlight" data-term="niraya">niraya</span></span></em> (hell), where the suffering is optimum. Thus <em>dōsa</em> has origins in the four greed-based "<em><span>sōmanassa <span class="pali-term term-highlight" data-term="sahagata">sahagata</span>, diṭṭhi sampayutta <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>."</li>
+<li style="text-align: justify;">When <em>diṭṭhi</em> is removed at the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, all four greed-based<em><span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em> stop arising. At that stage, <em>lōbha</em> and <em>dōsa</em> become<em><span> <span class="pali-term term-highlight" data-term="rāga">rāga</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="paṭigha">paṭigha</span></span></em>, which are then removed successively at the <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> and <em>Anāgāmi</em> stages. <em>Avijja</em> keeps reducing at each stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> and is removed at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</li>
+</ul>
+<p style="text-align: justify;">12. When <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, dōsa</span></em>, and <em>mōha</em> cannot arise in the mind, that mind (and thus <em>cittā</em>) are devoid (<em>suñña</em>) of them. That is the purified state of a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, <em>or a</em><strong><em> pabhassara viññāna</em> (consciousness devoid of defilements), i.e., <em><span><span class="pali-term term-highlight" data-term="paññā">paññā</span></span></em> (wisdom).</strong> See "<a href="../../pages/AB.GG.006/index.html" rel="noopener" target="_blank">Pabhassara Citta, Radiant Mind, and Bhavaṅga</a>."</p>
+<ul>
+<li style="text-align: justify;"><em>Anidassana</em> implies something that is not visible. Thus, <em>anidassana viññāna </em>means<em> "viññāna </em>cannot be seen<em>." S</em>ee "<a href="../../pages/KD.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Anidassana Viññāṇa – What It Really Means</a>."</li>
+<li style="text-align: justify;">The forefathers of <em>Mahāyāna</em><span> <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> could not grasp the concept of </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, so they came up with misleading descriptions, including that of<em> Sunyata</em>: see, "<a href="../../pages/HB.AA.014/index.html" rel="noopener noreferrer" target="_blank" title="What is Sunyata or Sunnata (Emptiness)?">What is Sunyata or Sunnata (Emptiness)?</a>".</li>
+<li>Even among the current <em>Theravāda</em> Buddhists, there are many debates about what is meant by <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. That is sad to see.</li>
+</ul>
+<p style="text-align: justify;">13. When <em><span><span class="pali-term term-highlight" data-term="rāga">rāga</span>, dōsa, and mōha</span></em> are removed, a <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> stops going around and around a given thought object (<em><span><span class="pali-term term-highlight" data-term="ārammana">ārammana</span></span></em>). <strong>This “wheeling” is what fuels the <em>saṃsāric</em> journey.</strong> Thus stopping this process is called “taking off the wheels of the <em>saṃsāric</em> vehicle.”</p>
+<ul>
+<li style="text-align: justify;"><span>The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> (and <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) word for a vehicle is “</span><em>riya,</em>” and stopping of the “<em>riya</em>” is called “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>”; one who has taken the wheels off the vehicle for the <em>saṃsāric</em> journey is called an “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>.” Thus contrary to popular usage, "<em>Āryan</em>" (with racial implications) has nothing to do with a Noble Person; it is <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>.</li>
+<li style="text-align: justify;"><strong>Therefore, it is clear that “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>” has nothing to do with a race, “<em>Āryan</em>.” </strong></li>
+<li style="text-align: justify;">Furthermore, "<em><span><span class="pali-term term-highlight" data-term="viriya">viriya</span></span></em>" ("<em>vi</em>" + "<em>riya</em>") means staying away from the "wheeling process" (and the effort to do so). Therefore, <em><span><span class="pali-term term-highlight" data-term="viriya">viriya</span></span></em> means actively engaging in <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>; see "<a href="../../pages/LD.AA.008/index.html" rel="noopener noreferrer" target="_blank">Satipaṭṭhāna Sutta – Relevance to Suffering in This Life</a>."</li>
+</ul>
+<p style="text-align: justify;">14. Anyone who has at least attained the first stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, i.e., <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>, can be called an<em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> or a Noble Person. This is because the "<em>āsavās</em>" or deep-seated cravings that a <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> have been permanently removed.</p>
+<ul>
+<li style="text-align: justify;">All the <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> are removed at <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; thus, "<em>Āsāvakkhaya</em>" (elimination of <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em>) is another synonym for <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. People who had been on the lowest social ladder or lowest caste at the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> could become </span><em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em> or Noble Persons.</li>
+</ul>
+<p style="text-align: justify;">15. When one sees<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, one’s mind does not crave anything “in this world” of 31 realms. There is nothing for the last <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="cuti">cuti</span> <span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, pronounced "chuthi chiththa") of this life (at death) to grab (nothing to <em><span><span class="pali-term term-highlight" data-term="upādāna">upādāna</span></span></em>) and to start a new birth in “this world,” and the mind becomes free.</p>
+<ul>
+<li style="text-align: justify;"><strong>The mind becomes PERMANENTLY pure and permanently detached from any type of physical body, dense or fine.</strong></li>
+</ul>
+<p style="text-align: justify;">16. Thus, an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will not be reborn in “this material world” of 31 realms (see “<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>”), i.e., one attains <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>. He/she is “gone” from “this world” of 31 realms. The suffering stops permanently.</p>
+<ul>
+<li style="text-align: justify;">Thus, it is pretty clear WHAT <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> is: it stops the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. What is hard to understand is WHY stopping the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process can relieve all suffering.</span></li>
+<li style="text-align: justify;">No matter how much hardship one has endured, one likes to live. This is true for a human or a lowly worm. For any living being, the most precious thing is its life. <span style="color: #3366ff;"><strong><span>When one starts understanding the "big picture of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>," one will slowly start seeing the dangers of staying in this endless <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process.</span></strong></span></li>
+</ul>
+<p style="text-align: justify;">17. Other analyses of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> can be found in "<a href="http://localhost/beng_feb2026/key-dhamma-concepts/nirodha-and-vaya-two-different-concepts/" rel="noopener noreferrer" target="_blank" title="Nirödha and Vaya – Two Different Concepts">Nirodha and Vaya - Two Different Concepts</a>" and "<a href="../../pages/TL.HH.011/index.html" rel="noopener noreferrer" target="_blank" title="Difference Between Giving Up Valuables and Losing Interest in Worthless">Difference Between Giving up Valuables and Losing Interest in Worthless</a>", ............</p>
+<ul>
+<li style="text-align: justify;">Also, see the new section: "<a href="../../pages/CH.AA.000/index.html" rel="noopener" target="_blank">Buddhism – In Charts</a>."</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.EE.002"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0089"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.EE.002
+Language:     pt-BR
+Generated-At: 2026-04-18T04:04:13Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p>Nossas angústias e sofrimentos são causados por nossas mentes contaminadas. À medida que purificamos a mente, começamos a experimentar <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<p style="text-align: justify;"><strong>Revisado em 6 de dezembro de 2016; 3 de janeiro de 2019; <span style="color: #3366ff;"><span style="color: #000000;">17 de setembro de 2022;</span> 4 de agosto de 2023</span></strong></p>
+<p>Recomendo ler qualquer ensaio uma vez sem clicar nos links primeiro. Depois de entender a ideia principal, os links podem esclarecer os outros conceitos-chave relacionados.</p>
+<ul>
+<li style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> pode não ser fácil de alcançar, mas é fácil entender o que é. Você não precisa de conceitos complexos como vazio (<em>sunyātā</em>) e <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> para descrever ou compreender <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;"><span>1. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que sofremos por causa das impurezas que temos em nossas mentes: ganância, ódio, ignorância e outras qualidades mentais que surgem a partir delas. </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> tem muitos sinônimos, e “<em>Nivana</em>” (“esfriar”) transmite melhor a ideia acima; <em>Nivana</em>, que também é chamado de “<em>niveema</em>” (නිවීම) em cingalês, transmite a mesma ideia que <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;">À medida que nos afastamos do ódio, da ganância e da ignorância, podemos sentir-nos “esfriando” POR DENTRO. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> (“<em>Nib</em>” + “<em>bāna</em>”, onde “<em>bāna</em>” significa laços) e, portanto, <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> significa libertar-se dos laços que nos prendem aos 31 reinos.</li>
+<li style="text-align: justify;">Gosto da palavra <em>Nivana </em>ou <em>niveema</em> porque ela transmite os benefícios do Caminho à medida que se experimenta um “esfriamento” gradual até que se torne completo em <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; veja “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank">Três Tipos de Felicidade – O que é Nirāmisa Sukha?</a>”, “<a href="../../pages/TL.CC.006/index.html" rel="noopener noreferrer" target="_blank" title="How to Taste Nibbāna">Como Saborear Nibbāna</a>” e “<a href="../../pages/TL.CC.007/index.html" rel="noopener noreferrer" target="_blank">Aprender o Buddha Dhamma Leva ao Nirāmisa Sukha</a>”.</li>
+</ul>
+<p style="text-align: justify;">2. Para “esfriar”, primeiro precisamos saber o que está “queimando” (“<em>tāpa</em><span>” em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>; pronunciado “thāpa”); nossas mentes estão constantemente em chamas devido à ganância, ao ódio e à ignorância, e nem mesmo percebemos isso; veja a seção “</span><a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Dhamma Vivo</a>” e, especificamente, o ensaio “<a href="../../pages/LD.AA.008/index.html" rel="noopener noreferrer" target="_blank">Satipaṭṭhāna Sutta – Relevância para o Sofrimento nesta Vida</a>”.</p>
+<ul>
+<li style="text-align: justify;">Esse “ardor” é pior nos quatro reinos inferiores ou nos “<em>apāyā</em>”. Assim, é preciso compreender a Primeira Nobre Verdade sobre o sofrimento, para perceber o valor do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. Há vários ensaios em diversos níveis sobre o significado real e mais profundo do que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> quis dizer com “sofrimento neste mundo de 31 reinos”.</span></li>
+<li style="text-align: justify;">Nossos sofrimentos são mascarados pelos aparentes prazeres sensoriais, que não duram. Um <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> compreende o sofrimento melhor do que uma pessoa comum e, à medida que se alcança os estágios mais elevados de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>,</span></em> será possível ver o significado da Primeira Nobre Verdade ainda mais claramente.</li>
+</ul>
+<p style="text-align: justify;">3. O ponto-chave é que se PODE começar a sentir <em>o</em> “<em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>” AGORA MESMO.<em><span> O <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é experimentado ao abandonar as dez impurezas (ver “<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Ten Immoral Actions (Dasa Akusala)">Dez Ações Imorais (Dasa Akusala)</a>”). Não é necessário livrar-se de todas de uma vez, o que também não é aconselhável. Deve-se livrar-se das MAIORES, que podem ser facilmente removidas.</p>
+<ul style="text-align: justify;">
+<li>Matar, roubar, mentir (e fofocar, caluniar, insultar verbalmente), praticar conduta sexual imprópria e ficar intoxicado (não apenas com álcool ou drogas, mas também com riqueza, poder etc.) são os primeiros a serem considerados.</li>
+<li>Basta abandonar as relativamente fáceis por algumas semanas e experimentar o “<em>nivana</em>”, a tranquilidade mental, a “paz interior” que advém disso. Esse é o maior incentivo para continuar no Caminho.</li>
+</ul>
+<p style="text-align: justify;">4. Também é preciso compreender os pesos <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> relativos associados ao trato com animais e seres humanos (e até mesmo entre seres humanos). Por exemplo, é muito difícil nascer humano; assim, mesmo dizer algo ofensivo a um ser humano (especialmente a um <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> ou a um Nobre) pode ter um peso <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> mil vezes maior do que matar um animal; veja “<a href="../../pages/TL.EE.007/index.html" rel="noopener noreferrer" target="_blank" title="How to Evaluate Weights of Different Kamma">Como Avaliar os Pesos de Diferentes Kammas</a>”.</p>
+<ul style="text-align: justify;">
+<li>Outro conceito-chave é que NÃO é preciso se preocupar com o <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> passado. O papel do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> tem sido exagerado; veja “<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">O que é Kamma? O Kamma determina tudo?</a>”. <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> não é alcançado através da remoção do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, mas da remoção dos <em><span><span class="pali-term term-highlight" data-term="āsavā">Āsavā</span></span></em> ou desejos; veja “O<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" style="color: #ea9629;" target="_blank" title="The Way to Nibbāna – Removal of Āsavas"> Caminho para Nibbāna – Remoção dos Āsavā</a>”.</li>
+<li>O principal é não repetir os mesmos erros. Quanto mais a pessoa se mantém afastada das dez impurezas, mais fácil isso automaticamente SE TORNA. É como empurrar um carro parado: inicialmente difícil, mas fica mais fácil quando ele começa a se mover.</li>
+</ul>
+<p style="text-align: justify;">5.<strong> <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> NÃO é remover tudo da mente, mas apenas remover as impurezas</strong>: <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é <em>rāgakkhaya</em> (eliminação da ganância), <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é <em>dōsakkhaya</em> (eliminação do ódio), <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é <em>mōhakkhaya</em> (eliminação da ilusão); esses três são sinônimos de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify;"><strong>Assim, vê-se <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> com um pensamento </strong>(<em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>)<strong> desprovido de <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> (ganância), <em>dōsa</em> (ódio) e <em>mōha</em> (ilusão). </strong>Essa MENTE PURA não deseja ser sobrecarregada com uma “existência material” em nenhum dos 31 reinos; veja “<a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank" title="What Are Rupa? (Relation to Nibbāna)">O que são Rūpa? Relação com Nibbāna</a>”.</li>
+<li>A propósito, <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span> </span></em>pronuncia-se “chiththa”; veja “<a href="http://localhost/beng_feb2026/historical-background/Tipiṭaka-english-convention-part-1/" rel="noopener noreferrer" target="_blank">Convenção do Tipiṭaka em Inglês” adotada pelos primeiros estudiosos europeus – Parte 1</a>”, “<a href="http://localhost/beng_feb2026/tables-and-summaries/Pālī-glossary-a-k/" rel="noopener noreferrer" target="_blank">Glossário Pālī – (A-K)</a>” e “<a href="http://localhost/beng_feb2026/tables-and-summaries/Pālī-glossary-l-z/" rel="noopener noreferrer" target="_blank">Glossário Pālī – (L-Z)</a>”.</li>
+</ul>
+<p style="text-align: justify;">6. O sofrimento é um resultado direto de ter um “aspecto material” associado à mente: <span style="color: #0000ff;">esse corpo material está sujeito à decadência e à morte.</span> <strong>A mente se associa a um corpo ao qual se “apega” com ganância, ódio e ignorância. </strong>Se você observar os 31 reinos “deste mundo” (veja “<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">A Grande Teoria Unificada do Dhamma</a>”):</p>
+<ul style="text-align: justify;">
+<li>fica claro que o sofrimento está presente nos cinco reinos mais baixos — incluindo o reino humano — onde todos os três (ganância, ódio, ignorância) podem estar presentes; os corpos dos seres nesses reinos são geralmente mais densos e sujeitos à decadência e às doenças. É claro que há um sofrimento inimaginável nos quatro reinos mais baixos.</li>
+<li>No entanto, o reino humano (nº 5) é único porque é POSSÍVEL atingir <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> como humano, mesmo que também estejam sujeitos a dores físicas, decadência e doenças.</li>
+<li>No <em>dēva lōkā</em> (reinos 6-11), o ódio não existe, e o sofrimento é menor. E os corpos dos <em>dēvas</em> são menos densos e não estão sujeitos a doenças físicas (até a morte, é claro).</li>
+<li>No <em>reino</em> de <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> (reinos 12-31), o ódio e a ganância estão ausentes, e o sofrimento é ainda menor. Eles têm corpos muito sutis (menos densos) e não sofrem de doenças físicas.</li>
+</ul>
+<p style="text-align: justify;">7. No entanto, como a ignorância está presente em todos os 31 reinos, um estado completo e absoluto de felicidade está ausente em qualquer um dos 31 reinos. Mesmo que alguém nasça em um mundo <em>dēva</em> ou <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em>, acabará por ir parar nos quatro reinos mais baixos (a menos que tenha alcançado o <em>Sótapanna</em> ou um estágio superior de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>).</p>
+<ul>
+<li>O sofrimento é, naturalmente, inimaginavelmente intenso nos reinos inferiores.</li>
+<li><span>Esta é a mensagem central do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>: </span><strong><span style="color: #3366ff;">Ele disse que o sofrimento nunca termina enquanto a pessoa retornar a “este mundo dos 31 reinos” quando morrer, ou seja, a menos que alcance</span> <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</strong></li>
+<li>O sofrimento termina com a morte do <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>; não há mais renascimentos neste mundo dos 31 reinos.</li>
+<li>No entanto, pode-se ficar deprimido pensando que <em><span>o estado de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> é “aniquilação”; mas isso não é verdade. Basta seguir o Caminho passo a passo; veja “<a href="../../pages/LD.EE.002/index.html" rel="noopener noreferrer" target="_blank">É necessário que um Buddhista elimine os desejos sensuais?</a>” e “<a href="../../pages/SI.AA.005/index.html" rel="noopener noreferrer" target="_blank">Mahā Cattārisaka Sutta (Discurso sobre os Quarenta Grandes)</a>”.</li>
+</ul>
+<p style="text-align: justify;">8. Portanto, pode-se visualizar uma diminuição gradual do sofrimento à medida que se eliminam o ódio, a ganância e a ignorância, nessa ordem.</p>
+<ul>
+<li style="text-align: justify;">E pode-se experimentar essa felicidade chamada <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span> </span></em>nesta mesma vida humana, até chegar a<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; veja “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três tipos de felicidade – O que é Niramisa Sukha</a>”. Essa é a singularidade do nascimento humano.</li>
+</ul>
+<p style="text-align: justify;">9. Quando a mente “começa a pensar” sobre um determinado objeto de pensamento (<em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em>), digamos, um objeto visual, ela começa “apenas vendo”; este é o estágio <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>. Mas, em uma fração de segundo, a mente começa a adicionar impurezas (baseadas na ganância, no ódio e na ignorância) se esse objeto for “de interesse”.</p>
+<ul>
+<li style="text-align: justify;">Ela desenvolve outros pensamentos contaminados pela ganância, ódio e ignorância (possivelmente uma combinação) ao girar repetidamente em torno desse objeto de pensamento e acaba no estágio do “pensamento contaminado” (<em>viññāna</em>) antes mesmo que se perceba; veja “<a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">Evolução Temporal Incrivelmente Rápida de um Pensamento (Citta)</a>”.</li>
+<li style="text-align: justify;">Isso também é descrito em <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>; veja “<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Paṭicca Samuppāda – “Pati+ichcha”+”Sama+uppäda”">Paṭicca Samuppāda - “Pati + Ichcha” + “Sama + uppada</a>” e os links abaixo disso. <em>Viññāna</em> é um <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> <strong>contaminado</strong> por <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> (ganância), <em>dōsa</em> (ódio) e <em>mōha</em> (ignorância).</li>
+<li style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span>, </span></em><span>que é <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, é discutido em detalhes na série “</span><a href="../../pages/PS.II.001/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda em linguagem simples</a>”.</li>
+</ul>
+<p style="text-align: justify;">10. Quando <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span>, dōsa</span></em> e <em>mōha</em> são removidos da mente, <em><span>o <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> (plural de <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>) torna-se <em>pabhassara</em> (brilhante); não há mais impurezas ali obscurecendo o <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>.  <strong>Nesse estágio, diz-se que o <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> puro “vê <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>”; </strong>veja “<a href="../../pages/AB.GG.006/index.html" rel="noopener noreferrer" target="_blank">Pabhassara Citta, Mente Radiante e Bhavaṅga</a>”.</p>
+<ul>
+<li style="text-align: justify;">Depois que se alcança<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> com um <em><span><span class="pali-term term-highlight" data-term="citta">citta</span>,</span></em> os <em>cittās</em> retornam ao “estado normal”, e a pessoa vive como um ser humano comum (mas sem agir com ganância, ódio e ignorância) até que a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> da semente <em><span>de <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> que deu início à vida atual se esgote.</li>
+<li style="text-align: justify;">Na morte (chamada <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>), a mente de um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não se apega (<em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>) a outra semente <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (mesmo que possam existir muitas sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) e, assim, não há mais Renascimento. <span style="color: #0000ff;">A mente se torna livre de um “corpo” que pode estar sujeito à decadência e à morte. Isso é <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>, “<span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> completo” ou “resfriamento completo”.</span></li>
+</ul>
+<p style="text-align: justify;">11. Estamos presos a esse processo de renascimento devido a duas causas: <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>. A primeira versão de <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> é <em>lōbha</em>, a ganância intensa, que pode rapidamente se transformar em<em> dōsa</em> (ódio forte) quando alguém se interpõe no caminho. Assim, essas duas causas de <em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> efetivamente se tornam três:<em> lōbha, dōsa e mōha</em>.</p>
+<ul>
+<li style="text-align: justify;">Embora <em>dōsa</em> surja devido a <em>lōbha</em>,<em> dōsa</em> traz consigo o pior <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>: o renascimento no <em><span><span class="pali-term term-highlight" data-term="niraya">Niraya</span></span></em> (inferno), onde o sofrimento é extremo. Assim<em>, dōsa</em> tem origem nos quatro “<em><span>sōmanassa <span class="pali-term term-highlight" data-term="sahagata">Sahagata</span>, diṭṭhi sampayutta <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>” baseados na ganância.</li>
+<li style="text-align: justify;">Quando <em>diṭṭhi</em> é removido no estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, todos os quatro <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> baseados na ganância deixam de surgir. Nesse estágio, <em>lōbha</em> e <em>dōsa</em> tornam-se<em><span> <span class="pali-term term-highlight" data-term="rāga">Rāga</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="paṭigha">Paṭigha</span></span></em>, que são então removidos sucessivamente nos estágios de <em><span><span class="pali-term term-highlight" data-term="sakadāgāmi">Sakadāgāmi</span></span></em> e <em>Anāgāmi</em>. <em><span>A <span class="pali-term term-highlight" data-term="avijjā">Avijjā</span></span></em> continua a diminuir em cada estágio de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> e é removida no estágio <em><span>de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;">12. Quando <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span>, dōsa</span></em> e <em>mōha</em> não podem surgir na mente, essa mente (e, portanto<em><span>, o <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>) está desprovida (<em>suñña</em>) deles. Esse é o estado purificado de um <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>, <em>ou um</em><strong><em> pabhassara viññāna</em> (consciência desprovida de impurezas), ou seja, <em><span><span class="pali-term term-highlight" data-term="paññā">Paññā</span></span></em> (sabedoria).</strong> Veja “<a href="../../pages/AB.GG.006/index.html" rel="noopener" target="_blank">Pabhassara Citta, Mente Radiante e Bhavaṅga</a>”.</p>
+<ul>
+<li style="text-align: justify;"><em>Anidassana</em> implica algo que não é visível. Assim, <em><span>anidassana <span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>significa<em><span> “<span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span> </span></em>não pode ser visto<em>”.</em> Veja “<a href="../../pages/KD.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Anidassana Viññāṇa – O que realmente significa</a>”.</li>
+<li style="text-align: justify;">Os antepassados do Buddhismo <em>Mahāyāna</em> não conseguiam compreender o conceito de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, então criaram descrições enganosas, incluindo a de<em> Sunyata</em>: veja “<a href="../../pages/HB.AA.014/index.html" rel="noopener noreferrer" target="_blank" title="What is Sunyata or Sunnata (Emptiness)?">O que é Sunyata ou Sunnata (Vazio)?</a>”.</li>
+<li>Mesmo entre os atuais Buddhistas <em>Theravāda</em>, há muitos debates sobre o que se entende por <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. É triste ver isso.</li>
+</ul>
+<p style="text-align: justify;">13. Quando <em><span><span class="pali-term term-highlight" data-term="rāga">Rāga</span>, dōsa e mōha</span></em> são removidos, uma <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> deixa de girar em torno de um determinado objeto de pensamento (<em><span><span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em>). <strong>Esse “girar” é o que alimenta a jornada <em>saṃsárica</em>.</strong> Assim, interromper esse processo é chamado de “retirar as rodas do veículo <em>saṃsárico</em>”.</p>
+<ul>
+<li style="text-align: justify;"><span>A palavra em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> (e em Cingalês) para veículo é “</span><em>riya</em>”<em>,</em> e parar o “<em>riya</em>” é chamado de “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>”; aquele que retirou as rodas do veículo da jornada <em>samsárica</em> é chamado de “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>”. Assim, ao contrário do uso popular, “<em>Āryan</em>” (com conotações raciais) não tem nada a ver com uma Pessoa Nobre; é <em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>.</li>
+<li style="text-align: justify;"><strong>Portanto, fica claro que “<em><span><span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em>” não tem nada a ver com uma raça, “<em>Āryan</em>”. </strong></li>
+<li style="text-align: justify;">Além disso, “<em><span><span class="pali-term term-highlight" data-term="viriya">Viriya</span></span></em>” (“<em>vi</em>” + “<em>riya</em>”) significa manter-se afastado do “processo de rodar” (e o esforço para fazê-lo). Portanto, <em><span><span class="pali-term term-highlight" data-term="viriya">Viriya</span></span></em> significa envolver-se ativamente em <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>; veja “<a href="../../pages/LD.AA.008/index.html" rel="noopener noreferrer" target="_blank">Satipaṭṭhāna Sutta – Relevância para o Sofrimento nesta Vida</a>”.</li>
+</ul>
+<p style="text-align: justify;">14. Qualquer pessoa que tenha alcançado pelo menos o primeiro estágio de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, ou seja, <em>Sótapanna</em>, pode ser chamada de<em><span> <span class="pali-term term-highlight" data-term="ariya">Ariya</span></span></em> ou Pessoa Nobre. Isso ocorre porque os “<em>Āsavās</em>” ou desejos profundamente arraigados de um <em>Sótapanna</em> foram removidos permanentemente.</p>
+<ul>
+<li style="text-align: justify;">Todos os <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em> são removidos no <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; assim, “<em>Āsāvakkhaya</em>” (eliminação dos <em><span><span class="pali-term term-highlight" data-term="āsavā">āsavā</span></span></em>) é outro sinônimo para <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span>. Pessoas que estavam no degrau mais baixo da escada social ou na casta mais baixa na época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> podiam se tornar </span><em><span><span class="pali-term term-highlight" data-term="ariyā">Ariyā</span></span></em> ou Pessoas Nobres.</li>
+</ul>
+<p style="text-align: justify;">15. Quando alguém alcança<em><span> o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, sua mente não deseja mais nada “neste mundo” dos 31 reinos. Não há nada para o último <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="cuti">Cuti</span> <span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>, pronunciado “chuthi chiththa”) desta vida (na morte) se apegar (nada para <em><span><span class="pali-term term-highlight" data-term="upādāna">Upādāna</span></span></em>) e iniciar um novo nascimento “neste mundo”, e a mente se torna livre.</p>
+<ul>
+<li style="text-align: justify;"><strong>A mente torna-se PERMANENTEMENTE pura e permanentemente desligada de qualquer tipo de corpo físico, denso ou sutil.</strong></li>
+</ul>
+<p style="text-align: justify;">16. Assim, um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> não renascerá neste “mundo material” dos 31 reinos (ver “<a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank" title="The Grand Unified Theory of Dhamma">A Grande Teoria Unificada do Dhamma</a>”), ou seja, alcança-se <em><span>o <span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>. Ele/ela “partiu” deste “mundo” dos 31 reinos. O sofrimento cessa permanentemente.</p>
+<ul>
+<li style="text-align: justify;">Assim, fica bastante claro O QUE é <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>: ela interrompe o processo de Renascimento. O que é difícil de entender é POR QUE interromper o processo de Renascimento pode aliviar todo o sofrimento.</li>
+<li style="text-align: justify;">Não importa quanta adversidade alguém tenha suportado, a pessoa gosta de viver. Isso é verdade tanto para um ser humano quanto para um humilde verme. Para qualquer ser vivo, a coisa mais preciosa é a sua vida. <span style="color: #3366ff;"><strong><span>Quando se começa a compreender o “quadro geral do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>”, passa-se lentamente a perceber os perigos de permanecer nesse processo infinito de Renascimento.</span></strong></span></li>
+</ul>
+<p style="text-align: justify;">17. Outras análises sobre <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> podem ser encontradas em “<a href="http://localhost/beng_feb2026/key-dhamma-concepts/nirodha-and-vaya-two-different-concepts/" rel="noopener noreferrer" target="_blank" title="Nirödha and Vaya – Two Different Concepts">Nirodha e Vaya – Dois Conceitos D</a>iferentes” e “<a href="../../pages/TL.HH.011/index.html" rel="noopener noreferrer" target="_blank" title="Difference Between Giving Up Valuables and Losing Interest in Worthless">Diferença entre Abrir Mão do que é Valioso e Perder o Interesse pelo que é Sem Valor</a>”, ............</p>
+<ul>
+<li style="text-align: justify;">Além disso, consulte a nova seção: “<a href="../../pages/CH.AA.000/index.html" rel="noopener" target="_blank">Buddhismo – Em Gráficos</a>”.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.EE.001/index.html">Nibbana 2</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.EE.003/index.html">Does The First Noble Truth Describe Only Suffering</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.EE.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Nibbana 2</span>
+        
+        <span class="pathway-title title-pt">Nibbāna 2</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.EE.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Does The First Noble Truth Describe Only Suffering</span>
+        
+        <span class="pathway-title title-pt">A Primeira Nobre Verdade descreve apenas o sofrimento?</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

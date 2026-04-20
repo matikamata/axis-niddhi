@@ -1,0 +1,315 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Why Does The World Exist | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Dhamma and Philosophy</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 8 / 12</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">DP.BB.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Why Does The World Exist</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>DP.BB.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Dhamma and Philosophy</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="DP.BB.002"
+             data-section="Dhamma and Philosophy"
+             data-section-code="DP"
+             data-findex="0709"
+             data-level="intermediate"
+             data-reading-time="8"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>DP.BB.002</td></tr><tr><td>Fin-dex</td><td>0709</td></tr><tr><td>Slug</td><td>why-does-the-world-exist</td></tr><tr><td>Section</td><td>DP</td></tr><tr><td>Title EN</td><td>Why Does The World Exist</td></tr></table></div></div><p><strong>Revised October 1, 2021</strong></p>
+<p style="text-align: justify"><span>1. I started writing this <span class="pali-term term-highlight" data-term="post">post</span> while reading the popular book “Why Does the World Exist? - An Existential Detective Story” by Jim Holt (2012). It is a good book with many thought-provoking questions. Here I would like to point out that most of those questions have answers in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul>
+<li style="text-align: justify">On p. 269, equating the <em><span><span class="pali-term term-highlight" data-term="nibbānic">Nibbānic</span></span></em><span> bliss to the annihilation of a person, he asks, “...But how can you enjoy something if you do not exist?”. To address this question, I initially started the <span class="pali-term term-highlight" data-term="post">post</span> with the title, "Does </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> Mean Annihilation of a “Person”?". Still, I started addressing other issues in the book and eventually changed the title to be the same as the book title.</li>
+<li>Even many Buddhists are terrified of the idea of<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, thinking that it means destruction. That is why even many <em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em> like to give “blessings” to the effect, “May you attain<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> at the end of much pleasures in the heavenly worlds.” That illustrates a total lack of understanding of the profound message of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></li>
+</ul>
+<p style="text-align: justify"><span>2. The problem is in the question itself. If a "person" is to be annihilated, a “person” needs to exist in the first place. Now, this is a deep issue that needs some knowledge of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. As the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said in his first sermon, his <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> is, “</span><i><span>pubbe ananussutesu <span class="pali-term term-highlight" data-term="dhammesu">dhammesu</span>….. “</span></i> or “a concept that has not been known to the world before..”.</p>
+<ul style="text-align: justify">
+<li><span>To annihilate, something “concrete” must exist. The Brahmins of the day of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> believed there is a permanent “</span><em>äthma</em>” associated with a person (a “soul” in the present day.) It is very difficult for all of us to get rid of the perception of “me” or” myself”. <b><span>In fact, that perception is totally removed only at the <span class="pali-term term-highlight" data-term="arahant">Arahant</span> stage of <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span>; it keeps decreasing as one advances on the Path.</span></b></li>
+<li><span>Thus as long as one “belongs to this world of 31 realms”, one always thinks in terms of “me” and “the external world”. This is why the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> rejected the concept of “no-self” even though most people incorrectly translate <span class="pali-term term-highlight" data-term="anatta">anatta</span> as “no-self”; see, "</span><a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank" title="The Grand Unified Theory of Dhamma">The Grand Unified Theory of Dhamma</a>".</li>
+<li><span>On the other hand, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that it is also incorrect to say there is “self”. This is because any “person” changes even moment-to-moment; see, “</span><a href="../../pages/PS.FF.003/index.html">What Reincarnates? – Concept of a Lifestream</a>“.</li>
+<li><span>In rejecting both “self” and “no-self” extremes, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, “this changing being” or “a lifestream” changes moment-to-moment due to changes in the causes that support that lifestream. This is not something that I can explain in one essay and is explained via many <span class="pali-term term-highlight" data-term="posts">posts</span> at the site, including the important section on </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>.</li>
+<li>In the book there is a separate chapter on, "The Self - Do I Really Exist?". I will discuss that chapter below, and point out a few more related facts.</li>
+</ul>
+<p style="text-align: justify">3. The book’s main theme is “why is there something rather than nothing?” or “how did the world got started?”. It summarizes most of the arguments that have accumulated over thousands of years, and of course, come to the inevitable question on “the nature of the Creator God who would not need a cause for being there”.</p>
+<ul style="text-align: justify">
+<li><span>However, regarding the two questions on existence as expressed above, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s answer is the simplest: The world has existed forever and it is not possible to pinpoint a specific first cause. The proof is very simple: Suppose there is a first cause; then what caused that? QED.</span></li>
+<li>Thus in the scientific basis of cause and effect, the absence of a first cause is built in.</li>
+<li>On p. 82 of the book, Jim Holt did point out, “<em><span>..Scientific thinkers, <span class="pali-term term-highlight" data-term="by and large">by and large</span>, have not shared such qualms about eternity. Neither Galileo nor Newton nor Einstein had any problem conceiving of a universe that was infinite in time. Indeed, Einstein added to his field equations a fudge factor - the infamous “cosmological constant” - to ensure that they would yield a universe that was static and eternal</span></em>".</li>
+<li>And a few philosophers have discussed the problem with “first cause” arguments, as Jim Holt noted. Talking about the late philosopher John Mackie on p. 206, “<em>..Obviously, as Mackie observed, no explanation in terms of a "first cause” could answer the ultimate question of existence, for such an explanation would merely raise the further question of why that first cause -whether it be God, an unstable chunk of false vacuum, or some still more exotic entity- itself existed</em>”.</li>
+</ul>
+<p style="text-align: justify"><span>4. If one accepts that the world has existed forever, then many other questions discussed in the book do not even arise. Thus 100% of the questions discussed are answered if we start off with the premise that the world has existed forever AND the root causes (greed, hate, and ignorance) for the existence of the world given by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>.</span></p>
+<ul style="text-align: justify">
+<li><span>For example, on p. 7, Leibniz’s Principle of Sufficient Reason is discussed: For every truth, there must be a reason why it is so and not otherwise; and for everything, there must be a reason for that thing’s existence. This is basically “cause and effect”. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that the world exists because of greed, hate, and ignorance; and those causes have no beginning.</span></li>
+<li><span>This is related to the issue of the mind taking precedence over matter, and I am slowly building evidence for that in the website. There are some introductory <span class="pali-term term-highlight" data-term="posts">posts</span> in the “<span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>” and “<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and Philosophy” sections.</span></li>
+<li>On p. 188, Jim Holt discusses the fact that all science says about the “stuff that makes up our world” is that mass is equivalent to energy, “<em>....but it gives us no idea of what energy really is..</em><span>”. This is exactly what is explained in <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>, and I will get to it eventually. He goes on to say, “</span><em>...As Bertrand Russell noted in his 1927 book, The Analysis of Matter when it comes to the intrinsic nature of the entities making up the world, science is silent</em>”.</li>
+<li>He also briefly discuss another big issue in philosophy on p. 192: “<em>The conclusion of the philosophers …...that there is more to consciousness than the mere processing of information. If this is true, then science, insofar as it describes the world as a play of information states, would seem to leave out a part of reality: the subjective, irreducibly qualitative part</em><span>”. Actually, as we will see, <span class="pali-term term-highlight" data-term="buddha">Buddha</span>’s answer solves both this and the issue above in one fell swoop.</span></li>
+<li><span>A world without a beginning also gives an answer to the question of "why do I exist” (p. 18). We all have “existed” forever; there is no beginning so the question has no meaning. Another frequently asked question is, “what is the meaning of life?”. There is no meaning to life: <span class="pali-term term-highlight" data-term="the bottom line">The bottom line</span> is that we all suffer in this existence ON THE AVERAGE, IN THE LONG TERM while we meander aimlessly among the 31 realms of existence; see, "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener" target="_blank" title="Evidence for Rebirth">Evidence for Rebirth</a>".</li>
+</ul>
+<p style="text-align: justify"><span>5. Now the only critical question is how do we know that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>’s worldview is correct? The answer is that it can explain the complex world around us; it has the "explanatory power". Also see, “</span><a href="../../pages/TL.GG.003/index.html" rel="noopener" target="_blank" title="Vagaries of Life and the Way to Seek “Good Rebirths”">Vagaries of Life and the Way to Seek Good Births</a>"  and “<a href="../../pages/DS.AA.002/index.html" rel="noopener" target="_blank" title="Good Explanations – Key to Weeding Out Bad Versions of Dhamma">Good Explanations - Key to Weeding out Bad Versions of Dhamma</a><span>",  among many other <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></p>
+<ul style="text-align: justify">
+<li><span>Furthermore, one can EXPERIENCE the truth of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s teachings and the results for oneself. I have described part of my experience in following the Path in, "</span><a href="../../pages/BM.AA.013/index.html" rel="noopener" target="_blank" title="Ariya Jhanas via Cultivation of Saptha Bojjhaṅga">Ariya Jhanas via Cultivation of Saptha Bojjhaṅga</a><span>". Do not be discouraged by the title of the <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+</ul>
+<p style="text-align: justify">6. Now let me briefly discuss the late chapter on,  "The Self - Do I Really Exist?". Here Jim Holt comes across the answer himself (p. 256): Talking about Descartes' famous phrase, "I think, therefore I exist", he says, "<em>... ..Did Descartes here infer more than he was entitled to? As many commentators have pointed out (beginning with Georg Lichtenberg in the eighteenth century), the "I" in his ultimate premise is not quite legitimate. All Descartes could assert with certainty was "there are thoughts". <strong>He never proved that thoughts require a thinker</strong>......</em>" (boldface mine).</p>
+<p style="text-align: justify"><span>7. This is exactly what the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said. There are thoughts, but no REAL thinker; there is the PERCEPTION of a thinker in "one's mind" until one's mind is purified to the level of an <span class="pali-term term-highlight" data-term="arahant">Arahant</span> and it becomes clear that there is no "thinker". </span><span style="color: #0000ff">However, the irony is that until that wisdom is gained, "one's suffering" is real.</span> The suffering is there simply because one thinks there is a real thinker!</p>
+<ul>
+<li style="text-align: justify">But one cannot honestly say, "there is no-self" as most people try to do unless one is an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>; one is just trying to fool oneself in saying that. When something bad happens to "anything that belongs to oneself" one INEVITABLY feels the pain associated with it; see, "<a href="../../pages/KD.FF.019/index.html" rel="noopener" target="_blank" title="Anatta and Dukkha – True Meanings">Anatta and Dukkha - True Meanings</a>".</li>
+<li style="text-align: justify">When the mind is purified (i.e., is absent of greed, hate, and ignorance) perception of "self" goes away at the<em><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage, then the suffering associated with "one's stuff" is not there anymore. When one comprehends the concept of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> to some extent, this will become clear to some extent. In other words, <em><span><span class="pali-term term-highlight" data-term="nibbānic">Nibbānic</span></span></em> bliss or <em><span>niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> increases as one advances on the Path, with the mind being purified at each step; see, "<a href="../../pages/TL.CC.005/index.html" rel="noopener" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a>", and "<a href="../../pages/BD.JJ.003/index.html" rel="noopener" target="_blank" title="Niramisa Sukha">Niramisa Sukha</a>".</li>
+<li style="text-align: justify">Thus we cannot forcibly get rid of the sense of "I". Only through the true understanding of the Three Characteristics of this world, <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>, that one can slowly start getting rid of that sense of "I" or "self". Until then there is neither a "self" nor "no-self", but just a stream of thoughts; see, “<a href="../../pages/PS.FF.003/index.html">What Reincarnates? – Concept of a Lifestream</a>“. Only at the death of an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> that stream of thoughts is ended and the mind becomes free of any attachment to the material world of the 31 realms; see, "<a href="../../pages/KD.EE.002/index.html" rel="noopener" target="_blank" title="Nibbāna – Is it Difficult to Understand?">Nibbāna - Is it Difficult to Understand?</a>", and “<a href="../../pages/BD.JJ.002/index.html" rel="noopener" target="_blank" title="What Are Rupa? (Relation to Nibbāna)">What are Rupa? Relation to Nibbāna</a>".</li>
+</ul>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/DP.BB.001/index.html">Book Reviews</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/DP.BB.003/index.html">Waking Up By Sam Harris</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/DP.BB.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Book Reviews</span>
+        
+        <span class="pathway-title title-pt">Book Reviews</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/DP.BB.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Waking Up By Sam Harris</span>
+        
+        <span class="pathway-title title-pt">Waking Up By Sam Harris</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-DP">
+        ↑ Back to Dhamma and Philosophy
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Two Types Of Vedana Feelings | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 2 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.II.009</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Two Types Of Vedana Feelings</h1>
+    
+    <h1 class="title-pt">Dois tipos de sentimentos de Vedanā</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.II.009</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.II.009"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0148"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.II.009</td></tr><tr><td>Fin-dex</td><td>0148</td></tr><tr><td>Slug</td><td>two-types-of-vedana-feelings</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Two Types Of Vedana Feelings</td></tr></table></div></div><p style="text-align: justify;">Most <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>are "mind-made" (<span style="text-align: justify;">"</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em><span style="text-align: justify;">”</span>) and have their origin in <span style="text-align: justify;">"distorted </span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em><span style="text-align: justify;">"</span></p>
+<p style="text-align: justify;"><strong>Revised February 9, 2017; rewritten December 20, 2023;<span style="color: #3366ff;"> revised August 23, 2024</span></strong></p>
+<h5 style="text-align: justify;">Introduction</h5>
+<p style="text-align: justify;">1. The word <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>means " becoming aware<em>" </em>of a sensory input. It comes from<em> (“vé” + “danā”) </em><span>which means “වීම දැනවීම” in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>. When an</span><em><span> <span class="pali-term term-highlight" data-term="ārammaṇa">ārammaṇa</span></span></em> (sensory input) comes to the mind (via any of the six senses), we become aware of it.<em> </em></p>
+<ul style="text-align: justify;">
+<li>Only sensory inputs to the "physical body" can bring <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> or <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em> directly. The other five types of sensory inputs only generate "neutral <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>.</span></em>" However, based on our "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" (distorted perceptions) about the world, our minds attach to even those "neutral <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" and generate "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" or "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span>.</span></em>”</li>
+</ul>
+<p style="text-align: justify;"><strong>Thus,<em><span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> can</strong> <strong>arise in two ways</strong>:</p>
+<ol style="text-align: justify; list-style-type: lower-roman;">
+<li>One type of <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> is a consequence of a previous <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (or defiled action), i.e., a <span style="color: #3366ff;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>.</span></em> Our <span style="color: #993366;"><strong>physical bodies</strong></span> feel those <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em></strong></span>. </span></span>However, most<em><span> <span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> arise not due to a specific <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> but because we are born with a "dense physical body" that can be subjected to various external influences. </li>
+<li>The second is a direct consequence of attaching to a sensory input via liking, disliking, or even with a neutral mindset due to " distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>."</span></em> Yes. There is an automatic attachment due to the following: <strong>The version of the "external <em><span><span class="pali-term term-highlight" data-term="rupa">rupa</span></span></em>" coming to the mind is NOT authentic but depends on one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>/<span class="pali-term term-highlight" data-term="anusaya">anusaya</span>/saṁyojana</span></em>.</strong> Such a "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" automatically arises with ANY sensory input. The explanation is a bit deep and is at "<a href="http://localhost/beng_feb2026/three-levels-of-practice/sotapanna-stage-of-nibbana/fooled-by-distorted-sanna-sanjanati-origin-of-attachment-ta%e1%b9%87ha/" rel="noopener" target="_blank">Fooled by Distorted Saññā (Sañjānāti) – Origin of Attachment (Taṇhā)</a>." That "distorted perception" leads to "<span style="color: #3366ff;"><strong>mind-made </strong></span><em><span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></strong></span>."</em> They are also called <span style="color: #3366ff;"><strong>"<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>”</strong></span> (which vary according to one's current<i><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></i>).</li>
+</ol>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> Associated With the Physical Body</h5>
+<p style="text-align: justify;">2<em><span>. <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> (feelings) felt by the physical body<span style="color: #3366ff;"><strong> </strong></span>are <strong>three kinds</strong>: <em><span><span class="pali-term term-highlight" data-term="sukha vedanā">Sukha vedanā</span></span></em> (pleasant bodily feeling), <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em> (unpleasant or painful bodily feeling), and <em>adukkhamasukha</em> (without being painful or pleasant, just neutral.) Here, the combination of <em>adukkha </em>and<em> asukha </em>rhymes as "<em>adukkhamasukha."</em></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma vipāka</span></span></em> leading to s<em><span>ukha <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em> happen to everyone, including <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>. See Ref.1.</li>
+<li>For example, the <em><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></em> himself had physical ailments later in his life as <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>. Moggallana <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> was beaten to death because of a bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> that he had done many lives before.</li>
+<li><span style="color: #3366ff;"><span style="color: #000000;">The third type of<em><span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>felt by the physical body is</span><span style="color: #000000;"> "neutral" or "<em>adukkhamasukha."</em></span><strong><br/>
+</strong></span></li>
+<li><span style="color: #3366ff;"><span style="color: #000000;"><strong>The first two types of<em><span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>are felt only by the physical body (<em>sārīrika </em><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em></strong>); see #11 of </span></span><a href="../../pages/IS.CC.003/index.html" rel="noopener noreferrer" target="_blank">Vipāka Vedanā and “Samphassa jā Vedanā” in a Sensory Event</a>."<span style="color: #3366ff;"> </span></li>
+<li><span style="color: #993366;"><strong>These two are the only types of "real <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" felt by all living beings with "dense bodies," including animals and <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em></strong></span>; thus, they are "real."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> Associated With Other Sensory Inputs Are Neutral</h5>
+<p style="text-align: justify;">3. <span style="color: #3366ff;"><strong><span style="color: #000000;">All</span></strong></span><em><span style="color: #3366ff;"><strong><span style="color: #000000;"><span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></span></strong></span></em><span style="color: #3366ff;"><strong><span style="color: #000000;">initially coming through</span></strong></span><span style="color: #000000;"><strong> the other five sense faculties are</strong></span><span style="color: #3366ff;"><strong><span style="color: #000000;"> neutral</span></strong></span><span style="color: #3366ff;"><strong><span style="color: #000000;">, i.e.,</span></strong></span><em><span style="color: #3366ff;"><strong><span style="color: #000000;"><span> adukkhamasukha <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>.</span></span></strong></span></em></p>
+<ul style="text-align: justify;">
+<li>Sensory inputs through the other five senses (eyes, ears, tongue, nose, and mind) ALWAYS lead to this type of "neutral" or "<em><span>adukkhamasukha" <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>.</span></em></li>
+<li>Then the question arises: "Why do I feel pleasure when tasting sugar or looking at a beautiful model"? <span style="color: #3366ff;"><strong>Those are "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>" </span></em>based on "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" (our wrong perceptions about the external world.)</strong></span></li>
+<li style="text-align: justify;">Let us look at that second type of "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>."</span></em></li>
+</ul>
+<h5 style="text-align: justify;">Mind- Made <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> ("<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>")</h5>
+<p style="text-align: justify;">4. Sensory inputs coming in via the eyes, ears, tongue, nose, and mind are <em>adukkhamasukha</em> (without being painful or joyous, just neutral.) However, based on those sights, sounds, tastes, smells, and thoughts, our minds generate "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" which lead to "mind-made" <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> (<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>), also called <em>sōmanassa</em> and <em><span>dōmanassa <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>. </span></em>For details, see “<a href="../../pages/IS.BB.010/index.html" rel="noopener" target="_blank">Saññā – All Our Thoughts Arise With “Distorted Saññā”</a></p>
+<ul style="text-align: justify;">
+<li> In #2 above, we saw that <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>are felt only by the physical body (<span style="color: #3366ff;"><span style="color: #000000;"><em>sārīr</em></span></span><em>a</em>.) We may also form <em>sōmanassa</em> and <em><span>dōmanassa <span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em><em> </em>based on <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span> <span class="pali-term term-highlight" data-term="vipāka">vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">vedanā</span>.</span></em> For example, one may become depressed upon getting injured; thus, there is now a "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" in addition to the <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> felt by the body.</li>
+<li>These are <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>that a mind generates due to ignorance about the "real nature of this world," i.e., not having "<em><span><span class="pali-term term-highlight" data-term="yathābhūta">yathābhūta</span> ñāna." </span></em>See "<a href="../../pages/KD.LL.002/index.html" rel="noopener" target="_blank">Bhūta and Yathābhūta – What Do They Really Mean</a>."</li>
+<li>They do not arise in an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+<h5>Origin of the "Distorted <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>"</h5>
+<p style="text-align: justify;">5. <span style="color: #993366;"><strong>The <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>coming through the other senses (eyes, ears, tongue, nose, and mind) may feel "pleasant" or "unpleasant" NOT because of <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>, but due to "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em>"</strong></span></p>
+<ul style="text-align: justify;">
+<li>For example, all humans taste sugar to be sweet. That "sweetness" arises due to "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em>" Then, based on that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>,</span></em>" the mind becomes joyful, and that is <em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span> </span></em>or"mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>.</span></em>" See "<a href="../../pages/CH.BB.006/index.html" rel="noopener" target="_blank">Contamination of a Human Mind – Detailed Analysis</a>."</li>
+<li><strong>The "sweet taste of sugar" or the "beauty of an actress" is a <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>, not a <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>.</strong> <span style="color: #993366;"><strong>However, based on that "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" our minds automatically attach to them and generate "mind-made" <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> called "<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span>."</span></em></strong></span></li>
+<li>However, average humans believe that "sugar" inherently has sweetness, i.e., that "sweetness" is a "<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> guṇa</span></em>" associated with sugar. In the same way, they believe that "beauty" is inherent in the physical body of an actress. See "<a href="../../pages/IS.CC.004/index.html" rel="noopener noreferrer" target="_blank">Kāma Guṇa – Origin of Attachment (Tanhā)</a>." </li>
+<li>If "sweetness" was in sugar, all living beings should taste sugar to be sweet. However, pigs or cows don't eat sugar; pigs like rotten meat, and cows like grass, but humans don't like to eat either. <strong>Therefore, "sweetness of sugar" (or in rotten meat or grass) is NOT in sugar/rotten meat/grass but arises due to "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em>" </strong>Those "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" arose because humans, pigs, and cows have "vastly different <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>."</li>
+</ul>
+<h5 style="text-align: justify;">If "Distorted <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>" Is Not Real, Can We Eat Rotten Meat or Grass?</h5>
+<p style="text-align: justify;">6. This "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" is not a mere trick. The physical bodies of humans (and animals) are made by nature to be compatible with it. </p>
+<ul style="text-align: justify;">
+<li>That is why the human digestive system is different from that of a pig or a cow. Our digestive system is designed to be compatible only with food that gives us those distorted perceptions of "sweetness" or "deliciousness." If we eat rotten meat or grass, we will get sick.</li>
+<li>In the same way, pigs have their digestive system designed to digest rotten meat without any problem, and <em>ditto</em> for cows to be able to eat grass.</li>
+<li>This is a more profound point connected to <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> cultivated as a human. For example, those born as pigs accumulated the <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em> energy to "be born a pig" by engaging in lowly and "morally rotten" deeds when they were human. Thus, they are reborn as pigs "to like rotten things." (All living beings attached to the Earth were born human when the Earth was formed several billions of years ago: "<a href="../../pages/SI.AA.010/index.html" rel="noopener" target="_blank">Buddhism and Evolution – Aggañña Sutta (DN 27)</a><span>.") One's <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> is according to one's </span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>; see, for example,  "<a href="../../pages/PS.DD.007/index.html" rel="noopener" target="_blank">Gati (Habits/Character) Determine Births – Saṃsappanīya Sutta</a>" and "<a href="../../pages/KD.GG.004/index.html" rel="noopener" target="_blank">Gati to Bhava to Jāti – Ours to Control</a><span>." This is why I say that <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is profound and self-consistent.</span></li>
+<li>First, it is necessary to have a good understanding of "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" to understand the <em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> fully<em>. </em><span>We will discuss that in upcoming <span class="pali-term term-highlight" data-term="posts">posts</span> in “</span><a href="../../pages/TL.II.002/index.html" rel="noopener" target="_blank">Sotapanna Stage via Understanding Perception (Saññā)</a>.” However, we can get an idea by looking at some examples.</li>
+</ul>
+<h5 style="text-align: justify;">Some Examples of<em><span> <span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em></h5>
+<p style="text-align: justify;">7. A <em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> arises due to attachment via greed or hate at that moment (i.e., due to one's <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>); see "<a href="../../pages/KD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Tanhā – How We Attach Via Greed, Hate, and Ignorance</a>."</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">These are the <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> (feelings) that<em><span> <span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> do not feel.  Since they do not have any "bad <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>,"</span></em> they do not commit any <em><span>(abhi)<span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span>.</span></em> The easiest way to explain this kind of <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> is to give some examples:</li>
+</ul>
+<ol style="text-align: justify; list-style-type: lower-alpha;">
+<li>Three people are walking down the street. One has an ultra-right political bias (A), the second has an ultra-left preference (B), and the third is an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> (C) who does not have special feelings for anyone. They all see a famous politician hated by the political right coming their way. <span style="color: #0000ff;">It is a given that the sight of the politician causes A to have displeasure and B to have a pleasurable feeling.</span> On the other hand, sight does not cause the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> to generate any pleasure or displeasure.  <strong>Even though all three see and identify the person</strong>, they produce different feelings. <em>It is essential to realize that the feelings were created in A and B by themselves.</em></li>
+<li>Two friends go looking for treasure and find a gem. Both are overjoyed. It seems highly valuable; one kills the other to get all the money. Yet when he tries to sell the "gem," he discovers it is not valuable. His joy turns to sorrow in an instant. <span style="color: #3366ff;"><strong>Nothing had changed in the object. It was the same piece of colored rock. What has changed is the perception of it.</strong></span></li>
+</ol>
+<h5 style="text-align: justify;">Another Example of<em><span> <span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em></h5>
+<p style="text-align: justify;">8. A loving couple had lived for many years without any problems and were happy to be together. However, the husband slaps his wife during an argument. The physical pain from the slap itself did not last more than a few minutes. But for how long would the wife suffer mentally? Even the husband, who did not feel any physical pain, would suffer for days if he loved his wife. <span style="color: #3366ff;"><strong>In both cases, the actual mental pain was associated with the attachment to each other.</strong></span> The wife could have dropped something on her foot and would have suffered about the same amount of physical pain. But she would not have had any lingering mental pain associated with that.</p>
+<ul style="text-align: justify;">
+<li>The initial sensory contact, by itself, did not generate any<strong> <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span> energy</span></em>.</strong></li>
+<li>However, based on that sensory contact, we tend to pursue it either <em>sōmanassa</em> or <em>dōmanassa </em><em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> based on "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>." That is when we<strong> start generating <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>. </strong>For example, if we see our "worst enemy," that is just "seeing." But if we start thinking about how bad a person he is, we will generate "bad <em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" and thus "bad <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>."</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>Arise Due to <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em></h5>
+<p style="text-align: justify;">9. Thus, it is clear that in all the above examples, the "extra" happiness or suffering (other than due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>) arose from <span style="color: #3366ff;"><strong>within one's mind</strong>.</span> And <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em> (attachment via greed, hate, or ignorance) was the cause of it. See "<a href="../../pages/KD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Tanhā – How We Attach Via Greed, Hate, and Ignorance</a>."</p>
+<ul style="text-align: justify;">
+<li>When we generate such "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span>," </span></em>we also tend to do <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (via <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></em>), bringing more suffering in the future.</li>
+</ul>
+<p style="text-align: justify;">10. <strong>Therefore, <em><span><span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span> </span></em>arises due to "mind-made <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>."</strong> <span style="color: #3366ff;">They arose INSIDE the mind itself and did not come from outside.</span><span> If external things can cause suffering, we will have to destroy external things to eliminate suffering. However, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> showed that the root causes of suffering are within one's mind and can be eliminated.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">There is no inherent suffering or happiness in anything external; sensory contact with an external thing can cause pain or happiness, depending on our<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> and <em>āsāvās</em>.</li>
+<li style="text-align: justify;">An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> will still experience "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>" while living everyday life (i.e. unless they are in a <em>samāpatti</em>.) But since they have removed all <em><span>āsāvās/<span class="pali-term term-highlight" data-term="anusaya">anusaya</span>/saṁyojana/<span class="pali-term term-highlight" data-term="gati">gati</span> </span></em>by comprehending the true nature ("<em><span><span class="pali-term term-highlight" data-term="yathābhūta">yathābhūta</span> ñāna"</span></em>), they are free of <strong>attaching to</strong> "distorted <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span>.</span></em>" Even though they cannot get rid of any <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span></span></em> (until the death of their physical bodies), they don't become depressed about them. In the same way, they don't become joyful about <em><span><span class="pali-term term-highlight" data-term="sukha vedanā">sukha vedanā</span>. </span></em>They generate true "neutral or <em>upekkha</em> <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>" in response to ANY sensory input. Thus, “<em><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span></em>(<em>abhi</em>)<em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>" or "(<em><span><span class="pali-term term-highlight" data-term="samphassa">samphassa</span>-jā-</span></em>)<em><span>vēdanā <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="taṇhā">taṇhā</span></span></em>" or any other term in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> does not apply to them.</li>
+</ul>
+<h5 style="text-align: justify;">References</h5>
+<p style="text-align: justify;">1. <em><span><span class="pali-term term-highlight" data-term="sukha vedanā">Sukha vedanā</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">dukkha vedanā</span> </span></em>due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> are not deterministic. We can avoid some by living mindfully; see "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank" title="What is Kamma? – Is Everything Determined by Kamma?">What is Kamma? – Is Everything Determined by Kamma?</a>” Many <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> </span></em>can be reduced in strength with time if one starts acting with foresight and mindfulness. For example, eating healthy and exercising regularly can avoid many physical ailments.</p>
+<ul style="text-align: justify;">
+<li>We can avoid some <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span> </span></em>by preventing conditions for them from arising just by using common sense. For example, going out at night in a dangerous neighborhood provides fertile ground for past bad <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> to appear. Many <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> CANNOT take place unless the conditions are right. See, "<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Anantara and Samanantara Paccayā</a>."</li>
+<li>We have done innumerable <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (good and bad) in our past lives. If we act with common sense, we can suppress bad <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> and make conditions for good <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> to arise.</li>
+<li style="text-align: justify;">Also, see the discussion on <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> bījā</span></em> in "<a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Sankhāra, Kamma, Kamma Bījā, Kamma Vipāka.</a>"</li>
+</ul>
+<p style="text-align: justify;">More on <em><span><span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em> at: "<a href="../../pages/PS.KK.002/index.html" rel="noopener noreferrer" target="_blank">Feelings: Sukha, Dukha, Somanassa, and Domanassa,</a>" “<a href="../../pages/KD.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Does Bodily Pain Arise Only Due to Kamma Vipāka?</a>,“ "<a href="../../pages/PS.AA.003/index.html" rel="noopener noreferrer" target="_blank">How Are Paṭicca Samuppāda Cycles Initiated?,</a>" and "<a href="../../pages/PS.HH.003/index.html" rel="noopener noreferrer" target="_blank">Avyākata Paṭicca Samuppāda for Vipāka Viññāna.</a>"</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.II.009"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0148"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+======================================================
+PD#PN:        TL.II.009
+Language:     pt-BR
+Generated-At: 2026-02-23T21:19:51Z
+Source-Ref:   2026-02-23T21:10:02Z
+Engine:       DeepL API (Glossary v5)
+======================================================
+DO NOT EDIT WITHOUT REVIEW LOG. THIS IS A DERIVATIVE WORK.
+-->
+<p style="text-align: justify;">A maioria <em><span>das <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>são “criadas pela mente” (<span style="text-align: justify;">“</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em><span style="text-align: justify;">”</span>) e têm sua origem em <span style="text-align: justify;">“</span><em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> <span style="text-align: justify;">distorcida</span><em style="text-align: justify;">”.</em></p>
+<p style="text-align: justify;"><strong>Revisado em 9 de fevereiro de 2017; reescrito em 20 de dezembro de 2023;<span style="color: #3366ff;"> revisado em 23 de agosto de 2024</span></strong></p>
+<h5 style="text-align: justify;">Introdução</h5>
+<p style="text-align: justify;">1. A palavra <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>significa “tornar-se consciente<em>” </em>de um estímulo sensorial. Ela vem de<em> (“vé” + “danā”),</em> que significa “වීම දැනවීම” em Cingalês. Quando um<em><span> <span class="pali-term term-highlight" data-term="ārammaṇa">Ārammaṇa</span></span></em> (estímulo sensorial) chega à mente (por meio de qualquer um dos seis sentidos), nos tornamos conscientes dele.<em> </em></p>
+<ul style="text-align: justify;">
+<li>Somente estímulos sensoriais ao “corpo físico” podem trazer <em><span><span class="pali-term term-highlight" data-term="sukha vedanā">Sukha Vedanā</span></span></em> ou <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em> diretamente. Os outros cinco tipos de estímulos sensoriais geram apenas “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> neutro<em>”.</em> No entanto, com base em nossa “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida” (percepções distorcidas) sobre o mundo, nossas mentes se apegam até mesmo a essas “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> neutras” e geram “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> criada pela mente” ou <em><span>“<span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>”.</span></em></li>
+</ul>
+<p style="text-align: justify;"><strong>Assim,<em><span> <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> pode</strong> <strong>surgir de duas maneiras</strong>:</p>
+<ol style="text-align: justify; list-style-type: lower-roman;">
+<li>Um tipo de <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> é consequência de um <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> anterior (ou ação impura), ou seja, um <span style="color: #3366ff;"><span style="color: #000000;"><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span>.</span></em> Nossos <span style="color: #993366;"><strong>corpos físicos</strong></span> sentem esses <span style="color: #993366;"><strong><em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em></strong></span>. </span></span>No entanto, a maioria<em><span> dos <span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> surge não devido a um <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> específico, mas porque nascemos com um “corpo físico denso” que pode estar sujeito a várias influências externas. </li>
+<li>O segundo é uma consequência direta do apego a um estímulo sensorial por meio do gosto, do desgosto ou mesmo de uma mentalidade neutra devido a “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida<em>”.</em> Sim. Há um apego automático devido ao seguinte: <strong>a versão do <em><span>“<span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em> externo” que vem à mente NÃO é autêntica, mas depende do <em><span><span class="pali-term term-highlight" data-term="gati">gati</span>/<span class="pali-term term-highlight" data-term="anusaya">Anusaya</span>/saṁyojana</span></em> de cada um.</strong> Tal “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida” surge automaticamente com QUALQUER estímulo sensorial<strong>.</strong> A explicação é um pouco profunda e está em “<a href="http://localhost/brasileirinho/three-levels-of-practice/sotapanna-stage-of-nibbana/fooled-by-distorted-sanna-sanjanati-origin-of-attachment-ta%e1%b9%87ha/">Enganado por Saññā Distorcida (Sañjānāti) – Origem do Apego (Taṇhā)</a>”. Essa “percepção distorcida” leva a “<em><span style="color: #3366ff;"><strong><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></strong></span></em><span style="color: #3366ff;"><strong>criada pela mente</strong></span><em>”.</em> Elas também são chamadas de <span style="color: #3366ff;"><strong>“<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">vedanā</span></span></em>”</strong></span> (que variam de acordo com a sua <i><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></i> atual).</li>
+</ol>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> associada ao corpo físico</h5>
+<p style="text-align: justify;">2<em><span>. <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> (sentimentos) sentidos pelo corpo físico são de <strong>três tipos</strong>: <em><span><span class="pali-term term-highlight" data-term="sukha vedanā">Sukha Vedanā</span></span></em> (sensação corporal agradável), <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em> (sensação corporal desagradável ou dolorosa) e <em>adukkhamasukha</em> (sem ser doloroso ou agradável, apenas neutro). Aqui, a combinação de <em>adukkha </em>e<em> asukha </em>rima como “<em>adukkhamasukha”.</em></p>
+<ul style="text-align: justify;">
+<li><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> levando a S<em><span>ukha <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em> acontece com todos, incluindo <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em>. Veja Ref.1.</li>
+<li>Por exemplo, o próprio <em><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></em> teve doenças físicas no final de sua vida como <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>. Moggallana <em><span><span class="pali-term term-highlight" data-term="thero">Thero</span></span></em> foi espancado até a morte por causa de um mau <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> que ele havia feito em muitas vidas anteriores.</li>
+<li><span style="color: #3366ff;"><span style="color: #000000;">O terceiro tipo de<em><span> <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>sentido pelo corpo físico é “neutro” ou “</span><span style="color: #000000;"><em>adukkhamasukha”.</em></span><strong><br/>
+</strong></span></li>
+<li><span style="color: #3366ff;"><span style="color: #000000;"><strong>Os dois primeiros tipos de<em><span> <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>são sentidos apenas pelo corpo físico (<em><span>sārīrika <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em></strong>); veja o nº 11 de </span></span><a href="../../pages/IS.CC.003/index.html">Vipāka Vedanā e “Samphassa jā Vedanā” em um Evento Sensorial</a>.<span style="color: #3366ff;"> </span></li>
+<li><span style="color: #993366;"><strong>Esses dois são os únicos tipos de “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> real” sentidos por todos os seres vivos com “corpos densos”, incluindo animais e <em><span><span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em></strong></span>; portanto, eles são “reais”.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> associado a outros estímulos sensoriais é neutro</h5>
+<p style="text-align: justify;">3. <span style="color: #3366ff;"><strong><span style="color: #000000;">Todas</span></strong></span><em><span style="color: #3366ff;"><strong><span style="color: #000000;"><span> as <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></span></strong></span></em><span style="color: #3366ff;"><strong><span style="color: #000000;">que inicialmente chegam através</span></strong></span><span style="color: #000000;"><strong> das outras cinco faculdades sensoriais são</strong></span><span style="color: #3366ff;"><strong><span style="color: #000000;"> neutras, ou seja,</span></strong></span><em><span style="color: #3366ff;"><strong><span style="color: #000000;"><span> adukkhamasukha <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>.</span></span></strong></span></em></p>
+<ul style="text-align: justify;">
+<li>Os estímulos sensoriais através dos outros cinco sentidos (olhos, ouvidos, língua, nariz e mente) SEMPRE levam a esse tipo de <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> “neutro” ou “<em>adukkhamasukha”.</em></li>
+<li>Então surge a pergunta: “Por que sinto prazer ao provar açúcar ou olhar para uma bela modelo”? <span style="color: #3366ff;"><strong>Esses são “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> criados pela mente<em>” </em>com base em “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido” (nossas percepções erradas sobre o mundo externo).</strong></span></li>
+<li style="text-align: justify;">Vejamos esse segundo tipo de “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> criada pela mente<em>”.</em></li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em><span> criada pela mente (“<span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-j</span><em>ā-</em>Vedan<em>ā</em>”)</h5>
+<p style="text-align: justify;">4. Os estímulos sensoriais que chegam através dos olhos, ouvidos, língua, nariz e mente são <em>adukkhamasukha</em> (sem serem dolorosos ou alegres, apenas neutros). No entanto, com base nessas imagens, sons, sabores, cheiros e pensamentos, nossas mentes geram <em><span>“<span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida”, que leva a <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> “criada pela mente” (<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>), também chamada de <em>sōmanassa</em> e <em><span>dōmanassa <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>. </span></em>Para mais detalhes, consulte “<a href="../../pages/IS.BB.010/index.html">Saññā – Todos os nossos pensamentos surgem com “Saññā distorcida”</a></p>
+<ul style="text-align: justify;">
+<li> No item 2 acima, vimos que <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="vipāka">Vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>são sentidos apenas pelo corpo físico (<span style="color: #3366ff;"><span style="color: #000000;"><em>sārīr</em></span></span><em>a</em>). Também podemos formar <em>sōmanassa</em> e <em><span>dōmanassa <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>com base em <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> <span class="pali-term term-highlight" data-term="vipāka">Vipāka</span> <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>.</span></em> Por exemplo, alguém pode ficar deprimido ao se machucar; assim, agora há um “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> criado pela mente” além do <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> sentido pelo corpo.</li>
+<li>Esses são <em style="text-align: justify;"><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>que a mente gera devido à ignorância sobre a “verdadeira natureza deste mundo”, ou seja, por não ter “<em><span><span class="pali-term term-highlight" data-term="yathābhūta">Yathābhūta</span> ñāna”.</span></em> Veja “<a href="../../pages/KD.LL.002/index.html">Bhūta e Yathābhūta – O que eles realmente significam</a>”.</li>
+<li>Elas não surgem em um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+<h5>Origem do <em><span>“<span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido”</h5>
+<p style="text-align: justify;">5. <span style="color: #993366;"><strong>A <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>que vem através dos outros sentidos (olhos, ouvidos, língua, nariz e mente) pode parecer “agradável” ou “desagradável” NÃO por causa do <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>, mas devido ao “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido<em>”.</em></strong></span></p>
+<ul style="text-align: justify;">
+<li>Por exemplo, todos os seres humanos sentem o açúcar como doce. Essa “doçura” surge devido ao “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido<em>”.</em> Então, com base nesse “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido”<em>,</em> a mente fica alegre, e isso é <em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>ou “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> criado pela mente<em>”.</em> Veja “<a href="../../pages/CH.BB.006/index.html">Contaminação da mente humana – Análise detalhada</a>”.</li>
+<li><strong>O “sabor doce do açúcar” ou a “beleza de uma atriz” é uma <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>, não uma <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em>.</strong> <span style="color: #993366;"><strong>No entanto, com base nesse “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido”, nossas mentes automaticamente se apegam a eles e geram <em><span>uma <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> “criada pela mente” chamada “<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>”.</span></em></strong></span></li>
+<li>No entanto, os seres humanos comuns acreditam que o “açúcar” tem doçura inerente, ou seja, que a “doçura” é um “<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> guṇa</span></em>” associado ao açúcar. Da mesma forma, eles acreditam que a “beleza” é inerente ao corpo físico de uma atriz. Veja “<a href="../../pages/IS.CC.004/index.html">Kāma Guṇa – Origem do apego (Tanhā)</a>”. </li>
+<li>Se a “doçura” estivesse no açúcar, todos os seres vivos deveriam sentir o açúcar como doce. No entanto, porcos ou vacas não comem açúcar; porcos gostam de carne podre e vacas gostam de grama, mas os seres humanos não gostam de comer nenhum dos dois. <strong>Portanto, a “doçura do açúcar” (ou da carne podre ou da grama) NÃO está no açúcar/carne podre/grama, mas surge devido à “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida<em>”.</em> </strong>Essas “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcidas” surgiram porque os seres humanos, os porcos e as vacas têm “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> muito diferentes”.</li>
+</ul>
+<h5 style="text-align: justify;">Se <em>a</em> “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida” não é real, podemos comer carne podre ou grama?</h5>
+<p style="text-align: justify;">6. Esse “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido” não é um mero truque. Os corpos físicos dos seres humanos (e animais) são feitos pela natureza para serem compatíveis com ele. </p>
+<ul style="text-align: justify;">
+<li>É por isso que o sistema digestivo humano é diferente do de um porco ou de uma vaca. Nosso sistema digestivo foi projetado para ser compatível apenas com alimentos que nos dão essas percepções distorcidas de “doçura” ou “delícia”. Se comermos carne podre ou grama, ficaremos doentes.</li>
+<li>Da mesma forma, os porcos têm seu sistema digestivo projetado para digerir carne podre sem qualquer problema, e <em>o mesmo vale</em> para as vacas, que são capazes de comer grama.</li>
+<li>Este é um ponto mais profundo relacionado à <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> cultivada como humana. Por exemplo, aqueles que nasceram como porcos acumularam a energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> para “nascer como porco” ao se envolverem em ações baixas e “moralmente podres” quando eram humanos. Assim, eles renascem como porcos “para gostar de coisas podres”. (Todos os seres vivos ligados à Terra nasceram humanos quando a Terra foi formada há vários bilhões de anos: “<a href="../../pages/SI.AA.010/index.html">Buddhismo e Evolução – Aggañña Sutta (DN 27)</a>”.) O renascimento de uma pessoa está de acordo com sua <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>; veja, por exemplo, “<a href="../../pages/PS.DD.007/index.html">Gati (Hábitos/Caráter) Determinam os Nascimentos – Saṃsappanīya Sutta</a>” e “<a href="../../pages/KD.GG.004/index.html">Gati para Bhava para Jāti – Nosso Controle</a><span>”. É por isso que digo que o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é profundo e auto-consistente.</span></li>
+<li>Primeiro, é necessário ter uma boa compreensão de <em><span>“<span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida” para entender completamente a <em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span>. </span></em>Discutiremos isso em ensaios futuros em <a href="../../pages/TL.II.002/index.html">“Estágio Sotapanna através da compreensão da percepção (Saññā)</a>”. No entanto, podemos ter uma ideia observando alguns exemplos.</li>
+</ul>
+<h5 style="text-align: justify;">Alguns exemplos de<em><span> <span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em></h5>
+<p style="text-align: justify;">7. Uma <em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> surge devido ao apego por meio da ganância ou do ódio naquele momento (ou seja, devido à sua <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>); veja “<a href="../../pages/KD.HH.003/index.html">Tanhā – Como nos apegamos por meio da ganância, do ódio e da ignorância</a>”.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Esses são os <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> (sentimentos) que<em><span> os <span class="pali-term term-highlight" data-term="arahants">Arahants</span></span></em> não sentem. Como eles não têm nenhum “<em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> ruim<em>”,</em> eles não cometem nenhum <em><span>(abhi)<span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span>.</span></em> A maneira mais fácil de explicar esse tipo de <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> é dar alguns exemplos:</li>
+</ul>
+<ol style="text-align: justify; list-style-type: lower-alpha;">
+<li>Três pessoas estão andando pela rua. Uma tem uma tendência política ultradireitista (A), a segunda tem uma preferência ultralevistiça (B) e a terceira é um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> (C) que não tem sentimentos especiais por ninguém. Todos eles veem um político famoso odiado pela direita política vindo em sua direção. <span style="color: #0000ff;">É certo que a visão do político causa desagrado em A e uma sensação de prazer em B.</span> Por outro lado, a visão não faz com que o <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> sinta prazer ou desagrado. <strong>Embora os três vejam e identifiquem a pessoa</strong>, eles produzem sentimentos diferentes. <em>É essencial perceber que os sentimentos foram criados em A e B por eles mesmos.</em></li>
+<li>Dois amigos vão à procura de um tesouro e encontram uma joia. Ambos ficam muito felizes. Parece ser muito valiosa; um mata o outro para ficar com todo o dinheiro. No entanto, quando tenta vender a “joia”, descobre que ela não tem valor. Sua alegria se transforma em tristeza em um instante. <span style="color: #3366ff;"><strong>Nada mudou no objeto. Era a mesma pedra colorida. O que mudou foi a percepção dela.</strong></span></li>
+</ol>
+<h5 style="text-align: justify;">Outro exemplo de<em><span> <span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em></h5>
+<p style="text-align: justify;">8. Um casal apaixonado vivia há muitos anos sem problemas e era feliz por estar junto. No entanto, o marido bate na esposa durante uma discussão. A dor física da bofetada em si não durou mais do que alguns minutos. Mas por quanto tempo a esposa sofreria mentalmente? Mesmo o marido, que não sentiu nenhuma dor física, sofreria por dias se amasse a esposa. <span style="color: #3366ff;"><strong>Em ambos os casos, a dor mental real estava associada ao apego um ao outro.</strong></span> A esposa poderia ter deixado cair algo em seu pé e teria sofrido aproximadamente a mesma quantidade de dor física. Mas ela não teria tido nenhuma dor mental persistente associada a isso.</p>
+<ul style="text-align: justify;">
+<li>O contato sensorial inicial, por si só, não gerou nenhuma <strong><em><span>energia de <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>.</strong></li>
+<li>No entanto, com base nesse contato sensorial, tendemos a persegui-lo como <em>sōmanassa</em> ou <em><span>dōmanassa <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> com base em “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida”. É aí que <strong>começamos a gerar <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>. </strong>Por exemplo, se vemos nosso “pior inimigo”, isso é apenas “ver”. Mas se começarmos a pensar em como ele é uma pessoa má, geraremos “<em><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> ruim” e, portanto, “<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> ruim”.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-jā-<span class="pali-term term-highlight" data-term="vedanā">Vedanā</span> </span></em>surge devido a <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em></h5>
+<p style="text-align: justify;">9. Assim, fica claro que, em todos os exemplos acima, a felicidade ou o sofrimento “extra” (além do devido ao <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>) surgiram da <span style="color: #3366ff;"><strong>mente da pessoa</strong>.</span> E <em><span><span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em> (apego por meio da ganância, do ódio ou da ignorância) foi a causa disso. Veja “<a href="../../pages/KD.HH.003/index.html">Taṇhā – Como nos apegamos por meio da ganância, do ódio e da ignorância</a>”.</p>
+<ul style="text-align: justify;">
+<li>Quando geramos tal “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> criada pela mente<em>”,</em> também tendemos a fazer <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (por meio de <em><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">Abhisaṅkhāra</span></span></em>), trazendo mais sofrimento no futuro.</li>
+</ul>
+<p style="text-align: justify;">10. <strong>Portanto, <em><span>a <span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span> </span></em>surge devido ao “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> criado pela mente”.</strong> <span style="color: #3366ff;">Eles surgiram DENTRO da própria mente e não vieram de fora.</span><span> Se as coisas externas podem causar sofrimento, teremos que destruir as coisas externas para eliminar o sofrimento. No entanto, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> mostrou que as causas fundamentais do sofrimento estão dentro da mente e podem ser eliminadas.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Não há sofrimento ou felicidade inerentes em nada externo; o contato sensorial com uma coisa externa pode causar dor ou felicidade, dependendo de nossa<em><span> <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> e <em>āsāvās</em>.</li>
+<li style="text-align: justify;">Um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> ainda experimentará “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcida” enquanto vive a vida cotidiana (ou seja, a menos que esteja em um <em>samāpatti</em>). Mas, como removeram todos <em><span>os āsāvās/<span class="pali-term term-highlight" data-term="anusaya">Anusaya</span>/saṁyojana/<span class="pali-term term-highlight" data-term="gati">gati</span> </span></em>ao compreender a verdadeira natureza (“<em><span><span class="pali-term term-highlight" data-term="yathābhūta">Yathābhūta</span> ñāna”</span></em>), eles estão livres do <strong>apego ao</strong> “<em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em> distorcido<em>”.</em> Mesmo que não possam se livrar de nenhum <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span></span></em> (até a morte de seus corpos físicos), eles não ficam deprimidos por causa disso. Da mesma forma, eles não ficam alegres com <em><span><span class="pali-term term-highlight" data-term="sukha vedanā">Sukha Vedanā</span>. </span></em>Eles geram verdadeiro “<em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> neutro ou <em><span>de <span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em>” em resposta a QUALQUER estímulo sensorial. Assim, “<em><span><span class="pali-term term-highlight" data-term="avijjā">Avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> </span></em>(<em>abhi</em>)Sa<em>ṅkhāra</em>” ou “(<em><span><span class="pali-term term-highlight" data-term="samphassa">Samphassa</span>-</span></em>)<em><span>Vēdanā <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span> <span class="pali-term term-highlight" data-term="taṇhā">Taṇhā</span></span></em>” ou qualquer outro termo em <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> não se aplica a eles.</li>
+</ul>
+<h5 style="text-align: justify;">Referências</h5>
+<p style="text-align: justify;">1. <em><span><span class="pali-term term-highlight" data-term="sukha vedanā">Sukha Vedanā</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="dukkha vedanā">Dukkha Vedanā</span> </span></em>devido a <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> não são determinísticos. Podemos evitar alguns deles vivendo com atenção plena; veja “<a href="../../pages/TL.EE.006/index.html" title="What is Kamma? – Is Everything Determined by Kamma?">O que é Kamma? – Tudo é determinado pelo Kamma?</a>” Muitos <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span> </span></em>podem ter sua força reduzida com o tempo se começarmos a agir com previsão e atenção plena. Por exemplo, comer de forma saudável e praticar exercícios regularmente pode evitar muitas doenças físicas.</p>
+<ul style="text-align: justify;">
+<li>Podemos evitar alguns <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>, impedindo que as condições para que eles surjam, apenas usando o bom senso. Por exemplo, sair à noite em um bairro perigoso fornece terreno fértil para que <em><span>o <span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> ruim do passado apareça. Muitos <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> NÃO PODEM ocorrer, a menos que as condições sejam adequadas. Veja “<a href="../../pages/PS.JJ.003/index.html">Anantara e Samanantara Paccayā</a>”.</li>
+<li>Fizemos inúmeros <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (bons e ruins) em nossas vidas passadas. Se agirmos com bom senso, podemos suprimir <em><span>o <span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> ruim e criar condições para que <em><span>o <span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em> bom surja.</li>
+<li style="text-align: justify;">Veja também a discussão sobre <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> bījā</span></em> em “<a href="../../pages/KD.DD.003/index.html" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Sankhāra, Kamma, Kamma Bījā, Kamma Vipāka”.</a></li>
+</ul>
+<p style="text-align: justify;">Mais sobre <em><span>a <span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> em: “<a href="../../pages/PS.KK.002/index.html">Sentimentos: Sukha, Dukha, Somanassa e Domanassa</a>”<a href="../../pages/PS.KK.002/index.html">,</a> “<a href="../../pages/KD.JJ.003/index.html">A dor corporal surge apenas devido ao Kamma Vipāka?</a>”, “<a href="../../pages/PS.AA.003/index.html">Como os ciclos de Paṭicca Samuppāda são iniciados?</a>” e “<a href="../../pages/PS.HH.003/index.html">Avyākata Paṭicca Samuppāda para Vipāka Viññāna”.</a></p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.EE.013/index.html">Hetu Phala Paccuppanna And Paticca Samuppada</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.CC.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">How To Taste Nibbana</span>
+        
+        <span class="pathway-title title-pt">Como Sentir o Gosto de Nibbana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.EE.013/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Hetu Phala Paccuppanna And Paticca Samuppada</span>
+        
+        <span class="pathway-title title-pt">Hetu Phala Paccuppanna e Paticca Samuppada</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

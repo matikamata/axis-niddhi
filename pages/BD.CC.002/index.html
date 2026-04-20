@@ -1,0 +1,469 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Mind Is Not In The Brain | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 10 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.CC.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Mind Is Not In The Brain</h1>
+    
+    <h1 class="title-pt">A mente não está no cérebro</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.CC.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>9</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.CC.002"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0013"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.CC.002</td></tr><tr><td>Fin-dex</td><td>0013</td></tr><tr><td>Slug</td><td>mind-is-not-in-the-brain</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Mind Is Not In The Brain</td></tr></table></div></div><p><strong>September 6, 2020</strong></p>
+<p>The mind is not in the brain, but the brain is essential for the mind to work as long as the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is inside the physical body.</p>
+<h5><span>Relevant Summary of Previous <span class="pali-term term-highlight" data-term="posts">Posts</span></span></h5>
+<p><span>1. In the previous <span class="pali-term term-highlight" data-term="posts">posts</span>, we discussed that only in the </span><em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em> that some living beings have physical bodies with brains. <em><span><span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> in 20 realms do not have physical bodies or brains. See "<a href="../../pages/BD.BB.004/index.html" rel="noopener noreferrer" target="_blank">Mind and Matter – Buddhist Analysis,</a>" "<a href="../../pages/BD.BB.005/index.html" rel="noopener noreferrer" target="_blank">Sensual Pleasures – The Hidden Suffering</a>," and "<a href="../../pages/BD.BB.006/index.html" rel="noopener noreferrer" target="_blank">Kammic Energy Leads to Consciousness</a>."</p>
+<ul>
+<li>Of course, modern science is not aware of realms other than the human and animal realms. That is one reason that most scientists believe that consciousness arises in the brain.</li>
+<li><span>Per <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, humans and animals (and other beings in </span><em><span><span class="pali-term term-highlight" data-term="kāma loka">kāma loka</span></span></em>) REQUIRE physical bodies to have access to close sensory contacts (taste, smell, and touch.) That, in turn, REQUIRES a brain to control the movement of heavy body parts. See, "<a href="../../pages/LD.GG.002/index.html" rel="noopener noreferrer" target="_blank">Our Mental Body – Gandhabba</a>."<br/><span>
+We will discuss that more in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li>But let us first review the current status of scientific research on the efforts by scientists to explain consciousness to arise in the brain.</li>
+<li>We already discussed the following roadblock facing "materialistic science": How can <span style="color: #ff0000;"><strong>feelings</strong></span> arise in inter matter? That is the "hard problem of consciousness" that philosopher David Chalmers discussed in the video in #9 and #10 of "<a href="../../pages/BD.BB.003/index.html" rel="noopener noreferrer" target="_blank">Theories of Our World – Scientific Overview</a>."</li>
+</ul>
+<h5>Mind Is Not in the Brain</h5>
+<p>2. The following video summarizes the current status of scientists' attempts to prove that consciousness arises in the brain. Many of them, who spent their whole lives looking into this issue, have concluded the following: <strong>The brain does play a role in consciousness. But consciousness does not arise in the brain.</strong></p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/fOFGKhvWQ4M?si=bHwX5hPxKIpYs5aT" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li>@ 3 minutes: Neuroscientist Wilder Pennfield argued that "<strong>the causal force is missing</strong> within the brain that can account for the <strong>actions and intentions</strong>." How can <span style="color: #ff0000;"><strong>intention</strong></span> arise in inter matter?</li>
+<li>@ 4 minutes: There are correlations between the mind and the brain, but <strong>correlation does not mean causation.</strong><span> That is where science got stuck. However, it is fully explained in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. The brain is just a conduit facilitating body movements. A </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> does not have a brain. <strong>The brain becomes necessary only where a solid physical body is required for close sensory contacts for sensory pleasures (<em><span><span class="pali-term term-highlight" data-term="kāma">kāma</span> assada</span></em>.)</strong></li>
+</ul>
+<h5>More Comments About the Above Video</h5>
+<p>3. Around 5 minutes, the author explains the "Visual Binding Problem," which is a part of a broader "unified perception." This is important.</p>
+<ul>
+<li>Let me give you another example. Suppose you are in a restaurant and see someone entering the restaurant. It is an old friend you have not seen any many years. But how long does it take you to recognize who it is, and even recall some "good old memories"?</li>
+<li>I discussed that in detail at #4 through #6 in "<a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">Amazingly Fast Time Evolution of a Thought (Citta)</a>."</li>
+<li><span>The mind is not in the brain and can work MUCH faster than the brain. In the above examples, recognition happens not in the brain, but in the mind. We will discuss details in future <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p>4. At 8 minutes: Instead of the brain giving rise to mind, the evidence is emerging that <strong>the mind can affect the brain.</strong> The brain has this property called "plasticity." That means our thoughts can make some brain changes, especially "re-wiring of neural connections" and even repairing some minor damages to the brain.</p>
+<ul>
+<li>The video in the following section a presentation by neuroscientist Dr. Schwartz mentioned here. He has successfully treated some patients with Obsessive-Compulsive Disorder (OCD.)</li>
+<li>In fact, the correct mindful meditation (<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em>or <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>; not breath meditation) can vastly improve brain function in all of us to help grasp deeper aspects of nature. That is what entails following the Eightfold Noble Path. We will get to that in the future.</li>
+<li>At 13:45 minutes: A study found that it is possible to control one's sexual urges by "applying the mind." They were able to control brain activity with "mind control."</li>
+<li>It is clear that the mind is not in the brain because it can affect brain activity.</li>
+</ul>
+<h5 class="title style-scope ytd-video-primary-info-renderer">You Are More than Your Brain</h5>
+<p>5. More and more scientists and philosophers realize that "you are more than your brain." A human has the freedom and capability to change his/her destiny.</p>
+<ul>
+<li>Dr. Jeffrey Scwartz is a neuroscientist who has developed a novel program to treat OCD successfully. He has written several books on the subject of the mind, including Ref. 1 below.</li>
+<li>Here is a recent presentation of Dr. Schwartz on the subject:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/rFIOSQNuXuY?si=PocYrWhUpfBTCEkt" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li>Dr. Schwartz was one of the early scientists to become aware that we (our minds) are more than our brains. He did most of his studies in the 1980s and 1990s. Since then, there have been more studies conducted using new techniques for brain imaging.</li>
+</ul>
+<h5 class="title style-scope ytd-video-primary-info-renderer">More Evidence against Materialism</h5>
+<p>6. The current Western tradition of thinking is that the only things that really exist are the atoms and the void. Everything else, including the mind, is reducible to matter made of atoms. That worldview is "materialism."</p>
+<p>The following presentation by Dr. Michael Ignor provides a summary of evidence against materialism from recent research by many neuroscientists.</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/BqHrpBPdtSI?si=yxGIp09QTpoGmTmu" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li>At 5 minutes: Cutting a brain in half does not lead to significant changes in a person. If the brain gave rise to consciousness, one would expect such a drastic change would lead to a huge change in personality (and perhaps to two personalities). But the changes were insignificant (except that it relieved the patients of susceptibility to seizures.</li>
+<li>At 7 minutes: Research of Dr. Wilder Pennfield showed that probing various areas of the brain could not affect personal characteristics, such as intellect, political biases, habits, etc. There is a "core personality" that does not depend on the brain. But, of course, if the brain is dead, then such attributes cannot manifest.</li>
+<li>More evidence that the mind is not in the brain!</li>
+</ul>
+<h5>Those in Vegetative States May Be Fully Conscious</h5>
+<p>7. Another notable fact from the video by Dr. Ignor is that some of the "brain-dead" patients in "vegetative states" could be fully conscious.</p>
+<ul>
+<li>At 9:30 minutes: People who are "brain dead" and are in vegetative states may be "alive inside." They are just not able to express their feelings because they cannot talk or move body parts. A discussion of Dr. Owen's brain scan studies (mentioned by Dr. Ignor) is in Ref. 2. <span style="color: #0000ff;"><strong>There are aspects of the mind that cannot be destroyed even with severe brain damage.</strong></span><span> I will discuss this more in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li>At 15:30 minutes: Libet experiments on free will that seemed to suggest that humans do not have free will. Also, see, "<a href="../../pages/AB.FF.002/index.html" rel="noopener noreferrer" target="_blank">Neuroscience says there is no Free Will? – That is a Misinterpretation!</a>" More information providing evidence that humans do have free will in Ref. 3.</li>
+<li>At 19:30 minutes: The book by Bennett and Hacker referred to y Dr. Ignor is Ref. 4.</li>
+<li>At 22:20 minutes: Importance of intentionality that we touched on in #2 above. How can intentionality arise from the lifeless matter in a brain?</li>
+</ul>
+<h5>Teleology - Purpose of Things in the World</h5>
+<p>8. At 25 minutes, the discussion turns to teleology. Teleology is about "a reason or explanation for something to exist." See Ref. 5. An acorn grows into an oak tree and not to an apple tree. The blueprint for bringing an oak tree into existence is in that tiny seed. Of course, the acorn needs to germinate and extract all necessary material from the earth to grow into that huge oak tree.</p>
+<ul>
+<li>So, even scientists like Dr. Ignor cannot explain the ROOT CAUSES for either an oak tree or a human being comes into existence. Therefore, they assign that to a Creator. In their view, it is the Creator that designs EVERYTHING in this world. That is the "<a href="https://en.wikipedia.org/wiki/Teleological_argument" rel="noopener noreferrer" target="_blank">Teleological argument</a>" for the existence of a Creator. It sometimes goes as "<a href="https://en.wikipedia.org/wiki/Intelligent_design#:~:text=Intelligent%20design%20(ID)%20is%20a,scientific%20theory%20about%20life's%20origins%22." rel="noopener noreferrer" target="_blank">Intelligent Design</a>."</li>
+<li><span>As Dr. Ignor asks around 26 minutes what the purpose of an eye is. He would say that it was created by the Creator for humans to see. He says that there is a "grand mind" (that of the Creator God) behind the universe. That is because Dr. Ignor is not aware of the "previously unknown theory of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>."</span></li>
+<li><span>But the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said that we create our own future eyes because we like to enjoy seeing things in this world! Again, this needs to be explained in a bigger picture.</span></li>
+<li>An acorn giving rise to an oak tree is very similar to a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> giving rise to a human body. That <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is unimaginably smaller than an acorn but has the blueprint for the human body. The <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> starts building the body while inside the mother's womb, by taking nutrition from the mother. Once born, the baby starts eating food, and that is how the body of a full-grown adult comes into being. See, "<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Buddhist Explanations of Conception, Abortion, and Contraception</a>."</li>
+</ul>
+<h5>If Mind Is Separate From the Body, What Happens to It at the Death of the Body?</h5>
+<p>9. Therefore, there is strong evidence emerging to support the idea that the mind is not in the brain, even though the brain helps facilitate the mind's workings. That gives rise to the following critical question. <span style="color: #0000ff;"><strong>If the mind is something more than the brain (and the physical body), what happens to that mind when the body dies?</strong></span></p>
+<ul>
+<li><span>For those who have not been exposed to true <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, there could be only one option. That is the ASSUMPTION that the mind (stated to be "soul") must be going to either heaven or hell forever.</span></li>
+<li><span>But as we have already discussed, the mind creates "seeds" for future lives. Many such "seeds" exist for many future lives (some with physical bodies and brains) for ANY living being. That is why we all have been in this <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process from a time that cannot be traced back. See, "</span><a href="../../pages/DS.BB.002/index.html" rel="noopener noreferrer" target="_blank">Origin of Life – There is No Traceable Origin</a>."</li>
+<li><span>The "previously unheard <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" is that living beings themselves are responsible for creating SEEDS for their future lives. Furthermore, living beings are also responsible for creating their environment to live in! That includes living things without consciousness (like vegetation) and the whole environment for all of that to exist. This is a VERY DEEP subject. But we will first address the issue of living beings creating the seeds their future lives.</span></li>
+<li>Both aspects are explained with <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em>. We will, of course, first focus on human beings and other living beings.</li>
+</ul>
+<h5>References</h5>
+<p>1. Jeffrey Schwartz, "<span class="a-size-medium a-color-base a-text-normal">You Are Not Your Brain: The 4-Step Solution for Changing Bad Habits, Ending Unhealthy Thinking, and Taking Control of Your Life", (2012)</span></p>
+<p>2. Dr. Owen's brain scan studies are discussed in the following video:</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/JbWHAIDHUQ4?si=U1O_h_rYDnPkHc_i" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p>3. Alfred R. Mele, "<span class="a-size-extra-large" id="productTitle">Free: Why Science Hasn't Disproved Free Will" (2014)</span></p>
+<p>4. M. R. Bennett and P. M. S. Hacker, "<span class="a-size-extra-large" id="productTitle">Philosophical Foundations of Neuroscience" (2003)</span></p>
+<p>5. Wikipedia article, "<a href="https://en.wikipedia.org/wiki/Teleology" rel="noopener noreferrer" target="_blank">Teleology</a>."</p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.CC.002"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0013"
+             data-level="intermediate"
+             data-reading-time="9"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.CC.002
+Language:     pt-BR
+Generated-At: 2026-04-17T21:31:26Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>6 de setembro de 2020</strong></p>
+<p>A mente não está no cérebro, mas o cérebro é essencial para que a mente funcione enquanto o <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> estiver dentro do corpo físico.</p>
+<h5>Resumo relevante dos ensaios anteriores</h5>
+<p>1. Nas postagens anteriores, discutimos que apenas no <em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em> alguns seres vivos possuem corpos físicos com cérebros. <em><span>Os <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span></span></em> nos 20 reinos não possuem corpos físicos nem cérebros. Veja “<a href="../../pages/BD.BB.004/index.html" rel="noopener noreferrer" target="_blank">Mente e Matéria – Análise Buddhista</a>”<a href="../../pages/BD.BB.004/index.html" rel="noopener noreferrer" target="_blank">,</a> “<a href="../../pages/BD.BB.005/index.html" rel="noopener noreferrer" target="_blank">Prazeres Sensuais – O Sofrimento Oculto</a>” e “<a href="../../pages/BD.BB.006/index.html" rel="noopener noreferrer" target="_blank">A Energia Kamma Leva à Consciência</a>”.</p>
+<ul>
+<li>É claro que a ciência moderna não tem conhecimento de reinos além dos reinos humano e animal. Essa é uma das razões pelas quais a maioria dos cientistas acredita que a consciência surge no cérebro.</li>
+<li><span>
+De acordo com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, humanos e animais (e outros seres no </span><em><span><span class="pali-term term-highlight" data-term="kāma loka">Kāma Loka</span></span></em>
+) NECESSITAM de corpos físicos para ter acesso a contatos sensoriais diretos (paladar, olfato e tato). Isso, por sua vez, EXIGE um cérebro para controlar o movimento de partes pesadas do corpo. Veja “<a href="../../pages/LD.GG.002/index.html" rel="noopener noreferrer" target="_blank">Nosso Corpo Mental – Gandhabba</a>
+”.<br/>
+Discutiremos isso mais detalhadamente no próximo ensaio.</li>
+<li>Mas vamos primeiro revisar o status atual da pesquisa científica sobre os esforços dos cientistas para explicar que a consciência surge no cérebro.</li>
+<li>Já discutimos o seguinte obstáculo enfrentado pela “ciência materialista”: como podem surgir <span style="color: #ff0000;"><strong>sentimentos</strong></span> na inter-matéria? Esse é o “problema difícil da consciência” que o filósofo David Chalmers discutiu nos vídeos nº 9 e nº 10 de “<a href="../../pages/BD.BB.003/index.html" rel="noopener noreferrer" target="_blank">Teorias do Nosso Mundo – Visão Geral Científica</a>”.</li>
+</ul>
+<h5>A mente não está no cérebro</h5>
+<p>2. O vídeo a seguir resume o estado atual das tentativas dos cientistas de provar que a consciência surge no cérebro. Muitos deles, que passaram a vida inteira investigando essa questão, chegaram à seguinte conclusão: <strong>o cérebro desempenha um papel na consciência. Mas a consciência não surge no cérebro.</strong></p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/fOFGKhvWQ4M?si=bHwX5hPxKIpYs5aT" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li>@ 3 minutos: O neurocientista Wilder Pennfield argumentou que “<strong>falta</strong> no cérebro <strong>a força causal</strong> capaz de explicar as <strong>ações e intenções</strong>”. Como <span style="color: #ff0000;"><strong>a intenção</strong></span> pode surgir na matéria?</li>
+<li>@ 4 minutos: Existem correlações entre a mente e o cérebro, mas <strong>correlação não significa causalidade.</strong><span> É aí que a ciência ficou estagnada. No entanto, isso é totalmente explicado no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. O cérebro é apenas um canal que facilita os movimentos do corpo. Um </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não possui cérebro. <strong>O cérebro torna-se necessário apenas quando um corpo físico sólido é exigido para contatos sensoriais próximos, a fim de obter prazeres sensoriais (<em><span><span class="pali-term term-highlight" data-term="kāma">Kāma</span> assada</span></em>).</strong></li>
+</ul>
+<h5>Mais comentários sobre o vídeo acima</h5>
+<p>3. Por volta dos 5 minutos, o autor explica o “Problema da Ligação Visual”, que faz parte de uma “percepção unificada” mais ampla. Isso é importante.</p>
+<ul>
+<li>Deixe-me dar outro exemplo. Suponha que você esteja em um restaurante e veja alguém entrando no restaurante. É um velho amigo que você não vê há muitos anos. Mas quanto tempo leva para você reconhecer quem é e até mesmo relembrar algumas “boas e antigas memórias”?</li>
+<li>Discuti isso em detalhes nos pontos 4 a 6 em “<a href="../../pages/AB.BB.003/index.html" rel="noopener noreferrer" target="_blank">A Evolução Incrivelmente Rápida de um Pensamento (Citta)</a>”.</li>
+<li>A mente não está no cérebro e pode funcionar MUITO mais rápido do que o cérebro. Nos exemplos acima, o reconhecimento não ocorre no cérebro, mas na mente. Discutiremos os detalhes em ensaios futuros.</li>
+</ul>
+<p>4. Aos 8 minutos: Em vez de ser o cérebro que dá origem à mente, estão surgindo evidências de que <strong>a mente pode afetar o cérebro.</strong> O cérebro possui uma propriedade chamada “plasticidade”. Isso significa que nossos pensamentos podem provocar algumas mudanças no cérebro, especialmente a “reconfiguração das conexões neurais” e até mesmo a reparação de alguns danos menores no cérebro.</p>
+<ul>
+<li>O vídeo na seção a seguir é uma apresentação do neurocientista Dr. Schwartz, mencionado aqui. Ele tratou com sucesso alguns pacientes com Transtorno Obsessivo-Compulsivo (TOC).</li>
+<li>Na verdade, a meditação consciente correta (<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> </span></em>ou <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>; não a meditação da respiração) pode melhorar significativamente a função cerebral em todos nós, ajudando a compreender aspectos mais profundos da natureza. É isso que implica seguir o Nobre Caminho Óctuplo. Abordaremos isso no futuro.</li>
+<li>Aos 13:45 minutos: Um estudo descobriu que é possível controlar os impulsos sexuais “aplicando a mente”. Eles conseguiram controlar a atividade cerebral com “controle mental”.</li>
+<li>Fica claro que a mente não está no cérebro, pois ela pode afetar a atividade cerebral.</li>
+</ul>
+<h5 class="title style-scope ytd-video-primary-info-renderer">Você é mais do que seu cérebro</h5>
+<p>5. Cada vez mais cientistas e filósofos percebem que “você é mais do que seu cérebro”. O ser humano tem a liberdade e a capacidade de mudar seu destino.</p>
+<ul>
+<li>O Dr. Jeffrey Schwartz é um neurocientista que desenvolveu um programa inovador para tratar o TOC com sucesso. Ele escreveu vários livros sobre o tema da mente, incluindo a Ref. 1 abaixo.</li>
+<li>Aqui está uma apresentação recente do Dr. Schwartz sobre o assunto:</li>
+</ul>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/rFIOSQNuXuY?si=PocYrWhUpfBTCEkt" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li>O Dr. Schwartz foi um dos primeiros cientistas a perceber que nós (nossas mentes) somos mais do que nossos cérebros. Ele realizou a maior parte de seus estudos nas décadas de 1980 e 1990. Desde então, mais estudos foram conduzidos utilizando novas técnicas de imagem cerebral.</li>
+</ul>
+<h5 class="title style-scope ytd-video-primary-info-renderer">Mais evidências contra o materialismo</h5>
+<p>6. A tradição ocidental atual de pensamento é que as únicas coisas que realmente existem são os átomos e o vazio. Todo o resto, incluindo a mente, é redutível à matéria composta de átomos. Essa visão de mundo é o “materialismo”.</p>
+<p>A apresentação a seguir, do Dr. Michael Ignor, fornece um resumo das evidências contra o materialismo, com base em pesquisas recentes de muitos neurocientistas.</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/BqHrpBPdtSI?si=yxGIp09QTpoGmTmu" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<ul>
+<li>Aos 5 minutos: Cortar um cérebro ao meio não leva a mudanças significativas em uma pessoa. Se o cérebro fosse a origem da consciência, seria de se esperar que uma mudança tão drástica levasse a uma enorme alteração na personalidade (e talvez a duas personalidades). Mas as mudanças foram insignificantes (exceto que isso aliviou a suscetibilidade dos pacientes a convulsões).</li>
+<li>Aos 7 minutos: A pesquisa do Dr. Wilder Pennfield mostrou que sondar várias áreas do cérebro não afetava características pessoais, como intelecto, tendências políticas, hábitos, etc. Existe uma “personalidade central” que não depende do cérebro. Mas, é claro, se o cérebro estiver morto, tais atributos não podem se manifestar.</li>
+<li>Mais evidências de que a mente não está no cérebro!</li>
+</ul>
+<h5>Pessoas em estado vegetativo podem estar plenamente conscientes</h5>
+<p>7. Outro fato notável do vídeo do Dr. Ignor é que alguns dos pacientes com “morte cerebral” em “estados vegetativos” poderiam estar plenamente conscientes.</p>
+<ul>
+<li>Aos 9:30 minutos: Pessoas que estão em “morte cerebral” e em estado vegetativo podem estar “vivas por dentro”. Elas simplesmente não conseguem expressar seus sentimentos porque não podem falar ou mover partes do corpo. Uma discussão sobre os estudos de tomografia cerebral do Dr. Owen (mencionados pelo Dr. Ignor) está na Ref. 2. <span style="color: #0000ff;"><strong>Existem aspectos da mente que não podem ser destruídos mesmo com danos cerebrais graves.</strong></span> Discutirei isso mais detalhadamente no próximo ensaio.</li>
+<li>Aos 15:30 minutos: As experiências de Libet sobre o livre arbítrio que pareciam sugerir que os seres humanos não têm livre arbítrio. Veja também: “<a href="../../pages/AB.FF.002/index.html" rel="noopener noreferrer" target="_blank">A neurociência diz que não há livre arbítrio? – Isso é uma interpretação errônea!</a>” Mais informações que fornecem evidências de que os seres humanos têm livre arbítrio na Ref. 3.</li>
+<li>Aos 19:30 minutos: O livro de Bennett e Hacker mencionado pelo Dr. Ignor está na Ref. 4.</li>
+<li>Aos 22:20 minutos: Importância da intencionalidade que abordamos no ponto 2 acima. Como a intencionalidade pode surgir da matéria inanimada em um cérebro?</li>
+</ul>
+<h5>Teleologia – O propósito das coisas no mundo</h5>
+<p>8. Aos 25 minutos, a discussão volta-se para a teleologia. A teleologia trata de “uma razão ou explicação para a existência de algo”. Veja a Ref. 5. Uma bolota cresce e se torna um carvalho, e não uma macieira. O projeto para dar origem a um carvalho está nessa semente minúscula. É claro que a bolota precisa germinar e extrair todos os nutrientes necessários da terra para se tornar aquele enorme carvalho.</p>
+<ul>
+<li>Portanto, mesmo cientistas como o Dr. Ignor não conseguem explicar as CAUSAS FUNDAMENTAIS da existência tanto de um carvalho quanto de um ser humano. Por isso, eles atribuem isso a um Criador. Na visão deles, é o Criador que projeta TUDO neste mundo. Esse é o “<a href="https://en.wikipedia.org/wiki/Teleological_argument" rel="noopener noreferrer" target="_blank">argumento teleológico</a>” a favor da existência de um Criador. Às vezes, ele é chamado de “<a href="https://en.wikipedia.org/wiki/Intelligent_design#:~:text=Intelligent%20design%20(ID)%20is%20a,scientific%20theory%20about%20life's%20origins%22." rel="noopener noreferrer" target="_blank">Design Inteligente</a>”.</li>
+<li><span>Como o Dr. Ignor pergunta por volta dos 26 minutos qual é o propósito de um olho. Ele diria que foi criado pelo Criador para que os humanos pudessem ver. Ele diz que existe uma “grande mente” (a do Deus Criador) por trás do universo. Isso porque o Dr. Ignor não está ciente da “teoria anteriormente desconhecida do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>”.</span></li>
+<li><span>Mas o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que criamos nossos próprios olhos futuros porque gostamos de desfrutar de ver as coisas neste mundo! Mais uma vez, isso precisa ser explicado em um contexto mais amplo.</span></li>
+<li>Uma bolota dando origem a um carvalho é muito semelhante a um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> dando origem a um corpo humano. Esse <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> é inimaginavelmente menor do que uma bolota, mas possui o projeto do corpo humano. O <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> começa a construir o corpo enquanto está dentro do útero da mãe, obtendo nutrição dela. Uma vez nascido, o bebê começa a se alimentar, e é assim que o corpo de um adulto plenamente desenvolvido passa a existir. Veja “<a href="../../pages/DS.BB.006/index.html" rel="noopener noreferrer" target="_blank">Explicações Buddhistas sobre concepção, aborto e contracepção</a>”.</li>
+</ul>
+<h5>Se a mente é separada do corpo, o que acontece com ela quando o corpo morre?</h5>
+<p>9. Portanto, há fortes evidências surgindo para apoiar a ideia de que a mente não está no cérebro, embora o cérebro ajude a facilitar o funcionamento da mente. Isso levanta a seguinte questão crítica. <span style="color: #0000ff;"><strong>Se a mente é algo mais do que o cérebro (e o corpo físico), o que acontece com essa mente quando o corpo morre?</strong></span></p>
+<ul>
+<li><span>Para aqueles que não tiveram contato com o verdadeiro <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, poderia haver apenas uma opção. Essa é a SUPOSIÇÃO de que a mente (denominada “alma”) deve ir para o céu ou para o inferno para sempre.</span></li>
+<li>Mas, como já discutimos, a mente cria “sementes” para vidas futuras. Muitas dessas “sementes” existem para muitas vidas futuras (algumas com corpos físicos e cérebros) para QUALQUER ser vivo. É por isso que todos nós estamos nesse processo de Renascimento desde um tempo que não pode ser rastreado. Veja “<a href="../../pages/DS.BB.002/index.html" rel="noopener noreferrer" target="_blank">Origem da Vida – Não há Origem Rastreável</a>”.</li>
+<li><span>O “<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> até então desconhecido” é que os próprios seres vivos são responsáveis por criar SEMENTES para suas vidas futuras. Além disso, os seres vivos também são responsáveis por criar o ambiente em que vivem! Isso inclui seres vivos sem consciência (como a vegetação) e todo o ambiente necessário para que tudo isso exista. Este é um assunto MUITO PROFUNDO. Mas abordaremos primeiro a questão dos seres vivos criarem as sementes de suas vidas futuras.</span></li>
+<li>Ambos os aspectos são explicados com <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. É claro que, primeiro, vamos nos concentrar nos seres humanos e em outros seres vivos.</li>
+</ul>
+<h5>Referências</h5>
+<p>1. Jeffrey Schwartz, “<span class="a-size-medium a-color-base a-text-normal">Você não é seu cérebro: a solução em quatro etapas para mudar maus hábitos, acabar com pensamentos prejudiciais e assumir o controle de sua vida”, (2012)</span></p>
+<p>2. Os estudos de exames cerebrais do Dr. Owen são discutidos no vídeo a seguir:</p>
+<p style="text-align: justify;"><div class="video-container"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/JbWHAIDHUQ4?si=U1O_h_rYDnPkHc_i" width="560"><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span><span class="mce_SELRES_start" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;">﻿</span></iframe></div></p>
+<p>3. Alfred R. Mele, "<span class="a-size-extra-large" id="productTitle">Livre: Por que a ciência não refutou o livre arbítrio" (2014)</span></p>
+<p>4. M. R. Bennett e P. M. S. Hacker, <span class="a-size-extra-large" id="productTitle">“Fundamentos Filosóficos da Neurociência” (2003)</span></p>
+<p>5. Artigo da Wikipedia, “<a href="https://en.wikipedia.org/wiki/Teleology" rel="noopener noreferrer" target="_blank">Teleologia</a>”.</p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.CC.001/index.html">Brain And The Gandhabba</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.CC.003/index.html">Gandhabba In A Human Body An Analogy</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.CC.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Brain And The Gandhabba</span>
+        
+        <span class="pathway-title title-pt">Brain e o Gandhabba</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.CC.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Gandhabba In A Human Body An Analogy</span>
+        
+        <span class="pathway-title title-pt">Um Gandhabba em um corpo humano: uma analogia</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

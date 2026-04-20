@@ -1,0 +1,436 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>First Noble Truth Is Suffering Myths About Suffering | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 55 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.AA.009</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">First Noble Truth Is Suffering Myths About Suffering</h1>
+    
+    <h1 class="title-pt">A Primeira Nobre Verdade é o sofrimento: Mitos sobre o sofrimento</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.AA.009</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.AA.009"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0064"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.AA.009</td></tr><tr><td>Fin-dex</td><td>0064</td></tr><tr><td>Slug</td><td>first-noble-truth-is-suffering-myths-about-suffering</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>First Noble Truth Is Suffering Myths About Suffering</td></tr></table></div></div><p style="text-align: justify;">Most people believe that the First Noble Truth only says there is suffering. Some also think it is possible to "remove" this existing suffering IN THIS LIFE by following extensive and elaborate meditation techniques.</p>
+<p style="text-align: justify;"><span>1. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "My <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> has not been known in this world. It is something people have never heard of previously". So we should carefully examine to see what is new about the suffering that he talked about.</span></p>
+<ul style="text-align: justify;">
+<li>What is new about knowing that there is suffering around us? Everybody knows there is suffering from old age, diseases, poverty, etc.</li>
+<li>Is it possible to REMOVE existing suffering by doing meditation? For example, if one has come down with a disease, can one overcome that by meditation? If someone is getting old and feeling the pains and aches of old age, can that be PERMANENTLY removed by meditation? Even though some issues can be handled for special reasons, in most cases, we CAN NOT overcome them. They are the RESULTS (<em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>) of previous actions (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.)</li>
+<li>We can stop similar future suffering by abstaining from engaging in such actions.</li>
+</ul>
+<p style="text-align: justify;">Let us discuss these two points one at a time.</p>
+<p style="text-align: justify;">3. Let us first see whether it is possible to REMOVE the existing suffering.</p>
+<ul style="text-align: justify;">
+<li><span>For example, if someone has aches and pains due to old age, it is impossible to get rid of them other than to use medications or therapy to lessen and manage the pain. If someone gets cancer, it is impossible to get rid of it through meditation. It may be handled by medication. Even the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> had pains and aches due to old age and had a severe stomach ache at the end.</span></li>
+<li>In the context of that last sentence, It must be noted that there are two types of <em>vedana</em> (feelings). (i) Those due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>,</span></em> and (ii) Those due to <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (attachment to sensual pleasures.) An <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> gets rid of only the second kind until the <em>Parinibbana</em> (death); see "<a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank" title="Vedana (Feelings) Arise in Two Ways">Vedana (Feelings) Arise in Two Ways</a>."</li>
+<li>It may not even be possible to do meditation under such conditions. Even someone who has developed <em>jhānā</em> may not be able to get into <em>jhānā</em> if the pains are too distracting.</li>
+<li><span>The goal of <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> meditation is to contemplate the world's true nature and find the CAUSES of such suffering. Then we can stop those causes, and FUTURE suffering will cease.</span></li>
+<li><span>One can get relief from day-to-day stresses by doing different kinds of meditation. And it is good to do them. But such practices were there even before the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. A <span class="pali-term term-highlight" data-term="buddha">Buddha</span> did not need to reveal to the world that one could get some "calming down" by doing breath or</span><em><span> <span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> meditation.</li>
+<li>In a way, such "<em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em><span>" meditations are comparable to taking an aspirin for a headache. One can get relief in the short term, but it is temporary. But the problem that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> addressed involved a much longer time scale, leading to a permanent </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em>.</li>
+</ul>
+<p style="text-align: justify;"><span>4. What was the "never heard truth about suffering" that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> revealed to the world? In short, it is the "suffering hidden in sensory pleasures; the suffering that WILL ARISE in future lives."</span></p>
+<ul style="text-align: justify;">
+<li>Let us take an example to get a simple version of this "new idea."</li>
+<li>When a fish bites the bait, it does not see the suffering hidden in that action. Looking from the ground, we can see the whole picture and know what will happen to the fish if it bites the bait. But the fish cannot see the entire situation and thus does not see the hidden suffering. It is unable to see the hook hidden in the bait. </li>
+<li>In the same way, if we do not know about the wider world of 31 realms (with the suffering-laden four lowest realms) and that we have gone through unimaginable suffering in those realms in the past, we only focus on what is easily accessible to our six senses.</li>
+<li>To comprehend suffering through repeated rebirths, one needs to understand that most suffering is encountered in the four lowest realms (<em>apāyā</em>); see "<a href="../../pages/MR.AA.006/index.html" rel="noopener" target="_blank">Does the Hell (Niraya) Exist?</a>."</li>
+<li>Thus, stopping suffering requires one to first stop the causes for rebirths in the <em>apāyā</em> by attaining the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage of<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; see "<a href="../../pages/KD.EE.004/index.html" rel="noopener" target="_blank">Nibbāna “Exists”, but Not in This World</a>."</li>
+</ul>
+<p style="text-align: justify;">5. <strong>Seeing this hidden suffering is tricky. </strong><span>It is not possible to convey the whole message in one essay, but I will try to get across the main idea. One needs to spend some time thinking through these issues. When the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> attained Buddhahood, he was worried about whether he could convey this profound idea to most people.</span></p>
+<ul style="text-align: justify;">
+<li>Everything happens due to one or (usually) many causes. The famous Third Law of motion in physics says that every action has an opposite action or a reaction. The First Law states that an object will not change its status unless a force acts on it. It is easy to see these "cause and effect" principles in inert objects. If an object needs moving, it needs to be pushed or pulled. If we throw a stone up, it must come down since gravity pulls it down.</li>
+<li>We seek pleasures apparent to all. But if we gain such pleasures through immoral acts, the consequences of such evil actions are not obvious. We can see a stone thrown up needs to come down, but we cannot see the (future) dire consequences for the drug dealer who seems to enjoy life right now.</li>
+</ul>
+<p style="text-align: justify;">6. <span style="color: #0000ff;">The main problem in clearly seeing the "cause and effect of mind actions" is that the results of those actions have a time delay and are unpredictable. </span>In contrast, it is easy to predict what will happen with material things (moving an object, a vehicle, a rocket, etc.). The success of physical sciences is due to this reason. Once the underlying laws are found (laws of gravity, laws of motion, electromagnetism, nuclear forces, quantum mechanics, etc.), one has complete control.</p>
+<ul style="text-align: justify;">
+<li>But the mind is very different. Two minds never work the same way. Under a given set of conditions, each person will choose to act differently. With physical objects, that is not so; under a given set of suitable conditions, what will happen can be predicted accurately.</li>
+<li>Effects of some actions (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>) may not materialize in this life, and sometimes it may come to fruition only in many lives down the road (but with accumulated interest).</li>
+<li>Even in this life, mental phenomena are complex: This is why economics is not a "real science." It involves how people sometimes act "irrationally" for perceived gains. No economic theory can precisely predict how a given stock market will perform.</li>
+</ul>
+<p style="text-align: justify;">7. When mechanical systems have time lags, those are predictable. We can set off a device to work in a certain way AT A CERTAIN TIME, and we know that it will happen at that time if all mechanical components work properly. Not so with the mind. When we act in a certain way, their RESULTS may not manifest for many lives into the future. That is a crucial point to contemplate.</p>
+<ul style="text-align: justify;">
+<li>But cause and effect is nature's fundamental principle. <strong>When something is done, it will lead to one or more effects. </strong>In mind-related causes, the effects may take time, sometimes a long time over many lives, to trigger the "corresponding effect."</li>
+<li><span>Thus it should be clear that "action and reaction" associated with mind effects REQUIRE the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process. It is not readily apparent and is an essential part of the "previously unheard <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>" that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> revealed to the world.</span><b> </b></li>
+<li><b>This "cause and effect" that involves the mind is the principle of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em><span> in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></b></li>
+<li>But unlike in Hinduism, <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> is not deterministic, i.e., not all <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> have to come to fruition; see, "<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank">What is Kamma? does Kamma determine Everything?</a>". All unspent <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> become null and void when <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> passes away.</li>
+</ul>
+<p style="text-align: justify;">8. Our life as a human is a RESULT of a past good deed (<em><span>punna <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>.) The life of a dog or an ant results from a past action by that sentient being.</p>
+<ul style="text-align: justify;">
+<li>And what happens to us in this life is a COMBINATION of what we have done in the past (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>) AND what we do in this life.</li>
+<li>What happens to an animal is MOSTLY due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> from the past.</li>
+<li>The difference between a human and an animal is that the animal has little control over what will happen to it. But human birth is special: We have a higher-level mind that CAN change the future to some extent, with possible enormous consequences.</li>
+</ul>
+<p style="text-align: justify;">9. What can we change, and what cannot be changed?</p>
+<ul style="text-align: justify;">
+<li>We are born with a certain <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> built in. Our body features and significant illnesses (such as cancer) are mostly built-in. We can avoid many <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> by acting with mindfulness, i.e., planning well, taking precautions, etc.</li>
+<li>But we CAN NOT change the fact that we will get old and eventually die, no matter what we do. Our life is a RESULT.</li>
+<li>What we CAN change are the CAUSES for future lives.</li>
+<li>Even though meditation cannot relieve most of the pre-determined suffering, proper meditation CAN provide temporary relief and PERMANENTLY remove future suffering.</li>
+</ul>
+<p style="text-align: justify;">10. The second Noble Truth describes the CAUSES we need to work on. The root causes are greed, hate, and ignorance. They need to be removed mainly via understanding the Three Characteristics (see #12 below) and also via removing our bad sansaric habits. See "<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits, Goals, and Character (Gati)">Habits, Goals, Character (Gati)</a>" to "<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank" title="The Way to Nibbāna – Removal of Āsavas">The Way to Nibbāna – Removal of Āsavā</a>."</p>
+<p style="text-align: justify;">11. The Third Noble Truth is about what can be achieved by systematically removing those causes. <em><span>Niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> increases from the point of embarking on the Path and has four levels of PERMANENT increases starting at the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage and culminating at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em><span> stage. There are several related <span class="pali-term term-highlight" data-term="posts">posts</span>, starting with "</span><a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Three Kinds of Happiness - What is Niramisa Sukha?</a>".</p>
+<p style="text-align: justify;">12. Fourth Noble Truth is the way to attain <em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> and then various stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. <em><span>Niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> starts when one lives a moral life (see "<a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank">Ten Immoral Actions (Dasa Akusala)</a><span>" and follow-up <span class="pali-term term-highlight" data-term="posts">posts</span>). The root causes of immoral behavior are greed, hate, and ignorance. Ignorance can be reduced to the extent of attaining the <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> stage by comprehending the Three Characteristics of "this world of 31 realms", i.e., </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>; see, "<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anatta - Wrong Interpretations</a><span>," and the follow-up <span class="pali-term term-highlight" data-term="posts">posts</span>. It is that powerful.</span></p>
+<ul>
+<li style="text-align: justify;">Once one attains the <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> stage, one can find the rest of the way by oneself.</li>
+</ul>
+<p style="text-align: justify;"><span>13. There are many ways to describe and analyze what I summarized above. Other people may grasp <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> by looking at it from different angles. That is what I try to cover with sections like "<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and Science" and "<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and Philosophy," and for those who like to dig deeper into <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, the section on "<span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>" or "Higher or Deeper <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>."</span></p>
+<ul>
+<li style="text-align: justify;"><span>I aim to provide a "wide view" that accommodates most people. Even though I cannot even begin to cover a significant fraction of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, one does not need to understand "everything" even to attain </span><em>Arahanthood</em><span>. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> has said that one could reach all four stages of </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> by comprehending <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> at deeper and deeper levels. That is because, with deeper understanding, one's mind automatically directs one in the right direction.</li>
+<li style="text-align: justify;"><span>Another reason I try to cover many topics is to illustrate that <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is a complete description of nature.</span></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.AA.009"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0064"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.AA.009
+Language:     pt-BR
+Generated-At: 2026-04-18T04:02:17Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;">A maioria das pessoas acredita que a Primeira Nobre Verdade apenas afirma que existe sofrimento. Alguns também pensam que é possível “eliminar” esse sofrimento existente NESTA VIDA seguindo técnicas de meditação extensas e elaboradas.</p>
+<p style="text-align: justify;"><span>1. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “Meu <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> não é conhecido neste mundo. É algo de que as pessoas nunca ouviram falar antes”. Portanto, devemos examinar cuidadosamente para ver o que há de novo no sofrimento de que ele falou.</span></p>
+<ul style="text-align: justify;">
+<li>O que há de novo em saber que existe sofrimento ao nosso redor? Todos sabem que existe sofrimento devido à velhice, às doenças, à pobreza, etc.</li>
+<li>É possível REMOVER o sofrimento existente por meio da meditação? Por exemplo, se alguém adoeceu, pode superar isso com meditação? Se alguém está envelhecendo e sentindo as dores e os incômodos da velhice, isso pode ser REMOVIDO PERMANENTEMENTE pela meditação? Embora algumas questões possam ser tratadas por motivos especiais, na maioria dos casos, NÃO PODEMOS superá-las. Elas são os RESULTADOS (<em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>) de ações anteriores (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>).</li>
+<li>Podemos impedir sofrimentos futuros semelhantes abstendo-nos de praticar tais ações.</li>
+</ul>
+<p style="text-align: justify;">Vamos discutir esses dois pontos, um de cada vez.</p>
+<p style="text-align: justify;">3. Vamos primeiro ver se é possível ELIMINAR o sofrimento existente.</p>
+<ul style="text-align: justify;">
+<li><span>Por exemplo, se alguém tem dores e incômodos devido à velhice, é impossível livrar-se deles a não ser usando medicamentos ou terapia para diminuir e controlar a dor. Se alguém tiver câncer, é impossível livrar-se dele por meio da meditação. Ele pode ser tratado com medicamentos. Até mesmo o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> teve dores e incômodos devido à velhice e teve uma forte dor de estômago no final.</span></li>
+<li>No contexto dessa última frase, deve-se observar que existem dois tipos de <em><span><span class="pali-term term-highlight" data-term="vedanā">Vedanā</span></span></em> (sensações). (i) Aquelas decorrentes de <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span>,</span></em> e (ii) aquelas decorrentes de <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (apego aos prazeres sensuais). Um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> se livra apenas do segundo tipo até o <em>Parinibbana</em> (morte); veja “<a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank" title="Vedana (Feelings) Arise in Two Ways">Vedanā (Sentimentos) Surgem de Duas Maneiras</a>”.</li>
+<li>Pode nem mesmo ser possível meditar nessas condições. Mesmo alguém que tenha desenvolvido <em>jhānā</em> pode não conseguir entrar em <em>jhānā</em> se as dores forem muito perturbadoras.</li>
+<li>O objetivo da meditação Buddhista é contemplar a verdadeira natureza do mundo e encontrar as CAUSAS desse sofrimento. Assim, podemos eliminar essas causas, e o sofrimento FUTURO cessará.</li>
+<li><span>É possível obter alívio do estresse cotidiano praticando diferentes tipos de meditação. E é bom praticá-las. Mas tais práticas já existiam mesmo antes do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> não precisava revelar ao mundo que era possível obter algum “alívio” praticando meditação da respiração ou</span><em> Kasiṇa</em>.</li>
+<li>De certa forma, essas meditações “<em><span><span class="pali-term term-highlight" data-term="samatha">Samatha</span></span></em><span>” são comparáveis a tomar uma aspirina para dor de cabeça. É possível obter alívio a curto prazo, mas é temporário. Mas o problema que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> abordou envolvia uma escala de tempo muito mais longa, levando a um </span><em><span>nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> permanente.</li>
+</ul>
+<p style="text-align: justify;"><span>4. Qual foi a “verdade nunca antes ouvida sobre o sofrimento” que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> revelou ao mundo? Em resumo, é o “sofrimento oculto nos prazeres sensoriais; o sofrimento que SURGIRÁ em vidas futuras”.</span></p>
+<ul style="text-align: justify;">
+<li>Vamos dar um exemplo para entender uma versão simples dessa “nova ideia”.</li>
+<li>Quando um peixe morde a isca, ele não vê o sofrimento oculto nessa ação. Olhando da terra, podemos ver o quadro completo e saber o que acontecerá com o peixe se ele morder a isca. Mas o peixe não consegue ver a situação inteira e, portanto, não vê o sofrimento oculto. Ele é incapaz de ver o anzol escondido na isca. </li>
+<li>Da mesma forma, se não conhecemos o mundo mais amplo dos 31 reinos (com os quatro reinos mais baixos, repletos de sofrimento) e não sabemos que passamos por sofrimentos inimagináveis nesses reinos no passado, focamos apenas no que é facilmente acessível aos nossos seis sentidos.</li>
+<li>Para compreender o sofrimento através de renascimentos repetidos, é preciso entender que a maior parte do sofrimento é encontrada nos quatro reinos inferiores (<em>apāyā</em>); veja “<a href="../../pages/MR.AA.006/index.html" rel="noopener" target="_blank">O Inferno (Niraya) Existe?</a>”.</li>
+<li>Assim, para acabar com o sofrimento, é preciso primeiro eliminar as causas dos renascimentos nos <em>apāyā</em>, alcançando o estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> do <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; veja “<a href="../../pages/KD.EE.004/index.html" rel="noopener" target="_blank">O Nibbāna ‘existe’, mas não neste mundo</a>”.</li>
+</ul>
+<p style="text-align: justify;">5. <strong>Perceber esse sofrimento oculto é complicado.</strong><span> Não é possível transmitir toda a mensagem em um único ensaio, mas tentarei transmitir a ideia principal. É preciso dedicar algum tempo a refletir sobre essas questões. Quando o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> alcançou a iluminação, ele se preocupava se conseguiria transmitir essa ideia profunda à maioria das pessoas.</span></p>
+<ul style="text-align: justify;">
+<li>Tudo acontece devido a uma ou (geralmente) muitas causas. A famosa Terceira Lei do movimento, na física, diz que toda ação tem uma ação oposta ou uma reação. A Primeira Lei afirma que um objeto não mudará seu estado a menos que uma força atue sobre ele. É fácil ver esses princípios de “causa e efeito” em objetos inertes. Se um objeto precisa ser movido, ele precisa ser empurrado ou puxado. Se jogarmos uma pedra para cima, ela deve cair, pois a gravidade a puxa para baixo.</li>
+<li>Buscamos prazeres evidentes para todos. Mas se obtemos tais prazeres por meio de atos imorais, as consequências dessas ações malignas não são óbvias. Podemos ver que uma pedra lançada para cima precisa cair, mas não podemos ver as (futuras) consequências terríveis para o traficante de drogas que parece estar aproveitando a vida neste momento.</li>
+</ul>
+<p style="text-align: justify;">6. <span style="color: #0000ff;">O principal problema em ver claramente a “causa e efeito das ações da mente” é que os resultados dessas ações têm um atraso temporal e são imprevisíveis. </span>Em contraste, é fácil prever o que acontecerá com coisas materiais (mover um objeto, um veículo, um foguete, etc.). O sucesso das ciências físicas se deve a essa razão. Uma vez descobertas as leis subjacentes (leis da gravidade, leis do movimento, eletromagnetismo, forças nucleares, mecânica quântica etc.), tem-se controle total.</p>
+<ul style="text-align: justify;">
+<li>Mas a mente é muito diferente. Duas mentes nunca funcionam da mesma maneira. Sob um determinado conjunto de condições, cada pessoa escolherá agir de maneira diferente. Com objetos físicos, isso não acontece; sob um determinado conjunto de condições adequadas, o que acontecerá pode ser previsto com precisão.</li>
+<li>Os efeitos de algumas ações (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>) podem não se materializar nesta vida e, às vezes, só se concretizarão em muitas vidas futuras (mas com juros acumulados).</li>
+<li>Mesmo nesta vida, os fenômenos mentais são complexos: é por isso que a economia não é uma “ciência real”. Ela envolve como as pessoas às vezes agem “irracionalmente” em busca de ganhos percebidos. Nenhuma teoria econômica pode prever com precisão como um determinado mercado de ações se comportará.</li>
+</ul>
+<p style="text-align: justify;">7. Quando os sistemas mecânicos apresentam atrasos, estes são previsíveis. Podemos acionar um dispositivo para funcionar de determinada maneira EM UM MOMENTO ESPECÍFICO, e sabemos que isso acontecerá naquele momento se todos os componentes mecânicos funcionarem corretamente. Não é assim com a mente. Quando agimos de determinada maneira, seus RESULTADOS podem não se manifestar por muitas vidas no futuro. Esse é um ponto crucial a ser contemplado.</p>
+<ul style="text-align: justify;">
+<li>Mas causa e efeito são o princípio fundamental da natureza. <strong>Quando algo é feito, isso levará a um ou mais efeitos. </strong>Nas causas relacionadas à mente, os efeitos podem levar tempo, às vezes muito tempo ao longo de muitas vidas, para desencadear o “efeito correspondente”.</li>
+<li><span>Assim, deve ficar claro que a “ação e reação” associadas aos efeitos da mente EXIGEM o processo de Renascimento. Isso não é imediatamente aparente e é uma parte essencial do “<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> anteriormente desconhecido” que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> revelou ao mundo.</span><b> </b></li>
+<li><b>Essa “causa e efeito” que envolve a mente é o princípio do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> e do <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em><span> no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></b></li>
+<li>Mas, ao contrário do que ocorre no hinduísmo, <em><span>o <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> não é determinista, ou seja, nem todo <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> precisa se concretizar; veja “<a href="../../pages/TL.EE.006/index.html" rel="noopener noreferrer" target="_blank">O que é kamma? O kamma determina tudo?</a>”. Todo <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> não consumido se torna nulo e sem efeito quando <em><span>o <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> falece.</li>
+</ul>
+<p style="text-align: justify;">8. Nossa vida como seres humanos é o RESULTADO de uma boa ação passada (<em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>). A vida de um cão ou de uma formiga resulta de uma ação passada desse ser senciente.</p>
+<ul style="text-align: justify;">
+<li>E o que nos acontece nesta vida é uma COMBINAÇÃO do que fizemos no passado (<em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>) E do que fazemos nesta vida.</li>
+<li>O que acontece a um animal deve-se PRINCIPALMENTE ao <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> do passado.</li>
+<li>A diferença entre um ser humano e um animal é que o animal tem pouco controle sobre o que lhe acontecerá. Mas o nascimento humano é especial: temos uma mente de nível superior que PODE mudar o futuro até certo ponto, com possíveis consequências enormes.</li>
+</ul>
+<p style="text-align: justify;">9. O que podemos mudar e o que não pode ser mudado?</p>
+<ul style="text-align: justify;">
+<li>Nascemos com um certo <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> incorporado. Nossas características físicas e doenças graves (como o câncer) são, em grande parte, inatas. Podemos evitar muitos <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> agindo com atenção plena, ou seja, planejando bem, tomando precauções, etc.</li>
+<li>Mas NÃO PODEMOS mudar o fato de que envelheceremos e, eventualmente, morreremos, não importa o que façamos. Nossa vida é um RESULTADO.</li>
+<li>O que podemos mudar são as CAUSAS para vidas futuras.</li>
+<li>Embora a meditação não possa aliviar a maior parte do sofrimento predeterminado, a meditação adequada PODE proporcionar alívio temporário e remover PERMANENTEMENTE o sofrimento futuro.</li>
+</ul>
+<p style="text-align: justify;">10. A Segunda Nobre Verdade descreve as CAUSAS nas quais precisamos trabalhar. As causas fundamentais são a ganância, o ódio e a ignorância. Elas precisam ser removidas principalmente por meio da compreensão das Três Características (veja o nº 12 abaixo) e também por meio da remoção de nossos maus hábitos samsáricos. Veja “<a href="../../pages/TL.BB.004/index.html" rel="noopener noreferrer" target="_blank" title="Habits, Goals, and Character (Gati)">Hábitos, Objetivos, Caráter (Gati)</a>” até “<a href="../../pages/TL.HH.004/index.html" rel="noopener noreferrer" target="_blank" title="The Way to Nibbāna – Removal of Āsavas">O Caminho para Nibbāna – Remoção de Āsavā</a>”.</p>
+<p style="text-align: justify;">11. A Terceira Nobre Verdade trata do que pode ser alcançado pela remoção sistemática dessas causas. <em><span>O niramisa <span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> aumenta a partir do momento em que se embarca no Caminho e possui quatro níveis de aumento PERMANENTE, começando no estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> e culminando no estágio <em><span>de <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>. Há várias postagens relacionadas, começando com “<a href="../../pages/TL.CC.005/index.html" rel="noopener noreferrer" target="_blank" title="Three Kinds of Happiness – What is Niramisa Sukha?">Três Tipos de Felicidade – O que é Niramisa Sukha?</a>”.</p>
+<p style="text-align: justify;">12. A Quarta Nobre Verdade é o caminho para alcançar <em><span>o nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> e, em seguida, os vários estágios do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. <em><span>O nirāmisa <span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> começa quando se leva uma vida moral (ver <a href="../../pages/TL.EE.003/index.html" rel="noopener noreferrer" target="_blank">“Dez Ações Imorais (Dasa Akusala)</a><span>” e ensaios subsequentes). As causas fundamentais do comportamento imoral são a ganância, o ódio e a ignorância. A ignorância pode ser reduzida a ponto de se atingir o estágio de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> ao compreender as Três Características deste “mundo dos 31 reinos”, ou seja, </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>; veja “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anattā – Interpretações Er</a>radas” e os ensaios subsequentes. É assim tão poderoso.</p>
+<ul>
+<li style="text-align: justify;">Uma vez que se atinge o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, pode-se encontrar o resto do caminho por conta própria.</li>
+</ul>
+<p style="text-align: justify;"><span>13. Há muitas maneiras de descrever e analisar o que resumi acima. Outras pessoas podem compreender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> observando-o sob diferentes ângulos. É isso que procuro abordar em seções como “<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e Ciência” e “<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e Filosofia”, e, para aqueles que gostam de se aprofundar no <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, a seção sobre “<span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span>” ou “<span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> Superior ou Mais Profundo”.</span></p>
+<ul>
+<li style="text-align: justify;"><span>Meu objetivo é oferecer uma “visão ampla” que atenda à maioria das pessoas. Embora eu não consiga sequer começar a abordar uma fração significativa do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, não é necessário compreender “tudo” para alcançar </span><em>a Arahantia</em><span>. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que é possível alcançar todos os quatro estágios do </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> ao compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em> em níveis cada vez mais profundos. Isso porque, com uma compreensão mais profunda, a mente automaticamente nos conduz na direção certa.</li>
+<li style="text-align: justify;"><span>Outra razão pela qual tento abordar muitos tópicos é para ilustrar que o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é uma descrição completa da natureza.</span></li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.AA.008/index.html">Transfer Of Merits Pattidana Punnanumodana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.AA.010/index.html">Vinaya The Nature Likes To Be In Equillibrium</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.AA.008/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Transfer Of Merits Pattidana Punnanumodana</span>
+        
+        <span class="pathway-title title-pt">Transferência de méritos, Pattidana e Punnanumodana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.AA.010/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Vinaya The Nature Likes To Be In Equillibrium</span>
+        
+        <span class="pathway-title title-pt">Vinaya: A natureza gosta de estar em equilíbrio</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

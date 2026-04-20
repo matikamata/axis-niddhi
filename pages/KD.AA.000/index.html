@@ -1,0 +1,517 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Key Dhamma Concepts | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 1 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.AA.000</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Key Dhamma Concepts</h1>
+    
+    <h1 class="title-pt">Conceitos-chave do Dhamma</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.AA.000</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>3</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.AA.000"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0066"
+             data-level="intermediate"
+             data-reading-time="3"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.AA.000</td></tr><tr><td>Fin-dex</td><td>0066</td></tr><tr><td>Slug</td><td>key-dhamma-concepts</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Key Dhamma Concepts</td></tr></table></div></div><p style="text-align: justify;"><span>Within thousand years of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>’s </span><em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span> </span></em><span>(passing away), certain key concepts became distorted. For many years, I had nagging questions on the compatibility of certain concepts that are widely published in “<span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> literature”, including Theravada literature. For example, explanations of </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span>, sunyata</span></em>, did not make sense to me. Furthermore, I got lost in a myriad of explanations for terms like <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>; there are three different meanings for that word in standard Theravada texts.</p>
+<p style="text-align: justify;">When I started listening to the <em>dēsanas</em><span> by Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span> in Sri Lanka, it became immediately apparent to me that “this was the true <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>”; see, "</span><a href="../../pages/FT.BB.001/index.html" rel="noopener noreferrer" target="_blank">Parinibbāna of Waharaka Thero</a>". Furthermore, concepts like <em><span><span class="pali-term term-highlight" data-term="saṃsāra">saṃsāra</span>, samma, <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> became crystal clear while I was just listening. I hope I will be able to convey this information as clearly below.</p>
+<p style="text-align: justify;"><strong>This main section has the following sub-sections:</strong></p>
+<p class="entry-title"><a href="../../pages/KD.BB.001/index.html" rel="noopener" target="_blank">Basic Framework of Buddha Dhamma</a></p>
+<ul>
+<li><a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Noble Truths, Paṭicca Samuppāda, Tilakkhana</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.DD.001/index.html" rel="noopener noreferrer" target="_blank">San </a><span style="color: #0000ff;"><span>(Explanation of many key <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words)</span></span></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank" title="What is “San”? Meaning of Sansara (or Samsara)">What is “San”? Meaning of Sansāra (or Saṃsāra)</a></li>
+<li class="entry-title"><a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Sankhāra, Kamma, Kamma Bīja, Kamma Vipāka</a></li>
+<li class="entry-title"><a href="../../pages/KD.DD.004/index.html" rel="noopener noreferrer" target="_blank">Sankhāra – Life is a Bundle of Sankhāra</a></li>
+<li class="entry-title"><a href="http://localhost/beng_feb2026/key-dhamma-concepts/difference-between-dhamma-and-sankhara/" rel="noopener noreferrer" target="_blank">Difference Between Dhamma and saṅkhāra </a></li>
+<li class="entry-title"><a href="http://localhost/beng_feb2026/key-dhamma-concepts/san/sankhara-kamma/" rel="noopener noreferrer" target="_blank">Kamma are Done with Saṅkhāra – Types of Saṅkhāra</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Nibbāna – Is it Difficult to Understand?">Nibbāna – Is it Difficult to Understand?</a></li>
+<li class="entry-title"><a href="../../pages/BD.JJ.001/index.html" rel="noopener noreferrer" target="_blank">The Four Stages in Attaining Nibbāna</a></li>
+<li class="entry-title"><a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank">What Are Rupa? (Relation to Nibbāna)</a></li>
+<li class="entry-title"><a href="../../pages/BD.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Niramisa Sukha</a></li>
+<li class="entry-title"><a href="../../pages/TL.CC.006/index.html" rel="bookmark noopener noreferrer" target="_blank">How to Taste Nibbāna</a></li>
+<li class="entry-title"><a href="../../pages/KD.EE.003/index.html" rel="noopener noreferrer" target="_blank">Does the First Noble Truth Describe only Suffering?</a></li>
+<li class="entry-title"><a href="http://localhost/beng_feb2026/key-dhamma-concepts/nirodha-and-vaya-two-different-concepts/" rel="noopener noreferrer" target="_blank">Nirodha and Vaya – Two Different Concepts</a></li>
+<li class="entry-title"><a href="../../pages/KD.EE.004/index.html" rel="noopener noreferrer" target="_blank">Nibbāna “Exists”, but Not in This World</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anatta – Wrong Interpretations</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank" title="Anicca – True Meaning">Anicca – True Meaning</a></li>
+<li><a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank" title="Anicca – True Meaning">Anicca – Inability to Keep What We Like</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Repeated Arising/Destruction</a></li>
+<li><a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – Worthlessness of Worldly Things</a></li>
+<li><a href="../../pages/KD.FF.009/index.html" rel="noopener noreferrer">Anicca – The Incessant Distress (“Pīḷana”)</a></li>
+<li><a href="../../pages/KD.FF.020/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta – According to Some Key Suttas</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.017/index.html" rel="noopener noreferrer" target="_blank">Anatta – the Opposite of Which Atta?</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.016/index.html" rel="noopener noreferrer" target="_blank">Dasa Akusala and Anatta – The Critical Link</a></li>
+<li><a href="../../pages/KD.FF.018/index.html" rel="noopener noreferrer" target="_blank">Anattā (Mundane Interpretation) – There is no “Unchanging Self”</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.019/index.html" rel="noopener noreferrer" target="_blank">Anatta and Dukkha – True Meanings</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.010/index.html" rel="noopener noreferrer" target="_blank">How to Cultivate Anicca Saññā</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.011/index.html" rel="noopener noreferrer" target="_blank">How to Cultivate the Anicca Saññā – II</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.012/index.html" rel="noopener noreferrer" target="_blank">If Everything is Anicca Should We Just give up Everything?</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.026/index.html" rel="noopener noreferrer" target="_blank">Why are Tilakkhaṇa not Included in 37 Factors of Enlightenment?</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.027/index.html" rel="noopener noreferrer" target="_blank">Two Versions of 37 Factors of Enlightenment</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.009/index.html" rel="noopener noreferrer">The Incessant Distress (“Pilana”) – Key to Dukkha Sacca</a></li>
+<li class="entry-title">Also see, “<a href="http://localhost/beng_feb2026/three-levels-of-practice/seeking-nibbana/root-cause-of-anicca-nature-of-sankata/" rel="noopener noreferrer" target="_blank">Root Cause of Anicca – Five Stages of a Saṅkata</a>” that is in a different section.</li>
+</ul>
+<p class="entry-title"><strong><a href="../../pages/KD.GG.001/index.html" rel="noopener" target="_blank" title="Gati, Bhava, and Jāti">Gati, Bhava, and Jāti</a></strong></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.GG.002/index.html" rel="noopener noreferrer" target="_blank">Namagotta, Bhava, Kamma Bīja, and Mano Loka (Mind Plane)</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Gati and Bhava – Many Varieties</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Gati to Bhava to Jati – Ours to Control</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.005/index.html" rel="noopener noreferrer" target="_blank">Memory, Brain, Mind, Nama Loka, Kamma Bhava, Kamma Vipaka</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava and Jāti – States of Existence and Births Therein</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/PS.II.009/index.html" rel="noopener noreferrer" target="_blank">Difference Between Taṇhā and Upādāna</a></p>
+</li>
+<li><a href="../../pages/KD.GG.009/index.html" rel="noopener noreferrer" target="_blank">Pāpa Kamma Versus Akusala Kamma</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.HH.001/index.html" rel="noopener noreferrer" target="_blank">Sorting out Some Key Pāli Terms (Tanha, Lobha, Dosa, Moha, etc)</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.HH.002/index.html" rel="noopener noreferrer" target="_blank">Kama Taṇhā, Bhava Taṇhā, Vibhava Taṇhā</a></li>
+<li class="entry-title"><a href="../../pages/KD.HH.004/index.html" rel="noopener noreferrer" target="_blank">Lobha, Rāga and Kāmachanda, Kāmarāga</a></li>
+<li class="entry-title"><a href="../../pages/KD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Lobha, Dosa, Moha versus Rāga, Paṭigha, Avijjā</a></li>
+<li class="entry-title"><a href="../../pages/LD.AA.006/index.html" rel="noopener noreferrer" target="_blank">What Are Kilesa (Mental Impurities)? – Connection to Cetasika</a></li>
+<li class="entry-title"><a href="../../pages/TL.EE.009/index.html" rel="noopener noreferrer" target="_blank">Diṭṭhi (Wrong Views), Sammā Diṭṭhi (Good/Correct Views)</a></li>
+<li class="entry-title"><a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Anantara and Samanantara Paccayā</a></li>
+<li class="entry-title"><a href="../../pages/KD.HH.006/index.html" rel="noopener noreferrer" target="_blank">What is Avijjā (Ignorance)?</a></li>
+<li><a href="../../pages/KD.HH.007/index.html" rel="noopener noreferrer" target="_blank">Indriya and Āyatana – Big Difference</a></li>
+<li><a href="../../pages/TL.EE.013/index.html" rel="noopener noreferrer" target="_blank">Hetu-Phala, Paccuppanna, and Paṭicca Samuppāda</a></li>
+<li class="entry-title"><a href="../../pages/KD.BB.007/index.html" rel="noopener noreferrer" target="_blank">Correct Meaning of Vaci saṅkhāra</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.HH.008/index.html" rel="noopener noreferrer" target="_blank">Pañca Indriya and Pañca Bala – Five Faculties and Five Powers</a></p>
+</li>
+<li><a href="../../pages/KD.HH.009/index.html" rel="noopener noreferrer" target="_blank">Kāmaccandha and Icca – Being Blinded by Cravings</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.II.001/index.html" rel="noopener noreferrer" target="_blank">The Five Aggregates (Pañcakkhandha)</a></p>
+<ul>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Five Aggregates – Introduction">Five Aggregates – Introduction</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.003/index.html" rel="noopener noreferrer" target="_blank">Difference Between Rūpa and Rūpakkhandha</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.004/index.html" rel="noopener noreferrer" target="_blank">Rūpakkhandha and Rūpa Upādānakkhandha</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.005/index.html" rel="noopener noreferrer" target="_blank">Arising of Five Aggregates Based on an Ārammaṇa</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.006/index.html" rel="noopener noreferrer" target="_blank">Memory Records- Critical Part of Five Aggregates</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.007/index.html" rel="noopener noreferrer" target="_blank">Pañca Upādānakkhandhā – Introduction</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.KK.001/index.html" rel="noopener noreferrer" target="_blank">Five Aggregates – Connection to Tilakkhaṇa</a></p>
+</li>
+<li class="entry-title"><a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank" title="Vedana (Feelings) Arise in Two Ways">Vedanā (Feelings) Arise in Two Ways</a></li>
+<li><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> is discussed at, “</span><a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipāka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipāka</a>“.</li>
+<li>“<a href="../../pages/KD.II.008/index.html" rel="noopener noreferrer" target="_blank">Viññāṇa (Defiled Consciousness)</a>“</li>
+<li>“<a href="../../pages/TS.AA.006/index.html" rel="noopener noreferrer" title="Rūpa (Material Form)">Rūpa (Material Form)</a>“</li>
+</ul>
+<p><strong>Subsection:</strong> "<a href="../../pages/KD.JJ.001/index.html" rel="noopener" target="_blank">Nāma &amp; Rūpa to Nāmarūpa</a>"</p>
+<p class="entry-title"><strong>Deeper Analyses:</strong></p>
+<ul>
+<li class="entry-title">
+<p class="entry-title"><a href="../../pages/KD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pañcakkhandha or Five Aggregates – A Misinterpreted Concept</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pañcupādānakkhandha – It is All Mental</a></p>
+</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.AA.000"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0066"
+             data-level="intermediate"
+             data-reading-time="3"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.AA.000
+Language:     pt-BR
+Generated-At: 2026-04-18T04:02:27Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify;">No decorrer de mil anos após o <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span> </span></em><span>(falecimento) do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, certos conceitos fundamentais sofreram distorções. Por muitos anos, tive dúvidas persistentes sobre a compatibilidade de certos conceitos amplamente divulgados na “literatura Buddhista”, incluindo a literatura Theravada. Por exemplo, as explicações sobre </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, Anattā e sunyata</span></em> não faziam sentido para mim. Além disso, me perdi em uma miríade de explicações para termos como <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>; há três significados diferentes para essa palavra nos textos Theravada padrão.</p>
+<p style="text-align: justify;">Quando comecei a ouvir os <em>dēsanas</em><span> de Waharaka <span class="pali-term term-highlight" data-term="thero">Thero</span> no Sri Lanka, ficou imediatamente claro para mim que “este era o verdadeiro <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>”; veja “</span><a href="../../pages/FT.BB.001/index.html" rel="noopener noreferrer" target="_blank">Parinibbāna de Waharaka Thero</a>”. Além disso, conceitos como <em><span><span class="pali-term term-highlight" data-term="saṃsāra">Saṃsāra</span>, samma e <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> tornaram-se cristalinos enquanto eu apenas ouvia. Espero ser capaz de transmitir essas informações com clareza a seguir.</p>
+<p style="text-align: justify;"><strong>Esta seção principal possui as seguintes subseções:</strong></p>
+<p class="entry-title"><a href="../../pages/KD.BB.001/index.html" rel="noopener" target="_blank">Estrutura Básica do Buddha Dhamma</a></p>
+<ul>
+<li><a href="../../pages/KD.BB.002/index.html" rel="noopener" target="_blank">Buddha Dhamma – Nobres Verdades, Paṭicca Samuppāda, Tilakkhaṇa</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.DD.001/index.html" rel="noopener noreferrer" target="_blank">San </a><span style="color: #0000ff;"><span>(Explicação de muitas palavras-chave em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>)</span></span></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank" title="What is “San”? Meaning of Sansara (or Samsara)">O que é “San”? Significado de Sansāra (ou Saṃsāra)</a></li>
+<li class="entry-title"><a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipaka">Sankhāra, Kamma, Kamma Bīja, Kamma Vipāka</a></li>
+<li class="entry-title"><a href="../../pages/KD.DD.004/index.html" rel="noopener noreferrer" target="_blank">Sankhāra – A vida é um conjunto de Sankhāra</a></li>
+<li class="entry-title"><a href="http://localhost/beng_feb2026/key-dhamma-concepts/difference-between-dhamma-and-sankhara/" rel="noopener noreferrer" target="_blank">Diferença entre Dhamma e Saṅkhāra </a></li>
+<li class="entry-title"><a href="http://localhost/beng_feb2026/key-dhamma-concepts/san/sankhara-kamma/" rel="noopener noreferrer" target="_blank">Kamma é realizado por meio de Saṅkhāra – Tipos de Saṅkhāra</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.EE.002/index.html" rel="noopener noreferrer" target="_blank" title="Nibbāna – Is it Difficult to Understand?">Nibbāna – É difícil de entender?</a></li>
+<li class="entry-title"><a href="../../pages/BD.JJ.001/index.html" rel="noopener noreferrer" target="_blank">Os Quatro Estágios para Alcançar o Nibbāna</a></li>
+<li class="entry-title"><a href="../../pages/BD.JJ.002/index.html" rel="noopener noreferrer" target="_blank">O que são Rūpa? (Relação com Nibbāna)</a></li>
+<li class="entry-title"><a href="../../pages/BD.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Niramisa Sukha</a></li>
+<li class="entry-title"><a href="../../pages/TL.CC.006/index.html" rel="bookmark noopener noreferrer" target="_blank">Como Experimentar o Nibbāna</a></li>
+<li class="entry-title"><a href="../../pages/KD.EE.003/index.html" rel="noopener noreferrer" target="_blank">A Primeira Nobre Verdade descreve apenas o sofrimento?</a></li>
+<li class="entry-title"><a href="http://localhost/beng_feb2026/key-dhamma-concepts/nirodha-and-vaya-two-different-concepts/" rel="noopener noreferrer" target="_blank">Nirodha e Vaya – Dois Conceitos Diferentes</a></li>
+<li class="entry-title"><a href="../../pages/KD.EE.004/index.html" rel="noopener noreferrer" target="_blank">Nibbāna “Existe”, mas Não Neste Mundo</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anattā – Interpretações Erradas</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank" title="Anicca – True Meaning">Anicca – O verdadeiro significado</a></li>
+<li><a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank" title="Anicca – True Meaning">Anicca – Incapacidade de Manter o que Gostamos</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Surgimento/Destruição Repetidos</a></li>
+<li><a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – A futilidade das coisas mundanas</a></li>
+<li><a href="../../pages/KD.FF.009/index.html" rel="noopener noreferrer">Anicca – O sofrimento incessante (“Pīḷana”)</a></li>
+<li><a href="../../pages/KD.FF.020/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā – De acordo com alguns Suttā fundamentais</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.017/index.html" rel="noopener noreferrer" target="_blank">Anattā – O oposto de qual Atta?</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.016/index.html" rel="noopener noreferrer" target="_blank">Dasa Akusala e Anattā – O elo crítico</a></li>
+<li><a href="../../pages/KD.FF.018/index.html" rel="noopener noreferrer" target="_blank">Anattā (Interpretação Mundana) – Não existe um “Eu Imutável”</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.019/index.html" rel="noopener noreferrer" target="_blank">Anattā e Dukkha – Os verdadeiros significados</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.010/index.html" rel="noopener noreferrer" target="_blank">Como cultivar Anicca Saññā</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.011/index.html" rel="noopener noreferrer" target="_blank">Como cultivar o Anicca Saññā – II</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.012/index.html" rel="noopener noreferrer" target="_blank">Se tudo é Anicca, devemos simplesmente desistir de tudo?</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.026/index.html" rel="noopener noreferrer" target="_blank">Por que os Tilakkhaṇa não estão incluídos nos 37 Fatores da Iluminação?</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.027/index.html" rel="noopener noreferrer" target="_blank">Duas versões dos 37 Fatores da Iluminação</a></li>
+<li class="entry-title"><a href="../../pages/KD.FF.009/index.html" rel="noopener noreferrer">O sofrimento incessante (“Pilana”) – Chave para Dukkha Sacca</a></li>
+<li class="entry-title">Veja também <a href="http://localhost/beng_feb2026/three-levels-of-practice/seeking-nibbana/root-cause-of-anicca-nature-of-sankata/" rel="noopener noreferrer" target="_blank">“A Causa Raiz de Anicca – Os Cinco Estágios de um Saṅkata</a>”, que se encontra em uma seção diferente.</li>
+</ul>
+<p class="entry-title"><strong><a href="../../pages/KD.GG.001/index.html" rel="noopener" target="_blank" title="Gati, Bhava, and Jāti">Gati, Bhava e Jāti</a></strong></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.GG.002/index.html" rel="noopener noreferrer" target="_blank">Namagotta, Bhava, Kamma Bīja e Mano Loka (Plano Mental)</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Gati e Bhava – Muitas variedades</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.004/index.html" rel="noopener noreferrer" target="_blank">De Gati a Bhava a Jāti – Sob Nosso Controle</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.005/index.html" rel="noopener noreferrer" target="_blank">Memória, Cérebro, Mente, Nama Loka, Kamma Bhava, Kamma Vipaka</a></li>
+<li class="entry-title"><a href="../../pages/KD.GG.006/index.html" rel="noopener noreferrer" target="_blank">Bhava e Jāti – Estados de existência e nascimentos neles</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/PS.II.009/index.html" rel="noopener noreferrer" target="_blank">Diferença entre Taṇhā e Upādāna</a></p>
+</li>
+<li><a href="../../pages/KD.GG.009/index.html" rel="noopener noreferrer" target="_blank">Pāpa Kamma versus Akusala Kamma</a></li>
+</ul>
+<p class="entry-title"><a href="http://localhost/beng_feb2026/key-dhamma-concepts/key-Pālī-terms-tanha-lobha-dosa-moha/" rel="noopener noreferrer" target="_blank">Esclarecendo alguns termos-chave em Pālī (Taṇhā, Lobha, Dosa, Moha, etc.)</a></p>
+<ul>
+<li class="entry-title"><a href="../../pages/KD.HH.002/index.html" rel="noopener noreferrer" target="_blank">Kama Taṇhā, Bhava Taṇhā, Vibhava Taṇhā</a></li>
+<li class="entry-title"><a href="../../pages/KD.HH.004/index.html" rel="noopener noreferrer" target="_blank">Lobha, Rāga e Kāmachanda, Kāmarāga</a></li>
+<li class="entry-title"><a href="../../pages/KD.HH.005/index.html" rel="noopener noreferrer" target="_blank">Lobha, Dosa, Moha versus Rāga, Paṭigha, Avijjā</a></li>
+<li class="entry-title"><a href="../../pages/LD.AA.006/index.html" rel="noopener noreferrer" target="_blank">O que são Kilesa (impurezas mentais)? – Conexão com Cetasika</a></li>
+<li class="entry-title"><a href="../../pages/TL.EE.009/index.html" rel="noopener noreferrer" target="_blank">Diṭṭhi (visões erradas), Sammā Diṭṭhi (visões boas/corretas)</a></li>
+<li class="entry-title"><a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank">Anantara e Samanantara Paccayā</a></li>
+<li class="entry-title"><a href="../../pages/KD.HH.006/index.html" rel="noopener noreferrer" target="_blank">O que é Avijjā (Ignorância)?</a></li>
+<li><a href="../../pages/KD.HH.007/index.html" rel="noopener noreferrer" target="_blank">Indriya e Āyatana – Grande diferença</a></li>
+<li><a href="../../pages/TL.EE.013/index.html" rel="noopener noreferrer" target="_blank">Hetu-Phala, Paccuppanna e Paṭicca Samuppāda</a></li>
+<li class="entry-title"><a href="../../pages/KD.BB.007/index.html" rel="noopener noreferrer" target="_blank">Significado correto de Vaci Saṅkhāra</a></li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.HH.008/index.html" rel="noopener noreferrer" target="_blank">Pañca Indriya e Pañca Bala – Cinco Faculdades e Cinco Poderes</a></p>
+</li>
+<li><a href="../../pages/KD.HH.009/index.html" rel="noopener noreferrer" target="_blank">Kāmaccandha e Icca – Ser cegado pelos desejos</a></li>
+</ul>
+<p class="entry-title"><a href="../../pages/KD.II.001/index.html" rel="noopener noreferrer" target="_blank">Os Cinco Agregados (Pañcakkhandha)</a></p>
+<ul>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Five Aggregates – Introduction">Cinco Agregados – Introdução</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.003/index.html" rel="noopener noreferrer" target="_blank">Diferença entre Rūpa e Rūpakkhandha</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.004/index.html" rel="noopener noreferrer" target="_blank">Rūpakkhandha e Rūpa Upādānakkhandha</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.005/index.html" rel="noopener noreferrer" target="_blank">O Surgimento dos Cinco Agregados com Base em um Ārammaṇa</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.006/index.html" rel="noopener noreferrer" target="_blank">Registros da Memória – Parte Crítica dos Cinco Agregados</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.II.007/index.html" rel="noopener noreferrer" target="_blank">Pañca Upādānakkhandhā – Introdução</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.KK.001/index.html" rel="noopener noreferrer" target="_blank">Cinco Agregados – Conexão com Tilakkhaṇa</a></p>
+</li>
+<li class="entry-title"><a href="../../pages/TL.II.009/index.html" rel="noopener noreferrer" target="_blank" title="Vedana (Feelings) Arise in Two Ways">Vedanā (Sensações) Surgem de Duas Maneiras</a></li>
+<li><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> é discutido em “</span><a href="../../pages/KD.DD.003/index.html" rel="noopener noreferrer" target="_blank" title="Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipāka">Saṅkhāra, Kamma, Kamma Bīja, Kamma Vipāka</a>”.</li>
+<li>“<a href="../../pages/KD.II.008/index.html" rel="noopener noreferrer" target="_blank">Viññāṇa (Consciência Impura)</a>”</li>
+<li>“<a href="../../pages/TS.AA.006/index.html" rel="noopener noreferrer" title="Rūpa (Material Form)">Rūpa (Forma Material)</a>”</li>
+</ul>
+<p><strong>Subseção:</strong> <a href="../../pages/KD.JJ.001/index.html" rel="noopener" target="_blank">“Nāma &amp; Rūpa para </a>Nāmarū<a href="../../pages/KD.JJ.001/index.html" rel="noopener" target="_blank">pa</a>”</p>
+<p class="entry-title"><strong>Análises mais aprofundadas:</strong></p>
+<ul>
+<li class="entry-title">
+<p class="entry-title"><a href="../../pages/KD.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pañcakkhandha ou Cinco Agregados – Um Conceito Mal Interpretado</a></p>
+</li>
+<li>
+<p class="entry-title"><a href="../../pages/KD.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pañcupādānakkhandha – É tudo mental</a></p>
+</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.BB.001/index.html">Basic Framework Of Buddha Dhamma</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    <span class="pathway-placeholder"></span>
+
+    
+    <a class="pathway-link next" href="../../pages/KD.BB.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Basic Framework Of Buddha Dhamma</span>
+        
+        <span class="pathway-title title-pt">Estrutura básica do Buddha Dhamma</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

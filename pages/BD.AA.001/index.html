@@ -1,0 +1,572 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Users Guide Puredhamma Website | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 2 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.AA.001</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Users Guide Puredhamma Website</h1>
+    
+    <h1 class="title-pt">Guia do usuário do site PureDhamma</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.AA.001</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>12</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.AA.001"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0003"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.AA.001</td></tr><tr><td>Fin-dex</td><td>0003</td></tr><tr><td>Slug</td><td>users-guide-puredhamma-website</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Users Guide Puredhamma Website</td></tr></table></div></div><strong>June 8, 2017; revised October 1, 2017; <span style="color: #0000ff">August 28, 2022</span></strong>
+<p style="text-align: justify"><span>As of August 2022, there are over 700 <span class="pali-term term-highlight" data-term="posts">posts</span> on the website. Recently, I have been getting inquiries on "where to start?" when one first comes to the website.</span></p>
+<p style="text-align: justify">1. First, there are a few general tools that can be used to navigate the website:</p>
+<ul style="text-align: justify">
+<li style="list-style-type: none">
+<ul style="text-align: justify">
+<li>Following is what the home page of the site should look like.</li>
+</ul>
+</li>
+</ul>
+<p style="text-align: justify"><img alt="" class="alignnone wp-image-33746 size-large" height="462" src="http://localhost/beng_feb2026/wp-content/uploads/Home-Page-2-800x462.jpg" width="800"/></p>
+<ul style="text-align: justify">
+<li>If you do not see it like that with the menu system, you should update your browser (Google Chrome, Microsoft Explorer, Firefox, etc.) so that you would be able to see the menu as shown above.</li>
+<li>Another way to look at the whole menu is “<a href="../../pages/FT.HH.001/index.html" rel="noopener noreferrer" target="_blank">Pure Dhamma – Sitemap</a><span>. “ All <span class="pali-term term-highlight" data-term="posts">posts</span> are categorized under sections and subsections there. One could scan through it to locate relevant <span class="pali-term term-highlight" data-term="posts">posts</span> of interest.</span></li>
+<li><span>The “Search” button at the top right is also good at extracting relevant <span class="pali-term term-highlight" data-term="posts">posts</span> for a given keyword or keywords.</span></li>
+<li>I have added a “bread crumbs” link at the top of each page so you can see which section/subsection the page belongs to. You can go to that section/subsection and read more on that topic.</li>
+<li><strong><span style="color: #0000ff">January 30, 2019:</span></strong><span> For those new to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (or just want to look at the essential fundamentals, see "</span><a href="../../pages/LD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Essential Buddhism</a>."</li>
+<li><span style="color: #0000ff"><span style="color: #0000ff"><strong>February 28, 2022: </strong><span style="color: #000000">New section pointing out the glaring inconsistencies (with the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>) in the current <em>Theravada</em> texts: "</span></span></span><a href="../../pages/ER.AA.000/index.html" rel="noopener" target="_blank">Elephants in the Room</a>."</li>
+</ul>
+<p style="text-align: justify"><span>2. First, for those familiar with <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>), I like to point out that three main misconceptions are prevalent today. They not only block the path to </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> but are<em><span> <span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em><span> that could be responsible for <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em>apāyā</em>. I am not trying to scare anyone, but "making <em>adhamma</em> to be <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> is a serious offense."</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Misinterpretation of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>: "<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anatta – Wrong Interpretations</a>."</li>
+<li style="text-align: justify">Misinterpretation of breath meditation as<em><span> <span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>: "<a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">Is Ānāpānasati Breath Meditation?</a>".</li>
+<li style="text-align: justify">Insisting that the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (<em>manomaya kaya</em>) is a Mahāyāna concept: "<a href="../../pages/LD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Gandhabba State – Evidence from Tipiṭaka</a>".</li>
+<li style="text-align: justify">These misconceptions are not the fault of current <em>Theravadins</em>; they have been handed down for hundreds of years, as explained in the "<a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Historical Background</a>." <strong><span>However, it makes no sense to adhere to them when solid evidence is presented, per the above <span class="pali-term term-highlight" data-term="posts">posts</span> and many others on this website. </span></strong></li>
+<li style="text-align: justify"><span style="color: #0000ff">Of course, no one should be able to insist, "this is the only truth, and nothing else is the truth," but the truth can be verified to one's satisfaction by critically examining the evidence. I am open to discussing any valid contrary evidence. We need to sort out the truth for the benefit of all.</span></li>
+</ul>
+<p style="text-align: justify"><span>3. Now, let us discuss which sections could interest people with different backgrounds on their exposure to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul style="text-align: justify">
+<li>The "<a href="../../pages/TL.BB.000/index.html" rel="noopener noreferrer" target="_blank">Moral Living and Fundamentals</a><span>" section is a good start for anyone since the fundamentals of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> are discussed. In particular, the subsections "</span><a href="../../pages/TL.DD.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma and Buddhism</a>" and "<a href="../../pages/TL.EE.001/index.html" rel="noopener noreferrer" target="_blank">Dhamma Concepts</a>"  could be informative.</li>
+<li>The subsection on "<a href="../../pages/TL.GG.001/index.html" rel="noopener noreferrer" target="_blank">Working Towards Good Rebirths</a>" broadens the concepts discussed in the above subsection to indicate how one's actions need to be tailored to seek rebirths in higher realms and to avoid births in the lower realms (<em>apāyā</em>) in case one is unable to attain any stages of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> in this life.</li>
+<li><span>Even those exposed to "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" may realize that some fundamental aspects have been misrepresented in many textbooks and websites.</span></li>
+</ul>
+<p style="text-align: justify">4. The "<a href="../../pages/BD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma</a><span>" section is a more advanced version of the abovementioned sections. It discusses the basis of the <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, i.e., the importance of purifying one's mind in the first few <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></p>
+<ul style="text-align: justify">
+<li><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> described a wider world of 31 realms, of which we know only two: the animal and human realms: "</span><a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank">The Grand Unified Theory of Dhamma</a>."</li>
+<li><span>Then it discusses how the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> could see that "bigger picture" in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/BD.AA.005/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma: Non-Perceivability and Self-Consistency</a>."</li>
+<li><span>The two <span class="pali-term term-highlight" data-term="posts">posts</span> "</span><a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank">Saṃsāric Time Scale, Buddhist Cosmology, and the Big Bang Theory</a>" and "<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a><span>" discuss how we have been going through the birth/death/<span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process from the beginning-less time.</span></li>
+</ul>
+<p style="text-align: justify">5. For Those who have had exposure mainly to "<em>Mahāyāna</em><span> <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>," the following two <span class="pali-term term-highlight" data-term="posts">posts</span> will provide an idea of why </span><em>Mahāyāna</em> <em>sutrās</em> are very different from the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em><span> that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> delivered: "</span><a href="../../pages/HB.AA.013/index.html" rel="noopener noreferrer" target="_blank">Saddharma Pundarika Sutra (Lotus Sutra) – A Focused Analysis</a>" and "<a href="../../pages/HB.AA.014/index.html" rel="noopener noreferrer" target="_blank">What is Sunyata or Sunnata (Emptiness)?</a>".</p>
+<ul style="text-align: justify">
+<li><span>Further details on how various "schools of <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" -- like </span><em>Mahāyāna</em>, <em>Vajrayāna</em> (Tibetan), <em>Zen</em><span>, etc. -- evolved within the first 1000 years after the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> can be found in the "</span><a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Historical Background</a>" section.</li>
+</ul>
+<p style="text-align: justify">6. Even <em>Theravāda</em><span> <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> -- which is supposed to be closest to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s original teachings -- has been contaminated over the years, mainly due to three key reasons. The </span><span style="color: #0000ff"><strong>first reason</strong></span> is losing the true interpretations of ten types of <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> (wrong views).</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">There are two types of Eightfold Paths: mundane and transcendental (<em>lokottara</em><span>). One needs to first get into the mundane Path by getting rid of the ten types of <span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span>; see "</span><a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – In a Chart</a>" and "<a href="../../pages/SI.AA.005/index.html" rel="noopener noreferrer" target="_blank">Maha Chattarisaka Sutta (Discourse on the Great Forty)</a>".</li>
+<li style="text-align: justify">One of the ten <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em> is "<em>para lōka</em>" ("<em><span>para <span class="pali-term term-highlight" data-term="loka">loka</span>"</span></em><span> in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>), or the world of </span><em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> does not exist. Many people think that <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is a Mahāyāna concept, but that is a big mistake; see below.</li>
+<li style="text-align: justify">One cannot even get into the mundane Eightfold Path if one believes that <em>para lōka</em> and <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> are not real.</li>
+</ul>
+<p style="text-align: justify">7. <strong><span style="color: #0000ff">Second</span></strong>, various Hindu meditation techniques -- including wrong interpretations of <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> meditation and <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em> (as breath mediation) -- were incorporated into <em>Theravāda</em> teachings, especially after Buddhaghosa's <em>Visuddhimagga</em>; see "<a href="../../pages/HB.AA.016/index.html" rel="noopener noreferrer" target="_blank">Buddhaghosa’s Visuddhimagga – A Focused Analysis</a><span>," and the <span class="pali-term term-highlight" data-term="posts">posts</span> referred to there.</span></p>
+<p style="text-align: justify">8. <span style="color: #0000ff"><strong>Third and most important reason</strong></span> is the incorrect translation of key <em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em> words like <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> by the Early European scholars in the 1800s, see "<a href="../../pages/HB.AA.018/index.html" rel="noopener noreferrer" target="_blank">Misinterpretation of Anicca and Anatta by Early European Scholars</a>."</p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>Let us briefly discuss each of those three and point to a few more relevant <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+</ul>
+<p style="text-align: justify">9. Many people don't realize that the concept of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (mental body) is a critical component in explaining how life functions in human and animal realms.</p>
+<ul style="text-align: justify">
+<li>First, it is a misconception that <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> is a <em>Mahāyāna</em> concept; see "<a href="../../pages/LD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Antarabhava and Gandhabba</a>" and "<a href="../../pages/LD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Gandhabba State – Evidence from Tipiṭaka</a>."</li>
+<li>Without the concepts of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em><span>, it is not possible to explain so many <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> stories and out-of-body experiences that have been widely reported in recent years; see "</span><a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidence for Rebirth</a>" and "<a href="../../pages/AB.DD.007/index.html" rel="noopener noreferrer" target="_blank">Out-of-Body Experience (OBE) and Manōmaya Kāya</a>."</li>
+<li>The main opposition to the concept of <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> in current <em>Theravāda</em> circles is the misconception that it is an "<em>antarābhava</em>," i.e., between two <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span>. </span></em>But a human<em><span> <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>is in the same "human <em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>." This is clarified in "<a href="../../pages/LD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Antarabhava and Gandhabba</a>."</li>
+<li style="text-align: justify">The critical role of the mental body (<em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em>) in giving rise to multiple births (<em><span><span class="pali-term term-highlight" data-term="jāti">jāti</span></span></em>) within human and animal existences (<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em>) has been disregarded. <span style="color: #0000ff"><span>However, not believing in the existence of <span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> is a </span><em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">micchā diṭṭhi</span></span></em></span> and is a hindrance to attaining the <em>Sōtāpanna</em> stage; see, "<a href="../../pages/LD.GG.009/index.html" rel="noopener noreferrer" target="_blank">Miccā Diṭṭhi, Gandhabba, and Sotāpanna Stage</a>."</li>
+<li style="text-align: justify">Because of its high importance, <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span> </span></em>is discussed in two main sections: "<a href="../../pages/LD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Mental Body – Gandhabba</a>" and "<a href="../../pages/AB.DD.001/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)</a>".</li>
+</ul>
+<ol style="text-align: justify">
+<li>Regarding the problems with Buddhaghosa's <em>Visuddhimagga</em> -- published 1500 years ago -- the two issues mentioned above are:</li>
+</ol>
+<ul style="text-align: justify">
+<li>Regarding <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> mediations discussed in the <em>Visuddhimagga</em><span>, there is not a single <span class="pali-term term-highlight" data-term="sutta">sutta</span> in the </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> that discusses <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> mediation.</li>
+<li>Regarding the breath meditation discussed in the <em>Visuddgimagga</em><span>, no <span class="pali-term term-highlight" data-term="suttā">suttā</span> in the </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> discusses BREATH MEDITATION. Those <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> have been mistranslated. Furthermore, there is a<em><span> <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> that specifically says breath meditation is not <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em> meditation, see, "<a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">Is Ānāpānasati Breath Meditation?</a>".</li>
+</ul>
+<p style="text-align: justify">11. The critical problem of incorrect translation of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span> has prevented so many people from making progress over the past 200 years. I strongly recommend the <span class="pali-term term-highlight" data-term="post">post</span> “</span><a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta – Wrong Interpretations</a>. “</p>
+<ul style="text-align: justify">
+<li><span>More <span class="pali-term term-highlight" data-term="posts">posts</span> can be found in the section "</span><a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anatta</a>." The correct interpretation of many relevant key <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> is discussed in that section.</li>
+<li>The introductory timeline on those historical developments is given in "<a href="../../pages/HB.AA.002/index.html" rel="noopener noreferrer" target="_blank">Incorrect Theravāda Interpretations – Historical Timeline</a><span>," and all relevant <span class="pali-term term-highlight" data-term="posts">posts</span> are in the "</span><a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Historical Background</a>" section.</li>
+</ul>
+<p style="text-align: justify"><span>12. Now, let us turn to an issue of relevance to many new to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Many people -- especially in Western countries -- have a hard time believing in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>; see, "</span><a href="../../pages/TL.DD.006/index.html" rel="noopener noreferrer" target="_blank">Buddhism without Rebirth and Nibbāna?</a>".</p>
+<ul style="text-align: justify">
+<li>The section, "<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a><span>," is specially designed for one to start following <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> even without believing in the concept of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>.</span></li>
+<li><span>The first two subsections there are good to be read by everyone. One can experience a real "cooling down" even without believing in <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>.</span></li>
+<li><span>The latter subsections gradually take one to advanced concepts, and the latter sections are appropriate even for people with advanced backgrounds in <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. One would be able to clarify advanced concepts in later subsections.</span></li>
+</ul>
+<p style="text-align: justify"><span>13. Once one starts looking into <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> seriously, it is a good idea to learn a few basic things about the </span><em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em> language. The <em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em> Canon, first transmitted orally and then written 2000 years ago, still has all the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em><span> composed by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> and memorized by Ven. Ananda.</span></p>
+<ul style="text-align: justify">
+<li>See "<a href="../../pages/HB.AA.007/index.html" rel="noopener noreferrer" target="_blank">Preservation of the Dhamma</a><span>" and other relevant <span class="pali-term term-highlight" data-term="posts">posts</span> in the "</span><a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Historical Background</a>."</li>
+<li><span>While the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> encouraged delivering <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> to others in their native language, there are some advantages to learning at least some key </span><em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em> words, see, "<a href="../../pages/TL.EE.012/index.html" rel="noopener noreferrer" target="_blank">Why is it Necessary to Learn Key Pāli Words?</a>".</li>
+<li>In particular, learning the meanings behind some key roots like "<em>san</em>" makes a huge difference in gaining an understanding of keywords like <em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="sammā">sammā</span></span></em>, see the subsection on "<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is “San”? Meaning of Sansāra (or Saṃsāra)</a>".</li>
+</ul>
+<p style="text-align: justify">14. Learning the correct meanings of the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> in the<em><span> <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> is essential to learning <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Most existing literature, even on </span><em>Theravāda</em>, has incorrect translations.</p>
+<ul style="text-align: justify">
+<li>The section "<a href="../../pages/SI.AA.000/index.html" rel="noopener noreferrer" target="_blank">Sutta Interpretations</a>" discusses some key <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>.</li>
+<li style="text-align: justify"><span>It is a good idea first to read two important <span class="pali-term term-highlight" data-term="posts">posts</span> in that section, "</span><a href="../../pages/SI.AA.001/index.html" rel="noopener noreferrer" target="_blank">Sutta – Introduction</a>" and "<a href="../../pages/SI.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pāli Dictionaries – Are They Reliable?</a>".</li>
+<li><span>Short and succinct sayings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> in the </span><em>Dhammapada</em> provide deep insights in short verses. Some of these are discussed in the "<a href="../../pages/DD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Dhammapada</a>" section.</li>
+</ul>
+<p style="text-align: justify"><span>15. Meditation (both formal and informal) is essential to following the Path of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. The "</span><a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" target="_blank">Bhāvanā (Meditation)</a><span>" provides a series of <span class="pali-term term-highlight" data-term="posts">posts</span> on the fundamentals of meditation and also on advanced topics.</span></p>
+<ul style="text-align: justify">
+<li>A critical misconception that is prevalent today is that <em><span><span class="pali-term term-highlight" data-term="ānāpānasati bhāvanā">Ānāpānasati bhāvanā</span></span></em><span> is breath meditation. Several <span class="pali-term term-highlight" data-term="posts">posts</span> discuss the correct version, and the <span class="pali-term term-highlight" data-term="post">post</span> "</span><a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">Is Ānāpānasati Breath Meditation?</a>" discusses evidence from the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> that breath meditation is not <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em>.</li>
+<li>The <em><span>Satipattāna <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> is discussed in the subsection, "<a href="../../pages/SI.BB.001/index.html" rel="noopener noreferrer" target="_blank">Maha Satipaṭṭhāna Sutta</a>."</li>
+</ul>
+<p style="text-align: justify"><span>16. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is based on the principle of causation (cause and effect), which in </span><em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em> is<em><span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. The principles are discussed in the section "<a href="../../pages/PS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda</a>."</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">While the meaning of <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>is clear from its name itself, "<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – “Pati+ichcha”+” Sama+uppāda</a>," the main concepts are discussed in plain English:  "<a href="../../pages/PS.II.001/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda in Plain English</a>."</li>
+<li>
+<p class="entry-title">Comprehension of the Four Noble Truths requires understanding <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>. See "<a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhana, Four Noble Truths</a>."</p>
+</li>
+<li>
+<p class="entry-title">Just because causes exist does not necessarily mean that effects (results) will follow. There must be suitable conditions for those results (also called <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>). This is discussed in detail in the subsection "<a href="../../pages/PS.JJ.001/index.html" rel="noopener noreferrer" target="_blank">Paṭṭhāna Dhamma</a>."</p>
+</li>
+</ul>
+<p style="text-align: justify">17. Chanting of <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em><span> and reciting the virtues of <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, and Saṅgha can prepare one's mind to be receptive to learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and thus could be an important part of the practice, see "</span><a href="../../pages/BC.AA.000/index.html" rel="noopener noreferrer" target="_blank">Buddhist Chanting</a>."</p>
+<ul style="text-align: justify">
+<li>The section on "<a href="../../pages/MR.AA.000/index.html" rel="noopener noreferrer" target="_blank">Myths or Realities?</a><span>" is also important since it discusses many concepts and practices that some consider to not belong to <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify"><span>18. For Those who would like to see how compatible <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is with modern science, the "</span><a href="../../pages/DS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Dhamma and Science</a>" section is a good resource.</p>
+<ul style="text-align: justify">
+<li>That section points out both consistencies and inconsistencies with modern science.</li>
+<li><span>Modern science has had to revise or come up with new theories to explain many phenomena over the past 500 years, but <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (in the </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>) has remained the same for over 2500 years.</li>
+<li><span>I predict the remaining inconsistencies will also be resolved in favor of <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify">19. The section on "<a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Tables and Summaries</a><span>" is an important collection of <span class="pali-term term-highlight" data-term="posts">posts</span> summarizing bits of information or "data" that are not necessary to be memorized but could be needed to explain things in detail.</span></p>
+<ul style="text-align: justify">
+<li><span>There are several <span class="pali-term term-highlight" data-term="posts">posts</span> with listings of types of </span><em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="cetasika">cetasika</span></span></em>, 28 types of <em><span><span class="pali-term term-highlight" data-term="rūpa">rūpa</span></span></em>, etc., in this section.</li>
+<li>There is also a<em><span> <span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em> glossary with pronunciation: "<a href="../../pages/TS.AA.001/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (A-K)</a>" and "<a href="../../pages/TS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Pāli Glossary – (L-Z)</a>."</li>
+<li>The section on "<a href="../../pages/DP.BB.001/index.html" rel="noopener noreferrer" target="_blank">Comments/Reviews</a>" has two subsections on "<a href="http://localhost/beng_feb2026/book-reviews/discussion-of-comments/" rel="noopener noreferrer" target="_blank">Discussion of Comments</a>" and "<a href="../../pages/DP.BB.001/index.html" rel="noopener noreferrer" target="_blank">Book Reviews</a>."</li>
+</ul>
+<p style="text-align: justify">20. Some either have already learned <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> or would like to learn. For them, the "<a href="../../pages/AB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Abhidhamma</a>" section could be useful. There are several subsections in this section on various topics.</p>
+<ul style="text-align: justify">
+<li>The "<a href="../../pages/AB.FF.001/index.html" rel="noopener" target="_blank">Abhidhamma via Science</a>" section highlights some overlaps between <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> Science.</li>
+<li>One of my favorite subjects is<em><span> <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>. When one has proceeded along the Path to some extent, it could be useful to learn <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, which will help gain a deeper understanding.</li>
+</ul>
+<p style="text-align: justify">21. Finally, <span style="color: #0000ff">but most importantly</span>, three important subsections discuss issues involved in attaining <em><span><span class="pali-term term-highlight" data-term="magga phala">magga phala</span></span></em> (stages of<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>). The primary goal of this website is to provide enough material for one to attain the <em>Sōtāpanna</em> stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">First, the concept of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em><span> is a puzzle to many. It is discussed in several <span class="pali-term term-highlight" data-term="posts">posts</span> in the subsection: "</span><a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a>."</li>
+<li style="text-align: justify">Some critical points to consider by those making an effort in that direction are discussed in the subsection: "<a href="../../pages/TL.HH.001/index.html" rel="noopener noreferrer" target="_blank">Seeking Nibbāna</a>."</li>
+<li style="text-align: justify">The first goal of those who seek <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> is the <em>Sōtāpanna</em> stage. Many concepts are requirements for achieving that goal are discussed in the subsection: "<a href="../../pages/TL.II.001/index.html" rel="noopener noreferrer" target="_blank">Sōtāpanna Stage of Nibbāna</a>."</li>
+<li style="text-align: justify">The section “<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a><span>“is specially designed for one to start following <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> even without believing in the concept of <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>, all the way to the </span><em>Sōtāpanna</em> stage. People with a more advanced background can start at later subsections, skipping the early ones.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.AA.001"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0003"
+             data-level="intermediate"
+             data-reading-time="12"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.AA.001
+Language:     pt-BR
+Generated-At: 2026-04-17T21:30:39Z
+Engine:       DeepL API (Glossary V5)
+-->
+<strong>8 de junho de 2017; revisado em 1º de outubro de 2017; <span style="color: #0000ff">28 de agosto de 2022</span></strong>
+<p style="text-align: justify">Em agosto de 2022, havia mais de 700 ensaios no site. Recentemente, tenho recebido perguntas sobre “por onde começar?” quando alguém acessa o site pela primeira vez.</p>
+<p style="text-align: justify">1. Primeiro, existem algumas ferramentas gerais que podem ser usadas para navegar pelo site:</p>
+<ul style="text-align: justify">
+<li style="list-style-type: none">
+<ul style="text-align: justify">
+<li>A seguir, veja como deve ser a página inicial do site.</li>
+</ul>
+</li>
+</ul>
+<p style="text-align: justify"><img alt="" class="alignnone wp-image-33746 size-large" height="462" src="http://localhost/beng_feb2026/wp-content/uploads/Home-Page-2-800x462.jpg" width="800"/></p>
+<ul style="text-align: justify">
+<li>Se você não a estiver vendo assim, com o sistema de menus, atualize seu navegador (Google Chrome, Microsoft Explorer, Firefox, etc.) para que possa ver o menu conforme mostrado acima.</li>
+<li>Outra maneira de visualizar todo o menu é acessar “<a href="../../pages/FT.HH.001/index.html" rel="noopener noreferrer" target="_blank">Pure Dhamma – Mapa do site</a>”. Todos os ensaios estão categorizados em seções e subseções nesse local. É possível dar uma olhada para localizar ensaios relevantes de seu interesse.</li>
+<li>O botão “Pesquisar” no canto superior direito também é útil para encontrar ensaios relevantes para uma ou mais palavras-chave específicas.</li>
+<li>Adicionei um link de “trilha de navegação” no topo de cada página para que você possa ver a qual seção/subseção a página pertence. Você pode acessar essa seção/subseção e ler mais sobre o assunto.</li>
+<li><strong><span style="color: #0000ff">30 de janeiro de 2019:</span></strong><span> Para aqueles que são novos no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (ou apenas querem conhecer os fundamentos essenciais), consulte “</span><a href="../../pages/LD.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddhismo Essencial</a>”.</li>
+<li><span style="color: #0000ff"><span style="color: #0000ff"><strong>28 de fevereiro de 2022: </strong><span style="color: #000000">Nova seção apontando as inconsistências gritantes (com o <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>) nos textos <em>Theravada</em> atuais: “</span></span></span><a href="../../pages/ER.AA.000/index.html" rel="noopener" target="_blank">Elefantes na Sala</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>2. Primeiro, para aqueles familiarizados com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (Buddhismo), gostaria de salientar que três equívocos principais prevalecem hoje em dia. Eles não apenas bloqueiam o caminho para </span><em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, mas são<em><span> <span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> que podem ser responsáveis pelo Renascimento nos <em>apāyā</em>. Não estou tentando assustar ninguém, mas “fazer com que <em>o adhamma</em> seja considerado <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> é uma ofensa grave”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Interpretação errônea de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, Anattā</span></em>: “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank" title="Anicca, Dukkha, Anatta – Wrong Interpretations">Anicca, Dukkha, Anattā – Interpretações Erradas</a>”.</li>
+<li style="text-align: justify">Interpretação errônea da meditação da respiração como<em><span> <span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>: <a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Ānāpānasati é meditação da respiração?</a>”.</li>
+<li style="text-align: justify">Insistência de que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (<em>manomaya kaya</em>) é um conceito Mahāyāna: <a href="http://localhost/beng_feb2026/living-dhamma/mental-body-gandhabba/gandhabba-state-Tipiṭaka-evidence/" rel="noopener noreferrer" target="_blank">“Estado de Gandhabba – Evidências do Tipiṭaka</a>”.</li>
+<li style="text-align: justify">Esses equívocos não são culpa dos atuais <em>theravadins</em>; eles foram transmitidos ao longo de centenas de anos, conforme explicado na seção “<a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Contexto histórico</a>”. <strong>No entanto, não faz sentido aderir a eles quando evidências sólidas são apresentadas, conforme os ensaios acima e muitos outros neste site. </strong></li>
+<li style="text-align: justify"><span style="color: #0000ff">É claro que ninguém deve insistir que “esta é a única verdade, e nada mais é verdade”, mas a verdade pode ser verificada de forma satisfatória por meio do exame crítico das evidências. Estou aberto a discutir qualquer evidência contrária válida. Precisamos esclarecer a verdade para o benefício de todos.</span></li>
+</ul>
+<p style="text-align: justify"><span>3. Agora, vamos discutir quais seções poderiam interessar a pessoas com diferentes níveis de familiaridade com o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul style="text-align: justify">
+<li>A seção “<a href="../../pages/TL.BB.000/index.html" rel="noopener noreferrer" target="_blank">Vida Moral e Fundamentos</a><span>” é um bom começo para qualquer pessoa, já que os fundamentos do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> são discutidos. Em particular, as subseções “</span><a href="../../pages/TL.DD.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma e Buddhismo</a>” e <a href="../../pages/TL.EE.001/index.html" rel="noopener noreferrer" target="_blank">“Conceitos do Dhamma</a>” podem ser informativas.</li>
+<li>A subseção sobre <a href="../../pages/TL.GG.001/index.html" rel="noopener noreferrer" target="_blank">“Trabalhando para Boas </a>Renascências” amplia os conceitos discutidos na subseção acima para indicar como as ações de uma pessoa precisam ser adaptadas para buscar renascimentos em reinos superiores e evitar nascimentos nos reinos inferiores (<em>apāyā</em>), caso não seja possível atingir nenhum estágio de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> nesta vida.</li>
+<li>Mesmo aqueles que já tiveram contato com o “Buddhismo” podem perceber que alguns aspectos fundamentais foram deturpados em muitos livros didáticos e sites.</li>
+</ul>
+<p style="text-align: justify">4. A seção “<a href="../../pages/BD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma</a><span>” é uma versão mais avançada das seções acima mencionadas. Ela discute a base do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, ou seja, a importância de purificar a mente nos primeiros ensaios.</span></p>
+<ul style="text-align: justify">
+<li><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> descreveu um mundo mais amplo de 31 reinos, dos quais conhecemos apenas dois: os reinos animal e humano: “</span><a href="../../pages/BD.HH.001/index.html" rel="noopener noreferrer" target="_blank">A Grande Teoria Unificada do Dhamma</a>”.</li>
+<li><span>Em seguida, discute-se como o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> conseguia enxergar esse “quadro mais amplo” no ensaio “</span><a href="../../pages/BD.AA.005/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma: Não-perceptibilidade e Auto-consistência</a>”.</li>
+<li>Os dois ensaios “<a href="../../pages/BD.AA.006/index.html" rel="noopener noreferrer" target="_blank">Escala de Tempo Saṃsárica, Cosmologia Buddhista e a Teoria do Big Bang</a>” e “<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências do Renascimento</a>” discutem como temos passado pelo processo de nascimento/morte/renascimento desde tempos imemoriais.</li>
+</ul>
+<p style="text-align: justify">5. Para aqueles que tiveram contato principalmente com o “Buddhismo <em>Mahāyāna</em>”, os dois ensaios a seguir darão uma ideia de por que <em><span>os <span class="pali-term term-highlight" data-term="suttas">Suttas</span> Mahāyāna</span></em> são muito diferentes dos <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em><span> que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> proferiu: “</span><a href="http://localhost/beng_feb2026/historical-background/saddharma-pundarika-Sutta-lotus-Sutta-a-focused-analysis/" rel="noopener noreferrer" target="_blank">Saddharma Pundarika Sutta (Sutta do Lótus) – Uma Análise Focada</a>” e “<a href="../../pages/HB.AA.014/index.html" rel="noopener noreferrer" target="_blank">O que é Sunyata ou Sunnata (Vazio)?</a>”.</p>
+<ul style="text-align: justify">
+<li>Mais detalhes sobre como várias “escolas do Buddhismo” — como <em>Mahāyāna</em>, <em>Vajrayāna</em> (tibetano), <em>Zen</em><span>, etc. — evoluíram nos primeiros 1.000 anos após o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> podem ser encontrados na seção “</span><a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Contexto Histórico</a>”.</li>
+</ul>
+<p style="text-align: justify">6. Mesmo o Buddhismo <em>Theravāda</em><span> — que supostamente é o mais próximo dos ensinamentos originais do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> — foi contaminado ao longo dos anos, principalmente devido a três razões principais. A </span><span style="color: #0000ff"><strong>primeira razão</strong></span> é a perda das verdadeiras interpretações dos dez tipos de <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> (visões erradas).</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Existem dois tipos de Caminhos Óctuplos: mundano e transcendental (<em>lokottara</em><span>). É preciso primeiro entrar no Caminho mundano livrando-se dos dez tipos de <span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span>; consulte “</span><a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Em um Gráfico</a>” e “<a href="../../pages/SI.AA.005/index.html" rel="noopener noreferrer" target="_blank">Mahā Chattarisaka Sutta (Discurso sobre os Quarenta Grandes)</a>”.</li>
+<li style="text-align: justify">Um dos dez <em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em> é “<em>para lōka</em>” (“<em><span>para <span class="pali-term term-highlight" data-term="loka">loka</span>”</span></em> em cingalês), ou seja, o mundo dos <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> não existe. Muitas pessoas pensam que <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> é um conceito do Mahāyāna, mas isso é um grande erro; veja abaixo.</li>
+<li style="text-align: justify">Não se pode sequer entrar no mundano Caminho Óctuplo se acreditar que <em>para lōka</em> e <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> não são reais.</li>
+</ul>
+<p style="text-align: justify">7. <strong><span style="color: #0000ff">Em segundo lugar</span></strong>, várias técnicas de meditação hindus — incluindo interpretações errôneas da meditação <em>Kasiṇa</em> e <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em> (como meditação da respiração) — foram incorporadas aos ensinamentos <em>Theravāda</em>, especialmente após <em>o Visuddhimagga</em> de Buddhaghosa; veja “<a href="../../pages/HB.AA.016/index.html" rel="noopener noreferrer" target="_blank">O Visuddhimagga de Buddhaghosa – Uma Análise Focada</a>” e os ensaios mencionados ali.</p>
+<p style="text-align: justify">8. <span style="color: #0000ff"><strong>A terceira e mais importante razão</strong></span> é a tradução incorreta de palavras-chave <em><span>em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>,</span></em> como <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e<em> Anattā</em>, pelos primeiros estudiosos europeus no século XIX; veja “<a href="../../pages/HB.AA.018/index.html" rel="noopener noreferrer" target="_blank">Interpretação errônea de Anicca e Anattā pelos primeiros estudiosos europeus</a>”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Vamos discutir brevemente cada uma dessas três razões e indicar mais alguns ensaios relevantes.</li>
+</ul>
+<p style="text-align: justify">9. Muitas pessoas não percebem que o conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> (corpo mental) é um componente essencial para explicar como a vida funciona nos reinos humano e animal.</p>
+<ul style="text-align: justify">
+<li>Primeiro, é um equívoco pensar que <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> é um conceito <em>do Mahāyāna</em>; veja “<a href="../../pages/LD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Antarabhava e Gandhabba</a>” e “<a href="http://localhost/beng_feb2026/living-dhamma/mental-body-gandhabba/gandhabba-state-Tipiṭaka-evidence/" rel="noopener noreferrer" target="_blank">Estado de Gandhabba – Evidências do Tipiṭaka</a>”.</li>
+<li>Sem os conceitos de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>, não é possível explicar tantas histórias de renascimento e experiências extracorpóreas que têm sido amplamente relatadas nos últimos anos; veja “<a href="../../pages/BD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Evidências para o Renascimento</a>” e “<a href="../../pages/AB.DD.007/index.html" rel="noopener noreferrer" target="_blank">Experiência extracorpórea (OBE) e Manōmaya Kāya</a>”.</li>
+<li>A principal oposição ao conceito de <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> nos círculos <em>Theravāda</em> atuais é o equívoco de que se trata de um “<em>antarābhava</em>”, ou seja, algo entre dois <em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span>. </span></em>Mas um <em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em> humano está no mesmo “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> humano”. Isso é esclarecido em “<a href="../../pages/LD.GG.004/index.html" rel="noopener noreferrer" target="_blank">Antarabhava e Gandhabba</a>”.</li>
+<li style="text-align: justify">O papel crítico do corpo mental (<em><span><span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>) em dar origem a múltiplos nascimentos (<em><span><span class="pali-term term-highlight" data-term="jāti">Jāti</span></span></em>) dentro das existências humanas e animais (<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em>) tem sido desconsiderado. <span style="color: #0000ff"><span>No entanto, não acreditar na existência do <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> é um </span><em><span><span class="pali-term term-highlight" data-term="micchā diṭṭhi">Micchā Diṭṭhi</span></span></em></span> e constitui um obstáculo para alcançar o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>; consulte “<a href="../../pages/LD.GG.009/index.html" rel="noopener noreferrer" target="_blank">Micchā Diṭṭhi, Gandhabba e o Estágio de Sotāpanna</a>”.</li>
+<li style="text-align: justify">Devido à sua grande importância, <em><span>o <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span> </span></em>é discutido em duas seções principais: “<a href="../../pages/LD.GG.001/index.html" rel="noopener noreferrer" target="_blank">Corpo Mental – Gandhabba</a>” e “<a href="../../pages/AB.DD.001/index.html" rel="noopener noreferrer" target="_blank">Gandhabba (Manomaya Kaya)</a>”.</li>
+</ul>
+<ol style="text-align: justify">
+<li>No que diz respeito aos problemas com <em>o Visuddhimagga</em> de Buddhaghosa — publicado há 1.500 anos —, as duas questões mencionadas acima são:</li>
+</ol>
+<ul style="text-align: justify">
+<li>Em relação às meditações <em>Kasiṇa</em> discutidas no <em>Visuddhimagga</em><span>, não há um único <span class="pali-term term-highlight" data-term="sutta">Sutta</span> no </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> que discuta a meditação <em>Kasiṇa</em>.</li>
+<li>Em relação à meditação da respiração discutida no <em>Visuddhimagga</em><span>, nenhuma <span class="pali-term term-highlight" data-term="suttā">Suttā</span> no </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> discute a MEDITAÇÃO DA RESPIRAÇÃO. Essas <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> foram traduzidas incorretamente. Além disso, há uma<em><span> <span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> que afirma especificamente que a meditação da respiração não é a meditação <em><span><span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>; veja <a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Ānāpānasati é meditação da respiração?</a>”.</li>
+</ul>
+<p style="text-align: justify">11. O problema crítico da tradução incorreta de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em> impediu tantas pessoas de progredir nos últimos 200 anos. Recomendo fortemente o ensaio “<a href="../../pages/KD.FF.003/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā – Interpretações Erradas</a>”.</p>
+<ul style="text-align: justify">
+<li>Mais ensaios podem ser encontrados na seção “<a href="../../pages/KD.FF.001/index.html" rel="noopener noreferrer" target="_blank">Anicca, Dukkha, Anattā</a>”. A interpretação correta de muitos <em>ensaios</em>-chave relevantes é discutida nessa seção.</li>
+<li>A linha do tempo introdutória sobre esses desenvolvimentos históricos é apresentada em “<a href="../../pages/HB.AA.002/index.html" rel="noopener noreferrer" target="_blank">Interpretações incorretas do Theravāda – Linha do tempo histórica</a>”, e todos os ensaios relevantes estão na seção “<a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Contexto histórico</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>12. Agora, vamos nos voltar para uma questão relevante para muitos que são novos no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. Muitas pessoas — especialmente nos países ocidentais — têm dificuldade em acreditar no Renascimento; veja “</span><a href="../../pages/TL.DD.006/index.html" rel="noopener noreferrer" target="_blank">Buddhismo sem Renascimento e Nibbāna?</a>”.</p>
+<ul style="text-align: justify">
+<li>A seção “<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Dhamma Vivo</a><span>” foi especialmente concebida para que se possa começar a seguir o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> mesmo sem acreditar no conceito de Renascimento.</span></li>
+<li>As duas primeiras subseções são recomendadas para todos. É possível experimentar um verdadeiro “refresco” mesmo sem acreditar no Renascimento.</li>
+<li><span>As subseções seguintes conduzem gradualmente a conceitos avançados, e as seções finais são adequadas até mesmo para pessoas com conhecimentos avançados no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. É possível esclarecer conceitos avançados nas subseções posteriores.</span></li>
+</ul>
+<p style="text-align: justify"><span>13. Uma vez que se começa a investigar o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> seriamente, é uma boa ideia aprender algumas noções básicas sobre a língua </span><em><span><span class="pali-term term-highlight" data-term="pālī">Pālī</span></span></em>. O Cânone <em><span><span class="pali-term term-highlight" data-term="pālī">Pālī</span></span></em>, transmitido inicialmente oralmente e depois escrito há 2.000 anos, ainda contém todos os <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em><span> compostos pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span> e memorizados pelo Venerável Ananda.</span></p>
+<ul style="text-align: justify">
+<li>Veja “<a href="../../pages/HB.AA.007/index.html" rel="noopener noreferrer" target="_blank">Preservação do Dhamma</a>” e outros ensaios relevantes em “<a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Contexto Histórico</a>”.</li>
+<li><span>Embora o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> tenha incentivado a transmissão do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> aos outros em sua língua nativa, há algumas vantagens em aprender pelo menos algumas palavras-chave </span><em><span>em <span class="pali-term term-highlight" data-term="pālī">Pālī</span></span></em>; veja “<a href="http://localhost/beng_feb2026/three-levels-of-practice/moral-living-and-fundamentals/why-is-it-necessary-to-learn-key-Pālī-words/" rel="noopener noreferrer" target="_blank">Por que é necessário aprender palavras-chave em Pālī?</a>”.</li>
+<li>Em particular, aprender os significados por trás de algumas raízes-chave como “<em>san</em>” faz uma enorme diferença na compreensão de palavras-chave como <em><span><span class="pali-term term-highlight" data-term="samsāra">samsāra</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="sammā">Sammā</span></span></em>; veja a subseção sobre “<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">O que é ‘San’? Significado de Sansāra (ou Saṃsāra)</a>”.</li>
+</ul>
+<p style="text-align: justify">14. Aprender os significados corretos das <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> no<em><span> <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> é essencial para aprender o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>. A maior parte da literatura existente, mesmo sobre </span><em>o Theravāda</em>, contém traduções incorretas.</p>
+<ul style="text-align: justify">
+<li>A seção “<a href="../../pages/SI.AA.000/index.html" rel="noopener noreferrer" target="_blank">Interpretações dos S</a>uttas” discute alguns <em><span><span class="pali-term term-highlight" data-term="suttas">suttas</span></span></em> fundamentais do <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>.</li>
+<li style="text-align: justify">É uma boa ideia ler primeiro dois ensaios importantes nessa seção: “<a href="../../pages/SI.AA.001/index.html" rel="noopener noreferrer" target="_blank">Sutta – Introdução</a>” e <a href="http://localhost/beng_feb2026/sutta-interpretations/Pālī-dictionaries-reliability/" rel="noopener noreferrer" target="_blank">“Dicionários de Pālī – Eles são confiáveis?</a>”.</li>
+<li><span>As palavras curtas e sucintas do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> no </span><em>Dhammapada</em> oferecem insights profundos em versos curtos. Algumas delas são discutidas na seção “<a href="../../pages/DD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Dhammapada</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>15. A meditação (tanto formal quanto informal) é essencial para seguir o Caminho do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. A seção “</span><a href="../../pages/BM.AA.000/index.html" rel="noopener noreferrer" target="_blank">Bhāvanā (Meditação)</a>” oferece uma série de ensaios sobre os fundamentos da meditação e também sobre tópicos avançados.</p>
+<ul style="text-align: justify">
+<li>Um equívoco crítico que prevalece hoje em dia é que <em><span><span class="pali-term term-highlight" data-term="ānāpānasati bhāvanā">Ānāpānasati Bhāvanā</span></span></em> é meditação da respiração. Vários ensaios discutem a versão correta, e o ensaio <a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Ānāpānasati é meditação da respiração?</a>” discute evidências do <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> de que a meditação da respiração não é <em><span><span class="pali-term term-highlight" data-term="ānāpāna">Ānāpāna</span></span></em>.</li>
+<li>O <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span> <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> é discutido na subseção “<a href="../../pages/SI.BB.001/index.html" rel="noopener noreferrer" target="_blank">Mahā Satipaṭṭhāna Sutta</a>”.</li>
+</ul>
+<p style="text-align: justify"><span>16. <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> baseia-se no princípio da causalidade (causa e efeito), que em </span><em><span><span class="pali-term term-highlight" data-term="pālī">Pālī</span></span></em> é<em><span> <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>. Os princípios são discutidos na seção “<a href="../../pages/PS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda</a>”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Embora o significado de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>seja claro a partir do próprio nome, “<a href="../../pages/PS.EE.002/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda – ‘Pati+ichcha’+’Sama+uppāda</a>’”, os conceitos principais são discutidos em linguagem simples: “<a href="../../pages/PS.II.001/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda em linguagem simples</a>”.</li>
+<li>
+<p class="entry-title">A compreensão das Quatro Nobres Verdades requer a compreensão de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> e <em>Tilakkhaṇa</em>. Veja “<a href="../../pages/PS.EE.001/index.html" rel="noopener" target="_blank">Paṭicca Samuppāda, Tilakkhaṇa, Quatro Nobres Verdades</a>”.</p>
+</li>
+<li>
+<p class="entry-title">O simples fato de as causas existirem não significa necessariamente que os efeitos (resultados) se seguirão. Deve haver condições adequadas para esses resultados (também chamados de <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>). Isso é discutido em detalhes na subseção “<a href="../../pages/PS.JJ.001/index.html" rel="noopener noreferrer" target="_blank">Paṭṭhāna Dhamma</a>”.</p>
+</li>
+</ul>
+<p style="text-align: justify">17. O canto de <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em><span> e a recitação das virtudes do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e do Saṅgha podem preparar a mente para ser receptiva ao aprendizado do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e, portanto, podem ser uma parte importante da prática; consulte “</span><a href="../../pages/BC.AA.000/index.html" rel="noopener noreferrer" target="_blank">Canto Buddhista</a>”.</p>
+<ul style="text-align: justify">
+<li>A seção sobre “<a href="../../pages/MR.AA.000/index.html" rel="noopener noreferrer" target="_blank">Mitos ou Realidades?</a><span>” também é importante, pois discute muitos conceitos e práticas que alguns consideram não pertencerem ao <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify"><span>18. Para aqueles que gostariam de ver como o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> é compatível com a ciência moderna, a seção “</span><a href="../../pages/DS.AA.002/index.html" rel="noopener noreferrer" target="_blank">Dhamma e Ciência</a>” é um bom recurso.</p>
+<ul style="text-align: justify">
+<li>Essa seção aponta tanto as consistências quanto as inconsistências com a ciência moderna.</li>
+<li><span>A ciência moderna teve que revisar ou propor novas teorias para explicar muitos fenômenos nos últimos 500 anos, mas o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> (no </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>) permaneceu o mesmo por mais de 2.500 anos.</li>
+<li><span>Prevejo que as inconsistências restantes também serão resolvidas em favor do <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></li>
+</ul>
+<p style="text-align: justify">19. A seção “<a href="../../pages/TS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Tabelas e Resumos</a>” é uma importante coleção de ensaios que resumem informações ou “dados” que não precisam ser memorizados, mas podem ser necessários para explicar as coisas em detalhes.</p>
+<ul style="text-align: justify">
+<li>Há vários ensaios com listas de tipos de <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="cetasika">Cetasika</span></span></em>, 28 tipos de <em><span><span class="pali-term term-highlight" data-term="rūpa">Rūpa</span></span></em>, etc., nesta seção.</li>
+<li>Há também um glossário <em><span>de <span class="pali-term term-highlight" data-term="pālī">Pālī</span></span></em> com pronúncia: “<a href="http://localhost/beng_feb2026/tables-and-summaries/Pālī-glossary-a-k/" rel="noopener noreferrer" target="_blank">Glossário de Pālī – (A-K)</a>” e “<a href="http://localhost/beng_feb2026/tables-and-summaries/Pālī-glossary-l-z/" rel="noopener noreferrer" target="_blank">Glossário de Pālī – (L-Z)</a>”.</li>
+<li>A seção “<a href="../../pages/DP.BB.001/index.html" rel="noopener noreferrer" target="_blank">Comentários/Resenhas</a>” tem duas subseções: “<a href="http://localhost/beng_feb2026/book-reviews/discussion-of-comments/" rel="noopener noreferrer" target="_blank">Discussão de Comentários</a>” e <a href="../../pages/DP.BB.001/index.html" rel="noopener noreferrer" target="_blank">“Resenhas de Livros</a>”.</li>
+</ul>
+<p style="text-align: justify">20. Alguns já aprenderam <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> ou gostariam de aprender. Para eles, a seção “<a href="../../pages/AB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Abhidhamma</a>” pode ser útil. Há várias subseções nesta seção sobre vários tópicos.</p>
+<ul style="text-align: justify">
+<li>A seção “<a href="../../pages/AB.FF.001/index.html" rel="noopener" target="_blank">Abhidhamma através da Ciência</a>” destaca algumas sobreposições entre <em><span>o <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> e a ciência.</li>
+<li>Um dos meus assuntos favoritos é<em><span> o <span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>. Quando alguém já avançou um pouco no Caminho, pode ser útil aprender <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em>, o que ajudará a obter uma compreensão mais profunda.</li>
+</ul>
+<p style="text-align: justify">21. Por fim, <span style="color: #0000ff">mas mais importante</span>, três subseções importantes discutem questões envolvidas na obtenção <em><span>do <span class="pali-term term-highlight" data-term="magga phala">Magga Phala</span></span></em> (estágios do<em><span> <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>). O objetivo principal deste site é fornecer material suficiente para que se alcance o estágio <em>Sōtāpanna</em> do <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul>
+<li style="text-align: justify">Primeiro, o conceito de <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é um enigma para muitos. Ele é discutido em vários ensaios na subseção: “<a href="../../pages/KD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Nibbāna</a>”.</li>
+<li style="text-align: justify">Alguns pontos críticos a serem considerados por aqueles que se esforçam nessa direção são discutidos na subseção: “<a href="../../pages/TL.HH.001/index.html" rel="noopener noreferrer" target="_blank">Buscando o Nibbāna</a>”.</li>
+<li style="text-align: justify">O primeiro objetivo daqueles que buscam <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> é o estágio <em>Sōtāpanna</em>. Muitos conceitos e requisitos para alcançar esse objetivo são discutidos na subseção: “<a href="../../pages/TL.II.001/index.html" rel="noopener noreferrer" target="_blank">Estágio Sōtāpanna do Nibbāna</a>”.</li>
+<li style="text-align: justify">A seção “<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Dhamma Vivo”</a><span> foi especialmente concebida para que se possa começar a seguir o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>, mesmo sem acreditar no conceito de Renascimento, até chegar ao estágio </span><em>de</em> <em>Sōtāpanna</em>. Pessoas com uma base mais avançada podem começar nas subseções posteriores, pulando as iniciais.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.AA.000/index.html">Dhamma</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.BB.001/index.html">Buddha Dhamma A Scientific Approach</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.AA.000/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Dhamma</span>
+        
+        <span class="pathway-title title-pt">Dhamma</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.BB.001/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Buddha Dhamma A Scientific Approach</span>
+        
+        <span class="pathway-title title-pt">Buddha Dhamma: Uma Abordagem Científica</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

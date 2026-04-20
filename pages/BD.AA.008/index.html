@@ -1,0 +1,472 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Transfer Of Merits Pattidana Punnanumodana | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Buddha Dhamma</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 54 / 59</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">BD.AA.008</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Transfer Of Merits Pattidana Punnanumodana</h1>
+    
+    <h1 class="title-pt">Transferência de méritos, Pattidana e Punnanumodana</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>BD.AA.008</td></tr>
+          <tr><td><strong>Section</strong></td><td>Buddha Dhamma</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="BD.AA.008"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0063"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>BD.AA.008</td></tr><tr><td>Fin-dex</td><td>0063</td></tr><tr><td>Slug</td><td>transfer-of-merits-pattidana-punnanumodana</td></tr><tr><td>Section</td><td>BD</td></tr><tr><td>Title EN</td><td>Transfer Of Merits Pattidana Punnanumodana</td></tr></table></div></div><p><strong>Revised July 7, 2018; August 16, 2019; February 12, 2020; <span style="color: #0000ff;">August 9, 2022</span></strong></p>
+<h5>Introduction - Unseen Mental Energy</h5>
+<p style="text-align: justify;"><span>1. Even some Buddhists are skeptical that merits can be “transferred” to other beings: It does not appear “scientific.” However, <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is far ahead of science, and this is another example. Even though the vocabulary is different, mechanisms of “energy transfer” (mental energy) are also explained in <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></p>
+<ul style="text-align: justify;">
+<li>It is possible to transfer the merits of a good deed and many other versions of “mental energy.”</li>
+<li><strong>The basic idea can be thought of as follows.</strong> Suppose one has a lighted oil lamp, and many others have oil lamps but don't have access to a flame to light them. Wouldn't it be good to let others use one's lamp's flame to light their lamps?</li>
+<li>Of course, it is not possible to "create" many lighted oil lamps starting with one. But it is possible to light a thousand other lamps by sharing the flame of one oil lamp. In the same way, the receiving person needs to have essential ingredients to reap the benefits, as explained below. But since all those lamps will be useless without a way to light them, the person providing the light is doing an excellent service.</li>
+<li>One "giving merits" is doing <em>pattidāna</em> or "conditions" for good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> bija </span></em>(or<em> bīja</em>) to germinate. The receiver must have good <em><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span> or</span></em> "root causes" and receive those <em>pattidāna</em> willingly, which is called “<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> anumōdanā,</span></em>” which rhymes as "<em>puññānumōdanā.</em>"</li>
+</ul>
+<h5 style="text-align: justify;">What Is <em>Anumōdanā?</em></h5>
+<p style="text-align: justify;">2. <em>Anumōdanā</em> means the receiving mind is becoming joyful with the merits it received (“<em>anu</em>” + “<em>ōdanā,”</em> which rhymes as "<em>anumōdanā</em>”). The giver is giving (“<em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em>”) the “<em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>” or the auxiliary causes. (The commonly-used word is “<em>pratyaya</em><span>” but that is the incorrect <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span> word; the correct <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word is </span><em><span><span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>). It is<em><span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em> that represents "<em>patti</em>" in "<em>pattidāna</em>" (pronounced, "<em>paththidāna</em>").</p>
+<ul style="text-align: justify;">
+<li>Only in direct giving of material things can a giver ensure that the receiver receives what is given.</li>
+<li>Giving merits (<em>pattidāna</em>) is different. The giver cannot ensure that the receiving party “received what is intended” unless the person receiving was attuned to receiving.</li>
+<li>It is the receiving person that is doing the “<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> anumōdanā,”</span></em> i.e., gladly receiving the<em> pattidāna</em> of the giver and becoming joyful with the merits received. That is also called "<em>pattānumōdanā.</em>"</li>
+</ul>
+<h5 style="text-align: justify;">Giving Can Be Mental Too - <em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span> </span></em>and<em> P</em><em>attidāna</em></h5>
+<p style="text-align: justify;">3. Giving and receiving can be done in many ways:</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">The direct method of giving/receiving is when one gives money or something material. It is deducted from the giver’s ledger and added to the receiver’s: Transfer is complete.</li>
+<li style="text-align: justify;">When a teacher teaches a classroom full of kids, he/she gives instructions the same way to all the kids. But how much a particular kid “receives" or comprehends depends on that specific kid’s ability to receive. That is similar to <em>pattidāna.</em></li>
+<li style="text-align: justify;">A radio/television station is broadcasting a program. But the reception of the program by a radio/TV depends on the quality of that receiving device. Furthermore, it has to be “tuned” to the correct station.</li>
+<li style="text-align: justify;">This transfer can happen instantaneously or with a time lag because that mental energy is in the "<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> lōka</span></em>" and is accessible at any time; see "<a href="../../pages/KD.GG.005/index.html" rel="noopener noreferrer" target="_blank" title="Memory, Brain, Mind, Nama Loka, Kamma Bhava, Kamma Vipaka">Memory, Brain, Mind, Nama Loka, Kamma Bhava, Kamma Vipaka</a>," "<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">What are Dhamma? – A Deeper Analysis</a>,", and "<a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Our Two Worlds: Material and Mental</a>."</li>
+</ul>
+<p style="text-align: justify;">4. Therefore, only in “direct giving” is the amount received the same. The amount received in “indirect giving” methods depends on the receiver. That latter mechanism works when “transferring merits” to another person who may be far away.</p>
+<ul style="text-align: justify;">
+<li>All intentions have <em><span><span class="pali-term term-highlight" data-term="kammic">kammic</span></span></em><span> energy. You may remember that the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, “</span><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> aham bhikkave kammaṃ vadāmi,”</span></em> or “<em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em>, I say that intention is <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span>.”</span></em> <strong>And <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> is the vital potential energy for everything in this world.</strong></li>
+<li>People very much underestimate the power of the human mind. Those who have experienced at least <em><span><span class="pali-term term-highlight" data-term="anariya">anariya</span> jhānā</span></em> can sense at least a little about the power of the mind; see “<a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Introduction">Power of the Human Mind – introduction</a><span>” and the two follow-up <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li>Direct giving is "<em><span><span class="pali-term term-highlight" data-term="dāna">dāna</span></span></em>"; indirect giving is "<em>pattidāna."</em> These are two of the ten meritorious deeds (<em><span><span class="pali-term term-highlight" data-term="puñña">puñña</span> <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>); see "<a href="../../pages/TL.EE.004/index.html" rel="noopener noreferrer" target="_blank" title="Ten Moral Actions (Dasa Kusala) and Ten Meritorious Actions (Punna Kriya)">Punna Kamma – Dāna, Sīla, Bhāvanā</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Giving Merits - <em>P</em><em>attidāna</em></h5>
+<p style="text-align: justify;">5. One such mechanism is the <em><span><span class="pali-term term-highlight" data-term="anantara">anantara</span>-samanantara <span class="pali-term term-highlight" data-term="paccayā">paccayā</span></span></em>; see “<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Annantara and Samanantara Paccaya">Annantara and Samanantara Paccaya</a>.” It is one of the universal laws governing how <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> operate (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> niyama</span></em>). Many people pronounce “<em>niyama</em>” as “<em>niyāma,”</em> but “<em>niyama</em><span>” is the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> or <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> word for “principle.”</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Thus <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> niyama</span></em> are the universal laws of <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> (like the law of gravitation).</li>
+</ul>
+<p style="text-align: justify;">6. Suppose one is “transferring merits” by sincerely saying, "May so and so receive merits from this good deed that I have done.” One could do <em><span><span class="pali-term term-highlight" data-term="metta">Metta</span> <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em> by saying, “May all beings be free from the suffering in the <em>apāyā</em>” or some version of it. In both cases, one is BROADCASTING one’s intention.</p>
+<ul style="text-align: justify;">
+<li>However, just because one is doing such a “giving," the intended recipient may not receive the benefits UNLESS the recipient has a matching mindset. It is just like the case of radio/TV, where the receiving device needs to be set to the "right frequency” to receive the signal.</li>
+<li><span>That is explained in the <span class="pali-term term-highlight" data-term="post">post</span>, “</span><a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Annantara and Samanantara Paccaya">Annantara and Samanantara Paccaya</a><span>.” Don’t be discouraged by those <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words. Sometimes, as in the case of </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>, it is best to use the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words and understand their meanings.</span></li>
+</ul>
+<p style="text-align: justify;">7. Transfer of merits is efficient when the giver and the receiver are together, and each is aware of the other’s intention. For example, in Asian countries, it is customary to transfer merits to deceased relatives. Alms-giving to the<em> Saṅgha</em> and <em>pattidāna</em> offered to the deceased relative belong to this category.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">The deceased party can receive merits if it is in a state where it can receive such merits, for example, if it is in a <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> state.</li>
+<li style="text-align: justify;">But if the deceased is reborn as an animal or human, it cannot receive full benefits, even though it may benefit to some extent.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> <span class="pali-term term-highlight" data-term="dāna">Dāna</span> </span></em>Is The Ultimate Giving</h5>
+<p style="text-align: justify;"><span>8. It is possible to “give <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>” or to “give </span><em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em><span>” too. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, “</span><em><span>sabba dānaṃ <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> dānaṃ jināti</span></em>” or, “from all kinds of giving, <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> giving is the most meritorious.”</p>
+<ul style="text-align: justify;">
+<li><span>When the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> gave a discourse, those listening “received” </span><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> varying degrees. Some became<em><span> <span class="pali-term term-highlight" data-term="arahants">Arahants</span>, and some</span></em> attained the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage during the discourse itself. But others did not achieve any stage but possibly still accumulated merits or <em><span><span class="pali-term term-highlight" data-term="kusala">kusala</span></span></em>. <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em> ("<em>ku</em>" or "<em>kunu</em>" or "dirty"+"<em>sala</em>" or "remove," and thus shedding defiled thoughts from the mind). That means gaining wisdom, non-greed, non-hate, AND discarding greed, hate, and delusion.</li>
+<li>During such a discourse, one mainly cultivates wisdom. That, in turn, results in discarding greed and hate.</li>
+</ul>
+<h5 style="text-align: justify;">Importance of State of Mind</h5>
+<p style="text-align: justify;">9. How much merit a given person receives depends on the state of mind of that person. It also depends on the intellectual level of that person. But it is impossible to quantify the intellectual level using modern standards of "book knowledge." It is not directly related to one’s formal education. It is easier to give some examples.</p>
+<ul style="text-align: justify;">
+<li>Ven. Ananda was highly literate, a former prince, and had fantastic memory power. He had the whole <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span> Piṭaka</span></em><span> in his memory. And he was with the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> for many years but attained </span><em>Arahanthood</em> only after the <i><span><span class="pali-term term-highlight" data-term="buddha">Buddha</span>'s <span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span> (passing away)</span></i>.</li>
+<li><span>Sunīta was of low caste and carried buckets of feces when the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> met him. With his supernormal powers, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> saw that Sunīta could comprehend <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> and asked Sunīta to become a</span><em><span> <span class="pali-term term-highlight" data-term="bhikkhu">bhikkhu</span></span></em>. Ven. Sunīta became an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> within seven days.</li>
+</ul>
+<p style="text-align: justify;"><span>10. A given person may be receptive to “receiving <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>” when his mind is calm. But the same person may not comprehend anything when his mind is excited or distracted. That is the same as saying that the <span class="pali-term term-highlight" data-term="five hindrances">five hindrances</span> are active; see "</span><a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank" title="Key to Calming the Mind – The Five Hindrances">Key to Calming the Mind - Five Hindrances</a><span>." Therefore, it is IMPORTANT to have a correct mindset when learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, whether by listening or reading.</span></p>
+<ul style="text-align: justify;">
+<li><span>Therefore, try to read these <span class="pali-term term-highlight" data-term="posts">posts</span> at quiet times, when the mind is receptive, and NOT during the brief breaks at work when the mind is occupied or agitated.</span></li>
+<li><span>In Asian countries, that is a significant reason for going to the temple. At the temple, people offer flowers to the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> or the </span><em>Bodhi</em><span> tree. Such activities get the mind into a calm, peaceful state suitable for listening to a <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> discourse afterward; see "</span><a href="../../pages/BC.AA.000/index.html" rel="noopener noreferrer" target="_blank">Buddhist Chanting</a>" and "<a href="../../pages/MR.AA.005/index.html" rel="noopener noreferrer" target="_blank">Tisarana Vandana and Its Effects on One’s Gati</a>."</li>
+</ul>
+<h5 style="text-align: justify;">Both <em><span><span class="pali-term term-highlight" data-term="anantara">Anantara</span></span></em> and <em>Samanantara</em> Must be Optimized</h5>
+<p style="text-align: justify;">11. Therefore, both <em><span><span class="pali-term term-highlight" data-term="anantara">anantara</span></span></em> and <em>samanantara</em> must be optimized to make all these activities efficient.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>Of course, if one is not learning the true <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, there is nothing substantial in </span><em><span><span class="pali-term term-highlight" data-term="anantara">anantara</span>.</span></em> Thus, one would be wasting one’s time.</li>
+<li style="text-align: justify;"><span>On the other hand, even with an excellent <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> delivery, the receiver’s mind needs to be receptive to get full benefits. In other words, </span><em>samanantara</em> must be good too.</li>
+</ul>
+<p style="text-align: justify;"><span style="font-size: 12pt;">12. <span style="letter-spacing: 0px;">The following example may help clarify this</span><span style="letter-spacing: 0px;"> concept: Having "good </span><em style="letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></em><span style="letter-spacing: 0px;">" is like having "good seeds." Suppose person X has potent seeds but does not have water and nutrients for those seeds to germinate and grow. If person Y can provide X with water and nutrients, X can plant those seeds and get them to germinate and grow.</span></span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Some people may have "good <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds" but do not have the necessary conditions to bring the corresponding good <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em>. When another person does <em>pattidāna</em>, that is like donating water and nutrients to that person.</li>
+</ul>
+<p style="text-align: justify;">13. A seed is the <em><span><span class="pali-term term-highlight" data-term="anantara">anantara</span></span></em> or the cause <em><span>(<span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></em>), and the receiving party must have that. However, like a seed cannot grow unless it is exposed to moist soil, has nutrients, and sunlight, that <em><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span> </span></em>cannot bear fruit without suitable conditions. i.e., the <em>samanantara</em> (or suitable conditions) must be there too.</p>
+<ul style="text-align: justify;">
+<li>Therefore, the receiver can accept those conditions from the giver and get those existing good<em><span> <span class="pali-term term-highlight" data-term="kamma bīja">kamma bīja</span></span></em> to bring their good <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>.</li>
+<li style="text-align: justify;">It is only when both <em><span><span class="pali-term term-highlight" data-term="anantara">anantara</span></span></em> and <em>samanantara</em> are optimized and matched that full benefits result. i.e., the optimum transfer takes place. This phenomenon is quite similar to the "resonance effect" in physics. Only when the energy of a photon matches an energy gap of an atom that the absorption of that photon by the atom is optimum.</li>
+</ul>
+<h5 style="text-align: justify;"> Different Types of <em>Anumōdanā</em></h5>
+<p style="text-align: justify;">14. A type of "<em>anumōdanā</em>" also happens in day-to-day life. Suppose X starts a project to feed the hungry. Many poor people benefit from it. Another person (Y) sees that and may become joyful seeing the hungry getting fed and may thank X for doing it. This joy of heart, even if Y did not contribute, counts as "merits"; it becomes a good <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> for Y. That does not take any merits away from X.</p>
+<ul>
+<li style="text-align: justify;">Something cannot come out of nothing. So, where do those kinds of benefits come from? It comes from the mental energy of Y, who became joyful upon seeing the kind act. That is part of a human's mental energy (<em><span><span class="pali-term term-highlight" data-term="javana">javana</span></span></em>); see "<a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Introduction">Power of the Human Mind – introduction</a>."</li>
+<li style="text-align: justify;">That is true of immoral acts too. Suppose X is beating up Y. Person Z may be glad to see that and may encourage X to beat up Y. Now, suppose Y dies due to the beating. Then not only X but Z also gets bad <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> for that immoral act.</li>
+<li style="text-align: justify;">In our societies also, the same principle applies. Suppose the police are investigating the death of Y. They have evidence that Z encouraged the killing; they can prosecute both Z and X.</li>
+<li style="text-align: justify;">Thus our feelings (good or bad) play an important role in accumulating good and bad <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>.</span></em></li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="BD.AA.008"
+             data-section="Buddha Dhamma"
+             data-section-code="BD"
+             data-findex="0063"
+             data-level="intermediate"
+             data-reading-time="10"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        BD.AA.008
+Language:     pt-BR
+Generated-At: 2026-04-18T04:02:11Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p><strong>Revisado em 7 de julho de 2018; 16 de agosto de 2019; 12 de fevereiro de 2020; <span style="color: #0000ff;">9 de agosto de 2022</span></strong></p>
+<h5>Introdução – Energia Mental Invisível</h5>
+<p style="text-align: justify;"><span>1. Até mesmo alguns Buddhistas duvidam que os méritos possam ser “transferidos” para outros seres: isso não parece “científico”. No entanto, o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> está muito à frente da ciência, e este é mais um exemplo. Embora o vocabulário seja diferente, os mecanismos de “transferência de energia” (energia mental) também são explicados no <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span>.</span></p>
+<ul style="text-align: justify;">
+<li>É possível transferir os méritos de uma boa ação e muitas outras versões de “energia mental”.</li>
+<li><strong>A ideia básica pode ser concebida da seguinte forma.</strong> Suponha que alguém tenha uma lamparina acesa, e muitos outros tenham lamparinas, mas não tenham acesso a uma chama para acendê-las. Não seria bom permitir que os outros usassem a chama da sua lamparina para acender as deles?</li>
+<li>É claro que não é possível “criar” muitas lâmpadas de óleo acesas a partir de uma única. Mas é possível acender mil outras lâmpadas compartilhando a chama de uma única lâmpada de óleo. Da mesma forma, a pessoa que recebe precisa ter ingredientes essenciais para colher os benefícios, conforme explicado abaixo. Mas, como todas essas lâmpadas serão inúteis sem uma maneira de acendê-las, a pessoa que fornece a luz está prestando um excelente serviço.</li>
+<li>Aquele que “concede méritos” está realizando <em>pattidāna,</em> ou “condições”, para que <em>o</em> bom <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> bija </span></em>(ou<em> Bīja</em>) germine. O receptor deve ter um bom <em><span><span class="pali-term term-highlight" data-term="kamma bīja">kamma Bīja</span>, ou</span></em> “causas fundamentais”, e receber esses <em>pattidāna</em> de boa vontade, o que é chamado de “<em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> anumōdanā</span></em>”<em>,</em> que rima como “<em>Puññānumōdanā”.</em></li>
+</ul>
+<h5 style="text-align: justify;">O que é <em>Anumōdanā?</em></h5>
+<p style="text-align: justify;">2. <em>Anumōdanā</em> significa que a mente receptora está se tornando alegre com os méritos que recebeu (“<em>anu</em>” + “<em>ōdanā”,</em> que rima como “<em>anumōdanā</em>”). O doador está oferecendo (“<em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em>”) o “P<em>accayā</em>” ou as causas auxiliares. (A palavra comumente usada é “<em>pratyaya</em><span>”, mas essa é a palavra sânscrita incorreta; a palavra <span class="pali-term term-highlight" data-term="pālī">Pālī</span> correta é </span><em><span><span class="pali-term term-highlight" data-term="paccayā">Paccayā</span></span></em>). É<em><span> o <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span></span></em> que representa “<em>patti</em>” em “patt<em>idāna</em>” (pronuncia-se “<em>paththidāna</em>”).</p>
+<ul style="text-align: justify;">
+<li>Somente na doação direta de bens materiais o doador pode garantir que o destinatário receba o que foi dado.</li>
+<li>A doação de méritos (<em>pattidāna</em>) é diferente. O doador não pode garantir que o destinatário “recebeu o que se pretendia”, a menos que a pessoa que recebe estivesse sintonizada para receber.</li>
+<li>É a pessoa que recebe que está realizando o “<em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> anumōdanā”,</span></em> ou seja, recebendo com alegria o<em> pattidāna</em> do doador e ficando feliz com os méritos recebidos. Isso também é chamado de <em>“pattānumōdanā”.</em></li>
+</ul>
+<h5 style="text-align: justify;">A doação também pode ser mental – <em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span> </span></em>e<em> Pattidāna</em></h5>
+<p style="text-align: justify;">3. Dar e receber podem ser feitos de várias maneiras:</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">O método direto de dar/receber é quando alguém dá dinheiro ou algo material. É deduzido do registro do doador e adicionado ao do receptor: a transferência está concluída.</li>
+<li style="text-align: justify;">Quando um professor dá aula para uma sala cheia de crianças, ele/ela dá instruções da mesma maneira para todas as crianças. Mas o quanto uma criança em particular “recebe” ou compreende depende da capacidade de recepção dessa criança específica. Isso é semelhante ao <em>pattidāna.</em></li>
+<li style="text-align: justify;">Uma estação de rádio/televisão está transmitindo um programa. Mas a recepção do programa por um rádio/TV depende da qualidade desse aparelho receptor. Além disso, ele precisa estar “sintonizado” na estação correta.</li>
+<li style="text-align: justify;">Essa transferência pode ocorrer instantaneamente ou com um atraso, pois essa energia mental está no “<em><span><span class="pali-term term-highlight" data-term="nāma">nāma</span> lōka</span></em>” e é acessível a qualquer momento; consulte “<a href="../../pages/KD.GG.005/index.html" rel="noopener noreferrer" target="_blank" title="Memory, Brain, Mind, Nama Loka, Kamma Bhava, Kamma Vipaka">Memória, Cérebro, Mente, Nāma Lōka, Kamma Bhava, Kamma Vipaka</a>”, “<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">O que é Dhamma? – Uma Análise Mais Profunda</a>” e “<a href="../../pages/BD.HH.003/index.html" rel="noopener noreferrer" target="_blank">Nossos Dois Mundos: Material e Mental</a>”.</li>
+</ul>
+<p style="text-align: justify;">4. Portanto, somente na “doação direta” a quantidade recebida é a mesma. A quantidade recebida nos métodos de “doação indireta” depende do receptor. Esse último mecanismo funciona ao “transferir méritos” para outra pessoa que pode estar longe.</p>
+<ul style="text-align: justify;">
+<li>Todas as intenções possuem energia <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em><span>. Você deve se lembrar que o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span><span class="pali-term term-highlight" data-term="cetanā">Cetanā</span> aham bhikkave kammaṃ vadāmi”,</span></em> ou “<em>Bhikk</em>hū, eu digo que a intenção é <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span>”.</span></em> <strong>E <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> é a energia potencial vital para tudo neste mundo.</strong></li>
+<li>As pessoas subestimam muito o poder da mente humana. Aqueles que experimentaram pelo menos <em><span><span class="pali-term term-highlight" data-term="anariya">Anariya</span> jhānā</span></em> podem perceber, pelo menos um pouco, o poder da mente; veja “O <a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Introduction">Poder da Mente Humana – introdu</a>ção” e os dois ensaios seguintes.</li>
+<li>A doação direta é “<em><span><span class="pali-term term-highlight" data-term="dāna">Dāna</span></span></em>”; a doação indireta é “<em>pattidāna”.</em> Estas são duas das dez ações meritórias (<em><span><span class="pali-term term-highlight" data-term="puñña">Puñña</span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>); veja “<a href="../../pages/TL.EE.004/index.html" rel="noopener noreferrer" target="_blank" title="Ten Moral Actions (Dasa Kusala) and Ten Meritorious Actions (Punna Kriya)">Punna Kamma – Dāna, Sīla, Bhāvanā</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Doação de Méritos – <em>Pattidāna</em></h5>
+<p style="text-align: justify;">5. Um desses mecanismos é o <em><span><span class="pali-term term-highlight" data-term="anantara">anantara</span>-samanantara <span class="pali-term term-highlight" data-term="paccayā">Paccayā</span></span></em>; veja “<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Annantara and Samanantara Paccaya">Annantara e Samanantara Paccaya</a>”. É uma das leis universais que regem como <em><span>o <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> e <em><span>o <span class="pali-term term-highlight" data-term="kamma vipāka">kamma Vipāka</span></span></em> operam (<em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span> niyama</span></em>). Muitas pessoas pronunciam “<em>niyama</em>” como “<em>niyāma”,</em> mas “<em>niyama</em><span>” é a palavra em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> ou Cingalês para “princípio”.</span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Assim<em><span>, <span class="pali-term term-highlight" data-term="kamma">Kamma</span> niyama</span></em> são as leis universais do <em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em> (como a lei da gravidade).</li>
+</ul>
+<p style="text-align: justify;">6. Suponha que alguém esteja “transferindo méritos” ao dizer sinceramente: “Que fulano receba méritos desta boa ação que eu realizei”. Pode-se praticar <em><span>a <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em> <em><span>de <span class="pali-term term-highlight" data-term="mettā">Mettā</span></span></em> dizendo: “Que todos os seres estejam livres do sofrimento nos <em>apāyā</em>” ou alguma versão disso. Em ambos os casos, está-se TRANSMITINDO a própria intenção.</p>
+<ul style="text-align: justify;">
+<li>No entanto, só porque alguém está fazendo tal “doação”, o destinatário pretendido pode não receber os benefícios, A MENOS QUE o destinatário tenha uma mentalidade compatível. É exatamente como no caso do rádio/TV, onde o aparelho receptor precisa estar sintonizado na “frequência certa” para receber o sinal.</li>
+<li>Isso é explicado na postagem “<a href="../../pages/PS.JJ.003/index.html" rel="noopener noreferrer" target="_blank" title="Annantara and Samanantara Paccaya">Annantara e Samanantara Paccaya</a><span>”. Não se deixe desanimar por essas palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>. Às vezes, como no caso de </span><em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em><span>, é melhor usar as palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e compreender seus significados.</span></li>
+</ul>
+<p style="text-align: justify;">7. A transferência de méritos é eficaz quando o doador e o receptor estão juntos, e cada um está ciente da intenção do outro. Por exemplo, nos países asiáticos, é costume transferir méritos para parentes falecidos. A doação de esmolas ao<em> Saṅgha</em> e <em>o pattidāna</em> oferecido ao parente falecido pertencem a essa categoria.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">O falecido pode receber méritos se estiver em um estado em que possa recebê-los, por exemplo, se estiver no estado <em><span>de <span class="pali-term term-highlight" data-term="gandhabba">Gandhabba</span></span></em>.</li>
+<li style="text-align: justify;">Mas se o falecido renascer como animal ou humano, não poderá receber todos os benefícios, embora possa se beneficiar até certo ponto.</li>
+</ul>
+<h5 style="text-align: justify;"><em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> <span class="pali-term term-highlight" data-term="dāna">Dāna</span> </span></em>é a Doação Suprema</h5>
+<p style="text-align: justify;"><span>8. É possível “dar <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>” ou “dar </span><em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em><span>” também. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span>sabba dānaṃ <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> dānaṃ jināti</span></em>” ou “de todos os tipos de doação, a doação <em><span>do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> é a mais meritória”.</p>
+<ul style="text-align: justify;">
+<li><span>Quando o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> proferia um discurso, aqueles que o ouviam “recebiam” </span><em><span>o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> em graus variados. Alguns se tornaram<em><span> <span class="pali-term term-highlight" data-term="arahants">Arahants</span>, e alguns</span></em> alcançaram o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em> durante o próprio discurso. Mas outros não alcançaram nenhum estágio, embora possivelmente ainda tenham acumulado méritos ou <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em>. <em><span><span class="pali-term term-highlight" data-term="kusala">Kusala</span></span></em> (“<em>ku</em>” ou “<em>kunu</em>” ou “sujo” + “<em>sala</em>” ou “remover”, e assim livrar a mente de pensamentos impuros). Isso significa ganhar sabedoria, não-ganância, não-ódio E descartar a ganância, o ódio e a ilusão.</li>
+<li>Durante tal discurso, cultiva-se principalmente a sabedoria. Isso, por sua vez, resulta no abandono da ganância e do ódio.</li>
+</ul>
+<h5 style="text-align: justify;">Importância do estado de espírito</h5>
+<p style="text-align: justify;">9. A quantidade de mérito que uma determinada pessoa recebe depende do estado de espírito dessa pessoa. Depende também do nível intelectual dessa pessoa. Mas é impossível quantificar o nível intelectual usando padrões modernos de “conhecimento acadêmico”. Não está diretamente relacionado à educação formal de alguém. É mais fácil dar alguns exemplos.</p>
+<ul style="text-align: justify;">
+<li>O Venerável Ananda era altamente letrado, um ex-príncipe, e possuía uma memória fantástica. Ele tinha todo o <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span> Piṭaka</span></em><span> em sua memória. E ele esteve com o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> por muitos anos, mas alcançou </span><em>a Arahantia</em> somente após o <i><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span> (falecimento) do <span class="pali-term term-highlight" data-term="buddha">Buddha</span></span></i>.</li>
+<li><span>Sunīta era de casta baixa e carregava baldes de fezes quando o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> o encontrou. Com seus poderes sobrenaturais, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> viu que Sunīta era capaz de compreender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> e pediu a Sunīta que se tornasse um</span><em><span> <span class="pali-term term-highlight" data-term="bhikkhu">Bhikkhu</span></span></em>. O Venerável Sunīta tornou-se um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> em sete dias.</li>
+</ul>
+<p style="text-align: justify;"><span>10. Uma determinada pessoa pode estar receptiva a “receber o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>” quando sua mente está calma. Mas a mesma pessoa pode não compreender nada quando sua mente está agitada ou distraída. Isso é o mesmo que dizer que os Cinco Estorvos estão ativos; veja “</span><a href="../../pages/TL.CC.002/index.html" rel="noopener noreferrer" target="_blank" title="Key to Calming the Mind – The Five Hindrances">A Chave para Acalmar a Mente – Os Cinco Estorvos</a><span>”. Portanto, é IMPORTANTE ter uma mentalidade correta ao aprender o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, seja ouvindo ou lendo.</span></p>
+<ul style="text-align: justify;">
+<li>Portanto, tente ler estes ensaios em momentos tranquilos, quando a mente estiver receptiva, e NÃO durante os breves intervalos no trabalho, quando a mente está ocupada ou agitada.</li>
+<li><span>Nos países asiáticos, essa é uma razão significativa para ir ao templo. No templo, as pessoas oferecem flores ao <span class="pali-term term-highlight" data-term="buddha">Buddha</span> ou à árvore </span><em>Bodhi</em><span>. Tais atividades levam a mente a um estado calmo e pacífico, adequado para ouvir um discurso do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span> posteriormente; veja “</span><a href="../../pages/BC.AA.000/index.html" rel="noopener noreferrer" target="_blank">Cânticos Buddhistas</a>” e “<a href="../../pages/MR.AA.005/index.html" rel="noopener noreferrer" target="_blank">Tisarana Vandana e Seus Efeitos sobre a Gati de Cada Um</a>”.</li>
+</ul>
+<h5 style="text-align: justify;">Tanto <em><span><span class="pali-term term-highlight" data-term="anantara">Anantara</span></span></em> quanto <em>Samanantara</em> devem ser otimizados</h5>
+<p style="text-align: justify;">11. Portanto, tanto <em><span>o <span class="pali-term term-highlight" data-term="anantara">Anantara</span></span></em> quanto <em>o samanantara</em> devem ser otimizados para tornar todas essas atividades eficientes.</p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;"><span>É claro que, se alguém não estiver aprendendo o verdadeiro <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, não há nada de substancial no </span><em><span><span class="pali-term term-highlight" data-term="anantara">Anantara</span>.</span></em> Assim, estaria desperdiçando seu tempo.</li>
+<li style="text-align: justify;"><span>Por outro lado, mesmo com uma excelente transmissão do <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>, a mente do receptor precisa estar receptiva para obter todos os benefícios. Em outras palavras, </span><em>o samanantara</em> também deve ser bom.</li>
+</ul>
+<p style="text-align: justify;"><span style="font-size: 12pt;">12. <span style="letter-spacing: 0px;">O exemplo a seguir pode ajudar a esclarecer esse conceito: Ter “</span><em style="letter-spacing: 0px;"><span><span class="pali-term term-highlight" data-term="kamma bīja">Kamma Bīja</span></span></em><span style="letter-spacing: 0px;">” é como ter “boas sementes”. Suponha que a pessoa X tenha sementes potentes, mas não tenha água e nutrientes para que essas sementes germinem e cresçam. Se a pessoa Y puder fornecer água e nutrientes a X, X poderá plantar essas sementes e fazê-las germinar e crescer.</span></span></p>
+<ul style="text-align: justify;">
+<li style="text-align: justify;">Algumas pessoas podem ter “boas sementes <em>de</em><span> <span class="pali-term term-highlight" data-term="kamma">Kamma</span>”, mas não possuem as condições necessárias para gerar o correspondente bom </span><em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em>. Quando outra pessoa pratica <em>pattidāna</em>, isso é como doar água e nutrientes a essa pessoa.</li>
+</ul>
+<p style="text-align: justify;">13. Uma semente é o <em><span><span class="pali-term term-highlight" data-term="anantara">Anantara</span></span></em> ou a causa <em><span>(<span class="pali-term term-highlight" data-term="kamma bīja">Kamma Bīja</span></span></em>), e a parte receptora deve possuí-la. No entanto, assim como uma semente não pode crescer a menos que seja exposta a solo úmido, tenha nutrientes e luz solar, esse <em><span><span class="pali-term term-highlight" data-term="kamma bīja">Kamma Bīja</span> </span></em>não pode dar frutos sem condições adequadas. Ou seja, o <em>samanantara</em> (ou condições adequadas) também deve estar presente.</p>
+<ul style="text-align: justify;">
+<li>Portanto, o receptor pode aceitar essas condições do doador e obter esses <em><span><span class="pali-term term-highlight" data-term="kamma bīja">Kamma Bīja</span></span></em> bons existentes para que tragam seu bom <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>.</li>
+<li style="text-align: justify;">É somente quando tanto <em><span>o <span class="pali-term term-highlight" data-term="anantara">Anantara</span></span></em> quanto <em>o samanantara</em> estão otimizados e combinados que se obtêm todos os benefícios. Ou seja, ocorre a transferência ideal. Esse fenômeno é bastante semelhante ao “efeito de ressonância” na física. Somente quando a energia de um fóton corresponde a uma lacuna de energia de um átomo é que a absorção desse fóton pelo átomo é ideal.</li>
+</ul>
+<h5 style="text-align: justify;"> Diferentes tipos de <em>Anumōdanā</em></h5>
+<p style="text-align: justify;">14. Um tipo de “<em>anumōdanā</em>” também ocorre na vida cotidiana. Suponha que X inicie um projeto para alimentar os famintos. Muitas pessoas pobres se beneficiam disso. Outra pessoa (Y) vê isso e pode ficar alegre ao ver os famintos sendo alimentados e pode agradecer a X por fazê-lo. Essa alegria do coração, mesmo que Y não tenha contribuído, conta como “méritos”; torna-se um bom <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> para Y. Isso não tira nenhum mérito de X.</p>
+<ul>
+<li style="text-align: justify;">Algo não pode surgir do nada. Então, de onde vêm esses tipos de benefícios? Eles vêm da energia mental de Y, que ficou alegre ao ver o ato de bondade. Isso faz parte da energia mental humana (<em><span><span class="pali-term term-highlight" data-term="javana">Javana</span></span></em>); veja “<a href="../../pages/BD.II.002/index.html" rel="noopener noreferrer" target="_blank" title="Power of the Human Mind – Introduction">O Poder da Mente Humana – introdução</a>”.</li>
+<li style="text-align: justify;">Isso também se aplica a atos imorais. Suponha que X esteja espancando Y. A pessoa Z pode ficar contente ao ver isso e pode encorajar X a espancar Y. Agora, suponha que Y morra devido ao espancamento. Então, não apenas X, mas também Z recebe <em>um</em> <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> ruim por esse ato imoral.</li>
+<li style="text-align: justify;">Em nossas sociedades também se aplica o mesmo princípio. Suponha que a polícia esteja investigando a morte de Y. Eles têm provas de que Z encorajou o assassinato; podem processar tanto Z quanto X.</li>
+<li style="text-align: justify;">Assim, nossos sentimentos (bons ou maus) desempenham um papel importante na acumulação de <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> bom e mau<em>.</em></li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/BD.II.006/index.html">Are There Procedures For Attaining Magga Phala Jhana And Abhinna</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/BD.AA.009/index.html">First Noble Truth Is Suffering Myths About Suffering</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/BD.II.006/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Are There Procedures For Attaining Magga Phala Jhana And Abhinna</span>
+        
+        <span class="pathway-title title-pt">Existem procedimentos para alcançar o Magga Phala Jhāna e os Abhinna?</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/BD.AA.009/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">First Noble Truth Is Suffering Myths About Suffering</span>
+        
+        <span class="pathway-title title-pt">A Primeira Nobre Verdade é o sofrimento: Mitos sobre o sofrimento</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-BD">
+        ↑ Back to Buddha Dhamma
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

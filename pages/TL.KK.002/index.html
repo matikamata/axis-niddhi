@@ -1,0 +1,478 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Assada Adinava Nissarana Introduction | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Three Levels of Practice</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 88 / 97</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">TL.KK.002</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Assada Adinava Nissarana Introduction</h1>
+    
+    <h1 class="title-pt">Assada Adinava Nissarana: Introdução</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>TL.KK.002</td></tr>
+          <tr><td><strong>Section</strong></td><td>Three Levels of Practice</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>11</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="TL.KK.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0494"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>TL.KK.002</td></tr><tr><td>Fin-dex</td><td>0494</td></tr><tr><td>Slug</td><td>assada-adinava-nissarana-introduction</td></tr><tr><td>Section</td><td>TL</td></tr><tr><td>Title EN</td><td>Assada Adinava Nissarana Introduction</td></tr></table></div></div><strong>November 1, 2017; revised May 25, 2022</strong>
+<p style="text-align: justify"><span>1. This subsection replaces the old subsection, "Āsvāda (Mind-Made Pleasures), Ādeenava (Bad Outcomes), Nissarana (Relinquish)." I had used <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> terms in that series without realizing it. Also, I have basically re-written some of the <span class="pali-term term-highlight" data-term="posts">posts</span> -- including the Introduction -- to have a logical flow.</span></p>
+<ul style="text-align: justify">
+<li>Furthermore, this subsection was under "<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>." I have now moved it to the "<em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> Stage," where it is more appropriate.</li>
+<li>Here is the pronunciation of the three words:[sc_embed_player fileurl="http://localhost/beng_feb2026/wp-content/uploads/Assada-adinava-nissarana.mp3"]</li>
+</ul>
+<p style="text-align: justify">2. There are two main categories of "pleasures" that one experiences: (i) Those arising <strong>due to <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em></strong>, and (ii) mind-made "pleasures" where we keep generating more <strong><em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>  (thinking/talking to ourselves in our minds) recalling such an experience of the first kind. </strong></p>
+<ul style="text-align: justify">
+<li>For example, eating a piece of cake generates a "good feeling" via the taste itself. That belongs to the first category. This is a <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span></span></em> and there are "no new <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> generated"; see, "<a href="../../pages/PS.HH.003/index.html" rel="noopener noreferrer" target="_blank">Avyākata Paṭicca Samuppāda for Vipāka Viññāna</a>".</li>
+<li><span>But if we get "attached to that taste" and start thinking about how good it is and crave for more, now we are generating vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> (thinking/talking to ourselves about how good it is), then we are generating "new </span><em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>". This second type is called <span style="color: #ff0000"><strong><em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em></strong></span> (<em>ā</em><em>svāda</em><span> in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>).</span></li>
+</ul>
+<p style="text-align: justify">3. Therefore, <strong><em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span> </span></em></strong>are<strong><em> </em></strong>basically "mind-made pleasures," i.e., <strong>only those in the second category.</strong></p>
+<ul style="text-align: justify">
+<li>Those of the first type arise AUTOMATICALLY due to sensory inputs. They arise due to our <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">kamma vipāka</span>/<span class="pali-term term-highlight" data-term="gati">gati</span></span></em> via <em>manō</em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. <em><span>Manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> <strong>are defined</strong> as <em>vēdanā, sanna</em> which arise in each and every <em><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></em>.</li>
+<li>Based on those initial feelings, we are also likely to start generating <em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (talking to ourselves, which is defined as<em><span> <span class="pali-term term-highlight" data-term="vitakka">vitakka</span>/<span class="pali-term term-highlight" data-term="vicāra">vicāra</span>,</span></em> then actual speech) and then even generate <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (bodily actions). <span style="color: #0000ff">We HAVE CONTROL over <em><span>vacī and <span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>, and that is the key to changing our <strong>defiled</strong> <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>.</span></li>
+<li>It is important to realize that <em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> are associated with speech and also "talking to ourselves": "<a href="../../pages/KD.BB.007/index.html" rel="noopener noreferrer" target="_blank">Correct Meaning of Vaci Saṅkhāra</a>".</li>
+</ul>
+<p style="text-align: justify">4. There is nothing we can do to stop the first kind. For example, even an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> WILL feel the "tastiness" of sugar or a nice meal (or saltiness of salt or unpleasantness of some medications/foods, etc.). But he/she WILL NOT become attached to that taste and crave for more.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff">It is this <strong>craving </strong>and the subsequent conscious thinking about it (<em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>) that is called <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em></span>, and that is what is bad because <strong>that will extend the <em>samsāric</em> journey filled with suffering,</strong> as we will discuss in detail in this subsection.</li>
+<li>So, it is important to distinguish between the AUTOMATIC generation of <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (due to <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>) and the CONSCIOUS generation of <em>vacī </em>and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>: "<a href="../../pages/LD.AA.009/index.html" rel="noopener noreferrer" target="_blank">How Are Gati and Kilesa Incorporated into Thoughts?</a>".</li>
+</ul>
+<p style="text-align: justify">5. It is those CONSCIOUS generations of <em>vacī</em> and <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> that contribute to future suffering (and also lead to <em>tāpa</em> or "heat" in mind right now): "<a href="../../pages/LD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Suffering in This Life – Role of Mental Impurities</a>."</p>
+<ul style="text-align: justify">
+<li>We "get addicted" to things like drugs, alcohol, and even over-eating by constantly thinking about them. We tend to recall past experiences and create in our minds such future experiences. This is generating <em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> (talking to ourselves). Then we start talking and doing things accordingly.</li>
+<li>This is how we strengthen "old bad habits" and even develop "new bad habits" or <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>. These habits or<em><span> <span class="pali-term term-highlight" data-term="gati">gati</span></span></em> could be <em>samsāric</em> <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> or new ones.</li>
+<li><span>There are many <span class="pali-term term-highlight" data-term="posts">posts</span> on the site on "</span><em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>" (or habits/character). A simple explanation is in "<a href="../../pages/TL.BB.003/index.html" rel="noopener noreferrer" target="_blank">The Law of Attraction, Habits, Character (Gati), and Cravings (Āsavas)</a>", and there is a scientific explanation too: "<a href="../../pages/DS.KK.007/index.html" rel="noopener noreferrer" target="_blank">How Habits are Formed and Broken – A Scientific View</a>."</li>
+<li><span style="color: #0000ff">This important concept of <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> is not discussed in current Theravada literature, but it can explain many other concepts.</span></li>
+</ul>
+<p style="text-align: justify">6. The more we enjoy such "mind-made pleasures" or <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>, the more established those associated <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> become. For example, a drug user/alcoholic is constantly thinking about either past experiences or the next, and is "building up" that <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em>. Then it will become increasingly difficult to be drug/alcohol-free.</p>
+<ul style="text-align: justify">
+<li>There is an even worse consequence, too: that <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> becomes what one craves/thinks about and will become operational in <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> via "<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">upādāna paccayā bhava</span></span></em>." One can start a PS cycle just in mind by thinking about getting drunk via initiating <em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em> and generating "<em><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></em> or existence of a drunkard." Then, of course, one will follow-up with actual drinking, which is done via <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></em>. Soon enough, one will end up an alcoholic.</li>
+<li>Therefore, <span style="color: #ff0000"><strong><em>ā</em></strong><em><strong>dīnava</strong></em></span> means "bad consequences or dangers". In this case, what we perceive as "mental pleasures" (<em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>) WILL have bad consequences both in this life <strong>and in future lives:</strong> In the above example, one is likely to be matched with an "alcoholic mother" in the next birth, and be born an alcoholic.</li>
+</ul>
+<p style="text-align: justify">7. This is another way to express the First Noble Truth. What a normal person thinks as "<em>sōmanassa" ("suva" + "manasa" </em>or "good feelings in the mind") CAN actually be the cause for FUTURE<em> s</em>uffering, <strong>but ONLY IF one gets attached, as discussed above</strong>.</p>
+<ul style="text-align: justify">
+<li>Note the difference between consuming tasty food and getting attached to it; seeing a nice picture and getting attached to it; hearing nice music and getting attached to it, etc.</li>
+<li><strong>Getting to that point of being able to experience "taste things" without getting attached to them is not easy</strong>; that is not attained fully until the <em>Anāgāmi</em> stage. It requires more learning and contemplation (<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> <em><span><span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>).</li>
+<li><span style="color: #0000ff">However, to first get to the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage, one needs at least to <strong>"see with wisdom"</strong> that <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em> does lead to <em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em></span>; when that understanding sinks in, <strong>that will prevent one from committing <em><span>apāyagāmi <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em>, </strong>i.e., one's mind will get rid of <strong>the coarse level of <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em></strong>. <span style="color: #0000ff">This subsection can help gain that "vision."</span></li>
+</ul>
+<p style="text-align: justify">8. When one fully understands the bad consequences (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>) of these mind-made pleasures (<em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>), that means one has understood the First Noble Truth as well as the causes for it, how to eliminate those causes, and the way to do it, i.e., all four Noble Truths.</p>
+<ul style="text-align: justify">
+<li><span>That leads to the <span class="pali-term term-highlight" data-term="cessation">cessation</span> of the </span><em>samsāric</em> journey, and that is called <span style="color: #ff0000"><em><strong>Nissarana</strong></em></span> (end of "<em>carana</em>" or journey ("nis" + "charana," which rhymes as "nissarana").</li>
+<li>But it is a step-by-step process that starts with the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span> Anugāmi</span></em> stage and culminates at the <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> stage.</li>
+</ul>
+<p style="text-align: justify">9.<strong><span> It will take several <span class="pali-term term-highlight" data-term="posts">posts</span> to explain the above in detail</span></strong>. However, understanding them will help with <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em> cycles and also with <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>/Ānāpana <span class="pali-term term-highlight" data-term="bhāvanā">bhāvanā</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>The first few subsections of the "<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a><span>" section has all the fundamentals that are needed to help understand this subsection. The <span class="pali-term term-highlight" data-term="posts">posts</span> mentioned in #3 and #4 are especially important ones.</span></li>
+<li><em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em> is related to <em><span><span class="pali-term term-highlight" data-term="āsava">āsava</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anusaya">anusaya</span></span></em>, as well as <em><span><span class="pali-term term-highlight" data-term="gati">gati</span></span></em> (pronounced <em><span><span class="pali-term term-highlight" data-term="gathi">gathi</span></span></em><span>) as we mentioned above. There are many <span class="pali-term term-highlight" data-term="posts">posts</span> on those key concepts on the site, and a couple was listed in #4 above. One could use the "Search" button on the top right to locate relevant <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li>In the following, we will discuss a couple of more examples of a<em>ssāda, </em><em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span> </span></em>and<em> nissarana </em>in simple terms.</li>
+</ul>
+<p style="text-align: justify">10. We know many things that provide instant gratification but are harmful in the long term. A good example is smoking. A smoker gets an enjoyment with smoking. Furthermore, he/she wants it to be repeated again and again, and that is <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span>.</span></em> But it has been proven without a doubt that long-term smoking causes many health problems, including cancer.</p>
+<ul style="text-align: justify">
+<li>Even though smoking has decreased over the years, many people still smoke. I had a older friend who smoked heavily; I asked him why he would keep doing it since he knew about the bad consequences. He said the habit had been ingrained, and it was hard to break it. Many years ago, he died because of his bad habit. The last several years of his life were spent in hospitals, with parts of his lungs removed piece-by-piece, and eventually, he was on oxygen most of the time.</li>
+<li><span>Of course he finally gave up smoking when he was about to be hospitalized. It was too late by the time he clearly saw the “<span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span>” (when he actually experienced the bad consequences). The damage had been done.</span></li>
+</ul>
+<p style="text-align: justify">11. However, his children clearly saw what he went through and understood that smoking might provide temporary enjoyment (<em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>), but is bound to bring about bad consequences (<em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>). Thus they stayed away from smoking (<em>nissarana</em>).</p>
+<ul style="text-align: justify">
+<li>This is the key point that we will prove to be valid for ANY sense of pleasure in the end. But do not worry; <span style="color: #0000ff">we do not have to (and cannot effectively) give up anything without understanding.</span><span> In fact, such forced “giving up” will only lead to more stress. Our minds will automatically avoid more and more “bad things” as we keep learning <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></li>
+<li>There are a few more “relatively easy to see” examples of “<em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span>, <span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span>, nissarana</span></em><span>“,  even before we get to the deeper analysis in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></li>
+<li>Craving for tasty foods is another very clear example. Most of us cannot “see” the bad consequences of overindulging in eating, and as a consequence we have a obesity problem in most countries. This has resulted in many health problems for those people and has led to increased healthcare costs for all. Still, many people are beginning to see the truth of  “<em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span>, <span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span>, nissarana</span></em>” of overeating.</li>
+<li>Heavy drinking, use of drugs, and association with bad friends are relatively “easy to see” examples.</li>
+</ul>
+<p style="text-align: justify"><span>12. However, we can systematically understand the “root causes” for ALL such problems by using the guidelines provided by the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Once we understand the actual root causes, at least some of us can think through and avoid not only such “mundane problems”, but start seeing even more long-term benefits: It is the same line of reasoning that eventually leads to the four stages of </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li><span>Thus even though <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> is focused on “eliminating the long-term suffering”, it can also help reduce some of the “short-term suffering” too.</span></li>
+<li><span>As a clear example of this, one can always examine the health of <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> monks. On average, they are much healthier than the “householders” in any of the <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> countries. They do not smoke and do not overeat.</span></li>
+<li>And one can clearly see their “joy in heart” and the calmness of their minds even though they have very few possessions and do not seek gratification in many sense pleasures that others value so highly.</li>
+</ul>
+<p style="text-align: justify">13. This last point is worth thinking about some more. If one thinks deeply enough, one can see that even some common “sense pleasures” are not that different from the pleasure one gets by inhaling a drug. They give a highly enjoyable “burst of pleasure”, but inevitably lead to bad outcomes, even short-term. One can get a hangover with a bad headache due to excess drinking, and in the case of overeating, one can feel the “discomfort” right away.</p>
+<ul style="text-align: justify">
+<li>We seek such sense pleasures because we don’t realize the value of just having a calm, peaceful state of mind. One does not understand the value of a “neutral mind” (which is called <em><span><span class="pali-term term-highlight" data-term="upekkhā">upekkhā</span></span></em>), unless one can experience it. It is like getting rid of a headache that one has had for a long time. We do not realize the "incessant stress" that is with us, until we reduce it.</li>
+<li>Our minds are constantly under stress seeking sense pleasures. That is what we all had been doing in countless previous births too. That is why it is hard to recognize any negative consequences.</li>
+</ul>
+<p style="text-align: justify">14. In the <em>Sambhōdhi Vagga</em> of the <em>Anguttara Nikāya</em>, there are several <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> on<em><span> <span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>, <em>nissarana</em>. The "<a href="https://suttacentral.net/an3.103/pli/ms" rel="noopener noreferrer" target="_blank">Pubbe­va Sam­bodha Sutta (AN 3.103)</a>" provides a succinct statement on what they are:</p>
+<p style="text-align: justify">"..<em><span>ko nu kho <span class="pali-term term-highlight" data-term="loke">loke</span> </span><strong>assādo</strong>, ko <strong>ādīnavo</strong><span>, <span class="pali-term term-highlight" data-term="kiṃ">kiṃ</span> </span><strong>nissaraṇan</strong><span>’ti? Tassa mayhaṃ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, etadahosi: ‘<span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> kho </span><span class="var">lokam </span><span><span class="pali-term term-highlight" data-term="paṭicca">paṭicca</span> uppajjāti <span class="pali-term term-highlight" data-term="sukhaṃ">sukhaṃ</span> sōmanassaṃ, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> <span class="pali-term term-highlight" data-term="loke">loke</span> assādo. <span class="pali-term term-highlight" data-term="yaṃ">Yaṃ</span> </span><span class="var" id="note389" title="loke (pts1, mr)"><span><span class="pali-term term-highlight" data-term="loko">loko</span></span></span><span> anicco dukkho vipari­ṇāma­dhammo, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> <span class="pali-term term-highlight" data-term="loke">loke</span> ādīnavo. Yo <span class="pali-term term-highlight" data-term="loke">loke</span> ­<span class="pali-term term-highlight" data-term="chanda">chanda</span>­<span class="pali-term term-highlight" data-term="rāga">rāga</span>­vinayo ­<span class="pali-term term-highlight" data-term="chanda">chanda</span>­rāgap­pahānaṃ, <span class="pali-term term-highlight" data-term="idaṃ">idaṃ</span> </span><span class="var" id="note390" title="lokanissaraṇaṃ (aṭṭha.)"><span><span class="pali-term term-highlight" data-term="loke">loke</span> nissaraṇan’ti</span></span></em>..".</p>
+<p style="text-align: justify"><strong>Translated</strong>: "..What are <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>, and <em>nissarana</em> in this world? If one gets attached (<em><span><span class="pali-term term-highlight" data-term="paṭicca">Paṭicca</span></span></em>) to <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span>/sōmanassa,</span></em> that is <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>. That gives rise to the <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em><span> (the seeds for future suffering, because these are really "<span class="pali-term term-highlight" data-term="kamma">kamma</span> seeds") with <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and viparināma nature, which is called </span><em><span><span class="pali-term term-highlight" data-term="ādīnava">ādīnava</span></span></em>. Arising of such <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> can be stopped by constraining the tendency to indulge in sense pleasures (<em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span>­<span class="pali-term term-highlight" data-term="rāga">rāga</span>­vinayo</span></em>), and thus getting rid of the craving for sense pleasures (<em><span><span class="pali-term term-highlight" data-term="chanda">chanda</span>­rāgap­pahānaṃ</span></em>)..".</p>
+<ul style="text-align: justify">
+<li>It is to be noted that <em><span><span class="pali-term term-highlight" data-term="sukha">sukha</span></span></em> is "bodily pleasure" and <em>sōmanassa </em><span>is "mind pleasure." We will discuss this highly condensed verse in the upcoming <span class="pali-term term-highlight" data-term="posts">posts</span>.</span></li>
+<li>In that <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span>, </span></em><span>the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> says that he was unable to attain the Buddhahood until he realized the need to see the dangers in sense attachments and work diligently to get rid of such cravings for sense pleasures.</span></li>
+<li>It is important to note that <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> are really <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> seeds that lead to future <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em>; see, “<a href="http://localhost/beng_feb2026/living-dhamma/rupa-aggregate/what-are-rupa-dhamma-are-rupa-too/" rel="noopener noreferrer" target="_blank">What are rūpa? – Dhamma are rūpa too!</a>“ and "<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">What are Dhamma? - A Deeper Analysis</a>".</li>
+</ul>
+<p style="text-align: justify">12. many other <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> discuss these three key concepts. In particular, "<a href="https://suttacentral.net/an6.112/pli/ms" rel="noopener noreferrer" target="_blank">Assada Sutta (AN 6.112)</a>" is notable since it ties <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span> diṭṭhi</span></em> to <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>:</p>
+<p style="text-align: justify">"“<em><span>Tayome, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, <span class="pali-term term-highlight" data-term="dhammā">dhammā</span>. Katame tayo? </span><strong>Assādadiṭṭhi</strong><span>, attānudiṭṭhi, micchādiṭṭhi. Ime kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, tayo <span class="pali-term term-highlight" data-term="dhammā">dhammā</span>. <span class="pali-term term-highlight" data-term="imesaṃ">Imesaṃ</span> kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, tiṇṇaṃ dhammānaṃ pahānāya tayo <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> bhāvetabbā. Katame tayo? </span><strong>Assādadiṭṭhiyā pahānāya aniccasaññā</strong> <strong>bhāvetabbā</strong><span>, attānudiṭṭhiyā pahānāya anattasaññā bhāvetabbā, micchādiṭṭhiyā pahānāya sammādiṭṭhi bhāvetabbā. <span class="pali-term term-highlight" data-term="imesaṃ">Imesaṃ</span> kho, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, tiṇṇaṃ dhammānaṃ pahānāya ime tayo <span class="pali-term term-highlight" data-term="dhammā">dhammā</span> bhāvetabbā”ti</span></em>".</p>
+<ul>
+<li style="text-align: justify">Or, contemplation of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span> </span></em>leads to the removal of <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span> diṭṭhi. </span></em></li>
+<li style="text-align: justify">This is because the mind-made pleasures (<em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span></span></em>) are based on the wrong perception of <em>nicca</em> <em><span><span class="pali-term term-highlight" data-term="saññā">saññā</span></span></em>, i.e., that those sense experiences are real and fruitful.</li>
+</ul>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="TL.KK.002"
+             data-section="Three Levels of Practice"
+             data-section-code="TL"
+             data-findex="0494"
+             data-level="intermediate"
+             data-reading-time="11"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        TL.KK.002
+Language:     pt-BR
+Generated-At: 2026-04-18T03:46:22Z
+Engine:       DeepL API (Glossary V5)
+-->
+<strong>1º de novembro de 2017; revisado em 25 de maio de 2022</strong>
+<p style="text-align: justify">1. Esta subseção substitui a antiga subseção “Āsvāda (Prazeres Criados pela Mente), Ādeenava (Consequências Negativas), Nissarana (Renúncia)”. Eu havia usado termos cingalêses nessa série sem perceber. Além disso, reescrevi basicamente alguns dos ensaios — incluindo a Introdução — para que houvesse um fluxo lógico.</p>
+<ul style="text-align: justify">
+<li>Além disso, esta subseção estava em “<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>”. Agora a movi para o “Estágio <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>”, onde é mais apropriada.</li>
+<li>Aqui está a pronúncia das três palavras: [sc_embed_player fileurl="http://localhost/beng_feb2026/wp-content/uploads/Assada-adinava-nissarana.mp3"]</li>
+</ul>
+<p style="text-align: justify">2. Existem duas categorias principais de “prazeres” que se experimenta: (i) aqueles que surgem <strong>devido ao <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em></strong>, e (ii) “prazeres” criados pela mente, nos quais continuamos gerando mais <strong><em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (pensando/falando conosco em nossas mentes), relembrando tal experiência do primeiro tipo. </strong></p>
+<ul style="text-align: justify">
+<li>Por exemplo, comer um pedaço de bolo gera uma “sensação agradável” por meio do próprio sabor. Isso pertence à primeira categoria. Trata-se de um <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span></span></em> e “nenhum novo <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> é gerado”; veja “<a href="../../pages/PS.HH.003/index.html" rel="noopener noreferrer" target="_blank">Avyākata Paṭicca Samuppāda para Vipāka Viññāna</a>”.</li>
+<li><span>Mas se ficarmos “apegados a esse sabor” e começarmos a pensar em como ele é bom e a desejar mais, agora estamos gerando vacī <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span> (pensar/falar conosco sobre como ele é bom), então estamos gerando “novo </span><em><span><span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>”. Esse segundo tipo é chamado <span style="color: #ff0000"><strong><em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em></strong></span> (<em>āsvāda</em> em Cingalês).</li>
+</ul>
+<p style="text-align: justify">3. Portanto, <strong><em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span> </span></em></strong>são<strong><em> </em></strong>basicamente “prazeres criados pela mente”, ou seja, <strong>apenas aqueles da segunda categoria.</strong></p>
+<ul style="text-align: justify">
+<li>Os do primeiro tipo surgem AUTOMATICAMENTE devido a estímulos sensoriais. Eles surgem devido ao nosso <em><span><span class="pali-term term-highlight" data-term="kamma vipāka">Kamma Vipāka</span>/<span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> por meio de <em>manō</em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>. <em><span>Manō <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> <strong>são definidos</strong> como <em>vēdanā, sanna</em> que surgem em cada <em><span><span class="pali-term term-highlight" data-term="citta">Citta</span></span></em>.</li>
+<li>Com base nessas sensações iniciais, também é provável que comecemos a gerar <em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (falar conosco mesmos, o que é definido como<em><span> <span class="pali-term term-highlight" data-term="vitakka">Vitakka</span>/<span class="pali-term term-highlight" data-term="vicāra">Vicāra</span>,</span></em> e depois a fala propriamente dita) e, então, até mesmo gerar <em><span><span class="pali-term term-highlight" data-term="kāya">kāya</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (ações corporais). <span style="color: #0000ff">NÓS TEMOS CONTROLE sobre <em><span>vacī e <span class="pali-term term-highlight" data-term="kāya">kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>, e essa é a chave para mudar nossa <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> <strong>contaminada</strong>.</span></li>
+<li>É importante perceber que <em><span>os vacī <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> estão associados à fala e também a “falar conosco mesmos”: “<a href="../../pages/KD.BB.007/index.html" rel="noopener noreferrer" target="_blank">Significado Correto de Vaci Saṅkhāra</a>”.</li>
+</ul>
+<p style="text-align: justify">4. Não há nada que possamos fazer para impedir o primeiro tipo. Por exemplo, mesmo um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> SENTIRÁ o “sabor” do açúcar ou de uma boa refeição (ou o salgado do sal ou o gosto desagradável de alguns medicamentos/alimentos, etc.). Mas ele/ela NÃO SE APEGARÁ a esse sabor e não desejará mais.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff">É esse <strong>desejo </strong>e o subsequente pensamento consciente sobre ele (<em><span>Vacī <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>) que é chamado de <em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em></span>, e é isso que é ruim, pois <strong>prolongará a jornada <em>samsárica</em> repleta de sofrimento,</strong> como discutiremos em detalhes nesta subseção.</li>
+<li>Portanto, é importante distinguir entre a geração AUTOMÁTICA de <em><span>manō <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (devido ao <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>) e a geração CONSCIENTE de <em>vacī </em>e <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>: “<a href="../../pages/LD.AA.009/index.html" rel="noopener noreferrer" target="_blank">Como Gati e Kilesa são incorporados aos pensamentos?</a>”.</li>
+</ul>
+<p style="text-align: justify">5. São essas gerações CONSCIENTES de <em>vacī</em> e <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> que contribuem para o sofrimento futuro (e também levam ao <em>tāpa</em> ou “calor” na mente neste momento): “<a href="../../pages/LD.AA.007/index.html" rel="noopener noreferrer" target="_blank">Sofrimento nesta vida – Papel das impurezas mentais</a>”.</p>
+<ul style="text-align: justify">
+<li>Nós “nos tornamos viciados” em coisas como drogas, álcool e até mesmo comer em excesso ao pensar constantemente nelas. Temos a tendência de relembrar experiências passadas e criar em nossas mentes tais experiências futuras. Isso está gerando <em><span>vacī <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> (falar conosco mesmos). Então começamos a falar e a agir de acordo com isso.</li>
+<li>É assim que fortalecemos “velhos maus hábitos” e até desenvolvemos “novos maus hábitos” ou <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>. Esses hábitos ou<em><span> <span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> podem ser <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span> samsáricos</span></em> ou novos.</li>
+<li>Há muitos ensaios no site sobre “<em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>” (ou hábitos/caráter). Uma explicação simples está em “<a href="../../pages/TL.BB.003/index.html" rel="noopener noreferrer" target="_blank">A Lei da Atração, Hábitos, Caráter (Gati) e Desejos (Āsavas)</a>”, e há também uma explicação científica: “<a href="../../pages/DS.KK.007/index.html" rel="noopener noreferrer" target="_blank">Como os Hábitos são Formados e Quebrados – Uma Visão Científica</a>”.</li>
+<li><span style="color: #0000ff">Este importante conceito de <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> não é discutido na literatura Theravada atual, mas pode explicar muitos outros conceitos.</span></li>
+</ul>
+<p style="text-align: justify">6. Quanto mais desfrutamos desses “prazeres criados pela mente” ou <em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>, mais arraigadas essas <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> associadas se tornam. Por exemplo, um usuário de drogas/alcoólatra está constantemente pensando em experiências passadas ou nas próximas, e está “fortalecendo” essa <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em>. Então, ficará cada vez mais difícil ficar livre de drogas/álcool.</p>
+<ul style="text-align: justify">
+<li>Há também uma consequência ainda pior: essa <em><span><span class="pali-term term-highlight" data-term="gati">Gati</span></span></em> se torna aquilo que se almeja/pensa e passará a operar no <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> por meio de “<em><span><span class="pali-term term-highlight" data-term="upādāna paccayā bhava">Upādāna Paccayā Bhava</span></span></em>”. Pode-se iniciar um ciclo de PS apenas na mente, pensando em ficar bêbado por meio da iniciação <em><span>de vacī <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em> e gerando “<em><span><span class="pali-term term-highlight" data-term="bhava">Bhava</span></span></em> ou existência de um bêbado”. Então, é claro, seguirá-se com o ato real de beber, o que é feito por meio de <em><span><span class="pali-term term-highlight" data-term="kāya">Kāya</span> <span class="pali-term term-highlight" data-term="saṅkhāra">Saṅkhāra</span></span></em>. Em pouco tempo, acabará se tornando um alcoólatra.</li>
+<li>Portanto, <span style="color: #ff0000"><em><strong><span><span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span></span></strong></em></span> significa “consequências ruins ou perigos”. Nesse caso, o que percebemos como “prazeres mentais” (<em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>) TERÁ consequências ruins tanto nesta vida <strong>quanto em vidas futuras:</strong> no exemplo acima, é provável que a pessoa se encontre com uma “mãe alcoólatra” no próximo nascimento e nasça alcoólatra.</li>
+</ul>
+<p style="text-align: justify">7. Esta é outra maneira de expressar a Primeira Nobre Verdade. O que uma pessoa normal considera como “<em>sōmanassa” (“suva” + “manasa” </em>ou “boas sensações na mente”) PODE, na verdade, ser a causa de <em>s</em>ofrimento FUTURO, <strong>mas SOMENTE SE a pessoa se apegar, conforme discutido acima</strong>.</p>
+<ul style="text-align: justify">
+<li>Observe a diferença entre consumir comida saborosa e apegar-se a ela; ver uma imagem bonita e apegar-se a ela; ouvir música agradável e apegar-se a ela, etc.</li>
+<li><strong>Chegar a esse ponto de ser capaz de experimentar “saborear as coisas” sem se apegar a elas não é fácil</strong>; isso não é alcançado plenamente até o estágio <em>de Anāgāmi</em>. Requer mais aprendizado e contemplação (<em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span></span></em> <em><span><span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>).</li>
+<li><span style="color: #0000ff">No entanto, para primeiro chegar ao estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>, é preciso pelo menos <strong>“ver com sabedoria”</strong> que <em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em> leva a <em><span><span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span></span></em></span>; quando essa compreensão se fixar, <strong>isso impedirá a pessoa de cometer <em><span>apāyagāmi <span class="pali-term term-highlight" data-term="kamma">Kamma</span></span></em>, </strong>ou seja, a mente se livrará do <strong>nível grosseiro de <em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em></strong>. <span style="color: #0000ff">Esta subseção pode ajudar a obter essa “visão”.</span></li>
+</ul>
+<p style="text-align: justify">8. Quando se compreende plenamente as consequências ruins (<em><span><span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span></span></em>) desses prazeres criados pela mente (<em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>), isso significa que se compreendeu a Primeira Nobre Verdade, bem como suas causas, como eliminar essas causas e a maneira de fazê-lo, ou seja, todas as quatro Nobres Verdades.</p>
+<ul style="text-align: justify">
+<li>Isso leva à cessação da jornada <em>samsárica</em>, e isso é chamado de <span style="color: #ff0000"><em><strong>Nissarana</strong></em></span> (fim de “<em>carana</em>” ou jornada (“nis” + “charana”, que rima como “nissarana”).</li>
+<li>Mas é um processo passo a passo que começa no estágio de <em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span> Anugāmi</span></em> e culmina no estágio de <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em>.</li>
+</ul>
+<p style="text-align: justify">9.<strong> Serão necessários vários ensaios para explicar o acima exposto em detalhes</strong>. No entanto, compreendê-las ajudará com os ciclos de <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em> e também com <em><span><span class="pali-term term-highlight" data-term="satipaṭṭhāna">Satipaṭṭhāna</span>/Ānāpana <span class="pali-term term-highlight" data-term="bhāvanā">Bhāvanā</span></span></em>.</p>
+<ul style="text-align: justify">
+<li>As primeiras subseções da seção “<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a>” contêm todos os fundamentos necessários para ajudar a compreender esta subseção. Os ensaios mencionados nos itens 3 e 4 são especialmente importantes.</li>
+<li><em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em> está relacionado a <em><span><span class="pali-term term-highlight" data-term="āsava">Āsava</span></span></em> e <em><span><span class="pali-term term-highlight" data-term="anusaya">Anusaya</span></span></em>, bem como <em><span><span class="pali-term term-highlight" data-term="a gati">a Gati</span></span></em> (pronuncia-se <em><span><span class="pali-term term-highlight" data-term="gathi">Gathi</span></span></em>), conforme mencionamos acima. Há muitas postagens sobre esses conceitos-chave no site, e algumas foram listadas no nº 4 acima. Pode-se usar o botão “Pesquisar” no canto superior direito para localizar postagens relevantes.</li>
+<li>A seguir, discutiremos mais alguns exemplos de A<em><span>ssāda, <span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span> </span></em>e<em> nissarana </em>em termos simples.</li>
+</ul>
+<p style="text-align: justify">10. Sabemos de muitas coisas que proporcionam gratificação instantânea, mas são prejudiciais a longo prazo. Um bom exemplo é o tabagismo. Um fumante sente prazer ao fumar. Além disso, ele/ela deseja repetir essa experiência repetidamente, e isso é <em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span>.</span></em> Mas está comprovado, sem sombra de dúvida, que o tabagismo a longo prazo causa muitos problemas de saúde, incluindo câncer.</p>
+<ul style="text-align: justify">
+<li>Embora o tabagismo tenha diminuído ao longo dos anos, muitas pessoas ainda fumam. Eu tinha um amigo mais velho que fumava muito; perguntei-lhe por que continuava a fazê-lo, já que sabia das consequências ruins. Ele disse que o hábito estava arraigado e que era difícil abandoná-lo. Há muitos anos, ele morreu por causa desse mau hábito. Os últimos anos de sua vida foram passados em hospitais, com partes de seus pulmões removidas aos poucos e, por fim, ele ficou dependente de oxigênio a maior parte do tempo.</li>
+<li><span>É claro que ele finalmente parou de fumar quando estava prestes a ser hospitalizado. Já era tarde demais quando ele percebeu claramente o <span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span> (quando realmente experimentou as consequências ruins). O dano já estava feito.</span></li>
+</ul>
+<p style="text-align: justify">11. No entanto, seus filhos viram claramente o que ele passou e compreenderam que fumar pode proporcionar prazer temporário (<em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>), mas está fadado a trazer consequências ruins (<em><span><span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span></span></em>). Assim, eles se mantiveram longe do fumo (<em>nissarana</em>).</p>
+<ul style="text-align: justify">
+<li>Esse é o ponto-chave que provaremos ser válido para QUALQUER sensação de prazer no final. Mas não se preocupe; <span style="color: #0000ff">não precisamos (e não podemos efetivamente) abrir mão de nada sem compreender.</span><span> Na verdade, essa “renúncia” forçada só levará a mais estresse. Nossas mentes evitarão automaticamente cada vez mais “coisas ruins” à medida que continuarmos aprendendo o <span class="pali-term term-highlight" data-term="dhamma">Dhamma</span>.</span></li>
+<li>Existem mais alguns exemplos “relativamente fáceis de perceber” de “<em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span>, <span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span>, nissarana</span></em>”, mesmo antes de chegarmos à análise mais profunda no próximo ensaio.</li>
+<li>O desejo por comidas saborosas é outro exemplo muito claro. A maioria de nós não consegue “perceber” as consequências ruins do excesso na alimentação e, como consequência, temos um problema de obesidade na maioria dos países. Isso resultou em muitos problemas de saúde para essas pessoas e levou ao aumento dos custos com saúde para todos. Ainda assim, muitas pessoas estão começando a perceber a verdade de “<em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span>, <span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span>, nissarana</span></em>” em relação ao excesso de comida.</li>
+<li>O consumo excessivo de álcool, o uso de drogas e a convivência com más companhias são exemplos relativamente “fáceis de perceber”.</li>
+</ul>
+<p style="text-align: justify"><span>12. No entanto, podemos compreender sistematicamente as “causas fundamentais” de TODOS esses problemas usando as orientações fornecidas pelo <span class="pali-term term-highlight" data-term="buddha">Buddha</span>. Uma vez que compreendamos as causas fundamentais reais, pelo menos alguns de nós podem refletir e evitar não apenas esses “problemas mundanos”, mas começar a enxergar benefícios ainda mais duradouros: é a mesma linha de raciocínio que, por fim, conduz aos quatro estágios do </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.</p>
+<ul style="text-align: justify">
+<li><span>Assim, embora o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> se concentre em “eliminar o sofrimento de longo prazo”, ele também pode ajudar a reduzir parte do “sofrimento de curto prazo”.</span></li>
+<li>Como exemplo claro disso, pode-se sempre examinar a saúde dos monges Buddhistas. Em média, eles são muito mais saudáveis do que os “chefes de família” em qualquer um dos países Buddhistas. Eles não fumam e não comem em excesso.</li>
+<li>E pode-se ver claramente a “alegria em seus corações” e a calma de suas mentes, mesmo que tenham poucos bens e não busquem satisfação nos muitos prazeres sensoriais que os outros valorizam tanto.</li>
+</ul>
+<p style="text-align: justify">13. Vale a pena refletir um pouco mais sobre este último ponto. Se pensarmos profundamente, podemos perceber que mesmo alguns “prazeres sensoriais” comuns não são tão diferentes do prazer obtido ao inalar uma droga. Eles proporcionam uma “explosão de prazer” altamente agradável, mas inevitavelmente levam a resultados ruins, mesmo a curto prazo. Pode-se ter uma ressaca com uma forte dor de cabeça devido ao consumo excessivo de álcool e, no caso de comer demais, pode-se sentir o “desconforto” imediatamente.</p>
+<ul style="text-align: justify">
+<li>Buscamos esses prazeres sensoriais porque não percebemos o valor de simplesmente ter um estado mental calmo e pacífico. Não se compreende o valor de uma “mente neutra” (chamada <em><span><span class="pali-term term-highlight" data-term="upekkhā">Upekkhā</span></span></em>), a menos que se possa experimentá-la. É como livrar-se de uma dor de cabeça que se tem há muito tempo. Não percebemos o “estresse incessante” que nos acompanha, até que o reduzamos.</li>
+<li>Nossas mentes estão constantemente sob estresse, buscando prazeres sensoriais. É isso que todos nós vínhamos fazendo em inúmeras vidas anteriores também. É por isso que é difícil reconhecer quaisquer consequências negativas.</li>
+</ul>
+<p style="text-align: justify">14. No <em>Sambhōdhi Vagga</em> do <em>Anguttara Nikāya</em>, há várias <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em> sobre<em><span> <span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span></span></em>, <em>nissarana</em>. O “<a href="https://suttacentral.net/an3.103/pli/ms" rel="noopener noreferrer" target="_blank">Pubbe­va Sam­bodha Sutta (AN 3.103)</a>” oferece uma declaração sucinta sobre o que eles são:</p>
+<p style="text-align: justify">“...<em><span>ko nu kho <span class="pali-term term-highlight" data-term="loke">loke</span> </span><strong>assādo</strong>, ko <strong>ādīnavo</strong><span>, <span class="pali-term term-highlight" data-term="kiṃ">kiṃ</span> </span><strong>nissaraṇan</strong><span>’ti? Tassa mayhaṃ, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, etadahosi: ‘<span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> kho </span><span class="var">lokam </span><span><span class="pali-term term-highlight" data-term="paṭicca">Paṭicca</span> uppajjāti <span class="pali-term term-highlight" data-term="sukhaṃ">sukhaṃ</span> sōmanassaṃ, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> <span class="pali-term term-highlight" data-term="loke">loke</span> assādo. <span class="pali-term term-highlight" data-term="yaṃ">Yaṃ</span> </span><span class="var" id="note389" title="loke (pts1, mr)"><span><span class="pali-term term-highlight" data-term="loko">loko</span></span></span><span> anicco dukkho vipari­ṇāma­dhammo, <span class="pali-term term-highlight" data-term="ayaṃ">ayaṃ</span> <span class="pali-term term-highlight" data-term="loke">loke</span> ādīnavo. Yo <span class="pali-term term-highlight" data-term="loke">loke</span> ­<span class="pali-term term-highlight" data-term="chanda">chanda</span>­<span class="pali-term term-highlight" data-term="rāga">rāga</span>­vinayo ­<span class="pali-term term-highlight" data-term="chanda">chanda</span>­rāgap­pahānaṃ, <span class="pali-term term-highlight" data-term="idaṃ">idaṃ</span> </span><span class="var" id="note390" title="lokanissaraṇaṃ (aṭṭha.)"><span><span class="pali-term term-highlight" data-term="loke">loke</span> nissaraṇan’ti</span></span></em>..".</p>
+<p style="text-align: justify"><strong>Traduzido</strong>: “... O que são <em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span></span></em> e <em>nissarana</em> neste mundo? Se alguém se apega (<em><span><span class="pali-term term-highlight" data-term="paṭicca">Paṭicca</span></span></em>) a <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span>/sōmanassa,</span></em> isso é <em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>. Isso dá origem aos <em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em><span> (as sementes para o sofrimento futuro, pois estas são, na verdade, “sementes de <span class="pali-term term-highlight" data-term="kamma">Kamma</span>”) com natureza <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e viparināma, o que é chamado de </span><em><span><span class="pali-term term-highlight" data-term="ādīnava">Ādīnava</span></span></em>. O surgimento de tal <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> pode ser interrompido restringindo-se a tendência de se entregar aos prazeres sensoriais (<em><span><span class="pali-term term-highlight" data-term="chanda">Chanda</span>­<span class="pali-term term-highlight" data-term="rāga">rāga</span>­vinayo</span></em>) e, assim, livrando-se do desejo por prazeres sensoriais (<em><span><span class="pali-term term-highlight" data-term="chanda">Chanda</span>­rāgap­pahānaṃ</span></em>)..”.</p>
+<ul style="text-align: justify">
+<li>É importante notar que <em><span><span class="pali-term term-highlight" data-term="sukha">Sukha</span></span></em> é “prazer corporal” e <em>sōmanassa </em>é “prazer mental”. Discutiremos este versículo altamente condensado nos próximos ensaios.</li>
+<li>Nesse <em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span>, </span></em><span>o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> diz que não conseguiu atingir a iluminação até perceber a necessidade de enxergar os perigos dos apegos sensoriais e trabalhar diligentemente para se livrar desses desejos por prazeres sensoriais.</span></li>
+<li>É importante observar que <em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em> são, na verdade, sementes <em><span>de <span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> que levam a futuros <em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span></span></em>; veja “O que<a href="http://localhost/beng_feb2026/living-dhamma/rupa-aggregate/what-are-rupa-dhamma-are-rupa-too/" rel="noopener noreferrer" target="_blank"> são rūpa? – Dhammā também são rūpa!</a>” e “<a href="../../pages/AB.GG.005/index.html" rel="noopener noreferrer" target="_blank">O que são Dhammā? – Uma Análise Mais Profunda</a>”.</li>
+</ul>
+<p style="text-align: justify">12. muitos outros <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> discutem esses três conceitos-chave. Em particular, o “<a href="https://suttacentral.net/an6.112/pli/ms" rel="noopener noreferrer" target="_blank">Assada Sutta (AN 6.112)</a>” é notável, pois vincula <em><span><span class="pali-term term-highlight" data-term="assāda">assāda</span> diṭṭhi</span></em> a <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>:</p>
+<p style="text-align: justify">“<em><span>Existem, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, três <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span>. Quais são esses três? </span><strong>Assādadiṭṭhi</strong><span>, attānudiṭṭhi, micchādiṭṭhi. Eis, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, esses três Dhammās. Para eliminar esses três Dhammās, devem-se cultivar esses três Dhammās. Quais são eles? </span><strong>Para eliminar a visão correta</strong>, <strong>deve-se cultivar a percepção da impermanência</strong>; para eliminar a visão de si mesmo, deve-se cultivar a percepção da não-existência de um eu; para eliminar a visão errada, deve-se cultivar a visão correta. </em>“<em><span>Isto, <span class="pali-term term-highlight" data-term="bhikkhave">bhikkhave</span>, significa que, para eliminar esses três <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span>, estes três <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> devem ser cultivados</span></em>.”</p>
+<ul>
+<li style="text-align: justify">Ou, a contemplação da <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span> </span></em>leva à remoção da <em><span>visão errônea (<span class="pali-term term-highlight" data-term="assāda">Assāda</span> diṭṭhi). </span></em></li>
+<li style="text-align: justify">Isso ocorre porque os prazeres criados pela mente (<em><span><span class="pali-term term-highlight" data-term="assāda">Assāda</span></span></em>) baseiam-se na percepção errônea de <em>nicca</em> <em><span><span class="pali-term term-highlight" data-term="saññā">Saññā</span></span></em>, ou seja, de que essas experiências sensoriais são reais e frutíferas.</li>
+</ul>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/TL.KK.001/index.html">Assada Adinava Nissarana</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/TL.KK.003/index.html">How Perceived Pleasures Assada Lead To Dukkha</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/TL.KK.001/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Assada Adinava Nissarana</span>
+        
+        <span class="pathway-title title-pt">Assada Adinava Nissarana</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/TL.KK.003/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">How Perceived Pleasures Assada Lead To Dukkha</span>
+        
+        <span class="pathway-title title-pt">Como os prazeres aparentes acabam levando ao Dukkha</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-TL">
+        ↑ Back to Three Levels of Practice
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

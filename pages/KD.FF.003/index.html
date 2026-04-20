@@ -1,0 +1,655 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Anicca Dukkha Anatta | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" >
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Key Dhamma Concepts</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 27 / 110</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">KD.FF.003</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label ">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Anicca Dukkha Anatta</h1>
+    
+    <h1 class="title-pt">Anicca, Dukkha, Anattā</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>KD.FF.003</td></tr>
+          <tr><td><strong>Section</strong></td><td>Key Dhamma Concepts</td></tr>
+          <tr><td><strong>Level</strong></td><td>intermediate</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>15</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+    <div class="toc-pt" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-pt')">
+            ☰ Ver seções deste texto
+        </button>
+        <div class="mini-toc" id="toc-content-pt" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Seções:</strong></p><ul id="toc-list-pt"></ul></div>
+    </div>
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="KD.FF.003"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0099"
+             data-level="intermediate"
+             data-reading-time="15"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>KD.FF.003</td></tr><tr><td>Fin-dex</td><td>0099</td></tr><tr><td>Slug</td><td>anicca-dukkha-anatta</td></tr><tr><td>Section</td><td>KD</td></tr><tr><td>Title EN</td><td>Anicca Dukkha Anatta</td></tr></table></div></div><p style="text-align: justify"><strong>Revised October 25, 2016; April 11, 2017; September 13, 2017; January 26, 2018; May 25, 2019; August 6, 2019; January 11,2020; <span style="color: #0000ff">August 23, 2022</span></strong></p>
+<h5><strong><span style="font-size: 18pt">Introduction</span></strong></h5>
+<p style="text-align: justify">1. No other factor has contributed to helping keep <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> hidden in the past hundreds of years than the incorrect interpretations of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> as just "impermanence" and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> as just "no-self." If one can find even a single instance in the <em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span> <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> (not translations) that describes <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span> that way, please let me know at lal@<span class="pali-term term-highlight" data-term="puredhamma">puredhamma</span>.net.  Also, before quoting English translations of the </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span>, please read the <span class="pali-term term-highlight" data-term="post">post</span>,</span><strong> "</strong><a href="../../pages/HB.AA.018/index.html" rel="noopener" target="_blank">Misinterpretation of Anicca and Anatta by Early European Scholars.</a><strong>" </strong></p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>I consider this series of <span class="pali-term term-highlight" data-term="posts">posts</span> on "</span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>" to be the most important on the website. Reading the <span class="pali-term term-highlight" data-term="posts">posts</span> in the given order could be very beneficial.</span></li>
+<li style="text-align: justify"><span style="color: #0000ff"><span>A <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comes to this world to reveal three words and eight letters (in <span class="pali-term term-highlight" data-term="pāli">Pāli</span>).  </span></span><span style="color: #0000ff"><i style="color: #0000ff">"<strong><span>Attakkarā thīnapadā Sambuddhena pakāsithā,  na hī <span class="pali-term term-highlight" data-term="sīla">sīla</span> vatan hotu uppajjāti Tathāgatā.</span></strong>" </i><span style="color: #0000ff"><span>That means "a <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span></span><i style="color: #0000ff"><span><span class="pali-term term-highlight" data-term="tathāgata">Tathāgata</span>)</span></i><span style="color: #0000ff"> is born NOT just to show how to live a moral life, but to reveal three words with eight letters to the world."</span></span> So far, I have not seen this verse in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>.</span></em> It is likely to have been in an old commentary.</li>
+<li style="text-align: justify"><span style="color: #0000ff">These three words with eight letters are <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>. <span style="color: #000000"><span>(when written in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>/<span class="pali-term term-highlight" data-term="pāli">Pāli</span>: අනිච්ච දුක්ඛ අනත්ත but with last two letters in each term in the "old script" combined to become one, so the number of letters becomes eight instead of 11. I was able to find only අනත්‍ථ for අනත්ත, but you can see how four letters become three there). </span></span></span></li>
+</ul>
+<p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em><span> is pronounced "<span class="pali-term term-highlight" data-term="anichcha">anichcha</span>," which rhymes with "picture."</span></p>
+<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/anicca.mp3" type="audio/mpeg"/></audio>
+<p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> is pronounced similarly, duk+kha.</p>
+<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/dukkha.mp3" type="audio/mpeg"/></audio>
+<p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anatta">Anatta</span></span></em> is pronounced, "anaththa."</p>
+<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/anatta.mp3" type="audio/mpeg"/></audio>
+<p style="text-align: justify">See "<a href="../../pages/FT.FF.001/index.html" rel="noopener" target="_blank">Popup Pāli Glossary with Pronunciation</a><span>" for more meanings of <span class="pali-term term-highlight" data-term="pāli">Pāli</span> terms and sound files on pronunciations.</span></p>
+<p style="text-align: justify">2. <em><span><span class="pali-term term-highlight" data-term="asubha">Asubha</span></span></em> ("non-auspicious" or "unfruitful" nature) is another characteristic of nature. It appears with <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> in several <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, for example, "<a href="https://suttacentral.net/an4.49/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 4.49)</a>".</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Furthermore, the word, <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>, does not appear in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> to my knowledge.</li>
+<li style="text-align: justify">However, as discussed below, <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>, and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> appear as a group in many <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>. Thus it is justifiable to clump them together as <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em>.</li>
+</ul>
+<h5 style="text-align: justify"><span style="font-size: 18pt">Why Are <em><span><span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> so Important?</span></h5>
+<p style="text-align: justify"><span>3. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> clarified these "three characteristics of this world" in his first </span><em><span><span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em>; see, "<a href="../../pages/KD.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Does the First Noble Truth Describe only Suffering?">Does the First Noble Truth Describe only Suffering?</a>".</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff"><span>These are the three primary characteristics of “this world.” <span class="pali-term term-highlight" data-term="buddha">Buddha</span> comes to the world to reveal the true nature of the world. </span></span></li>
+<li><span style="color: #0000ff">Any moral person instinctively knows (and most religions teach) how to live a righteous life; see, "<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma - In a Chart</a>." </span></li>
+<li style="text-align: justify"><span>The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that if one comprehends the true nature of “this world,” as codified in these three words, then one would attain the Stream Entry (</span><em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em>) stage of <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; see, “<a href="../../pages/TL.HH.008/index.html" rel="noopener" target="_blank">Why is Correct Interpretation of Anicca, Dukkha, Anatta so Important?</a>”.</li>
+</ul>
+<p style="text-align: justify">4. Understanding the words<em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> is critical. If one sticks to an incorrect interpretation of these three words, no matter how much effort one exerts, there is no possibility of attaining the <em><span><span class="pali-term term-highlight" data-term="sōtapanna">Sōtapanna</span></span></em> stage. Even i<span style="font-size: 1.125rem;letter-spacing: 0px">n most </span><em style="font-size: 1.125rem;letter-spacing: 0px">Thēravada</em><span style="font-size: 1.125rem;letter-spacing: 0px"> English texts, t</span><span style="font-size: 1.125rem;letter-spacing: 0px">hese three words have incorrect translations: impermanence, suffering, and “no-soul” or "no-self." The correct meanings are the following.</span></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Nothing in this world can be maintained to one's satisfaction (<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>).</li>
+<li style="text-align: justify">When one strives to achieve that, it leads to suffering (<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>). However, many people try to gain "happiness" by resorting to immoral deeds, ending up in the <em>apāyā</em>. That is how one becomes genuinely helpless.</li>
+<li style="text-align: justify"><span>Striving to achieve the impossible (i.e., seeking happiness in worldly things) only leads to suffering. Thus, one's efforts are not only unfruitful, but one becomes helpless in the <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> process (</span><em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>).</li>
+</ul>
+<h5 style="text-align: justify"><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span> Words for Impermanence Are "</span><em>Adduwan</em>" or "<em>Aniyata</em>"</h5>
+<p style="text-align: justify"><span>5. The <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word for impermanence is NOT </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>; it</span></em> is <em>adduwan</em> or <em>aniyata</em>. For example, “<i>Jeevitan aniyatam, Maranan niyatam</i>” means, “life is not permanent, death is.”</p>
+<p style="text-align: justify">“<i>addhuvam jeevitam, dhuvaṃ maranam</i>” means the same thing.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>Therefore, the critical mistake was translating the original <span class="pali-term term-highlight" data-term="pāli">Pāli</span> word <span class="pali-term term-highlight" data-term="anicca">anicca</span> to <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span> as “anitya,” which does mean impermanence.</span></li>
+<li style="text-align: justify">This term, “<em>dhuva,</em>” comes in the <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>­niman­tanika <span class="pali-term term-highlight" data-term="sutta">Sutta</span> (Majjhima Nikāya 49)</span></em><span>, where the Baka <span class="pali-term term-highlight" data-term="brahma">Brahma</span> says his existence is permanent; see #12 of
+“</span><a href="../../pages/KD.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Anidassana Viññāṇa – What It Really Means</a>.”</li>
+</ul>
+<h5 style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anatta">Anatta</span></span></em> Is Not “Self” or “No-Self”</h5>
+<p style="text-align: justify">6. Now, let us examine the damage done by translating the original <em><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span></span></em> word <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> to <em><span><span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span></span></em> as “<em>anātma.”</em></p>
+<ul style="text-align: justify">
+<li><span>At the time of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, there were two opposing views on the idea of a “self.” One camp believed in an unchanging “soul” (</span><em>ātma</em>) associated with a being. This camp thus corresponds to the world's major religions today with the concept that when one dies, one’s soul goes to heaven or hell.</li>
+<li>The opposing camp argued that there is “no-soul” (<em>anātma</em>) and that when one dies, there is nothing that survives the death. This view is the materialistic view today that our minds arise from matter, and thus, there is nothing that survives death.</li>
+</ul>
+<p style="text-align: justify"><span>7. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said it was neither. There is no "self" permanently associated with a living being: both the mind and the body are in constant flux (see the Section on “</span><a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank">The Grand Unified Theory of Dhamma</a>”), and thus there is no “soul” or an “unchanging self.” See "<a href="../../pages/PS.FF.003/index.html" rel="noopener" target="_blank">What Reincarnates? - Concept of a Lifestream</a>".</p>
+<ul style="text-align: justify">
+<li>However, one can choose how to respond to an external stimulus. Therefore, it is also incorrect to say there is "no-self."</li>
+<li>Furthermore, there is continuity at death based on cause-and-effect (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></em>; see, "<a href="../../pages/PS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Paṭicca samuppāda</a>").</li>
+<li>The new living being is a continuation of the old living being, just as an older man is a continuation of the process from the baby stage. Change is there at every MOMENT, based on cause-and-effect. The “new” is dependent on the “old.”</li>
+<li>That is also why it is incorrect to say that an <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> is annihilated at death (i.e., at <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>). See "<a href="../../pages/SI.AA.012/index.html" rel="noopener noreferrer" target="_blank">Yamaka Sutta (SN 22.85) – Arahanthood Is Not Annihilation but End of Suffering</a>".</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">They Are Related to Each Other</span></strong></h5>
+<p style="text-align: justify"><span>8. The <span class="pali-term term-highlight" data-term="buddha">Buddha</span> stated that the three characteristics of “this world” are RELATED to each other:</span></p>
+<p style="text-align: justify"><i>“yadaniccam tam dukkham, yam dukkham tadanatt<em>ā</em>” </i>(<i><span>"yad aniccam <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> dukkham, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> dukkham tad anatt</span><em>ā</em>"</i>)<i>, </i>i.e.,</p>
+<p style="text-align: justify">“if something is <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>, <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em> arises, and one becomes helpless (<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>).” </span></em>Note that<em> "<i><span><span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span>" </span></i></em>and<i style="font-style: italic"> "yad" </i>have the same meaning and are used interchangeably.<em><i> </i></em>In the same way<em><i>, "yadidaṃ" </i></em>comes from<em><i><span> "yad <span class="pali-term term-highlight" data-term="idaṃ">idaṃ</span>."</span></i></em></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">(In the <em>Samyutta Nikāya</em> <em><span>(<span class="pali-term term-highlight" data-term="anicca">Anicca</span> Vagga</span></em>)<em>,</em> many <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span>,</span></em> including "<a href="https://suttacentral.net/sn35.1/en/sujato" rel="noopener" target="_blank"><em><span>Ajjhattanicca <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.1)</a>"<em>,</em> "<a href="https://suttacentral.net/sn35.4/en/sujato" rel="noopener" target="_blank"><em><span>Bahiranicca <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.4)</a>", and "<a href="https://suttacentral.net/sn22.15/en/sujato" rel="noopener" target="_blank"><em><span>Yadanicca <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> (SN 22.15)</a>" have the above verse.)<em>
+</em></li>
+</ul>
+<p style="text-align: justify">9. <strong>Now, let us see what happens if we take <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> to be impermanent and<em><span> <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> to be “no-soul.”</strong> <span style="color: #0000ff">Then the above verse reads, “if something is not permanent, suffering arises, and because of that one becomes “no-self.” </span></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Many people think that since one's body is impermanent, suffering arises. But the <em><span><span class="pali-term term-highlight" data-term="suttās">suttās</span></span></em> mentioned above describe this for all six <span style="color: #ff0000">internal</span> senses (<em>Ajjhattanicca</em> or <span style="color: #ff0000"><em><span>Ajjhatta <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em></span> <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>) and for everything <span style="color: #ff0000"><strong>external</strong></span> sensed by the six sense faculties (<span style="color: #000000"><em>Bāhiranicca </em></span>or<em><strong><span style="color: #ff0000"><span> Bāhira <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></span></strong><span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>). Therefore, that verse holds for anything and everything "in this world."</li>
+<li style="text-align: justify">Thus if a headache becomes impermanent (i.e., if it goes away,) that will lead to happiness. Thus, impermanence does not necessarily lead to suffering. But if we cannot handle a headache the way we want (i.e., cannot get rid of it), then that will lead to suffering!</li>
+<li style="text-align: justify"><span>As we will show in the next <span class="pali-term term-highlight" data-term="post">post</span> ("</span><a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Anicca – True Meaning</a>"), the correct translation holds for any case.</li>
+</ul>
+<p style="text-align: justify"><span style="color: #0000ff">10. The opposite of the above statement must be correct, too (in mathematical logic, this is not correct generally, but in this particular case, it can be shown to be right. It is due to the assumption that "<em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>" depends only on "<em>nicca</em>" or "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>" and no other factor).</span></p>
+<p style="text-align: justify">Let us consider the incorrect interpretations that say:</p>
+<p style="text-align: justify"><span style="color: #0000ff">“if something is permanent, suffering does not arise, and because of that, it implies a  “self.”</span></p>
+<ul style="text-align: justify">
+<li>How can one stop suffering if one has a permanent headache or a sickness? And in what sense does a “self” arise?</li>
+<li style="text-align: justify">There are many things in this world, if it becomes permanent, would lead to suffering: a disease, poverty, association with someone disliked, moving away from a loved one, etc.<b></b></li>
+</ul>
+<p style="text-align: justify">Thus we can see that <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> do not mean impermanence and “no-self.”</p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>However, if we take the correct translation, we can show that the reverse statement also holds, as discussed in the next <span class="pali-term term-highlight" data-term="post">post</span>: "</span><a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Inability to Keep What We Like</a>."</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">Everyone Knows Anything in This World is Impermanent</span></strong></h5>
+<p style="text-align: justify">11. Permanence and impermanence are inseparable PROPERTIES of living beings, objects, and events. On the other hand,<em><span> nicca/<span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> are PERCEPTIONS IN ONE'S MIND about them.</p>
+<ul style="text-align: justify">
+<li style="list-style-type: none">
+<ul>
+<li style="list-style-type: none">
+<ul>
+<li style="text-align: justify">In the long run, we cannot maintain anything to our satisfaction (including "our" own body), which is <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>. And because of that, we become distraught, and that is <em><span><span class="pali-term term-highlight" data-term="dukkha">dukkha</span></span></em>. And since we cannot prevent this sequence of events, we are truly helpless in the long run (nothing of real substance left in the end.) That is <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>.
+<ul>
+<li>Here is a video that illustrates the concept of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> clearly:</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span class="mce_SELRES_start" style="width: 0px;overflow: hidden;line-height: 0">﻿</span></li>
+<li style="text-align: justify">We must realize that we all will undergo this inevitable change as we age. No matter how hard we try, it is not possible to maintain ANYTHING to our satisfaction. It is the nature of "this world": <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>.</span></em></li>
+<li style="text-align: justify">Of course, any of these celebrities (or their fans) will be saddened to see that comparison in the video above. They have not been able to maintain their bodies to their satisfaction. However, a person on bad terms with any of these celebrities could be happy to see those pictures since he/she would like to see something terrible happen to that celebrity.</li>
+</ul>
+<p style="text-align: justify">12. Thus, "impermanence" is inevitable; it is a property of anything in this world. <b>But "<em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>" is a perception in someone's mind. That perception CAN be changed; that is how one gets rid of suffering. </b></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">In the above case, celebrities' bodies ARE impermanent; but that did not necessarily cause suffering to ALL. It caused pain to only those who did not like them getting old. If they had any enemies, those would be happy to see them losing their "good looks."</li>
+<li style="text-align: justify">Impermanence is a fact; see "<a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank">Grand Unified Theory of Dhamma</a>." But impermanence is NOT the MEANING of <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em>.</li>
+<li style="text-align: justify">These pictures provide the visual impact that we do not usually get. We don't see changes in ourselves because the change is gradual.</li>
+</ul>
+<p style="text-align: justify"><span>13.  A <span class="pali-term term-highlight" data-term="buddha">Buddha</span> is not needed to show that impermanence is an inherent characteristic of our universe. Scientists are well aware of that, but they have not attained </span><em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>.  <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> is a profound concept with several meanings, and they are all related. Here are three ways to look at it:</p>
+<ul style="text-align: justify">
+<li>"<a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Inability to Keep What We Like</a>" (listed above).</li>
+<li>"<a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Repeated Arising/Destruction</a>."</li>
+<li>"<a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – Worthlessness of Worldly Things</a>."</li>
+<li>"<a href="../../pages/KD.FF.009/index.html" rel="noopener" target="_blank">Anicca – The Incessant Distress (“Pīḷana”)</a>"</li>
+</ul>
+<p style="text-align: justify"><span>14. Finally, the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> said, "</span><em><span>Sabbe <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> anattā."</span></em><strong> So, what does "all <em><span><span class="pali-term term-highlight" data-term="dhammā">dhammā</span></span></em> are "no-self" mean</strong> <strong>(if <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em> meant "no-self")?</strong> <em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> </span></em><span>means "to bear" and includes those <span class="pali-term term-highlight" data-term="kammic">kammic</span> energies that can bring in the future </span><em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span>,</span></em> including future rebirths. We strive to make such <em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> </span></em>which will only bring NET suffering in the future.  Nothing in this world is of any real value in the end. That is <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span> </span></em>nature.</p>
+<ul style="text-align: justify">
+<li>This is systematically explained in "<a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origin of Life</a><span>" and specifically in the <span class="pali-term term-highlight" data-term="post">post</span>, "</span><a href="../../pages/DS.FF.009/index.html" rel="noopener noreferrer" target="_blank">Dhammā, Kamma, Saṅkhāra, Mind – Critical Connections</a>."</li>
+<li style="text-align: justify">Another keyword that has lost its true meaning is "<em>san</em>"; see, "<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">What is “San”? Meaning of Sansara (or Samsara)</a>".</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">Possible Historical Reasons for Mistranslations</span></strong></h5>
+<p style="text-align: justify">15. We can<span style="font-size: 1.125rem;letter-spacing: 0px"> see the origins of some of these incorrect translations b</span><span style="font-size: 1.125rem;letter-spacing: 0px"><span>y looking at how <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> was transmitted over time. For details, see "</span></span><a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" style="font-size: 1.125rem;letter-spacing: 0px" target="_blank">Historical Background</a>."</p>
+<ul style="text-align: justify">
+<li style="list-style-type: none">
+<ul style="text-align: justify">
+<li>For about 500 years after the <em>Parinibbåna</em><span> of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> was transmitted orally from generation to generation of <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em><span>, who faithfully passed down the <span class="pali-term term-highlight" data-term="pāli">Pāli</span> Canon. Of course, it had been DESIGNED for easy oral transmission.</span></li>
+<li>See "<a href="../../pages/HB.AA.007/index.html" rel="noopener noreferrer" target="_blank">Preservation of the Dhamma</a><span>" for a discussion on this aspect. The original teachings of the <span class="pali-term term-highlight" data-term="buddha">Buddha</span> are still intact.</span></li>
+</ul>
+</li>
+</ul>
+<p style="text-align: justify">16. <span style="color: #0000ff"><span>Then, it was written down in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> script for the first time in 29 BCE in Sri Lanka. </span><strong><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span> is a phonetic language that does not have an alphabet.</span></strong></span></p>
+<ul style="text-align: justify">
+<li>The <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> was never translated to any other language until the Europeans discovered "<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>" in the late 1600s; see "</span><a href="../../pages/HB.AA.017/index.html" rel="noopener noreferrer" target="_blank">Background on the Current Revival of Buddha Dhamma</a>."</li>
+<li><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> was not translated to even the <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language until 2005.</span></li>
+</ul>
+<p style="text-align: justify"><span>17. When Rhys Davis and others started doing those English translations, they were heavily influenced by <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span> </span><em><span>Mahāyāna <span class="pali-term term-highlight" data-term="sutras">sutras</span> and</span></em> <em>Vedic</em><span> literature. Think about it: when the Europeans first started discovering all these different <span class="pali-term term-highlight" data-term="pāli">Pāli</span> and <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span> documents, they must have been overwhelmed by the complexities.</span></p>
+<ul style="text-align: justify">
+<li><span>It took them some time to separate <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> from Hinduism, and in the process, some concepts got mixed up; see "</span><a href="../../pages/HB.AA.018/index.html" rel="noopener" target="_blank">Misinterpretation of Anicca and Anatta by Early European Scholars</a>."</li>
+<li>For example, They ASSUMED that “<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em>” was the same as “<em>anātma,</em><span>” which is a <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span> word with a different meaning, i.e., "no-self." Similarly, they took "</span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em><span>" to mean the same as <span class="pali-term term-highlight" data-term="sanskrit">Sanskrit</span> "</span><em>anitya,"</em> which does mean "impermanent."</li>
+</ul>
+<h5 style="text-align: justify">It Will Take Time to Untangle These Issues</h5>
+<p style="text-align: justify"><span>18. The worst was that even contemporary <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> scholars like Malasekara (a doctoral student of Rhys Davis) “learned” <span class="pali-term term-highlight" data-term="buddhism">Buddhism</span> from the Europeans and thus started using wrong interpretations. Other <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> scholars like Kalupahana and Jayathilake also learned “<span class="pali-term term-highlight" data-term="buddhism">Buddhism</span>” at universities in the United Kingdom.</span></p>
+<ul style="text-align: justify">
+<li><span>Following the original translations by Rhys Davis, Eugene Burnouf, Olcott, and others, those <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> scholars also write books in both English and <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>. Of course, scholars in other <span class="pali-term term-highlight" data-term="buddhist">Buddhist</span> countries did the same in their languages, and the incorrect interpretations spread worldwide.</span></li>
+<li>To correct this grave problem, we must go back to the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> in <span class="pali-term term-highlight" data-term="pāli">Pāli</span> and start the process there.</span></li>
+<li><span><span class="pali-term term-highlight" data-term="pāli">Pāli</span> </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> should not be translated word to word. Most of the <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> are condensed and written in a style conducive to oral transmission; see "<a href="../../pages/SI.AA.001/index.html" rel="noopener" target="_blank">Sutta Interpretation – Uddēsa, Niddēsa, Paṭiniddēsa</a>."</li>
+<li>Commentaries were written to explain critical concepts in the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, and only three of those original commentaries have survived. We need to rely heavily on <em>Patisambhidamagga</em>, <em>Petakopadesa</em>, and <em>Nettippakarana.</em></li>
+<li>Instead, most people rely on incorrect commentaries written in more recent years, especially Buddhaghosa's <em>Visuddhimagga</em>. For details, see "<a href="../../pages/HB.AA.015/index.html" rel="noopener noreferrer" target="_blank">Buddhaghosa and Visuddhimagga – Historical Background</a>." However, Buddhaghosa did not change the meanings of the words<em><span> <span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span>. T</span></em>hat is likely to have happened in more recent times, as I explained above). But he incorporated many other Hindu concepts like breath and <em><span><span class="pali-term term-highlight" data-term="kasina">kasina</span></span></em> meditation; see, "<a href="../../pages/HB.AA.016/index.html" rel="noopener noreferrer" target="_blank">Buddhaghosa’s Visuddhimagga – A Focused Analysis</a>."</li>
+</ul>
+<p style="text-align: justify">19. It is also important to note that mass printing was not available until recent years and became common only in the 1800s; see, "<a href="https://www.newworldencyclopedia.org/entry/Printing_press" rel="noopener noreferrer" target="_blank">Printing press</a>."</p>
+<ul style="text-align: justify">
+<li>Thus mass production of books became possible only with the new printing presses in the 1800s. By that time, key concepts had been mistranslated.</li>
+<li>In the early days, <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> was written on specially prepared leaves and needed to be re-written by hand every 100-200 years before they degraded. So, we must be grateful to the <em><span><span class="pali-term term-highlight" data-term="bhikkhus">bhikkhus</span></span></em> in Sri Lanka who did this dutifully for almost 2000 years.</li>
+<li><span><span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> language (both spoken and written) changed over the past 2000 years. </span><strong>The need to re-write the <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> every 100 or so years made sure that any changes in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span> script were taken into account;</span></strong> see #21 of "<a href="../../pages/HB.AA.018/index.html" rel="noopener noreferrer" target="_blank">Misinterpretation of Anicca and Anatta by Early European Scholars</a>."</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">Other Related Issues</span></strong></h5>
+<p style="text-align: justify">20. I came across another problem in a recent online forum. People are debating the meanings of the words "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>" (අනත්ත in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>) and "</span><em>anattha</em>" <span style="font-size: 1.125rem;letter-spacing: 0px">(</span>අනත්ථ<span style="font-size: 1.125rem;letter-spacing: 0px"><span> in <span class="pali-term term-highlight" data-term="sinhala">Sinhala</span>). They mean the same, but more emphasis is added to the latter word.</span></span></p>
+<ul style="text-align: justify">
+<li>So, most people write it as "<em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span>."</span></em> It does not matter how one writes it, as long as one understands the meaning as "with no refuge" or "without essence," and NOT "no-self."</li>
+<li>But it does mean "it is not fruitful to take anything in this world to be mine."</li>
+</ul>
+<p style="text-align: justify">21. Two more main misconceptions are prevalent today. They not only block the path to <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> but are<em> miccha diṭṭhi</em><span> that could be responsible for <span class="pali-term term-highlight" data-term="rebirth">rebirth</span> in the </span><em>apāyā</em>. I am not trying to scare anyone, but “making <em>adhamma</em> to be <em><span><span class="pali-term term-highlight" data-term="dhamma">dhamma</span></span></em> is a serious offense.”</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Misinterpretation of breath meditation as<em><span> <span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>: “<a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">Is Ānāpānasati Breath Meditation?</a>“.</li>
+<li style="text-align: justify">Insisting that the <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (<em>manomaya kaya</em>) is a Mahāyāna concept: “<a href="../../pages/LD.GG.003/index.html" rel="noopener noreferrer" target="_blank">Gandhabba State – Evidence from Tipiṭaka</a>“.</li>
+</ul>
+<p style="text-align: justify">22. All these misconceptions are not the fault of current <em>Theravadins</em>; they have been handed down hundreds of years, as explained in the “<a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Historical Background</a>.“ <strong><span>However, it makes no sense to adhere to them when substantial evidence is presented against them, per the above <span class="pali-term term-highlight" data-term="posts">posts</span> and many others on this website.</span></strong></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Of course, no one should be able to insist, “this is the only truth, and nothing else is the truth.” But the truth can be verified to one’s satisfaction by critically examining the evidence. I am open to discussing any valid contrary evidence. We need to sort out the truth for the benefit of all.</li>
+</ul>
+<p style="text-align: justify">23. Finally, it may not be possible to comprehend <em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">dukkha</span>, and <span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>. One must first follow the mundane path to learn basic concepts like <span class="pali-term term-highlight" data-term="kamma">kamma</span> and <span class="pali-term term-highlight" data-term="rebirth">rebirth</span>.</span></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">More details in "<a href="../../pages/LD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Transition to Noble Eightfold Path</a>."</li>
+<li style="text-align: justify">A systematic approach at "<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Living Dhamma</a>."</li>
+</ul>
+<p style="text-align: justify">24.<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span> are complex <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words that cannot be translated into English directly. No English word can convey the meaning of </span><em><span><span class="pali-term term-highlight" data-term="anicca">anicca</span></span></em> (or <em><span><span class="pali-term term-highlight" data-term="anatta">anatta</span></span></em><span>). The following subsections discuss those two complex <span class="pali-term term-highlight" data-term="pāli">Pāli</span> words:</span></p>
+<p class="entry-title" style="text-align: justify"><a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Anicca – True Meaning</a></p>
+<p class="entry-title" style="text-align: justify"><a href="../../pages/KD.FF.013/index.html" rel="noopener noreferrer" target="_blank">Anattā – A Systematic Analysis</a></p>
+<p class="entry-title" style="text-align: justify"><span style="color: #0000ff"><strong>
+July 10, 2020:</strong></span> <span style="color: #000000"><span>A new series of <span class="pali-term term-highlight" data-term="posts">posts</span> on "</span><a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origin of Life</a>" systematically explain<em><span> <span class="pali-term term-highlight" data-term="tilakkhana">Tilakkhana</span></span></em> and <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>and also makes the connection between them.</span></p>
+<p style="text-align: justify"></p>
+    </article>
+
+    
+    <article class="content-block content-pt" id="content-pt"
+             data-pdpn="KD.FF.003"
+             data-section="Key Dhamma Concepts"
+             data-section-code="KD"
+             data-findex="0099"
+             data-level="intermediate"
+             data-reading-time="15"
+             data-language-availability="en,pt"
+             itemscope itemtype="https://schema.org/Article">
+        <!--
+💎 BRASILEIRINHO ENGINE - DERIVED TRANSLATION ARTIFACT
+PD#PN:        KD.FF.003
+Language:     pt-BR
+Generated-At: 2026-04-18T04:04:55Z
+Engine:       DeepL API (Glossary V5)
+-->
+<p style="text-align: justify"><strong>Revisado em 25 de outubro de 2016; 11 de abril de 2017; 13 de setembro de 2017; 26 de janeiro de 2018; 25 de maio de 2019; 6 de agosto de 2019; 11 de janeiro de 2020; <span style="color: #0000ff">23 de agosto de 2022</span></strong></p>
+<h5><strong><span style="font-size: 18pt">Introdução</span></strong></h5>
+<p style="text-align: justify">1. Nenhum outro fator contribuiu tanto para manter <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em> oculto nas últimas centenas de anos quanto as interpretações incorretas de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> como meramente “impermanência” e<em> </em>de <em>Anattā</em> como meramente “não-eu”. Se alguém conseguir encontrar sequer um único exemplo no <em><span><span class="pali-term term-highlight" data-term="pālī">Pālī</span> <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> (não em traduções) que descreva <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em><span> dessa forma, por favor, entre em contato comigo pelo e-mail lal@<span class="pali-term term-highlight" data-term="puredhamma">puredhamma</span>.net.  Além disso, antes de citar traduções em inglês do </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, por favor, leia o ensaio <strong>“</strong><a href="../../pages/HB.AA.018/index.html" rel="noopener" target="_blank">Interpretação errônea de Anicca e Anattā por estudiosos europeus antigos”.</a><strong> </strong></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Considero esta série de ensaios sobre <em><span>“<span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span>, </span></em>Anattā” a mais importante do site. Ler os ensaios na ordem indicada pode ser muito benéfico.</li>
+<li style="text-align: justify"><span style="color: #0000ff"><span>Um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> vem a este mundo para revelar três palavras e oito letras (em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>). </span></span><span style="color: #0000ff"><i style="color: #0000ff">“<strong><span>Attakkarā thīnapadā Sambuddhena pakāsithā,  na hī <span class="pali-term term-highlight" data-term="sīla">Sīla</span> vatan hotu uppajjāti Tathāgatā</span></strong>.” </i><span style="color: #0000ff"><span>Isso significa “um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> (</span></span><i style="color: #0000ff"><span><span class="pali-term term-highlight" data-term="tathāgata">Tathāgata</span>)</span></i><span style="color: #0000ff"> nasce NÃO apenas para mostrar como viver uma vida moral, mas para revelar três palavras com oito letras ao mundo”.</span></span> Até agora, não vi esse versículo no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span>.</span></em> É provável que tenha estado em um antigo comentário.</li>
+<li style="text-align: justify"><span style="color: #0000ff">Essas três palavras com oito letras são <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em>. <span style="color: #000000"><span>(quando escritas em cingalês/<span class="pali-term term-highlight" data-term="pālī">Pālī</span>: අනිච්ච දුක්ඛ අනත්ත, mas com as duas últimas letras de cada termo na “escrita antiga” combinadas para formar uma só, de modo que o número de letras passa a ser oito em vez de 11. Consegui encontrar apenas අනත්‍ථ para අනත්ත, mas dá para ver como quatro letras se tornam três ali). </span></span></span></li>
+</ul>
+<p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em><span> é pronunciado “<span class="pali-term term-highlight" data-term="anichcha">Anichcha</span>”, que rima com “picture”.</span></p>
+<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/anicca.mp3" type="audio/mpeg"/></audio>
+<p style="text-align: justify"><em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> é pronunciado de forma semelhante, duk+kha.</p>
+<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/dukkha.mp3" type="audio/mpeg"/></audio>
+<p style="text-align: justify"><em>Anattā</em> é pronunciado “anaththa”.</p>
+<audio controls="" preload="none" style="width:100%;margin:0.5em 0"><source src="../../assets/audio/en-US/anatta.mp3" type="audio/mpeg"/></audio>
+<p style="text-align: justify">Consulte <a href="http://localhost/beng_feb2026/new-revised-posts/Pālī-glossary-with-pronunciation/" rel="noopener" target="_blank">o</a> “<a href="http://localhost/beng_feb2026/new-revised-posts/Pālī-glossary-with-pronunciation/" rel="noopener" target="_blank">Glossário Pop-up de Pālī com Pronúncia</a><span>” para obter mais significados dos termos em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e arquivos de áudio com as pronúncias.</span></p>
+<p style="text-align: justify">2. <em><span><span class="pali-term term-highlight" data-term="asubha">Asubha</span></span></em> (“natureza não auspiciosa” ou “infructuosa”) é outra característica da natureza. Ela aparece junto com <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em> em vários <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em>, por exemplo, no “<a href="https://suttacentral.net/an4.49/en/sujato" rel="noopener" target="_blank"><em><span><span class="pali-term term-highlight" data-term="vipallāsa">Vipallāsa</span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (AN 4.49)</a>”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Além disso, a palavra <em>Tilakkhaṇa</em>, pelo que sei, não aparece no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>.</li>
+<li style="text-align: justify">No entanto, conforme discutido abaixo, <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em> e <em>Anattā</em> aparecem como um grupo em muitos <em><span><span class="pali-term term-highlight" data-term="suttā">Suttā</span></span></em>. Assim, é justificável agrupá-los como <em>Tilakkhaṇa</em>.</li>
+</ul>
+<h5 style="text-align: justify"><span style="font-size: 18pt">Por que <em>Tilakkhaṇa</em> é tão importante?</span></h5>
+<p style="text-align: justify"><span>3. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> esclareceu essas “três características deste mundo” em seu primeiro </span><em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>; veja “<a href="../../pages/KD.EE.003/index.html" rel="noopener noreferrer" target="_blank" title="Does the First Noble Truth Describe only Suffering?">A Primeira Nobre Verdade descreve apenas o sofrimento?</a>”.</p>
+<ul style="text-align: justify">
+<li><span style="color: #0000ff"><span>Estas são as três características principais de “este mundo”. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> vem ao mundo para revelar a verdadeira natureza do mundo. </span></span></li>
+<li><span style="color: #0000ff">Qualquer pessoa moral sabe instintivamente (e a maioria das religiões ensina) como viver uma vida virtuosa; veja “<a href="../../pages/MS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Buddha Dhamma – Em um gráfico</a>”. </span></li>
+<li style="text-align: justify"><span>O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou que, se alguém compreender a verdadeira natureza de “este mundo”, conforme codificada nessas três palavras, então alcançará o estágio de Entrada na Corrente (</span><em><span><span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>) <em>do</em> <em><span><span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>; veja “Por que <a href="../../pages/TL.HH.008/index.html" rel="noopener" target="_blank">a interpretação correta de Anicca, Dukkha e Anattā é tão importante?</a>”.</li>
+</ul>
+<p style="text-align: justify">4. Compreender as palavras<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em> é fundamental. Se alguém se apegar a uma interpretação incorreta dessas três palavras, não importa quanto esforço exerça, não há possibilidade de atingir o estágio <em><span>de <span class="pali-term term-highlight" data-term="sotāpanna">Sotāpanna</span></span></em>. Mesmo na<span style="font-size: 1.125rem;letter-spacing: 0px"> maioria dos textos em inglês</span> <em style="font-size: 1.125rem;letter-spacing: 0px">do Theravada</em><span style="font-size: 1.125rem;letter-spacing: 0px">, essas três palavras têm traduções incorretas: impermanência, sofrimento e “sem alma” ou “sem eu”. Os significados corretos são os seguintes.</span></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Nada neste mundo pode ser mantido de forma satisfatória (<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>).</li>
+<li style="text-align: justify">Quando se esforça para alcançar isso, isso leva ao <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>. No entanto, muitas pessoas tentam obter “felicidade” recorrendo a atos imorais, acabando no <em>apāyā</em>. É assim que se torna genuinamente desamparado.</li>
+<li style="text-align: justify">Esforçar-se para alcançar o impossível (ou seja, buscar a felicidade nas coisas mundanas) só leva ao sofrimento. Assim, os esforços não só são infrutíferos, como a pessoa se torna desamparada no processo de Renascimento (<em>Anattā</em>).</li>
+</ul>
+<h5 style="text-align: justify"><span>As palavras em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> para impermanência são “</span><em>Adduwan</em>” ou “<em>Aniyata</em>”</h5>
+<p style="text-align: justify"><span>5. A palavra em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> para impermanência NÃO é </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>; </span></em>é <em>adduwan</em> ou <em>aniyata</em>. Por exemplo, “<i>Jeevitan aniyatam, Maranan niyatam</i>” significa “a vida não é permanente, a morte é”.</p>
+<p style="text-align: justify">“<i>addhuvam jeevitam, dhuvaṃ maranam</i>” significa a mesma coisa.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify"><span>Portanto, o erro crítico foi traduzir a palavra original em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, para o sânscrito como “anitya”, que significa impermanência.</span></li>
+<li style="text-align: justify">Este termo, “<em>dhuva</em>”<em>,</em> aparece no <em><span><span class="pali-term term-highlight" data-term="brahma">Brahma</span>­niman­tanika <span class="pali-term term-highlight" data-term="sutta">Sutta</span> (Majjhima Nikāya 49)</span></em><span>, onde o Baka <span class="pali-term term-highlight" data-term="brahmā">Brahmā</span> diz que sua existência é permanente; veja o nº 12 de
+“</span><a href="../../pages/KD.JJ.009/index.html" rel="noopener noreferrer" target="_blank">Anidassana Viññāṇa – O que realmente significa</a>”.</li>
+</ul>
+<h5 style="text-align: justify"><em>Anattā</em> não é “eu” nem “não-eu”</h5>
+<p style="text-align: justify">6. Agora, vamos examinar o dano causado pela tradução da palavra original <em><span>em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>, Anattā,</span></em> para <em>o Sânscrito</em> como “<em>anātma”.</em></p>
+<ul style="text-align: justify">
+<li><span>Na época do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, havia duas visões opostas sobre a ideia de um “eu”. Um grupo acreditava em uma “alma” (</span><em>ātma</em>) imutável associada a um ser. Esse grupo corresponde, portanto, às principais religiões do mundo atual, com o conceito de que, quando alguém morre, sua alma vai para o céu ou para o inferno.</li>
+<li>O campo oposto argumentava que não há “alma” (<em>anātma</em>) e que, quando alguém morre, nada sobrevive à morte. Essa visão é a visão materialista atual de que nossas mentes surgem da matéria e, portanto, nada sobrevive à morte.</li>
+</ul>
+<p style="text-align: justify"><span>7. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse que não era nenhuma das duas coisas. Não existe um “eu” permanentemente associado a um ser vivo: tanto a mente quanto o corpo estão em constante fluxo (veja a seção sobre “A</span><a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank"> Grande Teoria Unificada do Dhamma</a>”), e, portanto, não há “alma” ou um “eu imutável”. Veja “<a href="../../pages/PS.FF.003/index.html" rel="noopener" target="_blank">O que ocorre no processo de Renascimento? – Conceito de um fluxo de vida</a>”.</p>
+<ul style="text-align: justify">
+<li>No entanto, é possível escolher como responder a um estímulo externo. Portanto, também é incorreto dizer que não existe “não-eu”.</li>
+<li>Além disso, há continuidade na morte com base na causa e efeito (<em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span></span></em>; veja “<a href="../../pages/PS.AA.000/index.html" rel="noopener noreferrer" target="_blank">Paṭicca Samuppāda</a>”).</li>
+<li>O novo ser vivo é uma continuação do antigo ser vivo, assim como um homem mais velho é uma continuação do processo desde a fase de bebê. A mudança está presente a cada MOMENTO, com base na causa e efeito. O “novo” depende do “antigo”.</li>
+<li>É também por isso que é incorreto dizer que um <em><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></em> é aniquilado na morte (ou seja, no <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em>). Veja “<a href="../../pages/SI.AA.012/index.html" rel="noopener noreferrer" target="_blank">Yamaka Sutta (SN 22.85) – Arahanthood Is Not Annihilation but End of Suffering</a>”.</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">Elas estão relacionadas entre si</span></strong></h5>
+<p style="text-align: justify"><span>8. O <span class="pali-term term-highlight" data-term="buddha">Buddha</span> afirmou que as três características “deste mundo” estão RELACIONADAS entre si:</span></p>
+<p style="text-align: justify"><i><span>“yadaniccam <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> dukkham, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> dukkham tadanatt</span><em>ā</em>” </i>(<i><span>“yad aniccam <span class="pali-term term-highlight" data-term="taṃ">taṃ</span> dukkham, <span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span> dukkham tad anatt</span><em>ā</em>”</i>)<i>, </i>ou seja,</p>
+<p style="text-align: justify">“se algo é <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>, surge <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>, e a pessoa se torna impotente (<em>Anattā).” </em>Observe que<em> “<i><span><span class="pali-term term-highlight" data-term="yaṃ">yaṃ</span>” </span></i></em>e<i style="font-style: italic"> “yad” </i>têm o mesmo significado e são usados de forma intercambiável.<em><i> </i></em>Da mesma forma<em><i>, “yadidaṃ” </i></em>vem de<em><i><span> “yad <span class="pali-term term-highlight" data-term="idaṃ">idaṃ</span>.”</span></i></em></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">(No <em>Samyutta Nikāya</em> <em><span>(<span class="pali-term term-highlight" data-term="anicca">Anicca</span> Vagga</span></em>)<em>,</em> muitos <em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span>,</span></em> incluindo <a href="https://suttacentral.net/sn35.1/en/sujato" rel="noopener" target="_blank"><em><span>“Ajjhattanicca <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.1)</a>”<em>,</em> <a href="https://suttacentral.net/sn35.4/en/sujato" rel="noopener" target="_blank"><em><span>“Bahiranicca <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em> (SN 35.4)</a>” e <a href="https://suttacentral.net/sn22.15/en/sujato" rel="noopener" target="_blank"><em><span>“Yadanicca <span class="pali-term term-highlight" data-term="sutta">sutta</span></span></em> (SN 22.15)</a>”, contêm o versículo acima.)</li>
+</ul>
+<p style="text-align: justify">9. <strong>Agora, vejamos o que acontece se considerarmos <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> como impermanente e<em> Anattā</em> como “sem alma”.</strong> <span style="color: #0000ff">Então, o versículo acima diz: “se algo não é permanente, surge o sofrimento e, por causa disso, torna-se ‘sem-eu’”. </span></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Muitas pessoas pensam que, como o corpo é impermanente, surge o sofrimento. Mas as <em><span><span class="pali-term term-highlight" data-term="suttās">Suttās</span></span></em> mencionadas acima descrevem isso para todos os seis sentidos <span style="color: #ff0000">internos</span> (<em>Ajjhattanicca</em> ou <span style="color: #ff0000"><em><span>Ajjhatta <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em></span> <em><span><span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>) e para tudo o que é percebido <span style="color: #ff0000"><strong>externamente</strong></span> pelos seis órgãos sensoriais (<span style="color: #000000"><em>Bāhiranicca </em></span>ou<em><strong><span style="color: #ff0000"><span> Bāhira <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></span></strong><span> <span class="pali-term term-highlight" data-term="sutta">Sutta</span></span></em>). Portanto, esse versículo se aplica a tudo e a todos “neste mundo”.</li>
+<li style="text-align: justify">Assim, se uma dor de cabeça se torna impermanente (ou seja, se ela passa), isso levará à felicidade. Portanto, a impermanência não leva necessariamente ao sofrimento. Mas se não conseguirmos lidar com uma dor de cabeça da maneira que queremos (ou seja, se não conseguirmos nos livrar dela), então isso levará ao sofrimento!</li>
+<li style="text-align: justify">Como mostraremos no próximo ensaio (“<a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Anicca – O Verdadeiro Significado</a>”), a tradução correta se aplica a qualquer caso.</li>
+</ul>
+<p style="text-align: justify"><span style="color: #0000ff">10. O oposto da afirmação acima também deve estar correto (na lógica matemática, isso geralmente não é correto, mas, neste caso específico, pode-se demonstrar que está certo. Isso se deve à suposição de que “<em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>” depende apenas de “<em>nicca</em>” ou “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” e de nenhum outro fator).</span></p>
+<p style="text-align: justify">Vamos considerar as interpretações incorretas que dizem:</p>
+<p style="text-align: justify"><span style="color: #0000ff">“se algo é permanente, o sofrimento não surge e, por causa disso, isso implica um ‘eu’”.</span></p>
+<ul style="text-align: justify">
+<li>Como alguém pode parar de sofrer se tem uma dor de cabeça permanente ou uma doença? E em que sentido surge um “eu”?</li>
+<li style="text-align: justify">Há muitas coisas neste mundo que, se se tornassem permanentes, levariam ao sofrimento: uma doença, a pobreza, a convivência com alguém de quem não se gosta, afastar-se de um ente querido, etc.<b></b></li>
+</ul>
+<p style="text-align: justify">Assim, podemos ver que <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em> não significam impermanência e “não-eu”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">No entanto, se adotarmos a tradução correta, podemos mostrar que a afirmação inversa também se mantém, conforme discutido no próximo ensaio: “<a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Incapacidade de Manter o que Gostamos</a>”.</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">Todos sabem que tudo neste mundo é impermanente</span></strong></h5>
+<p style="text-align: justify">11. Permanência e impermanência são PROPRIEDADES inseparáveis dos seres vivos, objetos e eventos. Por outro lado,<em><span> nicca/<span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> são PERCEPÇÕES NA MENTE DE CADA UM a respeito deles.</p>
+<ul style="text-align: justify">
+<li style="list-style-type: none">
+<ul>
+<li style="list-style-type: none">
+<ul>
+<li style="text-align: justify">A longo prazo, não podemos manter nada a nosso gosto (incluindo “nosso” próprio corpo), o que é <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>. E por causa disso, ficamos angustiados, e isso é <em><span><span class="pali-term term-highlight" data-term="dukkha">Dukkha</span></span></em>. E como não podemos impedir essa sequência de eventos, ficamos verdadeiramente desamparados a longo prazo (nada de substância real resta no final). Isso é <em>Anattā</em>.
+<ul>
+<li>Aqui está um vídeo que ilustra claramente o conceito de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>:</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span class="mce_SELRES_start" style="width: 0px;overflow: hidden;line-height: 0">﻿</span></li>
+<li style="text-align: justify">Devemos perceber que todos nós passaremos por essa mudança inevitável à medida que envelhecemos. Por mais que nos esforcemos, não é possível manter NADA que nos satisfaça. É a natureza “deste mundo”: <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>.</span></em></li>
+<li style="text-align: justify">É claro que qualquer uma dessas celebridades (ou seus fãs) ficará triste ao ver essa comparação no vídeo acima. Elas não conseguiram manter seus corpos de forma satisfatória. No entanto, uma pessoa que não tenha boas relações com qualquer uma dessas celebridades poderia ficar feliz ao ver essas fotos, já que gostaria de ver algo terrível acontecer com essa celebridade.</li>
+</ul>
+<p style="text-align: justify">12. Assim, a “impermanência” é inevitável; é uma propriedade de tudo neste mundo. <b>Mas “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” é uma percepção na mente de alguém. Essa percepção PODE ser alterada; é assim que se livra do sofrimento. </b></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">No caso acima, os corpos das celebridades SÃO impermanentes; mas isso não causou necessariamente sofrimento a TODOS. Causou dor apenas àqueles que não gostavam de vê-las envelhecer. Se elas tivessem inimigos, estes ficariam felizes em vê-las perder sua “beleza”.</li>
+<li style="text-align: justify">A impermanência é um fato; veja “<a href="../../pages/BD.HH.001/index.html" rel="noopener" target="_blank">Grande Teoria Unificada do Dhamma</a>”. Mas a impermanência NÃO é o SIGNIFICADO de <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>.</li>
+<li style="text-align: justify">Essas fotos proporcionam o impacto visual que normalmente não temos. Não vemos mudanças em nós mesmos porque a mudança é gradual.</li>
+</ul>
+<p style="text-align: justify"><span>13. Não é necessário um <span class="pali-term term-highlight" data-term="buddha">Buddha</span> para mostrar que a impermanência é uma característica inerente ao nosso universo. Os cientistas estão bem cientes disso, mas não alcançaram </span><em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>. <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> é um conceito profundo com vários significados, e todos eles estão relacionados. Aqui estão três maneiras de encarar isso:</p>
+<ul style="text-align: justify">
+<li>“<a href="../../pages/KD.FF.006/index.html" rel="noopener noreferrer" target="_blank">Anicca – Incapacidade de Manter o que</a> Gostamos” (listado acima).</li>
+<li>“<a href="../../pages/KD.FF.007/index.html" rel="noopener noreferrer" target="_blank">Anicca – Surgimento/destruição repetidos</a>.”</li>
+<li>“<a href="../../pages/KD.FF.008/index.html" rel="noopener noreferrer" target="_blank">Anicca – A futilidade das coisas mundanas</a>.”</li>
+<li><a href="../../pages/KD.FF.009/index.html" rel="noopener" target="_blank">“Anicca – O sofrimento incessante (‘Pīḷana’)</a>”</li>
+</ul>
+<p style="text-align: justify"><span>14. Finalmente, o <span class="pali-term term-highlight" data-term="buddha">Buddha</span> disse: “</span><em><span>Sabbe <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> Anattā”.</span></em> <strong>Então, o que significa “todos <em><span>os <span class="pali-term term-highlight" data-term="dhammā">Dhammā</span></span></em> são ‘sem-eu’” (se </strong><strong><em>Anattā</em> significasse “sem-eu”)?</strong> <em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> </span></em><span>significa “carregar” e inclui aquelas energias de <span class="pali-term term-highlight" data-term="kamma">Kamma</span> que podem trazer no futuro o </span><em><span><span class="pali-term term-highlight" data-term="vipāka">Vipāka</span>,</span></em> incluindo renascimentos futuros. Nós nos esforçamos para criar tais <em><span><span class="pali-term term-highlight" data-term="dhammā">Dhammā</span> </span></em>que trarão apenas sofrimento LÍQUIDO no futuro. Nada neste mundo tem qualquer valor real no final. Essa é a natureza <em>de Anattā</em>.</p>
+<ul style="text-align: justify">
+<li>Isso é explicado sistematicamente em “<a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origem da Vida</a>” e, especificamente, no ensaio “<a href="../../pages/DS.FF.009/index.html" rel="noopener noreferrer" target="_blank">Dhammā, Kamma, Saṅkhāra, Mente – Conexões Críticas</a>”.</li>
+<li style="text-align: justify">Outra palavra-chave que perdeu seu verdadeiro significado é “<em>san</em>”; veja “<a href="../../pages/KD.DD.002/index.html" rel="noopener noreferrer" target="_blank">O que é ‘San’? Significado de Sansara (ou Samsara)</a>”.</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">Possíveis razões históricas para erros de tradução</span></strong></h5>
+<p style="text-align: justify">15. Podemos<span style="font-size: 1.125rem;letter-spacing: 0px"><span> ver as origens de algumas dessas traduções incorretas observando como o <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> foi transmitido ao longo do tempo. Para mais detalhes, consulte “</span></span><a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" style="font-size: 1.125rem;letter-spacing: 0px" target="_blank">Contexto histórico</a>”.</p>
+<ul style="text-align: justify">
+<li style="list-style-type: none">
+<ul style="text-align: justify">
+<li>Por cerca de 500 anos após o <em><span><span class="pali-term term-highlight" data-term="parinibbāna">Parinibbāna</span></span></em><span> do <span class="pali-term term-highlight" data-term="buddha">Buddha</span>, o <span class="pali-term term-highlight" data-term="pālī">Pālī</span> </span><em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> foi transmitido oralmente de geração em geração de <em>Bhikkhūs</em><span>, que fielmente transmitiram o Cânone <span class="pali-term term-highlight" data-term="pālī">Pālī</span>. É claro que ele havia sido PROJETADO para facilitar a transmissão oral.</span></li>
+<li>Consulte “<a href="../../pages/HB.AA.007/index.html" rel="noopener noreferrer" target="_blank">Preservação do Dhamma</a><span>” para uma discussão sobre esse aspecto. Os ensinamentos originais do <span class="pali-term term-highlight" data-term="buddha">Buddha</span> permanecem intactos.</span></li>
+</ul>
+</li>
+</ul>
+<p style="text-align: justify">16. <span style="color: #0000ff">Em seguida, foi escrito pela primeira vez em escrita cingalês em 29 a.C. no Sri Lanka. <strong><span>O <span class="pali-term term-highlight" data-term="pālī">Pālī</span> é uma língua fonética que não possui um alfabeto.</span></strong></span></p>
+<ul style="text-align: justify">
+<li>O <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> nunca foi traduzido para nenhuma outra língua até que os europeus descobriram o “Buddhismo” no final do século XVII; consulte “<a href="../../pages/HB.AA.017/index.html" rel="noopener noreferrer" target="_blank">Contexto do atual renascimento do Buddha Dhamma</a>”.</li>
+<li><em><span>O <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> não foi traduzido nem mesmo para a língua cingalês até 2005.</li>
+</ul>
+<p style="text-align: justify">17. Quando Rhys Davis e outros começaram a fazer essas traduções para o inglês, eles foram fortemente influenciados pelos <em><span><span class="pali-term term-highlight" data-term="suttas">Suttas</span> Mahāyāna</span></em> em sânscrito <em>e</em> pela literatura <em>védica</em><span>. Pense nisso: quando os europeus começaram a descobrir todos esses diferentes documentos em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e sânscrito, eles devem ter ficado impressionados com as complexidades.</span></p>
+<ul style="text-align: justify">
+<li>Levou algum tempo para que separassem o Buddhismo do hinduísmo e, nesse processo, alguns conceitos se confundiram; veja “<a href="../../pages/HB.AA.018/index.html" rel="noopener" target="_blank">Interpretação errônea de Anicca e Anattā pelos primeiros estudiosos europeus</a>”.</li>
+<li>Por exemplo, eles PRESUMIRAM que “Anattā” era o mesmo que “<em>anātma</em>”<em>,</em> que é uma palavra sânscrita com um significado diferente, ou seja, “não-eu”. Da mesma forma, interpretaram “<em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em>” como tendo o mesmo significado do sânscrito “<em>anitya”,</em> que realmente significa “impermanente”.</li>
+</ul>
+<h5 style="text-align: justify">Levará tempo para esclarecer essas questões</h5>
+<p style="text-align: justify">18. O pior foi que até mesmo estudiosos cingaleses contemporâneos, como Malasekara (um aluno de doutorado de Rhys Davis), “aprenderam” o Buddhismo com os europeus e, assim, começaram a usar interpretações erradas. Outros estudiosos cingaleses, como Kalupahana e Jayathilake, também aprenderam o “Buddhismo” em universidades do Reino Unido.</p>
+<ul style="text-align: justify">
+<li>Seguindo as traduções originais de Rhys Davis, Eugene Burnouf, Olcott e outros, esses estudiosos cingaleses também escrevem livros tanto em inglês quanto em cingalês. É claro que estudiosos de outros países Buddhistas fizeram o mesmo em suas línguas, e as interpretações incorretas se espalharam pelo mundo.</li>
+<li>Para corrigir esse grave problema, devemos voltar ao <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em><span> em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> e iniciar o processo a partir daí.</span></li>
+<li><em><span>Os <span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em><span> em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> não devem ser traduzidos palavra por palavra. A maioria dos </span><em><span><span class="pali-term term-highlight" data-term="suttā">suttā</span></span></em> é condensada e escrita em um estilo propício à transmissão oral; veja “<a href="../../pages/SI.AA.001/index.html" rel="noopener" target="_blank">Interpretação dos Suttā – Uddēsa, Niddēsa, Paṭiniddēsa</a>”.</li>
+<li>Os comentários foram escritos para explicar conceitos críticos no <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em>, e apenas três desses comentários originais sobreviveram. Precisamos nos basear fortemente no <em>Patisambhidamagga</em>, no <em>Petakopadesa</em> e no <em>Nettippakarana.</em></li>
+<li>Em vez disso, a maioria das pessoas se baseia em comentários incorretos escritos em anos mais recentes, especialmente <em>o Visuddhimagga</em> de Buddhaghosa. Para mais detalhes, consulte “<a href="../../pages/HB.AA.015/index.html" rel="noopener noreferrer" target="_blank">Buddhaghosa e Visuddhimagga – Contexto Histórico</a>”. No entanto, Buddhaghosa não alterou os significados das palavras<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā.</span></em> É provável que isso tenha ocorrido em épocas mais recentes, conforme expliquei acima. Mas ele incorporou muitos outros conceitos hindus, como a meditação da respiração e <em>Kasiṇa</em>; consulte “<a href="../../pages/HB.AA.016/index.html" rel="noopener noreferrer" target="_blank">O Visuddhimagga de Buddhaghosa – Uma Análise Focada</a>”.</li>
+</ul>
+<p style="text-align: justify">19. Também é importante observar que a impressão em massa não estava disponível até anos recentes e só se tornou comum no século XIX; consulte “<a href="https://www.newworldencyclopedia.org/entry/Printing_press" rel="noopener noreferrer" target="_blank">Imprensa</a>”.</p>
+<ul style="text-align: justify">
+<li>Assim, a produção em massa de livros só se tornou possível com as novas impressoras no século XIX. Naquela época, conceitos-chave já haviam sido traduzidos incorretamente.</li>
+<li>Nos primórdios, <em><span>o <span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> era escrito em folhas especialmente preparadas e precisava ser reescrito à mão a cada 100-200 anos antes que se deteriorasse. Portanto, devemos ser gratos aos <em><span><span class="pali-term term-highlight" data-term="bhikkhus">Bhikkhus</span></span></em> do Sri Lanka que fizeram isso diligentemente por quase 2.000 anos.</li>
+<li>A língua cingalês (tanto falada quanto escrita) mudou ao longo dos últimos 2.000 anos. <strong>A necessidade de reescrever o <em><span><span class="pali-term term-highlight" data-term="tipiṭaka">Tipiṭaka</span></span></em> a cada 100 anos, aproximadamente, garantiu que quaisquer mudanças na escrita cingalês fossem levadas em consideração;</strong> veja o item 21 de “<a href="../../pages/HB.AA.018/index.html" rel="noopener noreferrer" target="_blank">Interpretação errônea de Anicca e Anattā pelos primeiros estudiosos europeus</a>”.</li>
+</ul>
+<h5 style="text-align: justify"><strong><span style="font-size: 18pt">Outras questões relacionadas</span></strong></h5>
+<p style="text-align: justify">20. Encontrei outro problema em um fórum online recente. As pessoas estão debatendo os significados das palavras “<em>Anattā</em>” (අනත්ත em Cingalês) e “<em>anattha</em>” <span style="font-size: 1.125rem;letter-spacing: 0px">(</span>අනත්ථ<span style="font-size: 1.125rem;letter-spacing: 0px"> em Cingalês). Elas significam a mesma coisa, mas há mais ênfase na última palavra.</span></p>
+<ul style="text-align: justify">
+<li>Por isso, a maioria das pessoas escreve “<em>Anattā”.</em> Não importa como se escreva, desde que se compreenda o significado como “sem refúgio” ou “sem essência”, e NÃO como “não-eu”.</li>
+<li>Mas significa "não é proveitoso considerar qualquer coisa neste mundo como minha".</li>
+</ul>
+<p style="text-align: justify">21. Mais dois equívocos principais são comuns hoje em dia. Eles não apenas bloqueiam o caminho para <em><span>o <span class="pali-term term-highlight" data-term="nibbāna">Nibbāna</span></span></em>, mas são<em> miccha diṭṭhi</em> que podem ser responsáveis pelo Renascimento nos <em>apāyā</em>. Não estou tentando assustar ninguém, mas “fazer com que <em>o adhamma</em> seja considerado <em><span><span class="pali-term term-highlight" data-term="dhamma">Dhamma</span></span></em> é uma ofensa grave”.</p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Interpretação errônea da meditação da respiração como<em><span> <span class="pali-term term-highlight" data-term="ānāpānasati">Ānāpānasati</span></span></em>: <a href="../../pages/BM.AA.008/index.html" rel="noopener noreferrer" target="_blank">“Ānāpānasati é meditação da respiração?</a>”.</li>
+<li style="text-align: justify">Insistência de que o <em><span><span class="pali-term term-highlight" data-term="gandhabba">gandhabba</span></span></em> (<em>manomaya kaya</em>) é um conceito Mahāyāna: <a href="http://localhost/beng_feb2026/living-dhamma/mental-body-gandhabba/gandhabba-state-Tipiṭaka-evidence/" rel="noopener noreferrer" target="_blank">“Estado</a> de <a href="http://localhost/beng_feb2026/living-dhamma/mental-body-gandhabba/gandhabba-state-Tipiṭaka-evidence/" rel="noopener noreferrer" target="_blank">Gandhabba – Evidências do Tipiṭaka</a>”.</li>
+</ul>
+<p style="text-align: justify">22. Todos esses equívocos não são culpa dos <em>theravadins</em> atuais; eles foram transmitidos ao longo de centenas de anos, conforme explicado no <a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">“Contexto</a> <a href="../../pages/HB.AA.000/index.html" rel="noopener noreferrer" target="_blank">Histórico</a>”. <strong>No entanto, não faz sentido aderir a eles quando evidências substanciais são apresentadas contra eles, conforme os ensaios acima e muitos outros neste site.</strong></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">É claro que ninguém deve insistir: “esta é a única verdade, e nada mais é verdade”. Mas a verdade pode ser verificada de forma satisfatória por meio do exame crítico das evidências. Estou aberto a discutir qualquer evidência contrária válida. Precisamos esclarecer a verdade para o benefício de todos.</li>
+</ul>
+<p style="text-align: justify">23. Por fim, talvez não seja possível compreender <em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span>, <span class="pali-term term-highlight" data-term="dukkha">Dukkha</span> e Anattā</span></em><span>. É preciso primeiro seguir o caminho mundano para aprender conceitos básicos como <span class="pali-term term-highlight" data-term="kamma">Kamma</span> e Renascimento.</span></p>
+<ul style="text-align: justify">
+<li style="text-align: justify">Mais detalhes em “<a href="../../pages/LD.EE.001/index.html" rel="noopener noreferrer" target="_blank">Transição para o Nobre Caminho Óctuplo</a>”.</li>
+<li style="text-align: justify">Uma abordagem sistemática em “<a href="../../pages/LD.AA.000/index.html" rel="noopener noreferrer" target="_blank">Dhamma Vivo</a>”.</li>
+</ul>
+<p style="text-align: justify">24.<em><span> <span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> e <em>Anattā</em><span> são palavras complexas em <span class="pali-term term-highlight" data-term="pālī">Pālī</span> que não podem ser traduzidas diretamente para o português. Nenhuma palavra em português consegue transmitir o significado de </span><em><span><span class="pali-term term-highlight" data-term="anicca">Anicca</span></span></em> (ou <em>Anattā</em><span>). As subseções a seguir discutem essas duas palavras complexas em <span class="pali-term term-highlight" data-term="pālī">Pālī</span>:</span></p>
+<p class="entry-title" style="text-align: justify"><a href="../../pages/KD.FF.005/index.html" rel="noopener noreferrer" target="_blank">Anicca – Significado Verdadeiro</a></p>
+<p class="entry-title" style="text-align: justify"><a href="../../pages/KD.FF.013/index.html" rel="noopener noreferrer" target="_blank">Anattā – Uma Análise Sistemática</a></p>
+<p class="entry-title" style="text-align: justify"><span style="color: #0000ff"><strong>
+10 de julho de 2020:</strong></span> <span style="color: #000000">Uma nova série de ensaios sobre “<a href="../../pages/DS.BB.001/index.html" rel="noopener noreferrer" target="_blank">Origem da Vida</a>” explica sistematicamente <em>Tilakkhaṇa</em> e <em><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca Samuppāda</span> </span></em>e também estabelece a conexão entre eles.</span></p>
+<p style="text-align: justify"></p>
+    </article>
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/KD.FF.002/index.html">Anicca Dukkha Anatta Distortion Timeline</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/KD.FF.004/index.html">The Way To Nibbana Transcription Of A Discourse By Waharaka Thero</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/KD.FF.002/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Anicca Dukkha Anatta Distortion Timeline</span>
+        
+        <span class="pathway-title title-pt">Anicca, Dukkha, Anattā: Linha do tempo da distorção</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/KD.FF.004/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">The Way To Nibbana Transcription Of A Discourse By Waharaka Thero</span>
+        
+        <span class="pathway-title title-pt">O Caminho para o Nibbāna: Transcrição de um discurso do Venerável Waharaka Thero</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-KD">
+        ↑ Back to Key Dhamma Concepts
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>

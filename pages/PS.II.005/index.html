@@ -1,0 +1,352 @@
+<!-- pipeline/13-ssg/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Sankhara Paccaya Vinnana 1 | AXIS-NIDDHI</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/typography-pro.css"><!-- FF-011 -->
+
+    <!-- [20260222] Service Worker: manifest PWA para instalabilidade futura -->
+    <!-- Placeholder: adicionar manifest.json quando PWA for ativada -->
+    <!-- <link rel="manifest" href="../../manifest.json"> -->
+</head>
+<body>
+<!-- FF-014: Reading Progress Bar -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+    <!-- FEATURE 1: Floating Navigation (Left) -->
+    <div class="floating-utilities" style="left: 1.2rem; right: auto;">
+        <a href="../../index.html" class="utility-pill" title="Home" style="text-decoration: none; font-size: 1.15rem; background: none; border: none; padding: 0.35rem 0.6rem;">
+            🏠
+        </a>
+        <button class="utility-pill print-trigger" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao Topo" style="font-weight: bold; font-size: 1.2rem; line-height: 1; padding: 0.35rem 0.6rem;">
+            ↑
+        </button>
+    </div>
+
+    <!-- Floating Utilities (Theme Switcher + Print Setup) -->
+    <div class="floating-utilities">
+        <div id="theme-controls" class="utility-pill theme-controls" aria-label="Reading Mode"></div>
+        <button class="utility-pill print-trigger" onclick="openPrintModal()" title="Configurar Impressão p/ PDF ou Papel">
+            🖨️
+        </button>
+    </div>
+
+    <main>
+        <!-- Search UI (Sprint 9) -->
+        <form id="search-form" role="search">
+          <input 
+            type="search"
+            id="search-input"
+            placeholder="Search..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div id="search-results" hidden></div>
+
+        <!-- FF-013: Labz banner — visível quando data-theme="stardust" -->
+        <div id="labz-banner">
+          ⚗️ LABZ MODE — Stardust Overworld &nbsp;·&nbsp;
+          Features experimentais ativas &nbsp;·&nbsp;
+          <button onclick="toggleLabz()" style="background:none;border:none;cursor:pointer;color:inherit;font:inherit;text-decoration:underline;padding:0;">sair do modo Labz</button>
+        </div>
+        
+
+<!-- reading-progress-hook removed FF-016: #reading-progress now in base.html -->
+
+<!-- CSS-ONLY LANGUAGE SWITCHER INPUTS (LOGIC) -->
+<input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+<input type="radio" name="lang_switch" id="lang-pt" class="lang-radio" disabled>
+
+<header>
+
+
+    <!-- SPRINT J: Context Pill -->
+    <div class="context-pill">
+      <span class="context-section">Paṭicca Samuppāda</span>
+      <span class="context-sep">·</span>
+      <span class="context-pos">Post 73 / 85</span>
+      <span class="context-sep">·</span>
+      <span class="context-pdpn">PS.II.005</span>
+    </div>
+
+    <!-- CANONICAL LANGUAGE SWITCHER (UI) -->
+    <div class="lang-switch-container">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label disabled">
+            🇧🇷 Português
+        </label>
+    </div>
+    
+    <h1 class="title-en">Sankhara Paccaya Vinnana 1</h1>
+    
+
+    <!-- [SPRINT I] MOVIDO DE: Transmission Map foi recortado daqui para o final do post.html -->
+
+</header>
+
+<div class="post-container">
+    
+    <!-- Breadcrumb desduplicado removido (Mantido context-pill acima do H1) -->
+
+    <!-- [SPRINT L] BUG 1+2: meta-toggle-wrap FORA de content-en/pt — visível em ambos os idiomas -->
+    <div class="meta-toggle-wrap csl-tattoo">
+      <button id="meta-toggle-btn" class="meta-toggle-btn" aria-expanded="false">
+        ℹ️
+        <span class="meta-toggle-label-en">Post info</span>
+        <span class="meta-toggle-label-pt">Info do post</span>
+      </button>
+      <div class="meta-table-wrap">
+        <table>
+          <tr><td><strong>PDPN</strong></td><td>PS.II.005</td></tr>
+          <tr><td><strong>Section</strong></td><td>Paṭicca Samuppāda</td></tr>
+          <tr><td><strong>Level</strong></td><td>advanced</td></tr>
+          <tr><td><strong>Reading time</strong></td><td>10</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- [SPRINT L] BUG 3: TOC buttons padronizados como pill -->
+    <div class="toc-en" style="margin-bottom: 2rem; font-size: 0.95rem;">
+        <button class="toc-reveal-btn" onclick="toggleTOC('toc-content-en')">
+            ☰ See sections of this text
+        </button>
+        <div class="mini-toc" id="toc-content-en" style="display: none; cursor: default; margin-top: 1rem;"><p><strong>Sections:</strong></p><ul id="toc-list-en"></ul></div>
+    </div>
+
+    
+
+    <article class="content-block content-en" id="content-en"
+             data-pdpn="PS.II.005"
+             data-section="Paṭicca Samuppāda"
+             data-section-code="PS"
+             data-findex="0628"
+             data-level="advanced"
+             data-reading-time="10"
+             data-language-availability="en"
+             itemscope itemtype="https://schema.org/Article">
+        <div class="meta-toggle-wrap csl-tattoo" aria-hidden="true"><button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\'open\')" aria-expanded="false">ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span></button><div class="meta-table-wrap"><table><tr><td>PD#PN</td><td>PS.II.005</td></tr><tr><td>Fin-dex</td><td>0628</td></tr><tr><td>Slug</td><td>sankhara-paccaya-vinnana-1</td></tr><tr><td>Section</td><td>PS</td></tr><tr><td>Title EN</td><td>Sankhara Paccaya Vinnana 1</td></tr></table></div></div><p style="text-align: justify">1. “<b><i>S<em>ankhār</em><span>a <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span><em>viññāna</em></i></b>” is normally translated something like, “with mental formations as condition, consciousness arises”. But I will show that a more accurate translation is, “Immoral/unfruitful actions and thoughts as root condition for <b>defiled</b> <b>consciousness</b>”.</p>
+<ul style="text-align: justify">
+<li>I will just keep the word <i>viññāna</i> without translating as “defiled/unfruitful consciousness” (which could become cumbersome to repeat also), because the word “consciousness” cannot fully embody the meaning of <i>viññāna</i>. Furthermore, <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <i>viññāna </i>(those that arise outside of “s<i><em>ankhār</em><span>a <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> </span><em>viññāna</em></i>”) are "just consciousness"; see #4 below.</li>
+<li><i><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></i> is a step in the <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></i> that describes how suffering arises; thus <i>viññāna</i> is NOT neutral or innocuous as the word “consciousness” or “awareness” implies; it is DEFILED consciousness, contaminated with immoral mental factors such as greed and hate.</li>
+<li>In contrast, an <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i> has undefiled, pure consciousness; thus an<i><span> <span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i> experiences the world without any defilements. He/she can see, hear, etc  without making any type of judgement, attachment, or repulsion to what is seen, heard, etc.</li>
+</ul>
+<p style="text-align: justify"><b>Thus we need to realize that </b><b><i>viññāna</i></b><b> is DIFFERENT from “knowing” or “being aware”, which is what “consciousness” implies. This is very important.</b></p>
+<p style="text-align: justify">2. For example, two people with opposing political views (A and B) may encounter a politician C on the street who has views compatible with those of A. Person A will be happy to meet C and may go up to C, shake his hand and talk to him enthusiastically. On the other hand, Person B will automatically have irritable thoughts about C and is likely to avoid C. In this case, A and B generated two very different kinds of <i>viññāna</i> upon seeing the same person.</p>
+<ul style="text-align: justify">
+<li>On the other hand, suppose there is a fourth person,D, who also knows the politician C AND suppose D is an <i><span><span class="pali-term term-highlight" data-term="arahant">Arahant</span></span></i>. Now, person D will recognize C as that politician but will not generate any likes or dislikes about C. That is what “consciousness” is, just recognizing who or what it is without generating any biases.</li>
+</ul>
+<p style="text-align: justify">3. The other main point is that <i>viññāna</i> is multi-faceted. <b>It has embedded in it one’s memories as well as one’s future hopes and plans</b>, and those lie under the surface. This is what Sigmund Freud called the subconscious. But there is no separate “subconscious”; there is only one <i><span><span class="pali-term term-highlight" data-term="citta">citta</span></span></i> at a time.</p>
+<ul style="text-align: justify">
+<li>The mind does this with the help of several mental factors (<em>cētasika</em>) like memory (<em>manasik<i>ā</i>ra</em>) and perception (<em>sa<i>ññā</i></em>). We will discuss that in the future.</li>
+</ul>
+<p style="text-align: justify">4. For example, when I am looking at a picture I have what is called <i><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> viññāna</span></i>, i.e., “visual consciousness”. This is a <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <i>viññāna</i> and is "just consciousness".</p>
+<p style="text-align: justify">However, if I have been planning a trip overseas that is still in the “back of my mind”; if I have been thinking about calling an old friend about whom I just thought of recently, that is also in the “back of my mind”. Thus at a given time there may be several or even many <i>viññāna</i> waiting to come to the surface.</p>
+<ul style="text-align: justify">
+<li>And some of those “subconscious” <em>viññāna</em> may disappear, if the reason for it to be there goes away for some reason. For example, if civil war breaks out in the country that I was planning to visit, I will abandon that trip and my “<i>viññāna</i>” for that will go away. If I stop thinking about my old friend, that <i>viññāna</i> for calling him up may also go away with time. Thus if a given <em>viññāna</em> stops getting “its food” it will die off gradually.</li>
+<li>The difference between <em><span><span class="pali-term term-highlight" data-term="kamma">kamma</span></span></em> <i>viññāna</i> (those that arise due to “<i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></i>”) and <em><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span></span></em> <i>viññāna</i> is discussed in "<a href="../../pages/LD.BB.004/index.html" rel="noopener noreferrer" target="_blank">Viññāna – Consciousness Together With Future Expectations</a>".</li>
+</ul>
+<p style="text-align: justify">5. <strong>Now we can see how “<i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></i>” works.</strong> The more I think about my old friend, the more <i>sankh<em>ā</em>ra</i> I am generating; thus I keep “feeding that <i>viññāna</i>” and that <em>viññāna</em> for calling him gets stronger.</p>
+<ul style="text-align: justify">
+<li>The breaking out of the civil war in that country basically deprived the “<i>viññāna</i> for making a trip to that country” of any food (i.e., now it is not possible to visit that country), and thus the news effectively killed that <i>viññāna</i>.</li>
+<li>As always, it is best to think about your own situations and see how  “<i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> viññāna</span></i>” works, and also how one can have many types of <i>viññāna</i> at the same time, even though only one is at the forefront at any given time.</li>
+</ul>
+<p style="text-align: justify">6. <strong>There is another way that <i>viññāna</i> can be divided into two main categories.</strong> One is the “base level” of <i>viññāna </i>for an existence or <i><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>. For example, if a deer is reborn as a human, then that lifestream will now have a “higher base level of <i>viññāna</i>” suitable for a human. Whereas a deer cannot sort out right from wrong, a human can. Thus at the end of a given “<i><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>” (say as a deer), that lifestream gets new, higher “base level” of <i>viññāna</i>.</p>
+<ul style="text-align: justify">
+<li>The other main category of <i>viññāna</i> is the numerous types of <i>viññāna</i> that arise in a given existence that we discussed above. What we perceive through the six senses (eye, ear, nose, tongue, body, and mind) gives rise to six types of consciousness: vision, hearing, smell, taste, touch, and concepts. Based on those, we can have infinite types of <i>viññāna</i> as we discussed above. These types of <i>viññāna</i> are now in accordance with the type of existence or “<i><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>”. For example, a deer does not perceive what is seen at the same level of consciousness as a human, even if both are looking at the same thing. Sometimes there may be differences in sense faculties too: a bat cannot see but uses sonar to find its way around. Furthermore, as we discussed above, there are many types of “subconscious” <i>viññāna</i> as well.</li>
+<li><span>There are many new concepts introduced in these introductory <span class="pali-term term-highlight" data-term="posts">posts</span> that are critical. One may need to go back to previous <span class="pali-term term-highlight" data-term="posts">posts</span> and re-read in order to grasps these important concepts.</span></li>
+</ul>
+<p style="text-align: justify">7. Based on those two categories, there are two main <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></i> cycles that describe life “in this world of 31 realms”:</p>
+<ul style="text-align: justify">
+<li>One describes how the “base level” of <i>viññāna</i> changes at the end of a “<i><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>”, say when a deer is reborn as a human. Here a given lifestream can make a transition from a lower base level of <i>viññāna</i> to a higher (e.g., deer reborn as a human) or vice versa (e.g., human reborn as a deer). This is the “<i><span>patisandhi <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></i>” cycle.</li>
+<li>The other <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></i> cycle describes how a given lifestream accumulates conditions for suffering during a given “<i><span><span class="pali-term term-highlight" data-term="bhava">bhava</span></span></i>”. This is where we experience <i>viññāna</i> through our daily activities. This is the “<em>i</em><i><span>dappaccayātā <span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></i>” cycle; see, "<a href="../../pages/PS.HH.002/index.html" rel="noopener noreferrer" target="_blank">Idappaccayātā Paṭicca Samuppāda</a>".</li>
+</ul>
+<p style="text-align: justify">Let us discuss the <i>viññāna</i> associated with this latter one first.</p>
+<h4 style="text-align: justify"><i>1. Sankh<em>ā</em><span>ra <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="idappaccayātā">Idappaccayātā</span> Viññāna</span></i></h4>
+<p style="text-align: justify">Let us first look at how our consciousness changes basically every moment in an active day. We are being bombarded with pictures, sounds, smells, tastes, body touches, and we think about all sorts of things throughout the day. In each single case, we experience a different <i>viññāna</i>. This is why <i>viññāna</i> is very complex and multi-faceted.</p>
+<p style="text-align: justify">1. If we take a simple example of looking at a person, there are multiple events that happens in the mind: the physical eye captures an image of the mind which is processed by the brain and sent to the mind (details of this will be discussed in the <em><span><span class="pali-term term-highlight" data-term="abhidhamma">Abhidhamma</span></span></em> section later). The mind instantly compares that image with previous experiences and recognizes that it is a close friend. Happy feelings may arise instantly too. If we had not seen him for a while, some old memories associated with him may also instantly pop into our mind. The sum total of all mental factors (feelings, perception, joy, etc) associated with that “seeing event” is the “eye consciousness” or “<i><span><span class="pali-term term-highlight" data-term="cakkhu">cakkhu</span> viññāna</span></i>” at that moment.</p>
+<ul style="text-align: justify">
+<li>And this is an example of a “<i><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> viññāna</span></i>”. We did not plan to see him, but just bumped into him.</li>
+</ul>
+<p style="text-align: justify">2. But now based on this <i><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> viññāna</span></i>, we may decide to take some actions. We may run to meet him, give him a hug, and follow-up with even more actions. Most of these could be harmless <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> and our experience, consciousness, or <i>viññāna</i> is mostly harmless.</p>
+<ul style="text-align: justify">
+<li>However, if we instead ran into a person with whom we recently had a serious argument, that <i><span><span class="pali-term term-highlight" data-term="vipāka">vipāka</span> viññāna</span></i> may lead to a series of “bad <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>” in our minds and thus lead to a totally different <i>viññāna</i> BASED ON those bad <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>. we may decide to say something bad to that person. Now we are doing <i><span>vaci <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> that may have adverse consequences. Now our <i>viññāna</i> is different and we feel differently from the above case. We have an agitated state of mind, and with the slightest provocation from him, we may say or do even more harmful things.</li>
+</ul>
+<p style="text-align: justify">3. When a thought arises in the mind, it has associated with it many mental factors (<i>cētasika</i>) which characterize how we feel: joy, sadness, greed, generosity, hate, kindness, etc. <i><span><span class="pali-term term-highlight" data-term="viññāṇa">Viññāṇa</span></span></i> encompasses all such relevant mental factors.<strong><strong>
+</strong></strong></p>
+<ul style="text-align: justify">
+<li>In the previous example of persons A and B meeting the politician C, person A’s thoughts embody happiness while person B’s thoughts embody dislike.</li>
+<li>For a <i>viññāna</i> to arise, there must be some interest in the sense object. For example, we are bombarded with millions of sense inputs in a day, but we “pay attention to” only a fraction of those. Each mind has a set of “preferred items” in the background or “in the subconscious” based on the person’s habits and cravings.</li>
+</ul>
+<p style="text-align: justify">4. Then, the more we “feed a given <i>viññāna</i>” by thinking, speaking, doing things related to that, the more strong it gets. Thus we can see how “habit building” is tightly associated with <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>. In the same way, we can “remove a habit” by depriving that associated <i>viññāna</i> of its food, i.e., by stopping thinking or doing things related to it.</p>
+<ul style="text-align: justify">
+<li>And that can be done only realizing the benefits of a good habit or adverse consequences of a bad habit, which was the first step in the <i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></i>, “<i><span><span class="pali-term term-highlight" data-term="avijjā">avijjā</span> <span class="pali-term term-highlight" data-term="paccayā">paccayā</span> <span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i><span>”. A bit of thought should make this clear. Comprehending <span class="pali-term term-highlight" data-term="buddha dhamma">Buddha Dhamma</span> takes time to think deeply about how all these things fit together.Just being able to recite the </span><i><span><span class="pali-term term-highlight" data-term="paṭicca samuppāda">Paṭicca samuppāda</span></span></i> cycle does not bring any benefits.</li>
+</ul>
+<p style="text-align: justify">5. A simple example is “building a <i>viññāna</i> for getting drunk”: A teenger may not like the taste of his first drink, but if he keeps doing it due to “peer pressure”, he is likely to build a new <em>viññāna</em> for it. As he builds this <i>viññāna</i>, he will keep accumulating <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> to “feed that <em>viññāna</em>”. He will be thinking about it, talking about it, and of course whenever has the chance he will be drinking. The more he does any of those <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>, that <i>viññāna</i> will grow. AND even when he is doing something else, that <em>viññāna</em> will be at close to top of the subconscious waiting for an opportunity to come up and induce him to get drunk.</p>
+<ul style="text-align: justify">
+<li>And it works the same way for any type of activity. A teenager studying for an exam, will have a <i>viññāna</i> for it. If he is serious about it, he will be thinking about it more, talking about it, and studying hard; all those are <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i> too, in this case for his benefit.</li>
+</ul>
+<p style="text-align: justify">The idea is to first not to do any <i><span><span class="pali-term term-highlight" data-term="abhisaṅkhāra">abhisaṅkhāra</span></span></i> (strong immoral <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i>) that could lead to birth in the four lower realms. These kinds of <i><span><span class="pali-term term-highlight" data-term="saṅkhāra">saṅkhāra</span></span></i><span> are the immoral acts, speech, and thoughts. We will discuss this in the next <span class="pali-term term-highlight" data-term="post">post</span>.</span></p>
+    </article>
+
+    
+
+    <!-- SPRINT 3: Digestibility Suggestion -->
+    
+    <div class="digestibility-suggestion">
+        <p>
+            <em>Note:</em> This text explores advanced concepts. 
+            If it feels dense, you may wish to review the foundational 
+            <a href="../../pages/TL.CC.006/index.html">How To Taste Nibbana</a> section first.
+        </p>
+    </div>
+    
+
+    <!-- SPRINT 5: Silent Pause Block -->
+    
+    <div class="silent-pause-block" aria-hidden="true">
+        <span class="pause-separator">***</span>
+        <p class="pause-text">
+            This text carries weight. It may be beneficial to pause here before continuing.
+        </p>
+    </div>
+    
+
+</div>
+
+<!-- [SPRINT I] MOVIDO PARA: Transmission Map -->
+<hr class="nav-divider">
+<div class="transmission-map">
+    
+    <div class="map-item">
+        <span class="map-label">From:</span>
+        <a href="../../pages/PS.II.004/index.html">Avijja Paccaya Sankhara</a>
+    </div>
+    
+    
+    
+    <div class="map-item">
+        <span class="map-label">To:</span>
+        <a href="../../pages/PS.II.006/index.html">Sankhara Paccaya Vinnana 2</a>
+    </div>
+    
+</div>
+
+<nav class="pathways" aria-label="Next and Previous">
+    
+    <a class="pathway-link prev" href="../../pages/PS.II.004/index.html">
+        <span class="pathway-label">← Previous</span>
+        <span class="pathway-title title-en">Avijja Paccaya Sankhara</span>
+        
+        <span class="pathway-title title-pt">Avijja Paccaya Sankhara</span>
+        
+    </a>
+    
+
+    
+    <a class="pathway-link next" href="../../pages/PS.II.006/index.html">
+        <span class="pathway-label">Next →</span>
+        <span class="pathway-title title-en">Sankhara Paccaya Vinnana 2</span>
+        
+        <span class="pathway-title title-pt">Sankhara Paccaya Vinnana 2</span>
+        
+    </a>
+    
+</nav>
+
+<div id="ai-assistant-hook"></div>
+
+<nav class="post-nav" style="margin-top: 3rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+    <a href="../../archive.html#section-PS">
+        ↑ Back to Paṭicca Samuppāda
+    </a>
+</nav>
+
+
+        
+        <footer>
+            <p>Dhamma Preservation Project. 2500 Years of Teaching.</p>
+            <p><small>Generated Static Site. IPFS Compatible. <a href="../../index.html" style="color:inherit;text-decoration:underline;">Showcase Manual</a></small></p>
+            <!-- FF-013 Labz button -->
+            <div id="labz-entry" style="margin-top:1.4rem; text-align:center;">
+              <button id="labz-btn" onclick="toggleLabz()" title="Laboratório de Features Experimentais" style="
+                background: transparent;
+                border: 1px solid rgba(128,128,128,0.25);
+                border-radius: 999px;
+                padding: 6px 16px;
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
+                cursor: pointer;
+                color: var(--meta-color, #888);
+                font-family: ui-monospace, monospace;
+                transition: all 0.2s ease;
+              ">⚗️ LABZ</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Progressive Enhancement JS -->
+    <script src="../../js/main.js"></script>
+    <!-- reading-flow.js removed FF-016: superseded by FF-014 in main.js -->
+
+    <!-- [V2.4.0] Service Worker — DESATIVADO para User Edition offline -->
+    <!-- SW causava conflito de cache em distribuição via pen drive -->
+    <script>
+      if (false && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('../../sw.js', { scope: '../../' })
+            .then(function(reg) {
+              console.log('[SW] Registered. Scope:', reg.scope);
+            })
+            .catch(function(err) {
+              console.warn('[SW] Registration failed:', err);
+            });
+        });
+      }
+    </script>
+    
+    <!-- PRINT FORMAT MODAL UI -->
+    <div id="print-modal-overlay" onclick="closePrintModal()"></div>
+    <div id="print-modal" role="dialog" aria-labelledby="print-title">
+        <h3 id="print-title">🖨️ Modo Impressão / PDF</h3>
+        <p style="font-size: 0.85rem; color: var(--meta-color); margin-bottom: 1.5rem;">Configure as margens para anotações e economize folhas. Apenas a versão lida (Português) será impressa.</p>
+        
+        <div class="print-group">
+            <label for="p-margin">Tamanho da Margem Esquerda / Direita</label>
+            <select id="p-margin">
+                <option value="compact">Modo Econômico (Sem margens)</option>
+                <option value="normal" selected>Normal (2cm)</option>
+                <option value="wide">Margem Larga (Para anotações a caneta)</option>
+            </select>
+        </div>
+        
+        <div class="print-group">
+            <label for="p-line">Espaçamento entre as Linhas</label>
+            <select id="p-line">
+                <option value="1.1">Ultra-Compacto</option>
+                <option value="1.3" selected>Normal (Leitura fácil)</option>
+                <option value="1.8">Espaçado (Anotações entre linhas)</option>
+            </select>
+        </div>
+
+        <div class="print-group">
+            <label for="p-color">Cores e Fundo</label>
+            <select id="p-color">
+                <option value="bw" selected>Preto e Branco (Economia de tinta)</option>
+                <option value="color">Manter Cores (Revisão e destaques)</option>
+            </select>
+        </div>
+        
+        <div class="print-actions">
+            <button class="print-btn" onclick="closePrintModal()">Cancelar</button>
+            <button class="print-btn primary" onclick="executePrint()">Confirmar e Imprimir</button>
+        </div>
+    </div>
+</body>
+</html>
