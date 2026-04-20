@@ -1,108 +1,217 @@
 #!/usr/bin/env python3
 """
-💎 BRASILEIRINHO ENGINE — SCRIPT S03b
-=====================================
+💎 AXIS-NIDDHI — SG04_harvest_assets.py
+=========================================
 Nome:       Asset Harvester (A Colheitadeira)
-Versão:     1.0 — AXIS-NIDDHI Edition
-Autor:      Aethel & The Orchestra
-Data:       2026-03-06
+Versão:     2.0 — bengyond-playground (2026-04-20)
+Sequência:  SG04 → roda após SG00b_prepare_wp.py
 
 OBJETIVO:
-Vasculhar o WordPress extraído (runtime_wp/wp-content/uploads),
-encontrar todos os áudios e imagens originais do Prof. Lal, e
-copiá-los para as pastas definitivas do pipeline.
+  Vasculhar o WordPress extraído (wordpress/runtime_wp/wp-content/uploads),
+  encontrar APENAS imagens e documentos originais do Prof. Lal, e
+  copiá-los para assets/images/ com deduplicação SHA-256.
 
-Isso garante que o .ZIP seja a ÚNICA fonte da verdade, eliminando
-a necessidade de copiar mídias de backups antigos manualmente.
+  ⚠️  ÁUDIOS (*.mp3, *.wav, *.ogg) SÃO IGNORADOS TERMINANTEMENTE.
+      O pipeline de áudio (SP06 + assets/audio/) trata isso separadamente.
+
+PATHS: todos derivados do config.py canônico — zero hardcode.
+
+USO:
+  python3 pipeline/scripts/core/SG04_harvest_assets.py
 """
 
+import hashlib
 import os
+import re
 import shutil
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 # ==============================================================================
-# ⚙️ CONFIGURAÇÃO — via config.py canônico (AXIS-NIDDHI V5.4 hardening)
+# ⚙️  BOOTSTRAP — config.py canônico
 # ==============================================================================
-
 _SCRIPT_DIR = Path(__file__).resolve().parent
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from config import BASE_DIR, DIR_09_CSL, DIR_STATIC_SITE, LOG_DIR
+from config import BASE_DIR, DIR_STATIC_SITE, LOG_DIR
 
-BENG_ROOT      = BASE_DIR.parent
-WP_UPLOADS_DIR = BENG_ROOT / "wordpress" / "runtime_wp" / "wp-content" / "uploads"
+# PROJECT_ROOT = BASE_DIR.parent  (config.py: BASE_DIR = pipeline/)
+PROJECT_ROOT   = BASE_DIR.parent
+WP_UPLOADS_DIR = PROJECT_ROOT / "wordpress" / "wp-content" / "uploads"
 
-# Destinos no Pipeline — derivados de config.py
-AUDIO_DEST = DIR_09_CSL / "meta" / "pronunciation"
+# Destino canônico das imagens
 IMAGE_DEST = DIR_STATIC_SITE / "assets" / "images"
-# LOG_DIR já importado de config
-
-AUDIO_EXTS = {".mp3", ".wav", ".ogg"}
-IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".pdf"} # PDF entra como doc estático
 
 # ==============================================================================
-# 🚀 MOTOR DE COLHEITA
+# 🎛️  FILTROS DE EXTENSÃO
 # ==============================================================================
-def main():
+# BLOQUEIO ABSOLUTO — áudios têm pipeline dedicado (SP06 / assets/audio/)
+BLOCKED_EXTS = {".mp3", ".wav", ".ogg", ".aac", ".flac", ".m4a", ".mp4", ".m4v"}
+
+# Apenas imagens e documentos estáticos
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".pdf"}
+
+# Regex para miniaturas geradas pelo WordPress (ex: imagem-150x150.jpg)
+_WP_THUMB_RE = re.compile(
+    r"-\d+x\d+\.(jpg|jpeg|png|gif|webp)$", re.IGNORECASE
+)
+
+
+# ==============================================================================
+# 🔑  SHA-256 — deduplicação por conteúdo
+# ==============================================================================
+def sha256(path: Path) -> str:
+    """Calcula hash SHA-256 de um arquivo em blocos (memory-safe)."""
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(65_536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+# ==============================================================================
+# 🚜  MOTOR DE COLHEITA
+# ==============================================================================
+def main() -> None:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
-    log_file = LOG_DIR / f"S03b_harvest_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-    
-    def log(msg):
+    log_file = LOG_DIR / f"SG04_harvest_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+
+    def log(msg: str) -> None:
         print(msg)
         with open(log_file, "a", encoding="utf-8") as f:
             f.write(msg + "\n")
 
-    log("\n" + "="*60)
-    log("🚜 INICIANDO COLHEITA DE ASSETS (S03b)")
-    log("="*60)
+    log("\n" + "=" * 60)
+    log("🚜  INICIANDO COLHEITA DE ASSETS (SG04 v2.0)")
+    log("=" * 60)
+    log(f"   PROJECT_ROOT   : {PROJECT_ROOT}")
+    log(f"   WP_UPLOADS_DIR : {WP_UPLOADS_DIR}")
+    log(f"   IMAGE_DEST     : {IMAGE_DEST}")
+    log(f"   LOG            : {log_file}")
+    log("=" * 60)
 
-    if not WP_UPLOADS_DIR.exists():
-        log(f"❌ ERRO: Pasta de uploads do WP não encontrada: {WP_UPLOADS_DIR}")
-        log("   O reset.sh extraiu o ZIP corretamente?")
+    # ------------------------------------------------------------------
+    # FAIL-FAST — valida paths críticos
+    # ------------------------------------------------------------------
+    if not PROJECT_ROOT.exists():
+        log(f"❌ FAIL-FAST: PROJECT_ROOT não existe: {PROJECT_ROOT}")
         sys.exit(1)
 
-    AUDIO_DEST.mkdir(parents=True, exist_ok=True)
+    if not WP_UPLOADS_DIR.exists():
+        log(f"❌ FAIL-FAST: WP uploads não encontrado: {WP_UPLOADS_DIR}")
+        log("   Execute primeiro: python3 pipeline/scripts/core/SG00b_prepare_wp.py")
+        sys.exit(1)
+
+    if not DIR_STATIC_SITE.exists():
+        log(f"❌ FAIL-FAST: DIR_STATIC_SITE não existe: {DIR_STATIC_SITE}")
+        sys.exit(1)
+
+    # Garante destino
     IMAGE_DEST.mkdir(parents=True, exist_ok=True)
 
-    count_audio = 0
-    count_image = 0
+    # ------------------------------------------------------------------
+    # COLHEITA
+    # ------------------------------------------------------------------
+    log("\n🔍 Vasculhando wp-content/uploads...")
 
-    log("🔍 Vasculhando wp-content/uploads...")
+    seen_hashes: dict[str, str] = {}   # sha256 → filename no destino
+    stats = {
+        "scanned": 0,
+        "copied": 0,
+        "deduplicated": 0,
+        "skipped_thumb": 0,
+        "skipped_audio": 0,
+        "skipped_other": 0,
+        "errors": 0,
+    }
 
-    # rglob vasculha todas as subpastas (2014/, 2015/, etc)
-    for file_path in WP_UPLOADS_DIR.rglob("*"):
-        if not file_path.is_file():
+    for src in WP_UPLOADS_DIR.rglob("*"):
+        if not src.is_file():
             continue
 
-        ext = file_path.suffix.lower()
-        
-        # Ignorar miniaturas geradas pelo WP (ex: imagem-150x150.jpg)
-        if re.search(r'-\d+x\d+\.(jpg|jpeg|png|gif|webp)$', file_path.name, re.IGNORECASE):
+        stats["scanned"] += 1
+        ext = src.suffix.lower()
+
+        # 1. Bloqueio absoluto de áudio
+        if ext in BLOCKED_EXTS:
+            stats["skipped_audio"] += 1
             continue
 
-        if ext in AUDIO_EXTS:
-            dest = AUDIO_DEST / file_path.name
-            if not dest.exists() or file_path.stat().st_mtime > dest.stat().st_mtime:
-                shutil.copy2(file_path, dest)
-            count_audio += 1
+        # 2. Apenas extensões permitidas
+        if ext not in IMAGE_EXTS:
+            stats["skipped_other"] += 1
+            continue
 
-        elif ext in IMAGE_EXTS:
-            dest = IMAGE_DEST / file_path.name
-            if not dest.exists() or file_path.stat().st_mtime > dest.stat().st_mtime:
-                shutil.copy2(file_path, dest)
-            count_image += 1
+        # 3. Ignora miniaturas WordPress
+        if _WP_THUMB_RE.search(src.name):
+            stats["skipped_thumb"] += 1
+            continue
 
-    log("\n" + "="*60)
-    log("📊 RESUMO DA COLHEITA")
-    log("="*60)
-    log(f"🎵 Áudios colhidos : {count_audio} -> {AUDIO_DEST}")
-    log(f"🖼️  Imagens colhidas: {count_image} -> {IMAGE_DEST}")
-    log("✅ Colheita concluída com sucesso!")
-    log("="*60 + "\n")
+        # 4. Deduplicação SHA-256
+        try:
+            checksum = sha256(src)
+        except OSError as e:
+            log(f"   ⚠️  Erro ao ler {src.name}: {e}")
+            stats["errors"] += 1
+            continue
+
+        if checksum in seen_hashes:
+            stats["deduplicated"] += 1
+            continue
+
+        # 5. Cópia — resolve colisão de nome com sufixo hash
+        dest_filename = src.name
+        dest = IMAGE_DEST / dest_filename
+        if dest.exists():
+            # Arquivo diferente com mesmo nome → sufixo de 8 chars do hash
+            stem, suffix = Path(dest_filename).stem, Path(dest_filename).suffix
+            dest_filename = f"{stem}_{checksum[:8]}{suffix}"
+            dest = IMAGE_DEST / dest_filename
+
+        try:
+            shutil.copy2(src, dest)
+            seen_hashes[checksum] = dest_filename
+            stats["copied"] += 1
+        except OSError as e:
+            log(f"   ⚠️  Erro ao copiar {src.name}: {e}")
+            stats["errors"] += 1
+
+    # ------------------------------------------------------------------
+    # RELATÓRIO
+    # ------------------------------------------------------------------
+    final_count = sum(1 for f in IMAGE_DEST.iterdir() if f.is_file())
+    total_size_mb = sum(
+        f.stat().st_size for f in IMAGE_DEST.rglob("*") if f.is_file()
+    ) / (1024 * 1024)
+
+    log("\n" + "=" * 60)
+    log("📊  RESUMO DA COLHEITA — SG04")
+    log("=" * 60)
+    log(f"   Arquivos varridos             : {stats['scanned']}")
+    log(f"   ✅ Imagens copiadas           : {stats['copied']}")
+    log(f"   ♻️  Deduplicadas (SHA-256)    : {stats['deduplicated']}")
+    log(f"   🔇 Áudios bloqueados          : {stats['skipped_audio']}")
+    log(f"   🖼️  Miniaturas WP ignoradas   : {stats['skipped_thumb']}")
+    log(f"   ⏭️  Outros formatos ignorados  : {stats['skipped_other']}")
+    log(f"   ❌ Erros                      : {stats['errors']}")
+    log("-" * 60)
+    log(f"   📁 Destino       : {IMAGE_DEST}")
+    log(f"   📊 Total no dest : {final_count} arquivos")
+    log(f"   💾 Tamanho total : {total_size_mb:.2f} MB")
+    log("=" * 60)
+    log(f"   📝 Log completo  : {log_file}")
+
+    if stats["errors"] > 0:
+        log(f"\n⚠️  {stats['errors']} erros encontrados. Revise o log acima.")
+    else:
+        log("\n✅ Colheita concluída sem erros!")
+
+    log("\n▶️  Próximo passo:")
+    log("   python3 pipeline/scripts/core/SD01_generate_asset_map.py")
+    log("=" * 60 + "\n")
+
 
 if __name__ == "__main__":
-    import re
     main()
