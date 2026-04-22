@@ -20,6 +20,7 @@
 #   BENG_AUTO_TRANSLATE=true    bypass confirmação DeepL
 #   BENG_AUTO_INJECT=true       bypass confirmação WordPress inject
 #   BENG_AUTO_GLOSSARY_OK=true  bypass Glossary Gate
+#   BENG_PTBR_SRC=/path         override explícito da fonte PT-BR para SP01
 #   BENG_FAILURE_THRESHOLD=5    máximo de falhas antes de abort (default: 5)
 # ==============================================================================
 
@@ -30,7 +31,7 @@
 # ==============================================================================
 if [[ $EUID -ne 0 ]]; then
     echo -e "🛡️  AXIS-NIDDHI: Elevação de privilégio necessária para operações de sistema."
-    exec sudo --preserve-env=BENG_BASE,BENG_AUTO_RESET,BENG_AUTO_TRANSLATE,BENG_AUTO_INJECT,BENG_AUTO_GLOSSARY_OK,BENG_FAILURE_THRESHOLD "$0" "$@"
+    exec sudo --preserve-env=BENG_BASE,BENG_VENV,VIRTUAL_ENV,BENG_PTBR_SRC,BENG_AUTO_RESET,BENG_AUTO_TRANSLATE,BENG_AUTO_INJECT,BENG_AUTO_GLOSSARY_OK,BENG_FAILURE_THRESHOLD "$0" "$@"
 fi
 
 set -euo pipefail
@@ -42,7 +43,7 @@ set -euo pipefail
 export BENG_BASE="${BENG_BASE:-/beng-fut/pipeline}"
 BENG_ROOT="${BENG_BASE%/pipeline}"
 SCRIPTS_DIR="$BENG_BASE/scripts"
-VENV_DIR="$BENG_ROOT/.venv"
+VENV_DIR="${BENG_VENV:-${VIRTUAL_ENV:-$BENG_ROOT/.venv}}"
 LOG_DIR="$BENG_BASE/logs"
 RECOVERY_DIR="$BENG_BASE/recovery"
 
@@ -67,8 +68,65 @@ log_warn()  { echo -e "${YELLOW}⚠️  $*${NC}"; }
 log_error() { echo -e "${RED}❌ $*${NC}" >&2; }
 log_step()  { echo -e "\n${BLUE}━━━ $* ━━━${NC}"; }
 
+show_boot_banner() {
+    echo ""
+    echo -e "${CYAN}+------------------------------------------------------------+${NC}"
+    echo -e "${CYAN}| AXIS-NIDDHI :: BRASILEIRINHO ENGINE :: CANONICAL REBUILD   |${NC}"
+    echo -e "${CYAN}| Mission Control Orchestrator v${PIPELINE_VERSION}                               |${NC}"
+    echo -e "${CYAN}+------------------------------------------------------------+${NC}"
+    echo -e "${GRAY}| BENG_BASE: $BENG_BASE${NC}"
+    echo ""
+}
+
+show_close_banner() {
+    local status="$1"
+    local color="$GREEN"
+    if [ "$status" != "SUCCESS" ]; then
+        color="$RED"
+    fi
+    echo ""
+    echo -e "${color}+------------------------------------------------------------+${NC}"
+    echo -e "${color}| PIPELINE STATUS: $status${NC}"
+    echo -e "${color}+------------------------------------------------------------+${NC}"
+}
+
+exec_tag_from_name() {
+    local script_name="$1"
+    local tag="${script_name%%_*}"
+    tag="${tag%%.*}"
+    tag="${tag^^}"
+    if [ -z "$tag" ]; then
+        tag="RUN"
+    fi
+    echo "$tag"
+}
+
+log_exec() {
+    local tag="$1"
+    local cmd="$2"
+    echo -e "\n${BLUE}--[${tag}]----------------------------------------${NC}"
+    echo -e "${YELLOW}> ${cmd}${NC}"
+}
+
+print_operator_summary() {
+    echo ""
+    echo -e "${CYAN}================ OPERATOR SUMMARY ================${NC}"
+    echo -e "${CYAN}DE ONDE VIEMOS${NC}"
+    echo -e "  ${GRAY}${BENG_ROOT}/sources/*.zip${NC}"
+    echo -e "${CYAN}ONDE ESTAMOS${NC}"
+    echo -e "  ${GRAY}${BENG_BASE}/09-csl${NC}"
+    echo -e "  ${GRAY}${BENG_BASE}/13-static-site${NC}"
+    echo -e "  ${GRAY}${BENG_BASE}/13-ssg/cache/build_state.json${NC}"
+    echo -e "${CYAN}O QUE FAZER AGORA${NC}"
+    echo -e "  ${GRAY}1. Health check:${NC} bash ${SCRIPTS_DIR}/run_full_pipeline.sh --health"
+    echo -e "  ${GRAY}2. Preview site:${NC} cd ${BENG_BASE}/13-static-site && python3 -m http.server 8080"
+    echo -e "  ${GRAY}3. Distribution only:${NC} bash ${SCRIPTS_DIR}/run_full_pipeline.sh --distribution"
+    echo -e "${CYAN}==================================================${NC}"
+}
+
 abort() {
     log_error "PIPELINE ABORT: $*"
+    show_close_banner "FAILURE"
     exit 1
 }
 
@@ -79,9 +137,40 @@ run_script() {
     script_dir="$(dirname "$script_path")"
     local script_name
     script_name="$(basename "$script_path")"
-
-    echo -e "\n${YELLOW}▶ $script_name $*${NC}"
+    local cmd="python3 $script_name"
+    if [ "$#" -gt 0 ]; then
+        cmd+=" $*"
+    fi
+    log_exec "$(exec_tag_from_name "$script_name")" "$cmd"
     (cd "$script_dir" && python3 "$script_name" "$@")
+}
+
+run_bash_script() {
+    local script_path="$1"
+    shift
+    local script_dir
+    script_dir="$(dirname "$script_path")"
+    local script_name
+    script_name="$(basename "$script_path")"
+    local cmd="bash $script_name"
+    if [ "$#" -gt 0 ]; then
+        cmd+=" $*"
+    fi
+    log_exec "$(exec_tag_from_name "$script_name")" "$cmd"
+    (cd "$script_dir" && bash "$script_name" "$@")
+}
+
+run_python_in_dir() {
+    local work_dir="$1"
+    local script_name="$2"
+    local tag="$3"
+    shift 3
+    local cmd="python3 $script_name"
+    if [ "$#" -gt 0 ]; then
+        cmd+=" $*"
+    fi
+    log_exec "$tag" "$cmd"
+    (cd "$work_dir" && python3 "$script_name" "$@")
 }
 
 run_script_retry() {
@@ -116,7 +205,9 @@ validate_workspace() {
 
     if [ ! -d "$VENV_DIR" ]; then
         log_error "Virtual environment não encontrado: $VENV_DIR"
-        log_error "Execute: python3 -m venv $VENV_DIR && source $VENV_DIR/bin/activate && pip install -r $BENG_BASE/requirements.txt"
+        log_error "Default canônico: $BENG_ROOT/.venv"
+        log_error "Overrides aceitos: BENG_VENV=/caminho/venv ou VIRTUAL_ENV ativo."
+        log_error "Exemplo: python3 -m venv $BENG_ROOT/.venv && source $BENG_ROOT/.venv/bin/activate && pip install -r $BENG_BASE/requirements.txt"
         fatal=1
     fi
 
@@ -149,6 +240,10 @@ validate_workspace() {
 # ==============================================================================
 
 activate_venv() {
+    log_info "Ambiente Python selecionado: $VENV_DIR"
+    if [ "$VENV_DIR" != "$BENG_ROOT/.venv" ]; then
+        log_warn "Override de venv em uso (default canônico seria $BENG_ROOT/.venv)."
+    fi
     # shellcheck disable=SC1090
     source "$VENV_DIR/bin/activate"
     log_info "Verificando dependências..."
@@ -181,7 +276,7 @@ run_sg() {
         [ "${confirm,,}" = "y" ] || { log_warn "Genesis cancelado."; return 0; }
     fi
 
-    bash "$SCRIPTS_DIR/SG00_reset_workspace.sh"
+    run_bash_script "$SCRIPTS_DIR/SG00_reset_workspace.sh"
     run_script "$SCRIPTS_DIR/SG01_extract_html.py"
     run_script "$SCRIPTS_DIR/SG02_preprocess_html.py"
     run_script "$SCRIPTS_DIR/SG03_build_csl.py" --apply
@@ -194,8 +289,21 @@ run_sg() {
 run_sp() {
     log_step "[SP] PRESERVATION — Migrate → Identity → Translate"
 
-    # SP01 — migração PT-BR legado
-    run_script "$SCRIPTS_DIR/SP01_migrate_ptbr.py" --apply
+    # SP01 — migração PT-BR legado (opcional no release)
+    local ptbr_default_src="$BENG_BASE/03-ptbr"
+    local ptbr_override_src="${BENG_PTBR_SRC:-}"
+    if [ -n "$ptbr_override_src" ]; then
+        if [ ! -d "$ptbr_override_src" ]; then
+            abort "[SP01] BENG_PTBR_SRC inválido: $ptbr_override_src (diretório não existe)."
+        fi
+        log_warn "[SP01] Override explícito via BENG_PTBR_SRC: $ptbr_override_src"
+        run_script "$SCRIPTS_DIR/SP01_migrate_ptbr.py" --apply --src "$ptbr_override_src"
+    elif [ -d "$ptbr_default_src" ]; then
+        log_info "[SP01] Fonte PT-BR local detectada: $ptbr_default_src"
+        run_script "$SCRIPTS_DIR/SP01_migrate_ptbr.py" --apply --src "$ptbr_default_src"
+    else
+        log_warn "[SP01] Fonte PT-BR ausente em $ptbr_default_src; prosseguindo com SP02+."
+    fi
 
     # SP02 — upgrade identity v3.1
     run_script "$SCRIPTS_DIR/SP02_upgrade_identity.py" --apply
@@ -288,26 +396,32 @@ run_sd() {
 
     # SD03 — SSG build (em seu próprio diretório)
     local ssg_dir="$BENG_BASE/13-ssg"
-    if [ ! -f "$ssg_dir/SD03_static_site_build.py" ]; then
+    if [ ! -f "$ssg_dir/build.py" ]; then
         # ── F4 Bootstrap Guard ────────────────────────────────────────────────
-        # 13-ssg/SD03_static_site_build.py não existe — ambiente SSG não montado.
+        # 13-ssg/build.py não existe — ambiente SSG não montado.
         # Tenta auto-setup via setup_v54_static_site.sh antes de abortar.
-        log_warn "[SD] 13-ssg/SD03_static_site_build.py não encontrado."
+        log_warn "[SD] 13-ssg/build.py não encontrado."
         log_warn "[SD] Tentando bootstrap automático via setup_v54_static_site.sh..."
         if [ -f "$SCRIPTS_DIR/setup_v54_static_site.sh" ]; then
-            bash "$SCRIPTS_DIR/setup_v54_static_site.sh" || abort "SSG bootstrap falhou. Execute setup_v54_static_site.sh manualmente."
+            run_bash_script "$SCRIPTS_DIR/setup_v54_static_site.sh" || abort "SSG bootstrap falhou. Execute setup_v54_static_site.sh manualmente."
         else
-            abort "SD03_static_site_build.py não encontrado em $ssg_dir e setup_v54_static_site.sh ausente em $SCRIPTS_DIR. Monte o ambiente SSG antes de executar SD."
+            abort "build.py não encontrado em $ssg_dir e setup_v54_static_site.sh ausente em $SCRIPTS_DIR. Monte o ambiente SSG antes de executar SD."
         fi
         # Re-verificar após bootstrap
-        if [ ! -f "$ssg_dir/SD03_static_site_build.py" ]; then
-            abort "Bootstrap SSG concluído mas SD03_static_site_build.py ainda ausente em $ssg_dir. Verifique setup_v54_static_site.sh."
+        if [ ! -f "$ssg_dir/build.py" ]; then
+            abort "Bootstrap SSG concluído mas build.py ainda ausente em $ssg_dir. Verifique setup_v54_static_site.sh."
         fi
-        log_ok "[SD] Bootstrap SSG concluído. Prosseguindo com build..."
+        log_ok "[SD] Bootstrap SSG concluído. Prosseguindo com build.py..."
         # ─────────────────────────────────────────────────────────────────────
     fi
-    echo -e "\n${YELLOW}▶ SD03_static_site_build.py${NC}"
-    (cd "$ssg_dir" && python3 SD03_static_site_build.py)
+    if [ -f "$ssg_dir/build.py" ]; then
+        run_python_in_dir "$ssg_dir" "build.py" "SD03"
+    elif [ -f "$ssg_dir/SD03_static_site_build.py" ]; then
+        log_warn "[SD] build.py ausente; fallback de compatibilidade via SD03 shim."
+        run_python_in_dir "$ssg_dir" "SD03_static_site_build.py" "SD03"
+    else
+        abort "SSG indisponível: nem build.py nem SD03_static_site_build.py em $ssg_dir."
+    fi
 
     # SD04 — WordPress inject (bypass via BENG_AUTO_INJECT)
     if [ "${BENG_AUTO_INJECT:-false}" = "true" ]; then
@@ -365,7 +479,7 @@ run_full() {
     fi
     read -rp "  📦 Criar snapshot da CSL antes de prosseguir? [Y/n]: " snap_confirm
     if [ "${snap_confirm,,}" != "n" ]; then
-        bash "$SCRIPTS_DIR/SN01_snapshot_csl.sh" || log_warn "Snapshot falhou — continuando."
+        run_bash_script "$SCRIPTS_DIR/SN01_snapshot_csl.sh" || log_warn "Snapshot falhou — continuando."
     else
         log_warn "Snapshot ignorado pelo operador."
     fi
@@ -375,6 +489,8 @@ run_full() {
     run_sa
     run_sd
     log_ok "[FULL] Pipeline completo executado com sucesso."
+    print_operator_summary
+    show_close_banner "SUCCESS"
 }
 
 # ==============================================================================
@@ -399,6 +515,7 @@ handle_cli_flag() {
             echo "  BENG_AUTO_INJECT=true       bypass WP inject prompt"
             echo "  BENG_AUTO_GLOSSARY_OK=true  bypass Glossary Gate"
             echo "  BENG_AUTO_RESET=true        bypass SG00 reset confirm"
+            echo "  BENG_PTBR_SRC=/path         explicit SP01 PT-BR source override"
             echo "  BENG_FAILURE_THRESHOLD=N    max failures before abort (default: 5)"
             echo "  BENG_BASE=/path/to/pipeline override base dir"
             exit 0
@@ -437,6 +554,8 @@ show_menu() {
 # ==============================================================================
 # 8. ENTRY POINT
 # ==============================================================================
+
+show_boot_banner
 
 # CLI flag (non-interactive)
 if [ $# -gt 0 ]; then

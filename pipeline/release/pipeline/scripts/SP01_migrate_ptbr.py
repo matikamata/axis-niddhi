@@ -219,8 +219,12 @@ def run(src_csl: Path, apply: bool, verbose: bool) -> None:
 
     if not src_csl.exists():
         log(f"SRC não encontrada: {src_csl}", "ERROR", RED)
-        log("Verifique se 03-ptbr/ existe em /beng-fut/pipeline/.", "ERROR", RED)
-        log("Execute: bash scripts/seed_ptbr.sh --src <backup_path>", "ERROR", RED)
+        if src_csl == _DEFAULT_SRC:
+            log(f"Fonte padrão derivada de BENG_BASE (DIR_03_PTBR): {_DEFAULT_SRC}", "ERROR", RED)
+            log("Se quiser usar fonte externa, informe --src <caminho/para/03-ptbr ou 09-csl>.", "ERROR", RED)
+        else:
+            log(f"Fonte explícita informada via --src: {src_csl}", "ERROR", RED)
+            log(f"Fonte padrão derivada de BENG_BASE (DIR_03_PTBR): {_DEFAULT_SRC}", "ERROR", RED)
         sys.exit(1)
 
     if not DST_CSL.exists():
