@@ -48,6 +48,7 @@ sys.path.insert(0, str(_HERE / "src"))
 try:
     # Config canônico do pipeline
     sys.path.insert(0, str(_HERE.parent / "scripts"))
+    sys.path.insert(0, str(_HERE.parent / "scripts" / "core"))
     from config import (
         DIR_09_CSL      as CSL_DIR_CFG,
         DIR_13_SSG      as SSG_DIR_CFG,
@@ -467,10 +468,10 @@ def main() -> None:
     parser.add_argument("--clean", action="store_true", help="Limpa cache antes do build")
     parser.add_argument("--rebuild", action="store_true", help="Alias para --clean")
     args = parser.parse_args()
+    CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
     if args.clean or args.rebuild:
-        cache_file = Path(__file__).parent / "cache" / "build_state.json"
-        if cache_file.exists():
-            cache_file.unlink()
+        if CACHE_FILE.exists():
+            CACHE_FILE.unlink()
             logger.info("🧹 Cache limpo (build_state.json removido)")
 
     start = time.time()

@@ -205,7 +205,7 @@ done
 if [[ -d "$SSG_DIR" ]]; then
     pass "SSG engine directory present: 13-ssg/"
 else
-    warn "13-ssg/ absent — run: bash $SCRIPTS/setup_v54_static_site.sh"
+    warn "13-ssg/ absent — run: bash $BENG_BASE/scripts/tools/setup_v54_static_site.sh"
 fi
 
 # ==============================================================================
@@ -216,16 +216,15 @@ info "── [5/6] SSG Engine ────────────────�
 
 SSG_ISSUES=0
 if [[ -f "$SSG_DIR/build.py" ]]; then
-    pass "13-ssg/build.py present"
+    pass "13-ssg/build.py present (engine real)"
 else
     warn "13-ssg/build.py absent"; SSG_ISSUES=$((SSG_ISSUES + 1))
 fi
 
 if [[ -f "$SSG_DIR/SD03_static_site_build.py" ]]; then
-    pass "13-ssg/SD03_static_site_build.py present"
+    pass "13-ssg/SD03_static_site_build.py present (compat shim)"
 else
-    warn "13-ssg/SD03_static_site_build.py absent — run setup_v54_static_site.sh"
-    SSG_ISSUES=$((SSG_ISSUES + 1))
+    detail "Shim SD03 ausente (ok no modelo vivo: run_full usa build.py)"
 fi
 
 if [[ -d "$SSG_DIR/src/loaders" && \
@@ -236,8 +235,30 @@ else
     warn "13-ssg/src/ incomplete or absent"; SSG_ISSUES=$((SSG_ISSUES + 1))
 fi
 
+if [[ -f "$SSG_DIR/templates/base.html" && \
+      -f "$SSG_DIR/templates/post.html" && \
+      -f "$SSG_DIR/templates/index.html" && \
+      -f "$SSG_DIR/templates/welcome.html" ]]; then
+    pass "13-ssg/templates payload mínimo presente (inclui welcome.html)"
+else
+    warn "13-ssg/templates incompleto (base/post/index/welcome)"; SSG_ISSUES=$((SSG_ISSUES + 1))
+fi
+
+if [[ -f "$SSG_DIR/static/css/style.css" && \
+      -f "$SSG_DIR/static/css/typography-pro.css" && \
+      -f "$SSG_DIR/static/js/main.js" && \
+      -f "$SSG_DIR/static/js/sw.js" && \
+      -f "$SSG_DIR/static/favicon.svg" && \
+      -f "$SSG_DIR/static/buddha-2.jpg" && \
+      -f "$SSG_DIR/static/assets/BodhiCircuitLeaf.png" && \
+      -f "$SSG_DIR/static/leaf.html" ]]; then
+    pass "13-ssg/static payload mínimo presente"
+else
+    warn "13-ssg/static payload mínimo incompleto"; SSG_ISSUES=$((SSG_ISSUES + 1))
+fi
+
 [[ "$SSG_ISSUES" -gt 0 ]] && \
-    detail "Auto-bootstrap will run at SD phase. Or: bash $SCRIPTS/setup_v54_static_site.sh"
+    detail "Auto-bootstrap no SD. Ou execute: bash $BENG_BASE/scripts/tools/setup_v54_static_site.sh"
 
 # ==============================================================================
 # 9. CHECK 6 — PYTHON ENVIRONMENT

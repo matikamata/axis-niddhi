@@ -305,7 +305,21 @@ run_sd() {
     # SD03 — SSG build (em seu próprio diretório)
     local ssg_dir="$BENG_BASE/13-ssg"
     if [ ! -f "$ssg_dir/build.py" ]; then
-        abort "build.py não encontrado em $ssg_dir"
+        log_warn "[SD] build.py não encontrado em $ssg_dir"
+        log_warn "[SD] Tentando bootstrap automático do SSG..."
+        local setup_tool="$BENG_BASE/scripts/tools/setup_v54_static_site.sh"
+        local setup_legacy="$BENG_BASE/scripts/setup_v54_static_site.sh"
+        if [ -f "$setup_tool" ]; then
+            bash "$setup_tool" || abort "SSG bootstrap falhou via $setup_tool."
+        elif [ -f "$setup_legacy" ]; then
+            bash "$setup_legacy" || abort "SSG bootstrap falhou via $setup_legacy."
+        else
+            abort "build.py ausente e setup_v54_static_site.sh não encontrado (tools/ nem legacy)."
+        fi
+        if [ ! -f "$ssg_dir/build.py" ]; then
+            abort "Bootstrap executado, mas build.py ainda ausente em $ssg_dir."
+        fi
+        log_ok "[SD] Bootstrap SSG concluído. Prosseguindo com build.py."
     fi
     echo -e "\n${YELLOW}▶ SD03 (SSG Build) — build.py${NC}"
     (cd "$ssg_dir" && python3 build.py)
