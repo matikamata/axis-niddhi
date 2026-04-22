@@ -186,6 +186,13 @@ DEEPL_GLOSSARY_ID = "bbebe104-0015-46a9-8f9e-98bb88431ecb"  # Glossário V5 (nã
 # ⚙️  PIPELINE — CONSTANTES OPERACIONAIS
 # ==============================================================================
 
+CORPUS_COLUMNS = {
+    "post_id": "id_10WEB.io",
+    "fin_dex": "Fin-dex",
+    "pdpn": "PD#PN",
+    "slug": "Slug_Derived"
+}
+
 SOURCE_LANG  = "en-US"
 TARGET_LANG  = "pt-BR"
 SCHEMA_VERSION      = "3.1"

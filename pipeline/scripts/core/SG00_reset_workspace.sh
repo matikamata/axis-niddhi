@@ -131,12 +131,23 @@ fi
 # ==============================================================================
 
 echo -e "\n${BLUE}>>> 0. Detectando Backup ZIP...${NC}"
-ZIP_FILE=$(find "$SOURCES_DIR" -maxdepth 1 -name "*.zip" 2>/dev/null | sort | tail -1)
-if [ -z "$ZIP_FILE" ]; then
+
+shopt -s nullglob
+ZIP_ARRAY=("$SOURCES_DIR"/*.zip)
+shopt -u nullglob
+
+if [ ${#ZIP_ARRAY[@]} -eq 0 ]; then
     echo -e "${RED}❌ ZIP não encontrado em $SOURCES_DIR${NC}"
     echo "   Coloque o backup .zip em: $SOURCES_DIR"
     exit 1
+elif [ ${#ZIP_ARRAY[@]} -gt 1 ]; then
+    echo "FATAL: Multiple corpus ZIP files found. Selection is ambiguous and violates deterministic rebuild." >&2
+    echo "Please leave exactly one ZIP file in $SOURCES_DIR. Found:" >&2
+    printf "  %s\n" "${ZIP_ARRAY[@]}" | LC_ALL=C sort >&2
+    exit 1
 fi
+
+ZIP_FILE="${ZIP_ARRAY[0]}"
 echo -e "    ZIP: ${CYAN}$ZIP_FILE${NC}"
 echo -e "    Tamanho: $(du -sh "$ZIP_FILE" | awk '{print $1}')"
 

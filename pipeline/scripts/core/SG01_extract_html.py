@@ -51,6 +51,7 @@ from config import (
     PDPN_CSV,
     DB_CONFIG,
     SOURCE_LANG,
+    CORPUS_COLUMNS,
 )
 
 OUTPUT_DIR = DIR_01_EXTRACTED / SOURCE_LANG   # /beng/pipeline/01-extracted-htmls/en-US
@@ -154,13 +155,27 @@ def update_cls_origin(pdpn: str, filename: str, sha256: str, extracted_at: str, 
         log(f"  [CLS] {pdpn}: aviso ao atualizar origin — {e}", "WARN")
 
 
+def get_extraction_time() -> str:
+    if "AXIS_EXTRACTION_TIME" in os.environ:
+        return os.environ["AXIS_EXTRACTION_TIME"]
+
+    if "SOURCE_DATE_EPOCH" in os.environ:
+        try:
+            epoch = int(os.environ["SOURCE_DATE_EPOCH"])
+            return datetime.utcfromtimestamp(epoch).strftime("%Y-%m-%d %H:%M:%S")
+        except (ValueError, TypeError):
+            pass
+
+    return "1970-01-01 00:00:00"
+
+
 def generate_tattoo(row: dict) -> str:
     """
     Gera o cabeçalho canônico (Anti-Amnésia) de cada arquivo extraído.
     Este comentário é a 'Tatuagem' — identificação permanente do artefato.
     NÃO remova nem edite este bloco nos arquivos gerados.
     """
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = get_extraction_time()
     return f"""<!--
 \U0001f4a1 BRASILEIRINHO ENGINE - CANONICAL SOURCE ARTIFACT
 ===================================================
@@ -236,10 +251,10 @@ def main():
     with conn.cursor() as cursor:
         for _, row in df.iterrows():
             try:
-                wp_id  = int(row["id_10WEB.io"])
-                findex = str(row["Fin-dex"]).zfill(4)
-                pdpn   = str(row["PD#PN"]).strip()
-                slug   = clean_slug(str(row.get("Slug_Derived", "")))
+                wp_id  = int(row[CORPUS_COLUMNS["post_id"]])
+                findex = str(row[CORPUS_COLUMNS["fin_dex"]]).zfill(4)
+                pdpn   = str(row[CORPUS_COLUMNS["pdpn"]]).strip()
+                slug   = clean_slug(str(row.get(CORPUS_COLUMNS["slug"], "")))
 
                 # Nome canônico: [Fin-dex]__[PD#PN]__[slug].html
                 filename = f"{findex}__{pdpn}__{slug}.html"
