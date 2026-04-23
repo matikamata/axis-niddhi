@@ -90,7 +90,8 @@ PIPELINE_ROOT  = CSL_DIR.parent          # /beng/pipeline
 TEMPLATES_DIR  = _HERE / "templates"
 STATIC_DIR     = _HERE / "static"
 CACHE_FILE     = _HERE / "cache" / "build_state.json"
-ASSET_MAP_FILE = ASSETS_DIR / "asset_map.json"
+ASSET_MAP_PRIMARY_FILE = ASSETS_DIR / "asset_map.json"
+ASSET_MAP_FALLBACK_FILE = METADATA_DIR / "asset_map.json"
 SLUG_MAP_FILE  = METADATA_DIR / "slug_map.json"   # gerado internamente se ausente
 GLOSSARY_CSV   = METADATA_DIR / "Glossario_v5.csv"  # fonte canônica: termo_en,termo_pt (sem cabeçalho)
 
@@ -162,19 +163,34 @@ def _load_asset_map() -> Dict[str, str]:
     Carrega asset_map.json se existir. OPCIONAL — nunca aborta.
     Retorna dict vazio se ausente (asset_mapper opera em passthrough).
     """
-    if not ASSET_MAP_FILE.exists():
+    asset_map_path: Optional[Path] = None
+
+    if ASSET_MAP_PRIMARY_FILE.exists():
+        asset_map_path = ASSET_MAP_PRIMARY_FILE
+        logger.info(f"📦 asset_map.json usando caminho primário: {ASSET_MAP_PRIMARY_FILE}")
+    elif ASSET_MAP_FALLBACK_FILE.exists():
+        asset_map_path = ASSET_MAP_FALLBACK_FILE
         logger.warning(
-            f"⚠️  asset_map.json ausente ({ASSET_MAP_FILE}) — "
+            f"⚠️  asset_map primário ausente ({ASSET_MAP_PRIMARY_FILE}) — "
+            f"usando fallback: {ASSET_MAP_FALLBACK_FILE}"
+        )
+    else:
+        logger.warning(
+            f"⚠️  asset_map.json ausente (primário: {ASSET_MAP_PRIMARY_FILE}; "
+            f"fallback: {ASSET_MAP_FALLBACK_FILE}) — "
             "assets não serão reescritos (passthrough). "
-            "[S14_ASSET_RESOLVER não executado]"
+            "[S14_ASSET_RESOLVER não executado / SD01 não gerou metadata]"
         )
         return {}
+
     try:
-        data = json.loads(ASSET_MAP_FILE.read_text(encoding="utf-8"))
-        logger.info(f"📦 asset_map.json carregado: {len(data)} entradas.")
+        data = json.loads(asset_map_path.read_text(encoding="utf-8"))
+        logger.info(f"📦 asset_map.json carregado de {asset_map_path}: {len(data)} entradas.")
         return data
     except Exception as e:
-        logger.warning(f"⚠️  Erro ao ler asset_map.json: {e} — passthrough ativado.")
+        logger.warning(
+            f"⚠️  Erro ao ler asset_map.json em {asset_map_path}: {e} — passthrough ativado."
+        )
         return {}
 
 

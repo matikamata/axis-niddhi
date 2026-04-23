@@ -232,9 +232,8 @@ body[data-theme="dark"] h1 { text-shadow: 0 1px 6px rgba(100, 255, 100, 0.2); }
 /* ── SPRINT G: h5 = Section Box Colasável ─────────────────────────────────── */
 /* ── SPRINT K: color hardcoded to readable dark green (was var(--green-axiom) = #00ff00, illegible on light bg) */
 h5 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
+  position: relative;
   font-family: Georgia, serif;
   font-size: 1.05rem;
   font-weight: 600;
@@ -242,7 +241,7 @@ h5 {
   background: rgba(0, 128, 0, 0.08);
   border-left: 3px solid #2d8a2d;
   border-radius: 0 8px 8px 0;
-  padding: 0.65rem 1rem;
+  padding: 0.65rem 2.1rem 0.65rem 1rem;
   margin: 2.2rem 0 0.4rem;
   cursor: pointer;
   user-select: none;
@@ -287,13 +286,15 @@ h5 + .section-content > *:first-child {
 }
 h5::after {
   content: "▼";
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
   font-size: 0.75rem;
   opacity: 0.6;
   transition: transform 0.25s ease;
-  margin-left: 0.8rem;
-  flex-shrink: 0;
+  transform: translateY(-50%);
 }
-h5.collapsed::after { transform: rotate(-90deg); }
+h5.collapsed::after { transform: translateY(-50%) rotate(-90deg); }
 
 .section-content {
   overflow: hidden;
@@ -382,6 +383,18 @@ a:hover { color: var(--green-axiom); text-decoration: underline; }
 #lang-pt:checked ~ .post-container .content-pt { display: block; }
 #lang-pt:checked ~ .post-container .toc-pt { display: block; }
 #lang-pt:checked ~ .post-container .breadcrumbs .current-crumb-pt { display: inline-block; }
+
+/* Keep active post titles block-level; language label spans remain inline. */
+#lang-en:checked ~ header .title-en,
+#lang-pt:checked ~ header .title-pt {
+  display: block;
+}
+
+/* Post header polish: slightly tighter title -> metadata spacing. */
+header .title-en,
+header .title-pt {
+  margin-bottom: 1.05rem;
+}
 
 /* ---------- ACCORDION (CANONICAL) ---------- */
 .library-section h2 {
@@ -1052,11 +1065,18 @@ body[data-theme="stardust"] #reading-progress {
 
 /* Oculto em tabelas puras antes do toggle wrap (fallback) */
 .csl-tattoo.meta-toggle-wrap {
-  display: block;
-  margin-top: -1rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px dotted var(--border-color);
-  padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.csl-tattoo.meta-toggle-wrap .meta-table-wrap table {
+  margin: 0.65rem auto 0;
+  text-align: left;
 }
 
 /* Visível apenas no Stardust (Labz mode) para tabelas velhas */
@@ -1210,16 +1230,29 @@ body[data-theme="stardust"] .csl-tattoo td {
   opacity: 1;
 }
 .meta-toggle-btn {
-  background: none;
-  border: none;
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: rgba(128, 128, 128, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--meta-color);
   cursor: pointer;
-  padding: 0.2rem 0;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  padding: 0.3rem 0.85rem;
+  min-width: 8.6rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
-.meta-toggle-btn:hover { opacity: 1; }
+.meta-toggle-btn:hover {
+  border-color: var(--meta-color);
+  background: rgba(128, 128, 128, 0.14);
+}
+.meta-toggle-btn:focus-visible {
+  outline: 2px solid rgba(0, 204, 0, 0.35);
+  outline-offset: 2px;
+}
 
 /* [SPRINT L] BUG 3 — TOC reveal button padronizado como pill */
 .toc-reveal-btn {

@@ -1,7 +1,8 @@
 /* pipeline/13-ssg/static/js/main.js */
 
 /**
- * AXIS-NIDDHI ENGINE — UNIFIED FRONTEND LOGIC V1.5.0
+ * AXIS-NIDDHI ENGINE — UNIFIED FRONTEND LOGIC V1.5.1
+ * [20260420] SPRINT O: initPronunciation() — lazy audio loading (preload='none', src on click)
  * [20260309] PATCH-B2: initPronunciation() — NFC normalization + explicit console logging
  * [20260309] PATCH-B:  initPronunciation() — dual-schema manifest loader
  * [20260223] Added: Offline Search UI (Sprint 9)
@@ -282,14 +283,21 @@ function toggleLabz() {
 
         el.addEventListener('click', function(e) {
           e.preventDefault();
-          var audio = new Audio(audioPath);
+          // [SPRINT O] CORREÇÃO 2+3: Lazy loading — src atribuído só no click,
+          // preload='none' previne download antecipado dos MP3s.
+          var audio = new Audio();
+          audio.preload = 'none';
+          audio.src = audioPath;
           audio.play().catch(function(err) {
             console.warn('[Pronunciation] Play failed:', audioPath, err);
             // FINAL FALLBACK: Try absolute path if relative failed
             if (!audioPath.startsWith('/')) {
               var absPath = '/' + audioPath.replace(/^\.+\//, '');
               console.log('[Pronunciation] Retrying absolute:', absPath);
-              new Audio(absPath).play().catch(e => {});
+              var fallback = new Audio();
+              fallback.preload = 'none';
+              fallback.src = absPath;
+              fallback.play().catch(function() {});
             }
           });
         });

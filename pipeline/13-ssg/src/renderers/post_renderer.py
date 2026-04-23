@@ -209,36 +209,13 @@ def render_post(
         raw_en = ""
 
     # [FF-016 v3] Extract & remove CSL tattoo comment BEFORE any BS4 processing.
-    # If comment absent (CSL rebuilt from scratch), generate tattoo from Post metadata.
-    _tattoo, raw_en_clean = extract_csl_tattoo(raw_en)
-
-    if not _tattoo:
-        # Active injection — CSL may lack comment after full reset (Akasa/FF-016-v3)
-        rows = ''.join(
-            f'<tr><td>{k}</td><td>{v}</td></tr>'
-            for k, v in [
-                ('PD#PN',    post.pdpn),
-                ('Fin-dex',  post.findex),
-                ('Slug',     post.slug_root),
-                ('Section',  post.section_code),
-                ('Title EN', post.titles.get('en', '')),
-            ]
-        )
-        _tattoo = (
-            f'<div class="meta-toggle-wrap csl-tattoo" aria-hidden="true">'
-            f'<button class="meta-toggle-btn" onclick="this.parentElement.classList.toggle(\\\'open\\\')" aria-expanded="false">'
-            f'ℹ️ <span class="meta-toggle-label-en">Post info</span><span class="meta-toggle-label-pt">Info do post</span>'
-            f'</button>'
-            f'<div class="meta-table-wrap">'
-            f'<table>{rows}</table>'
-            f'</div></div>'
-        )
+    # Canonical Post info UI is rendered by post.html to avoid EN-only duplication.
+    _, raw_en_clean = extract_csl_tattoo(raw_en)
 
     content_en = link_resolver.resolve_links(raw_en_clean, post.pdpn)
     content_en = process_assets(content_en, post.pdpn, asset_map)
     content_en = inject_marginalia(content_en, glossary)
     content_en = modernize_iframes(content_en)
-    content_en = _tattoo + content_en
 
     # ── 2. PT content (if available) ──────────────────────────────────────
     content_pt = ""
