@@ -1,7 +1,8 @@
 /* pipeline/13-ssg/static/js/main.js */
 
 /**
- * AXIS-NIDDHI ENGINE — UNIFIED FRONTEND LOGIC V1.5.0
+ * AXIS-NIDDHI ENGINE — UNIFIED FRONTEND LOGIC V1.5.1
+ * [20260420] SPRINT O: initPronunciation() — lazy audio loading (preload='none', src on click)
  * [20260309] PATCH-B2: initPronunciation() — NFC normalization + explicit console logging
  * [20260309] PATCH-B:  initPronunciation() — dual-schema manifest loader
  * [20260223] Added: Offline Search UI (Sprint 9)
@@ -195,28 +196,24 @@ function toggleLabz() {
   }
 
   function getRootPath() {
-    var path = window.location.pathname;
-    // Remove leading/trailing slashes and split
-    var parts = path.split('/').filter(p => p !== '');
-    
-    // Depth Counting for Netlify Pretty URLs:
-    // 1. /archive -> parts: ['archive']. depth: 0
-    // 2. /pages/TL.CC.003/ -> parts: ['pages', 'TL.CC.003']. depth: 2
-    // 3. /pages/TL.CC.003/index.html -> parts: ['pages', 'TL.CC.003', 'index.html']. depth: 2
-    
-    var depth = 0;
-    if (parts.length > 0) {
-      // If the last part has an extension, it's a file, so it doesn't add to depth
-      var lastPart = parts[parts.length - 1];
-      var isFile = lastPart.indexOf('.') !== -1 && !/^[A-Z]{2}\.[A-Z]{2}\.\d{3}$/.test(lastPart);
-      // Wait, our PDPNs like TL.CC.003 have dots. 
-      // Most reliable check for Netlify: the 'pages' directory is always level 1.
-      if (parts[0] === 'pages') {
-        depth = 2; // Always 2 levels deep for posts in the current architecture
-      } else {
-        depth = 0; // Root level for archive, index, etc.
-      }
-    }
+    var parts = window.location.pathname.split('/').filter(p => p !== '');
+    var pagesIndex = parts.indexOf('pages');
+
+    // Root pages (index/archive) always load side assets from current dir.
+    if (pagesIndex === -1) return './';
+
+    // Post URLs can be:
+    // - /pages/PDPN/index.html
+    // - /pages/PDPN/
+    // - /axis-niddhi/pages/PDPN/index.html (GitHub Pages project path)
+    var lastPart = parts[parts.length - 1] || '';
+    var isPdpn = /^[A-Z]{2}\.[A-Z]{2}\.\d{3}$/i.test(lastPart);
+    var isFile = lastPart.indexOf('.') !== -1 && !isPdpn;
+
+    // Depth from current page to site root (where search_index/pronunciation_manifest live).
+    var depth = isFile
+      ? (parts.length - pagesIndex - 1)
+      : (parts.length - pagesIndex);
 
     if (depth <= 0) return './';
     return '../'.repeat(depth);
@@ -226,6 +223,7 @@ function toggleLabz() {
     var terms = document.querySelectorAll('.term-highlight');
     if (!terms.length) return;
 
+    var EXTERNAL_AUDIO_BASE = 'https://puredhamma.net/wp-content/uploads/';
     var root = getRootPath();
     var manifestUrl = root + 'pronunciation_manifest.json';
     
@@ -242,13 +240,28 @@ function toggleLabz() {
         .catch(function(err) {
           console.warn('[Pronunciation] Load failed for ' + url + ':', err);
           if (!isRetry) {
-            // FALLBACK: Try absolute root as suggested by Gemini
-            loadManifest('/pronunciation_manifest.json', true);
+            // Fallback bound to current site root (works for /axis-niddhi/ too).
+            var fallbackUrl = new URL(root + 'pronunciation_manifest.json', window.location.href).toString();
+            if (fallbackUrl !== url) {
+              loadManifest(fallbackUrl, true);
+            }
           }
         });
     }
 
     function setupAudio(manifest, currentRoot) {
+      function buildExternalAudioUrl(pathLike) {
+        if (!pathLike) return null;
+        var m = String(pathLike).match(/assets\/audio\/en-US\/([^?#]+)/i);
+        if (!m || !m[1]) return null;
+        var filename = m[1].split('/').pop();
+        if (!filename) return null;
+        try {
+          filename = decodeURIComponent(filename);
+        } catch (_) {}
+        return EXTERNAL_AUDIO_BASE + encodeURIComponent(filename);
+      }
+
       function resolveAudioPath(termKey) {
         var key = termKey.normalize ? termKey.normalize('NFC') : termKey;
         var path = null;
@@ -263,7 +276,9 @@ function toggleLabz() {
         }
 
         if (!path) return null;
-        // If path starts with / it's already absolute (Gemini suggestion)
+        // Externalized oversized artifacts can be absolute URLs.
+        if (/^(?:https?:)?\/\//i.test(path)) return path;
+        // Site-root absolute path.
         if (path.startsWith('/')) return path;
         // Default to relative resolution
         return currentRoot + path;
@@ -282,16 +297,29 @@ function toggleLabz() {
 
         el.addEventListener('click', function(e) {
           e.preventDefault();
-          var audio = new Audio(audioPath);
-          audio.play().catch(function(err) {
-            console.warn('[Pronunciation] Play failed:', audioPath, err);
-            // FINAL FALLBACK: Try absolute path if relative failed
-            if (!audioPath.startsWith('/')) {
-              var absPath = '/' + audioPath.replace(/^\.+\//, '');
-              console.log('[Pronunciation] Retrying absolute:', absPath);
-              new Audio(absPath).play().catch(e => {});
-            }
-          });
+          // [SPRINT O] Lazy loading + robust fallback chain (relative -> absolute -> external canonical URL).
+          var candidates = [audioPath];
+          if (!/^(?:https?:)?\/\//i.test(audioPath) && !audioPath.startsWith('/')) {
+            candidates.push(new URL(audioPath, window.location.href).toString());
+          }
+          var externalUrl = buildExternalAudioUrl(audioPath);
+          if (externalUrl && candidates.indexOf(externalUrl) === -1) {
+            candidates.push(externalUrl);
+          }
+
+          function tryPlay(index) {
+            if (index >= candidates.length) return;
+            var src = candidates[index];
+            var audio = new Audio();
+            audio.preload = 'none';
+            audio.src = src;
+            audio.play().catch(function(err) {
+              console.warn('[Pronunciation] Play failed:', src, err);
+              tryPlay(index + 1);
+            });
+          }
+
+          tryPlay(0);
         });
       });
       console.log('[Pronunciation] Ready. Active terms:', activated);
@@ -396,6 +424,30 @@ function toggleLabz() {
       const saved = localStorage.getItem('axis-view-mode');
       if (saved === 'comparative') setViewMode('comparative');
     } catch(e) {}
+  }
+
+  function cleanupLegacyServiceWorker() {
+    // SW is intentionally disabled in base.html. If an older deployment
+    // left registrations/caches behind, they can cause stale loading loops.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations()
+        .then(function(registrations) {
+          registrations.forEach(function(reg) {
+            reg.unregister().catch(function() {});
+          });
+        })
+        .catch(function() {});
+    }
+
+    if ('caches' in window) {
+      caches.keys()
+        .then(function(keys) {
+          keys
+            .filter(function(k) { return k.indexOf('axis-niddhi-') === 0; })
+            .forEach(function(k) { caches.delete(k).catch(function() {}); });
+        })
+        .catch(function() {});
+    }
   }
 
 
@@ -523,6 +575,7 @@ function toggleLabz() {
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    cleanupLegacyServiceWorker();
     initTheme();
     initViewMode();       // [FF-012]
     restoreScrollPosition(); // [FF-014]
@@ -613,4 +666,3 @@ window.toggleTOC = function(targetId) {
         }
     }
 };
-
