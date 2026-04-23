@@ -41,7 +41,7 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Dict, Any, Optional
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 # ── Import path: src/ relativo ao build.py ─────────────────────────────────
 _HERE = Path(__file__).parent.resolve()
@@ -103,6 +103,7 @@ EXTERNAL_UPLOADS_BASE = os.environ.get(
     "BENG_EXTERNAL_UPLOADS_BASE_URL",
     "https://puredhamma.net/wp-content/uploads",
 ).rstrip("/")
+LOCAL_WP_PREFIXES = {"beng_feb2026", "brasileirinho"}
 
 # ── Logging ─────────────────────────────────────────────────────────────────
 LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -142,6 +143,14 @@ def _calculate_template_hash(template_dir: Path) -> str:
     renderers_dir = template_dir.parent / "src" / "renderers"
     if renderers_dir.exists():
         for p in sorted(renderers_dir.glob("*.py")):
+            try:
+                hasher.update(p.read_bytes())
+            except Exception as e:
+                logger.warning(f"⚠️  Não foi possível hashear {p.name}: {e}")
+    # [2026-04-23] Python transformers also affect rendered post output
+    transformers_dir = template_dir.parent / "src" / "transformers"
+    if transformers_dir.exists():
+        for p in sorted(transformers_dir.glob("*.py")):
             try:
                 hasher.update(p.read_bytes())
             except Exception as e:
@@ -210,6 +219,13 @@ def _copy_static_assets() -> None:
     logger.info(f"📦 Static assets copiados → {OUTPUT_DIR}")
 
 
+def _ensure_github_pages_markers() -> None:
+    """Garantias mínimas para deploy estático em GitHub Pages backup."""
+    marker = OUTPUT_DIR / ".nojekyll"
+    marker.write_text("", encoding="utf-8")
+    logger.info("🧷 GitHub Pages marker: .nojekyll")
+
+
 def _generate_search_index(posts: List[Post]) -> None:
     """Gera search_index.json para busca offline.
     [FF-010] 2026-03-09 — fixes:
@@ -230,6 +246,22 @@ def _generate_search_index(posts: List[Post]) -> None:
                 excerpt = re.sub(r'\s+', ' ', excerpt).strip()[:2000]
             except Exception as e:
                 logger.warning(f"  excerpt falhou para {p.pdpn}: {e}")
+
+        # Never leak localhost URLs in generated search excerpts.
+        def _to_public_url(match):
+            path = match.group(1) or "/"
+            parts = [p for p in path.split("/") if p]
+            if parts and parts[0].lower() in LOCAL_WP_PREFIXES:
+                parts = parts[1:]
+            normalized_path = "/" + "/".join(parts) if parts else "/"
+            return f"https://puredhamma.net{normalized_path}"
+
+        excerpt = re.sub(
+            r"https?://(?:localhost|127\.0\.0\.1)(/[^\s\"'<>]*)?",
+            _to_public_url,
+            excerpt,
+            flags=re.IGNORECASE,
+        )
 
         index.append({
             "pdpn":     p.pdpn,
@@ -470,6 +502,104 @@ def _rewrite_externalized_audio_references(external_audio: Dict[str, str]) -> No
     )
 
 
+def _rewrite_missing_local_audio_references() -> None:
+    """
+    Reescreve referências locais de áudio que apontam para arquivos ausentes
+    no output para a URL externa canônica.
+    """
+    html_files = sorted((OUTPUT_DIR / "pages").rglob("index.html"))
+    if not html_files:
+        return
+
+    audio_dst = OUTPUT_DIR / "assets" / "audio" / "en-US"
+    pattern = re.compile(
+        r'(?:\.\./){1,2}assets/audio/en-US/([^"\'<>\s?#]+)|'
+        r'assets/audio/en-US/([^"\'<>\s?#]+)|'
+        r'/assets/audio/en-US/([^"\'<>\s?#]+)'
+    )
+
+    updated_files = 0
+    replacements = 0
+
+    for html_file in html_files:
+        text = html_file.read_text(encoding="utf-8")
+        original = text
+
+        def repl(match):
+            nonlocal replacements
+            filename_token = next((g for g in match.groups() if g), "")
+            filename = unquote(filename_token)
+            if not filename:
+                return match.group(0)
+
+            local_file = audio_dst / filename
+            if local_file.exists():
+                return match.group(0)
+
+            replacements += 1
+            return f"{EXTERNAL_UPLOADS_BASE}/{quote(filename, safe='')}"
+
+        text = pattern.sub(repl, text)
+
+        if text != original:
+            html_file.write_text(text, encoding="utf-8")
+            updated_files += 1
+
+    if replacements:
+        logger.info(
+            f"🔁 Audio refs ausentes externalizados: {replacements} substituições em {updated_files} páginas."
+        )
+
+
+def _rewrite_missing_local_image_references() -> None:
+    """
+    Reescreve referências locais de imagem ausentes no output para URL externa
+    canônica. Evita placeholders quebrados por divergências de histórico WP.
+    """
+    html_files = sorted((OUTPUT_DIR / "pages").rglob("index.html"))
+    if not html_files:
+        return
+
+    image_dst = OUTPUT_DIR / "assets" / "images"
+    pattern = re.compile(
+        r'(?:\.\./){1,2}assets/images/([^"\'<>\s?#]+)|'
+        r'assets/images/([^"\'<>\s?#]+)|'
+        r'/assets/images/([^"\'<>\s?#]+)'
+    )
+
+    updated_files = 0
+    replacements = 0
+
+    for html_file in html_files:
+        text = html_file.read_text(encoding="utf-8")
+        original = text
+
+        def repl(match):
+            nonlocal replacements
+            filename_token = next((g for g in match.groups() if g), "")
+            filename = unquote(filename_token)
+            if not filename:
+                return match.group(0)
+
+            local_file = image_dst / filename
+            if local_file.exists():
+                return match.group(0)
+
+            replacements += 1
+            return f"{EXTERNAL_UPLOADS_BASE}/{quote(filename, safe='')}"
+
+        text = pattern.sub(repl, text)
+
+        if text != original:
+            html_file.write_text(text, encoding="utf-8")
+            updated_files += 1
+
+    if replacements:
+        logger.info(
+            f"🔁 Imagens ausentes externalizadas: {replacements} substituições em {updated_files} páginas."
+        )
+
+
 def _generate_pronunciation_manifest(
     csl_root: Path,
     glossary: Dict[str, Any],
@@ -634,7 +764,16 @@ def main() -> None:
     # ── 5. RENDERIZAR POSTS (INCREMENTAL) ──────────────────────────────────
     logger.info("▶ Fase 5/8: Renderizando posts (build incremental)...")
     template_hash = _calculate_template_hash(TEMPLATES_DIR)
-    logger.info(f"   Template hash: {template_hash[:12]}...")
+    asset_map_signature = hashlib.sha256(
+        json.dumps(asset_map, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()[:12]
+    template_hash = hashlib.sha256(
+        f"{template_hash}:{asset_map_signature}".encode("utf-8")
+    ).hexdigest()
+    logger.info(
+        f"   Template hash: {template_hash[:12]}... "
+        f"(asset_map={asset_map_signature})"
+    )
 
     # Detectar mudança de template (força rebuild total)
     prev_template_hash = ""
@@ -683,9 +822,12 @@ def main() -> None:
     # ── 7. ASSETS + SEARCH INDEX + AUDIO PIPELINE ────────────────────────────
     logger.info("▶ Fase 7/8: Copiando assets estáticos e áudio...")
     _copy_static_assets()
+    _ensure_github_pages_markers()
     _generate_search_index(posts)
     external_audio = _copy_audio_files(CSL_DIR)
     _rewrite_externalized_audio_references(external_audio)
+    _rewrite_missing_local_audio_references()
+    _rewrite_missing_local_image_references()
     _generate_pronunciation_manifest(CSL_DIR, glossary, external_audio)
 
     # ── 8. SERVICE WORKER + BUILD META (hardened — ÚLTIMO) ──────────────────

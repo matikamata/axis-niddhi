@@ -23,6 +23,7 @@ import os
 import sys
 from pathlib import Path
 from urllib.parse import quote
+from urllib.parse import unquote
 
 # ==============================================================================
 # ⚙️  BOOTSTRAP — config.py canônico (scripts/core/config.py)
@@ -45,6 +46,8 @@ EXTERNAL_UPLOADS_BASE = os.environ.get(
 
 # Extensões aceitas — mesmo conjunto do SG04 (consistência garantida)
 ACCEPTED_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".pdf"}
+WP_THUMB_RE = re.compile(r"^(?P<stem>.+)-\d+x\d+(?P<ext>\.[A-Za-z0-9]+)$")
+UPLOAD_FILENAME_INDEX: dict[str, str] = {}
 
 # ==============================================================================
 # 🔍  SCANNER — regex para URLs /wp-content/uploads/
@@ -55,24 +58,61 @@ WP_RE = re.compile(
 )
 
 
+def _encode_rel(path: str) -> str:
+    """Avoid double-encoding pre-escaped legacy paths."""
+    return quote(unquote(path), safe="/")
+
+
 def _target_for_upload_url(url: str) -> str:
     """
     Decide target path for an upload URL:
     - <= 25 MiB: local static asset path (assets/images/<filename>)
     - > 25 MiB: external canonical URL (EXTERNAL_UPLOADS_BASE/<relative_path>)
     """
-    rel_upload = url.replace("/wp-content/uploads/", "", 1).lstrip("/")
+    requested_rel_upload = url.replace("/wp-content/uploads/", "", 1).lstrip("/")
+    rel_upload = requested_rel_upload
     source_file = WP_UPLOADS_DIR / rel_upload
+
+    # Fallback for legacy URLs whose subdirectories no longer match local tree.
+    if not source_file.exists():
+        indexed_rel = UPLOAD_FILENAME_INDEX.get(Path(rel_upload).name.lower())
+        if indexed_rel:
+            rel_upload = indexed_rel
+            source_file = WP_UPLOADS_DIR / rel_upload
+
+    # Normalize WP thumbnail URLs to canonical originals when available.
+    # We intentionally avoid emitting thumbnail filenames because SG04 skips
+    # WP derivatives by design; originals keep output smaller and deterministic.
+    filename = Path(rel_upload).name
+    thumb_match = WP_THUMB_RE.match(filename)
+    if thumb_match:
+        original_name = f"{thumb_match.group('stem')}{thumb_match.group('ext')}"
+        original_rel = str(Path(rel_upload).with_name(original_name)).replace("\\", "/")
+        original_file = WP_UPLOADS_DIR / original_rel
+        if not original_file.exists():
+            indexed_rel = UPLOAD_FILENAME_INDEX.get(original_name.lower())
+            if indexed_rel:
+                original_rel = indexed_rel
+                original_file = WP_UPLOADS_DIR / original_rel
+        if original_file.exists():
+            rel_upload = original_rel
+            source_file = original_file
 
     if source_file.exists():
         try:
             if source_file.stat().st_size > CF_PAGES_MAX_BYTES:
-                encoded_rel = quote(rel_upload, safe="/")
+                encoded_rel = _encode_rel(rel_upload)
                 return f"{EXTERNAL_UPLOADS_BASE}/{encoded_rel}"
         except OSError:
             pass
 
-    return f"assets/images/{Path(url).name}"
+    if source_file.exists():
+        return f"assets/images/{source_file.name}"
+
+    # Last-resort fallback for unresolved local files: keep link valid via
+    # canonical external uploads path instead of emitting a broken local asset.
+    encoded_rel = _encode_rel(requested_rel_upload)
+    return f"{EXTERNAL_UPLOADS_BASE}/{encoded_rel}"
 
 
 # ==============================================================================
@@ -97,6 +137,14 @@ def main() -> None:
     if not WP_UPLOADS_DIR.exists():
         print(f"❌ FAIL-FAST: uploads não encontrado: {WP_UPLOADS_DIR}", file=sys.stderr)
         sys.exit(1)
+
+    # Build filename index once (case-insensitive) for robust legacy path recovery.
+    global UPLOAD_FILENAME_INDEX
+    UPLOAD_FILENAME_INDEX = {}
+    for file in WP_UPLOADS_DIR.rglob("*"):
+        if file.is_file():
+            rel = file.relative_to(WP_UPLOADS_DIR).as_posix()
+            UPLOAD_FILENAME_INDEX.setdefault(file.name.lower(), rel)
 
     # Scan
     html_files = list(DIR_09_CSL.rglob("*.html"))
@@ -156,3 +204,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    def _encode_rel(path: str) -> str:
+        # Avoid double-encoding pre-escaped paths from legacy CSL URLs.
+        return quote(unquote(path), safe="/")
