@@ -21,12 +21,14 @@ USO:
 """
 
 import hashlib
+import json
 import os
 import re
 import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import quote
 
 # ==============================================================================
 # ⚙️  BOOTSTRAP — config.py canônico
@@ -35,7 +37,7 @@ _SCRIPT_DIR = Path(__file__).resolve().parent
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from config import BASE_DIR, DIR_STATIC_SITE, LOG_DIR
+from config import BASE_DIR, DIR_STATIC_SITE, LOG_DIR, METADATA_DIR
 
 # PROJECT_ROOT = BASE_DIR.parent  (config.py: BASE_DIR = pipeline/)
 PROJECT_ROOT   = BASE_DIR.parent
@@ -43,6 +45,14 @@ WP_UPLOADS_DIR = PROJECT_ROOT / "wordpress" / "wp-content" / "uploads"
 
 # Destino canônico das imagens
 IMAGE_DEST = DIR_STATIC_SITE / "assets" / "images"
+
+# Limite Cloudflare Pages (default 25 MiB) e base externa para artefatos grandes
+CF_PAGES_MAX_BYTES = int(os.environ.get("BENG_PAGES_MAX_FILE_BYTES", str(25 * 1024 * 1024)))
+EXTERNAL_UPLOADS_BASE = os.environ.get(
+    "BENG_EXTERNAL_UPLOADS_BASE_URL",
+    "https://puredhamma.net/wp-content/uploads",
+).rstrip("/")
+OVERSIZED_MANIFEST = METADATA_DIR / "oversized_uploads.json"
 
 # ==============================================================================
 # 🎛️  FILTROS DE EXTENSÃO
@@ -89,6 +99,9 @@ def main() -> None:
     log(f"   PROJECT_ROOT   : {PROJECT_ROOT}")
     log(f"   WP_UPLOADS_DIR : {WP_UPLOADS_DIR}")
     log(f"   IMAGE_DEST     : {IMAGE_DEST}")
+    log(f"   MAX_FILE_SIZE  : {CF_PAGES_MAX_BYTES} bytes ({CF_PAGES_MAX_BYTES / (1024 * 1024):.1f} MiB)")
+    log(f"   EXTERNAL_BASE  : {EXTERNAL_UPLOADS_BASE}")
+    log(f"   MANIFEST       : {OVERSIZED_MANIFEST}")
     log(f"   LOG            : {log_file}")
     log("=" * 60)
 
@@ -117,12 +130,15 @@ def main() -> None:
     log("\n🔍 Vasculhando wp-content/uploads...")
 
     seen_hashes: dict[str, str] = {}   # sha256 → filename no destino
+    oversized_entries: list[dict[str, object]] = []
     stats = {
         "scanned": 0,
         "copied": 0,
         "deduplicated": 0,
         "skipped_thumb": 0,
         "skipped_audio": 0,
+        "skipped_oversized": 0,
+        "removed_stale_oversized": 0,
         "skipped_other": 0,
         "errors": 0,
     }
@@ -147,6 +163,35 @@ def main() -> None:
         # 3. Ignora miniaturas WordPress
         if _WP_THUMB_RE.search(src.name):
             stats["skipped_thumb"] += 1
+            continue
+
+        # 3.1 Bloqueio de arquivos acima do limite do Pages (mantém artefato canônico no WP)
+        try:
+            size_bytes = src.stat().st_size
+        except OSError as e:
+            log(f"   ⚠️  Erro ao inspecionar tamanho de {src.name}: {e}")
+            stats["errors"] += 1
+            continue
+
+        if size_bytes > CF_PAGES_MAX_BYTES:
+            stats["skipped_oversized"] += 1
+            rel_upload = src.relative_to(WP_UPLOADS_DIR).as_posix()
+            oversized_entries.append({
+                "source": f"/wp-content/uploads/{rel_upload}",
+                "filename": src.name,
+                "size_bytes": size_bytes,
+                "external_url": f"{EXTERNAL_UPLOADS_BASE}/{quote(rel_upload, safe='/')}",
+            })
+
+            # Remove cópia antiga do output para evitar artefato >25MiB em builds incrementais
+            stale_target = IMAGE_DEST / src.name
+            if stale_target.exists():
+                try:
+                    stale_target.unlink()
+                    stats["removed_stale_oversized"] += 1
+                except OSError as e:
+                    log(f"   ⚠️  Erro ao remover oversized antigo {stale_target.name}: {e}")
+                    stats["errors"] += 1
             continue
 
         # 4. Deduplicação SHA-256
@@ -193,6 +238,8 @@ def main() -> None:
     log(f"   ✅ Imagens copiadas           : {stats['copied']}")
     log(f"   ♻️  Deduplicadas (SHA-256)    : {stats['deduplicated']}")
     log(f"   🔇 Áudios bloqueados          : {stats['skipped_audio']}")
+    log(f"   🚫 Oversized bloqueados       : {stats['skipped_oversized']}")
+    log(f"   🧹 Oversized antigos removidos: {stats['removed_stale_oversized']}")
     log(f"   🖼️  Miniaturas WP ignoradas   : {stats['skipped_thumb']}")
     log(f"   ⏭️  Outros formatos ignorados  : {stats['skipped_other']}")
     log(f"   ❌ Erros                      : {stats['errors']}")
@@ -207,6 +254,19 @@ def main() -> None:
         log(f"\n⚠️  {stats['errors']} erros encontrados. Revise o log acima.")
     else:
         log("\n✅ Colheita concluída sem erros!")
+
+    # Manifesto determinístico dos uploads externalizados
+    oversized_payload = {
+        "max_file_size_bytes": CF_PAGES_MAX_BYTES,
+        "external_base": EXTERNAL_UPLOADS_BASE,
+        "entries": sorted(oversized_entries, key=lambda x: str(x["source"])),
+    }
+    OVERSIZED_MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    OVERSIZED_MANIFEST.write_text(
+        json.dumps(oversized_payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    log(f"   📒 Manifest oversized: {len(oversized_entries)} entradas → {OVERSIZED_MANIFEST}")
 
     log("\n▶️  Próximo passo:")
     log("   python3 pipeline/scripts/core/SD01_generate_asset_map.py")

@@ -19,8 +19,10 @@ USO:
 
 import re
 import json
+import os
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 # ==============================================================================
 # ⚙️  BOOTSTRAP — config.py canônico (scripts/core/config.py)
@@ -34,6 +36,12 @@ from config import BASE_DIR, DIR_09_CSL, METADATA_DIR
 # Output: pipeline/metadata/asset_map.json
 # METADATA_DIR já aponta para pipeline/metadata/ conforme config.py
 OUT_FILE = METADATA_DIR / "asset_map.json"
+WP_UPLOADS_DIR = BASE_DIR.parent / "wordpress" / "wp-content" / "uploads"
+CF_PAGES_MAX_BYTES = int(os.environ.get("BENG_PAGES_MAX_FILE_BYTES", str(25 * 1024 * 1024)))
+EXTERNAL_UPLOADS_BASE = os.environ.get(
+    "BENG_EXTERNAL_UPLOADS_BASE_URL",
+    "https://puredhamma.net/wp-content/uploads",
+).rstrip("/")
 
 # Extensões aceitas — mesmo conjunto do SG04 (consistência garantida)
 ACCEPTED_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".pdf"}
@@ -47,6 +55,26 @@ WP_RE = re.compile(
 )
 
 
+def _target_for_upload_url(url: str) -> str:
+    """
+    Decide target path for an upload URL:
+    - <= 25 MiB: local static asset path (assets/images/<filename>)
+    - > 25 MiB: external canonical URL (EXTERNAL_UPLOADS_BASE/<relative_path>)
+    """
+    rel_upload = url.replace("/wp-content/uploads/", "", 1).lstrip("/")
+    source_file = WP_UPLOADS_DIR / rel_upload
+
+    if source_file.exists():
+        try:
+            if source_file.stat().st_size > CF_PAGES_MAX_BYTES:
+                encoded_rel = quote(rel_upload, safe="/")
+                return f"{EXTERNAL_UPLOADS_BASE}/{encoded_rel}"
+        except OSError:
+            pass
+
+    return f"assets/images/{Path(url).name}"
+
+
 # ==============================================================================
 # 🚀  MAIN
 # ==============================================================================
@@ -54,6 +82,9 @@ def main() -> None:
     print(f"⚙️  BASE_DIR    : {BASE_DIR}")
     print(f"⚙️  CSL_DIR     : {DIR_09_CSL}")
     print(f"⚙️  OUT_FILE    : {OUT_FILE}")
+    print(f"⚙️  WP_UPLOADS  : {WP_UPLOADS_DIR}")
+    print(f"⚙️  MAX_FILE    : {CF_PAGES_MAX_BYTES} bytes ({CF_PAGES_MAX_BYTES / (1024 * 1024):.1f} MiB)")
+    print(f"⚙️  EXTERNAL    : {EXTERNAL_UPLOADS_BASE}")
 
     # FAIL-FAST
     if not BASE_DIR.exists():
@@ -62,6 +93,9 @@ def main() -> None:
 
     if not DIR_09_CSL.exists():
         print(f"❌ FAIL-FAST: CSL não encontrada: {DIR_09_CSL}", file=sys.stderr)
+        sys.exit(1)
+    if not WP_UPLOADS_DIR.exists():
+        print(f"❌ FAIL-FAST: uploads não encontrado: {WP_UPLOADS_DIR}", file=sys.stderr)
         sys.exit(1)
 
     # Scan
@@ -87,11 +121,12 @@ def main() -> None:
             print(f"   ⚠️  Erro ao processar {html.name}: {e}", file=sys.stderr)
             parse_errors += 1
 
-    # Gera mapa: url → caminho relativo no site estático
+    # Gera mapa: url → caminho local ou URL externa (se oversized)
     asset_map = {
-        url: f"assets/images/{Path(url).name}"
+        url: _target_for_upload_url(url)
         for url in sorted(urls)
     }
+    externalized = sum(1 for target in asset_map.values() if target.startswith("http"))
 
     # Salva
     OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -110,6 +145,7 @@ def main() -> None:
     print(f"   Arquivos HTML varridos  : {len(html_files)}")
     print(f"   Erros de parsing        : {parse_errors}")
     print(f"   URLs mapeadas           : {len(asset_map)}")
+    print(f"   URLs externalizadas     : {externalized}")
     print(f"   vs versão anterior (185): {delta_str}")
     print(f"   Output                  : {OUT_FILE}")
     print("=" * 55)

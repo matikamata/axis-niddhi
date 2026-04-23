@@ -33,6 +33,7 @@ import sys
 import time
 import json
 import logging
+import os
 import shutil
 import hashlib
 import re
@@ -40,6 +41,7 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Dict, Any, Optional
+from urllib.parse import quote
 
 # ── Import path: src/ relativo ao build.py ─────────────────────────────────
 _HERE = Path(__file__).parent.resolve()
@@ -96,6 +98,11 @@ SLUG_MAP_FILE  = METADATA_DIR / "slug_map.json"   # gerado internamente se ausen
 GLOSSARY_CSV   = METADATA_DIR / "Glossario_v5.csv"  # fonte canônica: termo_en,termo_pt (sem cabeçalho)
 
 ENGINE_VERSION = "3.0.2-S14-S15-C1-C3"  # PATCH S15: constante centralizada
+CF_PAGES_MAX_BYTES = int(os.environ.get("BENG_PAGES_MAX_FILE_BYTES", str(25 * 1024 * 1024)))
+EXTERNAL_UPLOADS_BASE = os.environ.get(
+    "BENG_EXTERNAL_UPLOADS_BASE_URL",
+    "https://puredhamma.net/wp-content/uploads",
+).rstrip("/")
 
 # ── Logging ─────────────────────────────────────────────────────────────────
 LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -363,23 +370,44 @@ def _load_glossary_csv() -> Dict[str, Any]:
     return glossary
 
 
-def _copy_audio_files(csl_root: Path) -> None:
+def _copy_audio_files(csl_root: Path) -> Dict[str, str]:
     """
     Copia MP3s de CSL/meta/pronunciation/ para output/assets/audio/en-US/ incrementalmente.
     Path canônico: assets/audio/en-US/ — idêntico ao BrasileirinhoHD.
     Usa mtime para skip. Nunca aborta se diretório ausente.
+    Arquivos > limite do Pages são externalizados para EXTERNAL_UPLOADS_BASE.
+    Retorna mapa {filename.mp3: external_url} para reescrever referências.
     """
     audio_src = csl_root / "meta" / "pronunciation"
     audio_dst = OUTPUT_DIR / "assets" / "audio" / "en-US"
 
     if not audio_src.exists():
         logger.warning("⚠️  pronunciation/ não encontrado — áudio não copiado.")
-        return
+        return {}
 
     audio_dst.mkdir(parents=True, exist_ok=True)
-    copied = skipped = 0
+    copied = skipped = oversized = removed_stale = 0
+    externalized: Dict[str, str] = {}
 
     for mp3 in sorted(audio_src.glob("*.mp3")):
+        try:
+            size_bytes = mp3.stat().st_size
+        except OSError as e:
+            logger.warning(f"⚠️  Audio inválido (stat falhou) {mp3.name}: {e}")
+            continue
+
+        if size_bytes > CF_PAGES_MAX_BYTES:
+            externalized[mp3.name] = f"{EXTERNAL_UPLOADS_BASE}/{quote(mp3.name, safe='')}"
+            oversized += 1
+            stale = audio_dst / mp3.name
+            if stale.exists():
+                try:
+                    stale.unlink()
+                    removed_stale += 1
+                except OSError as e:
+                    logger.warning(f"⚠️  Falha removendo oversized antigo {stale.name}: {e}")
+            continue
+
         target = audio_dst / mp3.name
         if not target.exists() or mp3.stat().st_mtime > target.stat().st_mtime:
             target.write_bytes(mp3.read_bytes())
@@ -387,20 +415,78 @@ def _copy_audio_files(csl_root: Path) -> None:
         else:
             skipped += 1
 
-    logger.info(f"🎵 Audio: {copied} copiados | {skipped} sem alteração → assets/audio/en-US/")
+    logger.info(
+        "🎵 Audio: "
+        f"{copied} copiados | {skipped} sem alteração | "
+        f"{oversized} externalizados (> {CF_PAGES_MAX_BYTES / (1024 * 1024):.1f} MiB) | "
+        f"{removed_stale} removidos do output"
+    )
+    if externalized:
+        logger.info(f"🌐 Audio externalizado base: {EXTERNAL_UPLOADS_BASE} ({len(externalized)} arquivos)")
+    return externalized
 
 
-def _generate_pronunciation_manifest(csl_root: Path, glossary: Dict[str, Any]) -> None:
+def _rewrite_externalized_audio_references(external_audio: Dict[str, str]) -> None:
+    """
+    Reescreve referências locais de áudio para URL externa quando o arquivo
+    foi externalizado por tamanho.
+    """
+    if not external_audio:
+        return
+
+    html_files = sorted((OUTPUT_DIR / "pages").rglob("index.html"))
+    if not html_files:
+        return
+
+    prefixes = [
+        "../../assets/audio/en-US/",
+        "../assets/audio/en-US/",
+        "assets/audio/en-US/",
+        "/assets/audio/en-US/",
+    ]
+    updated_files = 0
+    replacements = 0
+
+    for html_file in html_files:
+        text = html_file.read_text(encoding="utf-8")
+        original = text
+
+        for filename, external_url in external_audio.items():
+            encoded = quote(filename, safe="")
+            candidates = {filename, encoded}
+            for prefix in prefixes:
+                for candidate in candidates:
+                    local_ref = f"{prefix}{candidate}"
+                    if local_ref in text:
+                        text = text.replace(local_ref, external_url)
+                        replacements += 1
+
+        if text != original:
+            html_file.write_text(text, encoding="utf-8")
+            updated_files += 1
+
+    logger.info(
+        f"🔁 Audio refs externalizados em HTML: {replacements} substituições em {updated_files} páginas."
+    )
+
+
+def _generate_pronunciation_manifest(
+    csl_root: Path,
+    glossary: Dict[str, Any],
+    external_audio: Optional[Dict[str, str]] = None,
+) -> None:
     """
     Gera pronunciation_manifest.json: { termo → "assets/audio/en-US/arquivo.mp3" }
     Path canônico: assets/audio/en-US/ — idêntico ao BrasileirinhoHD.
-    Verifica existência física no output (não na CSL) — só inclui MP3s já copiados.
+    Verifica existência física no output (não na CSL) — inclui MP3s locais
+    e fallback externo para arquivos externalizados.
     Nunca aborta se glossário ou diretório ausente.
     """
     audio_dst = OUTPUT_DIR / "assets" / "audio" / "en-US"
     manifest: Dict[str, str] = {}
+    external_audio = external_audio or {}
 
-    if not audio_dst.exists() or not glossary:
+    if (not audio_dst.exists() and not external_audio) or not glossary:
         (OUTPUT_DIR / "pronunciation_manifest.json").write_text(
             json.dumps({}, indent=2), encoding="utf-8"
         )
@@ -412,6 +498,10 @@ def _generate_pronunciation_manifest(csl_root: Path, glossary: Dict[str, Any]) -
         f.stem.lower(): f.name
         for f in audio_dst.glob("*.mp3")
     }
+    external_available: Dict[str, str] = {
+        Path(filename).stem.lower(): external_url
+        for filename, external_url in external_audio.items()
+    }
 
     for term in glossary:
         # Match direto: dhamma → dhamma.mp3
@@ -419,12 +509,20 @@ def _generate_pronunciation_manifest(csl_root: Path, glossary: Dict[str, Any]) -
         if fname:
             manifest[term] = f"assets/audio/en-US/{fname}"
             continue
+        external = external_available.get(term.lower())
+        if external:
+            manifest[term] = external
+            continue
         # Fallback NFKD: ā → a, ṭ → t etc.
         slug = unicodedata.normalize("NFKD", term).encode("ascii", "ignore").decode("ascii")
         slug = re.sub(r"[^a-z0-9]+", "-", slug.lower()).strip("-")
         fname = available.get(slug)
         if fname:
             manifest[term] = f"assets/audio/en-US/{fname}"
+            continue
+        external = external_available.get(slug)
+        if external:
+            manifest[term] = external
 
     out = OUTPUT_DIR / "pronunciation_manifest.json"
     out.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -586,8 +684,9 @@ def main() -> None:
     logger.info("▶ Fase 7/8: Copiando assets estáticos e áudio...")
     _copy_static_assets()
     _generate_search_index(posts)
-    _copy_audio_files(CSL_DIR)
-    _generate_pronunciation_manifest(CSL_DIR, glossary)
+    external_audio = _copy_audio_files(CSL_DIR)
+    _rewrite_externalized_audio_references(external_audio)
+    _generate_pronunciation_manifest(CSL_DIR, glossary, external_audio)
 
     # ── 8. SERVICE WORKER + BUILD META (hardened — ÚLTIMO) ──────────────────
     logger.info("▶ Fase 8/8: Service Worker + Build Meta...")
