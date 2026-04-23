@@ -223,6 +223,7 @@ function toggleLabz() {
     var terms = document.querySelectorAll('.term-highlight');
     if (!terms.length) return;
 
+    var EXTERNAL_AUDIO_BASE = 'https://puredhamma.net/wp-content/uploads/';
     var root = getRootPath();
     var manifestUrl = root + 'pronunciation_manifest.json';
     
@@ -249,6 +250,18 @@ function toggleLabz() {
     }
 
     function setupAudio(manifest, currentRoot) {
+      function buildExternalAudioUrl(pathLike) {
+        if (!pathLike) return null;
+        var m = String(pathLike).match(/assets\/audio\/en-US\/([^?#]+)/i);
+        if (!m || !m[1]) return null;
+        var filename = m[1].split('/').pop();
+        if (!filename) return null;
+        try {
+          filename = decodeURIComponent(filename);
+        } catch (_) {}
+        return EXTERNAL_AUDIO_BASE + encodeURIComponent(filename);
+      }
+
       function resolveAudioPath(termKey) {
         var key = termKey.normalize ? termKey.normalize('NFC') : termKey;
         var path = null;
@@ -284,23 +297,29 @@ function toggleLabz() {
 
         el.addEventListener('click', function(e) {
           e.preventDefault();
-          // [SPRINT O] CORREÇÃO 2+3: Lazy loading — src atribuído só no click,
-          // preload='none' previne download antecipado dos MP3s.
-          var audio = new Audio();
-          audio.preload = 'none';
-          audio.src = audioPath;
-          audio.play().catch(function(err) {
-            console.warn('[Pronunciation] Play failed:', audioPath, err);
-            // FINAL FALLBACK: Try absolute path if relative failed
-            if (!/^(?:https?:)?\/\//i.test(audioPath) && !audioPath.startsWith('/')) {
-              var absPath = new URL(audioPath, window.location.href).toString();
-              console.log('[Pronunciation] Retrying absolute:', absPath);
-              var fallback = new Audio();
-              fallback.preload = 'none';
-              fallback.src = absPath;
-              fallback.play().catch(function() {});
-            }
-          });
+          // [SPRINT O] Lazy loading + robust fallback chain (relative -> absolute -> external canonical URL).
+          var candidates = [audioPath];
+          if (!/^(?:https?:)?\/\//i.test(audioPath) && !audioPath.startsWith('/')) {
+            candidates.push(new URL(audioPath, window.location.href).toString());
+          }
+          var externalUrl = buildExternalAudioUrl(audioPath);
+          if (externalUrl && candidates.indexOf(externalUrl) === -1) {
+            candidates.push(externalUrl);
+          }
+
+          function tryPlay(index) {
+            if (index >= candidates.length) return;
+            var src = candidates[index];
+            var audio = new Audio();
+            audio.preload = 'none';
+            audio.src = src;
+            audio.play().catch(function(err) {
+              console.warn('[Pronunciation] Play failed:', src, err);
+              tryPlay(index + 1);
+            });
+          }
+
+          tryPlay(0);
         });
       });
       console.log('[Pronunciation] Ready. Active terms:', activated);
