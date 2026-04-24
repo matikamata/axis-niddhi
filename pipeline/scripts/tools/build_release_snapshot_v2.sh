@@ -162,6 +162,32 @@ EOF
     fi
 }
 
+write_uploads_reference_json() {
+    local dest_file="$1"
+    local uploads_path="$2"
+    local exists_at_build="false"
+    local generated_at
+    generated_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+    if [[ -d "$uploads_path" ]]; then
+        exists_at_build="true"
+    fi
+
+    if $DRY_RUN; then
+        dryrun "write ${dest_file#"$RELEASE_ROOT/"} [uploads-reference]"
+    else
+        cat > "$dest_file" <<EOF
+{
+  "canonical_path": "$uploads_path",
+  "generated_at": "$generated_at",
+  "mode": "reference",
+  "exists_at_build_time": $exists_at_build
+}
+EOF
+        ok "${dest_file#"$RELEASE_ROOT/"} [uploads-reference]"
+    fi
+}
+
 copy_file() {
     local src="$1" dst="$2" kind="${3:-canonical}"
     local rel_dst="$dst" marker="✔" suffix=""
@@ -459,6 +485,9 @@ if [[ -f "$SRC_LINEAGE" ]]; then
     make_dir "$REL_PIPELINE/config"
     copy_file "$SRC_LINEAGE" "$REL_PIPELINE/config/lineage_schema.json"
 fi
+
+SRC_WP_UPLOADS="$SRC_ROOT/wordpress/wp-content/uploads"
+write_uploads_reference_json "$REL_METADATA/uploads_reference.json" "$SRC_WP_UPLOADS"
 
 # ==============================================================================
 # 9. RECORD / COPY PUREDHAMMA SOURCE ZIP

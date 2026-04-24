@@ -241,6 +241,14 @@ One canonical heavyweight input plus manifest references is the default operatin
 
 This reduces SSD pressure while preserving exact source identity and reproducibility.
 
+### Heavy Validation Location Rule
+
+Heavy validation and sealed-copy tests must not use `/tmp` or the OS root partition.
+
+Preferred local heavy test root:
+
+`<large-volume>/axis-review-tests`
+
 ## 8. Git Tracking Policy
 
 Git tracking must reflect role and rebuildability.

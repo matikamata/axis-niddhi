@@ -33,14 +33,18 @@ LAB_ROOT="${LAB_ROOT:-$(cd "$(dirname "$0")/../../.." && pwd)}"
 
 REVIEW_ROOT_DEFAULT="$LAB_ROOT_DEFAULT/review"
 REVIEW_ROOT="${REVIEW_ROOT:-$LAB_ROOT/review}"
+SNAPSHOT_ROOT_DEFAULT="$LAB_ROOT_DEFAULT/snapshots"
+SNAPSHOT_ROOT="$SNAPSHOT_ROOT_DEFAULT"
 SNAP_TAG="bilingual_review_$(date -u +%Y%m%dT%H%M%SZ)"
 FORCE=false
 SKIP_LAB_VALIDATION=false
 SOURCES_MODE="reference"
+ALLOW_TMP_HEAVY=false
 COMPACT_LONG_LOGS="${COMPACT_LONG_LOGS:-0}"
 COMPACT_FIRST_LINES="${COMPACT_FIRST_LINES:-20}"
 ENABLE_FINAL_CLEAR="${ENABLE_FINAL_CLEAR:-0}"
 FINAL_PAUSE_SECONDS="${FINAL_PAUSE_SECONDS:-1}"
+MIN_HEAVY_FREE_GIB="${MIN_HEAVY_FREE_GIB:-20}"
 
 usage() {
     cat <<EOF
@@ -50,11 +54,13 @@ Usage:
 Options:
   --lab-root <path>          LAB root (default: $LAB_ROOT_DEFAULT)
   --review-root <path>       Review workspace root (default: $REVIEW_ROOT_DEFAULT)
+  --snapshot-root <path>     Snapshot root base (default: $SNAPSHOT_ROOT_DEFAULT)
   --snapshot-tag <tag>       Snapshot tag (default: bilingual_review_<utc>)
   --force                    Overwrite existing snapshot tag if present
   --skip-lab-validation      Skip LAB seal/validation stage
   --include-sources          Copy source ZIP into snapshot/review sources
   --sealed-full-copy         Same as --include-sources; explicit archival mode
+  --allow-tmp-heavy          Allow copy/sealed mode under /tmp (still checks free space)
   -h, --help                 Show this help
 
 Notes:
@@ -73,6 +79,8 @@ while [[ $# -gt 0 ]]; do
             LAB_ROOT="$2"; shift 2 ;;
         --review-root)
             REVIEW_ROOT="$2"; shift 2 ;;
+        --snapshot-root)
+            SNAPSHOT_ROOT="$2"; shift 2 ;;
         --snapshot-tag)
             SNAP_TAG="$2"; shift 2 ;;
         --force)
@@ -81,6 +89,8 @@ while [[ $# -gt 0 ]]; do
             SKIP_LAB_VALIDATION=true; shift ;;
         --include-sources|--sealed-full-copy)
             SOURCES_MODE="copy"; shift ;;
+        --allow-tmp-heavy)
+            ALLOW_TMP_HEAVY=true; shift ;;
         -h|--help)
             usage; exit 0 ;;
         *)
@@ -97,8 +107,9 @@ LAB_SOURCES="$LAB_ROOT/sources"
 
 REVIEW_PIPELINE="$REVIEW_ROOT/pipeline"
 REVIEW_SCRIPTS="$REVIEW_PIPELINE/scripts"
+LAB_WORDPRESS_UPLOADS="$LAB_ROOT/wordpress/wp-content/uploads"
 
-SNAP_ROOT="$LAB_ROOT/snapshots/$SNAP_TAG"
+SNAP_ROOT="$SNAPSHOT_ROOT/$SNAP_TAG"
 BUILD_RELEASE_SCRIPT="$LAB_TOOLS/build_release_snapshot_v2.sh"
 SESSION_LOG_DIR="$LAB_ROOT/logs/review-build/$SNAP_TAG"
 SUMMARY_REPORT="$REVIEW_ROOT/review_build_summary.md"
@@ -134,6 +145,41 @@ tree_hash() {
     )
 }
 
+existing_parent_for_df() {
+    local path="$1"
+
+    while [[ ! -e "$path" && "$path" != "/" ]]; do
+        path="$(dirname "$path")"
+    done
+
+    printf '%s\n' "$path"
+}
+
+check_heavy_target_safety() {
+    local target_path="$1"
+    local target_label="$2"
+    local recommended_root="$3"
+    local probe_path avail_kb mount_point avail_gib
+    local min_heavy_free_kb=$((MIN_HEAVY_FREE_GIB * 1024 * 1024))
+
+    [[ "$SOURCES_MODE" == "copy" ]] || return 0
+
+    if [[ "$target_path" == /tmp || "$target_path" == /tmp/* ]]; then
+        if ! $ALLOW_TMP_HEAVY; then
+            fail "Copy/sealed mode refuses ${target_label} under /tmp by default. Use a larger filesystem such as $recommended_root or another <large-volume>/axis-review-tests path. If you really want to force /tmp, re-run with --allow-tmp-heavy."
+        fi
+        warn "Heavy copy mode was explicitly allowed under /tmp for ${target_label} via --allow-tmp-heavy."
+    fi
+
+    probe_path="$(existing_parent_for_df "$target_path")"
+    read -r avail_kb mount_point < <(df -Pk "$probe_path" | awk 'NR==2 {print $4, $6}')
+    avail_gib="$(awk -v kb="$avail_kb" 'BEGIN {printf "%.1f", kb / 1024 / 1024}')"
+
+    if [[ "$mount_point" == "/" && "$avail_kb" -lt "$min_heavy_free_kb" ]]; then
+        fail "Copy/sealed mode refused because ${target_label} resolves to the OS root filesystem with only ${avail_gib} GiB free. Use a larger filesystem such as $recommended_root or another <large-volume>/axis-review-tests path."
+    fi
+}
+
 write_source_reference_json() {
     local dest_file="$1"
     local source_path="$2"
@@ -148,6 +194,26 @@ write_source_reference_json() {
   "sha256": "$SOURCE_SHA256",
   "generated_at": "$generated_at",
   "mode": "$mode"
+}
+EOF
+}
+
+write_uploads_reference_json() {
+    local dest_file="$1"
+    local uploads_path="$2"
+    local generated_at="$3"
+    local exists_at_build="false"
+
+    if [[ -d "$uploads_path" ]]; then
+        exists_at_build="true"
+    fi
+
+    cat > "$dest_file" <<EOF
+{
+  "canonical_path": "$uploads_path",
+  "generated_at": "$generated_at",
+  "mode": "reference",
+  "exists_at_build_time": $exists_at_build
 }
 EOF
 }
@@ -236,6 +302,9 @@ count_ptbr_posts() {
     echo "$count"
 }
 
+check_heavy_target_safety "$REVIEW_ROOT" "review root" "/media/sanghop/BrasileirinhoHD/axis-review-tests"
+check_heavy_target_safety "$SNAPSHOT_ROOT" "snapshot root" "/media/sanghop/BrasileirinhoHD/axis-review-tests/snapshots"
+
 echo -e "${CYAN}"
 echo "=================================================================="
 echo " AXIS-NIDDHI - Bilingual Review Snapshot Builder"
@@ -243,6 +312,7 @@ echo "=================================================================="
 echo -e "${NC}"
 echo -e "${GRAY}LAB_ROOT      : $LAB_ROOT${NC}"
 echo -e "${GRAY}REVIEW_ROOT   : $REVIEW_ROOT${NC}"
+echo -e "${GRAY}SNAPSHOT_ROOT : $SNAPSHOT_ROOT${NC}"
 echo -e "${GRAY}SNAPSHOT_TAG  : $SNAP_TAG${NC}"
 echo -e "${GRAY}SOURCES_MODE  : $SOURCES_MODE${NC}"
 
@@ -258,6 +328,7 @@ LATEST_ZIP="$(find "$LAB_SOURCES" -maxdepth 1 -name '*.zip' 2>/dev/null | sort |
 SOURCE_SIZE_BYTES="$(stat -c '%s' "$LATEST_ZIP")"
 SOURCE_SHA256="$(sha256sum "$LATEST_ZIP" | awk '{print $1}')"
 SOURCE_REFERENCE_GENERATED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+UPLOADS_REFERENCE_GENERATED_AT="$SOURCE_REFERENCE_GENERATED_AT"
 
 if [[ -e "$SNAP_ROOT" ]]; then
     if $FORCE; then
@@ -304,6 +375,10 @@ write_source_reference_json \
     "$SOURCES_MODE" \
     "$SOURCE_REFERENCE_GENERATED_AT"
 cp "$SNAP_ROOT/sources/source_reference.json" "$SNAP_ROOT/metadata/source_reference.json"
+write_uploads_reference_json \
+    "$SNAP_ROOT/metadata/uploads_reference.json" \
+    "$LAB_WORDPRESS_UPLOADS" \
+    "$UPLOADS_REFERENCE_GENERATED_AT"
 if [[ "$SOURCES_MODE" == "copy" ]]; then
     cp "$LATEST_ZIP" "$SNAP_ROOT/sources/"
 fi
@@ -325,6 +400,7 @@ source_mode=$SOURCES_MODE
 source_sha256=$SOURCE_SHA256
 source_size_bytes=$SOURCE_SIZE_BYTES
 source_reference=$SNAP_ROOT/sources/source_reference.json
+uploads_reference=$SNAP_ROOT/metadata/uploads_reference.json
 EOF
 ok "Snapshot frozen at: $SNAP_ROOT"
 
@@ -356,7 +432,7 @@ PRE_CSL_HASH="$(tree_hash "$REVIEW_PIPELINE/09-csl")"
 echo -e "${GRAY}Pre-SD CSL hash: $PRE_CSL_HASH${NC}"
 
 run_with_live_log "05_sd01_generate_asset_map" \
-    env BENG_BASE="$REVIEW_PIPELINE" python3 "$REVIEW_SCRIPTS/SD01_generate_asset_map.py"
+    env BENG_BASE="$REVIEW_PIPELINE" BENG_WP_UPLOADS_DIR="$LAB_WORDPRESS_UPLOADS" python3 "$REVIEW_SCRIPTS/SD01_generate_asset_map.py"
 run_with_live_log "05_setup_v54_static_site" \
     env BENG_BASE="$REVIEW_PIPELINE" bash "$REVIEW_SCRIPTS/setup_v54_static_site.sh"
 run_with_live_log "05_sd03_static_site_build" \

@@ -27,7 +27,62 @@
 set -euo pipefail
 
 _SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
-BENG_BASE="${BENG_BASE:-$(cd "$_SELF_DIR/../.." && pwd)}"
+INPUT_BASE="${BENG_BASE:-$(cd "$_SELF_DIR/../.." && pwd)}"
+SOURCES_MODE="copy"
+
+usage() {
+    cat <<EOF
+Usage:
+  bash scripts/tools/package_steward_distribution.sh [options]
+  BENG_BASE=/path/to/pipeline-or-workspace bash scripts/tools/package_steward_distribution.sh
+
+Options:
+  --sources-mode reference|copy Control whether source ZIPs are copied
+  --skip-source-copy            Shortcut for --sources-mode reference
+  --include-sources             Shortcut for --sources-mode copy
+  --sealed-full-copy            Shortcut for --sources-mode copy
+  -h, --help                    Show this help
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --sources-mode)
+            [[ $# -ge 2 ]] || { echo "Missing value for --sources-mode" >&2; usage; exit 1; }
+            case "$2" in
+                reference|copy)
+                    SOURCES_MODE="$2" ;;
+                *)
+                    echo "Invalid --sources-mode: $2" >&2
+                    usage
+                    exit 1 ;;
+            esac
+            shift 2 ;;
+        --skip-source-copy)
+            SOURCES_MODE="reference"; shift ;;
+        --include-sources|--sealed-full-copy)
+            SOURCES_MODE="copy"; shift ;;
+        -h|--help)
+            usage; exit 0 ;;
+        *)
+            echo "Unknown argument: $1" >&2
+            usage
+            exit 1 ;;
+    esac
+done
+
+if [ -d "$INPUT_BASE/scripts/core" ]; then
+    PIPELINE_BASE="$INPUT_BASE"
+    WORKSPACE_ROOT="$(cd "$INPUT_BASE/.." && pwd)"
+elif [ -d "$INPUT_BASE/pipeline/scripts/core" ]; then
+    WORKSPACE_ROOT="$INPUT_BASE"
+    PIPELINE_BASE="$INPUT_BASE/pipeline"
+else
+    echo "❌ Could not resolve pipeline base from BENG_BASE=$INPUT_BASE" >&2
+    exit 1
+fi
+
+SOURCES_ROOT="$WORKSPACE_ROOT/sources"
 
 GREEN='\033[0;32m'
 CYAN='\033[0;96m'
@@ -36,14 +91,37 @@ RED='\033[0;31m'
 GRAY='\033[0;37m'
 NC='\033[0m'
 
-RELEASE_DIR="$BENG_BASE/releases/steward"
+RELEASE_DIR="$PIPELINE_BASE/releases/steward"
 TIMESTAMP=$(date -u +"%Y%m%dT%H%M%SZ")
+
+write_source_reference_json() {
+    local dest_dir="$1"
+    local zip_file="$2"
+    local mode="$3"
+    local size_bytes sha256 generated_at
+    size_bytes="$(stat -c '%s' "$zip_file")"
+    sha256="$(sha256sum "$zip_file" | awk '{print $1}')"
+    generated_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+    cat > "$dest_dir/source_reference.json" <<EOF
+{
+  "filename": "$(basename "$zip_file")",
+  "canonical_path": "$zip_file",
+  "size_bytes": $size_bytes,
+  "sha256": "$sha256",
+  "generated_at": "$generated_at",
+  "mode": "$mode"
+}
+EOF
+}
 
 echo -e "\n${CYAN}╔══════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║  💎 AXIS-NIDDHI — Steward Distribution Packager      ║${NC}"
 echo -e "${CYAN}╚══════════════════════════════════════════════════════╝${NC}"
-echo -e "   ${GRAY}Base    : $BENG_BASE${NC}"
+echo -e "   ${GRAY}Base    : $PIPELINE_BASE${NC}"
+echo -e "   ${GRAY}Root    : $WORKSPACE_ROOT${NC}"
 echo -e "   ${GRAY}Output  : $RELEASE_DIR${NC}"
+echo -e "   ${GRAY}Sources : $SOURCES_MODE${NC}"
 echo -e "   ${GRAY}Build   : $TIMESTAMP${NC}\n"
 
 # ==============================================================================
@@ -51,11 +129,11 @@ echo -e "   ${GRAY}Build   : $TIMESTAMP${NC}\n"
 # ==============================================================================
 MISSING=0
 for required in \
-    "$BENG_BASE/scripts/core" \
-    "$BENG_BASE/scripts/tools" \
-    "$BENG_BASE/metadata" \
-    "$BENG_BASE/03-translations" \
-    "$BENG_BASE/sources"; do
+    "$PIPELINE_BASE/scripts/core" \
+    "$PIPELINE_BASE/scripts/tools" \
+    "$PIPELINE_BASE/metadata" \
+    "$PIPELINE_BASE/03-translations" \
+    "$SOURCES_ROOT"; do
     if [ ! -d "$required" ]; then
         echo -e "  ${YELLOW}⚠ Missing: $required${NC}"
         MISSING=$((MISSING+1))
@@ -68,7 +146,7 @@ if [ "$MISSING" -gt 0 ]; then
 fi
 
 # Credentials guard — hard fail if private/ would be included
-if ls "$BENG_BASE/scripts/private/"*.txt 2>/dev/null | grep -q .; then
+if ls "$PIPELINE_BASE/scripts/private/"*.txt 2>/dev/null | grep -q .; then
     echo -e "${GREEN}✔ scripts/private/ detected — will be excluded from package${NC}"
 fi
 
@@ -88,7 +166,7 @@ mkdir -p "$RELEASE_DIR/pipeline/13-ssg"
 # ==============================================================================
 echo -e "  ${GRAY}[2/6] Copying scripts/core/ (pipeline engine)...${NC}"
 rsync -a --quiet \
-    "$BENG_BASE/scripts/core/" \
+    "$PIPELINE_BASE/scripts/core/" \
     "$RELEASE_DIR/pipeline/scripts/core/"
 CORE_COUNT=$(ls "$RELEASE_DIR/pipeline/scripts/core/" | wc -l)
 echo -e "     ${GRAY}$CORE_COUNT files${NC}"
@@ -98,7 +176,7 @@ echo -e "     ${GRAY}$CORE_COUNT files${NC}"
 # ==============================================================================
 echo -e "  ${GRAY}[3/6] Copying scripts/tools/...${NC}"
 rsync -a --quiet \
-    "$BENG_BASE/scripts/tools/" \
+    "$PIPELINE_BASE/scripts/tools/" \
     "$RELEASE_DIR/pipeline/scripts/tools/"
 TOOLS_COUNT=$(ls "$RELEASE_DIR/pipeline/scripts/tools/" | wc -l)
 echo -e "     ${GRAY}$TOOLS_COUNT files${NC}"
@@ -109,13 +187,13 @@ echo -e "     ${GRAY}$TOOLS_COUNT files${NC}"
 echo -e "  ${GRAY}[4/6] Copying metadata/...${NC}"
 rsync -a --quiet \
     --exclude="*.bak" \
-    "$BENG_BASE/metadata/" \
+    "$PIPELINE_BASE/metadata/" \
     "$RELEASE_DIR/pipeline/metadata/"
 CANON_HASH="UNKNOWN"
-if [ -f "$BENG_BASE/metadata/canon_manifest.json" ]; then
+if [ -f "$PIPELINE_BASE/metadata/canon_manifest.json" ]; then
     CANON_HASH=$(python3 -c "
 import json
-d = json.load(open('$BENG_BASE/metadata/canon_manifest.json'))
+d = json.load(open('$PIPELINE_BASE/metadata/canon_manifest.json'))
 print(d.get('canon_hash','UNKNOWN'))
 " 2>/dev/null || echo "UNKNOWN")
     echo -e "     ${GRAY}canon_manifest.json — hash: ${CANON_HASH:0:24}...${NC}"
@@ -126,18 +204,29 @@ fi
 # ==============================================================================
 echo -e "  ${GRAY}[5/6] Copying 03-translations/...${NC}"
 rsync -a --quiet \
-    "$BENG_BASE/03-translations/" \
+    "$PIPELINE_BASE/03-translations/" \
     "$RELEASE_DIR/pipeline/03-translations/"
 TRANS_COUNT=$(find "$RELEASE_DIR/pipeline/03-translations" -name "pt-BR.html" | wc -l)
 echo -e "     ${GRAY}$TRANS_COUNT frozen translations${NC}"
 
 # ==============================================================================
-# COPY SOURCES (ZIP only — no intermediate files)
+# COPY SOURCES / SOURCE REFERENCE
 # ==============================================================================
-echo -e "  ${GRAY}[6/6] Copying sources/ (source ZIP)...${NC}"
-find "$BENG_BASE/sources" -name "*.zip" -exec cp {} "$RELEASE_DIR/pipeline/sources/" \;
-ZIP_SIZE=$(du -sh "$RELEASE_DIR/pipeline/sources/" 2>/dev/null | cut -f1)
-echo -e "     ${GRAY}$ZIP_SIZE${NC}"
+echo -e "  ${GRAY}[6/6] Recording sources/...${NC}"
+LATEST_ZIP=$(find "$SOURCES_ROOT" -maxdepth 1 -name "*.zip" | sort | tail -n 1)
+if [ -z "$LATEST_ZIP" ]; then
+    echo -e "${RED}❌ No source ZIP found in $SOURCES_ROOT${NC}"
+    rm -rf "$RELEASE_DIR"
+    exit 1
+fi
+write_source_reference_json "$RELEASE_DIR/pipeline/sources" "$LATEST_ZIP" "$SOURCES_MODE"
+if [ "$SOURCES_MODE" = "copy" ]; then
+    find "$SOURCES_ROOT" -maxdepth 1 -name "*.zip" -exec cp {} "$RELEASE_DIR/pipeline/sources/" \;
+    ZIP_SIZE=$(du -sh "$RELEASE_DIR/pipeline/sources/" 2>/dev/null | cut -f1)
+    echo -e "     ${GRAY}$ZIP_SIZE${NC}"
+else
+    echo -e "     ${GRAY}reference only — source_reference.json${NC}"
+fi
 
 # ==============================================================================
 # COPY SSG ENGINE (no __pycache__)
@@ -145,7 +234,7 @@ echo -e "     ${GRAY}$ZIP_SIZE${NC}"
 rsync -a --quiet \
     --exclude="__pycache__" \
     --exclude="*.pyc" \
-    "$BENG_BASE/13-ssg/" \
+    "$PIPELINE_BASE/13-ssg/" \
     "$RELEASE_DIR/pipeline/13-ssg/"
 
 # ==============================================================================
@@ -201,7 +290,7 @@ steward/
 │   │   └── tools/         ← utility scripts
 │   ├── metadata/          ← PDPN CSVs, glossary, manifests
 │   ├── 03-translations/   ← $TRANS_COUNT frozen PT-BR translations
-│   ├── sources/           ← PureDhamma source ZIP (~2.2GB)
+│   ├── sources/           ← source_reference.json + ZIPs (copy mode only)
 │   └── 13-ssg/            ← Static site generator engine
 └── README_steward.md
 \`\`\`

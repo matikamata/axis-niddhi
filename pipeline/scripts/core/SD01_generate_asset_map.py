@@ -37,12 +37,37 @@ from config import BASE_DIR, DIR_09_CSL, METADATA_DIR
 # Output: pipeline/metadata/asset_map.json
 # METADATA_DIR já aponta para pipeline/metadata/ conforme config.py
 OUT_FILE = METADATA_DIR / "asset_map.json"
-WP_UPLOADS_DIR = BASE_DIR.parent / "wordpress" / "wp-content" / "uploads"
+WP_UPLOADS_DEFAULT_DIR = BASE_DIR.parent / "wordpress" / "wp-content" / "uploads"
+UPLOADS_REFERENCE_FILE = METADATA_DIR / "uploads_reference.json"
 CF_PAGES_MAX_BYTES = int(os.environ.get("BENG_PAGES_MAX_FILE_BYTES", str(25 * 1024 * 1024)))
 EXTERNAL_UPLOADS_BASE = os.environ.get(
     "BENG_EXTERNAL_UPLOADS_BASE_URL",
     "https://puredhamma.net/wp-content/uploads",
 ).rstrip("/")
+WP_UPLOADS_MODE = "default"
+
+
+def _resolve_wp_uploads_dir() -> tuple[Path, str]:
+    override = os.environ.get("BENG_WP_UPLOADS_DIR")
+    if override:
+        return Path(override).expanduser(), "env"
+
+    if WP_UPLOADS_DEFAULT_DIR.exists():
+        return WP_UPLOADS_DEFAULT_DIR, "default"
+
+    if UPLOADS_REFERENCE_FILE.exists():
+        try:
+            data = json.loads(UPLOADS_REFERENCE_FILE.read_text(encoding="utf-8"))
+            canonical_path = data.get("canonical_path", "").strip()
+            if canonical_path:
+                return Path(canonical_path).expanduser(), "metadata-reference"
+        except Exception:
+            pass
+
+    return WP_UPLOADS_DEFAULT_DIR, "default"
+
+
+WP_UPLOADS_DIR, WP_UPLOADS_MODE = _resolve_wp_uploads_dir()
 
 # Extensões aceitas — mesmo conjunto do SG04 (consistência garantida)
 ACCEPTED_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".pdf"}
@@ -123,6 +148,8 @@ def main() -> None:
     print(f"⚙️  CSL_DIR     : {DIR_09_CSL}")
     print(f"⚙️  OUT_FILE    : {OUT_FILE}")
     print(f"⚙️  WP_UPLOADS  : {WP_UPLOADS_DIR}")
+    print(f"⚙️  WP_MODE     : {WP_UPLOADS_MODE}")
+    print(f"⚙️  WP_REF_FILE : {UPLOADS_REFERENCE_FILE}")
     print(f"⚙️  MAX_FILE    : {CF_PAGES_MAX_BYTES} bytes ({CF_PAGES_MAX_BYTES / (1024 * 1024):.1f} MiB)")
     print(f"⚙️  EXTERNAL    : {EXTERNAL_UPLOADS_BASE}")
 
@@ -136,6 +163,9 @@ def main() -> None:
         sys.exit(1)
     if not WP_UPLOADS_DIR.exists():
         print(f"❌ FAIL-FAST: uploads não encontrado: {WP_UPLOADS_DIR}", file=sys.stderr)
+        if UPLOADS_REFERENCE_FILE.exists():
+            print(f"❌ uploads_reference.json presente em: {UPLOADS_REFERENCE_FILE}", file=sys.stderr)
+        print("❌ Defina BENG_WP_UPLOADS_DIR ou forneça uploads_reference.json válido.", file=sys.stderr)
         sys.exit(1)
 
     # Build filename index once (case-insensitive) for robust legacy path recovery.

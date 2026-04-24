@@ -65,11 +65,47 @@ set -euo pipefail
 
 DRY_RUN=false
 FORCE=false
+SOURCES_MODE="copy"
 
-for arg in "$@"; do
-    case "$arg" in
-        --dry-run) DRY_RUN=true ;;
-        --force)   FORCE=true ;;
+usage() {
+    cat <<EOF
+Usage:
+  bash build_release_snapshot.sh [options]
+
+Options:
+  --dry-run                     Simulate without creating files
+  --force                       Rebuild release root from scratch
+  --sources-mode reference|copy Control whether sources ZIP is copied
+  --skip-source-copy            Shortcut for --sources-mode reference
+  -h, --help                    Show this help
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --dry-run)
+            DRY_RUN=true; shift ;;
+        --force)
+            FORCE=true; shift ;;
+        --sources-mode)
+            [[ $# -ge 2 ]] || { echo -e "\033[0;31m  ✘ Missing value for --sources-mode\033[0m" >&2; usage; exit 1; }
+            case "$2" in
+                reference|copy)
+                    SOURCES_MODE="$2" ;;
+                *)
+                    echo -e "\033[0;31m  ✘ Invalid --sources-mode: $2\033[0m" >&2
+                    usage
+                    exit 1 ;;
+            esac
+            shift 2 ;;
+        --skip-source-copy)
+            SOURCES_MODE="reference"; shift ;;
+        -h|--help)
+            usage; exit 0 ;;
+        *)
+            echo -e "\033[0;31m  ✘ Unknown argument: $1\033[0m" >&2
+            usage
+            exit 1 ;;
     esac
 done
 
@@ -97,6 +133,30 @@ warn()  { echo -e "${YELLOW}  ⚠ $*${NC}"; }
 info()  { echo -e "\n${CYAN}── $* ──────────────────────────────────────────${NC}"; }
 detail(){ echo -e "${GRAY}    $*${NC}"; }
 dryrun(){ echo -e "${YELLOW}  [DRY-RUN] $*${NC}"; }
+
+write_source_reference_json() {
+    local dest_dir="$1"
+    local mode="$2"
+    local ref_file="$dest_dir/source_reference.json"
+    local generated_at
+    generated_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+    if $DRY_RUN; then
+        dryrun "write ${ref_file#"$RELEASE_ROOT/"} [mode=$mode]"
+    else
+        cat > "$ref_file" <<EOF
+{
+  "filename": "$(basename "$ZIP_FILE")",
+  "canonical_path": "$ZIP_FILE",
+  "size_bytes": $ZIP_SIZE_BYTES,
+  "sha256": "$ZIP_SHA256",
+  "generated_at": "$generated_at",
+  "mode": "$mode"
+}
+EOF
+        ok "${ref_file#"$RELEASE_ROOT/"} [mode=$mode]"
+    fi
+}
 
 copy_file() {
     local src="$1" dst="$2"
@@ -128,6 +188,7 @@ echo -e "${CYAN}${BOLD}╚══════════════════
 echo ""
 echo -e "${GRAY}  Source : $SRC_ROOT  (untouched)${NC}"
 echo -e "${GRAY}  Release: $RELEASE_ROOT${NC}"
+echo -e "${GRAY}  Sources: $SOURCES_MODE${NC}"
 $DRY_RUN && echo -e "${YELLOW}  Mode   : DRY-RUN — no files will be created${NC}" \
          || echo -e "${GRAY}  Mode   : LIVE${NC}"
 echo ""
@@ -148,6 +209,8 @@ info "PRE-FLIGHT — Validating source workspace"
 ZIP_FILE=$(find "$SRC_SOURCES" -maxdepth 1 -name "*.zip" 2>/dev/null | sort | tail -1)
 [[ -n "$ZIP_FILE" ]] || fail "No .zip found in $SRC_SOURCES — PureDhamma backup required"
 ZIP_SIZE=$(du -sh "$ZIP_FILE" | awk '{print $1}')
+ZIP_SIZE_BYTES=$(stat -c '%s' "$ZIP_FILE")
+ZIP_SHA256=$(sha256sum "$ZIP_FILE" | awk '{print $1}')
 ok "Source validated"
 ok "ZIP: $(basename "$ZIP_FILE") ($ZIP_SIZE)"
 
@@ -414,17 +477,24 @@ if [[ -f "$SRC_LINEAGE" ]]; then
 fi
 
 # ==============================================================================
-# 9. COPY PURЕDHAMMA SOURCE ZIP
+# 9. RECORD / COPY PUREDHAMMA SOURCE ZIP
 # ==============================================================================
 
-info "Copying PureDhamma source ZIP"
+info "Recording PureDhamma source ZIP"
 
 DST_ZIP="$RELEASE_ROOT/sources/$(basename "$ZIP_FILE")"
-if $DRY_RUN; then
-    dryrun "cp $ZIP_FILE → $DST_ZIP ($ZIP_SIZE)"
+write_source_reference_json "$REL_SOURCES" "$SOURCES_MODE"
+
+if [[ "$SOURCES_MODE" == "copy" ]]; then
+    info "Copying PureDhamma source ZIP"
+    if $DRY_RUN; then
+        dryrun "cp $ZIP_FILE → $DST_ZIP ($ZIP_SIZE)"
+    else
+        cp "$ZIP_FILE" "$DST_ZIP"
+        ok "$(basename "$ZIP_FILE") ($ZIP_SIZE) → /beng-release/sources/"
+    fi
 else
-    cp "$ZIP_FILE" "$DST_ZIP"
-    ok "$(basename "$ZIP_FILE") ($ZIP_SIZE) → /beng-release/sources/"
+    detail "Source ZIP copy skipped; source_reference.json recorded instead"
 fi
 
 # ==============================================================================
@@ -551,6 +621,7 @@ case "$CMD" in
         echo -e "  Options:"
         echo -e "    --dry-run    Simulate without copying files"
         echo -e "    --force      Rebuild from scratch (removes existing /beng-release)"
+        echo -e "    --sources-mode reference|copy"
         echo ""
         ;;
     help|*)
@@ -625,7 +696,8 @@ axis preview
 ├── axis                   CLI entry point
 ├── README.md              This file
 ├── sources/
-│   └── *.zip              PureDhamma WordPress backup (canonical source)
+│   ├── source_reference.json  Canonical source identity + checksum
+│   └── *.zip                  PureDhamma WordPress backup (copy mode only)
 └── pipeline/
     ├── scripts/           30 CORE pipeline scripts
     ├── metadata/          PDPN index, glossary, section map
@@ -733,7 +805,11 @@ if ! $DRY_RUN; then
     info "Release verification"
 
     REL_ERRORS=0
-    for f in "axis" "README.md" "sources/$(basename "$ZIP_FILE")"; do
+    VERIFY_FILES=("axis" "README.md" "sources/source_reference.json")
+    if [[ "$SOURCES_MODE" == "copy" ]]; then
+        VERIFY_FILES+=("sources/$(basename "$ZIP_FILE")")
+    fi
+    for f in "${VERIFY_FILES[@]}"; do
         [[ -e "$RELEASE_ROOT/$f" ]] && ok "$f" || \
             { warn "MISSING in release: $f"; REL_ERRORS=$((REL_ERRORS + 1)); }
     done
