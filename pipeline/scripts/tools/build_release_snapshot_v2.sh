@@ -6,8 +6,8 @@
 # Data:    2026-03-11
 #
 # PROPÓSITO:
-#   Criar um release limpo e reproduzível em /beng-release
-#   a partir do workspace de desenvolvimento /beng-fut.
+#   Criar um release limpo e reproduzível em REVIEW_ROOT
+#   a partir do workspace de desenvolvimento LAB_ROOT.
 #
 #   O release contém APENAS:
 #   • axis CLI (axis_cli.sh → executável como 'axis')
@@ -19,12 +19,12 @@
 #
 #   O objetivo é criar um Canonical Corpus Publishing Engine
 #   portátil: qualquer operador com o ZIP pode reconstruir
-#   o site completo sem dependência do ambiente /beng-fut.
+#   o site completo sem dependência do ambiente original de LAB.
 #
 # GARANTIAS:
-#   ✔ /beng-fut NÃO É MODIFICADO
+#   ✔ LAB_ROOT NÃO É MODIFICADO
 #   ✔ Apenas cópia — zero mutações na fonte
-#   ✔ config.py de release aponta para /beng-release (não /beng-fut)
+#   ✔ config.py de release aponta para REVIEW_ROOT (não LAB_ROOT)
 #   ✔ Credenciais sensíveis NÃO são copiadas
 #   ✔ Release é idempotente: pode ser re-executado com segurança
 #
@@ -34,12 +34,12 @@
 #   sudo bash build_release_snapshot.sh --force      # sobrescreve release existente
 #
 # PRÉ-REQUISITOS:
-#   • /beng-fut/pipeline/scripts/ com os 30 scripts CORE presentes
-#   • /beng-fut/sources/*.zip (backup PureDhamma)
+#   • LAB_ROOT/pipeline/scripts/ com os 30 scripts CORE presentes
+#   • LAB_ROOT/sources/*.zip (backup PureDhamma)
 #   • verify_pipeline_integrity.sh passou sem erros CORE
 #
 # ESTRUTURA CRIADA:
-#   /beng-release/
+#   REVIEW_ROOT/
 #   ├── axis*                           → CLI entry point (executável)
 #   ├── README.md                       → guia de onboarding
 #   ├── pipeline/
@@ -65,26 +65,66 @@ set -euo pipefail
 
 DRY_RUN=false
 FORCE=false
+SOURCES_MODE="copy"
 
-for arg in "$@"; do
-    case "$arg" in
-        --dry-run) DRY_RUN=true ;;
-        --force)   FORCE=true ;;
+usage() {
+    cat <<EOF
+Usage:
+  bash build_release_snapshot_v2.sh [options]
+
+Options:
+  --dry-run                     Simulate without creating files
+  --force                       Rebuild release root from scratch
+  --sources-mode reference|copy Control whether sources ZIP is copied
+  --skip-source-copy            Shortcut for --sources-mode reference
+  -h, --help                    Show this help
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --dry-run)
+            DRY_RUN=true; shift ;;
+        --force)
+            FORCE=true; shift ;;
+        --sources-mode)
+            [[ $# -ge 2 ]] || { echo -e "\033[0;31m  ✘ Missing value for --sources-mode\033[0m" >&2; usage; exit 1; }
+            case "$2" in
+                reference|copy)
+                    SOURCES_MODE="$2" ;;
+                *)
+                    echo -e "\033[0;31m  ✘ Invalid --sources-mode: $2\033[0m" >&2
+                    usage
+                    exit 1 ;;
+            esac
+            shift 2 ;;
+        --skip-source-copy)
+            SOURCES_MODE="reference"; shift ;;
+        -h|--help)
+            usage; exit 0 ;;
+        *)
+            echo -e "\033[0;31m  ✘ Unknown argument: $1\033[0m" >&2
+            usage
+            exit 1 ;;
     esac
 done
 
 # Source (development workspace — NEVER modified)
-SRC_ROOT="/beng-fut"
+SRC_ROOT="${LAB_ROOT:-$(cd "$(dirname "$0")/../../.." && pwd)}"
 SRC_PIPELINE="$SRC_ROOT/pipeline"
-SRC_SCRIPTS="$SRC_PIPELINE/scripts"
+SRC_SCRIPTS_ROOT="$SRC_PIPELINE/scripts"
+SRC_SCRIPTS_CORE="$SRC_PIPELINE/scripts/core"
+SRC_SCRIPTS_TOOLS="$SRC_PIPELINE/scripts/tools"
 SRC_SOURCES="$SRC_ROOT/sources"
 SRC_METADATA="$SRC_PIPELINE/metadata"
 SRC_13SSG="$SRC_PIPELINE/13-ssg"
 
 # Destination (clean release — created by this script)
-RELEASE_ROOT="/beng-release"
+RELEASE_ROOT="${REVIEW_ROOT:-$SRC_ROOT/review}"
 REL_PIPELINE="$RELEASE_ROOT/pipeline"
 REL_SCRIPTS="$REL_PIPELINE/scripts"
+REL_SCRIPTS_CORE="$REL_PIPELINE/scripts/core"
+REL_SCRIPTS_TOOLS="$REL_PIPELINE/scripts/tools"
 REL_SOURCES="$RELEASE_ROOT/sources"
 REL_METADATA="$REL_PIPELINE/metadata"
 
@@ -98,13 +138,54 @@ info()  { echo -e "\n${CYAN}── $* ──────────────
 detail(){ echo -e "${GRAY}    $*${NC}"; }
 dryrun(){ echo -e "${YELLOW}  [DRY-RUN] $*${NC}"; }
 
-copy_file() {
-    local src="$1" dst="$2"
+write_source_reference_json() {
+    local dest_dir="$1"
+    local mode="$2"
+    local ref_file="$dest_dir/source_reference.json"
+    local generated_at
+    generated_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
     if $DRY_RUN; then
-        dryrun "cp $src → $dst"
+        dryrun "write ${ref_file#"$RELEASE_ROOT/"} [mode=$mode]"
+    else
+        cat > "$ref_file" <<EOF
+{
+  "filename": "$(basename "$ZIP_FILE")",
+  "canonical_path": "$ZIP_FILE",
+  "size_bytes": $ZIP_SIZE_BYTES,
+  "sha256": "$ZIP_SHA256",
+  "generated_at": "$generated_at",
+  "mode": "$mode"
+}
+EOF
+        ok "${ref_file#"$RELEASE_ROOT/"} [mode=$mode]"
+    fi
+}
+
+copy_file() {
+    local src="$1" dst="$2" kind="${3:-canonical}"
+    local rel_dst="$dst" marker="✔" suffix=""
+
+    if [[ "$dst" == "$REL_PIPELINE/"* ]]; then
+        rel_dst="${dst#"$REL_PIPELINE/"}"
+    elif [[ "$dst" == "$RELEASE_ROOT/"* ]]; then
+        rel_dst="${dst#"$RELEASE_ROOT/"}"
+    fi
+
+    if [[ "$kind" == "compat" ]]; then
+        marker="↺"
+        suffix=" [compat]"
+    fi
+
+    if $DRY_RUN; then
+        dryrun "$marker $rel_dst$suffix"
     else
         cp "$src" "$dst"
-        ok "$(basename "$src")"
+        if [[ "$kind" == "compat" ]]; then
+            echo -e "${GRAY}  $marker $rel_dst$suffix${NC}"
+        else
+            echo -e "${GREEN}  $marker $rel_dst${NC}"
+        fi
     fi
 }
 
@@ -128,6 +209,7 @@ echo -e "${CYAN}${BOLD}╚══════════════════
 echo ""
 echo -e "${GRAY}  Source : $SRC_ROOT  (untouched)${NC}"
 echo -e "${GRAY}  Release: $RELEASE_ROOT${NC}"
+echo -e "${GRAY}  Sources: $SOURCES_MODE${NC}"
 $DRY_RUN && echo -e "${YELLOW}  Mode   : DRY-RUN — no files will be created${NC}" \
          || echo -e "${GRAY}  Mode   : LIVE${NC}"
 echo ""
@@ -139,22 +221,33 @@ echo ""
 info "PRE-FLIGHT — Validating source workspace"
 
 [[ -d "$SRC_PIPELINE" ]]  || fail "Source pipeline not found: $SRC_PIPELINE"
-[[ -d "$SRC_SCRIPTS" ]]   || fail "Source scripts not found: $SRC_SCRIPTS"
+[[ -d "$SRC_SCRIPTS_ROOT" ]] || fail "Source scripts root not found: $SRC_SCRIPTS_ROOT"
+[[ -d "$SRC_SCRIPTS_CORE" ]] || fail "Source scripts core not found: $SRC_SCRIPTS_CORE"
+[[ -d "$SRC_SCRIPTS_TOOLS" ]] || fail "Source scripts tools not found: $SRC_SCRIPTS_TOOLS"
 [[ -d "$SRC_SOURCES" ]]   || fail "Sources dir not found: $SRC_SOURCES (ZIP must be here)"
-[[ -f "$SRC_SCRIPTS/config.py" ]] || fail "config.py not found in source"
-[[ -f "$SRC_SCRIPTS/run_full_pipeline.sh" ]] || fail "run_full_pipeline.sh not found"
+[[ -f "$SRC_SCRIPTS_CORE/config.py" || -f "$SRC_SCRIPTS_ROOT/config.py" ]] || fail "config.py not found"
+[[ -f "$SRC_SCRIPTS_CORE/run_full_pipeline.sh" || -f "$SRC_SCRIPTS_ROOT/run_full_pipeline.sh" ]] || fail "run_full_pipeline.sh not found"
 
 # Detect source ZIP
 ZIP_FILE=$(find "$SRC_SOURCES" -maxdepth 1 -name "*.zip" 2>/dev/null | sort | tail -1)
 [[ -n "$ZIP_FILE" ]] || fail "No .zip found in $SRC_SOURCES — PureDhamma backup required"
 ZIP_SIZE=$(du -sh "$ZIP_FILE" | awk '{print $1}')
+ZIP_SIZE_BYTES=$(stat -c '%s' "$ZIP_FILE")
+ZIP_SHA256=$(sha256sum "$ZIP_FILE" | awk '{print $1}')
 ok "Source validated"
 ok "ZIP: $(basename "$ZIP_FILE") ($ZIP_SIZE)"
 
 # Verify integrity guard passes on source (CORE scripts check only)
-if [[ -f "$SRC_SCRIPTS/verify_pipeline_integrity.sh" ]]; then
+VERIFY_SRC=""
+if [[ -f "$SRC_SCRIPTS_CORE/verify_pipeline_integrity.sh" ]]; then
+    VERIFY_SRC="$SRC_SCRIPTS_CORE/verify_pipeline_integrity.sh"
+elif [[ -f "$SRC_SCRIPTS_ROOT/verify_pipeline_integrity.sh" ]]; then
+    VERIFY_SRC="$SRC_SCRIPTS_ROOT/verify_pipeline_integrity.sh"
+fi
+
+if [[ -n "$VERIFY_SRC" ]]; then
     detail "Running integrity guard on source..."
-    if BENG_BASE="$SRC_PIPELINE" bash "$SRC_SCRIPTS/verify_pipeline_integrity.sh" --quiet; then
+    if BENG_BASE="$SRC_PIPELINE" bash "$VERIFY_SRC" --quiet; then
         ok "Source integrity guard: PASS"
     else
         warn "Source integrity guard reported errors — proceeding with caution"
@@ -189,6 +282,8 @@ info "Creating workspace directory tree"
 
 # Core structure
 make_dir "$REL_PIPELINE/scripts"
+make_dir "$REL_PIPELINE/scripts/core"
+make_dir "$REL_PIPELINE/scripts/tools"
 make_dir "$REL_PIPELINE/09-csl"
 make_dir "$REL_PIPELINE/01-extracted-htmls/en-US"
 make_dir "$REL_PIPELINE/02-preprocessed/en-US"
@@ -234,10 +329,24 @@ CORE_SCRIPTS=(
 COPIED=0
 MISSING=0
 for script in "${CORE_SCRIPTS[@]}"; do
-    src="$SRC_SCRIPTS/$script"
-    dst="$REL_SCRIPTS/$script"
+    src="$SRC_SCRIPTS_CORE/$script"
+    # Canonical fallback sources for files that may live in 13-ssg/
+    if [[ ! -f "$src" ]]; then
+        case "$script" in
+            build.py)
+                [[ -f "$SRC_13SSG/build.py" ]] && src="$SRC_13SSG/build.py"
+                ;;
+            models.py)
+                [[ -f "$SRC_13SSG/src/models.py" ]] && src="$SRC_13SSG/src/models.py"
+                ;;
+        esac
+    fi
+    dst_core="$REL_SCRIPTS_CORE/$script"
+    dst_compat="$REL_SCRIPTS/$script"
     if [[ -f "$src" ]]; then
-        copy_file "$src" "$dst"
+        copy_file "$src" "$dst_core"
+        # Compatibility mirror for consumers that still read scripts/*
+        copy_file "$src" "$dst_compat" "compat"
         COPIED=$((COPIED + 1))
     else
         warn "MISSING in source — skipping: $script"
@@ -254,27 +363,64 @@ ok "$COPIED/30 CORE scripts copied"
 
 info "Copying CLI entry points"
 
-for cli in "axis_cli.sh" "verify_pipeline_integrity.sh" "setup_v54_static_site.sh"; do
-    src="$SRC_SCRIPTS/$cli"
-    [[ -f "$src" ]] && copy_file "$src" "$REL_SCRIPTS/$cli" || warn "Not found: $cli"
-done
+[[ -f "$SRC_SCRIPTS_TOOLS/axis_cli.sh" ]] \
+    && copy_file "$SRC_SCRIPTS_TOOLS/axis_cli.sh" "$REL_SCRIPTS_TOOLS/axis_cli.sh" \
+    || warn "Not found: axis_cli.sh"
+[[ -f "$SRC_SCRIPTS_TOOLS/axis_cli.sh" ]] \
+    && copy_file "$SRC_SCRIPTS_TOOLS/axis_cli.sh" "$REL_SCRIPTS/axis_cli.sh" "compat" \
+    || true
+
+[[ -f "$SRC_SCRIPTS_CORE/verify_pipeline_integrity.sh" ]] \
+    && copy_file "$SRC_SCRIPTS_CORE/verify_pipeline_integrity.sh" "$REL_SCRIPTS_CORE/verify_pipeline_integrity.sh" \
+    || warn "Not found: verify_pipeline_integrity.sh"
+[[ -f "$SRC_SCRIPTS_CORE/verify_pipeline_integrity.sh" ]] \
+    && copy_file "$SRC_SCRIPTS_CORE/verify_pipeline_integrity.sh" "$REL_SCRIPTS/verify_pipeline_integrity.sh" "compat" \
+    || true
+
+[[ -f "$SRC_SCRIPTS_TOOLS/setup_v54_static_site.sh" ]] \
+    && copy_file "$SRC_SCRIPTS_TOOLS/setup_v54_static_site.sh" "$REL_SCRIPTS_TOOLS/setup_v54_static_site.sh" \
+    || warn "Not found: setup_v54_static_site.sh"
+[[ -f "$SRC_SCRIPTS_TOOLS/setup_v54_static_site.sh" ]] \
+    && copy_file "$SRC_SCRIPTS_TOOLS/setup_v54_static_site.sh" "$REL_SCRIPTS/setup_v54_static_site.sh" "compat" \
+    || true
 
 # Copy SSG modules needed by setup_v54
 info "Copying SSG modules (deployed by setup_v54)"
 SSG_MODULES=(
-    "csl_loader.py" "identity_loader.py"
-    "post_renderer.py" "index_renderer.py"
-    "nav_builder.py" "link_resolver.py" "asset_mapper.py" "language_router.py"
-    "base.html" "post.html" "index.html"
-    "style.css" "main.js" "sw.js"
+    "src/loaders/csl_loader.py:csl_loader.py"
+    "src/loaders/identity_loader.py:identity_loader.py"
+    "src/renderers/post_renderer.py:post_renderer.py"
+    "src/renderers/index_renderer.py:index_renderer.py"
+    "src/transformers/nav_builder.py:nav_builder.py"
+    "src/transformers/link_resolver.py:link_resolver.py"
+    "src/transformers/asset_mapper.py:asset_mapper.py"
+    "src/transformers/language_router.py:language_router.py"
+    "templates/base.html:base.html"
+    "templates/post.html:post.html"
+    "templates/index.html:index.html"
+    "templates/welcome.html:welcome.html"
+    "static/css/style.css:style.css"
+    "static/css/typography-pro.css:typography-pro.css"
+    "static/js/main.js:main.js"
+    "static/js/sw.js:sw.js"
+    "static/js/reading-flow.js:reading-flow.js"
+    "static/favicon.svg:favicon.svg"
+    "static/buddha-2.jpg:buddha-2.jpg"
+    "static/assets/BodhiCircuitLeaf.png:BodhiCircuitLeaf.png"
+    "static/leaf.html:leaf.html"
 )
-for mod in "${SSG_MODULES[@]}"; do
-    src="$SRC_SCRIPTS/$mod"
-    [[ -f "$src" ]] && copy_file "$src" "$REL_SCRIPTS/$mod" || warn "Not found: $mod"
+for item in "${SSG_MODULES[@]}"; do
+    src_rel="${item%%:*}"
+    dst_name="${item##*:}"
+    src="$SRC_13SSG/$src_rel"
+    if [[ -f "$src" ]]; then
+        copy_file "$src" "$REL_SCRIPTS_CORE/$dst_name"
+        # Compatibility mirror for setup_v54 fallback lookup in scripts/*
+        copy_file "$src" "$REL_SCRIPTS/$dst_name" "compat"
+    else
+        warn "Not found: $src_rel"
+    fi
 done
-if [[ -f "$SRC_SCRIPTS/reading-flow.js" ]]; then
-    copy_file "$SRC_SCRIPTS/reading-flow.js" "$REL_SCRIPTS/reading-flow.js"
-fi
 
 # ==============================================================================
 # 8. COPY METADATA (control data, no CSL content)
@@ -285,16 +431,27 @@ info "Copying metadata control files"
 # Safe to copy: these are reference data, not workspace state
 METADATA_FILES=(
     "PDPN_01_Operational.csv"       # canonical post index (748 posts)
-    "PDPN_02_Historical_Updated.csv" # historical record
     "MasterPDPN_Sections.csv"       # section canonical names
     "Glossario_v5.csv"              # Pāli glossary source
-    "MasterPDPN_Raw.csv"            # raw PD index
 )
 
 for f in "${METADATA_FILES[@]}"; do
     src="$SRC_METADATA/$f"
     [[ -f "$src" ]] && copy_file "$src" "$REL_METADATA/$f" || warn "Metadata not found: $f"
 done
+
+# Optional archaeological/reference layer (never treated as live input)
+SRC_ARCHEOLOGY="$SRC_METADATA/ARCHEOLOGY"
+REL_ARCHEOLOGY="$REL_METADATA/ARCHEOLOGY"
+if [[ -d "$SRC_ARCHEOLOGY" ]]; then
+    make_dir "$REL_ARCHEOLOGY"
+    if $DRY_RUN; then
+        dryrun "↺ metadata/ARCHEOLOGY/ [reference]"
+    else
+        cp -a "$SRC_ARCHEOLOGY/." "$REL_ARCHEOLOGY/"
+        echo -e "${GRAY}  ↺ metadata/ARCHEOLOGY/ [reference]${NC}"
+    fi
+fi
 
 # lineage_schema.json lives in config/ (not metadata/)
 SRC_LINEAGE="$SRC_PIPELINE/config/lineage_schema.json"
@@ -304,17 +461,24 @@ if [[ -f "$SRC_LINEAGE" ]]; then
 fi
 
 # ==============================================================================
-# 9. COPY PURЕDHAMMA SOURCE ZIP
+# 9. RECORD / COPY PUREDHAMMA SOURCE ZIP
 # ==============================================================================
 
-info "Copying PureDhamma source ZIP"
+info "Recording PureDhamma source ZIP"
 
 DST_ZIP="$RELEASE_ROOT/sources/$(basename "$ZIP_FILE")"
-if $DRY_RUN; then
-    dryrun "cp $ZIP_FILE → $DST_ZIP ($ZIP_SIZE)"
+write_source_reference_json "$REL_SOURCES" "$SOURCES_MODE"
+
+if [[ "$SOURCES_MODE" == "copy" ]]; then
+    info "Copying PureDhamma source ZIP"
+    if $DRY_RUN; then
+        dryrun "✔ sources/$(basename "$ZIP_FILE") ($ZIP_SIZE)"
+    else
+        cp "$ZIP_FILE" "$DST_ZIP"
+        ok "sources/$(basename "$ZIP_FILE") ($ZIP_SIZE)"
+    fi
 else
-    cp "$ZIP_FILE" "$DST_ZIP"
-    ok "$(basename "$ZIP_FILE") ($ZIP_SIZE) → /beng-release/sources/"
+    detail "Source ZIP copy skipped; source_reference.json recorded instead"
 fi
 
 # ==============================================================================
@@ -323,12 +487,12 @@ fi
 
 info "Patching config.py for release environment"
 
-# config.py in release: BENG_BASE points to /beng-release/pipeline by default.
+# config.py in release: BENG_BASE points to \$RELEASE_ROOT/pipeline by default.
 # The script already supports env-var override: os.environ.get("BENG_BASE", ...)
 # We only need to confirm the fallback path is self-consistent.
 # Since config.py derives BASE_DIR from __file__ parent's parent, and the
-# release places config.py at /beng-release/pipeline/scripts/config.py,
-# the derived BASE_DIR will be /beng-release/pipeline — correct without any patch.
+# release places config.py at \$RELEASE_ROOT/pipeline/scripts/config.py,
+# the derived BASE_DIR will be \$RELEASE_ROOT/pipeline - correct without any patch.
 
 if $DRY_RUN; then
     dryrun "config.py self-consistent (BASE_DIR derived from __file__)"
@@ -372,7 +536,7 @@ else
 # axis — AXIS-NIDDHI CLI Entry Point
 # ==============================================================================
 # Installation:
-#   echo "alias axis='bash /beng-release/axis'" >> ~/.bashrc
+#   echo "alias axis='bash <release-root>/axis'" >> ~/.bashrc
 #   source ~/.bashrc
 #
 # Usage:
@@ -384,7 +548,7 @@ else
 #   axis build-release  → instructions to build a new release from the Lab
 # ==============================================================================
 
-RELEASE_ROOT="/beng-release"
+RELEASE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPTS="$RELEASE_ROOT/pipeline/scripts"
 export BENG_BASE="$RELEASE_ROOT/pipeline"
 CMD="${1:-help}"
@@ -433,14 +597,15 @@ case "$CMD" in
         echo -e "${BOLD}▶ axis build-release${NC}"
         echo ""
         echo -e "  This command must be run from the Lab workspace, not from a release."
-        echo -e "  The release builder copies from /beng-fut and writes to /beng-release."
+        echo -e "  The release builder copies from LAB_ROOT and writes to REVIEW_ROOT."
         echo ""
         echo -e "  Run:"
-        echo -e "    sudo bash /beng-fut/pipeline/scripts/build_release_snapshot.sh"
+        echo -e "    LAB_ROOT=<lab-root> REVIEW_ROOT=<review-root> bash <lab-root>/pipeline/scripts/tools/build_release_snapshot_v2.sh"
         echo ""
         echo -e "  Options:"
         echo -e "    --dry-run    Simulate without copying files"
-        echo -e "    --force      Rebuild from scratch (removes existing /beng-release)"
+        echo -e "    --force      Rebuild from scratch (removes existing REVIEW_ROOT)"
+        echo -e "    --sources-mode reference|copy"
         echo ""
         ;;
     help|*)
@@ -478,7 +643,7 @@ else
     cat > "$README" << 'README_CONTENT'
 # AXIS-NIDDHI — Canonical Corpus Publishing Engine
 **Version:** V5.4  
-**Release:** /beng-release
+**Release:** `<release-root>`
 
 ---
 
@@ -494,7 +659,7 @@ static site.
 
 ```bash
 # 1. Install alias (once)
-echo "alias axis='bash /beng-release/axis'" >> ~/.bashrc && source ~/.bashrc
+echo "alias axis='bash <release-root>/axis'" >> ~/.bashrc && source ~/.bashrc
 
 # 2. Check integrity
 axis integrity
@@ -511,11 +676,12 @@ axis preview
 ## What's in this release
 
 ```
-/beng-release/
+<release-root>/
 ├── axis                   CLI entry point
 ├── README.md              This file
 ├── sources/
-│   └── *.zip              PureDhamma WordPress backup (canonical source)
+│   ├── source_reference.json  Canonical source identity + checksum
+│   └── *.zip                  PureDhamma WordPress backup (copy mode only)
 └── pipeline/
     ├── scripts/           30 CORE pipeline scripts
     ├── metadata/          PDPN index, glossary, section map
@@ -547,7 +713,7 @@ axis preview
 All paths are derived from `BENG_BASE` environment variable:
 
 ```bash
-export BENG_BASE=/beng-release/pipeline   # default for this release
+export BENG_BASE=<release-root>/pipeline   # default for this release
 ```
 
 Credentials (required before first run):
@@ -575,7 +741,7 @@ These files are NOT included in the release for security reasons.
 Before the SD phase can run, the SSG engine must be initialized:
 
 ```bash
-bash /beng-release/pipeline/scripts/setup_v54_static_site.sh
+bash <release-root>/pipeline/scripts/setup_v54_static_site.sh
 ```
 
 This is automatic on `axis pipeline --full`.
@@ -596,6 +762,10 @@ info "Setting permissions"
 
 if ! $DRY_RUN; then
     chmod +x "$RELEASE_ROOT/axis"
+    chmod +x "$REL_SCRIPTS_CORE/run_full_pipeline.sh" 2>/dev/null || true
+    chmod +x "$REL_SCRIPTS_CORE/verify_pipeline_integrity.sh" 2>/dev/null || true
+    chmod +x "$REL_SCRIPTS_TOOLS/setup_v54_static_site.sh" 2>/dev/null || true
+    chmod +x "$REL_SCRIPTS_TOOLS/axis_cli.sh" 2>/dev/null || true
     chmod +x "$REL_SCRIPTS/run_full_pipeline.sh" 2>/dev/null || true
     chmod +x "$REL_SCRIPTS/SG00_reset_workspace.sh" 2>/dev/null || true
     chmod +x "$REL_SCRIPTS/SN01_snapshot_csl.sh" 2>/dev/null || true
@@ -612,16 +782,27 @@ if ! $DRY_RUN; then
     info "Release verification"
 
     REL_ERRORS=0
-    for f in "axis" "README.md" "sources/$(basename "$ZIP_FILE")"; do
+    VERIFY_FILES=("axis" "README.md" "sources/source_reference.json")
+    if [[ "$SOURCES_MODE" == "copy" ]]; then
+        VERIFY_FILES+=("sources/$(basename "$ZIP_FILE")")
+    fi
+    for f in "${VERIFY_FILES[@]}"; do
         [[ -e "$RELEASE_ROOT/$f" ]] && ok "$f" || \
             { warn "MISSING in release: $f"; REL_ERRORS=$((REL_ERRORS + 1)); }
     done
 
-    # Run integrity guard against the release (BENG_BASE = /beng-release/pipeline)
-    if [[ -f "$REL_SCRIPTS/verify_pipeline_integrity.sh" ]]; then
+    # Run integrity guard against the release (BENG_BASE = REL_PIPELINE)
+    VERIFY_REL=""
+    if [[ -f "$REL_SCRIPTS_CORE/verify_pipeline_integrity.sh" ]]; then
+        VERIFY_REL="$REL_SCRIPTS_CORE/verify_pipeline_integrity.sh"
+    elif [[ -f "$REL_SCRIPTS/verify_pipeline_integrity.sh" ]]; then
+        VERIFY_REL="$REL_SCRIPTS/verify_pipeline_integrity.sh"
+    fi
+
+    if [[ -n "$VERIFY_REL" ]]; then
         echo ""
         echo -e "${GRAY}  Running integrity guard against release...${NC}"
-        if BENG_BASE="$REL_PIPELINE" bash "$REL_SCRIPTS/verify_pipeline_integrity.sh" --quiet; then
+        if BENG_BASE="$REL_PIPELINE" bash "$VERIFY_REL" --quiet; then
             ok "Release integrity guard: PASS (target: $REL_PIPELINE)"
         else
             warn "Release integrity guard: warnings present (see above)"
@@ -636,7 +817,7 @@ fi
 # This seals the release: any future bitrot or tampering is detectable.
 #
 # Verification (by any future operator):
-#   cd /beng-release && sha256sum --check release-manifest.sha256
+#   cd <release-root> && sha256sum --check release-manifest.sha256
 # ==============================================================================
 
 if ! $DRY_RUN; then
@@ -691,9 +872,21 @@ echo -e "${GREEN}${BOLD}╠═════════════════�
 echo -e "${GREEN}${BOLD}║  Next steps:                                              ║${NC}"
 echo -e "${GREEN}${BOLD}║  1. Add DeepL key:  pipeline/scripts/deepl_key.txt        ║${NC}"
 echo -e "${GREEN}${BOLD}║  2. Add WP password: pipeline/scripts/wp_password.txt     ║${NC}"
-echo -e "${GREEN}${BOLD}║  3. Install alias:  echo \"alias axis='bash /beng-release/axis'\" >> ~/.bashrc${NC}"
+echo -e "${GREEN}${BOLD}║  3. Install alias:  echo \"alias axis='bash <release-root>/axis'\" >> ~/.bashrc${NC}"
 echo -e "${GREEN}${BOLD}║  4. Check:          axis doctor                            ║${NC}"
 echo -e "${GREEN}${BOLD}║  5. Run:            axis pipeline --full                   ║${NC}"
-echo -e "${GREEN}${BOLD}║  6. Verify seal:    cd /beng-release && sha256sum --check release-manifest.sha256${NC}"
+echo -e "${GREEN}${BOLD}║  6. Verify seal:    cd <release-root> && sha256sum --check release-manifest.sha256${NC}"
 echo -e "${GREEN}${BOLD}╚══════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+echo -e "${CYAN}${BOLD}  Closing / Encerramento${NC}"
+echo "        .-."
+echo "      .(   )."
+echo "     (___^___)   <><   [honey]"
+echo "        /_\\      /\\"
+echo ""
+echo "  en-US: Thank you for the care and patience in this release build."
+echo "         May this work serve clarity, continuity, and future keepers."
+echo "  pt-BR: Obrigado pelo cuidado e pela paciencia nesta construcao."
+echo "         Que este trabalho sirva a clareza, a continuidade e as futuras Abelhas."
 echo ""
