@@ -601,6 +601,48 @@ function toggleLabz() {
       });
   }
 
+
+  // --- Print Review Banner ---
+  function initPrintReviewBanner() {
+      if (document.querySelector('.print-review-banner')) {
+          return;
+      }
+
+      const article = document.querySelector('article.content-block');
+      if (!article) {
+          return;
+      }
+
+      const pdpn = article.getAttribute('data-pdpn') || 'unknown';
+
+      const banner = document.createElement('div');
+      banner.className = 'print-review-banner';
+
+      const lines = [
+          ['strong', 'DRAFT / RASCUNHO'],
+          ['text', 'Translation review copy / Cópia para revisão de tradução'],
+          ['text', 'Source/Fonte: PureDhamma.net'],
+          ['text', 'AXIS-NIDDHI page URL / URL da página AXIS-NIDDHI: ' + window.location.href],
+          ['text', 'Canonical ID / ID canônico: ' + pdpn],
+          ['text', 'Note/Nota: This printed/PDF copy is for review and archival traceability. The doctrinal source remains PureDhamma.net.']
+      ];
+
+      lines.forEach(function(item, index) {
+          if (item[0] === 'strong') {
+              const strong = document.createElement('strong');
+              strong.textContent = item[1];
+              banner.appendChild(strong);
+          } else {
+              banner.appendChild(document.createTextNode(item[1]));
+          }
+          if (index < lines.length - 1) {
+              banner.appendChild(document.createElement('br'));
+          }
+      });
+
+      article.parentNode.insertBefore(banner, article);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     cleanupLegacyServiceWorker();
     initTheme();
@@ -613,6 +655,7 @@ function toggleLabz() {
     initPronunciation();
     initSearch(); // [Sprint 9]
     initPrintVideoMarkers(); // [Sprint 7 Print Setup]
+    initPrintReviewBanner(); // Print review traceability banner
     generateTOC('content-en', 'toc-list-en');
     if (document.getElementById('content-pt')) {
       generateTOC('content-pt', 'toc-list-pt');
