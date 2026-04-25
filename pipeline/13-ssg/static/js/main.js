@@ -618,27 +618,48 @@ function toggleLabz() {
       const banner = document.createElement('div');
       banner.className = 'print-review-banner';
 
-      const lines = [
-          ['strong', 'DRAFT / RASCUNHO'],
-          ['text', 'Translation review copy / Cópia para revisão de tradução'],
-          ['text', 'Source/Fonte: PureDhamma.net'],
-          ['text', 'AXIS-NIDDHI page URL / URL da página AXIS-NIDDHI: ' + window.location.href],
-          ['text', 'Canonical ID / ID canônico: ' + pdpn],
-          ['text', 'Note/Nota: This printed/PDF copy is for review and archival traceability. The doctrinal source remains PureDhamma.net.']
-      ];
+      const header = document.createElement('strong');
+      header.textContent = 'DRAFT / RASCUNHO';
+      banner.appendChild(header);
+      banner.appendChild(document.createElement('br'));
 
-      lines.forEach(function(item, index) {
-          if (item[0] === 'strong') {
-              const strong = document.createElement('strong');
-              strong.textContent = item[1];
-              banner.appendChild(strong);
-          } else {
-              banner.appendChild(document.createTextNode(item[1]));
-          }
-          if (index < lines.length - 1) {
-              banner.appendChild(document.createElement('br'));
-          }
-      });
+      banner.appendChild(document.createTextNode('Translation review copy / Cópia para revisão de tradução'));
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('Source/Fonte: PureDhamma.net'));
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('AXIS-NIDDHI page URL / URL da página AXIS-NIDDHI: '));
+      const urlSpan = document.createElement('span');
+      urlSpan.className = 'print-review-url';
+      urlSpan.textContent = window.location.href;
+      banner.appendChild(urlSpan);
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('Canonical ID / ID canônico: ' + pdpn));
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('Note/Nota: This printed/PDF copy is for review and archival traceability. The doctrinal source remains PureDhamma.net.'));
+      banner.appendChild(document.createElement('br'));
+      banner.appendChild(document.createElement('br'));
+
+      const legendHeader = document.createElement('strong');
+      legendHeader.textContent = 'COLOR LEGEND / LEGENDA DE CORES:';
+      banner.appendChild(legendHeader);
+      banner.appendChild(document.createElement('br'));
+
+      const legendGlossarySpan = document.createElement('span');
+      legendGlossarySpan.className = 'print-legend-glossary';
+      legendGlossarySpan.textContent = 'Orange/Laranja';
+      banner.appendChild(legendGlossarySpan);
+      banner.appendChild(document.createTextNode(' = Glossary term / Termo protegido do glossário'));
+      banner.appendChild(document.createElement('br'));
+
+      const legendAudioSpan = document.createElement('span');
+      legendAudioSpan.className = 'print-legend-audio';
+      legendAudioSpan.textContent = 'Red/Vermelho';
+      banner.appendChild(legendAudioSpan);
+      banner.appendChild(document.createTextNode(' = Glossary term with audio / Termo do glossário com áudio'));
 
       article.parentNode.insertBefore(banner, article);
   }
