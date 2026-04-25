@@ -567,10 +567,37 @@ function toggleLabz() {
   // --- SPRINT 7: Print Markers ---
   function initPrintVideoMarkers() {
       document.querySelectorAll('iframe[src*="youtube"], iframe[src*="youtu.be"]').forEach(iframe => {
-          let marker = document.createElement('div');
+          if (iframe.previousElementSibling && iframe.previousElementSibling.classList.contains('print-video-marker')) {
+              return;
+          }
+
+          const marker = document.createElement('div');
           marker.className = 'print-video-marker';
-          marker.innerHTML = '🎥 [Um vídeo foi incorporado nesta seção]';
-          iframe.parentNode.insertBefore(marker, iframe);
+
+          const header = document.createElement('strong');
+          header.textContent = 'Video omitted in print / Vídeo omitido na impressão';
+          marker.appendChild(header);
+          marker.appendChild(document.createElement('br'));
+
+          const source = document.createElement('strong');
+          source.textContent = 'Source/Fonte: ';
+          marker.appendChild(source);
+          marker.appendChild(document.createTextNode('YouTube'));
+          marker.appendChild(document.createElement('br'));
+
+          const title = document.createElement('strong');
+          title.textContent = 'Title/Título: ';
+          marker.appendChild(title);
+          marker.appendChild(document.createTextNode(iframe.title || 'Embedded YouTube video'));
+          marker.appendChild(document.createElement('br'));
+
+          const url = document.createElement('strong');
+          url.textContent = 'URL: ';
+          marker.appendChild(url);
+          marker.appendChild(document.createTextNode(iframe.src));
+
+          const printHiddenContainer = iframe.closest('.video-container, .youtube-wrapper') || iframe;
+          printHiddenContainer.parentNode.insertBefore(marker, printHiddenContainer);
       });
   }
 
