@@ -61,7 +61,7 @@ Navigator, NANA, Academy, Cosmos, and future UX/LLM layers are downstream consum
 
 This repository is production-sensitive.
 
-- Never commit credentials or files under `scripts/private/`.
+- Never commit credentials or files under `pipeline/scripts/private/` or any `scripts/private/` subtree.
 - Never edit Canon/CSL for UI tasks.
 - Never change `build.py` unless explicitly requested.
 - Never shorten URLs used for archival traceability.
