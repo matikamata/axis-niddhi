@@ -269,19 +269,22 @@ def _copy_nana_static_artifacts() -> None:
         if f.name.lower() in ignore_names:
             continue
             
-        if any(part in ignore_dirs or part.startswith(".") for part in f.parts):
+        rel_path = f.relative_to(source_dir)
+            
+        if any(part in ignore_dirs or part.startswith(".") for part in rel_path.parts):
             continue
             
         try:
-            content = f.read_text(encoding="utf-8")
+            raw = f.read_bytes()
+            content = raw.decode("utf-8")
         except Exception as e:
             logger.warning(f"⚠️  Falha ao ler artefato NANA {f.name}: {e}")
             continue
             
-        path_str = str(f)
+        rel_path_str = rel_path.as_posix()
         has_forbidden = False
         for marker in forbidden_markers:
-            if marker in path_str or marker in content:
+            if marker in rel_path_str or marker in content:
                 logger.warning(f"🚨 blocked NANA artifact due forbidden marker '{marker}': {f.name}")
                 has_forbidden = True
                 blocked += 1
@@ -290,12 +293,11 @@ def _copy_nana_static_artifacts() -> None:
         if has_forbidden:
             continue
             
-        rel_path = f.relative_to(source_dir)
         target_file = target_dir / rel_path
         target_file.parent.mkdir(parents=True, exist_ok=True)
         
         try:
-            target_file.write_text(content, encoding="utf-8")
+            target_file.write_bytes(raw)
             copied += 1
         except Exception as e:
             logger.warning(f"⚠️  Falha ao escrever artefato NANA {rel_path}: {e}")
