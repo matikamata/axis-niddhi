@@ -219,6 +219,93 @@ def _copy_static_assets() -> None:
     logger.info(f"📦 Static assets copiados → {OUTPUT_DIR}")
 
 
+def _copy_nana_static_artifacts() -> None:
+    """
+    Copia os artefatos estáticos JSON do NANA para o output do SSG.
+    Fail-closed guard para rejeitar segredos.
+    Não executa LLM, não faz chamadas API.
+    """
+    source_dir = PIPELINE_ROOT / "capsule" / "nana"
+    target_dir = OUTPUT_DIR / "assets" / "nana"
+
+    if not source_dir.exists():
+        logger.info("📦 NANA capsule not found; skipping static NANA artifacts.")
+        return
+
+    json_files = list(source_dir.rglob("*.json"))
+    if not json_files:
+        logger.info("📦 NANA capsule found but no JSON artifacts present.")
+        return
+
+    forbidden_markers = [
+        "GOOGLE_APPLICATION_CREDENTIALS",
+        "gen-lang-client",
+        "private_key",
+        "BEGIN PRIVATE KEY",
+        "api_key",
+        "access_token",
+        "refresh_token",
+        "github_token",
+        "deepl_key",
+        "wp_password",
+        "/home/",
+        "/media/",
+        "pipeline/scripts/private"
+    ]
+    
+    ignore_names = {"readme.md", ".gitkeep"}
+    ignore_dirs = {"__pycache__", "private", ".git"}
+    
+    copied = 0
+    blocked = 0
+
+    for f in json_files:
+        if f.is_dir() or f.name.startswith("."):
+            continue
+            
+        if f.suffix.lower() != ".json":
+            continue
+            
+        if f.name.lower() in ignore_names:
+            continue
+            
+        if any(part in ignore_dirs or part.startswith(".") for part in f.parts):
+            continue
+            
+        try:
+            content = f.read_text(encoding="utf-8")
+        except Exception as e:
+            logger.warning(f"⚠️  Falha ao ler artefato NANA {f.name}: {e}")
+            continue
+            
+        path_str = str(f)
+        has_forbidden = False
+        for marker in forbidden_markers:
+            if marker in path_str or marker in content:
+                logger.warning(f"🚨 blocked NANA artifact due forbidden marker '{marker}': {f.name}")
+                has_forbidden = True
+                blocked += 1
+                break
+                
+        if has_forbidden:
+            continue
+            
+        rel_path = f.relative_to(source_dir)
+        target_file = target_dir / rel_path
+        target_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        try:
+            target_file.write_text(content, encoding="utf-8")
+            copied += 1
+        except Exception as e:
+            logger.warning(f"⚠️  Falha ao escrever artefato NANA {rel_path}: {e}")
+            
+    if copied > 0 or blocked > 0:
+        logger.info(f"🧠 copied {copied} NANA static artifact(s).")
+        if blocked > 0:
+            logger.warning(f"🚨 {blocked} blocked due to forbidden markers.")
+
+
 def _ensure_github_pages_markers() -> None:
     """Garantias mínimas para deploy estático em GitHub Pages backup."""
     marker = OUTPUT_DIR / ".nojekyll"
@@ -822,6 +909,7 @@ def main() -> None:
     # ── 7. ASSETS + SEARCH INDEX + AUDIO PIPELINE ────────────────────────────
     logger.info("▶ Fase 7/8: Copiando assets estáticos e áudio...")
     _copy_static_assets()
+    _copy_nana_static_artifacts()
     _ensure_github_pages_markers()
     _generate_search_index(posts)
     external_audio = _copy_audio_files(CSL_DIR)
