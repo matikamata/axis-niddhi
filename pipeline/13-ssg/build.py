@@ -228,6 +228,9 @@ def _copy_nana_static_artifacts() -> None:
     source_dir = PIPELINE_ROOT / "capsule" / "nana"
     target_dir = OUTPUT_DIR / "assets" / "nana"
 
+    if target_dir.exists():
+        shutil.rmtree(target_dir, ignore_errors=True)
+
     if not source_dir.exists():
         logger.info("📦 NANA capsule not found; skipping static NANA artifacts.")
         return
@@ -277,8 +280,10 @@ def _copy_nana_static_artifacts() -> None:
         try:
             raw = f.read_bytes()
             content = raw.decode("utf-8")
+            json.loads(content)
         except Exception as e:
-            logger.warning(f"⚠️  Falha ao ler artefato NANA {f.name}: {e}")
+            logger.warning(f"⚠️  Falha ao ler ou parsear JSON NANA {f.name}: {e}")
+            blocked += 1
             continue
             
         rel_path_str = rel_path.as_posix()
