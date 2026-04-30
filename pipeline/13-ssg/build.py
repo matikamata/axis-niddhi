@@ -694,6 +694,74 @@ def _rewrite_missing_local_image_references() -> None:
         )
 
 
+def _rewrite_legacy_shortcodes() -> None:
+    """
+    [FLAGFIX-022] Transforma shortcodes WordPress residuais em
+    um bloco técnico de evidência preservando a URL original.
+    Suporta URLs corrompidas por HTML injetado.
+    """
+    html_files = sorted((OUTPUT_DIR / "pages").rglob("index.html"))
+    if not html_files:
+        return
+
+    # Captura o shortcode inteiro para análise segura
+    pattern = re.compile(r'(\[\[?easy_media_download\b[^\]]*\]\]?)', re.IGNORECASE)
+
+    updated_files = 0
+    replacements = 0
+
+    import html as html_lib
+
+    for html_file in html_files:
+        text = html_file.read_text(encoding="utf-8")
+        original = text
+
+        def repl(match):
+            nonlocal replacements
+            replacements += 1
+            full = match.group(1)
+            
+            if "<" in full or ">" in full:
+                safe_comment = full.replace("-->", "-- >")
+                return (
+                    f'<div class="axis-media-evidence">'
+                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
+                    f'<span class="evidence-label">[LEGACY_MEDIA_CORRUPTED]</span> '
+                    f'<span class="evidence-message">Media URL corrupted during legacy conversion — human review required.</span>'
+                    f'</div>'
+                )
+            
+            url_m = re.search(r'(?:url|download)=["\']([^"\']+)["\']', full, re.IGNORECASE)
+            if url_m:
+                url = url_m.group(1)
+                return (
+                    f'<div class="axis-media-evidence">'
+                    f'<span class="evidence-label">[LEGACY_MEDIA_DOWNLOAD]</span> '
+                    f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="evidence-url">{url}</a>'
+                    f'</div>'
+                )
+            else:
+                safe_comment = full.replace("-->", "-- >")
+                return (
+                    f'<div class="axis-media-evidence">'
+                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
+                    f'<span class="evidence-label">[LEGACY_MEDIA_UNKNOWN]</span> '
+                    f'<span class="evidence-message">Legacy media shortcode preserved — human review required.</span>'
+                    f'</div>'
+                )
+
+        text = pattern.sub(repl, text)
+
+        if text != original:
+            html_file.write_text(text, encoding="utf-8")
+            updated_files += 1
+
+    if replacements:
+        logger.info(
+            f"🔁 Shortcodes legados convertidos: {replacements} blocos em {updated_files} páginas."
+        )
+
+
 def _generate_pronunciation_manifest(
     csl_root: Path,
     glossary: Dict[str, Any],
@@ -923,6 +991,7 @@ def main() -> None:
     _rewrite_externalized_audio_references(external_audio)
     _rewrite_missing_local_audio_references()
     _rewrite_missing_local_image_references()
+    _rewrite_legacy_shortcodes()
     _generate_pronunciation_manifest(CSL_DIR, glossary, external_audio)
 
     # ── 8. SERVICE WORKER + BUILD META (hardened — ÚLTIMO) ──────────────────
