@@ -722,11 +722,12 @@ def _rewrite_legacy_shortcodes() -> None:
             full = match.group(1)
             
             if "<" in full or ">" in full:
-                escaped = html_lib.escape(full)
+                safe_comment = full.replace("-->", "-- >")
                 return (
                     f'<div class="axis-media-evidence">'
+                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
                     f'<span class="evidence-label">[LEGACY_MEDIA_CORRUPTED]</span> '
-                    f'<span class="evidence-raw">{escaped}</span>'
+                    f'<span class="evidence-message">Media URL corrupted during legacy conversion — human review required.</span>'
                     f'</div>'
                 )
             
@@ -740,11 +741,12 @@ def _rewrite_legacy_shortcodes() -> None:
                     f'</div>'
                 )
             else:
-                escaped = html_lib.escape(full)
+                safe_comment = full.replace("-->", "-- >")
                 return (
                     f'<div class="axis-media-evidence">'
+                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
                     f'<span class="evidence-label">[LEGACY_MEDIA_UNKNOWN]</span> '
-                    f'<span class="evidence-raw">{escaped}</span>'
+                    f'<span class="evidence-message">Legacy media shortcode preserved — human review required.</span>'
                     f'</div>'
                 )
 
