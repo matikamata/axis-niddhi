@@ -1,41 +1,108 @@
 # FlagFix Status Checkpoint — 2026-05-02
 
-## Current state
+## Repository State
 
-- Production branch: main
-- Repository status: clean
-- Batch plans merged:
-  - Batch 01 — Print Review UX
-  - Batch 02 — Title and Metadata Integrity
-  - Batch 03 — Pāli Protection
-  - Batch 04 — Media and Assets
-  - Batch 05 — Architecture and Study Order
-- Production build input contract documented.
-- Media shortcode preservation layer merged.
-- FlagFix issue index mapped to batch plans.
+Repository: `matikamata/axis-niddhi`  
+Branch: `main`  
+Purpose: checkpoint after FlagFix issue migration, batch planning, print/media fixes, and title/date review scaffolding.
 
-## Open FlagFix issues
+## Completed / Merged Work
 
-Remaining open issues are intentionally preserved because they require either:
-- human review,
-- corpus-wide audit,
-- source/title comparison,
-- canonical policy decision,
-- or future architectural work.
+### Core Index and Batch Planning
 
-## Recommended next implementation target
+- `docs/FLAGFIX_INDEX.md`
+- `docs/FLAGFIX_BATCH_01_PRINT_REVIEW_UX_PLAN.md`
+- `docs/FLAGFIX_BATCH_02_TITLE_METADATA_INTEGRITY_PLAN.md`
+- `docs/FLAGFIX_BATCH_03_PALI_PROTECTION_PLAN.md`
+- `docs/FLAGFIX_BATCH_04_MEDIA_ASSETS_PLAN.md`
+- `docs/FLAGFIX_BATCH_05_ARCHITECTURE_STUDY_ORDER_PLAN.md`
 
-Start with:
+### Production / Build Guardrails
 
-- #30 — FlagFix 020 TITLE COMPARISON HUMAN REVIEW MATRIX
+- `docs/FLAGFIX_023_PRODUCTION_BUILD_INPUT_CONTRACT.md`
 
-Reason:
-This creates the review matrix needed to resolve or guide:
-- #21 title punctuation semantic preservation
-- #22 slug/title divergence
-- #23 PT title capitalization policy
-- #31 missing date metadata review box
+### Media / Shortcode Preservation
 
-## Do not run full production rebuilds
+- `docs/FLAGFIX_MEDIA_SHORTCODE_PRESERVATION_PLAN.md`
+- Legacy media shortcodes are preserved as explicit `axis-media-evidence` blocks.
+- Raw corrupted shortcode evidence is preserved in HTML comments for audit.
+- Shortcode garbage is no longer shown as editorial body text.
 
-axis-niddhi-production remains a static publication repository unless an approved 09-csl source contract is explicitly present.
+### Print Review UX
+
+Implemented in CSS and deployed through Cloudflare:
+- A4 print review layout rebalance.
+- Compact print review banner.
+- Previous/next transmission map hidden in printed review copies.
+- Page/browser headers remain useful for traceability.
+- PD#PN and page numbering remain essential for physical review workflows.
+
+### Title / Metadata Review
+
+- `docs/FLAGFIX_020_TITLE_COMPARISON_MATRIX.md`
+- `review/title-matrix/flagfix_020_title_comparison_matrix.csv`
+- `docs/FLAGFIX_021_MISSING_DATE_METADATA_REVIEW.md`
+
+Status:
+- Human review matrix exists.
+- No automatic title corrections implemented.
+- Date wording and blue didactic styling should be preserved unless reviewed.
+- Missing/ambiguous dates require conservative display treatment only; do not invent dates.
+
+## Current Open Issue Groups
+
+### Batch 02 — Title and Metadata Integrity
+
+- FlagFix 011
+- FlagFix 012
+- FlagFix 013
+- FlagFix 020
+- FlagFix 021
+
+Recommended next action:
+Curate a small pilot set in the title comparison matrix before any title correction code.
+
+### Batch 03 — Pāli Protection
+
+- FlagFix 002
+- FlagFix 003
+- FlagFix 004
+- FlagFix 007
+- FlagFix 009
+
+Recommended next action:
+Design source-bound protection rules before touching translation or renderer behavior.
+
+### Batch 04 — Media and Assets
+
+- FlagFix 005
+- FlagFix 010
+- FlagFix 014
+- FlagFix 015
+
+Recommended next action:
+Inventory media/image/video cases before applying broad rendering fixes.
+
+### Batch 05 — Architecture and Study Order
+
+- FlagFix 000
+- FlagFix 001
+- FlagFix 008
+- FlagFix 008b
+
+Recommended next action:
+Keep architecture work planning-only until production build input provenance is resolved.
+
+## Operational Guardrail
+
+`axis-niddhi-production` is currently a static publication repository.
+
+Do not run full rebuilds from this clone unless:
+1. approved `09-csl` provenance is present;
+2. the build input contract is satisfied;
+3. output diffs are expected and reviewed;
+4. Cloudflare deployment impact is intentional.
+
+## Suggested Next Step
+
+Create a small branch protection / main safety guardrail document before enabling GitHub branch protection directly.
