@@ -93,3 +93,20 @@ See:
 
 - `docs/FLAGFIX_023_PRODUCTION_BUILD_INPUT_CONTRACT.md`
 - `docs/FLAGFIX_STATUS_CHECKPOINT_2026-05-02.md`
+
+## Smoke Test Result — PR #47
+
+A conservative branch protection smoke test was completed successfully.
+
+Result:
+- direct work continued on a non-main branch;
+- branch push worked;
+- pull request workflow worked;
+- merge into `main` worked;
+- Cloudflare/static publication workflow was not blocked;
+- local and remote test branches were cleaned up.
+
+Conclusion:
+The current minimal branch protection rule is compatible with the AXIS-NIDDHI static publication workflow.
+
+Do not tighten protection further until several normal FlagFix PRs have passed under this rule.
