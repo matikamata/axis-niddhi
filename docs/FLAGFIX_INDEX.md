@@ -29,3 +29,31 @@ Fonte operacional: GitHub Issues com label `FlagFix`.
 - [#11 — FlagFix 002 PALI TERM COLOR AUDIO TAXONOMY](https://github.com/matikamata/axis-niddhi/issues/11)
 - [#10 — FlagFix 001 FUTURE PRESERVATION LAYERS](https://github.com/matikamata/axis-niddhi/issues/10)
 - [#9 — FlagFix 000 AXIS PRESERVATION STRATEGY](https://github.com/matikamata/axis-niddhi/issues/9)
+
+---
+
+## Batch Planning Documents
+
+These documents group the FlagFix issues into implementation/review blocks.
+
+| Batch | Scope | Document |
+|---|---|---|
+| Batch 01 | Print Review UX | `docs/FLAGFIX_BATCH_01_PRINT_REVIEW_UX_PLAN.md` |
+| Batch 02 | Title and Metadata Integrity | `docs/FLAGFIX_BATCH_02_TITLE_METADATA_INTEGRITY_PLAN.md` |
+| Batch 03 | Pāli Protection | `docs/FLAGFIX_BATCH_03_PALI_PROTECTION_PLAN.md` |
+| Batch 04 | Media and Assets | `docs/FLAGFIX_BATCH_04_MEDIA_ASSETS_PLAN.md` |
+| Batch 05 | Architecture and Study Order | `docs/FLAGFIX_BATCH_05_ARCHITECTURE_STUDY_ORDER_PLAN.md` |
+
+## Related Guardrails / Contracts
+
+| Topic | Document |
+|---|---|
+| Production Build Input Contract | `docs/FLAGFIX_023_PRODUCTION_BUILD_INPUT_CONTRACT.md` |
+| Media Shortcode Preservation Plan | `docs/FLAGFIX_MEDIA_SHORTCODE_PRESERVATION_PLAN.md` |
+
+## Current Operating Rule
+
+Individual `FlagFix_###.md` files remain a local drafting workspace.
+GitHub Issues are the public coordination layer.
+Batch planning documents in `/docs` are the canonical implementation map.
+
