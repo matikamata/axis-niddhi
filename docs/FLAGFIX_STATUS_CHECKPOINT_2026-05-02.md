@@ -241,3 +241,28 @@ Guardrail:
 No automatic Pāli, Dhamma term, quote, title, glossary, translation, CSL, renderer, HTML, CSS, JavaScript, or static-site output changes are authorized from Batch 03 alone.
 
 Any future implementation must start from a new issue/branch after source-bound human review rules are approved.
+
+## Batch 04 Start — 2026-05-03
+
+Batch 04 — Media and Assets is now the next active FlagFix planning group.
+
+Open items:
+
+- FlagFix 005 — Translatable image flowchart assets
+- FlagFix 010 — Audio offline placeholder language and external resolution
+- FlagFix 014 — Image rendering size centering and zoom
+- FlagFix 015 — YouTube print marker missing for embed variants
+
+Guardrail:
+
+No renderer, CSL, HTML, CSS, JavaScript, asset map, image, audio, YouTube, or static-site output changes are authorized by this checkpoint.
+
+Batch 04 must begin with inventory and source-bound media review documents only.
+
+Recommended order:
+
+1. document translatable image/flowchart asset policy;
+2. document audio offline/external resolution policy;
+3. document image rendering and sizing review policy;
+4. document YouTube/embed print marker policy;
+5. only then consider implementation issues.
