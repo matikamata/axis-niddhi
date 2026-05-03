@@ -215,3 +215,29 @@ Recommended order:
 3. document quote-level protection rules;
 4. document title/glossary protection rules;
 5. only then consider implementation issues.
+
+## Batch 03 Closed — 2026-05-03
+
+Batch 03 — Pāli Protection is now closed for policy/review-scaffold scope.
+
+Closed items:
+
+- FlagFix 002 — Pāli term color audio taxonomy
+- FlagFix 003 — Pāli grammar diacritics orthography
+- FlagFix 004 — Protect Pāli quotes from translation
+- FlagFix 007 — Title translation glossary protection
+- FlagFix 009 — Title translation glossary protection Micchā Diṭṭhi
+
+Final Batch 03 artifacts:
+
+- `docs/FLAGFIX_002_PALI_TERM_COLOR_AUDIO_TAXONOMY_POLICY.md`
+- `docs/FLAGFIX_003_PALI_GRAMMAR_DIACRITICS_ORTHOGRAPHY_POLICY.md`
+- `docs/FLAGFIX_004_PALI_QUOTE_PROTECTION_POLICY.md`
+- `docs/FLAGFIX_007_TITLE_TRANSLATION_GLOSSARY_PROTECTION_POLICY.md`
+- `docs/FLAGFIX_009_MICCHA_DITTHI_GLOSSARY_PROTECTION_POLICY.md`
+
+Guardrail:
+
+No automatic Pāli, Dhamma term, quote, title, glossary, translation, CSL, renderer, HTML, CSS, JavaScript, or static-site output changes are authorized from Batch 03 alone.
+
+Any future implementation must start from a new issue/branch after source-bound human review rules are approved.
