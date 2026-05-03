@@ -189,3 +189,29 @@ Guardrail:
 No automatic title, slug, route, metadata, CSL, renderer, or static-site corrections are authorized from Batch 02 alone.
 
 Any future implementation must start from a new issue/branch after a larger human-reviewed pilot matrix is approved.
+
+## Batch 03 Start — 2026-05-03
+
+Batch 03 — Pāli Protection is now the next active FlagFix planning group.
+
+Open items:
+
+- FlagFix 002 — Pāli term color audio taxonomy
+- FlagFix 003 — Pāli grammar diacritics orthography
+- FlagFix 004 — Protect Pāli quotes from translation
+- FlagFix 007 — Title translation glossary protection
+- FlagFix 009 — Title translation glossary protection Micchā Diṭṭhi
+
+Guardrail:
+
+No translation, glossary, renderer, CSL, HTML, or static-site output changes are authorized by this checkpoint.
+
+Batch 03 must begin with source-bound policy/review documents only.
+
+Recommended order:
+
+1. document protected Pāli term taxonomy;
+2. document diacritic/orthography preservation rules;
+3. document quote-level protection rules;
+4. document title/glossary protection rules;
+5. only then consider implementation issues.
