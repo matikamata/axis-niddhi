@@ -106,3 +106,27 @@ Do not run full rebuilds from this clone unless:
 ## Suggested Next Step
 
 Create a small branch protection / main safety guardrail document before enabling GitHub branch protection directly.
+
+## Batch 02 Update — 2026-05-03
+
+Closed after policy documentation:
+
+- FlagFix 011 — Title punctuation semantic preservation
+  - PR #51
+  - Artifact: `docs/FLAGFIX_011_TITLE_PUNCTUATION_PRESERVATION_POLICY.md`
+
+- FlagFix 012 — Slug/title divergence pale blue dot
+  - PR #52
+  - Artifact: `docs/FLAGFIX_012_SLUG_TITLE_DIVERGENCE_POLICY.md`
+
+- FlagFix 013 — PT title capitalization policy
+  - PR #50
+  - Artifact: `docs/FLAGFIX_013_PT_TITLE_CAPITALIZATION_POLICY.md`
+
+Remaining Batch 02 open work:
+
+- FlagFix 020 — Title comparison human review matrix
+- FlagFix 021 — Missing date metadata review box
+
+Guardrail:
+No automatic title, slug, route, metadata, CSL, or renderer corrections are authorized until the FlagFix 020 pilot matrix is curated and reviewed.
