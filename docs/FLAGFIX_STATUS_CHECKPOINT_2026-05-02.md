@@ -266,3 +266,27 @@ Recommended order:
 3. document image rendering and sizing review policy;
 4. document YouTube/embed print marker policy;
 5. only then consider implementation issues.
+
+## Batch 04 Closed — 2026-05-03
+
+Batch 04 — Media and Assets is now closed for policy/review-scaffold scope.
+
+Closed items:
+
+- FlagFix 005 — Translatable image flowchart assets
+- FlagFix 010 — Audio offline placeholder language and external resolution
+- FlagFix 014 — Image rendering size centering and zoom
+- FlagFix 015 — YouTube print marker missing for embed variants
+
+Final Batch 04 artifacts:
+
+- `docs/FLAGFIX_005_TRANSLATABLE_IMAGE_FLOWCHART_ASSETS_POLICY.md`
+- `docs/FLAGFIX_010_AUDIO_OFFLINE_PLACEHOLDER_POLICY.md`
+- `docs/FLAGFIX_014_IMAGE_RENDERING_SIZE_CENTERING_ZOOM_POLICY.md`
+- `docs/FLAGFIX_015_YOUTUBE_PRINT_MARKER_POLICY.md`
+
+Guardrail:
+
+No renderer, CSL, HTML, CSS, JavaScript, asset map, image, audio, YouTube, print, OCR, translation, external URL, or static-site output changes are authorized from Batch 04 alone.
+
+Any future media implementation must start from a new issue/branch after source-bound media review is approved.
