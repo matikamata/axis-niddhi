@@ -130,3 +130,35 @@ Remaining Batch 02 open work:
 
 Guardrail:
 No automatic title, slug, route, metadata, CSL, or renderer corrections are authorized until the FlagFix 020 pilot matrix is curated and reviewed.
+
+## Batch 02 Final Policy Checkpoint — 2026-05-03
+
+Closed after policy documentation:
+
+- FlagFix 011 — Title punctuation semantic preservation
+  - PR #51
+  - Artifact: `docs/FLAGFIX_011_TITLE_PUNCTUATION_PRESERVATION_POLICY.md`
+
+- FlagFix 012 — Slug/title divergence pale blue dot
+  - PR #52
+  - Artifact: `docs/FLAGFIX_012_SLUG_TITLE_DIVERGENCE_POLICY.md`
+
+- FlagFix 013 — PT title capitalization policy
+  - PR #50
+  - Artifact: `docs/FLAGFIX_013_PT_TITLE_CAPITALIZATION_POLICY.md`
+
+- FlagFix 021 — Missing date metadata review box
+  - PR #54
+  - Artifact: `docs/FLAGFIX_021_MISSING_DATE_REVIEW_BOX_POLICY.md`
+
+Remaining Batch 02 active item:
+
+- FlagFix 020 — Title comparison human review matrix
+  - Artifact already seeded:
+    - `docs/FLAGFIX_020_TITLE_COMPARISON_MATRIX.md`
+    - `review/title-matrix/flagfix_020_title_comparison_matrix.csv`
+
+Guardrail:
+Batch 02 implementation remains blocked until the FlagFix 020 pilot matrix is curated and reviewed.
+
+No automatic title, slug, route, date, metadata, CSL, renderer, or URL correction is authorized by the closed policy issues alone.
