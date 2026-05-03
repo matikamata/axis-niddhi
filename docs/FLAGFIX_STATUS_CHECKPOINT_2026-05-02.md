@@ -290,3 +290,28 @@ Guardrail:
 No renderer, CSL, HTML, CSS, JavaScript, asset map, image, audio, YouTube, print, OCR, translation, external URL, or static-site output changes are authorized from Batch 04 alone.
 
 Any future media implementation must start from a new issue/branch after source-bound media review is approved.
+
+## Batch 05 Start — 2026-05-03
+
+Batch 05 — Architecture and Study Order is now the next active FlagFix planning group.
+
+Open items:
+
+- FlagFix 000 — AXIS Preservation Strategy
+- FlagFix 001 — Future Preservation Layers
+- FlagFix 008 — Canonical Study Order and Path Registry
+- FlagFix 008b — AXIS COSMOS Order Graph Discussion
+
+Guardrail:
+
+No renderer, CSL, HTML, CSS, JavaScript, navigation, study-order, graph, metadata, pipeline, deployment, or static-site output changes are authorized by this checkpoint.
+
+Batch 05 must begin with architecture, preservation, study-order, and graph discussion documents only.
+
+Recommended order:
+
+1. document AXIS preservation strategy;
+2. document future preservation layers;
+3. document canonical study order and path registry policy;
+4. document AXIS COSMOS order graph discussion;
+5. only then consider implementation issues.
