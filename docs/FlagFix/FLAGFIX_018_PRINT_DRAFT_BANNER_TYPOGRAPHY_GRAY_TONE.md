@@ -221,3 +221,17 @@ No translation/content edits.
 No external font dependencies.
 ```
 
+---
+
+## Resolution / Fechamento
+
+Status: closed / no implementation recommended now.
+
+Current decision:
+
+- the current `DRAFT / RASCUNHO` banner behavior is acceptable for the review workflow;
+- no implementation is recommended at this time;
+- future typography, print prompt, or print menu refinements may be handled separately;
+- no CSS, JavaScript, renderer, CSL, pipeline, or static-site output change is authorized by this record.
+
+The banner remains a useful review artifact layer. The typography and gray-tone ideas above are preserved as optional future design polish, not an urgent fix.
