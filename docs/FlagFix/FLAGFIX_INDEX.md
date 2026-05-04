@@ -10,7 +10,7 @@ This index is navigational only. The current directory layout is maintained by G
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_BATCH_01_PRINT_REVIEW_UX_PLAN.md` | Print Review UX batch plan | discussion | Existing Batch 01 planning record; included here for inventory completeness. |
 | `docs/FlagFix/FLAGFIX_006_PRINT_NAV_LABEL_LOCALIZATION.md` | Print navigation label localization | review scaffold | Tracks English `From` / `To` labels appearing in printed/PDF review navigation. |
-| `docs/FlagFix/FLAGFIX_016_PRINT_MARGIN_CONTENT_WIDTH_ALIGNMENT.md` | Print margins and optical centering | review scaffold | Tracks print/PDF content width and left/right margin balance. |
+| `docs/FlagFix/FLAGFIX_016_PRINT_MARGIN_CONTENT_WIDTH_ALIGNMENT.md` | Print margins and optical centering | closed / no additional global patch recommended now | Current print margin/content-width behavior is acceptable after related fixes; PR #84 resolved the urgent image-driven overflow case. |
 | `docs/FlagFix/FLAGFIX_017_PRINT_GREEN_LINE_DECORATION_STANDARDIZATION.md` | Print green line decoration standardization | review scaffold | Tracks inconsistent green line decoration in printed review output. |
 | `docs/FlagFix/FLAGFIX_018_PRINT_DRAFT_BANNER_TYPOGRAPHY_GRAY_TONE.md` | Print draft banner typography and gray-tone design | closed / no implementation recommended now | Current banner behavior is acceptable for review workflow; future typography or print-menu polish may be handled separately. |
 | `docs/FlagFix/FLAGFIX_019_PRINT_PREV_NEXT_NAV_COMPACTION_AND_BOX_DESIGN.md` | Print previous/next navigation compaction | review scaffold | Tracks compact boxed print navigation and label treatment near the final page of essays. |
