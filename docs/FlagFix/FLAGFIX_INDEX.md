@@ -4,6 +4,19 @@ This document is the current navigational index for FlagFix policy, review scaff
 
 This index is navigational only. The current directory layout is maintained by Git history; this document does not authorize future moves, deletions, superseding, or implementation.
 
+## Batch 01 — Print Review UX
+
+| Path | Theme | Status | Observation |
+|---|---|---|---|
+| `docs/FlagFix/FLAGFIX_BATCH_01_PRINT_REVIEW_UX_PLAN.md` | Print Review UX batch plan | discussion | Existing Batch 01 planning record; included here for inventory completeness. |
+| `docs/FlagFix/FLAGFIX_006_PRINT_NAV_LABEL_LOCALIZATION.md` | Print navigation label localization | review scaffold | Tracks English `From` / `To` labels appearing in printed/PDF review navigation. |
+| `docs/FlagFix/FLAGFIX_016_PRINT_MARGIN_CONTENT_WIDTH_ALIGNMENT.md` | Print margins and optical centering | review scaffold | Tracks print/PDF content width and left/right margin balance. |
+| `docs/FlagFix/FLAGFIX_017_PRINT_GREEN_LINE_DECORATION_STANDARDIZATION.md` | Print green line decoration standardization | review scaffold | Tracks inconsistent green line decoration in printed review output. |
+| `docs/FlagFix/FLAGFIX_018_PRINT_DRAFT_BANNER_TYPOGRAPHY_GRAY_TONE.md` | Print draft banner typography and gray-tone design | review scaffold | Tracks archival/typewriter-style refinement for the DRAFT / RASCUNHO print banner. |
+| `docs/FlagFix/FLAGFIX_019_PRINT_PREV_NEXT_NAV_COMPACTION_AND_BOX_DESIGN.md` | Print previous/next navigation compaction | review scaffold | Tracks compact boxed print navigation and label treatment near the final page of essays. |
+| `docs/FlagFix/FLAGFIX_024_PRINT_INCONSISTENCIA_VISUAL_TITULO_H5.md` | Print H5 title visual inconsistency | review scaffold | Tracks visual inconsistency in internal H5 heading treatment in print/site output. |
+| `docs/FlagFix/FLAGFIX_025_PRINT_COMPACT_LAYOUT_BD_AA_007.md` | Compact print layout on BD.AA.007 | review scaffold | Tracks unusually narrow/compact print layout on the BD.AA.007 review page. |
+
 ## Batch 02 — Title and Metadata Integrity
 
 | Path | Theme | Status | Observation |
@@ -37,6 +50,7 @@ This index is navigational only. The current directory layout is maintained by G
 | `docs/FlagFix/FLAGFIX_010_AUDIO_OFFLINE_PLACEHOLDER_POLICY.md` | Audio placeholders and external resolution | policy | Requires language-aware, traceable audio fallback states. |
 | `docs/FlagFix/FLAGFIX_014_IMAGE_RENDERING_SIZE_CENTERING_ZOOM_POLICY.md` | Image rendering size, centering, and zoom | policy | Frames future image readability work without authorizing renderer or CSS changes. |
 | `docs/FlagFix/FLAGFIX_015_YOUTUBE_PRINT_MARKER_POLICY.md` | YouTube print markers | policy | Preserves video evidence in print review even when embeds do not render. |
+| `docs/FlagFix/FLAGFIX_022_SHORTCODE_WORDPRESS_EASY_MEDIA_DOWNLOAD.md` | WordPress `easy_media_download` shortcode leakage | review scaffold | Legacy ToDoList import for raw media/download shortcode leakage in static output; no implementation authorized. |
 | `docs/FlagFix/FLAGFIX_MEDIA_SHORTCODE_PRESERVATION_PLAN.md` | Media shortcode preservation layer | discussion | Plans preservation blocks for legacy media/download shortcodes; no production behavior is authorized here. |
 
 ## Batch 05 — Architecture and Study Order
@@ -53,7 +67,6 @@ This index is navigational only. The current directory layout is maintained by G
 
 | Path | Theme | Status | Observation |
 |---|---|---|---|
-| `docs/FlagFix/FLAGFIX_BATCH_01_PRINT_REVIEW_UX_PLAN.md` | Print Review UX batch plan | discussion | Existing Batch 01 planning record; included here for inventory completeness. |
 | `docs/FlagFix/FLAGFIX_023_PRODUCTION_BUILD_INPUT_CONTRACT.md` | Production build input contract | policy | Architecture guardrail for rebuild assumptions, CSL presence, and publication-repo boundaries. |
 | `docs/FlagFix/PRINT_REVIEW_LINKS_V1_LEGACY_REVIEW_2026-05-04.md` | Legacy print review links branch assessment | review scaffold | Reviews `print-review-links-v1` as reference only; does not authorize merge, cherry-pick, or implementation. |
 | `docs/FlagFix/FLAGFIX_STATUS_CHECKPOINT_2026-05-02.md` | FlagFix status snapshot | checkpoint | Captures repository state and open issue groups after issue migration and early batch planning. |
