@@ -32,6 +32,8 @@ This index is navigational only. The current directory layout is maintained by G
 | `review/title-matrix/flagfix_020_title_comparison_matrix.csv` | Seed title comparison matrix | review scaffold | Contains initial human-review rows and decisions; no correction is authorized by the CSV alone. |
 | `docs/FlagFix/FLAGFIX_021_MISSING_DATE_METADATA_REVIEW.md` | Missing or ambiguous date metadata | review scaffold | Documents date visibility review tasks before automated correction. |
 | `docs/FlagFix/FLAGFIX_021_MISSING_DATE_REVIEW_BOX_POLICY.md` | Missing date review box behavior | policy | Sets conservative display policy for date review boxes and source-date uncertainty. |
+| `docs/FlagFix/FLAGFIX_021_MISSING_DATE_METADATA_AUDIT_2026-05-04.md` | Missing date metadata audit | checkpoint | Records the current audit totals for visible top dates versus candidate missing-date pages; no date correction or inference is authorized here. |
+| `review/date-metadata/flagfix_021_missing_date_metadata_audit.csv` | Missing date metadata audit CSV | review scaffold | Small reviewable subset from the current date-visibility audit, including control and comment-only cases; human review remains pending. |
 
 ## Batch 03 — Pāli Protection
 
