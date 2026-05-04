@@ -14,7 +14,7 @@ This index is navigational only. The current directory layout is maintained by G
 | `docs/FlagFix/FLAGFIX_017_PRINT_GREEN_LINE_DECORATION_STANDARDIZATION.md` | Print green line decoration standardization | review scaffold | Tracks inconsistent green line decoration in printed review output. |
 | `docs/FlagFix/FLAGFIX_018_PRINT_DRAFT_BANNER_TYPOGRAPHY_GRAY_TONE.md` | Print draft banner typography and gray-tone design | review scaffold | Tracks archival/typewriter-style refinement for the DRAFT / RASCUNHO print banner. |
 | `docs/FlagFix/FLAGFIX_019_PRINT_PREV_NEXT_NAV_COMPACTION_AND_BOX_DESIGN.md` | Print previous/next navigation compaction | review scaffold | Tracks compact boxed print navigation and label treatment near the final page of essays. |
-| `docs/FlagFix/FLAGFIX_024_PRINT_INCONSISTENCIA_VISUAL_TITULO_H5.md` | Print H5 title visual inconsistency | review scaffold | Tracks visual inconsistency in internal H5 heading treatment in print/site output. |
+| `docs/FlagFix/FLAGFIX_024_PRINT_INCONSISTENCIA_VISUAL_TITULO_H5.md` | Print H5 title visual inconsistency | implemented | Resolved by PR #86 / commit `d798a86`; checkpoint `checkpoint/flagfix-024-print-h5-standardization-20260504`. |
 | `docs/FlagFix/FLAGFIX_025_PRINT_COMPACT_LAYOUT_BD_AA_007.md` | Compact print layout on BD.AA.007 | review scaffold | Tracks unusually narrow/compact print layout on the BD.AA.007 review page. |
 
 ## Batch 02 — Title and Metadata Integrity
