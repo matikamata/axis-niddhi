@@ -50,7 +50,7 @@ This index is navigational only. The current directory layout is maintained by G
 | `docs/FlagFix/FLAGFIX_010_AUDIO_OFFLINE_PLACEHOLDER_POLICY.md` | Audio placeholders and external resolution | policy | Requires language-aware, traceable audio fallback states. |
 | `docs/FlagFix/FLAGFIX_014_IMAGE_RENDERING_SIZE_CENTERING_ZOOM_POLICY.md` | Image rendering size, centering, and zoom | policy | Frames future image readability work without authorizing renderer or CSS changes. |
 | `docs/FlagFix/FLAGFIX_015_YOUTUBE_PRINT_MARKER_POLICY.md` | YouTube print markers | policy | Preserves video evidence in print review even when embeds do not render. |
-| `docs/FlagFix/FLAGFIX_022_SHORTCODE_WORDPRESS_EASY_MEDIA_DOWNLOAD.md` | WordPress `easy_media_download` shortcode leakage | review scaffold | Legacy ToDoList import for raw media/download shortcode leakage in static output; no implementation authorized. |
+| `docs/FlagFix/FLAGFIX_022_SHORTCODE_WORDPRESS_EASY_MEDIA_DOWNLOAD.md` | WordPress `easy_media_download` shortcode leakage | partially implemented / hardening pending | Original reader-facing leak is operationally resolved via media evidence blocks; corpus-wide hardening remains. |
 | `docs/FlagFix/FLAGFIX_MEDIA_SHORTCODE_PRESERVATION_PLAN.md` | Media shortcode preservation layer | discussion | Plans preservation blocks for legacy media/download shortcodes; no production behavior is authorized here. |
 
 ## Batch 05 — Architecture and Study Order

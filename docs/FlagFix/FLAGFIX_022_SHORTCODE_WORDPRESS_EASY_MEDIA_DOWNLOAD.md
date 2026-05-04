@@ -221,3 +221,30 @@ Ajuda necessária:
 Objetivo final:
 
 Transformar resíduos WordPress em artefatos estáticos claros, bonitos e duráveis.
+
+---
+
+## Read-only Triage / Triagem sem implementação
+
+Status: partially implemented / operationally resolved / hardening pending.
+
+The original visible `TL.EE.003` raw shortcode leak is no longer reader-facing.
+
+Recognized shortcodes are preserved as `axis-media-evidence` media evidence blocks.
+
+Corrupted or unknown legacy media cases may remain as review evidence, including `LEGACY_MEDIA_CORRUPTED`, `LEGACY_MEDIA_UNKNOWN`, and `RAW_SHORTCODE` evidence in HTML comments.
+
+No immediate implementation is recommended.
+
+Future hardening requires a corpus-wide audit.
+
+No manual CSL or static-site page edits are recommended.
+
+Recommended future hardening items:
+
+1. audit all `axis-media-evidence` blocks;
+2. inventory `LEGACY_MEDIA_CORRUPTED` / `LEGACY_MEDIA_UNKNOWN` cases;
+3. review `RAW_SHORTCODE` evidence in HTML comments;
+4. detect invalid surrounding markup;
+5. investigate glossary/Pāli markup inside shortcode URLs;
+6. only then consider pipeline hardening and an approved rebuild.
