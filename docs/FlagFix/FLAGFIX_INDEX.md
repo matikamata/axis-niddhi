@@ -9,6 +9,7 @@ This index is navigational only. The current directory layout is maintained by G
 | Path | Theme | Status | Observation |
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_BATCH_01_PRINT_REVIEW_UX_PLAN.md` | Print Review UX batch plan | discussion | Existing Batch 01 planning record; included here for inventory completeness. |
+| `docs/FlagFix/FLAGFIX_BATCH_01_CLOSURE_RECORD_2026-05-04.md` | Batch 01 closure record | checkpoint | Records final Print Review UX closure state, global decisions, and guardrails; no implementation is authorized here. |
 | `docs/FlagFix/FLAGFIX_006_PRINT_NAV_LABEL_LOCALIZATION.md` | Print navigation label localization | review scaffold | Tracks English `From` / `To` labels appearing in printed/PDF review navigation. |
 | `docs/FlagFix/FLAGFIX_016_PRINT_MARGIN_CONTENT_WIDTH_ALIGNMENT.md` | Print margins and optical centering | closed / no additional global patch recommended now | Current print margin/content-width behavior is acceptable after related fixes; PR #84 resolved the urgent image-driven overflow case. |
 | `docs/FlagFix/FLAGFIX_017_PRINT_GREEN_LINE_DECORATION_STANDARDIZATION.md` | Print green line decoration standardization | review scaffold | Tracks inconsistent green line decoration in printed review output. |
