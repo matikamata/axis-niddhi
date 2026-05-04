@@ -33,6 +33,7 @@ This index is navigational only. The current directory layout is maintained by G
 | `docs/FlagFix/FLAGFIX_021_MISSING_DATE_METADATA_REVIEW.md` | Missing or ambiguous date metadata | review scaffold | Documents date visibility review tasks before automated correction. |
 | `docs/FlagFix/FLAGFIX_021_MISSING_DATE_REVIEW_BOX_POLICY.md` | Missing date review box behavior | policy | Sets conservative display policy for date review boxes and source-date uncertainty. |
 | `docs/FlagFix/FLAGFIX_021_MISSING_DATE_METADATA_AUDIT_2026-05-04.md` | Missing date metadata audit | checkpoint | Records the current audit totals for visible top dates versus candidate missing-date pages; no date correction or inference is authorized here. |
+| `docs/FlagFix/FLAGFIX_021_DATE_METADATA_AUDIT_CHECKPOINT_2026-05-04.md` | Missing date metadata audit checkpoint | checkpoint | Freezes the post-audit state: 748 pages scanned, 63 candidates, 25 CSV rows, review box absent, and human review still pending. |
 | `review/date-metadata/flagfix_021_missing_date_metadata_audit.csv` | Missing date metadata audit CSV | review scaffold | Small reviewable subset from the current date-visibility audit, including control and comment-only cases; human review remains pending. |
 
 ## Batch 03 — Pāli Protection
