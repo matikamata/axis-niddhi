@@ -209,3 +209,30 @@ Somente apresentação visual de headings internos.
 * `needs-audit`
 
 EOF
+
+## Resolution / Fechamento
+
+Status: implemented.
+
+Resolved by:
+
+- PR: #86
+- Commit: `d798a86`
+- Checkpoint: `checkpoint/flagfix-024-print-h5-standardization-20260504`
+
+Resolution summary:
+
+The print/PDF visual treatment for internal `h5` review headings was standardized with a print-only CSS patch.
+
+The fix preserves the online collapsible `h5` behavior and only changes print/PDF rendering.
+
+Touched implementation files:
+
+- `pipeline/13-ssg/static/css/style.css`
+- `pipeline/13-static-site/css/style.css`
+
+No renderer, CSL, JS, template, metadata, navigation, or deployment configuration changes were made.
+
+Future note:
+
+The current review-box style is accepted for the reviewer workflow. A more “scientific essay” style may be considered later as an optional print-design mode, but it is not urgent and is not part of this fix.
