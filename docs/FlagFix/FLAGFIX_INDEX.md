@@ -53,6 +53,7 @@ This index is navigational only. The current directory layout is maintained by G
 | `docs/FlagFix/FLAGFIX_022_SHORTCODE_WORDPRESS_EASY_MEDIA_DOWNLOAD.md` | WordPress `easy_media_download` shortcode leakage | partially implemented / hardening pending | Original reader-facing leak is operationally resolved via media evidence blocks; corpus-wide hardening remains. |
 | `docs/FlagFix/FLAGFIX_022_MEDIA_EVIDENCE_AUDIT_2026-05-04.md` | Media evidence block audit | checkpoint | Read-only audit of `axis-media-evidence`, corrupted shortcode evidence, affected pages, and future hardening sub-issues. |
 | `docs/FlagFix/FLAGFIX_022A_CORRUPTED_URL_HARDENING_PLAN_2026-05-04.md` | Corrupted URL hardening for legacy media shortcodes | discussion | Plans future protection of legacy media shortcode URLs before glossary/Pāli marginalia; no implementation is authorized here. |
+| `docs/FlagFix/FLAGFIX_022B_MEDIA_EVIDENCE_MARKUP_PLAN_2026-05-04.md` | Media evidence block markup normalization | discussion | Plans future normalization of `axis-media-evidence` blocks outside invalid parent contexts; no implementation is authorized here. |
 | `docs/FlagFix/FLAGFIX_MEDIA_SHORTCODE_PRESERVATION_PLAN.md` | Media shortcode preservation layer | discussion | Plans preservation blocks for legacy media/download shortcodes; no production behavior is authorized here. |
 
 ## Batch 05 — Architecture and Study Order
