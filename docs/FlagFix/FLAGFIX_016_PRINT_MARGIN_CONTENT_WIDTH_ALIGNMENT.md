@@ -212,3 +212,19 @@ Acceptance:
 - no clipping;
 - no horizontal overflow;
 - no screen layout regression.
+
+---
+
+## Resolution / Fechamento
+
+Status: closed / no additional global patch recommended now.
+
+Current decision:
+
+- the current print margin and content-width behavior is acceptable after related print fixes;
+- PR #84 addressed the urgent image-driven overflow / shrink-to-fit case that affected global print geometry;
+- no additional global margin or content-width patch is recommended at this time;
+- future page-specific evidence may open a new targeted issue;
+- no CSS, JavaScript, renderer, CSL, pipeline, or static-site output change is authorized by this record.
+
+This record remains useful as historical review context, but it does not currently require implementation.
