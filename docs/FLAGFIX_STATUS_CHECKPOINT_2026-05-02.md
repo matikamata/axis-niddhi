@@ -315,3 +315,29 @@ Recommended order:
 3. document canonical study order and path registry policy;
 4. document AXIS COSMOS order graph discussion;
 5. only then consider implementation issues.
+
+## Batch 05 Closed — 2026-05-03
+
+Batch 05 — Architecture and Study Order is now closed for policy/review-scaffold scope.
+
+Closed items:
+
+- FlagFix 000 — AXIS Preservation Strategy
+- FlagFix 001 — Future Preservation Layers
+- FlagFix 008 — Canonical Study Order and Path Registry
+- FlagFix 008b — AXIS COSMOS Order Graph Discussion
+
+Final Batch 05 artifacts:
+
+- `docs/FLAGFIX_000_AXIS_PRESERVATION_STRATEGY_POLICY.md`
+- `docs/FLAGFIX_001_FUTURE_PRESERVATION_LAYERS_POLICY.md`
+- `docs/FLAGFIX_008_CANONICAL_STUDY_ORDER_PATH_REGISTRY_POLICY.md`
+- `docs/FLAGFIX_008B_AXIS_COSMOS_ORDER_GRAPH_DISCUSSION.md`
+
+Guardrail:
+
+No renderer, CSL, HTML, CSS, JavaScript, navigation, metadata, pipeline, deployment, archive, graph, study-order, path registry, AI, retrieval, or static-site output changes are authorized from Batch 05 alone.
+
+Any future architecture, preservation-layer, study-order, graph, retrieval, or AI implementation must start from a new issue/branch after explicit human review and approval.
+
+FlagFix policy/review scaffold sweep is complete as of Batch 05 closure.
