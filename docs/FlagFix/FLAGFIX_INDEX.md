@@ -23,6 +23,7 @@ This index is navigational only. The current directory layout is maintained by G
 | Path | Theme | Status | Observation |
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_BATCH_02_TITLE_METADATA_INTEGRITY_PLAN.md` | Batch plan for title and metadata integrity | discussion | Groups title punctuation, slug/title divergence, protected title terms, capitalization, and date visibility review. |
+| `docs/FlagFix/FLAGFIX_BATCH_02_PARTIAL_CHECKPOINT_2026-05-04.md` | Batch 02 partial checkpoint | checkpoint | Consolidates the current 020/021 review state, supporting policies, and Batch 02 guardrails while human decisions remain pending. |
 | `docs/FlagFix/FLAGFIX_011_TITLE_PUNCTUATION_PRESERVATION_POLICY.md` | Title punctuation preservation | policy | Protects semantic punctuation such as dashes, questions, ellipses, and source-title force. |
 | `docs/FlagFix/FLAGFIX_012_SLUG_TITLE_DIVERGENCE_POLICY.md` | Slug/title divergence | policy | Prevents slug-derived titles from overriding source title semantics. |
 | `docs/FlagFix/FLAGFIX_013_PT_TITLE_CAPITALIZATION_POLICY.md` | Portuguese title capitalization | policy | Defines conservative pt-BR title casing review rules. |
