@@ -27,6 +27,7 @@ This index is navigational only. The current directory layout is maintained by G
 | `docs/FlagFix/FLAGFIX_012_SLUG_TITLE_DIVERGENCE_POLICY.md` | Slug/title divergence | policy | Prevents slug-derived titles from overriding source title semantics. |
 | `docs/FlagFix/FLAGFIX_013_PT_TITLE_CAPITALIZATION_POLICY.md` | Portuguese title capitalization | policy | Defines conservative pt-BR title casing review rules. |
 | `docs/FlagFix/FLAGFIX_020_TITLE_COMPARISON_MATRIX.md` | Human title comparison workflow | review scaffold | Defines the review matrix before any title correction is considered. |
+| `docs/FlagFix/FLAGFIX_020_TITLE_MATRIX_EXPANSION_PLAN_2026-05-04.md` | Title comparison matrix expansion plan | discussion | Plans controlled pilot expansion of the human-review matrix; no title corrections, scripts, metadata changes, or rebuilds are authorized here. |
 | `review/title-matrix/flagfix_020_title_comparison_matrix.csv` | Seed title comparison matrix | review scaffold | Contains initial human-review rows and decisions; no correction is authorized by the CSV alone. |
 | `docs/FlagFix/FLAGFIX_021_MISSING_DATE_METADATA_REVIEW.md` | Missing or ambiguous date metadata | review scaffold | Documents date visibility review tasks before automated correction. |
 | `docs/FlagFix/FLAGFIX_021_MISSING_DATE_REVIEW_BOX_POLICY.md` | Missing date review box behavior | policy | Sets conservative display policy for date review boxes and source-date uncertainty. |
