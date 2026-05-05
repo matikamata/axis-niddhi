@@ -44,6 +44,7 @@ This index is navigational only. The current directory layout is maintained by G
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_BATCH_03_PALI_PROTECTION_PLAN.md` | Batch plan for Pāli and protected terminology | discussion | Groups protected terms, diacritics, Pāli quotes, glossary behavior, and title protection. |
 | `docs/FlagFix/FLAGFIX_BATCH_03_PALI_PROTECTION_AUDIT_2026-05-04.md` | Batch 03 Pāli protection audit | checkpoint | Pilot read-only inventory of glossary/audio term markers, quote preservation, diacritic drift, and Miccha/Micchā title/body evidence; no implementation is authorized here. |
+| `docs/FlagFix/FLAGFIX_BATCH_03_CLOSURE_RECORD_2026-05-04.md` | Batch 03 closure record | checkpoint | Closes Batch 03 as an inventory/review-control batch, records the audit artifacts, and keeps 002/003/004/009 in human-review-first posture with no new patches authorized. |
 | `docs/FlagFix/FLAGFIX_002_PALI_TERM_COLOR_AUDIO_TAXONOMY_POLICY.md` | Pāli term color and audio taxonomy | policy | Preserves visible distinctions between glossary-only, audio-linked, and uncertain Pāli terms. |
 | `docs/FlagFix/FLAGFIX_003_PALI_GRAMMAR_DIACRITICS_ORTHOGRAPHY_POLICY.md` | Pāli grammar, diacritics, and orthography | policy | Requires human review for spelling, macrons, grammar, and source-convention questions. |
 | `docs/FlagFix/FLAGFIX_004_PALI_QUOTE_PROTECTION_POLICY.md` | Pāli quote protection | policy | Protects Pāli quotes and canonical phrases from translation-stage mutation. |
