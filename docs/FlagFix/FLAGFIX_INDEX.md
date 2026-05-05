@@ -57,10 +57,12 @@ This index is navigational only. The current directory layout is maintained by G
 | Path | Theme | Status | Observation |
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_BATCH_04_MEDIA_ASSETS_PLAN.md` | Batch plan for media and assets | discussion | Groups image, audio, YouTube, and asset traceability issues. |
+| `docs/FlagFix/FLAGFIX_BATCH_04_MEDIA_ASSETS_AUDIT_2026-05-04.md` | Batch 04 media and assets audit | checkpoint | Pilot read-only inventory of text-bearing images, diagrams, YouTube/embed variants, audio traceability, and media-evidence cross-references; no implementation is authorized here. |
 | `docs/FlagFix/FLAGFIX_005_TRANSLATABLE_IMAGE_FLOWCHART_ASSETS_POLICY.md` | Translatable image and flowchart assets | policy | Preserves original media as evidence before any human redraw or translation. |
 | `docs/FlagFix/FLAGFIX_010_AUDIO_OFFLINE_PLACEHOLDER_POLICY.md` | Audio placeholders and external resolution | policy | Requires language-aware, traceable audio fallback states. |
 | `docs/FlagFix/FLAGFIX_014_IMAGE_RENDERING_SIZE_CENTERING_ZOOM_POLICY.md` | Image rendering size, centering, and zoom | policy | Frames future image readability work without authorizing renderer or CSS changes. |
 | `docs/FlagFix/FLAGFIX_015_YOUTUBE_PRINT_MARKER_POLICY.md` | YouTube print markers | policy | Preserves video evidence in print review even when embeds do not render. |
+| `review/media-assets/flagfix_batch04_media_assets_audit.csv` | Batch 04 media and assets audit CSV | review scaffold | Small reviewable evidence set for image/diagram context, embed variants, audio traceability, and cross-reference rows related to media evidence blocks. |
 | `docs/FlagFix/FLAGFIX_022_SHORTCODE_WORDPRESS_EASY_MEDIA_DOWNLOAD.md` | WordPress `easy_media_download` shortcode leakage | partially implemented / hardening pending | Original reader-facing leak is operationally resolved via media evidence blocks; corpus-wide hardening remains. |
 | `docs/FlagFix/FLAGFIX_022_MEDIA_EVIDENCE_AUDIT_2026-05-04.md` | Media evidence block audit | checkpoint | Read-only audit of `axis-media-evidence`, corrupted shortcode evidence, affected pages, and future hardening sub-issues. |
 | `docs/FlagFix/FLAGFIX_022_HARDENING_ROADMAP_2026-05-04.md` | FLAGFIX_022 hardening roadmap | discussion | Coordinates the umbrella record, audit, 022A URL hardening plan, and 022B markup normalization plan; no implementation is authorized here. |
