@@ -88,6 +88,7 @@ This index is navigational only. The current directory layout is maintained by G
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_023_PRODUCTION_BUILD_INPUT_CONTRACT.md` | Production build input contract | policy | Architecture guardrail for rebuild assumptions, CSL presence, and publication-repo boundaries. |
 | `docs/FlagFix/FLAGFIX_GLOBAL_SANITY_CHECKPOINT_2026-05-04.md` | Global sanity checkpoint after Batch 04 | checkpoint | Sprint-wide checkpoint through Batch 04 closure, summarizing implemented fixes versus docs/review-control work and authorizing no new implementation. |
+| `docs/FlagFix/FLAGFIX_SPRINT_FINAL_CLOSURE_RECORD_2026-05-04.md` | Final FlagFix sprint closure record | checkpoint | Summarizes the completed sprint through Batch 05 checkpoint, records implemented fixes and review-control artifacts, and authorizes no new implementation. |
 | `docs/FlagFix/PRINT_REVIEW_LINKS_V1_LEGACY_REVIEW_2026-05-04.md` | Legacy print review links branch assessment | review scaffold | Reviews `print-review-links-v1` as reference only; does not authorize merge, cherry-pick, or implementation. |
 | `docs/FlagFix/FLAGFIX_STATUS_CHECKPOINT_2026-05-02.md` | FlagFix status snapshot | checkpoint | Captures repository state and open issue groups after issue migration and early batch planning. |
 | `docs/FlagFix/AXIS_HANDOFF_FLAGFIX_SPRINT_2026-05-03.md` | Post-sprint handoff | checkpoint | Records the final state of the policy/review-scaffold sprint completed around 2026-05-03 / 2026-05-04 UTC. |
