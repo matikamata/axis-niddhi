@@ -76,6 +76,7 @@ This index is navigational only. The current directory layout is maintained by G
 | Path | Theme | Status | Observation |
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_BATCH_05_ARCHITECTURE_STUDY_ORDER_PLAN.md` | Batch plan for architecture and study order | discussion | Separates corpus order, archive order, review order, and future study paths. |
+| `docs/FlagFix/FLAGFIX_BATCH_05_ARCHITECTURE_CHECKPOINT_2026-05-04.md` | Batch 05 architecture checkpoint | checkpoint | Records Batch 05 as architecture/planning boundary only, confirms AXIS-Cosmos is still discussion-stage, and authorizes no registry, graph, UI, or production implementation. |
 | `docs/FlagFix/FLAGFIX_000_AXIS_PRESERVATION_STRATEGY_POLICY.md` | AXIS preservation strategy | policy | Defines source traceability, canonical identity, reproducibility, and review boundaries. |
 | `docs/FlagFix/FLAGFIX_001_FUTURE_PRESERVATION_LAYERS_POLICY.md` | Future preservation layers | policy | Describes future layers without authorizing implementation in production. |
 | `docs/FlagFix/FLAGFIX_008_CANONICAL_STUDY_ORDER_PATH_REGISTRY_POLICY.md` | Canonical study order and path registry | policy | Requires explicit, auditable path registries instead of overwriting source order. |
