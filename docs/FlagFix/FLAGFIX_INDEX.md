@@ -58,6 +58,7 @@ This index is navigational only. The current directory layout is maintained by G
 |---|---|---|---|
 | `docs/FlagFix/FLAGFIX_BATCH_04_MEDIA_ASSETS_PLAN.md` | Batch plan for media and assets | discussion | Groups image, audio, YouTube, and asset traceability issues. |
 | `docs/FlagFix/FLAGFIX_BATCH_04_MEDIA_ASSETS_AUDIT_2026-05-04.md` | Batch 04 media and assets audit | checkpoint | Pilot read-only inventory of text-bearing images, diagrams, YouTube/embed variants, audio traceability, and media-evidence cross-references; no implementation is authorized here. |
+| `docs/FlagFix/FLAGFIX_BATCH_04_CLOSURE_RECORD_2026-05-04.md` | Batch 04 closure record | checkpoint | Closes Batch 04 as an audit/inventory/review-control batch, keeps 014 split-friendly, and records that 022 remains in its own dedicated hardening package. |
 | `docs/FlagFix/FLAGFIX_005_TRANSLATABLE_IMAGE_FLOWCHART_ASSETS_POLICY.md` | Translatable image and flowchart assets | policy | Preserves original media as evidence before any human redraw or translation. |
 | `docs/FlagFix/FLAGFIX_010_AUDIO_OFFLINE_PLACEHOLDER_POLICY.md` | Audio placeholders and external resolution | policy | Requires language-aware, traceable audio fallback states. |
 | `docs/FlagFix/FLAGFIX_014_IMAGE_RENDERING_SIZE_CENTERING_ZOOM_POLICY.md` | Image rendering size, centering, and zoom | policy | Frames future image readability work without authorizing renderer or CSS changes. |
