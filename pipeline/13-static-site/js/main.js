@@ -195,6 +195,108 @@ function toggleLabz() {
     handleHash(); // Run on load
   }
 
+  function initSectionListToggle() {
+    const list = document.getElementById('all-sections-list');
+    const toggle = document.getElementById('section-list-toggle');
+    if (!list || !toggle) return;
+
+    document.body.classList.add('js-section-list-collapsed');
+    const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null;
+    const startsOpen = !!(hashTarget && hashTarget.classList.contains('library-section'));
+    list.hidden = !startsOpen;
+    toggle.setAttribute('aria-expanded', String(startsOpen));
+    toggle.textContent = startsOpen
+      ? 'Hide all sections / Ocultar seções'
+      : 'View all sections / Ver todas as seções';
+
+    toggle.addEventListener('click', function() {
+      const shouldShow = list.hidden;
+      list.hidden = !shouldShow;
+      toggle.setAttribute('aria-expanded', String(shouldShow));
+      toggle.textContent = shouldShow
+        ? 'Hide all sections / Ocultar seções'
+        : 'View all sections / Ver todas as seções';
+
+      if (shouldShow) {
+        list.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  }
+
+  function initInlineSectionReveal() {
+    const grid = document.querySelector('.section-grid');
+    const panel = document.getElementById('inline-section-panel');
+    if (!grid || !panel) return;
+
+    const cards = Array.from(grid.querySelectorAll('.section-card[href^="#section-"]'));
+    if (!cards.length) return;
+
+    function closePanel() {
+      panel.hidden = true;
+      panel.innerHTML = '';
+      cards.forEach(card => card.classList.remove('active'));
+    }
+
+    function getLastCardInRow(card) {
+      const rowTop = card.offsetTop;
+      let lastInRow = card;
+      cards.forEach(item => {
+        if (item.offsetTop === rowTop) lastInRow = item;
+      });
+      return lastInRow;
+    }
+
+    grid.addEventListener('click', function(event) {
+      const card = event.target.closest('.section-card[href^="#section-"]');
+      if (!card || !grid.contains(card)) return;
+
+      const targetId = card.getAttribute('href');
+      const source = targetId ? document.querySelector(targetId) : null;
+      if (!source || !source.classList.contains('library-section')) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+
+      const lastInRow = getLastCardInRow(card);
+      if (lastInRow && lastInRow.nextElementSibling !== panel) {
+        lastInRow.insertAdjacentElement('afterend', panel);
+      }
+
+      const clone = source.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.classList.add('inline-section-clone');
+      clone.querySelectorAll('[id]').forEach(el => {
+        el.id = `inline-${el.id}`;
+      });
+
+      const h2 = clone.querySelector('h2');
+      const list = clone.querySelector('.accordion-content');
+      const icon = clone.querySelector('.toggle-icon');
+      if (h2) h2.classList.add('active');
+      if (list) list.style.maxHeight = 'none';
+      if (icon) icon.textContent = '▼';
+
+      const header = document.createElement('div');
+      header.className = 'inline-section-panel-header';
+
+      const close = document.createElement('button');
+      close.type = 'button';
+      close.className = 'inline-section-close';
+      close.textContent = 'Close / Fechar';
+      close.addEventListener('click', closePanel);
+
+      header.appendChild(close);
+      panel.innerHTML = '';
+      panel.appendChild(header);
+      panel.appendChild(clone);
+      panel.hidden = false;
+
+      cards.forEach(item => item.classList.toggle('active', item === card));
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, true);
+  }
+
   function getRootPath() {
     var parts = window.location.pathname.split('/').filter(p => p !== '');
     var pagesIndex = parts.indexOf('pages');
@@ -672,6 +774,8 @@ function toggleLabz() {
     initSectionHighlight();  // [FF-014]
     initLang();
     initAccordion();
+    initSectionListToggle();
+    initInlineSectionReveal();
     initSectionBoxes();   // [SPRINT G] h5 colasáveis
     initPronunciation();
     initSearch(); // [Sprint 9]
