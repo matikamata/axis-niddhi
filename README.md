@@ -1,167 +1,100 @@
 # AXIS-NIDDHI
 
-### A framework for careful translation and crystallization of Dhamma content
+AXIS-NIDDHI is a careful preservation and translation project for the
+PureDhamma.net teaching corpus.
 
-This system does **not** attempt to reinterpret or redefine Dhamma.
-It supports faithful transmission across languages with minimal distortion.
+It has two public-facing goals:
 
----
+- keep a static, offline-readable archive available without depending on a live database;
+- support reviewed Portuguese access without silently changing the original meaning.
 
-## 🧭 New here?
+It does **not** reinterpret Dhamma, replace PureDhamma.net, or claim authority
+over the teaching. Technology assists the work; human discernment remains the
+validation layer.
 
-Before exploring the code, please read:
+## Start Here
 
-👉 `/docs/VISION.md`
+If you are new to the project, read these first:
 
-This document explains the intention, scope, and guiding principles behind this project.
+- [START_HERE.md](docs/START_HERE.md) - a 3-minute orientation for visitors.
+- [TRANSLATION_REVIEW_GUIDE.md](docs/TRANSLATION_REVIEW_GUIDE.md) - how to review translation quality.
+- [VISION.md](docs/VISION.md) - the deeper intention behind AXIS-NIDDHI.
+- [CONTRIBUTING.md](CONTRIBUTING.md) - how Kalyana mitta review works.
 
----
+## What You Can Read Today
 
-## 📜 License
+The public archive is a static site generated from the AXIS-NIDDHI corpus. It is
+designed to be portable: HTML, images, CSS, and JavaScript files that can be
+hosted without a server-side application.
 
-> License: MIT (see `LICENSE.md`)
+Current public-facing surfaces:
 
----
+- Official manual Netlify vitrine: `https://niddhi.netlify.app/`
+- GitHub-connected Cloudflare preview/test surface: `https://niddhi.pages.dev/welcome.html`
 
-## Canonical Corpus Publishing Engine
+The source corpus comes from PureDhamma.net, a large body of essays explaining
+Buddha Dhamma with technical precision. AXIS-NIDDHI preserves source
+traceability and avoids presenting translations as final without review.
 
-> Deterministic pipeline for publishing knowledge corpora as reproducible, static artifacts.
+## How the Project Is Organized
 
----
-
-## 🧭 Quick Overview
-
-AXIS-NIDDHI takes a source corpus (e.g., a WordPress backup) and produces:
-
-* Static, database-free HTML output
-* Multi-language support via controlled translation pipeline
-* Bit-for-bit reproducible builds
-* Cryptographically verifiable integrity (SHA-256)
-
-This is not a backup system.
-
-It is a **deterministic publishing and verification pipeline**.
-
----
-
-## ⚙️ What It Does
-
-Given a source archive:
-
-* Extracts content into a canonical structure (CSL)
-* Applies controlled transformations (translation, normalization)
-* Verifies integrity at every stage
-* Produces a fully static, portable site
-
-Output characteristics:
-
-* No runtime dependencies
-* No database required
-* Fully offline-readable
-* Rebuildable on any compatible system
-
----
-
-## 🌍 Language Expansion
-
-AXIS-NIDDHI supports any DeepL-compatible language.
-
-Each new language requires a **human validation layer**, including:
-
-* glossary validation
-* translation review
-* consistency checks
-
-Technology assists — it does not replace discernment.
-
-See `CONTRIBUTING.md`.
-
----
-
-## 📚 Context
-
-This engine was built in the context of a specific corpus:
-
-A body of work published at PureDhamma.net — a large collection of essays aimed at explaining Dhamma with technical precision.
-
-The current situation:
-
-* Deep material is primarily available in English
-* Many readers rely on translations
-* Literal translation can introduce distortion
-
-AXIS-NIDDHI exists to support:
-
-> **careful, traceable, and verifiable transmission across languages**
-
----
-
-## 🧱 Architecture
-
-```
+```text
 pipeline/
-├── scripts/core/
-├── scripts/tools/
-├── metadata/
-├── 09-csl/              ← Canonical Source Library (source of truth)
-├── 13-ssg/              ← Static site generator
-└── release/             ← Reproducible builds
+├── metadata/            # control files, status, glossary/reference data
+├── 09-csl/              # Canonical Source Library
+├── 13-ssg/              # static site generator source
+└── 13-static-site/      # generated static site output
+docs/                   # orientation, handoffs, review and policy notes
+review/                 # review artifacts and audit notes
+sources/                # source archive area
 ```
 
-### Pipeline Stages
+## Translation Review
 
-| Stage        | Code | Description                      |
-| ------------ | ---- | -------------------------------- |
-| Genesis      | SG   | Extract → structured corpus      |
-| Processing   | SP   | Translation + normalization      |
-| Audit        | SA   | Integrity verification (SHA-256) |
-| Distribution | SD   | Static site generation           |
+Translation quality is not only grammar. Reviewers look for:
 
----
+- preserved Pali terms where substitution would distort meaning;
+- accurate doctrinal sense, especially for Anicca, Dukkha, Anatta, Nibbana, and
+  Paticca Samuppada;
+- stable tone appropriate to teaching material;
+- titles and navigation that help readers without inventing interpretation.
 
-> Status: Active — First public release (2026)
+See [TRANSLATION_REVIEW_GUIDE.md](docs/TRANSLATION_REVIEW_GUIDE.md).
 
----
+Portuguese translations are offered as study and review support for readers who
+are not fluent in English. They are not official, final, or doctrinally
+certified translations; the English articles at PureDhamma.net remain the
+primary reference. See the full translation disclaimer in
+[TRANSLATION_REVIEW_GUIDE.md](docs/TRANSLATION_REVIEW_GUIDE.md#important-note-about-the-portuguese-translation).
 
-## 🚀 Quick Start
+## Steward Notes
 
-```bash
-# Install CLI
-echo "alias axis='bash $(pwd)/release/axis'" >> ~/.bashrc && source ~/.bashrc
+The pipeline can rebuild and audit the corpus, but those commands are
+steward-only operations. Do not run them casually.
 
-# Add source
-ls pipeline/sources/*.zip
+Before any build, deploy, sync, reset, or cleanup:
 
-# Add DeepL key
-echo "DEEPL_API_KEY=your-key" > pipeline/scripts/private/deepl_key.txt
+1. preserve evidence of local changes;
+2. identify which workspace is being used;
+3. confirm whether the target is Cloudflare preview or the Netlify deploy
+   payload;
+4. record the decision.
 
-# Verify integrity
-axis integrity
+Monthly maintenance is described in
+[MONTHLY_MAINTENANCE.md](docs/MONTHLY_MAINTENANCE.md).
 
-# Full pipeline
-axis pipeline --full
+## Design Principles
 
-# Preview
-axis preview
-```
+- Meaning over speed
+- Traceability over convenience
+- Review before scale
+- Static access over platform dependency
+- Human discernment over automated confidence
 
----
+## License
 
-## 🧠 Design Principles
-
-* Determinism over convenience
-* Structure over ambiguity
-* Reproducibility over speed
-* Independence over infrastructure
-
----
-
-## 🐝 Start Here
-
-👉 Read: `WELCOME.md`
-👉 Then: `CONTRIBUTING.md`
+License: MIT. See [LICENSE.md](LICENSE.md).
 
 ---
 
-*AXIS-NIDDHI — Enable continuity without altering meaning.*
-
+AXIS-NIDDHI - enable continuity without altering meaning.
