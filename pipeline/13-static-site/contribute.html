@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contribute / Colaborar — AXIS-NIDDHI</title>
+  <style>
+    :root {
+      --bg: #17140e;
+      --paper: #fbf7ec;
+      --ink: #1f1b14;
+      --soft: #4b4538;
+      --gold: #b8975a;
+      --rule: rgba(184, 151, 90, 0.28);
+      --green: #2f7b62;
+      --header-bg: #1f1b14;
+      --header-btn-bg: rgba(251, 247, 236, 0.1);
+      --header-btn-fg: #f7ebcf;
+      --header-btn-border: rgba(184, 151, 90, 0.58);
+      --header-btn-hover: rgba(184, 151, 90, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      background: radial-gradient(circle at top, #2f2a1e 0%, var(--bg) 58%);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.75;
+    }
+
+    body[data-theme="mountain"] {
+      --bg: #17202a;
+      --paper: #f4f8fa;
+      --ink: #172633;
+      --soft: #526271;
+      --gold: #8f7a4c;
+      --rule: rgba(95, 117, 132, 0.28);
+      --green: #2d7566;
+      --header-bg: #1c2630;
+    }
+
+    body[data-theme="moon"] {
+      --bg: #07090c;
+      --paper: #15181d;
+      --ink: #f1eadb;
+      --soft: #c9bfaa;
+      --gold: #d4b56c;
+      --rule: rgba(212, 181, 108, 0.28);
+      --green: #7ccf9c;
+      --header-bg: #0d1015;
+      --header-btn-bg: rgba(244, 238, 224, 0.12);
+      --header-btn-fg: #fff5da;
+      --header-btn-border: rgba(212, 181, 108, 0.62);
+      --header-btn-hover: rgba(212, 181, 108, 0.18);
+    }
+
+    body[data-theme="sun"] {
+      --bg: #3a2c13;
+      --paper: #fff7df;
+      --ink: #332714;
+      --soft: #6c5935;
+      --gold: #b38324;
+      --rule: rgba(179, 131, 36, 0.3);
+      --green: #5a8f36;
+      --header-bg: #2d2110;
+    }
+
+    body[data-theme="leaf"] {
+      --bg: #102016;
+      --paper: #f3fff0;
+      --ink: #14351f;
+      --soft: #4d6d55;
+      --gold: #8b8650;
+      --rule: rgba(73, 128, 81, 0.3);
+      --green: #23854b;
+      --header-bg: #132719;
+    }
+
+    main {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    header {
+      padding: 2.2rem 2rem 2.6rem;
+      text-align: center;
+      background: var(--header-bg);
+      color: var(--gold);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .theme-controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+      display: flex;
+      gap: 0.35rem;
+      padding: 0.35rem;
+      border: 1px solid var(--header-btn-border);
+      border-radius: 999px;
+      background: rgba(31, 27, 20, 0.82);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .theme-btn {
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .theme-btn:hover,
+    .theme-btn:focus {
+      border-color: var(--gold);
+      background: rgba(184, 151, 90, 0.16);
+      outline: none;
+    }
+
+    .nav,
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .nav { margin-bottom: 2rem; }
+
+    .nav .btn {
+      color: var(--header-btn-fg);
+      border-color: var(--header-btn-border);
+      background: var(--header-btn-bg);
+    }
+
+    .nav .btn:hover,
+    .nav .btn:focus {
+      border-color: var(--gold);
+      background: var(--header-btn-hover);
+      color: #fff7dd;
+    }
+
+    .kicker,
+    h2 {
+      font-family: "Times New Roman", serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .kicker {
+      margin: 0 0 0.8rem;
+      font-size: 0.72rem;
+      opacity: 0.72;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 400;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      max-width: 720px;
+      margin: 1rem auto 0;
+      color: rgba(184, 151, 90, 0.82);
+      font-size: 1.08rem;
+      font-style: italic;
+    }
+
+    .subtitle + .subtitle { margin-top: 0.35rem; }
+
+    .content { padding: 2rem; }
+
+    .lang-radio {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .lang-label {
+      cursor: pointer;
+      padding: 0.65rem 1rem;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: rgba(184, 151, 90, 0.08);
+      color: var(--soft);
+      font-size: 0.95rem;
+    }
+
+    #lang-en:checked ~ .content .lang-switch label[for="lang-en"],
+    #lang-pt:checked ~ .content .lang-switch label[for="lang-pt"] {
+      border-color: var(--green);
+      color: var(--ink);
+      background: rgba(47, 123, 98, 0.14);
+      box-shadow: 0 0 0 3px rgba(47, 123, 98, 0.08);
+      font-weight: bold;
+    }
+
+    .language-panel { display: none; }
+    #lang-en:checked ~ .content .panel-en { display: block; }
+    #lang-pt:checked ~ .content .panel-pt { display: block; }
+
+    section {
+      padding: 1.45rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    section:last-of-type { border-bottom: 0; }
+
+    h2 {
+      margin: 0 0 0.85rem;
+      color: var(--gold);
+      font-size: 0.82rem;
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--soft);
+      font-size: 1.06rem;
+    }
+
+    ul {
+      margin: 0.4rem 0 0;
+      padding-left: 1.2rem;
+      color: var(--soft);
+    }
+
+    li { margin: 0.42rem 0; }
+
+    strong { color: var(--ink); }
+
+    .note {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 3px solid var(--green);
+      background: rgba(47, 123, 98, 0.08);
+      color: var(--soft);
+    }
+
+    .actions {
+      padding: 1.6rem 0 0.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.72rem 0.95rem;
+      border: 1px solid var(--gold);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(184, 151, 90, 0.08);
+    }
+
+    .btn:hover,
+    .btn:focus {
+      border-color: var(--green);
+      outline: none;
+      background: rgba(47, 123, 98, 0.1);
+    }
+
+    footer {
+      padding: 1.5rem 2rem 2rem;
+      text-align: center;
+      color: rgba(75, 69, 56, 0.76);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-controls" aria-label="Theme controls">
+    <button type="button" class="theme-btn" data-theme="mountain" title="Mountain theme">⛰️</button>
+    <button type="button" class="theme-btn" data-theme="moon" title="Moon theme">🌙</button>
+    <button type="button" class="theme-btn" data-theme="sun" title="Sun theme">☀️</button>
+    <button type="button" class="theme-btn" data-theme="leaf" title="Leaf theme">🌿</button>
+  </div>
+
+  <main>
+    <input type="radio" name="lang_switch" id="lang-en" class="lang-radio" checked>
+    <input type="radio" name="lang_switch" id="lang-pt" class="lang-radio">
+
+    <header>
+      <nav class="nav" aria-label="Gateway navigation">
+        <a class="btn" href="welcome.html">Back to Welcome</a>
+        <a class="btn" href="archive.html">Open Archive</a>
+        <a class="btn" href="https://github.com/matikamata/axis-niddhi" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+      </nav>
+      <p class="kicker">AXIS-NIDDHI Cloudflare Staging</p>
+      <h1>Contribute / Colaborar</h1>
+      <p class="subtitle">For developers, reviewers, translators, and careful readers</p>
+      <p class="subtitle">Para desenvolvedores, revisores, tradutores e leitores cuidadosos</p>
+    </header>
+
+    <div class="content">
+      <div class="lang-switch" aria-label="Language">
+        <label for="lang-en" class="lang-label">🇺🇸 English</label>
+        <label for="lang-pt" class="lang-label">🇧🇷 Português</label>
+      </div>
+
+      <div class="language-panel panel-en">
+        <section>
+          <h2>1. Welcome to the development side</h2>
+          <p>
+            This Cloudflare site is not only a reading doorway. It is the developer and reviewer side of AXIS-NIDDHI: a staging surface for preservation, translation review, UI/UX testing, and multilingual engine development.
+          </p>
+          <p>
+            Come and see for yourself. Nothing here asks for blind trust; the work is meant to be inspected, compared, and improved carefully.
+          </p>
+        </section>
+
+        <section>
+          <h2>2. What AXIS-NIDDHI is</h2>
+          <p>
+            AXIS-NIDDHI preserves and presents the PureDhamma.net corpus in a static, traceable, reviewable form. It supports reading, comparison, offline continuity, and careful study translation review.
+          </p>
+          <p>
+            PureDhamma.net remains the primary source. AXIS-NIDDHI helps people approach that source with care; it does not replace it.
+          </p>
+        </section>
+
+        <section>
+          <h2>3. What this site is not</h2>
+          <ul>
+            <li>It is not an official PureDhamma.net translation.</li>
+            <li>It is not a final or doctrinally certified Portuguese edition.</li>
+            <li>It is not a place to reinterpret Dhamma according to preference.</li>
+            <li>It is not a finished product pretending to be complete.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>4. Why translation review matters</h2>
+          <p>
+            Buddha Dhamma is precise. Many Pali terms do not have simple one-word equivalents in Portuguese. A small wording error can shift the meaning of an entire passage.
+          </p>
+          <p>
+            Translation review protects meaning by checking nuance, context, terminology, and source alignment.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Dhamma Dāna</h2>
+          <p>
+            This work may be approached as Dhamma Dāna: an offering of care, time, attention, and skill. The best contribution is humble and precise. It does not need to be large to be meaningful.
+          </p>
+          <div class="note">
+            If any merit arises from this effort, may it support clarity and reduce confusion for all who sincerely seek the Path.
+          </div>
+        </section>
+
+        <section>
+          <h2>6. How developers and reviewers can help</h2>
+          <ul>
+            <li>Improve static-site accessibility, navigation, and reading ergonomics.</li>
+            <li>Preserve source traceability between generated pages and upstream material.</li>
+            <li>Compare Portuguese passages against the original English article.</li>
+            <li>Suggest terminology improvements without claiming final authority.</li>
+            <li>Report broken links, confusing UI, or missing translation status signals.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>7. First 15-minute task</h2>
+          <p>
+            Open one article. Read one paragraph in English and its Portuguese study translation, if available. Ask three questions:
+          </p>
+          <ul>
+            <li>Does the Portuguese preserve the meaning of the English?</li>
+            <li>Are any Pali or Dhamma terms flattened too much?</li>
+            <li>Would a sincere new reader be helped or confused here?</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="language-panel panel-pt" lang="pt-BR">
+        <section>
+          <h2>1. Porta de entrada para desenvolvedores e revisores</h2>
+          <p>
+            Este site no Cloudflare não é apenas uma página para leitura. Ele é o lado de trabalho do AXIS-NIDDHI: um espaço de desenvolvimento, revisão e testes, onde cuidamos da preservação do conteúdo, da clareza das traduções e da construção de uma futura plataforma multilíngue.
+          </p>
+          <p>
+            A proposta é simples: venha, veja por si mesmo e examine com calma. Nada aqui pede confiança cega. Cada melhoria deve poder ser comparada com a fonte, revisada por outras pessoas e corrigida quando necessário.
+          </p>
+        </section>
+
+        <section>
+          <h2>2. O que é o AXIS-NIDDHI</h2>
+          <p>
+            O AXIS-NIDDHI preserva e apresenta o corpus do PureDhamma.net em formato estático, verificável e fácil de revisar. Ele ajuda na leitura, na comparação entre idiomas, na continuidade offline e na revisão cuidadosa das traduções de estudo.
+          </p>
+          <p>
+            A fonte principal continua sendo o PureDhamma.net. O AXIS-NIDDHI não substitui essa fonte; ele cria uma ponte para que mais pessoas possam se aproximar dela com cuidado.
+          </p>
+        </section>
+
+        <section>
+          <h2>3. O que este site não é</h2>
+          <ul>
+            <li>Não é uma tradução oficial do PureDhamma.net.</li>
+            <li>Não é uma edição final em português.</li>
+            <li>Não possui certificação doutrinária.</li>
+            <li>Não é um espaço para reinterpretar o Dhamma conforme gosto pessoal.</li>
+            <li>Não é um produto acabado; é uma oficina aberta de preservação e revisão.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>4. Por que revisar traduções importa</h2>
+          <p>
+            Buddha Dhamma é preciso. Muitos termos em Pāli não têm equivalente simples em português. Às vezes, uma única palavra escolhida sem cuidado pode deslocar o sentido de uma passagem inteira.
+          </p>
+          <p>
+            Revisar traduções é uma forma de proteger o significado: conferir nuances, contexto, terminologia, coerência e alinhamento com o texto original.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Dhamma Dāna</h2>
+          <p>
+            Este trabalho pode ser tratado como Dhamma Dāna: uma oferta de cuidado, tempo, atenção e habilidade. A melhor contribuição não precisa ser grande; precisa ser honesta, humilde e precisa.
+          </p>
+          <p>
+            Cada ajuste bem feito pode reduzir confusão para alguém que talvez nunca estudasse profundamente em inglês. Por isso, até uma pequena revisão pode ter valor muito maior do que parece.
+          </p>
+          <div class="note">
+            Que qualquer mérito deste esforço apoie clareza, reduza confusão e beneficie todos que buscam sinceramente o Caminho.
+          </div>
+        </section>
+
+        <section>
+          <h2>6. Como desenvolvedores e revisores podem ajudar</h2>
+          <ul>
+            <li>Melhorar acessibilidade, navegação e conforto de leitura do site estático.</li>
+            <li>Preservar a rastreabilidade entre as páginas geradas e o material de origem.</li>
+            <li>Comparar trechos em português com o artigo original em inglês.</li>
+            <li>Sugerir melhorias de terminologia sem reivindicar autoridade final.</li>
+            <li>Relatar links quebrados, interfaces confusas ou ausência de status de tradução.</li>
+            <li>Ajudar a transformar este laboratório em uma ponte segura para outros idiomas.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>7. Primeira tarefa de 15 minutos</h2>
+          <p>
+            Abra um artigo. Leia um parágrafo em inglês e, se houver, sua tradução de estudo em português. Depois faça três perguntas:
+          </p>
+          <ul>
+            <li>O português preserva o significado do inglês?</li>
+            <li>Algum termo em Pāli ou Dhamma foi simplificado demais?</li>
+            <li>Um leitor sincero, chegando agora, seria ajudado ou confundido por este trecho?</li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h2>Links</h2>
+        <div class="actions">
+          <a class="btn" href="welcome.html">Back to Welcome</a>
+          <a class="btn" href="archive.html">Open Archive</a>
+          <a class="btn" href="pages/TL.AA.000/index.html" target="_blank" rel="noopener noreferrer">Start with Three Levels</a>
+          <a class="btn" href="https://github.com/matikamata/axis-niddhi/blob/main/docs/TRANSLATION_REVIEW_GUIDE.md" target="_blank" rel="noopener noreferrer">Translation Review Guide</a>
+          <a class="btn" href="https://github.com/matikamata/axis-niddhi" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      Reviewed with care · Offered without claim of final authority · Come and see for yourself
+    </footer>
+  </main>
+  <script>
+    (function() {
+      var key = 'axis-contribute-theme';
+      var saved = localStorage.getItem(key);
+      if (saved) document.body.dataset.theme = saved;
+
+      document.querySelectorAll('.theme-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+          var theme = button.getAttribute('data-theme');
+          document.body.dataset.theme = theme;
+          localStorage.setItem(key, theme);
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
