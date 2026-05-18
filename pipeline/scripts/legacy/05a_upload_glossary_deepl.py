@@ -1,4 +1,15 @@
 import os
+import sys
+
+if os.environ.get("AXIS_ALLOW_RETIRED_TRANSLATION_SCRIPT") != "1":
+    print(
+        "ERROR: This retired translation script is fenced and must not be run "
+        "during normal AXIS-NIDDHI operations. "
+        "Set AXIS_ALLOW_RETIRED_TRANSLATION_SCRIPT=1 only for supervised archaeology/recovery.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
 import deepl
 import csv
 

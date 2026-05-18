@@ -9,6 +9,12 @@
 
 set -euo pipefail
 
+: "${AXIS_ALLOW_HARDCODED_LEGACY_TOOL:=}"
+if [ "$AXIS_ALLOW_HARDCODED_LEGACY_TOOL" != "1" ]; then
+  echo "ERROR: This legacy hardcoded tool is fenced. Set AXIS_ALLOW_HARDCODED_LEGACY_TOOL=1 only after explicit review." >&2
+  exit 2
+fi
+
 SCRIPTS="/beng-fut/pipeline/scripts"
 CSL="/beng-fut/pipeline/09-csl"
 

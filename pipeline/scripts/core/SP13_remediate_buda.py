@@ -23,10 +23,19 @@ USO:
 """
 
 import json
+import os
 import re
 import sys
 import hashlib
 from pathlib import Path
+
+if os.environ.get("AXIS_ALLOW_EMERGENCY_REMEDIATION") != "1":
+    print(
+        "ERROR: Emergency remediation script is fenced. "
+        "Set AXIS_ALLOW_EMERGENCY_REMEDIATION=1 only after explicit review.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
 
 # ==============================================================================
 # ⚙️  BOOTSTRAP
