@@ -175,6 +175,14 @@ function toggleLabz() {
       if (!hash) return;
       const target = document.querySelector(hash);
       if (target && target.classList.contains('library-section')) {
+        const list = document.getElementById('all-sections-list');
+        const toggle = document.getElementById('section-list-toggle');
+        if (list && toggle) {
+          list.hidden = false;
+          toggle.setAttribute('aria-expanded', 'true');
+          toggle.textContent = 'Hide all sections / Ocultar seções';
+        }
+
         const h2 = target.querySelector('h2');
         if (h2) {
           h2.classList.add('active');
@@ -220,6 +228,16 @@ function toggleLabz() {
       if (shouldShow) {
         list.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
+    });
+  }
+
+  function initArticleLinkTargets() {
+    const articlePath = /(?:^|\/)pages\/[A-Z]{2}\.[A-Z]{2}\.\d{3}\/(?:index\.html)?$/i;
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (!articlePath.test(href)) return;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
     });
   }
 
@@ -776,6 +794,7 @@ function toggleLabz() {
     initAccordion();
     initSectionListToggle();
     initInlineSectionReveal();
+    initArticleLinkTargets();
     initSectionBoxes();   // [SPRINT G] h5 colasáveis
     initPronunciation();
     initSearch(); // [Sprint 9]
