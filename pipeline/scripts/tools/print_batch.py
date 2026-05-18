@@ -58,6 +58,17 @@ W = "\033[0;37m"   # Gray
 B = "\033[1m"      # Bold
 N = "\033[0m"      # Reset
 
+if os.environ.get("AXIS_ALLOW_RETIRED_PRINT_BATCH_TOOL") != "1":
+    print(
+        "ERROR: This print-batch workflow was retired by #FlagFix_033 because "
+        "Print_Translation_Control_Center.csv was removed. "
+        "Translation_Control_Center.csv remains official for SP10/DeepL. "
+        "Do not recreate Print_Translation_Control_Center.csv without explicit review. "
+        "Set AXIS_ALLOW_RETIRED_PRINT_BATCH_TOOL=1 only for supervised archaeology.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
 
 def banner():
     print(f"""

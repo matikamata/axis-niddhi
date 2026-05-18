@@ -498,7 +498,7 @@ fi
     echo ""
     echo "## Next Steps"
     echo "1. Review and print from \`$REVIEW_PIPELINE/13-static-site\`."
-    echo "2. Validate PT-BR quality using \`$REVIEW_PIPELINE/metadata/Print_Translation_Control_Center.csv\`."
+    echo "2. Do not use or recreate \`Print_Translation_Control_Center.csv\`; that print-batch workflow was retired by #FlagFix_033."
     echo "3. If approved, promote this snapshot toward canonical release governance."
     echo ""
     echo "Thank you for this careful run. May this effort support continuity and future translators."
@@ -507,10 +507,10 @@ fi
 ok "Review summary report: $SUMMARY_REPORT"
 
 echo ""
-echo -e "${CYAN}Print readiness${NC}"
-echo -e "  CSV governance: $REVIEW_PIPELINE/metadata/Print_Translation_Control_Center.csv"
-echo -e "  Print tool    : $REVIEW_PIPELINE/scripts/tools/print_batch.py"
-echo -e "  Run           : python3 $REVIEW_PIPELINE/scripts/tools/print_batch.py"
+echo -e "${CYAN}Print batch workflow retired${NC}"
+echo -e "  Retired by   : #FlagFix_033"
+echo -e "  Official CSV : Translation_Control_Center.csv remains official for SP10/DeepL"
+echo -e "  Do not recreate Print_Translation_Control_Center.csv without explicit review."
 echo ""
 
 sleep "$FINAL_PAUSE_SECONDS" 2>/dev/null || true
