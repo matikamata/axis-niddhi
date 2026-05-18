@@ -17,7 +17,7 @@ This is the official public surface currently shared via PureDhamma.net.
 The deploy payload comes from:
 
 ```text
-/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site
+<AXIS_ROOT>/axis/axis-niddhi-published/pipeline/13-static-site
 ```
 
 Treat this as the official/manual payload. It is refreshed intentionally, not casually.
@@ -37,7 +37,7 @@ This surface is GitHub-connected.
 Source workspace:
 
 ```text
-/home/sanghop/axis/axis-niddhi-production
+<AXIS_ROOT>/axis/axis-niddhi-production
 ```
 
 Cloudflare is used for staging and review work, including:
@@ -50,6 +50,28 @@ Cloudflare is used for staging and review work, including:
 - Cloudflare-visible static preview patches
 
 This is a safe staging surface. It is not the official public Netlify surface.
+
+## Cloudflare routing note
+
+Cloudflare Pages may serve clean URLs, so `/welcome.html` and `/welcome` behavior must be handled carefully.
+
+Do not add a redirect rule from `/welcome` to `/welcome.html`. That can create a browser redirect loop if Cloudflare normalizes `.html` URLs back to clean URLs.
+
+Current intended rule in `pipeline/13-static-site/_redirects`:
+
+```text
+/ /welcome 302
+```
+
+The root URL should lead to the welcome gateway.
+
+After any routing change, test:
+
+- `https://niddhi.pages.dev/`
+- `https://niddhi.pages.dev/welcome`
+- `https://niddhi.pages.dev/welcome.html`
+- `https://niddhi.pages.dev/contribute`
+- `https://niddhi.pages.dev/contribute.html`
 
 ## 3. GitHub repository
 
@@ -78,8 +100,8 @@ GitHub Pages functions as a backup/static mirror surface. Treat it as useful for
 Local workspaces:
 
 ```text
-/home/sanghop/axis/axis-niddhi-production
-/home/sanghop/axis/axis-niddhi-published
+<AXIS_ROOT>/axis/axis-niddhi-production
+<AXIS_ROOT>/axis/axis-niddhi-published
 ```
 
 Roles:
@@ -107,4 +129,3 @@ GitHub Pages = backup/static mirror
 ```
 
 The published Netlify payload should remain stable unless it is intentionally refreshed.
-
