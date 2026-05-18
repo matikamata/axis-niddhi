@@ -108,9 +108,22 @@ Suggested status: OK
 - Look for text overflow, low contrast, or confusing visual hierarchy.
 - Report screenshots or exact URLs when something feels unclear.
 
+## Report Your Finding
+
+If you complete a first review, report only what you can verify.
+
+Use:
+
+- Bee First Task issue:
+  https://github.com/matikamata/axis-niddhi/issues/120
+
+- Guided issue forms:
+  https://github.com/matikamata/axis-niddhi/issues/new/choose
+
+Small reports are welcome. A useful first report can be as simple as one article, one paragraph, one observation, and one suggested status.
+
 ## Closing note
 
 An Abelha does not need to carry the whole hive at once.
 
 One careful observation, one verified issue, or one clear `needs review` note can protect meaning for the next reader.
-
