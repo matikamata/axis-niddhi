@@ -10,9 +10,11 @@ It does not approve a Netlify refresh. It preserves the decision points, risks, 
 
 | Surface | URL | Local path | Role |
 |---|---|---|---|
-| Cloudflare staging | https://niddhi.pages.dev/ | /home/sanghop/axis/axis-niddhi-production | development/staging preview |
-| Official Netlify | https://niddhi.netlify.app/ | /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site | public surface shared by Prof. Lal |
-| GitHub repo | https://github.com/matikamata/axis-niddhi | /home/sanghop/axis/axis-niddhi-production | canonical tracked source |
+| Cloudflare staging | https://niddhi.pages.dev/ | `<AXIS_ROOT>/axis-niddhi-production` | development/staging preview |
+| Official Netlify | https://niddhi.netlify.app/ | `<AXIS_ROOT>/axis-niddhi-published/pipeline/13-static-site` | public surface shared by Prof. Lal |
+| GitHub repo | https://github.com/matikamata/axis-niddhi | `<AXIS_ROOT>/axis-niddhi-production` | canonical tracked source |
+
+`<AXIS_ROOT>` refers to the local operator workspace root. On the current maintainer machine this is `/home/sanghop/axis`, but public docs should avoid relying on one machine-specific path.
 
 ## 3. Changes currently proven on Cloudflare
 
