@@ -22,6 +22,7 @@ It records the final state, completed work, guardrails, and recommended next ste
 - Bee First Task issue created.
 - GitHub issue templates added.
 - Netlify refresh plan documented.
+- Production-to-published Netlify refresh SOP documented.
 - Cloudflare routing note documented.
 - Static payload `.gitignore` hygiene improved.
 - PR discipline guide added.
@@ -43,6 +44,7 @@ It records the final state, completed work, guardrails, and recommended next ste
 - `docs/NETLIFY_REFRESH_PLAN_20260518.md`
 - `docs/PR_DISCIPLINE.md`
 - `docs/TRANSLATION_REVIEW_GUIDE.md`
+- `docs/sops/PRODUCTION_TO_PUBLISHED_NETLIFY_REFRESH_SOP_20260518.md`
 - `docs/checkpoints/AXIS_NIDDHI_POST_309_PTBR_PUBLICATION_HANDOFF_2026-05-12.md`
 - `.github/ISSUE_TEMPLATE/*`
 
@@ -59,6 +61,7 @@ It records the final state, completed work, guardrails, and recommended next ste
 - `checkpoint/cloudflare-routing-note-20260518`
 - `checkpoint/bee-first-task-issue-flow-20260518`
 - `checkpoint/pr-discipline-guide-20260518`
+- `checkpoint/netlify-refresh-sop-20260518`
 
 ## 7. What was intentionally not done
 
