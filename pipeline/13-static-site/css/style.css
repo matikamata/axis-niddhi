@@ -788,6 +788,7 @@ footer { margin-top: 4.5rem; font-size: 0.85rem; opacity: 0.65; text-align: cent
   #reading-progress-hook, #ai-assistant-hook,
   .digestibility-suggestion, .silent-pause-block,
   #search-form, #search-results, #print-modal, #print-modal-overlay, #labz-banner,
+  .labz-ambient-layer,
   iframe, .youtube-wrapper, .video-container { display: none !important; }
 
   /* ── YouTube Print Marker ── */
@@ -1028,6 +1029,8 @@ body[data-theme="stardust"] {
 }
 
 body[data-theme="stardust"] main {
+  position: relative;
+  z-index: 1;
   box-shadow:
     0 0 0 1px rgba(0, 255, 65, 0.12),
     0 0 40px rgba(0, 255, 65, 0.04);
@@ -1103,6 +1106,128 @@ body[data-theme="stardust"] #labz-banner {
   opacity: 1;
   transform: none;
   pointer-events: auto;
+}
+
+/* 7. LABZ ambient side layer — decorative, inert, outside reading flow */
+.labz-ambient-layer {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 1101px) {
+  body[data-theme="stardust"] .labz-ambient-layer {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  body[data-theme="stardust"] .labz-ambient-side {
+    position: fixed;
+    top: 6rem;
+    bottom: 5rem;
+    width: 156px;
+    pointer-events: none;
+  }
+
+  body[data-theme="stardust"] .labz-ambient-side::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.44;
+  }
+
+  body[data-theme="stardust"] .labz-ambient-side-left {
+    left: max(1rem, calc((100vw - 840px) / 2 - 194px));
+  }
+
+  body[data-theme="stardust"] .labz-ambient-side-left::before {
+    background-image: url("../assets/labz/labz-ora-pro-nobis-left-mvp-01.webp");
+  }
+
+  body[data-theme="stardust"] .labz-ambient-side-right {
+    right: max(1rem, calc((100vw - 840px) / 2 - 194px));
+  }
+
+  body[data-theme="stardust"] .labz-ambient-side-right::before {
+    background-image: url("../assets/labz/labz-lily-right-mvp-01.webp");
+  }
+
+  body[data-theme="stardust"] .labz-ambient-motif {
+    position: absolute;
+    display: block;
+    width: 56px;
+    height: 92px;
+    border: 1px solid rgba(0, 255, 65, 0.18);
+    border-radius: 72% 6% 72% 6%;
+    background:
+      linear-gradient(135deg, rgba(0, 255, 65, 0.12), rgba(0, 230, 118, 0.02) 58%, transparent 60%),
+      linear-gradient(90deg, transparent 47%, rgba(0, 255, 65, 0.16) 49%, transparent 52%);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.035);
+    opacity: 0.16;
+    transform-origin: 50% 90%;
+  }
+
+  body[data-theme="stardust"] .labz-ambient-motif-1 {
+    top: 4%;
+    left: 28px;
+    transform: rotate(-18deg) scale(0.82);
+  }
+
+  body[data-theme="stardust"] .labz-ambient-motif-2 {
+    top: 38%;
+    left: 58px;
+    transform: rotate(14deg) scale(1.04);
+  }
+
+  body[data-theme="stardust"] .labz-ambient-motif-3 {
+    bottom: 6%;
+    left: 18px;
+    transform: rotate(-8deg) scale(0.9);
+  }
+
+  body[data-theme="stardust"] .labz-ambient-motif-4 {
+    top: 10%;
+    right: 24px;
+    transform: rotate(18deg) scale(0.86);
+  }
+
+  body[data-theme="stardust"] .labz-ambient-motif-5 {
+    top: 44%;
+    right: 58px;
+    transform: rotate(-14deg) scale(1);
+  }
+
+  body[data-theme="stardust"] .labz-ambient-motif-6 {
+    bottom: 4%;
+    right: 18px;
+    transform: rotate(10deg) scale(0.94);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body[data-theme="stardust"] .labz-ambient-motif {
+      animation: labzAmbientFloat 12s ease-in-out infinite alternate;
+    }
+
+    body[data-theme="stardust"] .labz-ambient-motif:nth-child(2) {
+      animation-duration: 15s;
+      animation-delay: -4s;
+    }
+
+    body[data-theme="stardust"] .labz-ambient-motif:nth-child(3) {
+      animation-duration: 18s;
+      animation-delay: -7s;
+    }
+  }
+}
+
+@keyframes labzAmbientFloat {
+  from { margin-top: 0; }
+  to { margin-top: 12px; }
 }
 
 /* ── END FF-013 ── */
