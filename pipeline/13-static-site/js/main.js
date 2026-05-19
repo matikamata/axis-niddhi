@@ -40,11 +40,13 @@ function toggleLabz() {
   const isActive = document.body.getAttribute('data-theme') === 'stardust';
   const btn    = document.getElementById('labz-btn');
   const banner = document.getElementById('labz-banner');
+  const THEME_KEY = 'br_theme';
 
   if (isActive) {
     // Restaurar tema anterior
     const prev = localStorage.getItem('axis-theme-pre-labz') || 'dark';
     document.body.setAttribute('data-theme', prev);
+    localStorage.setItem(THEME_KEY, prev);
     localStorage.setItem('axis-niddhi-theme', prev);
     localStorage.removeItem('axis-theme-pre-labz');
     btn    && btn.classList.remove('labz-active');
@@ -78,13 +80,16 @@ function toggleLabz() {
 
   function initTheme() {
     const saved = localStorage.getItem(THEME_KEY);
-    if (saved) document.body.setAttribute('data-theme', saved);
+    const labzState = localStorage.getItem('axis-niddhi-theme');
+    if (labzState === 'stardust') {
+      document.body.setAttribute('data-theme', 'stardust');
     // [FF-013] Restore labz button state if stardust was active
-    if (saved === 'stardust') {
       const btn = document.getElementById('labz-btn');
       const banner = document.getElementById('labz-banner');
       btn    && btn.classList.add('labz-active');
       banner && banner.classList.add('visible');
+    } else if (saved) {
+      document.body.setAttribute('data-theme', saved);
     }
 
     const container = document.getElementById('theme-controls');
@@ -96,7 +101,14 @@ function toggleLabz() {
       b.className = 'theme-btn';
       b.textContent = t.icon;
       b.onclick = () => {
-        document.body.setAttribute('data-theme', t.id);
+        const isLabzActive = document.body.getAttribute('data-theme') === 'stardust';
+        if (isLabzActive) {
+          // Em LABZ, trocar tema ajusta o "tema de saída" sem desligar o stardust.
+          localStorage.setItem('axis-theme-pre-labz', t.id);
+        } else {
+          document.body.setAttribute('data-theme', t.id);
+          localStorage.setItem('axis-niddhi-theme', t.id);
+        }
         localStorage.setItem(THEME_KEY, t.id);
       };
       container.appendChild(b);
