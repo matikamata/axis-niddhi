@@ -17,19 +17,37 @@ jobs:
         with:
           node-version: '24'
 
-      - name: 🚀 Preparando a Ponte (Instalando Farol Oficial)
-        run: npm install -g @lighthouse-web3/sdk
+      - name: 🚀 Preparando a Ponte (Instalando SDK Puro)
+        run: npm install @lighthouse-web3/sdk
 
-      - name: 🌌 Fixando a Joia no IPFS (Com Escudo TTY)
+      - name: 🌌 Fixando a Joia no IPFS (Via Código Puro)
         env:
           LIGHTHOUSE_API_KEY: ${{ secrets.LIGHTHOUSE_API_KEY }}
         run: |
-          echo "Criando o escudo de proteção visual..."
-          echo "process.stdout.clearLine = function() {}; process.stdout.cursorTo = function() {};" > escudo.js
-          export NODE_OPTIONS="--require ./escudo.js"
+          cat << 'EOF' > deploy.mjs
+          import lighthouse from '@lighthouse-web3/sdk';
           
-          echo "Guardando a chave no coração do monge-assistente..."
-          lighthouse-web3 api-key --import $LIGHTHOUSE_API_KEY
-          
-          echo "Iniciando a Entrega ao cosmos com perfeição..."
-          echo "Y" | lighthouse-web3 upload pipeline/13-static-site
+          async function run() {
+            console.log('Iniciando a oferenda ao cosmos (sem senhas, sem perguntas, apenas luz)...');
+            try {
+              const uploadResponse = await lighthouse.upload('./pipeline/13-static-site', process.env.LIGHTHOUSE_API_KEY);
+              const data = uploadResponse.data;
+              
+              console.log('\n✅ Oferenda de 400MB ancorada em Svalbard com sucesso!');
+              
+              // O IPFS devolve a lista de arquivos. Vamos extrair apenas o CID da pasta principal!
+              if (Array.isArray(data)) {
+                const root = data.find(item => item.Name === '13-static-site') || data[data.length - 1];
+                console.log('\n💎💎💎 SEU NOVO CID É: ' + root.Hash + ' 💎💎💎\n');
+              } else {
+                console.log('\n💎💎💎 SEU NOVO CID É: ' + data.Hash + ' 💎💎💎\n');
+              }
+              
+            } catch (e) {
+              console.error('Tropeço cósmico:', e);
+              process.exit(1);
+            }
+          }
+          run();
+          EOF
+          node deploy.mjs
