@@ -17,10 +17,12 @@ jobs:
         with:
           node-version: '24'
 
-      - name: 🚀 Invocando o Farol (Instalando Lighthouse CLI)
+      - name: 🚀 Invocando o Farol (Instalando Lighthouse SDK)
         run: npm install -g @lighthouse-web3/sdk
 
       - name: 🌌 Fixando a Joia no IPFS (Upload para Svalbard)
         run: |
+          echo "Guardando a chave no coração do monge-assistente..."
+          lighthouse-web3 api-key --import ${{ secrets.LIGHTHOUSE_API_KEY }}
           echo "Iniciando a oferenda ao cosmos..."
-          lighthouse-web3 upload . --token ${{ secrets.LIGHTHOUSE_API_KEY }}
+          lighthouse-web3 upload .
