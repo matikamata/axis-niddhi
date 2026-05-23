@@ -1,0 +1,26 @@
+name: Deploy DhammaSeed para Lighthouse IPFS
+
+on:
+  push:
+    branches:
+      - main # (Se o seu branch principal chamar 'master', mude aqui)
+
+jobs:
+  deploy-to-ipfs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧘‍♂️ Meditação Inicial (Checkout do Repositório)
+        uses: actions/checkout@v4
+
+      - name: 📦 Preparando o Solo (Instalando Node.js)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 🚀 Invocando o Farol (Instalando Lighthouse CLI)
+        run: npm install -g @lighthouse-web3/cli
+
+      - name: 🌌 Fixando a Joia no IPFS (Upload para Svalbard)
+        run: |
+          echo "Iniciando a oferenda ao cosmos..."
+          lighthouse-web3 upload . --token ${{ secrets.LIGHTHOUSE_API_KEY }}
