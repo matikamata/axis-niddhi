@@ -17,37 +17,19 @@ jobs:
         with:
           node-version: '24'
 
-      - name: 🚀 Preparando a Ponte (Instalando SDK Puro)
-        run: npm install @lighthouse-web3/sdk
+      - name: 🚀 Preparando a Ponte (Instalando Farol Oficial)
+        run: npm install -g @lighthouse-web3/sdk
 
-      - name: 🌌 Fixando a Joia no IPFS e Revelando o CID
+      - name: 🌌 Fixando a Joia no IPFS (Com Escudo TTY)
         env:
           LIGHTHOUSE_API_KEY: ${{ secrets.LIGHTHOUSE_API_KEY }}
         run: |
-          cat << 'EOF' > deploy.mjs
-          import lighthouse from '@lighthouse-web3/sdk';
+          echo "Criando o escudo de proteção visual..."
+          echo "process.stdout.clearLine = function() {}; process.stdout.cursorTo = function() {};" > escudo.js
+          export NODE_OPTIONS="--require ./escudo.js"
           
-          async function run() {
-            console.log('Iniciando a oferenda ao cosmos (sem firulas visuais)...');
-            try {
-              const uploadResponse = await lighthouse.upload('./pipeline/13-static-site', process.env.LIGHTHOUSE_API_KEY);
-              const data = uploadResponse.data;
-              
-              console.log('\n✅ Oferenda ancorada em Svalbard com sucesso!');
-              
-              // O IPFS as vezes retorna uma lista de arquivos, nós queremos a raiz (a pasta principal)
-              if (Array.isArray(data)) {
-                const root = data.find(item => item.Name === '13-static-site') || data[data.length - 1];
-                console.log('💎 SEU NOVO CID É: ' + root.Hash);
-              } else {
-                console.log('💎 SEU NOVO CID É: ' + data.Hash);
-              }
-              
-            } catch (e) {
-              console.error('Tropeço cósmico:', e);
-              process.exit(1);
-            }
-          }
-          run();
-          EOF
-          node deploy.mjs
+          echo "Guardando a chave no coração do monge-assistente..."
+          lighthouse-web3 api-key --import $LIGHTHOUSE_API_KEY
+          
+          echo "Iniciando a oferenda ao cosmos com perfeição..."
+          lighthouse-web3 upload pipeline/13-static-site
