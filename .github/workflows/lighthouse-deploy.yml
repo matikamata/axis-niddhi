@@ -20,31 +20,34 @@ jobs:
       - name: 🚀 Preparando a Ponte (Instalando SDK Puro)
         run: npm install @lighthouse-web3/sdk
 
-      - name: 🌌 Fixando a Joia no IPFS e Revelando a Verdade
+      - name: 🌌 Fixando a Joia no IPFS (Com Poder Supremo e Mente Expandida)
         env:
           LIGHTHOUSE_API_KEY: ${{ secrets.LIGHTHOUSE_API_KEY }}
+          NODE_OPTIONS: "--max-old-space-size=8192"
         run: |
           cat << 'EOF' > deploy.mjs
           import lighthouse from '@lighthouse-web3/sdk';
+          import path from 'path';
           
           async function run() {
-            console.log('Iniciando a oferenda ao cosmos (aproveitando o que já subiu)...');
+            // Mapeando a rota absoluta para não haver ilusões
+            const folderPath = path.resolve('./pipeline/13-static-site');
+            console.log('Iniciando a oferenda ao cosmos... 🌌');
+            console.log('Caminho Absoluto da Semente:', folderPath);
+            
             try {
-              const uploadResponse = await lighthouse.upload('./pipeline/13-static-site', process.env.LIGHTHOUSE_API_KEY);
+              // O monge agora tem 8GB de RAM para fazer isso sem suar!
+              const uploadResponse = await lighthouse.upload(folderPath, process.env.LIGHTHOUSE_API_KEY);
               const data = uploadResponse.data;
               
-              console.log('\n✅ Oferenda concluída!');
+              console.log('\n✅ Entrega ancorada! Registro Akáshico do Lighthouse:');
+              console.log(JSON.stringify(data, null, 2)); // Imprimimos tudo para termos a prova visual!
               
               if (Array.isArray(data)) {
-                // Imprime a lista completa (para nossa garantia visual)
-                console.log(JSON.stringify(data, null, 2));
-                
-                // O diretório raiz é sempre o que tem o maior tamanho (size)
-                // O Lighthouse retorna o tamanho como string ('402000000'), então convertemos para número.
+                // A pasta raiz é SEMPRE a que pesa mais! Vamos garimpar o maior de todos:
                 const root = data.reduce((maior, atual) => {
                   return (Number(atual.Size) > Number(maior.Size)) ? atual : maior;
                 });
-                
                 console.log('\n💎💎💎 A RAIZ DO SEU SITE É O CID: ' + root.Hash + ' 💎💎💎\n');
               } else {
                 console.log('\n💎💎💎 SEU NOVO CID É: ' + data.Hash + ' 💎💎💎\n');
