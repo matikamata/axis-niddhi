@@ -187,6 +187,7 @@ def render_post(
     asset_map: Dict[str, str],
     glossary: Dict[str, Any],
     nav_tree: Optional[List[Section]] = None,
+    derived_media: Optional[Dict[str, Any]] = None,
 ) -> str:
     """
     Renders a single post to HTML, injecting ALL variables required by post.html:
@@ -282,6 +283,7 @@ def render_post(
         meta_level            = meta_level,
         meta_reading_time     = meta_reading_time,
         suggestion_block      = suggestion_block,
+        derived_media         = derived_media or {},
     )
 
 
@@ -297,6 +299,7 @@ def render_posts(
     slug_resolver: "LinkResolver",
     asset_map: Dict[str, str],
     glossary: Dict[str, Any],
+    derived_media_manifest: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, int]:
     """
     Renderiza todos os posts com build incremental via cache.
@@ -320,6 +323,7 @@ def render_posts(
 
     csl_root = posts[0].source_dir.parent if posts else output_dir
     _glossary = load_glossary(csl_root) or glossary
+    derived_media_manifest = derived_media_manifest or {}
 
     for post in posts:
         try:
@@ -345,6 +349,7 @@ def render_posts(
                 asset_map     = asset_map,
                 glossary      = _glossary or glossary,
                 nav_tree      = nav_tree,
+                derived_media = derived_media_manifest.get(post.pdpn, {}),
             )
             out_file.write_text(html, encoding="utf-8")
 
