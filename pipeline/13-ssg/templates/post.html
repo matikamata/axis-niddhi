@@ -114,16 +114,25 @@
         ))
     %}
     {% if has_derived_media_links %}
+    {% set derived_media_labels = derived_media.labels or {} %}
     <section class="derived-media-companion"
              aria-labelledby="derived-media-title-{{ post.pdpn }}"
              data-source-pdpn="{{ derived_media.source_pdpn }}"
              data-review-status="{{ derived_media.review_status }}">
-        <h2 id="derived-media-title-{{ post.pdpn }}">Auxiliary derived media</h2>
-        <p>This NotebookLM-generated companion material is auxiliary. The CSL remains the source of truth.</p>
+        <h2 id="derived-media-title-{{ post.pdpn }}">{{ derived_media_labels.heading or 'Auxiliary derived media' }}</h2>
+        <p>{{ derived_media_labels.note or 'This NotebookLM-generated companion material is auxiliary. The CSL remains the source of truth.' }}</p>
 
         {% if derived_media.summary and derived_media.summary.path %}
+        {% if derived_media.summary.html %}
+        <details class="derived-media-summary" aria-label="{{ derived_media_labels.summary_label or 'Auxiliary summary' }}">
+            <summary>{{ derived_media_labels.summary_details_label or 'Read auxiliary summary' }}</summary>
+            <div class="derived-media-summary-body">
+                {{ derived_media.summary.html | safe }}
+            </div>
+        </details>
+        {% endif %}
         <p>
-            <a href="{{ relative_root }}{{ derived_media.summary.path }}">Auxiliary summary</a>
+            <a href="{{ relative_root }}{{ derived_media.summary.path }}">{{ derived_media_labels.raw_summary_label or 'Open Markdown summary' }}</a>
         </p>
         {% endif %}
 

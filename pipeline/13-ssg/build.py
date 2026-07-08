@@ -39,6 +39,7 @@ import hashlib
 import re
 import unicodedata
 from datetime import datetime, timezone
+from html import escape
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from urllib.parse import quote, unquote
@@ -421,6 +422,36 @@ def _safe_derived_summary_path(path_value: str) -> Optional[Path]:
     return rel_path
 
 
+def _render_derived_summary_html(text: str) -> str:
+    """Render a tiny escaped Markdown subset for inline derived summaries."""
+    blocks: List[str] = []
+    paragraph_lines: List[str] = []
+
+    def flush_paragraph() -> None:
+        if not paragraph_lines:
+            return
+        paragraph = " ".join(line.strip() for line in paragraph_lines if line.strip())
+        paragraph_lines.clear()
+        if paragraph:
+            blocks.append(f"<p>{escape(paragraph)}</p>")
+
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            flush_paragraph()
+            continue
+        if stripped.startswith("# "):
+            flush_paragraph()
+            heading = stripped[2:].strip()
+            if heading:
+                blocks.append(f"<h3>{escape(heading)}</h3>")
+            continue
+        paragraph_lines.append(stripped)
+
+    flush_paragraph()
+    return "\n".join(blocks)
+
+
 def _sanitize_derived_summary(pdpn: str, summary: Any) -> Optional[Dict[str, Any]]:
     if not isinstance(summary, dict):
         if summary not in (None, ""):
@@ -472,6 +503,8 @@ def _sanitize_derived_summary(pdpn: str, summary: Any) -> Optional[Dict[str, Any
         logger.warning(f"🚨 Derived summary dropped for {pdpn}: forbidden marker in file.")
         return None
 
+    summary_html = _render_derived_summary_html(text)
+
     declared_sha = _sanitize_derived_media_sha256(pdpn, "summary.sha256", summary.get("sha256"))
     actual_sha = hashlib.sha256(raw).hexdigest()
     if summary.get("sha256") not in (None, "") and declared_sha != actual_sha:
@@ -481,6 +514,8 @@ def _sanitize_derived_summary(pdpn: str, summary: Any) -> Optional[Dict[str, Any
     sanitized: Dict[str, Any] = {"path": rel_path.as_posix()}
     if declared_sha:
         sanitized["sha256"] = declared_sha
+    if summary_html:
+        sanitized["html"] = summary_html
     return sanitized
 
 
