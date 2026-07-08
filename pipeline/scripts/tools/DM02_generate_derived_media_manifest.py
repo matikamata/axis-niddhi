@@ -75,6 +75,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--registry", default=str(DEFAULT_REGISTRY), help="Registry CSV path.")
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Manifest JSON output path.")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate and preview the manifest without writing the output file.",
+    )
     return parser.parse_args()
 
 
@@ -141,7 +146,7 @@ def parse_bytes(value: str, row_number: int, field: str) -> int:
 
 def load_registry(path: Path) -> List[Tuple[int, Dict[str, str]]]:
     if not path.exists():
-        print(f"WARNING: registry absent; writing empty manifest: {path}")
+        print(f"WARNING: registry absent; manifest will be empty: {path}")
         return []
 
     with path.open("r", encoding="utf-8", newline="") as fh:
@@ -265,7 +270,8 @@ def main() -> int:
                 approved[pdpn] = build_entry(row)
 
         manifest = {pdpn: approved[pdpn] for pdpn in sorted(approved)}
-        write_manifest(output, manifest)
+        if not args.dry_run:
+            write_manifest(output, manifest)
     except RegistryError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
@@ -274,7 +280,10 @@ def main() -> int:
         return 1
 
     print(f"derived media manifest entries: {len(manifest)}")
-    print(f"output: {output}")
+    if args.dry_run:
+        print(f"dry-run: would write output: {output}")
+    else:
+        print(f"output: {output}")
     return 0
 
 

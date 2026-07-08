@@ -113,6 +113,9 @@ DERIVED_MEDIA_FORBIDDEN_MARKERS = [
     "C:\\",
 ]
 DERIVED_MEDIA_MAX_SUMMARY_BYTES = 1024 * 1024
+DERIVED_MEDIA_PDPN_RE = re.compile(r"^[A-Z]{2}\.[A-Z]{2}\.\d{3}$")
+DERIVED_MEDIA_SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
+DERIVED_MEDIA_BLOCKED_URL_PREFIXES = ("file://", "javascript:", "data:")
 
 # ── Logging ─────────────────────────────────────────────────────────────────
 LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -327,12 +330,88 @@ def _has_derived_media_forbidden_marker(text: str) -> bool:
     return any(marker.upper() in upper_text for marker in DERIVED_MEDIA_FORBIDDEN_MARKERS)
 
 
+def _derived_media_has_unsafe_path_shape(value: str) -> bool:
+    normalized = value.replace("\\", "/")
+    parts = normalized.split("/")
+    return (
+        normalized.startswith("/")
+        or normalized.startswith("~")
+        or ".." in parts
+        or re.match(r"^[A-Za-z]:[\\/]", value) is not None
+    )
+
+
+def _sanitize_derived_media_url(pdpn: str, field: str, value: Any) -> Optional[str]:
+    if value in (None, ""):
+        return None
+    if not isinstance(value, str):
+        logger.warning(f"⚠️  Derived media {field} dropped for {pdpn}: expected string.")
+        return None
+
+    url = value.strip()
+    lower_url = url.lower()
+    if not url:
+        return None
+    if lower_url.startswith(DERIVED_MEDIA_BLOCKED_URL_PREFIXES):
+        logger.warning(f"🚨 Derived media {field} dropped for {pdpn}: unsafe URL scheme.")
+        return None
+    if not (url.startswith("https://") or url.startswith("http://")):
+        logger.warning(f"🚨 Derived media {field} dropped for {pdpn}: URL must be http(s).")
+        return None
+    if _has_derived_media_forbidden_marker(url):
+        logger.warning(f"🚨 Derived media {field} dropped for {pdpn}: forbidden marker.")
+        return None
+    if _derived_media_has_unsafe_path_shape(url):
+        logger.warning(f"🚨 Derived media {field} dropped for {pdpn}: local path marker.")
+        return None
+
+    return url
+
+
+def _sanitize_derived_media_sha256(pdpn: str, field: str, value: Any) -> Optional[str]:
+    if value in (None, ""):
+        return None
+    if not isinstance(value, str):
+        logger.warning(f"⚠️  Derived media {field} dropped for {pdpn}: expected string.")
+        return None
+    digest = value.strip()
+    if _has_derived_media_forbidden_marker(digest):
+        logger.warning(f"🚨 Derived media {field} dropped for {pdpn}: forbidden marker.")
+        return None
+    if not DERIVED_MEDIA_SHA256_RE.match(digest):
+        logger.warning(f"⚠️  Derived media {field} dropped for {pdpn}: invalid sha256.")
+        return None
+    return digest.lower()
+
+
+def _sanitize_derived_media_bytes(pdpn: str, field: str, value: Any) -> Optional[int]:
+    if value in (None, ""):
+        return None
+    if isinstance(value, bool):
+        logger.warning(f"⚠️  Derived media {field} dropped for {pdpn}: invalid bytes.")
+        return None
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        logger.warning(f"⚠️  Derived media {field} dropped for {pdpn}: invalid bytes.")
+        return None
+    if parsed < 0:
+        logger.warning(f"⚠️  Derived media {field} dropped for {pdpn}: negative bytes.")
+        return None
+    return parsed
+
+
 def _safe_derived_summary_path(path_value: str) -> Optional[Path]:
     if not path_value:
         return None
     normalized = path_value.replace("\\", "/")
     parts = normalized.split("/")
-    if normalized.startswith("/") or normalized.startswith("~") or ".." in parts:
+    if (
+        normalized.startswith("/")
+        or normalized.startswith("~")
+        or ".." in parts
+        or re.match(r"^[A-Za-z]:[\\/]", path_value) is not None
+    ):
         return None
     if not normalized.startswith("derived_media/summaries/"):
         return None
@@ -340,6 +419,160 @@ def _safe_derived_summary_path(path_value: str) -> Optional[Path]:
     if rel_path.suffix.lower() not in {".md", ".txt"}:
         return None
     return rel_path
+
+
+def _sanitize_derived_summary(pdpn: str, summary: Any) -> Optional[Dict[str, Any]]:
+    if not isinstance(summary, dict):
+        if summary not in (None, ""):
+            logger.warning(f"⚠️  Derived summary dropped for {pdpn}: expected object.")
+        return None
+
+    path_value = summary.get("path", "")
+    if not isinstance(path_value, str):
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: path must be a string.")
+        return None
+    if _has_derived_media_forbidden_marker(path_value):
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: forbidden marker in path.")
+        return None
+
+    rel_path = _safe_derived_summary_path(path_value.strip())
+    if rel_path is None:
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: unsafe path.")
+        return None
+
+    source_file = (PIPELINE_ROOT / rel_path).resolve()
+    summary_root = (PIPELINE_ROOT / "derived_media" / "summaries").resolve()
+    try:
+        source_file.relative_to(summary_root)
+    except ValueError:
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: path escapes summaries dir.")
+        return None
+
+    if not source_file.exists():
+        logger.warning(f"⚠️  Derived summary dropped for {pdpn}: missing file {rel_path}.")
+        return None
+
+    try:
+        raw = source_file.read_bytes()
+    except Exception as e:
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: read failed: {e}")
+        return None
+
+    if len(raw) > DERIVED_MEDIA_MAX_SUMMARY_BYTES:
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: file too large.")
+        return None
+
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: not UTF-8.")
+        return None
+
+    if _has_derived_media_forbidden_marker(text):
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: forbidden marker in file.")
+        return None
+
+    declared_sha = _sanitize_derived_media_sha256(pdpn, "summary.sha256", summary.get("sha256"))
+    actual_sha = hashlib.sha256(raw).hexdigest()
+    if summary.get("sha256") not in (None, "") and declared_sha != actual_sha:
+        logger.warning(f"🚨 Derived summary dropped for {pdpn}: sha256 mismatch.")
+        return None
+
+    sanitized: Dict[str, Any] = {"path": rel_path.as_posix()}
+    if declared_sha:
+        sanitized["sha256"] = declared_sha
+    return sanitized
+
+
+def _sanitize_derived_av(pdpn: str, kind: str, value: Any) -> Optional[Dict[str, Any]]:
+    if not isinstance(value, dict):
+        if value not in (None, ""):
+            logger.warning(f"⚠️  Derived {kind} dropped for {pdpn}: expected object.")
+        return None
+
+    sanitized: Dict[str, Any] = {}
+    url = _sanitize_derived_media_url(pdpn, f"{kind}.url", value.get("url"))
+    if url:
+        sanitized["url"] = url
+
+    digest = _sanitize_derived_media_sha256(pdpn, f"{kind}.sha256", value.get("sha256"))
+    if digest:
+        sanitized["sha256"] = digest
+
+    byte_count = _sanitize_derived_media_bytes(pdpn, f"{kind}.bytes", value.get("bytes"))
+    if byte_count is not None:
+        sanitized["bytes"] = byte_count
+
+    return sanitized or None
+
+
+def _sanitize_derived_external(pdpn: str, external: Any) -> Optional[Dict[str, str]]:
+    if not isinstance(external, dict):
+        if external not in (None, ""):
+            logger.warning(f"⚠️  Derived external links dropped for {pdpn}: expected object.")
+        return None
+
+    sanitized: Dict[str, str] = {}
+    for key in ("telegram", "spotify", "youtube"):
+        url = _sanitize_derived_media_url(pdpn, f"external.{key}", external.get(key))
+        if url:
+            sanitized[key] = url
+
+    return sanitized or None
+
+
+def _derived_entry_has_renderable_item(entry: Dict[str, Any]) -> bool:
+    summary = entry.get("summary") if isinstance(entry.get("summary"), dict) else {}
+    audio = entry.get("audio") if isinstance(entry.get("audio"), dict) else {}
+    video = entry.get("video") if isinstance(entry.get("video"), dict) else {}
+    external = entry.get("external") if isinstance(entry.get("external"), dict) else {}
+    return bool(
+        summary.get("path")
+        or audio.get("url")
+        or video.get("url")
+        or external.get("telegram")
+        or external.get("spotify")
+        or external.get("youtube")
+    )
+
+
+def _sanitize_derived_media_entry(pdpn: str, entry: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    review_status = entry.get("review_status", "")
+    if review_status != "approved":
+        logger.warning(f"⚠️  Derived media entry skipped for {pdpn}: not approved.")
+        return None
+
+    source_pdpn = entry.get("source_pdpn") or pdpn
+    if source_pdpn != pdpn:
+        logger.warning(f"🚨 Derived media entry skipped for {pdpn}: source_pdpn mismatch.")
+        return None
+
+    sanitized: Dict[str, Any] = {
+        "source_pdpn": pdpn,
+        "review_status": "approved",
+    }
+
+    summary = _sanitize_derived_summary(pdpn, entry.get("summary"))
+    if summary:
+        sanitized["summary"] = summary
+
+    audio = _sanitize_derived_av(pdpn, "audio", entry.get("audio"))
+    if audio:
+        sanitized["audio"] = audio
+
+    video = _sanitize_derived_av(pdpn, "video", entry.get("video"))
+    if video:
+        sanitized["video"] = video
+
+    external = _sanitize_derived_external(pdpn, entry.get("external"))
+    if external:
+        sanitized["external"] = external
+
+    if not _derived_entry_has_renderable_item(sanitized):
+        logger.warning(f"⚠️  Derived media entry skipped for {pdpn}: no renderable items.")
+        return None
+
+    return sanitized
 
 
 def _load_derived_media_manifest() -> Dict[str, Any]:
@@ -357,10 +590,6 @@ def _load_derived_media_manifest() -> Dict[str, Any]:
         logger.warning(f"⚠️  Could not read derived media manifest: {e}")
         return {}
 
-    if _has_derived_media_forbidden_marker(raw):
-        logger.warning("🚨 Derived media manifest blocked due to forbidden marker.")
-        return {}
-
     try:
         manifest = json.loads(raw or "{}")
     except Exception as e:
@@ -372,15 +601,16 @@ def _load_derived_media_manifest() -> Dict[str, Any]:
         return {}
 
     safe_manifest: Dict[str, Any] = {}
-    pdpn_re = re.compile(r"^[A-Z]{2}\.[A-Z]{2}\.\d{3}$")
     for pdpn, entry in manifest.items():
-        if not pdpn_re.match(str(pdpn)):
+        if not DERIVED_MEDIA_PDPN_RE.match(str(pdpn)):
             logger.warning(f"⚠️  Derived media entry skipped due invalid PDPN: {pdpn}")
             continue
         if not isinstance(entry, dict):
             logger.warning(f"⚠️  Derived media entry skipped; expected object: {pdpn}")
             continue
-        safe_manifest[str(pdpn)] = entry
+        sanitized_entry = _sanitize_derived_media_entry(str(pdpn), entry)
+        if sanitized_entry:
+            safe_manifest[str(pdpn)] = sanitized_entry
 
     if safe_manifest:
         logger.info(f"📦 Derived media companion entries loaded: {len(safe_manifest)}")

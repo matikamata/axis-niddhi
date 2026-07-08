@@ -359,7 +359,12 @@ def main() -> int:
                 if (row.get("pdpn") or "").strip() == pdpn
             }
             if "approved" in statuses:
-                warnings.append(f"{pdpn}: approved registry row already exists; preserving it")
+                warnings.append(f"{pdpn}: approved registry row already exists; preserving it.")
+            else:
+                warnings.append(
+                    f"{pdpn}: registry row already exists; not appending. "
+                    "Manually update if new candidates appeared."
+                )
             continue
         try:
             rows_to_append.append(build_registry_row(pdpn, grouped[pdpn], warnings))

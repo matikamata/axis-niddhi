@@ -37,6 +37,14 @@ Only small text summaries may live in:
 pipeline/derived_media/summaries/
 ```
 
+`DM01` scans summary candidates in staging, but it does not copy them into the repository. After review, the operator must manually place approved small UTF-8 text summaries under `pipeline/derived_media/summaries/`.
+
+Suggested summary naming:
+
+```text
+pipeline/derived_media/summaries/TL.BB.002.pt-BR.md
+```
+
 Do not copy `.m4a`, `.mp3`, `.wav`, `.mp4`, or `.webm` files into `pipeline/13-static-site/`.
 
 ## Registry And Manifest
@@ -63,6 +71,8 @@ If the manifest is absent or empty, the build is a graceful no-op. Static pages 
 
 When approved manifest entries exist, the static renderer adds a minimal unstyled "Auxiliary derived media" block to the matching PDPN page. Summary, audio, video, and external links are labeled as auxiliary material. They do not replace the Canon.
 
+The static build sanitizes the manifest again before rendering. Unsafe, missing, oversized, non-UTF-8, or hash-mismatched summaries are suppressed before templates see them, so missing summary files do not create broken page links.
+
 ## Commands
 
 Run from `pipeline/`:
@@ -70,5 +80,6 @@ Run from `pipeline/`:
 ```bash
 python3 scripts/tools/DM01_scan_derived_media.py --dry-run --verbose
 python3 scripts/tools/DM01_scan_derived_media.py --apply
+python3 scripts/tools/DM02_generate_derived_media_manifest.py --dry-run
 python3 scripts/tools/DM02_generate_derived_media_manifest.py
 ```
