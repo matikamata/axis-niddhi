@@ -119,8 +119,8 @@
              aria-labelledby="derived-media-title-{{ post.pdpn }}"
              data-source-pdpn="{{ derived_media.source_pdpn }}"
              data-review-status="{{ derived_media.review_status }}">
-        <h2 id="derived-media-title-{{ post.pdpn }}">{{ derived_media_labels.heading or 'Auxiliary derived media' }}</h2>
-        <p>{{ derived_media_labels.note or 'This NotebookLM-generated companion material is auxiliary. The CSL remains the source of truth.' }}</p>
+        <h2 id="derived-media-title-{{ post.pdpn }}" class="derived-media-kicker">{{ derived_media_labels.heading or 'Auxiliary derived media' }}</h2>
+        <p class="derived-media-note">{{ derived_media_labels.note or 'This NotebookLM-generated companion material is auxiliary. The CSL remains the source of truth.' }}</p>
 
         {% if derived_media.summary and derived_media.summary.path %}
         {% if derived_media.summary.html %}
@@ -131,27 +131,27 @@
             </div>
         </details>
         {% endif %}
-        <p>
+        <p class="derived-media-raw-link">
             <a href="{{ relative_root }}{{ derived_media.summary.path }}">{{ derived_media_labels.raw_summary_label or 'Open Markdown summary' }}</a>
         </p>
         {% endif %}
 
         {% if derived_media.audio and derived_media.audio.url %}
-        <div>
+        <div class="derived-media-audio">
             <p>Auxiliary audio</p>
             <audio controls preload="metadata" src="{{ derived_media.audio.url }}"></audio>
         </div>
         {% endif %}
 
         {% if derived_media.video and derived_media.video.url %}
-        <div>
+        <div class="derived-media-video">
             <p>Auxiliary video</p>
             <video controls preload="metadata" src="{{ derived_media.video.url }}"></video>
         </div>
         {% endif %}
 
         {% if derived_media.external %}
-        <ul>
+        <ul class="derived-media-external">
             {% if derived_media.external.telegram %}
             <li><a href="{{ derived_media.external.telegram }}" target="_blank" rel="noopener noreferrer">Auxiliary Telegram link</a></li>
             {% endif %}
