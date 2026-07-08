@@ -130,6 +130,52 @@ def _classify_level(section_code: str) -> str:
     advanced = {"AB", "BA", "QD", "PS"}
     return "advanced" if section_code in advanced else "intermediate"
 
+
+_DERIVED_MEDIA_LABELS = {
+    "pt-BR": {
+        "heading": "Material auxiliar derivado",
+        "note": "Este material complementar gerado pelo NotebookLM é auxiliar. A CSL continua sendo a fonte de verdade.",
+        "summary_label": "Resumo auxiliar",
+        "summary_details_label": "Ler resumo auxiliar",
+        "raw_summary_label": "Abrir resumo em Markdown",
+    },
+    "en-US": {
+        "heading": "Auxiliary derived media",
+        "note": "This NotebookLM-generated companion material is auxiliary. The CSL remains the source of truth.",
+        "summary_label": "Auxiliary summary",
+        "summary_details_label": "Read auxiliary summary",
+        "raw_summary_label": "Open Markdown summary",
+    },
+}
+
+
+def _detect_derived_summary_language(summary_path: str, post: Post) -> str:
+    normalized = (summary_path or "").lower()
+    if ".pt-br." in normalized or normalized.endswith((".pt-br.md", ".pt-br.txt")):
+        return "pt-BR"
+    if ".en-us." in normalized or normalized.endswith((".en-us.md", ".en-us.txt")):
+        return "en-US"
+    return "pt-BR" if post.has_pt else "en-US"
+
+
+def _prepare_derived_media_for_template(
+    derived_media: Optional[Dict[str, Any]],
+    post: Post,
+) -> Dict[str, Any]:
+    if not isinstance(derived_media, dict):
+        return {}
+
+    prepared = dict(derived_media)
+    summary_path = ""
+    summary = prepared.get("summary")
+    if isinstance(summary, dict):
+        prepared["summary"] = dict(summary)
+        summary_path = str(summary.get("path", ""))
+
+    language = _detect_derived_summary_language(summary_path, post)
+    prepared["labels"] = dict(_DERIVED_MEDIA_LABELS.get(language, _DERIVED_MEDIA_LABELS["en-US"]))
+    return prepared
+
 # ── Section lookup helpers ────────────────────────────────────────────────────
 
 def _build_section_map(nav_tree: List[Section]) -> Dict[str, Section]:
@@ -266,6 +312,7 @@ def render_post(
 
     # ── 6. Relative root: pages/PDPN/index.html is 2 levels deep → ../../
     relative_root = "../../"
+    derived_media_for_template = _prepare_derived_media_for_template(derived_media, post)
 
     # ── 7. Render ──────────────────────────────────────────────────────────
     template = template_env.get_template("post.html")
@@ -283,7 +330,7 @@ def render_post(
         meta_level            = meta_level,
         meta_reading_time     = meta_reading_time,
         suggestion_block      = suggestion_block,
-        derived_media         = derived_media or {},
+        derived_media         = derived_media_for_template,
     )
 
 
