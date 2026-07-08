@@ -96,6 +96,7 @@ ASSET_MAP_PRIMARY_FILE = ASSETS_DIR / "asset_map.json"
 ASSET_MAP_FALLBACK_FILE = METADATA_DIR / "asset_map.json"
 SLUG_MAP_FILE  = METADATA_DIR / "slug_map.json"   # gerado internamente se ausente
 GLOSSARY_CSV   = METADATA_DIR / "Glossario_v5.csv"  # fonte canônica: termo_en,termo_pt (sem cabeçalho)
+DERIVED_MEDIA_MANIFEST_FILE = METADATA_DIR / "derived_media_manifest.json"
 
 ENGINE_VERSION = "3.0.2-S14-S15-C1-C3"  # PATCH S15: constante centralizada
 CF_PAGES_MAX_BYTES = int(os.environ.get("BENG_PAGES_MAX_FILE_BYTES", str(25 * 1024 * 1024)))
@@ -104,6 +105,14 @@ EXTERNAL_UPLOADS_BASE = os.environ.get(
     "https://puredhamma.net/wp-content/uploads",
 ).rstrip("/")
 LOCAL_WP_PREFIXES = {"beng_feb2026", "brasileirinho"}
+DERIVED_MEDIA_FORBIDDEN_MARKERS = [
+    "GOOGLE_APPLICATION_CREDENTIALS",
+    "PRIVATE KEY",
+    "SECRET",
+    "/home/",
+    "C:\\",
+]
+DERIVED_MEDIA_MAX_SUMMARY_BYTES = 1024 * 1024
 
 # ── Logging ─────────────────────────────────────────────────────────────────
 LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -311,6 +320,149 @@ def _copy_nana_static_artifacts() -> None:
         logger.info(f"🧠 copied {copied} NANA static artifact(s).")
         if blocked > 0:
             logger.warning(f"🚨 {blocked} blocked due to forbidden markers.")
+
+
+def _has_derived_media_forbidden_marker(text: str) -> bool:
+    upper_text = text.upper()
+    return any(marker.upper() in upper_text for marker in DERIVED_MEDIA_FORBIDDEN_MARKERS)
+
+
+def _safe_derived_summary_path(path_value: str) -> Optional[Path]:
+    if not path_value:
+        return None
+    normalized = path_value.replace("\\", "/")
+    parts = normalized.split("/")
+    if normalized.startswith("/") or normalized.startswith("~") or ".." in parts:
+        return None
+    if not normalized.startswith("derived_media/summaries/"):
+        return None
+    rel_path = Path(normalized)
+    if rel_path.suffix.lower() not in {".md", ".txt"}:
+        return None
+    return rel_path
+
+
+def _load_derived_media_manifest() -> Dict[str, Any]:
+    """
+    Loads optional derived media companion data.
+    Graceful no-op: missing, empty, or unsafe manifests are skipped.
+    """
+    if not DERIVED_MEDIA_MANIFEST_FILE.exists():
+        logger.info("📦 Derived media manifest not found; skipping companion layer.")
+        return {}
+
+    try:
+        raw = DERIVED_MEDIA_MANIFEST_FILE.read_text(encoding="utf-8")
+    except Exception as e:
+        logger.warning(f"⚠️  Could not read derived media manifest: {e}")
+        return {}
+
+    if _has_derived_media_forbidden_marker(raw):
+        logger.warning("🚨 Derived media manifest blocked due to forbidden marker.")
+        return {}
+
+    try:
+        manifest = json.loads(raw or "{}")
+    except Exception as e:
+        logger.warning(f"⚠️  Could not parse derived media manifest JSON: {e}")
+        return {}
+
+    if not isinstance(manifest, dict):
+        logger.warning("⚠️  Derived media manifest must be a JSON object; skipping.")
+        return {}
+
+    safe_manifest: Dict[str, Any] = {}
+    pdpn_re = re.compile(r"^[A-Z]{2}\.[A-Z]{2}\.\d{3}$")
+    for pdpn, entry in manifest.items():
+        if not pdpn_re.match(str(pdpn)):
+            logger.warning(f"⚠️  Derived media entry skipped due invalid PDPN: {pdpn}")
+            continue
+        if not isinstance(entry, dict):
+            logger.warning(f"⚠️  Derived media entry skipped; expected object: {pdpn}")
+            continue
+        safe_manifest[str(pdpn)] = entry
+
+    if safe_manifest:
+        logger.info(f"📦 Derived media companion entries loaded: {len(safe_manifest)}")
+    else:
+        logger.info("📦 Derived media manifest empty; companion layer is a no-op.")
+    return safe_manifest
+
+
+def _copy_derived_media_static_artifacts(manifest: Dict[str, Any]) -> None:
+    """
+    Copies only safe small text summaries and the manifest JSON to static output.
+    Binary media is never copied into 13-static-site.
+    """
+    manifest_target = OUTPUT_DIR / "assets" / "derived_media_manifest.json"
+    summaries_target = OUTPUT_DIR / "derived_media"
+
+    if summaries_target.exists():
+        shutil.rmtree(summaries_target, ignore_errors=True)
+    if manifest_target.exists():
+        try:
+            manifest_target.unlink()
+        except OSError as e:
+            logger.warning(f"⚠️  Could not remove stale derived media manifest: {e}")
+
+    if not manifest:
+        logger.info("📦 No derived media static artifacts to copy.")
+        return
+
+    manifest_payload = json.dumps(manifest, indent=2, ensure_ascii=False, sort_keys=True)
+    if _has_derived_media_forbidden_marker(manifest_payload):
+        logger.warning("🚨 Derived media static manifest blocked due to forbidden marker.")
+        return
+
+    manifest_target.parent.mkdir(parents=True, exist_ok=True)
+    manifest_target.write_text(manifest_payload + "\n", encoding="utf-8")
+
+    copied = 0
+    blocked = 0
+    missing = 0
+
+    for pdpn, entry in sorted(manifest.items()):
+        summary = entry.get("summary") if isinstance(entry, dict) else None
+        if not isinstance(summary, dict):
+            continue
+        rel_path = _safe_derived_summary_path(str(summary.get("path", "")))
+        if rel_path is None:
+            blocked += 1
+            logger.warning(f"🚨 Derived summary blocked for {pdpn}: unsafe path.")
+            continue
+
+        source_file = PIPELINE_ROOT / rel_path
+        if not source_file.exists():
+            missing += 1
+            logger.warning(f"⚠️  Derived summary missing for {pdpn}: {rel_path}")
+            continue
+
+        try:
+            raw = source_file.read_bytes()
+            if len(raw) > DERIVED_MEDIA_MAX_SUMMARY_BYTES:
+                blocked += 1
+                logger.warning(f"🚨 Derived summary blocked for {pdpn}: file too large.")
+                continue
+            text = raw.decode("utf-8")
+        except Exception as e:
+            blocked += 1
+            logger.warning(f"🚨 Derived summary blocked for {pdpn}: {e}")
+            continue
+
+        if _has_derived_media_forbidden_marker(text):
+            blocked += 1
+            logger.warning(f"🚨 Derived summary blocked for {pdpn}: forbidden marker.")
+            continue
+
+        target_file = OUTPUT_DIR / rel_path
+        target_file.parent.mkdir(parents=True, exist_ok=True)
+        target_file.write_bytes(raw)
+        copied += 1
+
+    logger.info(
+        f"📦 Derived media static artifacts: manifest copied | "
+        f"summaries copied={copied} missing={missing} blocked={blocked}"
+    )
 
 
 def _ensure_github_pages_markers() -> None:
@@ -922,6 +1074,7 @@ def main() -> None:
     slug_resolver = LinkResolver(slug_map)
     asset_map     = _load_asset_map()   # opcional — nunca aborta
     glossary      = _load_glossary_csv()  # carrega Glossario_v5.csv — nunca aborta
+    derived_media_manifest = _load_derived_media_manifest()
 
     # ── 5. RENDERIZAR POSTS (INCREMENTAL) ──────────────────────────────────
     logger.info("▶ Fase 5/8: Renderizando posts (build incremental)...")
@@ -929,12 +1082,15 @@ def main() -> None:
     asset_map_signature = hashlib.sha256(
         json.dumps(asset_map, sort_keys=True, ensure_ascii=False).encode("utf-8")
     ).hexdigest()[:12]
+    derived_media_signature = hashlib.sha256(
+        json.dumps(derived_media_manifest, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()[:12]
     template_hash = hashlib.sha256(
-        f"{template_hash}:{asset_map_signature}".encode("utf-8")
+        f"{template_hash}:{asset_map_signature}:{derived_media_signature}".encode("utf-8")
     ).hexdigest()
     logger.info(
         f"   Template hash: {template_hash[:12]}... "
-        f"(asset_map={asset_map_signature})"
+        f"(asset_map={asset_map_signature}, derived_media={derived_media_signature})"
     )
 
     # Detectar mudança de template (força rebuild total)
@@ -960,6 +1116,7 @@ def main() -> None:
         slug_resolver=slug_resolver,
         asset_map=asset_map,
         glossary=glossary,
+        derived_media_manifest=derived_media_manifest,
     )
 
     # Persistir template_hash no cache — write atômico (PATCH S15)
@@ -985,6 +1142,7 @@ def main() -> None:
     logger.info("▶ Fase 7/8: Copiando assets estáticos e áudio...")
     _copy_static_assets()
     _copy_nana_static_artifacts()
+    _copy_derived_media_static_artifacts(derived_media_manifest)
     _ensure_github_pages_markers()
     _generate_search_index(posts)
     external_audio = _copy_audio_files(CSL_DIR)
