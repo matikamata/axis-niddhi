@@ -138,6 +138,8 @@ _DERIVED_MEDIA_LABELS = {
         "summary_label": "Resumo auxiliar",
         "summary_details_label": "Ler resumo auxiliar",
         "raw_summary_label": "Abrir resumo em Markdown",
+        "audio_label": "Áudio auxiliar",
+        "video_label": "Vídeo auxiliar",
     },
     "en-US": {
         "heading": "Auxiliary derived media",
@@ -145,15 +147,17 @@ _DERIVED_MEDIA_LABELS = {
         "summary_label": "Auxiliary summary",
         "summary_details_label": "Read auxiliary summary",
         "raw_summary_label": "Open Markdown summary",
+        "audio_label": "Auxiliary audio",
+        "video_label": "Auxiliary video",
     },
 }
 
 
 def _detect_derived_summary_language(summary_path: str, post: Post) -> str:
     normalized = (summary_path or "").lower()
-    if ".pt-br." in normalized or normalized.endswith((".pt-br.md", ".pt-br.txt")):
+    if "pt-br" in normalized:
         return "pt-BR"
-    if ".en-us." in normalized or normalized.endswith((".en-us.md", ".en-us.txt")):
+    if "en-us" in normalized:
         return "en-US"
     return "pt-BR" if post.has_pt else "en-US"
 
