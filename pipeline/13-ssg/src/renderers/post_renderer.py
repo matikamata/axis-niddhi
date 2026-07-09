@@ -177,6 +177,7 @@ def _prepare_derived_media_for_template(
         summary_path = str(summary.get("path", ""))
 
     language = _detect_derived_summary_language(summary_path, post)
+    prepared["media_language"] = language
     prepared["labels"] = dict(_DERIVED_MEDIA_LABELS.get(language, _DERIVED_MEDIA_LABELS["en-US"]))
     return prepared
 
