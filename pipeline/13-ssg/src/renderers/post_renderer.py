@@ -133,8 +133,8 @@ def _classify_level(section_code: str) -> str:
 
 _DERIVED_MEDIA_LABELS = {
     "pt-BR": {
-        "heading": "Material auxiliar derivado",
-        "note": "Este material complementar gerado pelo NotebookLM é auxiliar. A CSL continua sendo a fonte de verdade.",
+        "heading": "Material auxiliar",
+        "note": "Este áudio e vídeo são materiais auxiliares de estudo preparados com apoio do NotebookLM a partir do ensaio original do PureDhamma.net. Eles não substituem o texto original em inglês, que continua sendo a referência principal para estudo e verificação. Atenção: o NotebookLM pode cometer erros de pronúncia ou reconhecimento de termos em Pāli e Sinhala/Cingalês, inclusive confundindo palavras com formas em Sânscrito.",
         "summary_label": "Resumo auxiliar",
         "summary_details_label": "Ler resumo auxiliar",
         "raw_summary_label": "Abrir resumo em Markdown",
@@ -142,8 +142,8 @@ _DERIVED_MEDIA_LABELS = {
         "video_label": "Vídeo auxiliar",
     },
     "en-US": {
-        "heading": "Auxiliary derived media",
-        "note": "This NotebookLM-generated companion material is auxiliary. The CSL remains the source of truth.",
+        "heading": "Auxiliary media",
+        "note": "This audio and video are auxiliary study materials prepared with NotebookLM from the original PureDhamma.net essay. They do not replace the original English text, which remains the main reference for study and verification. NotebookLM may mispronounce or misrecognize Pāli and Sinhala terms, including possible confusion with Sanskrit forms.",
         "summary_label": "Auxiliary summary",
         "summary_details_label": "Read auxiliary summary",
         "raw_summary_label": "Open Markdown summary",
