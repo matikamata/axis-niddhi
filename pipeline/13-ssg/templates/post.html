@@ -133,7 +133,15 @@
              data-review-status="{{ derived_media.review_status }}"
              data-companion-language="{{ derived_media_media_language }}">
         <h2 id="derived-media-title-{{ post.pdpn }}" class="derived-media-kicker">{{ derived_media_labels.heading or 'Auxiliary derived media' }}</h2>
-        <p class="derived-media-note">{{ derived_media_labels.note or 'This audio and video are auxiliary study materials prepared with NotebookLM from the original PureDhamma.net essay. They do not replace the original English text, which remains the main reference for study and verification.' }}</p>
+        <div class="derived-media-copy">
+            <p class="derived-media-note">{{ derived_media_labels.note or 'This audio and video are auxiliary study materials prepared with NotebookLM from the original PureDhamma.net essay.' }}</p>
+            {% if derived_media_labels.reference %}
+            <p class="derived-media-reference">{{ derived_media_labels.reference }}</p>
+            {% endif %}
+            {% if derived_media_labels.warning %}
+            <p class="derived-media-warning">{{ derived_media_labels.warning }}</p>
+            {% endif %}
+        </div>
 
         {% if derived_media.summary and derived_media.summary.path %}
         {% if derived_media.summary.html %}
@@ -149,17 +157,25 @@
         </p>
         {% endif %}
 
-        {% if derived_media.audio and derived_media.audio.url %}
-        <div class="derived-media-audio">
-            <p>{{ derived_media_labels.audio_label or 'Auxiliary audio' }}</p>
-            <audio controls preload="metadata" src="{{ derived_media.audio.url }}"></audio>
-        </div>
-        {% endif %}
+        {% if (derived_media.audio and derived_media.audio.url) or (derived_media.video and derived_media.video.url) %}
+        <div class="derived-media-player-group">
+            {% if derived_media.audio and derived_media.audio.url %}
+            <div class="derived-media-audio">
+                <p id="derived-media-audio-label-{{ post.pdpn }}" class="derived-media-player-label">{{ derived_media_labels.audio_label or 'Auxiliary audio' }}</p>
+                <div class="derived-media-player-shell">
+                    <audio controls preload="metadata" src="{{ derived_media.audio.url }}" aria-labelledby="derived-media-audio-label-{{ post.pdpn }}"></audio>
+                </div>
+            </div>
+            {% endif %}
 
-        {% if derived_media.video and derived_media.video.url %}
-        <div class="derived-media-video">
-            <p>{{ derived_media_labels.video_label or 'Auxiliary video' }}</p>
-            <video controls preload="metadata" src="{{ derived_media.video.url }}"></video>
+            {% if derived_media.video and derived_media.video.url %}
+            <div class="derived-media-video">
+                <p id="derived-media-video-label-{{ post.pdpn }}" class="derived-media-player-label">{{ derived_media_labels.video_label or 'Auxiliary video' }}</p>
+                <div class="derived-media-player-shell">
+                    <video controls preload="metadata" src="{{ derived_media.video.url }}" aria-labelledby="derived-media-video-label-{{ post.pdpn }}"></video>
+                </div>
+            </div>
+            {% endif %}
         </div>
         {% endif %}
 
