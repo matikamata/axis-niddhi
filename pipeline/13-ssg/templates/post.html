@@ -115,10 +115,23 @@
     %}
     {% if has_derived_media_links %}
     {% set derived_media_labels = derived_media.labels or {} %}
-    <section class="derived-media-companion"
+    {% set derived_media_media_language = derived_media.media_language or 'en-US' %}
+    {% set derived_media_language_class = 'derived-media-language-pt' if derived_media_media_language == 'pt-BR' else 'derived-media-language-en' %}
+    {% if derived_media_media_language == 'pt-BR' %}
+    <section class="derived-media-companion derived-media-preparation-notice derived-media-language-en"
+             aria-labelledby="derived-media-notice-title-{{ post.pdpn }}"
+             data-source-pdpn="{{ derived_media.source_pdpn }}"
+             data-review-status="{{ derived_media.review_status }}"
+             data-companion-language="en-US">
+        <h2 id="derived-media-notice-title-{{ post.pdpn }}" class="derived-media-kicker">Auxiliary derived media</h2>
+        <p class="derived-media-note">Companion audio/video in English is being prepared. The Portuguese companion is available under the Português tab.</p>
+    </section>
+    {% endif %}
+    <section class="derived-media-companion {{ derived_media_language_class }}"
              aria-labelledby="derived-media-title-{{ post.pdpn }}"
              data-source-pdpn="{{ derived_media.source_pdpn }}"
-             data-review-status="{{ derived_media.review_status }}">
+             data-review-status="{{ derived_media.review_status }}"
+             data-companion-language="{{ derived_media_media_language }}">
         <h2 id="derived-media-title-{{ post.pdpn }}" class="derived-media-kicker">{{ derived_media_labels.heading or 'Auxiliary derived media' }}</h2>
         <p class="derived-media-note">{{ derived_media_labels.note or 'This NotebookLM-generated companion material is auxiliary. The CSL remains the source of truth.' }}</p>
 
