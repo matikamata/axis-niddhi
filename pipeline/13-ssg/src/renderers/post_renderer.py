@@ -153,8 +153,8 @@ _DERIVED_MEDIA_LABELS = {
 }
 
 
-def _detect_derived_summary_language(summary_path: str, post: Post) -> str:
-    normalized = (summary_path or "").lower()
+def _detect_derived_media_language(post: Post, *hints: str) -> str:
+    normalized = " ".join(str(hint or "").lower() for hint in hints)
     if "pt-br" in normalized:
         return "pt-BR"
     if "en-us" in normalized:
@@ -176,7 +176,14 @@ def _prepare_derived_media_for_template(
         prepared["summary"] = dict(summary)
         summary_path = str(summary.get("path", ""))
 
-    language = _detect_derived_summary_language(summary_path, post)
+    media_language_hints = [summary_path]
+    for media_kind in ("audio", "video"):
+        media = prepared.get(media_kind)
+        if isinstance(media, dict):
+            prepared[media_kind] = dict(media)
+            media_language_hints.append(str(media.get("url", "")))
+
+    language = _detect_derived_media_language(post, *media_language_hints)
     prepared["media_language"] = language
     prepared["labels"] = dict(_DERIVED_MEDIA_LABELS.get(language, _DERIVED_MEDIA_LABELS["en-US"]))
     return prepared
