@@ -134,21 +134,25 @@ def _classify_level(section_code: str) -> str:
 _DERIVED_MEDIA_LABELS = {
     "pt-BR": {
         "heading": "Material auxiliar",
-        "note": "Este áudio e vídeo são materiais auxiliares de estudo preparados com apoio do NotebookLM a partir do ensaio original do PureDhamma.net. Eles não substituem o texto original em inglês, que continua sendo a referência principal para estudo e verificação. Atenção: o NotebookLM pode cometer erros de pronúncia ou reconhecimento de termos em Pāli e Sinhala/Cingalês, inclusive confundindo palavras com formas em Sânscrito.",
+        "note": "Este áudio e vídeo são materiais auxiliares de estudo preparados com apoio do NotebookLM a partir do ensaio original do PureDhamma.net.",
+        "reference": "Eles não substituem o texto original em inglês, que continua sendo a referência principal para estudo e verificação.",
+        "warning": "Atenção: o NotebookLM pode cometer erros de pronúncia ou reconhecimento de termos em Pāli e Sinhala/Cingalês, inclusive confundindo palavras com formas em Sânscrito.",
         "summary_label": "Resumo auxiliar",
         "summary_details_label": "Ler resumo auxiliar",
         "raw_summary_label": "Abrir resumo em Markdown",
-        "audio_label": "Áudio auxiliar",
-        "video_label": "Vídeo auxiliar",
+        "audio_label": "Áudio do ensaio",
+        "video_label": "Vídeo do ensaio",
     },
     "en-US": {
         "heading": "Auxiliary media",
-        "note": "This audio and video are auxiliary study materials prepared with NotebookLM from the original PureDhamma.net essay. They do not replace the original English text, which remains the main reference for study and verification. NotebookLM may mispronounce or misrecognize Pāli and Sinhala terms, including possible confusion with Sanskrit forms.",
+        "note": "This audio and video are auxiliary study materials prepared with NotebookLM from the original PureDhamma.net essay.",
+        "reference": "They do not replace the original English text, which remains the main reference for study and verification.",
+        "warning": "Note: NotebookLM may mispronounce or misrecognize Pāli and Sinhala terms, including possible confusion with Sanskrit forms.",
         "summary_label": "Auxiliary summary",
         "summary_details_label": "Read auxiliary summary",
         "raw_summary_label": "Open Markdown summary",
-        "audio_label": "Auxiliary audio",
-        "video_label": "Auxiliary video",
+        "audio_label": "Essay audio",
+        "video_label": "Essay video",
     },
 }
 
