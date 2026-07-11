@@ -287,6 +287,48 @@ def modernize_iframes(html_content: str) -> str:
 
     return str(soup)
 
+
+def _suppress_portuguese_legacy_media(html_content: str) -> str:
+    """
+    Removes legacy English media controls from the Portuguese article body when
+    pt-BR Dēsana audio translations are rendered as replacements.
+    """
+    if not html_content:
+        return html_content
+
+    html_content = re.sub(
+        r"\[\[?easy_media_download\b[^\]]*\]\]?",
+        "",
+        html_content,
+        flags=re.IGNORECASE,
+    )
+
+    if "<audio" not in html_content and "LEGACY_MEDIA_DOWNLOAD" not in html_content:
+        return html_content
+
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    for audio in soup.find_all("audio"):
+        audio.decompose()
+
+    for evidence in soup.select(".axis-media-evidence"):
+        evidence.decompose()
+
+    legacy_text_nodes = soup.find_all(string=lambda value: value and "[LEGACY_MEDIA_DOWNLOAD]" in value)
+    for node in legacy_text_nodes:
+        container = node.find_parent(["div", "p", "li", "ul"])
+        if container:
+            container.decompose()
+        else:
+            node.extract()
+
+    for tag_name in ("p", "li", "ul"):
+        for tag in soup.find_all(tag_name):
+            if not tag.get_text(strip=True) and not tag.find(["img", "iframe", "video"]):
+                tag.decompose()
+
+    return str(soup)
+
 # ── Core render function ──────────────────────────────────────────────────────
 
 def render_post(
@@ -378,6 +420,8 @@ def render_post(
     relative_root = "../../"
     derived_media_for_template = _prepare_derived_media_for_template(derived_media, post)
     long_audio_for_template = _prepare_long_audio_for_template(long_audio, post)
+    if long_audio_for_template and content_pt:
+        content_pt = _suppress_portuguese_legacy_media(content_pt)
 
     # ── 7. Render ──────────────────────────────────────────────────────────
     template = template_env.get_template("post.html")
