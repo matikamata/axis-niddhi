@@ -192,6 +192,53 @@ def _prepare_derived_media_for_template(
     prepared["labels"] = dict(_DERIVED_MEDIA_LABELS.get(language, _DERIVED_MEDIA_LABELS["en-US"]))
     return prepared
 
+
+def _format_long_audio_duration(seconds: Any) -> str:
+    try:
+        total_seconds = int(round(float(seconds)))
+    except (TypeError, ValueError):
+        return ""
+    if total_seconds <= 0:
+        return ""
+    hours, remainder = divmod(total_seconds, 3600)
+    minutes, secs = divmod(remainder, 60)
+    if hours:
+        return f"{hours}:{minutes:02d}:{secs:02d}"
+    return f"{minutes}:{secs:02d}"
+
+
+def _prepare_long_audio_for_template(
+    long_audio: Optional[Dict[str, Any]],
+    post: Post,
+) -> Dict[str, Any]:
+    if not post.has_pt or not isinstance(long_audio, dict):
+        return {}
+    if long_audio.get("language") != "pt-BR":
+        return {}
+
+    prepared_items: List[Dict[str, Any]] = []
+    for item in long_audio.get("items", []):
+        if not isinstance(item, dict):
+            continue
+        audio = item.get("audio")
+        if not isinstance(audio, dict) or not audio.get("url"):
+            continue
+        source = item.get("source") if isinstance(item.get("source"), dict) else {}
+        prepared_item = dict(item)
+        prepared_item["audio"] = dict(audio)
+        prepared_item["source"] = dict(source)
+        prepared_item["duration_label"] = _format_long_audio_duration(audio.get("duration_seconds"))
+        prepared_items.append(prepared_item)
+
+    if not prepared_items:
+        return {}
+
+    return {
+        "language": "pt-BR",
+        "audio_items": prepared_items,
+        "is_multi": len(prepared_items) > 1,
+    }
+
 # ── Section lookup helpers ────────────────────────────────────────────────────
 
 def _build_section_map(nav_tree: List[Section]) -> Dict[str, Section]:
@@ -250,6 +297,7 @@ def render_post(
     glossary: Dict[str, Any],
     nav_tree: Optional[List[Section]] = None,
     derived_media: Optional[Dict[str, Any]] = None,
+    long_audio: Optional[Dict[str, Any]] = None,
 ) -> str:
     """
     Renders a single post to HTML, injecting ALL variables required by post.html:
@@ -329,6 +377,7 @@ def render_post(
     # ── 6. Relative root: pages/PDPN/index.html is 2 levels deep → ../../
     relative_root = "../../"
     derived_media_for_template = _prepare_derived_media_for_template(derived_media, post)
+    long_audio_for_template = _prepare_long_audio_for_template(long_audio, post)
 
     # ── 7. Render ──────────────────────────────────────────────────────────
     template = template_env.get_template("post.html")
@@ -347,6 +396,7 @@ def render_post(
         meta_reading_time     = meta_reading_time,
         suggestion_block      = suggestion_block,
         derived_media         = derived_media_for_template,
+        long_audio            = long_audio_for_template,
     )
 
 
@@ -363,6 +413,7 @@ def render_posts(
     asset_map: Dict[str, str],
     glossary: Dict[str, Any],
     derived_media_manifest: Optional[Dict[str, Any]] = None,
+    long_audio_manifest: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, int]:
     """
     Renderiza todos os posts com build incremental via cache.
@@ -387,6 +438,7 @@ def render_posts(
     csl_root = posts[0].source_dir.parent if posts else output_dir
     _glossary = load_glossary(csl_root) or glossary
     derived_media_manifest = derived_media_manifest or {}
+    long_audio_manifest = long_audio_manifest or {}
 
     for post in posts:
         try:
@@ -413,6 +465,7 @@ def render_posts(
                 glossary      = _glossary or glossary,
                 nav_tree      = nav_tree,
                 derived_media = derived_media_manifest.get(post.pdpn, {}),
+                long_audio    = long_audio_manifest.get(post.pdpn, {}),
             )
             out_file.write_text(html, encoding="utf-8")
 
