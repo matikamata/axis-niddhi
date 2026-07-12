@@ -1307,6 +1307,18 @@ def _rewrite_legacy_shortcodes() -> None:
         url_m = re.search(r'(?:fileurl|url|download)=["\']([^"\']+)["\']', shortcode, re.IGNORECASE)
         return html_lib.unescape(url_m.group(1)).strip() if url_m else ""
 
+    def is_google_drive_url(url: str) -> bool:
+        normalized = unquote(html_lib.unescape(url)).strip().lower()
+        return "drive.google.com" in normalized or "docs.google.com" in normalized
+
+    def is_direct_playable_audio_url(url: str) -> bool:
+        if not url or is_google_drive_url(url):
+            return False
+        normalized = unquote(html_lib.unescape(url)).strip().lower()
+        if not re.match(r'^https?://', normalized):
+            return False
+        return bool(re.search(r'\.(?:mp3|m4a|wav|ogg|aac|webm)(?:[?#].*)?$', normalized))
+
     def legacy_unknown_block(raw_shortcode: str) -> str:
         safe_comment = raw_shortcode.replace("-->", "-- >")
         return (
@@ -1327,14 +1339,17 @@ def _rewrite_legacy_shortcodes() -> None:
             f'</div>'
         )
 
-    def legacy_download_block(url: str, raw_shortcode: str) -> str:
+    def legacy_link_block(url: str, raw_shortcode: str, link_number: int) -> str:
         if not url:
             return legacy_unknown_block(raw_shortcode)
         safe_url = html_lib.escape(url, quote=True)
+        link_text = "Open or download the original audio"
+        if link_number > 1:
+            link_text = f"Open original audio {link_number}"
         return (
             f'<div class="axis-media-evidence">'
-            f'<span class="evidence-label">[LEGACY_MEDIA_DOWNLOAD]</span> '
-            f'<a href="{safe_url}" target="_blank" rel="noopener noreferrer" class="evidence-url">{safe_url}</a>'
+            f'<span class="evidence-label">Original English audio</span> '
+            f'<a href="{safe_url}" target="_blank" rel="noopener noreferrer" class="evidence-url">{link_text}</a>'
             f'</div>'
         )
 
@@ -1350,9 +1365,10 @@ def _rewrite_legacy_shortcodes() -> None:
     for html_file in html_files:
         text = html_file.read_text(encoding="utf-8")
         original = text
+        legacy_link_count = 0
 
         def repl(match):
-            nonlocal replacements
+            nonlocal replacements, legacy_link_count
             replacements += 1
             full = match.group(1)
 
@@ -1361,8 +1377,12 @@ def _rewrite_legacy_shortcodes() -> None:
 
             url = shortcode_url(full)
             if re.match(r'\[\[?sc_embed_player\b', full, re.IGNORECASE):
-                return legacy_audio_player(url, full)
-            return legacy_download_block(url, full)
+                if is_direct_playable_audio_url(url):
+                    return legacy_audio_player(url, full)
+                legacy_link_count += 1
+                return legacy_link_block(url, full, legacy_link_count)
+            legacy_link_count += 1
+            return legacy_link_block(url, full, legacy_link_count)
 
         text = pattern.sub(repl, text)
 
