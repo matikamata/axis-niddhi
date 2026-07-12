@@ -1293,7 +1293,10 @@ def _rewrite_legacy_shortcodes() -> None:
         return
 
     # Captura o shortcode inteiro para análise segura
-    pattern = re.compile(r'(\[\[?easy_media_download\b[^\]]*\]\]?)', re.IGNORECASE)
+    pattern = re.compile(
+        r'(\[\[?(?:easy_media_download|sc_embed_player)\b[^\]]*\]\]?)',
+        re.IGNORECASE,
+    )
 
     updated_files = 0
     replacements = 0
@@ -1319,7 +1322,7 @@ def _rewrite_legacy_shortcodes() -> None:
                     f'</div>'
                 )
 
-            url_m = re.search(r'(?:url|download)=["\']([^"\']+)["\']', full, re.IGNORECASE)
+            url_m = re.search(r'(?:fileurl|url|download)=["\']([^"\']+)["\']', full, re.IGNORECASE)
             if url_m:
                 url = url_m.group(1)
                 return (

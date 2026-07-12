@@ -304,6 +304,12 @@ def _suppress_portuguese_legacy_media(html_content: str) -> str:
         html_content,
         flags=re.IGNORECASE,
     )
+    html_content = re.sub(
+        r"\[\[?sc_embed_player\b[^\]]*\]\]?",
+        "",
+        html_content,
+        flags=re.IGNORECASE,
+    )
 
     if "<audio" not in html_content and "LEGACY_MEDIA_DOWNLOAD" not in html_content:
         return html_content
