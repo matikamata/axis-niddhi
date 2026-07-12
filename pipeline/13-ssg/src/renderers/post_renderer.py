@@ -225,6 +225,8 @@ def _prepare_long_audio_for_template(
             continue
         source = item.get("source") if isinstance(item.get("source"), dict) else {}
         prepared_item = dict(item)
+        if str(prepared_item.get("part_label", "")).strip() == "Dēsana única":
+            prepared_item["part_label"] = ""
         prepared_item["audio"] = dict(audio)
         prepared_item["source"] = dict(source)
         prepared_item["duration_label"] = _format_long_audio_duration(audio.get("duration_seconds"))
