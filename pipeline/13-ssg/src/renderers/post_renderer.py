@@ -311,11 +311,7 @@ def _suppress_portuguese_legacy_media(html_content: str) -> str:
         flags=re.IGNORECASE,
     )
 
-    if (
-        "<audio" not in html_content
-        and "LEGACY_MEDIA_DOWNLOAD" not in html_content
-        and "legacy-original-audio" not in html_content
-    ):
+    if "<audio" not in html_content and "LEGACY_MEDIA_DOWNLOAD" not in html_content:
         return html_content
 
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -323,7 +319,7 @@ def _suppress_portuguese_legacy_media(html_content: str) -> str:
     for audio in soup.find_all("audio"):
         audio.decompose()
 
-    for evidence in soup.select(".axis-media-evidence, .legacy-original-audio"):
+    for evidence in soup.select(".axis-media-evidence"):
         evidence.decompose()
 
     legacy_text_nodes = soup.find_all(string=lambda value: value and "[LEGACY_MEDIA_DOWNLOAD]" in value)
