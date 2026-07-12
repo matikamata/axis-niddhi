@@ -1285,7 +1285,7 @@ def _rewrite_missing_local_image_references() -> None:
 def _rewrite_legacy_shortcodes() -> None:
     """
     [FLAGFIX-022] Transforma shortcodes WordPress residuais em
-    um bloco técnico de evidência preservando a URL original.
+    uma UI limpa de áudio original preservando a URL original.
     Suporta URLs corrompidas por HTML injetado.
     """
     html_files = sorted((OUTPUT_DIR / "pages").rglob("index.html"))
@@ -1293,7 +1293,11 @@ def _rewrite_legacy_shortcodes() -> None:
         return
 
     # Captura o shortcode inteiro para análise segura
-    pattern = re.compile(
+    paired_pattern = re.compile(
+        r'(\[\[?sc_embed_player\b[^\]]*\]\]?)\s*(\[\[?easy_media_download\b[^\]]*\]\]?)',
+        re.IGNORECASE,
+    )
+    single_pattern = re.compile(
         r'(\[\[?(?:easy_media_download|sc_embed_player)\b[^\]]*\]\]?)',
         re.IGNORECASE,
     )
@@ -1303,11 +1307,85 @@ def _rewrite_legacy_shortcodes() -> None:
 
     import html as html_lib
 
+    def shortcode_url(shortcode: str) -> str:
+        url_m = re.search(r'(?:fileurl|url|download)=["\']([^"\']+)["\']', shortcode, re.IGNORECASE)
+        return html_lib.unescape(url_m.group(1)).strip() if url_m else ""
+
+    def is_native_audio_url(url: str) -> bool:
+        if not url:
+            return False
+        lowered = url.lower()
+        if "drive.google.com" in lowered:
+            return False
+        return any(ext in lowered for ext in (".mp3", ".m4a", ".wav", ".ogg", ".webm"))
+
+    def original_audio_block(primary_url: str = "", download_url: str = "", raw_shortcode: str = "") -> str:
+        primary_url = primary_url.strip()
+        download_url = download_url.strip()
+        link_url = download_url or primary_url
+        if not primary_url and not download_url:
+            safe_comment = raw_shortcode.replace("-->", "-- >")
+            return (
+                f'<div class="axis-media-evidence">'
+                f'<!-- RAW_SHORTCODE: {safe_comment} -->'
+                f'<span class="evidence-label">[LEGACY_MEDIA_UNKNOWN]</span> '
+                f'<span class="evidence-message">Legacy media shortcode preserved — human review required.</span>'
+                f'</div>'
+            )
+
+        parts = [
+            '<div class="legacy-original-audio" data-legacy-media-kind="original-english-audio">',
+            '<p class="legacy-original-audio-heading">Original English audio</p>',
+            '<p class="legacy-original-audio-note">This is the original audio associated with this lesson.</p>',
+        ]
+        if primary_url and is_native_audio_url(primary_url):
+            safe_src = html_lib.escape(primary_url, quote=True)
+            parts.append(f'<audio controls preload="metadata" src="{safe_src}"></audio>')
+        if link_url:
+            safe_href = html_lib.escape(link_url, quote=True)
+            parts.append(
+                f'<p class="legacy-original-audio-link">'
+                f'<a href="{safe_href}" target="_blank" rel="noopener noreferrer">'
+                f'Open or download original audio</a></p>'
+            )
+        if primary_url and download_url and primary_url != download_url:
+            safe_href = html_lib.escape(primary_url, quote=True)
+            parts.append(
+                f'<p class="legacy-original-audio-secondary-link">'
+                f'<a href="{safe_href}" target="_blank" rel="noopener noreferrer">'
+                f'Open original audio source</a></p>'
+            )
+        parts.append('</div>')
+        return "".join(parts)
+
     for html_file in html_files:
         text = html_file.read_text(encoding="utf-8")
         original = text
 
-        def repl(match):
+        def paired_repl(match):
+            nonlocal replacements
+            replacements += 1
+            player_shortcode = match.group(1)
+            download_shortcode = match.group(2)
+
+            full = f"{player_shortcode}\n{download_shortcode}"
+            if "<" in full or ">" in full:
+                safe_comment = full.replace("-->", "-- >")
+                return (
+                    f'<div class="axis-media-evidence">'
+                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
+                    f'<span class="evidence-label">[LEGACY_MEDIA_CORRUPTED]</span> '
+                    f'<span class="evidence-message">Media URL corrupted during legacy conversion — human review required.</span>'
+                    f'</div>'
+                )
+
+            return original_audio_block(
+                primary_url=shortcode_url(player_shortcode),
+                download_url=shortcode_url(download_shortcode),
+                raw_shortcode=full,
+            )
+
+        def single_repl(match):
             nonlocal replacements
             replacements += 1
             full = match.group(1)
@@ -1322,26 +1400,13 @@ def _rewrite_legacy_shortcodes() -> None:
                     f'</div>'
                 )
 
-            url_m = re.search(r'(?:fileurl|url|download)=["\']([^"\']+)["\']', full, re.IGNORECASE)
-            if url_m:
-                url = url_m.group(1)
-                return (
-                    f'<div class="axis-media-evidence">'
-                    f'<span class="evidence-label">[LEGACY_MEDIA_DOWNLOAD]</span> '
-                    f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="evidence-url">{url}</a>'
-                    f'</div>'
-                )
-            else:
-                safe_comment = full.replace("-->", "-- >")
-                return (
-                    f'<div class="axis-media-evidence">'
-                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
-                    f'<span class="evidence-label">[LEGACY_MEDIA_UNKNOWN]</span> '
-                    f'<span class="evidence-message">Legacy media shortcode preserved — human review required.</span>'
-                    f'</div>'
-                )
+            url = shortcode_url(full)
+            if re.match(r'\[\[?sc_embed_player\b', full, re.IGNORECASE):
+                return original_audio_block(primary_url=url, raw_shortcode=full)
+            return original_audio_block(download_url=url, raw_shortcode=full)
 
-        text = pattern.sub(repl, text)
+        text = paired_pattern.sub(paired_repl, text)
+        text = single_pattern.sub(single_repl, text)
 
         if text != original:
             html_file.write_text(text, encoding="utf-8")
