@@ -98,6 +98,7 @@ ASSET_MAP_FALLBACK_FILE = METADATA_DIR / "asset_map.json"
 SLUG_MAP_FILE  = METADATA_DIR / "slug_map.json"   # gerado internamente se ausente
 GLOSSARY_CSV   = METADATA_DIR / "Glossario_v5.csv"  # fonte canônica: termo_en,termo_pt (sem cabeçalho)
 DERIVED_MEDIA_MANIFEST_FILE = METADATA_DIR / "derived_media_manifest.json"
+LONG_AUDIO_MANIFEST_FILE = METADATA_DIR / "long_audio_manifest.json"
 
 ENGINE_VERSION = "3.0.2-S14-S15-C1-C3"  # PATCH S15: constante centralizada
 CF_PAGES_MAX_BYTES = int(os.environ.get("BENG_PAGES_MAX_FILE_BYTES", str(25 * 1024 * 1024)))
@@ -268,28 +269,28 @@ def _copy_nana_static_artifacts() -> None:
         "/media/",
         "pipeline/scripts/private"
     ]
-    
+
     ignore_names = {"readme.md", ".gitkeep"}
     ignore_dirs = {"__pycache__", "private", ".git"}
-    
+
     copied = 0
     blocked = 0
 
     for f in json_files:
         if f.is_dir() or f.name.startswith("."):
             continue
-            
+
         if f.suffix.lower() != ".json":
             continue
-            
+
         if f.name.lower() in ignore_names:
             continue
-            
+
         rel_path = f.relative_to(source_dir)
-            
+
         if any(part in ignore_dirs or part.startswith(".") for part in rel_path.parts):
             continue
-            
+
         try:
             raw = f.read_bytes()
             content = raw.decode("utf-8")
@@ -298,7 +299,7 @@ def _copy_nana_static_artifacts() -> None:
             logger.warning(f"⚠️  Falha ao ler ou parsear JSON NANA {f.name}: {e}")
             blocked += 1
             continue
-            
+
         rel_path_str = rel_path.as_posix()
         has_forbidden = False
         for marker in forbidden_markers:
@@ -307,19 +308,19 @@ def _copy_nana_static_artifacts() -> None:
                 has_forbidden = True
                 blocked += 1
                 break
-                
+
         if has_forbidden:
             continue
-            
+
         target_file = target_dir / rel_path
         target_file.parent.mkdir(parents=True, exist_ok=True)
-        
+
         try:
             target_file.write_bytes(raw)
             copied += 1
         except Exception as e:
             logger.warning(f"⚠️  Falha ao escrever artefato NANA {rel_path}: {e}")
-            
+
     if copied > 0 or blocked > 0:
         logger.info(f"🧠 copied {copied} NANA static artifact(s).")
         if blocked > 0:
@@ -651,6 +652,176 @@ def _load_derived_media_manifest() -> Dict[str, Any]:
         logger.info(f"📦 Derived media companion entries loaded: {len(safe_manifest)}")
     else:
         logger.info("📦 Derived media manifest empty; companion layer is a no-op.")
+    return safe_manifest
+
+
+def _sanitize_long_audio_source(pdpn: str, order: str, source: Any) -> Dict[str, str]:
+    if not isinstance(source, dict):
+        return {}
+
+    sanitized: Dict[str, str] = {}
+    filename = source.get("filename", "")
+    if isinstance(filename, str):
+        filename = filename.strip()
+        if filename and not _has_derived_media_forbidden_marker(filename) and "/" not in filename and "\\" not in filename:
+            sanitized["filename"] = filename
+        elif filename:
+            logger.warning(f"🚨 Long audio source filename dropped for {pdpn} {order}: unsafe filename.")
+
+    youtube_url = _sanitize_derived_media_url(pdpn, f"long_audio.{order}.source.youtube_url", source.get("youtube_url"))
+    if youtube_url:
+        sanitized["youtube_url"] = youtube_url
+
+    return sanitized
+
+
+def _sanitize_long_audio_item(pdpn: str, item: Any, seen_orders: set, seen_urls: set) -> Optional[Dict[str, Any]]:
+    if not isinstance(item, dict):
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn}: expected object.")
+        return None
+
+    order = str(item.get("order", "")).strip()
+    if not re.match(r"^\d{2}(?:\.\d+)?$", order):
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn}: invalid order.")
+        return None
+    if order in seen_orders:
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn}: duplicate order {order}.")
+        return None
+    seen_orders.add(order)
+
+    title = str(item.get("title", "")).strip()
+    part_label = str(item.get("part_label", "")).strip()
+    series_label = str(item.get("series_label", "")).strip()
+    for field_name, text_value in (
+        ("title", title),
+        ("part_label", part_label),
+        ("series_label", series_label),
+    ):
+        if _has_derived_media_forbidden_marker(text_value):
+            logger.warning(f"🚨 Long audio item skipped for {pdpn} {order}: forbidden marker in {field_name}.")
+            return None
+
+    audio = item.get("audio")
+    if not isinstance(audio, dict):
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn} {order}: missing audio object.")
+        return None
+
+    url = _sanitize_derived_media_url(pdpn, f"long_audio.{order}.audio.url", audio.get("url"))
+    if not url:
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn} {order}: missing audio URL.")
+        return None
+    if url in seen_urls:
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn} {order}: duplicate audio URL.")
+        return None
+    seen_urls.add(url)
+
+    digest = _sanitize_derived_media_sha256(pdpn, f"long_audio.{order}.audio.sha256", audio.get("sha256"))
+    if not digest:
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn} {order}: missing sha256.")
+        return None
+
+    byte_count = _sanitize_derived_media_bytes(pdpn, f"long_audio.{order}.audio.bytes", audio.get("bytes"))
+    if byte_count is None or byte_count <= 0:
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn} {order}: invalid bytes.")
+        return None
+
+    try:
+        duration_seconds = float(audio.get("duration_seconds"))
+    except (TypeError, ValueError):
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn} {order}: invalid duration.")
+        return None
+    if duration_seconds <= 0:
+        logger.warning(f"⚠️  Long audio item skipped for {pdpn} {order}: non-positive duration.")
+        return None
+
+    sanitized: Dict[str, Any] = {
+        "order": order,
+        "title": title,
+        "part_label": part_label,
+        "series_label": series_label,
+        "audio": {
+            "url": url,
+            "sha256": digest,
+            "bytes": byte_count,
+            "duration_seconds": duration_seconds,
+        },
+    }
+
+    source = _sanitize_long_audio_source(pdpn, order, item.get("source"))
+    if source:
+        sanitized["source"] = source
+
+    return sanitized
+
+
+def _long_audio_order_key(item: Dict[str, Any]) -> tuple:
+    order = str(item.get("order", ""))
+    return tuple(int(part) for part in order.split(".") if part.isdigit())
+
+
+def _load_long_audio_manifest() -> Dict[str, Any]:
+    """
+    Loads optional Portuguese Desana long-audio data.
+    Graceful no-op: missing, empty, or unsafe manifests are skipped.
+    """
+    if not LONG_AUDIO_MANIFEST_FILE.exists():
+        logger.info("🎧 Long audio manifest not found; skipping Portuguese Desana audio layer.")
+        return {}
+
+    try:
+        raw = LONG_AUDIO_MANIFEST_FILE.read_text(encoding="utf-8")
+    except Exception as e:
+        logger.warning(f"⚠️  Could not read long audio manifest: {e}")
+        return {}
+
+    if _has_derived_media_forbidden_marker(raw):
+        logger.warning("🚨 Long audio manifest blocked due to forbidden marker.")
+        return {}
+
+    try:
+        manifest = json.loads(raw or "{}")
+    except Exception as e:
+        logger.warning(f"⚠️  Could not parse long audio manifest JSON: {e}")
+        return {}
+
+    if not isinstance(manifest, dict):
+        logger.warning("⚠️  Long audio manifest must be a JSON object; skipping.")
+        return {}
+
+    seen_urls: set = set()
+    safe_manifest: Dict[str, Any] = {}
+    for pdpn, entry in manifest.items():
+        if not DERIVED_MEDIA_PDPN_RE.match(str(pdpn)):
+            logger.warning(f"⚠️  Long audio entry skipped due invalid PDPN: {pdpn}")
+            continue
+        if not isinstance(entry, dict):
+            logger.warning(f"⚠️  Long audio entry skipped; expected object: {pdpn}")
+            continue
+        if entry.get("language") != "pt-BR":
+            logger.warning(f"⚠️  Long audio entry skipped for {pdpn}: language must be pt-BR.")
+            continue
+        raw_items = entry.get("items")
+        if not isinstance(raw_items, list):
+            logger.warning(f"⚠️  Long audio entry skipped for {pdpn}: items must be a list.")
+            continue
+
+        seen_orders: set = set()
+        items = [
+            sanitized
+            for item in raw_items
+            if (sanitized := _sanitize_long_audio_item(str(pdpn), item, seen_orders, seen_urls))
+        ]
+        if not items:
+            logger.warning(f"⚠️  Long audio entry skipped for {pdpn}: no renderable items.")
+            continue
+        items.sort(key=_long_audio_order_key)
+        safe_manifest[str(pdpn)] = {"language": "pt-BR", "items": items}
+
+    item_count = sum(len(entry["items"]) for entry in safe_manifest.values())
+    if safe_manifest:
+        logger.info(f"🎧 Long audio entries loaded: pdpns={len(safe_manifest)} items={item_count}")
+    else:
+        logger.info("🎧 Long audio manifest empty; Portuguese Desana audio layer is a no-op.")
     return safe_manifest
 
 
@@ -1114,7 +1285,7 @@ def _rewrite_missing_local_image_references() -> None:
 def _rewrite_legacy_shortcodes() -> None:
     """
     [FLAGFIX-022] Transforma shortcodes WordPress residuais em
-    um bloco técnico de evidência preservando a URL original.
+    blocos legados de áudio/download preservando a URL original.
     Suporta URLs corrompidas por HTML injetado.
     """
     html_files = sorted((OUTPUT_DIR / "pages").rglob("index.html"))
@@ -1122,50 +1293,96 @@ def _rewrite_legacy_shortcodes() -> None:
         return
 
     # Captura o shortcode inteiro para análise segura
-    pattern = re.compile(r'(\[\[?easy_media_download\b[^\]]*\]\]?)', re.IGNORECASE)
+    pattern = re.compile(
+        r'(\[\[?(?:easy_media_download|sc_embed_player)\b[^\]]*\]\]?)',
+        re.IGNORECASE,
+    )
 
     updated_files = 0
     replacements = 0
 
     import html as html_lib
 
+    def shortcode_url(shortcode: str) -> str:
+        url_m = re.search(r'(?:fileurl|url|download)=["\']([^"\']+)["\']', shortcode, re.IGNORECASE)
+        return html_lib.unescape(url_m.group(1)).strip() if url_m else ""
+
+    def is_google_drive_url(url: str) -> bool:
+        normalized = unquote(html_lib.unescape(url)).strip().lower()
+        return "drive.google.com" in normalized or "docs.google.com" in normalized
+
+    def is_direct_playable_audio_url(url: str) -> bool:
+        if not url or is_google_drive_url(url):
+            return False
+        normalized = unquote(html_lib.unescape(url)).strip().lower()
+        if not re.match(r'^https?://', normalized):
+            return False
+        return bool(re.search(r'\.(?:mp3|m4a|wav|ogg|aac|webm)(?:[?#].*)?$', normalized))
+
+    def legacy_unknown_block(raw_shortcode: str) -> str:
+        safe_comment = raw_shortcode.replace("-->", "-- >")
+        return (
+            f'<div class="axis-media-evidence">'
+            f'<!-- RAW_SHORTCODE: {safe_comment} -->'
+            f'<span class="evidence-label">[LEGACY_MEDIA_UNKNOWN]</span> '
+            f'<span class="evidence-message">Legacy media shortcode preserved — human review required.</span>'
+            f'</div>'
+        )
+
+    def legacy_corrupted_block(raw_shortcode: str) -> str:
+        safe_comment = raw_shortcode.replace("-->", "-- >")
+        return (
+            f'<div class="axis-media-evidence">'
+            f'<!-- RAW_SHORTCODE: {safe_comment} -->'
+            f'<span class="evidence-label">[LEGACY_MEDIA_CORRUPTED]</span> '
+            f'<span class="evidence-message">Media URL corrupted during legacy conversion — human review required.</span>'
+            f'</div>'
+        )
+
+    def legacy_link_block(url: str, raw_shortcode: str, link_number: int) -> str:
+        if not url:
+            return legacy_unknown_block(raw_shortcode)
+        safe_url = html_lib.escape(url, quote=True)
+        link_text = "Open or download the original audio"
+        if link_number > 1:
+            link_text = f"Open original audio {link_number}"
+        return (
+            f'<div class="axis-media-evidence">'
+            f'<span class="evidence-label">Original English audio</span> '
+            f'<a href="{safe_url}" target="_blank" rel="noopener noreferrer" class="evidence-url">{link_text}</a>'
+            f'</div>'
+        )
+
+    def legacy_audio_player(url: str, raw_shortcode: str) -> str:
+        if not url:
+            return legacy_unknown_block(raw_shortcode)
+        safe_url = html_lib.escape(url, quote=True)
+        return (
+            f'<audio controls="" preload="none" style="width:100%;margin:0.5em 0">'
+            f'<source src="{safe_url}" type="audio/mpeg"/></audio>'
+        )
+
     for html_file in html_files:
         text = html_file.read_text(encoding="utf-8")
         original = text
+        legacy_link_count = 0
 
         def repl(match):
-            nonlocal replacements
+            nonlocal replacements, legacy_link_count
             replacements += 1
             full = match.group(1)
-            
+
             if "<" in full or ">" in full:
-                safe_comment = full.replace("-->", "-- >")
-                return (
-                    f'<div class="axis-media-evidence">'
-                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
-                    f'<span class="evidence-label">[LEGACY_MEDIA_CORRUPTED]</span> '
-                    f'<span class="evidence-message">Media URL corrupted during legacy conversion — human review required.</span>'
-                    f'</div>'
-                )
-            
-            url_m = re.search(r'(?:url|download)=["\']([^"\']+)["\']', full, re.IGNORECASE)
-            if url_m:
-                url = url_m.group(1)
-                return (
-                    f'<div class="axis-media-evidence">'
-                    f'<span class="evidence-label">[LEGACY_MEDIA_DOWNLOAD]</span> '
-                    f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="evidence-url">{url}</a>'
-                    f'</div>'
-                )
-            else:
-                safe_comment = full.replace("-->", "-- >")
-                return (
-                    f'<div class="axis-media-evidence">'
-                    f'<!-- RAW_SHORTCODE: {safe_comment} -->'
-                    f'<span class="evidence-label">[LEGACY_MEDIA_UNKNOWN]</span> '
-                    f'<span class="evidence-message">Legacy media shortcode preserved — human review required.</span>'
-                    f'</div>'
-                )
+                return legacy_corrupted_block(full)
+
+            url = shortcode_url(full)
+            if re.match(r'\[\[?sc_embed_player\b', full, re.IGNORECASE):
+                if is_direct_playable_audio_url(url):
+                    return legacy_audio_player(url, full)
+                legacy_link_count += 1
+                return legacy_link_block(url, full, legacy_link_count)
+            legacy_link_count += 1
+            return legacy_link_block(url, full, legacy_link_count)
 
         text = pattern.sub(repl, text)
 
@@ -1177,7 +1394,6 @@ def _rewrite_legacy_shortcodes() -> None:
         logger.info(
             f"🔁 Shortcodes legados convertidos: {replacements} blocos em {updated_files} páginas."
         )
-
 
 def _generate_pronunciation_manifest(
     csl_root: Path,
@@ -1340,6 +1556,7 @@ def main() -> None:
     asset_map     = _load_asset_map()   # opcional — nunca aborta
     glossary      = _load_glossary_csv()  # carrega Glossario_v5.csv — nunca aborta
     derived_media_manifest = _load_derived_media_manifest()
+    long_audio_manifest = _load_long_audio_manifest()
 
     # ── 5. RENDERIZAR POSTS (INCREMENTAL) ──────────────────────────────────
     logger.info("▶ Fase 5/8: Renderizando posts (build incremental)...")
@@ -1350,12 +1567,16 @@ def main() -> None:
     derived_media_signature = hashlib.sha256(
         json.dumps(derived_media_manifest, sort_keys=True, ensure_ascii=False).encode("utf-8")
     ).hexdigest()[:12]
+    long_audio_signature = hashlib.sha256(
+        json.dumps(long_audio_manifest, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()[:12]
     template_hash = hashlib.sha256(
-        f"{template_hash}:{asset_map_signature}:{derived_media_signature}".encode("utf-8")
+        f"{template_hash}:{asset_map_signature}:{derived_media_signature}:{long_audio_signature}".encode("utf-8")
     ).hexdigest()
     logger.info(
         f"   Template hash: {template_hash[:12]}... "
-        f"(asset_map={asset_map_signature}, derived_media={derived_media_signature})"
+        f"(asset_map={asset_map_signature}, "
+        f"derived_media={derived_media_signature}, long_audio={long_audio_signature})"
     )
 
     # Detectar mudança de template (força rebuild total)
@@ -1382,6 +1603,7 @@ def main() -> None:
         asset_map=asset_map,
         glossary=glossary,
         derived_media_manifest=derived_media_manifest,
+        long_audio_manifest=long_audio_manifest,
     )
 
     # Persistir template_hash no cache — write atômico (PATCH S15)
