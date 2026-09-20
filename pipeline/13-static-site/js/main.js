@@ -83,7 +83,7 @@ function toggleLabz() {
     const labzState = localStorage.getItem('axis-niddhi-theme');
     if (labzState === 'stardust') {
       document.body.setAttribute('data-theme', 'stardust');
-    // [FF-013] Restore labz button state if stardust was active
+      // [FF-013] Restore labz button state if stardust was active
       const btn = document.getElementById('labz-btn');
       const banner = document.getElementById('labz-banner');
       btn    && btn.classList.add('labz-active');
