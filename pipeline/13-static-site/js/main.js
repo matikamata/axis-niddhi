@@ -119,43 +119,37 @@ function toggleLabz() {
     const radios = document.querySelectorAll('input[name="lang_switch"]');
     if (!radios.length) return;
 
-    const saved = localStorage.getItem(LANG_KEY);
+    const requested = new URLSearchParams(location.search).get('lang');
+    const saved = requested || localStorage.getItem(LANG_KEY);
     if (saved) {
       const r = document.getElementById('lang-' + saved);
       if (r && !r.disabled) r.checked = true;
     }
 
+    function updateLanguage(r, persist) {
+      const selected = r.id.replace('lang-', '');
+      document.documentElement.lang = { en: 'en-US', pt: 'pt-BR', 'es-419': 'es-419' }[selected] || 'en-US';
+      const title = document.querySelector('header .title-' + selected);
+      if (title) document.title = title.textContent.trim() + ' | AXIS-NIDDHI';
+      if (persist) {
+        try { localStorage.setItem(LANG_KEY, selected); } catch (_) { /* Storage may be disabled. */ }
+        try {
+          const url = new URL(location.href);
+          url.searchParams.set('lang', selected);
+          history.replaceState(null, '', url);
+        } catch (_) { /* CSS switching also works with file:// previews. */ }
+      }
+    }
     radios.forEach(r => {
+      if (r.checked) updateLanguage(r, Boolean(requested));
       r.addEventListener('change', () => {
-        if (r.checked) {
-          localStorage.setItem(LANG_KEY, r.id.replace('lang-', ''));
-        }
+        if (r.checked) updateLanguage(r, true);
       });
     });
   }
 
   function generateTOC(contentId, listId) {
-    const content = document.getElementById(contentId);
-    const list = document.getElementById(listId);
-    if (!content || !list) return;
-
-    list.innerHTML = '';
-    const h = content.querySelectorAll('h5');
-    if (!h.length) {
-      list.parentElement.style.display = 'none';
-      return;
-    }
-
-    h.forEach((el, i) => {
-      const id = `${contentId}-sec-${i}`;
-      el.id = id;
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = `#${id}`;
-      a.textContent = el.textContent;
-      li.appendChild(a);
-      list.appendChild(li);
-    });
+    window.AxisArticleSections.mount(contentId, listId);
   }
 
   function initAccordion() {
@@ -484,7 +478,7 @@ function toggleLabz() {
       if (!index) {
         fetch(root + 'search_index.json')
           .then(r => r.json())
-          .then(data => { index = data; })
+          .then(data => { index = data; input.dispatchEvent(new Event('input')); })
           .catch(err => console.warn('[Search] Index load failed', err));
       }
     });
@@ -503,6 +497,7 @@ function toggleLabz() {
       const matches = index.filter(item => {
         return normalize(item.title_en).includes(q)
             || normalize(item.title_pt).includes(q)
+            || normalize(item.title_es419).includes(q)
             || normalize(item.content).includes(q)
             || normalize(item.slug).includes(q);
       }).slice(0, 20);
@@ -519,8 +514,9 @@ function toggleLabz() {
 
         // Título com highlight
         const a = document.createElement('a');
-        a.href = root + item.url;                          // FF-010: era item.slug + '/index.html'
-        a.innerHTML = highlight(item.title_en || item.pdpn, raw); // FF-010: era item.title
+        const spanishMatch = item.has_es419 && normalize(item.title_es419).includes(q);
+        a.href = root + item.url + (spanishMatch ? '?lang=es-419' : '');
+        a.innerHTML = highlight((spanishMatch ? item.title_es419 : item.title_en) || item.pdpn, raw);
 
         // Snippet de conteúdo com highlight
         if (item.content) {
@@ -602,6 +598,7 @@ function toggleLabz() {
   }
 
   function restoreScrollPosition() {
+    if (location.hash) return;
     try {
       const pos = localStorage.getItem('scroll_' + location.pathname);
       if (pos && parseInt(pos) > 0) {
@@ -629,72 +626,6 @@ function toggleLabz() {
   }
 
   // ── END FF-014 ────────────────────────────────────────────────────────────
-
-  // --- SPRINT G: Section Boxes Colasáveis (h5 → wrapper) ---
-  function initSectionBoxes() {
-    // Extrair PDPN do URL: /pages/BD.AA.000/index.html → "BD.AA.000"
-    const pdpnMatch = window.location.pathname.match(/\/pages\/([^/]+)/);
-    const pdpn = pdpnMatch ? pdpnMatch[1] : 'index';
-    const storageKey = 'sections-' + pdpn;
-
-    // Recuperar estados salvos
-    let savedState = {};
-    try { savedState = JSON.parse(sessionStorage.getItem(storageKey) || '{}'); } catch(e) {}
-
-    // Slug simples a partir do texto do h5
-    function toSlug(text) {
-      return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
-    }
-
-    // Salvar estado atual
-    function saveState(slug, isCollapsed) {
-      savedState[slug] = isCollapsed;
-      try { sessionStorage.setItem(storageKey, JSON.stringify(savedState)); } catch(e) {}
-    }
-
-    // Processar cada container de conteúdo
-    ['content-en', 'content-pt'].forEach(function(containerId) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-
-      const h5s = Array.from(container.querySelectorAll('h5'));
-      if (!h5s.length) return;
-
-      h5s.forEach(function(h5) {
-        const slug = toSlug(h5.textContent || '');
-
-        // Coletar siblings até o próximo h5 ou fim do container
-        const siblings = [];
-        let next = h5.nextSibling;
-        while (next && !(next.nodeName === 'H5')) {
-          siblings.push(next);
-          next = next.nextSibling;
-        }
-
-        // Criar wrapper .section-content
-        const wrapper = document.createElement('div');
-        wrapper.className = 'section-content';
-        wrapper.setAttribute('data-h5-slug', slug);
-
-        // Inserir wrapper após o h5 e mover siblings para dentro
-        h5.parentNode.insertBefore(wrapper, h5.nextSibling);
-        siblings.forEach(function(el) { wrapper.appendChild(el); });
-
-        // Restaurar estado salvo (padrão: expandido)
-        if (savedState[slug] === true) {
-          h5.classList.add('collapsed');
-          wrapper.classList.add('collapsed');
-        }
-
-        // Evento de click
-        h5.addEventListener('click', function() {
-          const isCollapsed = h5.classList.toggle('collapsed');
-          wrapper.classList.toggle('collapsed', isCollapsed);
-          saveState(slug, isCollapsed);
-        });
-      });
-    });
-  }
 
   // --- SPRINT 7: Print Markers ---
   function initPrintVideoMarkers() {
@@ -807,15 +738,16 @@ function toggleLabz() {
     initSectionListToggle();
     initInlineSectionReveal();
     initArticleLinkTargets();
-    initSectionBoxes();   // [SPRINT G] h5 colasáveis
     initPronunciation();
     initSearch(); // [Sprint 9]
     initPrintVideoMarkers(); // [Sprint 7 Print Setup]
     initPrintReviewBanner(); // Print review traceability banner
     generateTOC('content-en', 'toc-list-en');
+    generateTOC('content-es-419', 'toc-list-es-419');
     if (document.getElementById('content-pt')) {
       generateTOC('content-pt', 'toc-list-pt');
     }
+    window.AxisArticleSections.revealHash();
 
     // [SPRINT L] BUG 1: meta-toggle via event listener (onclick inline estava quebrado)
     const metaBtn = document.getElementById('meta-toggle-btn');
