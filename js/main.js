@@ -40,11 +40,13 @@ function toggleLabz() {
   const isActive = document.body.getAttribute('data-theme') === 'stardust';
   const btn    = document.getElementById('labz-btn');
   const banner = document.getElementById('labz-banner');
+  const THEME_KEY = 'br_theme';
 
   if (isActive) {
     // Restaurar tema anterior
     const prev = localStorage.getItem('axis-theme-pre-labz') || 'dark';
     document.body.setAttribute('data-theme', prev);
+    localStorage.setItem(THEME_KEY, prev);
     localStorage.setItem('axis-niddhi-theme', prev);
     localStorage.removeItem('axis-theme-pre-labz');
     btn    && btn.classList.remove('labz-active');
@@ -78,13 +80,16 @@ function toggleLabz() {
 
   function initTheme() {
     const saved = localStorage.getItem(THEME_KEY);
-    if (saved) document.body.setAttribute('data-theme', saved);
-    // [FF-013] Restore labz button state if stardust was active
-    if (saved === 'stardust') {
+    const labzState = localStorage.getItem('axis-niddhi-theme');
+    if (labzState === 'stardust') {
+      document.body.setAttribute('data-theme', 'stardust');
+      // [FF-013] Restore labz button state if stardust was active
       const btn = document.getElementById('labz-btn');
       const banner = document.getElementById('labz-banner');
       btn    && btn.classList.add('labz-active');
       banner && banner.classList.add('visible');
+    } else if (saved) {
+      document.body.setAttribute('data-theme', saved);
     }
 
     const container = document.getElementById('theme-controls');
@@ -96,7 +101,14 @@ function toggleLabz() {
       b.className = 'theme-btn';
       b.textContent = t.icon;
       b.onclick = () => {
-        document.body.setAttribute('data-theme', t.id);
+        const isLabzActive = document.body.getAttribute('data-theme') === 'stardust';
+        if (isLabzActive) {
+          // Em LABZ, trocar tema ajusta o "tema de saída" sem desligar o stardust.
+          localStorage.setItem('axis-theme-pre-labz', t.id);
+        } else {
+          document.body.setAttribute('data-theme', t.id);
+          localStorage.setItem('axis-niddhi-theme', t.id);
+        }
         localStorage.setItem(THEME_KEY, t.id);
       };
       container.appendChild(b);
@@ -107,43 +119,37 @@ function toggleLabz() {
     const radios = document.querySelectorAll('input[name="lang_switch"]');
     if (!radios.length) return;
 
-    const saved = localStorage.getItem(LANG_KEY);
+    const requested = new URLSearchParams(location.search).get('lang');
+    const saved = requested || localStorage.getItem(LANG_KEY);
     if (saved) {
       const r = document.getElementById('lang-' + saved);
       if (r && !r.disabled) r.checked = true;
     }
 
+    function updateLanguage(r, persist) {
+      const selected = r.id.replace('lang-', '');
+      document.documentElement.lang = { en: 'en-US', pt: 'pt-BR', 'es-419': 'es-419' }[selected] || 'en-US';
+      const title = document.querySelector('header .title-' + selected);
+      if (title) document.title = title.textContent.trim() + ' | AXIS-NIDDHI';
+      if (persist) {
+        try { localStorage.setItem(LANG_KEY, selected); } catch (_) { /* Storage may be disabled. */ }
+        try {
+          const url = new URL(location.href);
+          url.searchParams.set('lang', selected);
+          history.replaceState(null, '', url);
+        } catch (_) { /* CSS switching also works with file:// previews. */ }
+      }
+    }
     radios.forEach(r => {
+      if (r.checked) updateLanguage(r, Boolean(requested));
       r.addEventListener('change', () => {
-        if (r.checked) {
-          localStorage.setItem(LANG_KEY, r.id.replace('lang-', ''));
-        }
+        if (r.checked) updateLanguage(r, true);
       });
     });
   }
 
   function generateTOC(contentId, listId) {
-    const content = document.getElementById(contentId);
-    const list = document.getElementById(listId);
-    if (!content || !list) return;
-
-    list.innerHTML = '';
-    const h = content.querySelectorAll('h5');
-    if (!h.length) {
-      list.parentElement.style.display = 'none';
-      return;
-    }
-
-    h.forEach((el, i) => {
-      const id = `${contentId}-sec-${i}`;
-      el.id = id;
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = `#${id}`;
-      a.textContent = el.textContent;
-      li.appendChild(a);
-      list.appendChild(li);
-    });
+    window.AxisArticleSections.mount(contentId, listId);
   }
 
   function initAccordion() {
@@ -175,6 +181,14 @@ function toggleLabz() {
       if (!hash) return;
       const target = document.querySelector(hash);
       if (target && target.classList.contains('library-section')) {
+        const list = document.getElementById('all-sections-list');
+        const toggle = document.getElementById('section-list-toggle');
+        if (list && toggle) {
+          list.hidden = false;
+          toggle.setAttribute('aria-expanded', 'true');
+          toggle.textContent = 'Hide all sections / Ocultar seções';
+        }
+
         const h2 = target.querySelector('h2');
         if (h2) {
           h2.classList.add('active');
@@ -193,6 +207,118 @@ function toggleLabz() {
 
     window.addEventListener('hashchange', handleHash);
     handleHash(); // Run on load
+  }
+
+  function initSectionListToggle() {
+    const list = document.getElementById('all-sections-list');
+    const toggle = document.getElementById('section-list-toggle');
+    if (!list || !toggle) return;
+
+    document.body.classList.add('js-section-list-collapsed');
+    const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null;
+    const startsOpen = !!(hashTarget && hashTarget.classList.contains('library-section'));
+    list.hidden = !startsOpen;
+    toggle.setAttribute('aria-expanded', String(startsOpen));
+    toggle.textContent = startsOpen
+      ? 'Hide all sections / Ocultar seções'
+      : 'View all sections / Ver todas as seções';
+
+    toggle.addEventListener('click', function() {
+      const shouldShow = list.hidden;
+      list.hidden = !shouldShow;
+      toggle.setAttribute('aria-expanded', String(shouldShow));
+      toggle.textContent = shouldShow
+        ? 'Hide all sections / Ocultar seções'
+        : 'View all sections / Ver todas as seções';
+
+      if (shouldShow) {
+        list.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  }
+
+  function initArticleLinkTargets() {
+    const articlePath = /(?:^|\/)pages\/[A-Z]{2}\.[A-Z]{2}\.\d{3}\/(?:index\.html)?$/i;
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (!articlePath.test(href)) return;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    });
+  }
+
+  function initInlineSectionReveal() {
+    const grid = document.querySelector('.section-grid');
+    const panel = document.getElementById('inline-section-panel');
+    if (!grid || !panel) return;
+
+    const cards = Array.from(grid.querySelectorAll('.section-card[href^="#section-"]'));
+    if (!cards.length) return;
+
+    function closePanel() {
+      panel.hidden = true;
+      panel.innerHTML = '';
+      cards.forEach(card => card.classList.remove('active'));
+    }
+
+    function getLastCardInRow(card) {
+      const rowTop = card.offsetTop;
+      let lastInRow = card;
+      cards.forEach(item => {
+        if (item.offsetTop === rowTop) lastInRow = item;
+      });
+      return lastInRow;
+    }
+
+    grid.addEventListener('click', function(event) {
+      const card = event.target.closest('.section-card[href^="#section-"]');
+      if (!card || !grid.contains(card)) return;
+
+      const targetId = card.getAttribute('href');
+      const source = targetId ? document.querySelector(targetId) : null;
+      if (!source || !source.classList.contains('library-section')) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+
+      const lastInRow = getLastCardInRow(card);
+      if (lastInRow && lastInRow.nextElementSibling !== panel) {
+        lastInRow.insertAdjacentElement('afterend', panel);
+      }
+
+      const clone = source.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.classList.add('inline-section-clone');
+      clone.querySelectorAll('[id]').forEach(el => {
+        el.id = `inline-${el.id}`;
+      });
+
+      const h2 = clone.querySelector('h2');
+      const list = clone.querySelector('.accordion-content');
+      const icon = clone.querySelector('.toggle-icon');
+      if (h2) h2.classList.add('active');
+      if (list) list.style.maxHeight = 'none';
+      if (icon) icon.textContent = '▼';
+
+      const header = document.createElement('div');
+      header.className = 'inline-section-panel-header';
+
+      const close = document.createElement('button');
+      close.type = 'button';
+      close.className = 'inline-section-close';
+      close.textContent = 'Close / Fechar';
+      close.addEventListener('click', closePanel);
+
+      header.appendChild(close);
+      panel.innerHTML = '';
+      panel.appendChild(header);
+      panel.appendChild(clone);
+      panel.hidden = false;
+
+      cards.forEach(item => item.classList.toggle('active', item === card));
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, true);
   }
 
   function getRootPath() {
@@ -352,7 +478,7 @@ function toggleLabz() {
       if (!index) {
         fetch(root + 'search_index.json')
           .then(r => r.json())
-          .then(data => { index = data; })
+          .then(data => { index = data; input.dispatchEvent(new Event('input')); })
           .catch(err => console.warn('[Search] Index load failed', err));
       }
     });
@@ -371,6 +497,7 @@ function toggleLabz() {
       const matches = index.filter(item => {
         return normalize(item.title_en).includes(q)
             || normalize(item.title_pt).includes(q)
+            || normalize(item.title_es419).includes(q)
             || normalize(item.content).includes(q)
             || normalize(item.slug).includes(q);
       }).slice(0, 20);
@@ -387,8 +514,9 @@ function toggleLabz() {
 
         // Título com highlight
         const a = document.createElement('a');
-        a.href = root + item.url;                          // FF-010: era item.slug + '/index.html'
-        a.innerHTML = highlight(item.title_en || item.pdpn, raw); // FF-010: era item.title
+        const spanishMatch = item.has_es419 && normalize(item.title_es419).includes(q);
+        a.href = root + item.url + (spanishMatch ? '?lang=es-419' : '');
+        a.innerHTML = highlight((spanishMatch ? item.title_es419 : item.title_en) || item.pdpn, raw);
 
         // Snippet de conteúdo com highlight
         if (item.content) {
@@ -470,6 +598,7 @@ function toggleLabz() {
   }
 
   function restoreScrollPosition() {
+    if (location.hash) return;
     try {
       const pos = localStorage.getItem('scroll_' + location.pathname);
       if (pos && parseInt(pos) > 0) {
@@ -498,80 +627,104 @@ function toggleLabz() {
 
   // ── END FF-014 ────────────────────────────────────────────────────────────
 
-  // --- SPRINT G: Section Boxes Colasáveis (h5 → wrapper) ---
-  function initSectionBoxes() {
-    // Extrair PDPN do URL: /pages/BD.AA.000/index.html → "BD.AA.000"
-    const pdpnMatch = window.location.pathname.match(/\/pages\/([^/]+)/);
-    const pdpn = pdpnMatch ? pdpnMatch[1] : 'index';
-    const storageKey = 'sections-' + pdpn;
-
-    // Recuperar estados salvos
-    let savedState = {};
-    try { savedState = JSON.parse(sessionStorage.getItem(storageKey) || '{}'); } catch(e) {}
-
-    // Slug simples a partir do texto do h5
-    function toSlug(text) {
-      return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
-    }
-
-    // Salvar estado atual
-    function saveState(slug, isCollapsed) {
-      savedState[slug] = isCollapsed;
-      try { sessionStorage.setItem(storageKey, JSON.stringify(savedState)); } catch(e) {}
-    }
-
-    // Processar cada container de conteúdo
-    ['content-en', 'content-pt'].forEach(function(containerId) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-
-      const h5s = Array.from(container.querySelectorAll('h5'));
-      if (!h5s.length) return;
-
-      h5s.forEach(function(h5) {
-        const slug = toSlug(h5.textContent || '');
-
-        // Coletar siblings até o próximo h5 ou fim do container
-        const siblings = [];
-        let next = h5.nextSibling;
-        while (next && !(next.nodeName === 'H5')) {
-          siblings.push(next);
-          next = next.nextSibling;
-        }
-
-        // Criar wrapper .section-content
-        const wrapper = document.createElement('div');
-        wrapper.className = 'section-content';
-        wrapper.setAttribute('data-h5-slug', slug);
-
-        // Inserir wrapper após o h5 e mover siblings para dentro
-        h5.parentNode.insertBefore(wrapper, h5.nextSibling);
-        siblings.forEach(function(el) { wrapper.appendChild(el); });
-
-        // Restaurar estado salvo (padrão: expandido)
-        if (savedState[slug] === true) {
-          h5.classList.add('collapsed');
-          wrapper.classList.add('collapsed');
-        }
-
-        // Evento de click
-        h5.addEventListener('click', function() {
-          const isCollapsed = h5.classList.toggle('collapsed');
-          wrapper.classList.toggle('collapsed', isCollapsed);
-          saveState(slug, isCollapsed);
-        });
-      });
-    });
-  }
-
   // --- SPRINT 7: Print Markers ---
   function initPrintVideoMarkers() {
       document.querySelectorAll('iframe[src*="youtube"], iframe[src*="youtu.be"]').forEach(iframe => {
-          let marker = document.createElement('div');
+          if (iframe.previousElementSibling && iframe.previousElementSibling.classList.contains('print-video-marker')) {
+              return;
+          }
+
+          const marker = document.createElement('div');
           marker.className = 'print-video-marker';
-          marker.innerHTML = '🎥 [Um vídeo foi incorporado nesta seção]';
-          iframe.parentNode.insertBefore(marker, iframe);
+
+          const header = document.createElement('strong');
+          header.textContent = 'Video omitted in print / Vídeo omitido na impressão';
+          marker.appendChild(header);
+          marker.appendChild(document.createElement('br'));
+
+          const source = document.createElement('strong');
+          source.textContent = 'Source/Fonte: ';
+          marker.appendChild(source);
+          marker.appendChild(document.createTextNode('YouTube'));
+          marker.appendChild(document.createElement('br'));
+
+          const title = document.createElement('strong');
+          title.textContent = 'Title/Título: ';
+          marker.appendChild(title);
+          marker.appendChild(document.createTextNode(iframe.title || 'Embedded YouTube video'));
+          marker.appendChild(document.createElement('br'));
+
+          const url = document.createElement('strong');
+          url.textContent = 'URL: ';
+          marker.appendChild(url);
+          marker.appendChild(document.createTextNode(iframe.src));
+
+          const printHiddenContainer = iframe.closest('.video-container, .youtube-wrapper') || iframe;
+          printHiddenContainer.parentNode.insertBefore(marker, printHiddenContainer);
       });
+  }
+
+
+  // --- Print Review Banner ---
+  function initPrintReviewBanner() {
+      if (document.querySelector('.print-review-banner')) {
+          return;
+      }
+
+      const article = document.querySelector('article.content-block');
+      if (!article) {
+          return;
+      }
+
+      const pdpn = article.getAttribute('data-pdpn') || 'unknown';
+
+      const banner = document.createElement('div');
+      banner.className = 'print-review-banner';
+
+      const header = document.createElement('strong');
+      header.textContent = 'DRAFT / RASCUNHO';
+      banner.appendChild(header);
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('Translation review copy / Cópia para revisão de tradução'));
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('Source/Fonte: PureDhamma.net'));
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('AXIS-NIDDHI page URL / URL da página AXIS-NIDDHI: '));
+      const urlSpan = document.createElement('span');
+      urlSpan.className = 'print-review-url';
+      urlSpan.textContent = window.location.href;
+      banner.appendChild(urlSpan);
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('Canonical ID / ID canônico: ' + pdpn));
+      banner.appendChild(document.createElement('br'));
+
+      banner.appendChild(document.createTextNode('Note/Nota: This printed/PDF copy is for review and archival traceability. The doctrinal source remains PureDhamma.net.'));
+      banner.appendChild(document.createElement('br'));
+      banner.appendChild(document.createElement('br'));
+
+      const legendHeader = document.createElement('strong');
+      legendHeader.textContent = 'COLOR LEGEND / LEGENDA DE CORES:';
+      banner.appendChild(legendHeader);
+      banner.appendChild(document.createElement('br'));
+
+      const legendGlossarySpan = document.createElement('span');
+      legendGlossarySpan.className = 'print-legend-glossary';
+      legendGlossarySpan.textContent = 'Orange/Laranja';
+      banner.appendChild(legendGlossarySpan);
+      banner.appendChild(document.createTextNode(' = Glossary term / Termo protegido do glossário'));
+      banner.appendChild(document.createElement('br'));
+
+      const legendAudioSpan = document.createElement('span');
+      legendAudioSpan.className = 'print-legend-audio';
+      legendAudioSpan.textContent = 'Red/Vermelho';
+      banner.appendChild(legendAudioSpan);
+      banner.appendChild(document.createTextNode(' = Glossary term with audio / Termo do glossário com áudio'));
+
+      article.parentNode.insertBefore(banner, article);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -582,14 +735,19 @@ function toggleLabz() {
     initSectionHighlight();  // [FF-014]
     initLang();
     initAccordion();
-    initSectionBoxes();   // [SPRINT G] h5 colasáveis
+    initSectionListToggle();
+    initInlineSectionReveal();
+    initArticleLinkTargets();
     initPronunciation();
     initSearch(); // [Sprint 9]
     initPrintVideoMarkers(); // [Sprint 7 Print Setup]
+    initPrintReviewBanner(); // Print review traceability banner
     generateTOC('content-en', 'toc-list-en');
+    generateTOC('content-es-419', 'toc-list-es-419');
     if (document.getElementById('content-pt')) {
       generateTOC('content-pt', 'toc-list-pt');
     }
+    window.AxisArticleSections.revealHash();
 
     // [SPRINT L] BUG 1: meta-toggle via event listener (onclick inline estava quebrado)
     const metaBtn = document.getElementById('meta-toggle-btn');
