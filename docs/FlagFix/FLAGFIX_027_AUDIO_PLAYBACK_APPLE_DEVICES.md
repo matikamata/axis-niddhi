@@ -98,7 +98,7 @@ Known local audio examples previously requested successfully in local preview:
 ### 1. Confirm repository and branch
 
 ```bash
-cd /home/sanghop/axis/axis-niddhi-production
+cd "${AXIS_WORKSPACE}/axis-niddhi-production"
 
 pwd
 git rev-parse --show-toplevel
@@ -109,7 +109,7 @@ git log --oneline -5
 
 Expected:
 
-- path is `/home/sanghop/axis/axis-niddhi-production`;
+- path is `${AXIS_WORKSPACE}/axis-niddhi-production`;
 - branch is `main`;
 - worktree is clean;
 - latest main includes PR `#112` merge or later.

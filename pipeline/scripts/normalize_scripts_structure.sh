@@ -2,7 +2,7 @@
 # ==============================================================================
 # AXIS-NIDDHI — normalize_scripts_structure.sh
 # Script Structure Normalization — V5.4 → Distribution Ready
-# Run from: /home/sanghop/beng_prelaunch/pipeline/scripts/
+# Run from: ${AXIS_WORKSPACE}/beng_prelaunch/pipeline/scripts/
 # ==============================================================================
 set -euo pipefail
 

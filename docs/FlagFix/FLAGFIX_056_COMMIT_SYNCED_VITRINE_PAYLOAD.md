@@ -6,7 +6,7 @@ Date: 2026-05-19
 
 This sprint committed the already-synced Vitrine static payload in:
 
-- `/home/sanghop/axis/axis-niddhi-published`
+- `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 Committed path scope:
 
@@ -35,11 +35,11 @@ Diff stat before commit:
 
 Source:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site`
 
 Target:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Parity command:
 

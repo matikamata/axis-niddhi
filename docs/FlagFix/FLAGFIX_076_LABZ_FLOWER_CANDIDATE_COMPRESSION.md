@@ -16,11 +16,11 @@ No site integration occurred.
 
 Source directory:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates/`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates/`
 
 Output directory:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_076_compressed_flowers/`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_076_compressed_flowers/`
 
 ## Source Files
 
@@ -77,7 +77,7 @@ labz-ora-pro-nobis-left-mvp-01.webp (1536, 1536) RGBA alpha=True 89046
 
 External comparison CSV:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_076_compressed_flowers/technical_comparison.csv`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_076_compressed_flowers/technical_comparison.csv`
 
 ## SHA256 Summary
 
@@ -90,13 +90,13 @@ a0a4421e01429c23faa9d66574002148be7ad120a7e2bbfc211845a423495e00  labz-flower-co
 
 Full external hash file:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_076_compressed_flowers/sha256sums.txt`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_076_compressed_flowers/sha256sums.txt`
 
 ## Contact Sheet
 
 Before/after contact sheet:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_076_compressed_flowers/labz-flower-compression-contact-sheet-flagfix-076.png`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_076_compressed_flowers/labz-flower-compression-contact-sheet-flagfix-076.png`
 
 Contact sheet details:
 

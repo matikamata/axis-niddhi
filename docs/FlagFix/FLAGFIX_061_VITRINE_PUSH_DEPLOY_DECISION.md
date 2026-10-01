@@ -12,7 +12,7 @@ No push, deploy, build, pipeline, sync, or copy was performed.
 
 Published repo:
 
-- path: `/home/sanghop/axis/axis-niddhi-published`
+- path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - branch: `main`
 - status: `main...origin/main [ahead 1]`
 - working tree: clean
@@ -130,7 +130,7 @@ Pros:
 
 Cons:
 
-- leaves `/home/sanghop/axis/axis-niddhi-published` ahead of remote;
+- leaves `${AXIS_WORKSPACE}/axis-niddhi-published` ahead of remote;
 - requires follow-up so the local commit is not forgotten.
 
 Assessment:
@@ -152,7 +152,7 @@ Recommended operational path:
 Future branch push command, not executed:
 
 ```bash
-cd /home/sanghop/axis/axis-niddhi-published
+cd "${AXIS_WORKSPACE}/axis-niddhi-published"
 git push origin HEAD:flagfix-061-approved-vitrine-payload
 ```
 
@@ -169,7 +169,7 @@ Publishes the approved Vitrine static payload after title corrections and visual
 
 ## Payload
 
-- Source local repo: /home/sanghop/axis/axis-niddhi-published
+- Source local repo: ${AXIS_WORKSPACE}/axis-niddhi-published
 - Commit: 92f4c298f17008f4022c0267f1e64af14a1742a1
 - Scope: pipeline/13-static-site/**
 

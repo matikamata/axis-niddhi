@@ -20,7 +20,7 @@ Local published root now includes:
 
 Exact upload source:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Local payload status at decision time:
 
@@ -63,7 +63,7 @@ Target site:
 
 Use exactly:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Steps:
 

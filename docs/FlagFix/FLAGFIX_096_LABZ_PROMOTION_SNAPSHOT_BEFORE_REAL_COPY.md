@@ -7,7 +7,7 @@ Create a rollback/safety snapshot of the current published static payload before
 - `checkpoint/flagfix-095-labz-netlify-promotion-dry-run-20260519`
 
 ## Snapshot base path
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424`
 
 ## Snapshot files created
 - `published_git_status_sb.txt`
@@ -34,7 +34,7 @@ Create a rollback/safety snapshot of the current published static payload before
 
 ## Tarball snapshot
 - tarball path:  
-  `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424/published_pipeline_13_static_site_pre_labz_promotion.tar.gz`
+  `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424/published_pipeline_13_static_site_pre_labz_promotion.tar.gz`
 - tarball SHA256:  
   `bcd801e0a4e74026e377107f262072f9b5f775972a5814f4e5d2cb903b74c6b4`
 - tar listing line count: `3846`

@@ -16,11 +16,11 @@ No upload or deployment was performed in this sprint.
 
 Approved source folder:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Published repo state:
 
-- Path: `/home/sanghop/axis/axis-niddhi-published`
+- Path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - Status: `main...origin/main [ahead 1]`
 - Working tree: clean
 - Current local commit: `92f4c29`
@@ -36,8 +36,8 @@ Source payload checks:
 
 Compared:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site`
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Result:
 
@@ -48,29 +48,29 @@ Result:
 
 Package directory:
 
-- `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749`
+- `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749`
 
 Tarball:
 
-- `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz`
+- `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz`
 
 Package details:
 
 - Tarball size: `722M`
-- Source file inventory: `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/source_file_inventory.txt`
-- Source file count record: `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/source_file_count.txt`
-- Source size record: `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/source_size.txt`
-- Package listing record: `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/package_ls_lh.txt`
+- Source file inventory: `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/source_file_inventory.txt`
+- Source file count record: `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/source_file_count.txt`
+- Source size record: `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/source_size.txt`
+- Package listing record: `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/package_ls_lh.txt`
 
 SHA256:
 
 ```text
-36cb0f2ee4feff4f45590684390b70b016d9e0246aac215f4af6f491b4272589  /home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz
+36cb0f2ee4feff4f45590684390b70b016d9e0246aac215f4af6f491b4272589  ${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz
 ```
 
 SHA256 file:
 
-- `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz.sha256`
+- `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz.sha256`
 
 ## Tarball Readability
 

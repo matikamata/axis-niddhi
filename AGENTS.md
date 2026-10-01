@@ -13,16 +13,22 @@ git remote -v
 
 If the workspace role is unclear, stop and ask.
 
+## Portable path convention
+
+`AXIS_WORKSPACE` is the locally configured parent of the role-specific checkouts.
+See [docs/PORTABLE_PATHS.md](docs/PORTABLE_PATHS.md) for POSIX and PowerShell setup.
+Repository-relative paths start at the checkout root.
+
 ## Workspace roles
 
 | Path | Role | Rule |
 |---|---|---|
-| `/home/sanghop/axis/axis-niddhi-production` | production | clean production branches only |
-| `/home/sanghop/bengyond-playground` | rescue quarantine | read/diff/cherry-pick archaeology only; no push |
-| `/home/sanghop/axis/axis-niddhi-lab` | integration lab | controlled integration |
-| `/home/sanghop/axis/axis-navigator-lab` | Navigator lab | UX experiments |
-| `/home/sanghop/axis/axis-nana-lab` | NANA lab | retrieval/LLM/provider experiments |
-| `/home/sanghop/axis/axis-print-review` | print review lab | print/PDF/CSS work |
+| `${AXIS_WORKSPACE}/axis-niddhi-production` | production | clean production branches only |
+| `${AXIS_WORKSPACE}/bengyond-playground` | rescue quarantine | read/diff/cherry-pick archaeology only; no push |
+| `${AXIS_WORKSPACE}/axis-niddhi-lab` | integration lab | controlled integration |
+| `${AXIS_WORKSPACE}/axis-navigator-lab` | Navigator lab | UX experiments |
+| `${AXIS_WORKSPACE}/axis-nana-lab` | NANA lab | retrieval/LLM/provider experiments |
+| `${AXIS_WORKSPACE}/axis-print-review` | print review lab | print/PDF/CSS work |
 
 ## Absolute rules
 

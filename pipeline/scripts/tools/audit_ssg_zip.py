@@ -1,15 +1,16 @@
 import os
+import argparse
 import filecmp
 from pathlib import Path
 
 # Configuração dos Paths
-ZIP_DIR = Path("/home/sanghop/Downloads/ssg13_AXIS_NIDDHI_v3/ssg13")
-ORIGINAL_DIR = Path("/beng/pipeline/13-ssg")
+ZIP_DIR = None
+ORIGINAL_DIR = None
 
 def audit_diffs():
     print(f"\n🔍 AUDITORIA DE SINCRONIA — SSG v3 vs AXIS-NIDDHI")
     print(f"📂 Fonte (Zip): {ZIP_DIR}")
-    print(f"📂 Destino (/beng): {ORIGINAL_DIR}\n")
+    print(f"📂 Destino: {ORIGINAL_DIR}\n")
     print(f"{'STATUS':<12} | {'ARQUIVO'}")
     print("-" * 50)
 
@@ -42,4 +43,11 @@ def audit_diffs():
                 print(f"🗑️  AUSENTE NO ZIP | {relative_path}")
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Compare an extracted SSG directory with a local source directory.")
+    parser.add_argument("zip_dir", type=Path)
+    parser.add_argument("original_dir", type=Path)
+    args = parser.parse_args()
+    ZIP_DIR, ORIGINAL_DIR = args.zip_dir.expanduser().resolve(), args.original_dir.expanduser().resolve()
+    if not ZIP_DIR.is_dir() or not ORIGINAL_DIR.is_dir():
+        parser.error("Both paths must be existing directories")
     audit_diffs()

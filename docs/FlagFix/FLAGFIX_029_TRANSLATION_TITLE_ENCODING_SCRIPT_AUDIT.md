@@ -1,7 +1,7 @@
 # FLAGFIX_029 - Translation/title pipeline encoding and temporary-script retirement audit
 
 Date: 2026-05-18
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 Mode: read-only triage plus this report
 
 ## Repository state
@@ -258,6 +258,6 @@ No deploy was run.
 No translation was run.
 No Netlify/Vitrine update was made.
 No Cloudflare configuration was touched.
-`/home/sanghop/axis/axis-niddhi-published` was not touched.
+`${AXIS_WORKSPACE}/axis-niddhi-published` was not touched.
 
 Only this report file was created for #FlagFix_029.

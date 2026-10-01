@@ -45,7 +45,7 @@ Changed paths are restricted to LABZ CSS counterparts plus this report.
 
 ## Netlify/Vitrine confirmation
 - No sync/copy to published.
-- No edit in `/home/sanghop/axis/axis-niddhi-published`.
+- No edit in `${AXIS_WORKSPACE}/axis-niddhi-published`.
 - Published repo check remained unchanged in this sprint (`main...origin/main [ahead 2]`).
 
 ## Forbidden-scope confirmation

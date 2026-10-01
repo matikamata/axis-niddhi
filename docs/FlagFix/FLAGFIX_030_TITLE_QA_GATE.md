@@ -1,7 +1,7 @@
 # FLAGFIX_030 - Title QA gate before SP10/SP11 apply
 
 Date: 2026-05-18
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 Scope: read-only QA tool plus documentation
 
 ## Purpose
@@ -119,4 +119,4 @@ No pipeline was run.
 No deploy was run.
 No Netlify/Vitrine update was made.
 No Cloudflare configuration was touched.
-`/home/sanghop/axis/axis-niddhi-published` was not touched.
+`${AXIS_WORKSPACE}/axis-niddhi-published` was not touched.

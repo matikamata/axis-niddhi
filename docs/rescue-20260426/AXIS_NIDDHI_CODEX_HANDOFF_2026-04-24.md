@@ -172,8 +172,8 @@ The project has multiple workspaces. Revalidate before acting.
 | Workspace | Role | Expected status |
 |---|---|---|
 | `/beng-fut/pipeline/` | LAB / long-term development base | Must remain stable; source of mature changes. |
-| `/home/sanghop/bengyond/pipeline/` | Portable workspace / PenDrive precursor | Tested portable rebuild path. |
-| `/home/sanghop/beng_prelaunch/pipeline/` | GOLDEN / distribution prelaunch workspace | Most recent full feature integration reports came from here. |
+| `${AXIS_WORKSPACE}/bengyond/pipeline/` | Portable workspace / PenDrive precursor | Tested portable rebuild path. |
+| `${AXIS_WORKSPACE}/beng_prelaunch/pipeline/` | GOLDEN / distribution prelaunch workspace | Most recent full feature integration reports came from here. |
 | `/beng-release/` | Self-contained release output | Rebuilt by release snapshot tooling. |
 | `/mnt/archaeology/` | Immutable archive | Read-only/noexec; historical record. |
 

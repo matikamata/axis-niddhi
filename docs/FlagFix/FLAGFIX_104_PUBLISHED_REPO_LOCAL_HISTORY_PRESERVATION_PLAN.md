@@ -1,7 +1,7 @@
 # #FlagFix_104 — Published Repo Local History Preservation Plan
 
 Date: 2026-05-19
-Workspace: `/home/sanghop/axis`
+Workspace: `${AXIS_WORKSPACE}`
 
 ## Source checkpoint
 `checkpoint/flagfix-103-published-repo-reconciliation-20260519`

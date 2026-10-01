@@ -24,13 +24,13 @@ Policy context:
 
 Production repo:
 
-- Path: `/home/sanghop/axis/axis-niddhi-production`
+- Path: `${AXIS_WORKSPACE}/axis-niddhi-production`
 - Status: `main...origin/main`
 - Current head includes `checkpoint/flagfix-078-labz-preview-closure-bodhi-asset-20260519`.
 
 Published repo:
 
-- Path: `/home/sanghop/axis/axis-niddhi-published`
+- Path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - Status: `main...origin/main [ahead 1]`
 - Head: `92f4c29 build(vitrine): sync static payload after title corrections`
 - `netlify.toml` publish directory: `pipeline/13-static-site`
@@ -245,5 +245,5 @@ If the desired stable Vitrine behavior is "root must show the CTA," the lowest-r
 - No SP10/SP11 changes.
 - No sync/copy.
 - No `.gitignore` changes.
-- No `/home/sanghop/axis/axis-niddhi-published` changes.
+- No `${AXIS_WORKSPACE}/axis-niddhi-published` changes.
 - No production static changes.

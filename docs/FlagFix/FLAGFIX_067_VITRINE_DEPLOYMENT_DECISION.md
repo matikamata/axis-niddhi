@@ -27,7 +27,7 @@ No deployment has been performed.
 
 Published repo:
 
-- Path: `/home/sanghop/axis/axis-niddhi-published`
+- Path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - Branch/status: `main...origin/main [ahead 1]`
 - Working tree: clean
 - Current local commit: `92f4c29`
@@ -49,7 +49,7 @@ Published `netlify.toml`:
 
 Deployment payload folder:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Payload check:
 
@@ -61,8 +61,8 @@ Payload check:
 
 Compared:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site`
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Result:
 
@@ -73,7 +73,7 @@ Result:
 
 ### Option A - Deploy Manually to Netlify Now
 
-Use the folder `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site` directly for manual Netlify upload.
+Use the folder `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site` directly for manual Netlify upload.
 
 Pros:
 
@@ -89,7 +89,7 @@ Cons:
 
 Create a `.zip` or tarball snapshot from exactly:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Record:
 
@@ -145,7 +145,7 @@ Recommended next step: Option B.
 
 Create a deployment package/snapshot in a later explicit sprint before any manual Netlify upload. The package should be created from exactly:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 The package sprint should record:
 

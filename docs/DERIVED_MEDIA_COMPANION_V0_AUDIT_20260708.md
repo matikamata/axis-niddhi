@@ -4,7 +4,7 @@
 
 Branch: `feature/derived-media-companion-v0`
 
-Workspace: `/home/imac2014/projects/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 
 Scope: post-implementation audit for the downstream Derived Media Companion Layer V0. This layer remains auxiliary and does not become Canon.
 
@@ -61,7 +61,7 @@ rg -n 'GOOGLE_APPLICATION_CREDENTIALS|PRIVATE KEY|SECRET|/home/|C:\\|file://' \
   docs/DERIVED_MEDIA_COMPANION_LAYER_V0.md \
   docs/DERIVED_MEDIA_COMPANION_LAYER_V0_PLAN.md
 python3 -m py_compile pipeline/scripts/tools/DM01_scan_derived_media.py pipeline/scripts/tools/DM02_generate_derived_media_manifest.py
-python3 pipeline/scripts/tools/DM01_scan_derived_media.py --source /home/imac2014/projects/axis/axis-derived-media-staging/raw --dry-run --verbose
+python3 pipeline/scripts/tools/DM01_scan_derived_media.py --source ${AXIS_WORKSPACE}/axis-derived-media-staging/raw --dry-run --verbose
 python3 pipeline/scripts/tools/DM02_generate_derived_media_manifest.py
 cat pipeline/metadata/derived_media_manifest.json
 bash pipeline/scripts/tools/axis_cli.sh verify pipeline
@@ -121,7 +121,7 @@ python3 pipeline/scripts/tools/DM02_generate_derived_media_manifest.py --dry-run
 python3 pipeline/scripts/tools/DM02_generate_derived_media_manifest.py
 cat pipeline/metadata/derived_media_manifest.json
 python3 pipeline/scripts/tools/DM01_scan_derived_media.py \
-  --source /home/imac2014/projects/axis/axis-derived-media-staging/raw \
+  --source ${AXIS_WORKSPACE}/axis-derived-media-staging/raw \
   --dry-run \
   --verbose
 bash pipeline/scripts/tools/axis_cli.sh verify pipeline

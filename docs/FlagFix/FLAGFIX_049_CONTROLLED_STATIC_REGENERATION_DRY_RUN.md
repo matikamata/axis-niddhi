@@ -70,7 +70,7 @@ No unexpected source paths were modified. In particular, there were no tracked c
 - `pipeline/metadata/Translation_Control_Center.csv`
 - SP10/SP11 scripts
 - `.gitignore`
-- `/home/sanghop/axis/axis-niddhi-published`
+- `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 ## Stale String Check
 
@@ -149,7 +149,7 @@ The regeneration appears internally consistent: validators passed, stale strings
 
 ## No-Change Confirmations
 
-- Did not touch `/home/sanghop/axis/axis-niddhi-published`.
+- Did not touch `${AXIS_WORKSPACE}/axis-niddhi-published`.
 - Did not update Netlify/Vitrine.
 - Did not deploy.
 - Did not call DeepL.

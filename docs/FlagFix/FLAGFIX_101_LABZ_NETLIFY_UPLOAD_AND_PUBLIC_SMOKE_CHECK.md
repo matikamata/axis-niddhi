@@ -8,7 +8,7 @@ Record public smoke validation after manual Netlify upload decision override for
 
 ## Manual upload confirmation context
 - Human-directed upload source folder:
-  - `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+  - `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 - This sprint executed read-only public checks only (no upload by agent).
 
 ## Public URLs checked

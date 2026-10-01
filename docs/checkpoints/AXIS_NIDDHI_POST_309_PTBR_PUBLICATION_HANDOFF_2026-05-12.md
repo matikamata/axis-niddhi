@@ -31,7 +31,7 @@ The important architectural lesson from this cycle is:
 
 ## 2. Workspace roles
 
-### `/home/sanghop/axis/axis-niddhi-production`
+### `${AXIS_WORKSPACE}/axis-niddhi-production`
 
 This is now the **active production workspace**.
 
@@ -54,7 +54,7 @@ publish/showcase-...
 docs/...
 ```
 
-### `/home/sanghop/axis/axis-niddhi-published`
+### `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 This is the **manual publish mirror**.
 
@@ -77,13 +77,13 @@ Do **not** use it for:
 The authoritative source for updating this directory is:
 
 ```text
-/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/
+${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/
 ```
 
 The intended target is:
 
 ```text
-/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/
+${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/
 ```
 
 ### Real lab / archaeology spaces
@@ -91,7 +91,7 @@ The intended target is:
 Lab and archaeology remain outside the active publication path:
 
 ```text
-/home/sanghop/bengyond-playground/pipeline
+${AXIS_WORKSPACE}/bengyond-playground/pipeline
 /media/sanghop/BrasileirinhoHD/20260427_16h16_Quartinho-da-BOA-bagunça
 Zibaldone folders
 ```
@@ -201,7 +201,7 @@ COMMAND=YES: 0
 Run only after freeze/menu are aligned:
 
 ```bash
-cd /home/sanghop/axis/axis-niddhi-production/pipeline/13-ssg
+cd "${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-ssg"
 python3 build.py
 ```
 
@@ -291,7 +291,7 @@ Netlify is the preferred end-user surface for now because manual full-folder dep
 For manual Netlify deploy, drag/copy this directory:
 
 ```text
-/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site
+${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site
 ```
 
 Important: publish the **site directory itself**, not the repo root.
@@ -322,25 +322,25 @@ Dry-run first:
 
 ```bash
 rsync -avhn --delete --itemize-changes \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/
 ```
 
 If sane, real sync:
 
 ```bash
 rsync -avh --delete --itemize-changes \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/
 ```
 
 Validate:
 
 ```bash
-test -f /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/archive.html
-test -f /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/search_index.json
-test -f /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/pages/LD.CC.005/index.html
-find /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/assets/audio -type f -name '*.mp3' | wc -l
+test -f ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/archive.html
+test -f ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/search_index.json
+test -f ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/pages/LD.CC.005/index.html
+find ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/assets/audio -type f -name '*.mp3' | wc -l
 ```
 
 Expected after the 309 pt-BR sync:
@@ -429,7 +429,7 @@ Agents must not:
 - Run `SP09` before understanding whether user selections should be preserved.
 - Commit `pipeline/13-static-site/**` without explicit publication approval.
 - Touch private keys beyond checking file existence and ignore status.
-- Use `/home/sanghop/bengyond-playground` as an operational dependency for current production.
+- Use `${AXIS_WORKSPACE}/bengyond-playground` as an operational dependency for current production.
 - Treat `axis-niddhi-published` as the place to translate/build.
 - Invent a post order for DeepL; the human operator selects rows.
 

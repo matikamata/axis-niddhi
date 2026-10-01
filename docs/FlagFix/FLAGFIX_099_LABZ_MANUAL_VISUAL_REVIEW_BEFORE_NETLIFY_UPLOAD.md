@@ -7,7 +7,7 @@ Record the manual visual review decision gate for local published LABZ payload b
 - `checkpoint/flagfix-098-labz-published-local-review-20260519`
 
 ## Reviewed local payload path
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 ## Published repo status
 - `git status -sb`: `## main...origin/main [ahead 2]`

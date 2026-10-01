@@ -42,7 +42,7 @@ The flora candidates should be designed as side-margin compositions rather than 
 
 Recommended candidate working directory outside all Git repositories:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates/`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates/`
 
 This directory should be used in the next sprint only if candidate image generation is explicitly approved.
 
@@ -118,7 +118,7 @@ Suggested review method:
 The next sprint should:
 
 - Create images outside repo only.
-- Use `/home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates/`.
+- Use `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates/`.
 - Generate/check dimensions and file sizes.
 - Create a contact sheet or visual review sheet if possible.
 - Record candidate paths, dimensions, file sizes, and SHA256 values.

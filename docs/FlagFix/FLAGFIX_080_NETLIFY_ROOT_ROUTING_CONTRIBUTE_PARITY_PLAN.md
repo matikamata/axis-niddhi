@@ -32,7 +32,7 @@ This is fragile because different hosts may not honor or prioritize the root red
 
 Evidence from the SSG source confirms the intended model:
 
-- [index_renderer.py](/home/sanghop/axis/axis-niddhi-production/pipeline/13-ssg/src/renderers/index_renderer.py:8)
+- [index_renderer.py](${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-ssg/src/renderers/index_renderer.py:8)
   - `index.html <- templates/welcome.html`
   - `archive.html <- templates/index.html`
 
@@ -276,6 +276,6 @@ This plan does not propose:
 - No SP10/SP11 changes
 - No sync/copy
 - No `.gitignore` changes
-- No `/home/sanghop/axis/axis-niddhi-published` changes
+- No `${AXIS_WORKSPACE}/axis-niddhi-published` changes
 - No production static changes
 - No website file changes

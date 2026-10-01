@@ -1,7 +1,7 @@
 # #FlagFix_112 — LABZ Theme Button Regression Triage
 
 Date: 2026-05-19  
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 
 ## #111 human result
 FAIL — after #110, theme buttons appeared non-functional during LABZ usage.

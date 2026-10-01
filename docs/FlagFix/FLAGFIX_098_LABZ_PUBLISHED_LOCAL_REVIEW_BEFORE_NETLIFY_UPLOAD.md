@@ -23,7 +23,7 @@ From `/tmp/flagfix_098_labz_hashes.txt`, source and published hashes match for b
 ## Local server review
 - server port used: `8098`
 - server started from:
-  - `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+  - `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 - server stopped successfully after checks (`server stopped` confirmed).
 
 ## HTTP status summary

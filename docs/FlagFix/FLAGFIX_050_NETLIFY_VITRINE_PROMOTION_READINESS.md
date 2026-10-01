@@ -6,10 +6,10 @@ Date: 2026-05-18
 
 This read-only audit compares the regenerated Cloudflare/dev static output with the currently published Netlify/Vitrine workspace before any promotion.
 
-- Production/dev repo: `/home/sanghop/axis/axis-niddhi-production`
-- Regenerated static source: `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site`
-- Published Vitrine workspace: `/home/sanghop/axis/axis-niddhi-published`
-- Comparable published static payload found at: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- Production/dev repo: `${AXIS_WORKSPACE}/axis-niddhi-production`
+- Regenerated static source: `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site`
+- Published Vitrine workspace: `${AXIS_WORKSPACE}/axis-niddhi-published`
+- Comparable published static payload found at: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Checkpoint reference:
 
@@ -27,7 +27,7 @@ Operator note: `pipeline/13-static-site/assets/BodhiCircuitLeaf.png` appears as 
 
 ## Validator Results
 
-Pre-promotion validators were run in `/home/sanghop/axis/axis-niddhi-production`.
+Pre-promotion validators were run in `${AXIS_WORKSPACE}/axis-niddhi-production`.
 
 CSL correction manifest validator:
 
@@ -52,7 +52,7 @@ Raw workspace comparison:
 - production static files: 3082
 - published workspace files: 4135
 
-The raw root-to-root comparison is not semantically equivalent because `/home/sanghop/axis/axis-niddhi-published` is a wider repository/workspace containing `.git`, docs, source folders, and other project files.
+The raw root-to-root comparison is not semantically equivalent because `${AXIS_WORKSPACE}/axis-niddhi-published` is a wider repository/workspace containing `.git`, docs, source folders, and other project files.
 
 Comparable static payload comparison:
 
@@ -156,7 +156,7 @@ This sprint did not:
 
 - copy files;
 - sync files;
-- modify `/home/sanghop/axis/axis-niddhi-published`;
+- modify `${AXIS_WORKSPACE}/axis-niddhi-published`;
 - update Netlify/Vitrine;
 - deploy;
 - run build or pipeline;
@@ -185,7 +185,7 @@ Recommended next step:
 Suggested future promotion command proposal only, not executed:
 
 ```bash
-cd /home/sanghop/axis
+cd "${AXIS_WORKSPACE}"
 rsync -av --delete \
   axis-niddhi-production/pipeline/13-static-site/ \
   axis-niddhi-published/pipeline/13-static-site/

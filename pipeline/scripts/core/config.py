@@ -11,7 +11,7 @@ REGRAS DESTE ARQUIVO:
   - Qualquer script do pipeline importa daqui — nunca redefine localmente
 
 CHANGELOG vs versão anterior:
-  ★ BASE_DIR          → /beng/pipeline          (era /home/sucessor/pipeline)
+  ★ BASE_DIR          → /beng/pipeline          (era ${AXIS_REPO}/pipeline)
   ★ DB 'database'     → beng_wp_21              (era puredhamma_clean)
   ★ WP_BASE_URL       → http://localhost/beng_feb2026  (era /brasileirinho)
   ★ get_deepl_key()   → sem hardcode; lê env ou deepl_key.txt; aborta se ausente

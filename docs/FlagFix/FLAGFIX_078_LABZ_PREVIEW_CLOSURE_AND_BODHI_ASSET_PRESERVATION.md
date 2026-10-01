@@ -62,7 +62,7 @@ Hash parity:
 - No build/pipeline run.
 - No deploy.
 - No Netlify/Vitrine update.
-- No `/home/sanghop/axis/axis-niddhi-published` changes.
+- No `${AXIS_WORKSPACE}/axis-niddhi-published` changes.
 - No CSL changes.
 - No metadata CSV changes.
 - No `Translation_Control_Center.csv` changes.

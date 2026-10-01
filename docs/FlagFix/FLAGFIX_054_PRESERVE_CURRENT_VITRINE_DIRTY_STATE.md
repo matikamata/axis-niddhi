@@ -12,7 +12,7 @@ No real sync was run in this sprint.
 
 Production repo:
 
-- path: `/home/sanghop/axis/axis-niddhi-production`
+- path: `${AXIS_WORKSPACE}/axis-niddhi-production`
 - branch/status: `main...origin/main`
 - #FlagFix_053 merged at checkpoint: `checkpoint/flagfix-053-vitrine-promotion-dry-run-20260519`
 
@@ -20,7 +20,7 @@ Production repo:
 
 Published workspace:
 
-- path: `/home/sanghop/axis/axis-niddhi-published`
+- path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - branch/status: `main...origin/main`
 - modified files: 116
 - untracked files: 0
@@ -46,16 +46,16 @@ Representative modified paths:
 
 Snapshot base:
 
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609`
 
 Files created outside the published Git tree:
 
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_status.txt`
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_diff_stat.txt`
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_name_status.txt`
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609.patch`
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_pipeline_13_static_site_snapshot.tar.gz`
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_sha256.txt`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_status.txt`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_diff_stat.txt`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_name_status.txt`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609.patch`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_pipeline_13_static_site_snapshot.tar.gz`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_sha256.txt`
 
 Observed sizes:
 
@@ -69,13 +69,13 @@ Observed sizes:
 ## SHA256
 
 ```text
-e9dad6d238b561230351d141e1aba619636279abb64a890789be525bd01dd782  /home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609.patch
-9d1523a308bd44fb28783c5df1c7f49a97e919ee31005bd9c5f4ee3569ae45a7  /home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_pipeline_13_static_site_snapshot.tar.gz
+e9dad6d238b561230351d141e1aba619636279abb64a890789be525bd01dd782  ${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609.patch
+9d1523a308bd44fb28783c5df1c7f49a97e919ee31005bd9c5f4ee3569ae45a7  ${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_pipeline_13_static_site_snapshot.tar.gz
 ```
 
 ## Commit Policy
 
-No commit was created inside `/home/sanghop/axis/axis-niddhi-published`.
+No commit was created inside `${AXIS_WORKSPACE}/axis-niddhi-published`.
 
 The published workspace remains dirty exactly so the operator can decide the next preservation/promotion move explicitly.
 
@@ -83,7 +83,7 @@ The published workspace remains dirty exactly so the operator can decide the nex
 
 Before any real sync, choose one of these paths:
 
-1. Commit, stash, or otherwise intentionally preserve the current dirty published state inside `/home/sanghop/axis/axis-niddhi-published`.
+1. Commit, stash, or otherwise intentionally preserve the current dirty published state inside `${AXIS_WORKSPACE}/axis-niddhi-published`.
 2. If the external snapshot is accepted as sufficient rollback evidence, proceed to a future real sync sprint with explicit approval.
 3. If there is uncertainty about the dirty state, inspect the 116 modified paths before syncing over them.
 
@@ -106,4 +106,4 @@ This sprint did not:
 - modify `Translation_Control_Center.csv`;
 - modify SP10/SP11;
 - change `.gitignore`;
-- commit inside `/home/sanghop/axis/axis-niddhi-published`.
+- commit inside `${AXIS_WORKSPACE}/axis-niddhi-published`.

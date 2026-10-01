@@ -16,11 +16,11 @@ Operator declaration:
 
 Reviewed local Vitrine payload:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Published repo:
 
-- path: `/home/sanghop/axis/axis-niddhi-published`
+- path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - branch/status: `main...origin/main [ahead 1]`
 - working tree: clean
 

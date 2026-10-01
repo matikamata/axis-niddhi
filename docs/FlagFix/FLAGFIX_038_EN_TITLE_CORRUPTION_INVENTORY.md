@@ -91,7 +91,7 @@ Do not mass-correct by automated substitution alone. Several title strings conta
 
 ## No-Change Confirmations
 
-- Did not touch `/home/sanghop/axis/axis-niddhi-published`.
+- Did not touch `${AXIS_WORKSPACE}/axis-niddhi-published`.
 - Did not update Netlify/Vitrine.
 - Did not run build, pipeline, or deploy.
 - Did not call DeepL.

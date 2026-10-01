@@ -1,7 +1,7 @@
 # #FlagFix_109 — LABZ Published Local Visual Review After Reference-Layer Promotion
 
 Date: 2026-05-19  
-Workspace: `/home/sanghop/axis`
+Workspace: `${AXIS_WORKSPACE}`
 
 ## #108 dependency
 - Source: `docs/FlagFix/FLAGFIX_108_PROMOTE_LABZ_REFERENCE_LAYER_TO_PUBLISHED.md`

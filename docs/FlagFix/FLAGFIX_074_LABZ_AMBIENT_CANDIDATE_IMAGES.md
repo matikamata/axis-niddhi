@@ -16,12 +16,12 @@ These are candidates only. They were not integrated into the site.
 
 External candidate directory:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates/`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates/`
 
 This directory is outside:
 
-- `/home/sanghop/axis/axis-niddhi-production`
-- `/home/sanghop/axis/axis-niddhi-published`
+- `${AXIS_WORKSPACE}/axis-niddhi-production`
+- `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 ## Generated Files
 
@@ -57,7 +57,7 @@ labz-ora-pro-nobis-left-candidate-01.png              | 1536x1536 | RGBA | 55609
 Directory size:
 
 ```text
-2.2M /home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates
+2.2M ${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates
 ```
 
 File type summary:
@@ -78,13 +78,13 @@ fe582f4807e6379eeab94a485c1804dbb0c1ccec32667b8d54362c677b2c3d85  labz-bee-amber
 
 Full external hash file:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates/sha256sums.txt`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates/sha256sums.txt`
 
 ## Contact Sheet
 
 Contact sheet path:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates/labz-ambient-candidates-contact-sheet-flagfix-074.png`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates/labz-ambient-candidates-contact-sheet-flagfix-074.png`
 
 The contact sheet places all five candidates on a neutral dark review background with filename labels.
 

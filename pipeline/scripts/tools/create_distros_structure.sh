@@ -2,7 +2,7 @@
 # ==============================================================================
 # AXIS-NIDDHI — create_distros_structure.sh
 # Distribution Tier Structure Creator
-# Run from: /home/sanghop/beng_prelaunch/pipeline/
+# Run from: ${AXIS_WORKSPACE}/beng_prelaunch/pipeline/
 # ==============================================================================
 set -euo pipefail
 

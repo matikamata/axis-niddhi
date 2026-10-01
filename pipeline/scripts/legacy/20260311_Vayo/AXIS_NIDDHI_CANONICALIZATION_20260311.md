@@ -394,7 +394,7 @@ rows = list(csv.reader(f, delimiter=';'))
 
 ### E — SG04: BENG_ROOT derivation
 
-After V5.4 patch, `BENG_ROOT = BASE_DIR.parent`. This assumes the pipeline directory is always one level under the server root (e.g., `/beng-fut/pipeline` → `BENG_ROOT = /beng-fut`). If `BENG_BASE` points to a non-standard location (e.g., `/home/operator/axis/pipeline`), `WP_UPLOADS_DIR` will be wrong.
+After V5.4 patch, `BENG_ROOT = BASE_DIR.parent`. This assumes the pipeline directory is always one level under the server root (e.g., `/beng-fut/pipeline` → `BENG_ROOT = /beng-fut`). If `BENG_BASE` points to a non-standard location (e.g., `${AXIS_WORKSPACE}/pipeline`), `WP_UPLOADS_DIR` will be wrong.
 
 **Operator rule:** `WP_UPLOADS_DIR` must always be verified in SG04 output before proceeding with SG-5 onwards.
 

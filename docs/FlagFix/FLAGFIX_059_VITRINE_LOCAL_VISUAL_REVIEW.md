@@ -8,7 +8,7 @@ This sprint ran local HTTP checks against the synced Vitrine static payload and 
 
 Static payload reviewed:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Published commit reviewed:
 
@@ -42,7 +42,7 @@ Result:
 Server command used:
 
 ```bash
-cd /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site
+cd "${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site"
 python3 -m http.server 8088
 ```
 

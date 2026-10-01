@@ -1,12 +1,12 @@
 # #FlagFix_113 — Sync LABZ Theme Fix To Published + Local Review
 
 Date: 2026-05-19  
-Production: `/home/sanghop/axis/axis-niddhi-production`  
-Published: `/home/sanghop/axis/axis-niddhi-published`
+Production: `${AXIS_WORKSPACE}/axis-niddhi-production`\
+Published: `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 ## Copied path
-- From: `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/js/main.js`
-- To: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/js/main.js`
+- From: `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/js/main.js`
+- To: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/js/main.js`
 
 ## Parity result
 - `/tmp/flagfix_113_main_js_parity.diff` line count: `0`

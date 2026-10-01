@@ -1,87 +1,47 @@
-> Question to Claude Sonnet 4.6 (inside Antigravity.Google):
+# AXIS-NIDDHI — Project Summary
 
-- Sanity check - can you please summarize the project in this folder?
+AXIS-NIDDHI preserves and translates the teaching corpus published by Lal A. at [PureDhamma.net](https://puredhamma.net/). It combines a static reading archive, traceable source material and a translation workflow with human review.
 
-Let me dig deeper into the key files to understand the project properly.
+## 🎯 Purpose
 
-Viewed README_HUMANS.md:1-132
-Viewed AXIS_PROTOCOL.md:1-225
-Viewed capsule_manifest.json:1-27
-Listed directory core
-Listed directory 13-ssg
-Listed directory 09-csl
-Listed directory release
-Listed directory mirror
+Keep the material accessible, make comparison with the English source straightforward, and preserve the meaning of the teachings through careful review. PureDhamma.net remains the primary reference. Translations are study aids whose review status must remain visible.
 
-Now I have a thorough picture. Here's the full summary:
+## 🏗️ How the project works
 
----
+1. Preserve source backups and extract article text, links and media.
+2. Associate articles with stable **PD#PN** identifiers in the Canonical Source Library (CSL).
+3. Prepare translations with terminology glossaries and record their status.
+4. Review source differences, translations, links, audio and images.
+5. Build and validate static publication packages, retaining manifests and release evidence.
 
-## AXIS-NIDDHI — Project Summary
+Published files are derived artifacts. A static copy is not, by itself, proof that a translation is complete or that a full rebuild has been reproduced.
 
-This is a **deterministic content preservation and translation pipeline** for the Buddhist teaching corpus originally published at **PureDhamma.net** by Lal A. — a scientific interpretation of the Buddha's Pāli Canon teaching.
+## 📦 Repository areas
 
----
+Paths below are relative to the repository root; availability depends on the checkout or distribution package.
 
-### 🎯 Mission
+| Path | Purpose |
+| --- | --- |
+| `pipeline/09-csl/` | Source records, identities and language-specific article content |
+| `pipeline/03-translations/` | Translation working material |
+| `pipeline/13-ssg/` | Static-site generation code and templates |
+| `pipeline/13-static-site/` | Generated publication output |
+| `pipeline/scripts/` | Pipeline and maintenance utilities |
+| `pipeline/metadata/` | Catalogs, glossaries and translation metadata |
+| `docs/` | Public guides, policies and review records |
 
-Preserve, translate, and distribute **748 posts** covering the full scope of Buddha Dhamma (ethics, Abhidhamma, dependent origination, meditation, path to Nibbāna) so that the teaching is **never lost**.
+## 🌐 Reading and collaboration
 
----
+The public archive offers language selection, search by topic or PD#PN, pronunciation recordings where available, glossary help and artwork by Mariinha. Language availability varies by article; a navigation option does not mean that its translation is ready.
 
-### 🏗️ Architecture — 4 Pipeline Stages
+The [Netlify archive](https://niddhi.netlify.app/) and [Cloudflare review preview](https://niddhi.pages.dev/welcome) can represent different release stages. Consult the notices on the page you are reading.
 
-```
-SOURCE ZIP (PureDhamma backup, ~2.3 GB)
-    │
-    ▼  [SG] EXTRACTION
-    │   Extract HTML → Clean → Build CSL → Harvest assets
-    │
-    ▼  [SP] PROCESSING
-    │   Migrate pt-BR stubs → Upgrade identities → Translate via DeepL
-    │   Compile glossary (986 terms) → Fix headers → Convert audio
-    │
-    ▼  [SA] AUDIT
-    │   Final audit → Freeze translations → Generate cryptographic manifests
-    │   Verify integrity → Generate build seal (reproducibility guarantee)
-    │
-    ▼  [SD] DEPLOYMENT
-        Generate asset/slug maps → Build static site (748 bilingual HTML pages)
-```
+The LABZ area contains optional reading and exploration tools. It does not assign doctrinal authority to generated suggestions or alter the source articles.
 
----
+## 🔎 Traceability and review
 
-### 📦 Key Components
+Release manifests and checksums identify the files included in a particular package. Source comparisons and human review serve different purposes: matching a file hash establishes file identity, not doctrinal correctness.
 
-| Directory | Purpose |
-|---|---|
-| `sources/` | Original PureDhamma backup ZIP (~2.3 GB) |
-| `09-csl/` | **Canon Source Library** — 748+ canonical entries, each with `identity.json`, `en-US/content.html`, `pt-BR/content.html`, and assets |
-| `03-translations/` | Translation working folders organized by PDPN code (93 batches) |
-| `13-ssg/` | Static site generator (Python `build.py` + templates) |
-| `13-static-site/` | **Output** — 748 bilingual HTML pages, fully offline-readable |
-| `scripts/core/` | 38 pipeline scripts (SG/SP/SA/SD stages + utilities) |
-| `metadata/` | Control center CSVs, glossary config, slug map, translation status |
-| `capsule/` | **Time Capsule** — sealed, self-describing archive with cryptographic integrity hashes, a concept/semantic layer, learning paths navigator, and a P2P mirror protocol |
-| `ledger/` | Append-only canon registry |
-| `release/` | Sealed release snapshot with SHA-256 manifest |
-| `mirror/` | P2P distribution endpoint |
+Useful contributions include reporting broken links, comparing a translation with its English source, preserving Pāḷi terminology and improving accessibility. Include the PD#PN, language and relevant passage when reporting a problem.
 
----
-
-### 🔐 Integrity Model
-
-The entire pipeline is **fully reproducible** from the source ZIP. Every artefact is SHA-256 hashed at 7 levels: `canon_hash → csl_hash → translations_hash → site_build_hash → pipeline_hash → manifest_hash → seed_integrity_hash`.
-
----
-
-### 🌐 Output & Distribution
-
-- **Static bilingual site** (en-US + pt-BR) serveable offline
-- **Capsule** for long-term archival (sealed 2026-03-13)
-- **P2P mirror protocol** for distributing seeds to other AXIS nodes
-- **Packages**: `sojourner` (~33 MB lightweight) and `steward` (full)
-
----
-
-**In one sentence:** This is a hermetically sealed, cryptographically verified pipeline that took a WordPress backup of a Buddhist teaching website, translated it to Portuguese via DeepL, and produced an offline-readable bilingual static site — designed to survive the internet.
+Start with [START HERE](START_HERE.md), the [translation review guide](TRANSLATION_REVIEW_GUIDE.md), or the [portable path conventions](PORTABLE_PATHS.md).

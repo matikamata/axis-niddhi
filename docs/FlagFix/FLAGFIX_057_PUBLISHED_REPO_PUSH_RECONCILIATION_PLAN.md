@@ -4,7 +4,7 @@ Date: 2026-05-19
 
 ## Scope
 
-This sprint creates a read-only reconciliation plan for the local Vitrine payload commit in `/home/sanghop/axis/axis-niddhi-published`.
+This sprint creates a read-only reconciliation plan for the local Vitrine payload commit in `${AXIS_WORKSPACE}/axis-niddhi-published`.
 
 No push, deploy, build, pipeline, copy, or sync was performed.
 
@@ -12,7 +12,7 @@ No push, deploy, build, pipeline, copy, or sync was performed.
 
 Production repo:
 
-- path: `/home/sanghop/axis/axis-niddhi-production`
+- path: `${AXIS_WORKSPACE}/axis-niddhi-production`
 - branch/status: `main...origin/main`
 - HEAD: `c4aef588373ba40727a4dc2b77dc6ac153d78eb1`
 - checkpoint: `checkpoint/flagfix-056-commit-synced-vitrine-payload-20260519`
@@ -21,7 +21,7 @@ Production repo:
 
 Published repo:
 
-- path: `/home/sanghop/axis/axis-niddhi-published`
+- path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - branch: `main`
 - status: `main...origin/main [ahead 1]`
 - working tree: clean
@@ -145,7 +145,7 @@ Cons:
 Recommended path:
 
 1. Do not push directly to `origin/main`.
-2. Keep `/home/sanghop/axis/axis-niddhi-published` ahead locally until visual review is complete.
+2. Keep `${AXIS_WORKSPACE}/axis-niddhi-published` ahead locally until visual review is complete.
 3. If GitHub history should contain the Vitrine payload update, push commit `92f4c29` to a branch and open a PR.
 4. If Netlify promotion is manual drag/drop, use the committed local folder only after visual review and keep the commit as the local checkpoint.
 5. Do not deploy until visual review is explicitly approved.
@@ -156,7 +156,7 @@ The safest next action is a dedicated visual review sprint before choosing PR pu
 
 Suggested #FlagFix_058:
 
-- visually review representative pages from `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`;
+- visually review representative pages from `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`;
 - confirm corrected titles and awaiting-translation label in browser;
 - confirm transparent Bodhi asset rendering;
 - decide whether to push a branch/PR or proceed with manual Netlify/Vitrine handling.

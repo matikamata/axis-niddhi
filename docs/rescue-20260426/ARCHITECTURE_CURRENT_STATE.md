@@ -1,4 +1,4 @@
-Lab: /home/sanghop/bengyond-playground/pipeline.
+Lab: ${AXIS_WORKSPACE}/bengyond-playground/pipeline.
 
 Scripts Reais: /pipeline/scripts/core/ (onde estão SG04, SD01, etc.).
 

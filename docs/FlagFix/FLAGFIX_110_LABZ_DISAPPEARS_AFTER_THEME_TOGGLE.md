@@ -1,7 +1,7 @@
 # #FlagFix_110 — LABZ Disappears After Theme Toggle
 
 Date: 2026-05-19  
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 
 ## Observed bug
 In local published review (`http://localhost:8088/archive.html`), LABZ flowers rendered initially, but disappeared after theme button interaction, and did not reliably return without refresh.

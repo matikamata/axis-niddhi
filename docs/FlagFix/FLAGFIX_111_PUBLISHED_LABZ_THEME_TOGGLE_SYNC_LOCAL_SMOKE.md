@@ -1,13 +1,13 @@
 # #FlagFix_111 — Published payload sync for LABZ theme-toggle runtime fix + local smoke
 
 Date: 2026-05-19  
-Production: `/home/sanghop/axis/axis-niddhi-production`  
-Published: `/home/sanghop/axis/axis-niddhi-published`
+Production: `${AXIS_WORKSPACE}/axis-niddhi-production`\
+Published: `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 ## Copied file
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/js/main.js`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/js/main.js`
   ->
-  `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/js/main.js`
+  `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/js/main.js`
 
 ## Diff counts
 - Before copy:

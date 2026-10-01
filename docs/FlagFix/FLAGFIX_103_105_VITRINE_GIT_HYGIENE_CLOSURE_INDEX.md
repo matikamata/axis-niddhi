@@ -1,7 +1,7 @@
 # #FlagFix_105 — Vitrine Git Hygiene Closure Index
 
 Date: 2026-05-19
-Workspace: `/home/sanghop/axis`
+Workspace: `${AXIS_WORKSPACE}`
 
 ## Source checkpoints
 - `checkpoint/flagfix-102-labz-netlify-promotion-closure-20260519`
@@ -20,7 +20,7 @@ Workspace: `/home/sanghop/axis`
 `KEEP_PUBLISHED_LOCAL_HISTORY_UNPUSHED_UNTIL_NEXT_APPROVED_VITRINE_CYCLE`
 
 ## Current known published state
-- Repository: `/home/sanghop/axis/axis-niddhi-published`
+- Repository: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - Status: `main...origin/main [ahead 2]`
 - Ahead commits:
   - `92f4c298f17008f4022c0267f1e64af14a1742a1`

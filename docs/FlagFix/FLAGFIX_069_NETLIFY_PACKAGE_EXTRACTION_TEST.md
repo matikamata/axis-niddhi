@@ -16,7 +16,7 @@ No upload or deployment was performed.
 
 Package path:
 
-- `/home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz`
+- `${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz`
 
 Package existence:
 
@@ -25,7 +25,7 @@ Package existence:
 SHA256 result:
 
 ```text
-36cb0f2ee4feff4f45590684390b70b016d9e0246aac215f4af6f491b4272589  /home/sanghop/axis/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz
+36cb0f2ee4feff4f45590684390b70b016d9e0246aac215f4af6f491b4272589  ${AXIS_WORKSPACE}/vitrine-deployment-packages/flagfix_068_20260519_060749/niddhi-netlify-vitrine-static-site-flagfix-068.tar.gz
 ```
 
 Expected SHA256:
@@ -67,7 +67,7 @@ Result:
 
 Source payload:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Extracted payload:
 
@@ -117,13 +117,13 @@ Result:
 
 Compared:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
 - `/tmp/flagfix_069_netlify_package_extract/assets/BodhiCircuitLeaf.png`
 
 SHA256 result:
 
 ```text
-92437a1aba75f9b6fb0d16f8598e1b0902a08c6c513d9014ac295d29848e49c7  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png
+92437a1aba75f9b6fb0d16f8598e1b0902a08c6c513d9014ac295d29848e49c7  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png
 92437a1aba75f9b6fb0d16f8598e1b0902a08c6c513d9014ac295d29848e49c7  /tmp/flagfix_069_netlify_package_extract/assets/BodhiCircuitLeaf.png
 ```
 

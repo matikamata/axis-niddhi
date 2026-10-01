@@ -9,14 +9,14 @@ Source checkpoint: `checkpoint/flagfix-106-surface-status-snapshot-20260519`
 Published had LABZ assets and toggle, but was missing the LABZ reference/render layer on target files.
 
 ## Files copied (narrow scope)
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/css/style.css`
-  -> `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/css/style.css`
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/archive.html`
-  -> `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/archive.html`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/css/style.css`
+  -> `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/css/style.css`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/archive.html`
+  -> `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/archive.html`
 
 ## Pre-patch safety snapshot
 Snapshot path:
-`/home/sanghop/axis/vitrine-safety-snapshots/flagfix_108_labz_reference_layer_prepatch`
+`${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_108_labz_reference_layer_prepatch`
 
 Prepatch hashes (`/tmp/flagfix_108_prepatch_target_hashes.txt`):
 - `70ade3a8383594b7c7b32d342a4a8aa9870ac2b5233e39d0d2fb4911479cda87`  `style.css.pre108`

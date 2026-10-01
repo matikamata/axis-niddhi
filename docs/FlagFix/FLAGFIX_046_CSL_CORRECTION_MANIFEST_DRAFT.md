@@ -78,7 +78,7 @@ python3 -m json.tool review/csl-corrections/csl_metadata_corrections_manifest_v1
 
 ## No-Change Confirmations
 
-- Did not touch `/home/sanghop/axis/axis-niddhi-published`.
+- Did not touch `${AXIS_WORKSPACE}/axis-niddhi-published`.
 - Did not update Netlify/Vitrine.
 - Did not run build, pipeline, or deploy.
 - Did not call DeepL.

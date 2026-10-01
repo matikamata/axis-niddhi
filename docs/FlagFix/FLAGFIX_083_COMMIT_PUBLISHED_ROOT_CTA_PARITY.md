@@ -6,7 +6,7 @@ Date: 2026-05-19
 
 This sprint committed the already prepared published payload update from #FlagFix_082 in:
 
-- `/home/sanghop/axis/axis-niddhi-published`
+- `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 Scope was intentionally minimal:
 
@@ -40,8 +40,8 @@ Published `index.html` now contains:
 
 Parity check:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/index.html`
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/index.html`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/index.html`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/index.html`
 
 Result:
 

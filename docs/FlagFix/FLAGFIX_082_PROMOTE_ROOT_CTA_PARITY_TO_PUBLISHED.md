@@ -17,8 +17,8 @@ This sprint promotes only the approved root CTA parity fix to published payload,
 
 Copied file:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/index.html`
-- to `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/index.html`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/index.html`
+- to `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/index.html`
 
 No other files were copied.
 

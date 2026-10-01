@@ -1,7 +1,7 @@
 # FLAGFIX_032 - Dry-run preflight for next translation batch
 
 Date: 2026-05-18
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 Mode: audit/report only
 Checkpoint reference: `checkpoint/flagfix-028-031-title-pipeline-safety-20260518`
 
@@ -216,6 +216,6 @@ No pipeline was run.
 No deploy was run.
 No Netlify/Vitrine update was made.
 No Cloudflare configuration was touched.
-`/home/sanghop/axis/axis-niddhi-published` was not touched.
+`${AXIS_WORKSPACE}/axis-niddhi-published` was not touched.
 
 Only this #FlagFix_032 report was created.
