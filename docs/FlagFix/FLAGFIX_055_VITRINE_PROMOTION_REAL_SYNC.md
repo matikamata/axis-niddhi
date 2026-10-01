@@ -8,11 +8,11 @@ This sprint performed the approved real Vitrine static payload sync after the #0
 
 Source:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/`
 
 Target:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/`
 
 Only the target static payload directory was synced.
 
@@ -20,13 +20,13 @@ Only the target static payload directory was synced.
 
 #054 rollback snapshot base:
 
-- `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609`
+- `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609`
 
 Verified SHA256:
 
 ```text
-e9dad6d238b561230351d141e1aba619636279abb64a890789be525bd01dd782  /home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609.patch
-9d1523a308bd44fb28783c5df1c7f49a97e919ee31005bd9c5f4ee3569ae45a7  /home/sanghop/axis/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_pipeline_13_static_site_snapshot.tar.gz
+e9dad6d238b561230351d141e1aba619636279abb64a890789be525bd01dd782  ${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609.patch
+9d1523a308bd44fb28783c5df1c7f49a97e919ee31005bd9c5f4ee3569ae45a7  ${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_054_published_dirty_state_20260519_020609_pipeline_13_static_site_snapshot.tar.gz
 ```
 
 Both values matched the expected #054 report values before real sync.
@@ -55,8 +55,8 @@ Command:
 
 ```bash
 rsync -avnc --delete \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/ \
   > /tmp/flagfix_055_vitrine_rsync_final_dry_run.txt
 ```
 
@@ -72,8 +72,8 @@ Command executed:
 
 ```bash
 rsync -avc --delete \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/ \
   > /tmp/flagfix_055_vitrine_rsync_real_sync.txt
 ```
 
@@ -130,7 +130,7 @@ Result:
 
 ## Published Repo Status
 
-After sync, `/home/sanghop/axis/axis-niddhi-published` shows:
+After sync, `${AXIS_WORKSPACE}/axis-niddhi-published` shows:
 
 - branch/status: `main...origin/main`
 - porcelain changed paths: 758

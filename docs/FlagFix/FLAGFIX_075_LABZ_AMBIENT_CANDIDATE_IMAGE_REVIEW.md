@@ -16,7 +16,7 @@ No site integration occurred.
 
 External candidate directory:
 
-- `/home/sanghop/axis/labz-ambient-candidates/flagfix_074_candidates/`
+- `${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_074_candidates/`
 
 Inventory:
 

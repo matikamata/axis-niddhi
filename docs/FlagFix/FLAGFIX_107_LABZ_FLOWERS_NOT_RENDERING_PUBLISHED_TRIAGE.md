@@ -1,13 +1,13 @@
 # #FlagFix_107 — LABZ Flowers Not Rendering in Published Payload (Triage)
 
 Date: 2026-05-19  
-Workspace: `/home/sanghop/axis`
+Workspace: `${AXIS_WORKSPACE}`
 
 ## Source checkpoint
 `checkpoint/flagfix-106-surface-status-snapshot-20260519`
 
 ## Symptom
-With local serving of published payload (`/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`), LABZ can be toggled but flower visuals do not appear.
+With local serving of published payload (`${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`), LABZ can be toggled but flower visuals do not appear.
 
 ## Key conclusion
 This is **not Netlify-specific** (reproduced in local published payload behavior).

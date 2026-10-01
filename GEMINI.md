@@ -15,7 +15,7 @@ git status --branch --short
 git remote -v
 ```
 
-If the workspace is `/home/sanghop/bengyond-playground`, treat it as rescue quarantine.
+If the workspace is `${AXIS_WORKSPACE}/bengyond-playground`, treat it as rescue quarantine.
 
 ## Do not do automatically
 

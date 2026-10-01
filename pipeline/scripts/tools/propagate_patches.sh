@@ -2,15 +2,23 @@
 # ==============================================================================
 # AXIS-NIDDHI — propagate_patches.sh
 # Propagate normalization patches to /bengyond and /beng-fut
-# Run from: /home/sanghop/beng_prelaunch/pipeline/
+# Run from: ${AXIS_WORKSPACE}/beng_prelaunch/pipeline/
 # ==============================================================================
 set -euo pipefail
 
-SRC_PIPELINE="/home/sanghop/beng_prelaunch/pipeline"
-TARGETS=(
-    "/home/sanghop/bengyond/pipeline"
-    "/beng-fut/pipeline"
-)
+# Explicit arguments prevent a personal path or an implicit sibling checkout
+# from becoming a mutation target on another computer.
+if (( $# < 2 )); then
+    echo "Usage: $0 SOURCE_PIPELINE TARGET_PIPELINE [TARGET_PIPELINE ...]" >&2
+    exit 2
+fi
+SRC_PIPELINE="$1"
+shift
+TARGETS=("$@")
+[[ -d "$SRC_PIPELINE" ]] || { echo "Source directory does not exist" >&2; exit 2; }
+for target_dir in "${TARGETS[@]}"; do
+    [[ -d "$target_dir" ]] || { echo "Target directory does not exist" >&2; exit 2; }
+done
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'

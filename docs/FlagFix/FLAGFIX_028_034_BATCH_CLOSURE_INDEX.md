@@ -1,7 +1,7 @@
 # FLAGFIX 028-034 - Batch closure index
 
 Date: 2026-05-18
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 Scope: closure/index document for the title pipeline safety and translation preflight batch
 
 ## Scope summary
@@ -108,4 +108,4 @@ No pipeline was run.
 No deploy was run.
 No Netlify/Vitrine update was made.
 No Cloudflare configuration was touched.
-`/home/sanghop/axis/axis-niddhi-published` was not touched.
+`${AXIS_WORKSPACE}/axis-niddhi-published` was not touched.

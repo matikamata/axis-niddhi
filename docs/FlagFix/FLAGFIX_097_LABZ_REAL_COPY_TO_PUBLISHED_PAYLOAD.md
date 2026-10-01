@@ -8,9 +8,9 @@ Perform the minimal approved LABZ real copy from production static payload into 
 
 ## Rollback snapshot verification
 - snapshot base:
-  - `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424`
+  - `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424`
 - tarball:
-  - `/home/sanghop/axis/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424/published_pipeline_13_static_site_pre_labz_promotion.tar.gz`
+  - `${AXIS_WORKSPACE}/vitrine-safety-snapshots/flagfix_096_labz_pre_promotion_20260519_200424/published_pipeline_13_static_site_pre_labz_promotion.tar.gz`
 - verified SHA256:
   - `bcd801e0a4e74026e377107f262072f9b5f775972a5814f4e5d2cb903b74c6b4`
 

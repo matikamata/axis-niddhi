@@ -14,7 +14,7 @@ No deploy was performed.
 
 Published source repo:
 
-- `/home/sanghop/axis/axis-niddhi-published`
+- `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 Pushed branch:
 
@@ -55,7 +55,7 @@ Result:
 Command executed:
 
 ```bash
-cd /home/sanghop/axis/axis-niddhi-published
+cd ${AXIS_WORKSPACE}/axis-niddhi-published
 git push origin HEAD:flagfix-062-approved-vitrine-payload
 ```
 

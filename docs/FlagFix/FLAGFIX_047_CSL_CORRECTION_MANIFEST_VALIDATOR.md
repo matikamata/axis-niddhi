@@ -77,7 +77,7 @@ Recommended next step before any apply script:
 
 - Did not create an apply script.
 - Did not modify CSL content.
-- Did not touch `/home/sanghop/axis/axis-niddhi-published`.
+- Did not touch `${AXIS_WORKSPACE}/axis-niddhi-published`.
 - Did not update Netlify/Vitrine.
 - Did not run build, pipeline, or deploy.
 - Did not call DeepL.

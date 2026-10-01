@@ -33,7 +33,7 @@ No generator, renderer, metadata, translation, or deployment behavior is changed
 
 This sprint did not:
 
-- touch `/home/sanghop/axis/axis-niddhi-published`;
+- touch `${AXIS_WORKSPACE}/axis-niddhi-published`;
 - update Netlify/Vitrine;
 - deploy;
 - run build or pipeline;

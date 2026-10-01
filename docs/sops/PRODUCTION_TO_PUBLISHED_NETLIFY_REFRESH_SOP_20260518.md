@@ -12,7 +12,7 @@ Related governance document:
 
 Migration must never be a blind sync. The Operator copies only files that were previously approved and visually reviewed on Cloudflare.
 
-`<AXIS_ROOT>` refers to the local AXIS workspace root. On the current maintainer machine this is `/home/sanghop/axis`, but SOPs should avoid relying on one machine-specific path.
+`<AXIS_ROOT>` refers to the local AXIS workspace root. On the current maintainer machine this is `${AXIS_WORKSPACE}`, but SOPs should avoid relying on one machine-specific path.
 
 ## 1. Confirm clean production state
 
@@ -194,7 +194,7 @@ Confirm locally:
 Useful command:
 
 ```bash
-grep -R "localhost\|127.0.0.1\|/home/sanghop\|<AXIS_ROOT>" \
+grep -R "localhost\|127.0.0.1\|${HOME}\|<AXIS_ROOT>" \
   <AXIS_ROOT>/axis-niddhi-published/pipeline/13-static-site \
   --exclude-dir=assets \
   --exclude-dir=pages

@@ -6,8 +6,8 @@ Date: 2026-05-19
 
 This sprint promoted the neutralized contribute copy from production static to published payload by copying only one file:
 
-- from `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/contribute.html`
-- to `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/contribute.html`
+- from `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/contribute.html`
+- to `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/contribute.html`
 
 ## Copy Change
 

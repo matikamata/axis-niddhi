@@ -7,13 +7,13 @@ Source checkpoint:
 `checkpoint/flagfix-102-labz-netlify-promotion-closure-20260519`
 
 ## Production status
-- Repo: `/home/sanghop/axis/axis-niddhi-production`
+- Repo: `${AXIS_WORKSPACE}/axis-niddhi-production`
 - Branch: `main...origin/main`
 - Working tree: clean
 - Recent state includes checkpoint/tag chain through `#102`.
 
 ## Published status
-- Repo: `/home/sanghop/axis/axis-niddhi-published`
+- Repo: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - Branch: `main`
 - Status: `main...origin/main [ahead 2]`
 - Working tree: clean

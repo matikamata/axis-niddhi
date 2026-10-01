@@ -33,14 +33,14 @@ PR #158:
 
 Production repo:
 
-- Path: `/home/sanghop/axis/axis-niddhi-production`
+- Path: `${AXIS_WORKSPACE}/axis-niddhi-production`
 - Branch/status: `main...origin/main`
 - HEAD: `5b1a3a36`
 - Checkpoint tag present: `checkpoint/flagfix-065-close-superseded-pr155-20260519`
 
 Published repo:
 
-- Path: `/home/sanghop/axis/axis-niddhi-published`
+- Path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - Branch/status: `main...origin/main [ahead 1]`
 - Working tree: clean
 - Local Vitrine commit still present: `92f4c298f17008f4022c0267f1e64af14a1742a1`
@@ -51,8 +51,8 @@ Published repo:
 
 Compared:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site`
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Result:
 
@@ -85,8 +85,8 @@ Result:
 
 Compared asset:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
 
 Result:
 

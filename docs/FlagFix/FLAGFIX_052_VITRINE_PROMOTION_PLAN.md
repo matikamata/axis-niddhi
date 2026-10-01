@@ -8,15 +8,15 @@ This sprint creates a read-only plan for a future Netlify/Vitrine promotion. No 
 
 Current production static source:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site`
 
 Current published/Vitrine workspace:
 
-- `/home/sanghop/axis/axis-niddhi-published`
+- `${AXIS_WORKSPACE}/axis-niddhi-published`
 
 Comparable published static payload:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Checkpoint reference:
 
@@ -26,11 +26,11 @@ Checkpoint reference:
 
 Future promotion should target:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/`
 
 Static files should not be copied to:
 
-- `/home/sanghop/axis/axis-niddhi-published/`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/`
 
 Reason:
 
@@ -43,7 +43,7 @@ This structure matches the current Netlify/Vitrine use.
 
 ## Validator Results
 
-Validators were run in `/home/sanghop/axis/axis-niddhi-production`.
+Validators were run in `${AXIS_WORKSPACE}/axis-niddhi-production`.
 
 CSL correction manifest validator:
 
@@ -154,19 +154,19 @@ Interpretation:
 Dry run first, in a future approved sprint:
 
 ```bash
-cd /home/sanghop/axis
+cd ${AXIS_WORKSPACE}
 rsync -avnc --delete \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/
 ```
 
 Only after explicit review and approval, real sync:
 
 ```bash
-cd /home/sanghop/axis
+cd ${AXIS_WORKSPACE}
 rsync -avc --delete \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/
 ```
 
 Do not target the published root.
@@ -187,7 +187,7 @@ Do not target the published root.
 
 After a future approved sync, still before deploy/publish confirmation:
 
-- Re-run string checks in `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`.
+- Re-run string checks in `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`.
 - Confirm stale strings are absent:
   - `Vivendo il Dhamma`
   - `Viparie1B987Ama Two Meanings`
@@ -202,7 +202,7 @@ After a future approved sync, still before deploy/publish confirmation:
 
 ## Rollback Idea
 
-Before real sync in a future sprint, capture the current published static payload state by branch, tag, or archive. If rollback is needed, restore `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/` from that captured state and re-run the post-promotion validation checks.
+Before real sync in a future sprint, capture the current published static payload state by branch, tag, or archive. If rollback is needed, restore `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/` from that captured state and re-run the post-promotion validation checks.
 
 ## Non-Actions
 
@@ -210,7 +210,7 @@ This sprint did not:
 
 - copy files;
 - sync files;
-- modify `/home/sanghop/axis/axis-niddhi-published`;
+- modify `${AXIS_WORKSPACE}/axis-niddhi-published`;
 - update Netlify/Vitrine;
 - deploy;
 - run build or pipeline;
@@ -228,7 +228,7 @@ This sprint did not:
 
 Ready for `#FlagFix_053` dry-run sync planning/execution, provided it remains dry-run first and targets only:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/`
 
 Not ready for direct real sync or public promotion without:
 

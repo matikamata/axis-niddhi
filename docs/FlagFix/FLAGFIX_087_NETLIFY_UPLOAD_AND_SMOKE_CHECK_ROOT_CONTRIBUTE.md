@@ -10,13 +10,13 @@ Manual upload status:
 
 Deployment was manually executed by the human using:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 ## Upload Source Folder
 
 Use exactly:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Validated local source:
 

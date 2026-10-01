@@ -1,7 +1,7 @@
 # #FlagFix_106 — Current Vitrine/Cloudflare Surface Status Snapshot
 
 Date: 2026-05-19  
-Workspace: `/home/sanghop/axis`
+Workspace: `${AXIS_WORKSPACE}`
 
 ## Source checkpoint
 `checkpoint/flagfix-105-vitrine-git-hygiene-closure-20260519`
@@ -12,13 +12,13 @@ Record a read-only post-closure status snapshot of:
 - public Cloudflare/Netlify surfaces (root, welcome, contribute, and LABZ assets).
 
 ## Production repo state
-- Repo: `/home/sanghop/axis/axis-niddhi-production`
+- Repo: `${AXIS_WORKSPACE}/axis-niddhi-production`
 - Status: `main...origin/main`
 - Working tree: clean during this audit.
 - Latest checkpoint tag present: `checkpoint/flagfix-105-vitrine-git-hygiene-closure-20260519`.
 
 ## Published repo state
-- Repo: `/home/sanghop/axis/axis-niddhi-published`
+- Repo: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - Status: `main...origin/main [ahead 2]`
 - Working tree: clean during this audit.
 - Ahead commits:

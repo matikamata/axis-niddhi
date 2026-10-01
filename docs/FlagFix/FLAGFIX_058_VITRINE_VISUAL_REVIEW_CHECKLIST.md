@@ -12,7 +12,7 @@ No local server was started.
 
 Published repo:
 
-- path: `/home/sanghop/axis/axis-niddhi-published`
+- path: `${AXIS_WORKSPACE}/axis-niddhi-published`
 - branch: `main`
 - status: `main...origin/main [ahead 1]`
 - working tree: clean
@@ -44,22 +44,22 @@ Result:
 
 Static payload root:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site`
 
 Review these files directly or through a local server:
 
-- archive/list page: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/archive.html`
-- site index: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/index.html`
-- search data: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/search_index.json`
-- index data: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/index.json`
-- LD.AA.000 page: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/pages/LD.AA.000/index.html`
-- BA.AA.004 page: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/pages/BA.AA.004/index.html`
-- Bodhi leaf asset: `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
+- archive/list page: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/archive.html`
+- site index: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/index.html`
+- search data: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/search_index.json`
+- index data: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/index.json`
+- LD.AA.000 page: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/pages/LD.AA.000/index.html`
+- BA.AA.004 page: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/pages/BA.AA.004/index.html`
+- Bodhi leaf asset: `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png`
 
 Suggested local review command only, not executed:
 
 ```bash
-cd /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site
+cd ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site
 python3 -m http.server 8088
 ```
 

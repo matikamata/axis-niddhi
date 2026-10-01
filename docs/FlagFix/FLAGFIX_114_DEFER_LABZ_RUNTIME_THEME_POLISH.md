@@ -1,7 +1,7 @@
 # #FlagFix_114 — Defer LABZ Runtime/Theme Polish After Failed Local Review
 
 Date: 2026-05-19  
-Workspace: `/home/sanghop/axis`
+Workspace: `${AXIS_WORKSPACE}`
 
 ## Prior chain
 - `#107` confirmed LABZ rendering/reference gap in published.

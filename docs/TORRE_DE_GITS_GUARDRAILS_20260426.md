@@ -22,12 +22,12 @@ The goal is to prevent accidental deployment of experimental work, generated sta
 
 | Path | Role | Rule |
 |---|---|---|
-| `/home/sanghop/axis/axis-niddhi-production` | Production clone | Clean reference, main branch, Cloudflare-connected repo |
-| `/home/sanghop/bengyond-playground` | Rescue quarantine | Read/diff/cherry-pick only; no push |
-| `/home/sanghop/axis/axis-niddhi-lab` | Future integration lab | Controlled integration before production |
-| `/home/sanghop/axis/axis-navigator-lab` | Navigator UX lab | UX experiments only |
-| `/home/sanghop/axis/axis-nana-lab` | NANA/LLM lab | Retrieval, source-bound Q&A, provider experiments |
-| `/home/sanghop/axis/axis-print-review` | Print review lab | CSS/print/PDF work before production |
+| `${AXIS_WORKSPACE}/axis-niddhi-production` | Production clone | Clean reference, main branch, Cloudflare-connected repo |
+| `${AXIS_WORKSPACE}/bengyond-playground` | Rescue quarantine | Read/diff/cherry-pick only; no push |
+| `${AXIS_WORKSPACE}/axis-niddhi-lab` | Future integration lab | Controlled integration before production |
+| `${AXIS_WORKSPACE}/axis-navigator-lab` | Navigator UX lab | UX experiments only |
+| `${AXIS_WORKSPACE}/axis-nana-lab` | NANA/LLM lab | Retrieval, source-bound Q&A, provider experiments |
+| `${AXIS_WORKSPACE}/axis-print-review` | Print review lab | CSS/print/PDF work before production |
 
 ---
 

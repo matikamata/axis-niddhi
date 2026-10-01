@@ -8,11 +8,11 @@ This sprint ran the approved Vitrine promotion dry run only. No real sync was ex
 
 Source:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/`
 
 Target:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/`
 
 The target structure matches `netlify.toml`:
 
@@ -46,8 +46,8 @@ Executed dry-run command:
 
 ```bash
 rsync -avnc --delete \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/ \
   > /tmp/flagfix_053_vitrine_rsync_dry_run.txt
 ```
 
@@ -133,7 +133,7 @@ Published Bodhi asset before real sync:
 de326fede79eca1b87237bbbb6274b74fd3a86191d15683d9b6521d2395c8545  axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png
 ```
 
-Read-only status check of `/home/sanghop/axis/axis-niddhi-published` showed existing modified files in its static subtree. Because this sprint ran only `rsync -n`, those target-workspace modifications were not caused by #FlagFix_053. Review the target workspace state before any future real sync.
+Read-only status check of `${AXIS_WORKSPACE}/axis-niddhi-published` showed existing modified files in its static subtree. Because this sprint ran only `rsync -n`, those target-workspace modifications were not caused by #FlagFix_053. Review the target workspace state before any future real sync.
 
 ## Real Sync Status
 
@@ -159,7 +159,7 @@ This sprint did not:
 
 - copy files;
 - sync files for real;
-- modify `/home/sanghop/axis/axis-niddhi-published`;
+- modify `${AXIS_WORKSPACE}/axis-niddhi-published`;
 - deploy;
 - run build or pipeline;
 - call DeepL;

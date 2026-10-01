@@ -1,7 +1,7 @@
 # FLAGFIX_031 - Fence retired translation scripts before next batch
 
 Date: 2026-05-18
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 Scope: minimal execution guards plus documentation
 
 ## Purpose
@@ -80,4 +80,4 @@ No pipeline was run.
 No deploy was run.
 No Netlify/Vitrine update was made.
 No Cloudflare configuration was touched.
-`/home/sanghop/axis/axis-niddhi-published` was not touched.
+`${AXIS_WORKSPACE}/axis-niddhi-published` was not touched.

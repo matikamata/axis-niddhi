@@ -137,14 +137,14 @@ grep -RIn "Vivendo o Dhamma\|Vipariṇāma Two Meanings\|Awaiting translation / 
 
 Cloudflare/dev and Netlify/Vitrine must remain separate.
 
-- `/home/sanghop/axis/axis-niddhi-production` is the Cloudflare/dev/experimental workspace.
-- `/home/sanghop/axis/axis-niddhi-published` is the approved Netlify Vitrine workspace.
+- `${AXIS_WORKSPACE}/axis-niddhi-production` is the Cloudflare/dev/experimental workspace.
+- `${AXIS_WORKSPACE}/axis-niddhi-published` is the approved Netlify Vitrine workspace.
 
 Static regeneration in production workspace does not automatically authorize promotion to Vitrine.
 
 ## Vitrine Promotion Checklist
 
-Before promoting to `/home/sanghop/axis/axis-niddhi-published`:
+Before promoting to `${AXIS_WORKSPACE}/axis-niddhi-published`:
 
 - Confirm reviewed static regeneration is approved.
 - Confirm generated static diff contains only expected site output.
@@ -166,7 +166,7 @@ Recommended sequence:
 
 ## Explicit Non-Actions
 
-- Did not touch `/home/sanghop/axis/axis-niddhi-published`.
+- Did not touch `${AXIS_WORKSPACE}/axis-niddhi-published`.
 - Did not update Netlify/Vitrine.
 - Did not run build, pipeline, or deploy.
 - Did not call DeepL.

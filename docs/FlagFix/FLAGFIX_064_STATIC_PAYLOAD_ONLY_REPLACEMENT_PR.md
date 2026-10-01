@@ -29,11 +29,11 @@ Blocked PR:
 
 Approved payload source:
 
-- `/home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/`
 
 Production target:
 
-- `/home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/`
+- `${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/`
 
 Replacement branch:
 
@@ -51,8 +51,8 @@ Command run:
 
 ```bash
 rsync -avc --delete \
-  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/ \
-  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/
+  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/ \
+  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/
 ```
 
 Result:
@@ -110,8 +110,8 @@ Corrected strings in production static:
 ## Bodhi Asset Hash
 
 ```text
-92437a1aba75f9b6fb0d16f8598e1b0902a08c6c513d9014ac295d29848e49c7  /home/sanghop/axis/axis-niddhi-production/pipeline/13-static-site/assets/BodhiCircuitLeaf.png
-92437a1aba75f9b6fb0d16f8598e1b0902a08c6c513d9014ac295d29848e49c7  /home/sanghop/axis/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png
+92437a1aba75f9b6fb0d16f8598e1b0902a08c6c513d9014ac295d29848e49c7  ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/assets/BodhiCircuitLeaf.png
+92437a1aba75f9b6fb0d16f8598e1b0902a08c6c513d9014ac295d29848e49c7  ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/assets/BodhiCircuitLeaf.png
 ```
 
 The approved transparent `BodhiCircuitLeaf.png` asset already matches between production and published.
@@ -147,4 +147,4 @@ This sprint did not:
 - modify SP10/SP11;
 - change `.gitignore`;
 - modify anything outside `pipeline/13-static-site/**` plus this report;
-- alter `/home/sanghop/axis/axis-niddhi-published`.
+- alter `${AXIS_WORKSPACE}/axis-niddhi-published`.

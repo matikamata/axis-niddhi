@@ -264,6 +264,6 @@ Primary guardrails:
 - No generated static output was modified.
 - No build/pipeline/deploy was run.
 - No Netlify/Vitrine update was performed.
-- `/home/sanghop/axis/axis-niddhi-published` was not touched.
+- `${AXIS_WORKSPACE}/axis-niddhi-published` was not touched.
 - No CSL content was modified.
 - No translation/TCC/SP10/SP11 behavior was modified.

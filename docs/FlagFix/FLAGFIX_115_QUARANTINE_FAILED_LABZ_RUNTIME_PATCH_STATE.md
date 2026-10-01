@@ -1,7 +1,7 @@
 # FLAGFIX_115 — Quarantine failed LABZ runtime patch state and restore production workspace cleanliness
 
 Date: 2026-05-19  
-Workspace: `/home/sanghop/axis/axis-niddhi-production`
+Workspace: `${AXIS_WORKSPACE}/axis-niddhi-production`
 
 ## Purpose
 
@@ -11,7 +11,7 @@ Preserve evidence from the failed LABZ runtime/theme attempt while removing acti
 
 Snapshot path:
 
-`/home/sanghop/axis/labz-failed-runtime-snapshots/flagfix_115_labz_failed_runtime_20260519_210100`
+`${AXIS_WORKSPACE}/labz-failed-runtime-snapshots/flagfix_115_labz_failed_runtime_20260519_210100`
 
 Snapshot includes:
 

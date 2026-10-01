@@ -12,7 +12,7 @@ This is a preview integration only. It does not promote anything to Netlify/Vitr
 
 External source directory:
 
-`/home/sanghop/axis/labz-ambient-candidates/flagfix_076_compressed_flowers/`
+`${AXIS_WORKSPACE}/labz-ambient-candidates/flagfix_076_compressed_flowers/`
 
 Approved assets copied:
 
@@ -107,7 +107,7 @@ Claim-language scan:
 ## Non-Actions
 
 - No Netlify/Vitrine update.
-- No `/home/sanghop/axis/axis-niddhi-published` changes.
+- No `${AXIS_WORKSPACE}/axis-niddhi-published` changes.
 - No deploy or manual upload.
 - No DeepL call.
 - No translation.
