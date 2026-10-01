@@ -185,7 +185,7 @@ Recommended next step:
 Suggested future promotion command proposal only, not executed:
 
 ```bash
-cd ${AXIS_WORKSPACE}
+cd "${AXIS_WORKSPACE}"
 rsync -av --delete \
   axis-niddhi-production/pipeline/13-static-site/ \
   axis-niddhi-published/pipeline/13-static-site/

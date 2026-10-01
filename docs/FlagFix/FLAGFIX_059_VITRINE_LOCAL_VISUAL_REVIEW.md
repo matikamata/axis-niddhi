@@ -42,7 +42,7 @@ Result:
 Server command used:
 
 ```bash
-cd ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site
+cd "${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site"
 python3 -m http.server 8088
 ```
 

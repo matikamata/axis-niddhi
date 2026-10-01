@@ -154,7 +154,7 @@ Interpretation:
 Dry run first, in a future approved sprint:
 
 ```bash
-cd ${AXIS_WORKSPACE}
+cd "${AXIS_WORKSPACE}"
 rsync -avnc --delete \
   ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
   ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/
@@ -163,7 +163,7 @@ rsync -avnc --delete \
 Only after explicit review and approval, real sync:
 
 ```bash
-cd ${AXIS_WORKSPACE}
+cd "${AXIS_WORKSPACE}"
 rsync -avc --delete \
   ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-static-site/ \
   ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site/

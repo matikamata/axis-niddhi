@@ -55,7 +55,7 @@ Result:
 Command executed:
 
 ```bash
-cd ${AXIS_WORKSPACE}/axis-niddhi-published
+cd "${AXIS_WORKSPACE}/axis-niddhi-published"
 git push origin HEAD:flagfix-062-approved-vitrine-payload
 ```
 

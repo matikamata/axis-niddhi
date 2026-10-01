@@ -59,7 +59,7 @@ Review these files directly or through a local server:
 Suggested local review command only, not executed:
 
 ```bash
-cd ${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site
+cd "${AXIS_WORKSPACE}/axis-niddhi-published/pipeline/13-static-site"
 python3 -m http.server 8088
 ```
 

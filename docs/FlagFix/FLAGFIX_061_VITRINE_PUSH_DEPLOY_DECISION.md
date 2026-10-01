@@ -152,7 +152,7 @@ Recommended operational path:
 Future branch push command, not executed:
 
 ```bash
-cd ${AXIS_WORKSPACE}/axis-niddhi-published
+cd "${AXIS_WORKSPACE}/axis-niddhi-published"
 git push origin HEAD:flagfix-061-approved-vitrine-payload
 ```
 

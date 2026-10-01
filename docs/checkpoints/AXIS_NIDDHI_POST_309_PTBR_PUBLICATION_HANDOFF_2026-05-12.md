@@ -201,7 +201,7 @@ COMMAND=YES: 0
 Run only after freeze/menu are aligned:
 
 ```bash
-cd ${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-ssg
+cd "${AXIS_WORKSPACE}/axis-niddhi-production/pipeline/13-ssg"
 python3 build.py
 ```
 
